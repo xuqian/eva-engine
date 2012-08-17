@@ -1,505 +1,125 @@
 <?
-$this->headTitle('甘肃婚庆行业协会', 'SET');
-
-$news = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'news', 'rows' => 7));
-
-$sheying = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'sheying', 'rows' => 1));
-$gongsi = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gongsi', 'rows' => 8));
-$jiaju = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'jiaju', 'rows' => 1));
-$jiudian = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'jiudian', 'rows' => 8));
-$zuanjie = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zuanjie', 'rows' => 1));
-
-$gonggao = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
-$zhuanti = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
-
-$hunshasheyingtuijianshangjia = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'hunshasheyingtuijianshangjia', 'rows' => 8));
-$hunshasheyingremenshangjia = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'hunshasheyingremenshangjia', 'rows' => 8));
-
-$hunlijiadianremenshangjia = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'hunlijiadianremenshangjia', 'rows' => 8));
-$hunlijiadiantuijianshangjia = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'hunlijiadiantuijianshangjia', 'rows' => 8));
-
-$hunlishoushi = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'hunlishoushi', 'rows' => 6));
-$hunlijiaju = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'hunlijiaju', 'rows' => 6));
-
-$kechenganpai = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'kechenganpai', 'rows' => 4));
-$peixunxinwen = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'peixunxinwen', 'rows' => 4));
-$shizituandui = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'shizituandui', 'rows' => 4));
-
-$yingshizuopin = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'yingshizuopin', 'rows' => 15));
-$sheyingzuopin = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'sheyingzuopin', 'rows' => 6));
-
-$categories['hunqing'] = $this->action('Gwa\Api\Controller\FrontendController', 'categoryAction',array('category' => 'hunqing')); 
+$this->headTitle('爱尔医疗', 'SET');
 ?>
-<div class="container"><div class="row">
-        <div class="span4">
-            <div class="carousel_wrap">
-                <div id="carousel-index" class="carousel">
-                    <div class="carousel-inner">
-                        <?=$this->widget('Gwa', 'components/slider')?>
-                    </div>
-                </div>
-            </div>
-        </div><!--span4 end-->
-        <div class="span5"><div class="box-container-r15">
-                <header class="page-header header-news">
-                <small class="pull-right"><a href="<?=$this->uri('/category/news')?>">More</a></small><h2>NEWS 新闻中心</h2>
-                </header>
-                <?if($news):?>
-                <ul class="vlist textlist">
-                    <?foreach($news as $post):?>
-                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                    <?endforeach;?>
-                </ul>
-                <?endif;?>
-                <div class="box-container-t15"><div class="tab-box square split5">
-                        <ul class="nav nav-tabs" id="newstab">
-                            <li class="active"><a href="#news-sheying">摄影</a></li>
-                            <li><a href="#news-gongsi">婚庆</a></li>
-                            <li><a href="#news-jiaju">家居</a></li>
-                            <li><a href="#news-zuanjie">钻戒</a></li>
-                            <li><a href="#news-jiudian">酒店</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <?if($sheying):?>
-                            <div class="tab-pane active" id="news-sheying"><div class="box-container-h5v20">
-                                    <div class="block block-sheying">
-                                        <div class="box-container-r5 pull-left"><img src="<?=$this->thumb($sheying[0]['File']['Thumb'], array('c_fill','h_125','w_200'))?>" class="" alt="" /></div>
-                                        <h3 class="shorttitle"><?=$sheying[0]['title']?></h3>
-                                        <p class="shorttext">
-                                            <?=$sheying[0]['preview']?>
-                                            <a href="<?=$this->uri('/pages/' . $sheying[0]['urlName'])?>" class="highlight pull-right">[详细]</a>
-                                        </p>
-                                    </div>
-                            </div></div>
-                            <?endif;?>
-                            <?if($gongsi):?>
-                            <div class="tab-pane" id="news-gongsi"><div class="box-container-h5v20">
-                                    <div class="block block-gongsi">
-                                        <div class="box-container-r5 pull-left"><img src="<?=$this->thumb($gongsi[0]['File']['Thumb'], array('c_fill','h_125','w_200'))?>" class="" alt="" /></div>
-                                        <h3 class="shorttitle"><?=$gongsi[0]['title']?></h3>
-                                        <p class="shorttext">
-                                            <?=$gongsi[0]['preview']?>
-                                            <a href="<?=$this->uri('/pages/' . $gongsi[0]['urlName'])?>" class="highlight pull-right">[详细]</a>
-                                        </p>
-                                    </div>
-                            </div></div>
-                            <?endif;?>
-                            <?if($jiaju):?>
-                            <div class="tab-pane" id="news-jiaju"><div class="box-container-h5v20">
-                                    <div class="block block-jiaju">
-                                        <div class="box-container-r5 pull-left"><img src="<?=$this->thumb($jiaju[0]['File']['Thumb'], array('c_fill','h_125','w_200'))?>" class="" alt="" /></div>
-                                        <h3 class="shorttitle"><?=$jiaju[0]['title']?></h3>
-                                        <p class="shorttext">
-                                            <?=$jiaju[0]['preview']?>
-                                            <a href="<?=$this->uri('/pages/' . $jiaju[0]['urlName'])?>" class="highlight pull-right">[详细]</a>
-                                        </p>
-                                    </div>
-                            </div></div>
-                            <?endif;?>
-                            <?if($zuanjie):?>
-                            <div class="tab-pane" id="news-zuanjie"><div class="box-container-h5v20">
-                                    <div class="block block-zuanjie">
-                                        <div class="box-container-r5 pull-left"><img src="<?=$this->thumb($zuanjie[0]['File']['Thumb'], array('c_fill','h_125','w_200'))?>" class="" alt="" /></div>
-                                        <h3 class="shorttitle"><?=$zuanjie[0]['title']?></h3>
-                                        <p class="shorttext">
-                                            <?=$zuanjie[0]['preview']?>
-                                            <a href="<?=$this->uri('/pages/' . $zuanjie[0]['urlName'])?>" class="highlight pull-right">[详细]</a>
-                                        </p>
-                                    </div>
-                            </div></div>
-                            <?endif;?>
-                            <?if($jiudian):?>
-                            <div class="tab-pane" id="news-jiudian"><div class="box-container-h5v20">
-                                    <div class="block block-jiudian">
-                                        <div class="box-container-r5 pull-left"><img src="<?=$this->thumb($jiudian[0]['File']['Thumb'], array('c_fill','h_125','w_200'))?>" class="" alt="" /></div>
-                                        <h3 class="shorttitle"><?=$jiudian[0]['title']?></h3>
-                                        <p class="shorttext">
-                                            <?=$jiudian[0]['preview']?>
-                                            <a href="<?=$this->uri('/pages/' . $jiudian[0]['urlName'])?>" class="highlight pull-right">[详细]</a>
-                                        </p>
-                                    </div>
-                            </div></div>
-                            <?endif;?>
-                        </div><!--tab content end-->
-                </div></div>
-        </div></div><!--span5 end-->
-        <div class="span3">
-            <?=$this->widget('Gwa', 'components/ad')?>
-            <div class="box-container-t15">
-                <div class="tab-box square split3">
-                    <ul class="nav nav-tabs" id="side-news-tab">
-                        <li class="active"><a href="#home">公告</a></li>
-                        <li><a href="#profile">专题</a></li>
-                        <li><a href="#messages">论坛</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home"><div class="box-container-v15">
-                            <?if($gonggao):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($gonggao as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>
-                        </div></div>
-                        <div class="tab-pane" id="profile"><div class="box-container-v15">
-                            <?if($zhuanti):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($zhuanti as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>
-                        </div></div>
-                        <div class="tab-pane" id="messages">...</div>
-                    </div>
-                </div>
-            </div>
-        </div><!--span3 end-->
-</div></div><!--row container end-->
 
-<hr class="white" />
-
-<div class="container">
-    <div class="row">
-        <div class="span3"><div class="box box-hunsha">
-                <header class="page-header header-color header-gray">
-                <h2>婚纱摄影</h2>
-                </header>
-                <div class="box-container-b10 centeralign">
-                    <img src="<?=$this->thumb($this->categories['hunshasheying']['File']['Thumb'], array('c_fill','h_84','w_230'))?>" class="preview" />
-                </div>
-                <div class="tab-box square split2">
-                    <ul class="nav nav-tabs" id="tab-hunsha">
-                        <li class="active"><a href="#tab-hunsha-1">热门商家</a></li>
-                        <li><a href="#tab-hunsha-2">推荐商家</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab-hunsha-1"><div class="box-container-v15">
-                            <?if($hunshasheyingremenshangjia):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($hunshasheyingremenshangjia as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>    
-                        </div></div>
-                        <div class="tab-pane" id="tab-hunsha-2"><div class="box-container-v15">
-                           <?if($hunshasheyingtuijianshangjia):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($hunshasheyingtuijianshangjia as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>    
-                        </div></div>
-                    </div>
-                </div>
-        </div></div><!--span3 end-->
-        <div class="span6"><div class="box-container-h10">
-                <div class="box-container-b15">
-                    <header class="page-header header-color header-red">
-                    <h2><a href="<?=$this->uri('/category/gongsi')?>">婚庆公司</a></h2>
-                    </header>
-                    <div class="block block-intro box-container-b15">
-                        <p><?=$this->categories['gongsi']['description']?>
-                        <a href="<?=$this->uri('/category/gongsi')?>" class="highlight pull-right">[详细]</a>
-                        </p>
-                    </div>
-                    <div class="cols">
-                        <section class="first col">
-                            <?if($gongsi):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($gongsi as $key=>$post):?>
-                                <?if($key > 3){break;}?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>    
-                        </section>
-                        <section class="col">
-                           <?if($gongsi):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($gongsi as $key=>$post):?>
-                                <?if($key <= 3){continue;}?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>    
-                        </section>
-                    </div>
-                </div>
-
-                <div class="box-container">
-                    <header class="page-header header-color header-darkred">
-                    <h2><a href="<?=$this->uri('/category/jiudian')?>">婚庆酒店</a></h2>
-                    </header>
-                    <div class="cols cols3">
-                        <section class="first col">
-                        <img src="<?=$this->thumb($this->categories['jiudian']['File']['Thumb'], array('c_fill','h_122','w_152'))?>" class="preview" />
-                        </section>
-                        <section class="col">
-                            <?if($jiudian):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($jiudian as $key=>$post):?>
-                                <?if($key > 3){break;}?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>
-                        </section>
-                        <section class="col">
-                             <?if($jiudian):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($jiudian as $key=>$post):?>
-                                <?if($key <= 3){continue;}?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>
-                        </section>
-                    </div>
-                </div>
-        </div></div><!--span6 end-->
-        <div class="span3"><div class="box box-hunsha">
-                <header class="page-header header-color header-brown">
-                <h2>婚礼家电</h2>
-                </header>
-                <div class="box-container-b10 centeralign">
-                    <img src="<?=$this->thumb($this->categories['hunlijiadian']['File']['Thumb'], array('c_fill','h_84','w_230'))?>" class="preview" />
-                </div>
-                <div class="tab-box square split2">
-                    <ul class="nav nav-tabs" id="tab-jiadian">
-                        <li class="active"><a href="#tab-jiadian-1">热门商家</a></li>
-                        <li><a href="#tab-jiadian-2">推荐商家</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab-jiadian-1"><div class="box-container-v15">
-                            <?if($hunlijiadianremenshangjia):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($hunlijiadianremenshangjia as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>    
-                        </div></div>
-                        <div class="tab-pane" id="tab-jiadian-2"><div class="box-container-v15">
-                            <?if($hunlijiadiantuijianshangjia):?>        
-                                <ul class="vlist textlist">
-                                <?foreach($hunlijiadiantuijianshangjia as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                                </ul>
-                            <?endif;?>    
-                        </div></div>
-                    </div>
-                </div>
-        </div></div><!--span3 end-->
-    </div>
-</div>
-
-<hr class="white" />
-
-<div class="container">
-    <div class="row">
-        <div class="span6">
-            <div class="box-container-r15"><div class="box box-border">
-                <div class="cols">
-                    <section class="first col">
-                    <h3 class="vtitle">婚<br>礼<br>首<br>饰</h3>
-                    <img src="<?=$this->thumb($this->categories['hunlishoushi']['File']['Thumb'], array('c_fill','h_152','w_152'))?>" class="vtitle-img" />&nbsp;
-                    </section>
-                    <section class="col">
-                        <?if($hunlishoushi):?>        
-                            <ul class="vlist textlist light">
-                                <?foreach($hunlishoushi as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?> 
-                    </section>
-                </div>
-            </div>
-        </div></div><!--span6 end-->
-        <div class="span6"><div class="box-container-h10">
-                <div class="box-container"><div class="box box-border">
-                <div class="cols">
-                    <section class="first col">
-                    <h3 class="vtitle vtitle-brown">婚<br>礼<br>家<br>具</h3>
-                    <img src="<?=$this->thumb($this->categories['hunlijiaju']['File']['Thumb'], array('c_fill','h_152','w_152'))?>" class="vtitle-img" />&nbsp;
-                    </section>
-                    <section class="col">
-                        <?if($hunlijiaju):?>        
-                            <ul class="vlist textlist light">
-                                <?foreach($hunlijiaju as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?> 
-                    </section>
-                </div>
-            </div>
-        </div></div><!--span6 end-->
-    </div>
-</div>
-
-
-<hr class="white" />
-
-<div class="container">
-    <header class="page-header header-color header-blue">
-    <h2>考核培训</h2>
-    </header>
-    <div class="row">
-        <div class="span4">
-            <header class="page-header header-small">
-            <small class="pull-right"><a href="<?=$this->uri('/category/kechenganpai')?>">More</a></small><h3>课程安排</h3>
-            </header>
-            <div class="cols cols3">
-                <section class="first col">
-                <img src="<?=$this->thumb($this->categories['kechenganpai']['File']['Thumb'], array('c_fill','h_97','w_97'))?>" class="" />
-                </section>
-                <section class="col col2">
-                    <?if($kechenganpai):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($kechenganpai as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                    <?endif;?> 
-                </section>
-            </div>
-        </div><!--span4 end-->
-        <div class="span4">
-            <header class="page-header header-small">
-            <small class="pull-right"><a href="<?=$this->uri('/category/peixunxinwen')?>">More</a></small><h3>培训新闻</h3>
-            </header>
-            <div class="cols cols3">
-                <section class="first col">
-                <img src="<?=$this->thumb($this->categories['peixunxinwen']['File']['Thumb'], array('c_fill','h_97','w_97'))?>" class="" />
-                </section>
-                <section class="col col2">
-                    <?if($peixunxinwen):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($peixunxinwen as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                    <?endif;?> 
-                </section>
-            </div>
-        </div><!--span4 end-->
-        <div class="span4">
-            <header class="page-header header-small">
-            <small class="pull-right"><a href="<?=$this->uri('/category/shizituandui')?>">More</a></small><h3>师资团队</h3>
-            </header>
-            <div class="cols cols3">
-                <section class="first col">
-                <img src="<?=$this->thumb($this->categories['shizituandui']['File']['Thumb'], array('c_fill','h_97','w_97'))?>" class="" />
-                </section>
-                <section class="col col2">
-                    <?if($shizituandui):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($shizituandui as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                    <?endif;?> 
-                </section>
-            </div>
-        </div><!--span4 end-->
-    </div>
-</div>
-
-
-
-<hr class="white" />
-
-<?if($sheyingzuopin):?>
-<div class="container">
-    <header class="page-header header-gradient">
-    <ul class="nav nav-pills nav-page-header pull-right">
-        <?foreach($sheyingzuopin as $key=>$post):?>
-        <?if($key < 4 ){continue;}?>
-            <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-        <?endforeach;?>    
-        <li><a href="<?=$this->uri('/category/sheyingzuopin')?>" class="last">More</a></li>
-    </ul>
-    <h2><a href="<?=$this->uri('/category/sheyingzuopin')?>"><span class="highlight">PHOTOGRAPHY</span> 摄影作品</a></h2>
-    </header>
-    <ul class="thumbnails">
-        <?foreach($sheyingzuopin as $key=>$post):?>
-        <?if($key >= 4 ){break;}?>
-        <li class="span3">
-        <div class="thumbnail">
-            <a href="<?=$this->uri('/pages/' . $post['urlName'])?>" class="thumbnail-img"><img src="<?=$this->thumb($post['File']['Thumb'], array('c_fill','h_142','w_216'))?>" class="" /></a>
-            <div class="caption">
-                <h5><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></h5>
-                <p><?=$post['preview']?></p>
-            </div>
+<!-- START homepage slideshow -->
+<div id="slideshow-wrapper">
+    <ul id="slideshow">
+        <li class="active"><!-- slide 1 -->
+        <a href="#"><img src="<?=$this->link('/src/aier/images/yl2.jpg')?>" width="641" height="281" alt="" class="slide-1-img" /></a>
+        <div class="slide-1-desc">
+            <h1>爱尔医疗</h1>
+            <p>
+            爱尔医疗有限公司是集开发、生产制造、经营销售三类植入材料及人工器官、二类矫形外科(骨科)手术器械专业生产企业。产品注册为“艾迪尔”商标。 
+            </p>
+            <p>
+            公司始终坚持以 “科技为本”为指导思想，以市场为导向，以需求为已任，追求科技创新的可持续发展战略。以优质的产品，真诚完善的服务，实现公司对顾客的承诺，满足顾客的需求。
+            </p>
+            <div class="slideshow-rm"><a href="#">learn more</a></div>
         </div>
         </li>
-        <?endforeach;?>
+
+        <li><!-- slide 2 -->
+        <a href="#"><img src="<?=$this->link('/src/aier/images/yl1.jpg')?>" width="960" height="281" alt="" /></a>
+        </li>
+
+        <li><!-- slide 3 -->
+        <div class="slide-txt">
+            <h3><a href="#">Learn how to protect your investments - a step by step guide</a></h3>
+
+        </div>
+        <a href="#"><img src="<?=$this->link('/src/aier/images/yl3.jpg')?>" width="960" height="281" alt="" /></a>
+        </li>
     </ul>
 </div>
-<?endif;?>
-
-
-<hr class="white" />
-
-<?if($yingshizuopin):?>
-<div class="container"><div class="box">
-    <header class="page-header header-gradient">
-    <h2><a href="<?=$this->uri('/category/yingshizuopin')?>"><span class="highlight">VIDEO WORKS</span> 影视作品</a></h2>
-    </header>
-    <div class="row">
-        <div class="span3">
-            <div class="thumbnail">
-                <a href="<?=$this->uri('/pages/' . $yingshizuopin[0]['urlName'])?>" class="thumbnail-img"><img src="<?=$this->thumb($yingshizuopin[0]['File']['Thumb'], array('c_fill','h_240','w_205'))?>" class="" /></a>
-            </div>
-            <div class="thumbnail-caption">
-                <a href="<?=$this->uri('/pages/' . $yingshizuopin[0]['urlName'])?>"><?=$yingshizuopin[0]['title']?></a>
-            </div>
-        </div><!--span3 end-->
-        <div class="span6">
-            <div class="cols cols3">
-            <?foreach($yingshizuopin as $key=>$post):?>
-            <?if($key == 0 || $key >= 4){continue;}?>
-                <section class="first col">
-                <div class="thumbnail">
-                    <a href="<?=$this->uri('/pages/' . $post['urlName'])?>" class="thumbnail-img"><img src="<?=$this->thumb($post['File']['Thumb'], array('c_fill','h_80','w_140'))?>" class="" /></a>
-                </div>
-                <div class="thumbnail-caption small">
-                    <a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a>
-                </div>
-                </section>
-            <?endforeach;?>    
-            </div>
-            <div class="cols cols3">
-             <?foreach($yingshizuopin as $key=>$post):?>
-             <?if($key < 4 || $key >= 7){continue;}?>
-                <section class="first col">
-                <div class="thumbnail">
-                    <a href="<?=$this->uri('/pages/' . $post['urlName'])?>" class="thumbnail-img"><img src="<?=$this->thumb($post['File']['Thumb'], array('c_fill','h_80','w_140'))?>" class="" /></a>
-                </div>
-                <div class="thumbnail-caption small">
-                    <a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a>
-                </div>
-                </section>
-            <?endforeach;?>    
-            </div>
-        </div><!--span4 end-->
-        <div class="span3">
-            <header class="page-header header-small">
-            <h3>更多婚纱电影</h3>
-            </header>
-            <ul class="vlist textlist">
-             <?foreach($yingshizuopin as $key=>$post):?>
-             <?if($key < 7 || $key > 14){continue;}?>
-                <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-            <?endforeach;?>    
-            </ul>
-        </div><!--span3 end-->
+<!-- END homepage slideshow -->
+<div id="left">
+    <div class="clearfix">
+        <h2>Welcome to our company</h2>
+        <p class="header-desc">We bring value, innovation and growth to your business</p>
     </div>
-</div></div>
-<?endif;?>
+    <p>
+    Ut dico exerci cum. Ipsum movet dolore sit ea, pri ea dicant mediocrem aliquando. Stet maiestatis ut pri, et vim melius legimus alienum. Nam nibh ipsum ad, pri dictas ornatus consequat te. Vel quem vidit posidonium in, brute dicunt maiorum vis te, mei veniam sanctus imperdiet ad.
+    </p>  
+    <p>
+    Ad officiis percipitur theophrastus quo, ubique impedit ancillae per eu, pri natum tritani copiosae in. Civibus molestie deseruisse mea an, sumo omittam adolescens has te. Atqui luptatum pro ei, his eu regione sensibus necessitatibus. Ne feugait consetetur temporibus nec, inani audiam interpretaris cu vis, qui aeque zzril dissentiunt ea. Ut lorem choro aliquid vix, dolor partem bonorum duo in. Enim cetero luptatum usu ne, soluta invidunt signiferumque id ius, eos eius idque audiam eu.        
+    </p>      
+
+    <div class="h-box-1"><!-- services overview box-->
+        <img src="img/services_icon.png" width="54" height="54" alt="" class="h-box-img" />
+        <div class="h-box-title">
+            <h3>Services overview</h3>
+            <p class="header-desc">Our services at a glance</p>
+        </div>
+        <div class="h-box-wrap">
+            <p>Phasellus ipsum nulla, dignissim condimentum mattis sit amet, feugiat a nulla.</p>
+            <ul class="h-services-list">
+                <li><a href="#">Corporate Publishing</a></li>
+                <li><a href="#">Interactive &amp; Onscreen Production</a></li>
+                <li><a href="#">Advertising</a></li>
+                <li><a href="#">Event Management</a></li>
+                <li><a href="#">Integrated Communications</a></li>                                
+                <li><a href="#">Public Relations</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="h-box-2"><!-- featured case study overview -->
+        <img src="img/case_study_icon.png" width="54" height="54" alt="" class="h-box-img" />
+        <div class="h-box-title">
+            <h3>Services overview</h3>
+            <p class="header-desc">Investments and advertising campaigns</p>
+        </div>
+        <div class="h-box-wrap">
+            <p>
+            Phasellus ipsum nulla, dignissim condimentum mattis sit amet, feugiat a nulla. Nulla molestie pellentesque lorem, eu lacinia sem pellentesque ut. Aenean tempor ligula ut massa feugiat quis lacinia sem sollicitudin.
+            </p>
+            <p>
+            Fusce mattis blandit libero a imperdiet. Sed lorem quam, imperdiet eu congue eget, pretium eget justo. 
+            </p>
+            <div class="body-rm"><a href="#">read more</a></div>
+        </div>
+    </div>
+
+</div>
+<div id="right">
+    <div class="latest-news"><!-- latest news section -->
+        <h3>Latest news</h3>
+        <ul class="ln-list">
+            <li>
+            <h6><a href="#">Our company organises workshop for ...</a></h6>
+            <p>Supendisse sit amet est odio. Suspendisse semper, tur pi eget feugiat venenatis, diam turpis euismod, nisl...</p>
+            <div class="ln-date">September 4th, 2009</div>
+            </li>
+            <li>
+            <h6><a href="#">Our company organises workshop for ...</a></h6>
+            <p>Supendisse sit amet est odio. Suspendisse semper, tur pi eget feugiat venenatis, diam turpis euismod, nisl...</p>
+            <div class="ln-date">September 4th, 2009</div>                    
+            </li>
+            <li>
+            <h6><a href="#">Our company organises workshop for ...</a></h6>
+            <p>Supendisse sit amet est odio. Suspendisse semper, tur pi eget feugiat venenatis, diam turpis euismod, nisl...</p>
+            <div class="ln-date">September 4th, 2009</div>                    
+            </li>                                         
+        </ul>            
+    </div>
+
+    <div class="newsletter"><!-- newsletter section -->
+        <h3>Sign up for Newsletter</h3>
+        <form action="#" method="post">
+            <fieldset class="newsletter-fieldset">
+                <input type="text" class="newsletter-input" value="Your email address" name="newsletter" />
+                <input type="submit" value="" class="input-arrow" />
+            </fieldset>
+        </form>
+        <p>We will keep you up to date with news, events and other great features.</p>
+    </div>
+
+    <div class="brochure"><!-- brochure section -->
+        <a href="#"><img src="img/pdf_icon.png" width="43" height="53" alt="" /></a>
+        <div class="brochure-title">
+            <h3>Media Consult brochure</h3>
+            <p class="header-desc">Download our PDF brochure</p>
+        </div>            
+    </div>
+</div>  

@@ -4,7 +4,7 @@ namespace Aier\Controller;
 use Eva\Mvc\Controller\ActionController,
     Eva\View\Model\ViewModel;
 
-class GwaController extends ActionController
+class AierController extends ActionController
 {
     protected $addResources = array(
     );
