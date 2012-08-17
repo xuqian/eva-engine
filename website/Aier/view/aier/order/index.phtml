@@ -2,8 +2,8 @@
 $this->headTitle('在线订单', 'SET');
 $method = 'post';
 
-$gonggao = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
-$zhuanti = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
+$gonggao = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
+$zhuanti = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
 
 if($this->form){
 	$form = $this->form;
@@ -16,153 +16,108 @@ $form->init(array(
     'values' => ''
 ));
 ?>
-<div class="container">
-<ul class="breadcrumb">
-	<li>您的位置：</li>
-	<li class="">
-		<a href="<?=$this->uri('/')?>">首页</a>
-		<span class="divider">››</span>
-	</li>
-	<li class="">
-    <a href="<?=$this->uri('/order/')?>">在线订单</a>
-	</li>
-</ul>
-</div>
 
+<div id="left">
+    <div class="interior-header">
+        <h2>Contact</h2>
+        <p class="intheader-paragraph">
+        Have a question? Want to leave feedback or just say hi? Please don’t hesitate to complete the form below if you want to 
+        discuss ways we could help you reach your objectives.
+        </p>
+    </div>
+    <div class="interior-content">
+        <p>
+        Ad officiis percipitur theophrastus quo, ubique impedit ancillae per eu, pri natum tritani copiosae in. Civibus molestie deseruisse mea an, sumo omittam adolescens has te. Atqui luptatum pro ei, his eu regione sensibus necessitatibus.
+        </p>
+        <p>
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+        </p>
 
-<div class="page">
-<!-- #body start-->
-<article id="body" class="body grid-s7m0">
-
-	<!-- #main start-->
-	<section id="main-wrap" class="main-wrap"><article id="main" class="main">
-    <div id="blog">
-
-
-        <div class="page_header large">
-            <h2>在线订单</h2>
+        <?php if(isset($hasError)) { //If errors are found ?>
+        <div class="contact-error">
+            <p>Please check if you've filled all the fields with valid information. Thank you.</p>
         </div>
-        <hr class="white" />
-        <?if($this->flashMessenger->getMessages()):?>
-        <div id="post-create-succeed" class="alert alert-success">
-            <a href="#" data-dismiss="alert" class="close">x</a>
-            <h4 class="alert-heading">订单已提交</h4>
+        <?php } ?>
+
+        <?php if(isset($emailSent) && $emailSent == true) { //If email is sent ?>
+        <div class="contact-success">
+            <p>
+            <strong>Your message has been sent!</strong><br />
+            Thank you <strong><?php echo $name;?></strong> for emailing us! We will get in touch with you soon.
+            </p>
         </div>
-        <?endif?>
+        <?php } ?>  
 
-        <form <?=$this->formAttr($form)?> class="form form-horizontal">
-            <?=$form->restful();?>
-            <div class="control-group <?=$form->isError('name') ? 'error' : '';?>">
-                <?=$form->helper('name', 'label', array('class' => 'control-label'))?>
-                <div class="controls">
-                    <?=$form->helper('name', array('class' => 'input-xlarge'))?>        
-                    <div class="help-block"><?=$form->helper('name', 'formElementErrors')?></div>
-                </div>
-            </div>
-            <div class="control-group <?=$form->isError('phone') ? 'error' : '';?>">
-                <?=$form->helper('phone', 'label', array('class' => 'control-label'))?>
-                <div class="controls">
-                    <?=$form->helper('phone', array('class' => 'input-xlarge'))?>        
-                    <div class="help-block"><?=$form->helper('phone', 'formElementErrors')?></div>
-                </div>
-            </div>
-            <div class="control-group <?=$form->isError('im') ? 'error' : '';?>">
-                <?=$form->helper('im', 'label', array('class' => 'control-label'))?>
-                <div class="controls">
-                    <?=$form->helper('im', array('class' => 'input-xlarge'))?>        
-                    <div class="help-block"><?=$form->helper('im', 'formElementErrors')?></div>
-                </div>
-            </div>
-            <div class="control-group <?=$form->isError('message') ? 'error' : '';?>">
-                <?=$form->helper('message', 'label', array('class' => 'control-label'))?>
-                <div class="controls">
-                    <?=$form->helper('message', 'formTextarea', array('class' => 'span6', 'rows' => '15'))?>        
-                    <div class="help-block"><?=$form->helper('message', 'formElementErrors')?></div>
-                </div>
-            </div>
-            <div class="form-actions">
-                <button class="btn btn-primary" type="submit">提交</button>
-            </div>
-
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="contactform"><!-- Contact form -->
+            <fieldset class="contact-fieldset">
+                <h3>Send us a message</h3>
+                <ul>
+                    <li>
+                    <label for="contactname">Your Name:</label>
+                    <input type="text" name="contactname" id="contactname" value="" class="contact-input required" />
+                    </li>
+                    <li>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" class="contact-input required email" />
+                    </li>     
+                    <li>
+                    <label for="subject">Subject:</label>
+                    <input type="text" name="subject" id="subject" class="contact-input required" />
+                    </li>
+                    <li>
+                    <label for="message">Your message:</label>
+                    <textarea rows="6" cols="40" id="message" name="message" class="contact-textarea required"></textarea>
+                    </li>
+                    <li>
+                    <input type="submit" value="Send message" name="submit" class="contact-submit" />
+                    </li>                      
+                </ul>
+            </fieldset>
         </form>
 
     </div>
 
-
-    </article></section>
-    <!-- #main end-->
-
-   <section id="sidebar" class="sidebar">
-
-    <div class="article-menu">
-        <ul>
-            <li>
-            <h3><a href="<?=$this->uri('/category/news')?>">
-                    最新动态
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/category/jiudian')?>">
-                    婚庆酒店
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/category/sheying')?>">
-                    婚庆摄影
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/order/')?>">
-                    在线订单
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-        </ul>
+</div>
+<div id="right">
+    <div class="address-box"><!-- address & map section -->
+        <h3>Map</h3>
+        <a rel="lightbox" title="blog detail image" href="img/map_big.jpg">
+            <img src="img/map_small.jpg" width="282" height="134" alt="" class="img-border map-img" />
+        </a>
+        <span class="map-txt">Click on the map to view a larger image.</span>
+        <h3>Address</h3>            
+        <address>
+            <span>
+                27 Tollit essent vituperata<br />
+                UK, London
+            </span>
+            <span>
+                Phone: 123 456 789<br />
+                Fax: 123 456 799<br />
+                Website: <a href="#">http://mediaconsult.com</a><br />
+                Email: <a href="#">info@mediaconsult.com</a> 
+            </span>
+        </address>
     </div>
 
-    <hr class="white">
+    <div class="newsletter"><!-- newsletter section -->
+        <h3>Sign up for Newsletter</h3>
+        <form action="#" method="post">
+            <fieldset class="newsletter-fieldset">
+                <input type="text" class="newsletter-input" value="Your email address" name="newsletter" />
+                <input type="submit" value="" class="input-arrow" />
+            </fieldset>
+        </form>
+        <p>We will keep you up to date with news, events and other great features.</p>
+    </div>
 
-    <div class="">
-        <?=$this->widget('Gwa', 'components/ad')?>
-        <div class="box-container-t15">
-            <div class="tab-box square split3">
-                <ul class="nav nav-tabs" id="side-news-tab">
-                    <li class="active"><a href="#home">公告</a></li>
-                    <li><a href="#profile">专题</a></li>
-                    <li><a href="#messages">论坛</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home"><div class="box-container-v15">
-                        <?if($gonggao):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($gonggao as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?>
-                    </div></div>
-                    <div class="tab-pane" id="profile"><div class="box-container-v15">
-                        <?if($zhuanti):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($zhuanti as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?>
-                    </div></div>
-                    <div class="tab-pane" id="messages">...</div>
-                </div>
-            </div>
-        </div>
-    </div><!--span3 end-->
+    <div class="brochure"><!-- brochure section -->
+        <a href="#"><img src="img/pdf_icon.png" width="43" height="53" alt="" /></a>
+        <div class="brochure-title">
+            <h3>Media Consult brochure</h3>
+            <p class="header-desc">Download our PDF brochure</p>
+        </div>            
+    </div>
 
-
-    </section>
-
-    <!-- #body end-->
-    </article>
-</div>
+</div>  
 

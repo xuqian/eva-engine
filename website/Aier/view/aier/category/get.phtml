@@ -1,126 +1,101 @@
 <?
 $this->headTitle($this->category['categoryName'], 'SET');
 
-$gonggao = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
-$zhuanti = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
+$gonggao = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
+$zhuanti = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
 ?>
-<div class="container">
-<ul class="breadcrumb">
-	<li>您的位置：</li>
-	<li class="">
-		<a href="<?=$this->uri('/')?>">首页</a>
-		<span class="divider">››</span>
-	</li>
-	<li class="">
-	<a href="<?=$this->uri('/category/' . $this->category['urlName'])?>"><?=$this->category['categoryName']?></a>
-	</li>
-</ul>
-</div>
 
 
-<div class="page">
-<!-- #body start-->
-<article id="body" class="body grid-s7m0">
-
-	<!-- #main start-->
-	<section id="main-wrap" class="main-wrap"><article id="main" class="main">
-
-		<?if($this->posts):?>
-		<div class="vlist posts">
-			<?foreach($this->posts as $key => $post):?>
-			<div class="item <?=$key == 0 ? 'first' : ''?>">
-				<div class="item-inline item_title">
-					<h3><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></h3>
-					<p class="info">发布时间： <?=$post['createTime']?></p>
-					<p class="description"><?=$post['preview']?></p>
-				</div>
-			</div>
-			<?endforeach;?>
-		</div>
-		<?=$this->pager ? $this->partial('pager.phtml', $this) : ''?>
-
-		<?else:?>
-		<?endif;?>
-
-        <?if($this->paginator):?>
-        <?=$this->paginator->setPath('/category/' . $this->category['urlName'])->setBaseQuery($this->query);?>
-        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-        <?endif;?>
-
-	</article></section>
-	<!-- #main end-->
-
-    <section id="sidebar" class="sidebar">
-
-    <div class="article-menu">
-        <ul>
-            <li>
-            <h3><a href="<?=$this->uri('/category/news')?>">
-                    最新动态
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/category/jiudian')?>">
-                    婚庆酒店
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/category/sheying')?>">
-                    婚庆摄影
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/order/')?>">
-                    在线订单
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-        </ul>
-    </div>
-
-    <hr class="white">
-
-    <div class="">
-        <?=$this->widget('Gwa', 'components/adside')?>
-        <div class="box-container-t15">
-            <div class="tab-box square split3">
-                <ul class="nav nav-tabs" id="side-news-tab">
-                    <li class="active"><a href="#home">公告</a></li>
-                    <li><a href="#profile">专题</a></li>
-                    <li><a href="#messages">论坛</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home"><div class="box-container-v15">
-                        <?if($gonggao):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($gonggao as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?>
-                    </div></div>
-                    <div class="tab-pane" id="profile"><div class="box-container-v15">
-                        <?if($zhuanti):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($zhuanti as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?>
-                    </div></div>
-                    <div class="tab-pane" id="messages">...</div>
-                </div>
-            </div>
+    <div id="left">
+		<div class="interior-header">
+            <h2><a href="<?=$this->uri('/category/' . $this->category['urlName'])?>"><?=$this->category['categoryName']?></a></h2>
+            <p class="intheader-paragraph">
+            <?=$this->category['description']?>
+            </p>
         </div>
-    </div><!--span3 end-->
+        <div class="interior-content">
+
+            <?if($this->posts):?>
+
+            <ul class="newslist-wrapper">
+                <?foreach($this->posts as $key => $post):?>
+                <li>
+                <a href="#"><img src="img/news_img1.jpg" width="72" height="72" alt="" class="news-img" /></a>
+                <h4><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></h4>
+                <span class="newslist-date">发布时间： <?=$post['createTime']?></span>
+                <p><?=$post['preview']?>
+                </p>                	
+                </li>
+                <?endforeach;?>
+            </ul>
+            <?else:?>
+            <?endif;?>
+
+            <?if($this->paginator):?>
+            <?=$this->paginator->setPath('/category/' . $this->category['urlName'])->setBaseQuery($this->query);?>
+            <?$paginator = $this->paginator;
+            if($paginator){
+                $path = $paginator->getPath();
+                $queryKey = $paginator->getPageQueryKey();
+                $baseQuery = $paginator->getBaseQuery();
+                $paginator = $paginator->toArray();
+            }?>
+            <div class="pagination"><!-- generic pagination, copy/paste this block wherever you like -->
+                <?if($paginator['prevPage']):?>
+                <div class="reverse-arrow"><a href="<?=$this->uri($path, 'dq', array('Q' => $baseQuery, 'q' => array($queryKey => $paginator['prevPage'])))?>">上页</a></div>
+                <?endif?>
+                <?if($paginator['nextPage']):?>
+                <div class="body-rm"><a href="<?=$this->uri($path, 'dq', array('Q' => $baseQuery, 'q' => array($queryKey => $paginator['nextPage'])))?>">下页</a></div>   
+                <?endif?>
+                <span class="page-number">当前在： <?=$paginator['pageNumber']?> / <?=$paginator['pageCount']?>页</span>             
+            </div>  
+            <li></li>
+            <?endif;?>
 
 
-    </section>
 
-    <!-- #body end-->
-    </article>
-</div>
+        </div>
 
+    </div>
+    <div id="right">
+        <div class="services-box">
+            <h3>Services</h3>
+            <p>Phasellus ipsum nulla, dignissim condimentum mattis sit amet, feugiat a nulla.</p>
+            <ul class="services-box-list">
+                <li><a href="#">Ingeniosity</a></li>
+                <li><a href="#">Clarity</a></li>
+                <li><a href="#">Performance</a></li>
+                <li><a href="#">Initiative</a></li>
+                <li><a href="#">Learning &amp; Leadership</a></li>
+                <li><a href="#">Customer insight</a></li>
+            </ul>             
+        </div>
+
+        <div class="newsletter"><!-- newsletter section -->
+            <h3>Sign up for Newsletter</h3>
+            <form action="#" method="post">
+                <fieldset class="newsletter-fieldset">
+                    <input type="text" class="newsletter-input" value="Your email address" name="newsletter" />
+                    <input type="submit" value="" class="input-arrow" />
+                </fieldset>
+            </form>
+            <p>We will keep you up to date with news, events and other great features.</p>
+        </div>
+
+        <div class="aboutus-box">
+            <h3>About Us</h3>
+            <p>
+            You don’t have to include all those boxes in your site. I provided all those right sections: about us, tabular section, right-services, newsletter, brochure download, latest news so that you can have a lot of options to chose from when building the final product.
+            </p>
+            <div class="body-rm"><a href="#">learn more</a></div>            
+        </div>
+
+        <div class="brochure"><!-- brochure section -->
+            <a href="#"><img src="img/pdf_icon.png" width="43" height="53" alt="" /></a>
+            <div class="brochure-title">
+                <h3>Media Consult brochure</h3>
+                <p class="header-desc">Download our PDF brochure</p>
+            </div>            
+        </div>
+
+    </div>  

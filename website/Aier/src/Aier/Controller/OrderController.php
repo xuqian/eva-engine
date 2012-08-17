@@ -42,7 +42,7 @@ class OrderController extends ActionController
 
         $view = new ViewModel(array(
         ));
-        $view->setTemplate('gwa/order/index');
+        $view->setTemplate('aier/order/index');
         $view->setVariables(array(
             'flashMessenger' => $this->flashMessenger(),
             'form' => $form,

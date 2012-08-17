@@ -1,113 +1,74 @@
 <?
 $this->headTitle($this->post['title'], 'SET');
 
-$gonggao = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
-$zhuanti = $this->action('Gwa\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
+$gonggao = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
+$zhuanti = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
 ?>
-<div class="container">
-<ul class="breadcrumb">
-	<li>您的位置：</li>
-	<li class="">
-		<a href="<?=$this->uri('/')?>">首页</a>
-		<span class="divider">››</span>
-	</li>
-	<li class="">
-	<a href="<?=$this->uri('/pages/' . $this->post['urlName'])?>"><?=$this->post['title']?></a>
-	</li>
-</ul>
+<div id="left">
+
+    <div class="interior-content">
+        <h2><a href="<?=$this->uri('/pages/' . $this->post['urlName'])?>"><?=$this->post['title']?></a></h2>
+        <div class="blog-misc">
+            <span><a href="#"><?=$this->post['createTime']?></a></span>
+        </div>
+        <?=$this->post['Text']['contentHtml']?>
+    </div>
+
 </div>
 
-
-<div class="page">
-<!-- #body start-->
-<article id="body" class="body grid-s7m0">
-
-	<!-- #main start-->
-	<section id="main-wrap" class="main-wrap"><article id="main" class="main">
-
-		<div id="blog">
-			<div class="page_header large">
-				<h2><?=$this->post['title'] ?></h2>
-			</div>
-			<article class="blog <?=$this->post['codeType'] == 'wiki' ? 'wiki' : ''?> post">
-				<?=$this->post['Text']['contentHtml']?>
-			</article>
-		</div>
-
-	</article></section>
-	<!-- #main end-->
-
-    <section id="sidebar" class="sidebar">
-
-    <div class="article-menu">
+<div id="right">
+    <div class="blog-categ">
+        <h3>Categories</h3>
         <ul>
-            <li>
-            <h3><a href="<?=$this->uri('/category/news')?>">
-                    最新动态
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/category/jiudian')?>">
-                    婚庆酒店
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/category/sheying')?>">
-                    婚庆摄影
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
-            <li>
-            <h3><a href="<?=$this->uri('/order/')?>">
-                    在线订单
-                    <span class="divider">›</span>
-            </a></h3>
-            </li>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Photography</a></li>                
+            <li><a href="#">Wordpress Themes</a></li>                
+            <li><a href="#">News</a></li>                
+            <li><a href="#">Inspiration</a></li>                
+            <li><a href="#">Marketing and Advertising</a></li>                
+            <li><a href="#">Management</a></li>                                                                
         </ul>
     </div>
 
-    <hr class="white">
+    <div class="blog-categ">
+        <h3>Archives</h3>
+        <ul>
+            <li><a href="#">August 2009</a></li>
+            <li><a href="#">July 2009</a></li>                
+            <li><a href="#">June 2009</a></li>                
+            <li><a href="#">May 2009</a></li>                
+            <li><a href="#">April 2009</a></li>                                            
+        </ul>
+    </div>
 
-    <div class="">
-        <?=$this->widget('Gwa', 'components/adside')?>
-        <div class="box-container-t15">
-            <div class="tab-box square split3">
-                <ul class="nav nav-tabs" id="side-news-tab">
-                    <li class="active"><a href="#home">公告</a></li>
-                    <li><a href="#profile">专题</a></li>
-                    <li><a href="#messages">论坛</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home"><div class="box-container-v15">
-                        <?if($gonggao):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($gonggao as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?>
-                    </div></div>
-                    <div class="tab-pane" id="profile"><div class="box-container-v15">
-                        <?if($zhuanti):?>        
-                            <ul class="vlist textlist">
-                                <?foreach($zhuanti as $post):?>
-                                    <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>" target="_blank" title=""><?=$post['title']?></a></li>
-                                <?endforeach;?>    
-                            </ul>
-                        <?endif;?>
-                    </div></div>
-                    <div class="tab-pane" id="messages">...</div>
-                </div>
-            </div>
-        </div>
-    </div><!--span3 end-->
+    <div class="flickr">
+        <h3>Flickr</h3>
+        <ul>
+            <li><a href="#"><img src="img/flickr1.jpg" width="90" height="90" alt="" /></a></li>
+            <li><a href="#"><img src="img/flickr2.jpg" width="90" height="90" alt="" /></a></li>
+            <li><a href="#"><img src="img/flickr3.jpg" width="90" height="90" alt="" /></a></li>    
+            <li><a href="#"><img src="img/flickr4.jpg" width="90" height="90" alt="" /></a></li>
+            <li><a href="#"><img src="img/flickr5.jpg" width="90" height="90" alt="" /></a></li>
+            <li><a href="#"><img src="img/flickr6.jpg" width="90" height="90" alt="" /></a></li>                                                
+        </ul>
+    </div>
+    <div class="newsletter"><!-- newsletter section -->
+        <h3>Sign up for Newsletter</h3>
+        <form action="#" method="post">
+            <fieldset class="newsletter-fieldset">
+                <input type="text" class="newsletter-input" value="Your email address" name="newsletter" />
+                <input type="submit" value="" class="input-arrow" />
+            </fieldset>
+        </form>
+        <p>We will keep you up to date with news, events and other great features.</p>
+    </div>
 
+    <div class="brochure"><!-- brochure section -->
+        <a href="#"><img src="img/pdf_icon.png" width="43" height="53" alt="" /></a>
+        <div class="brochure-title">
+            <h3>Media Consult brochure</h3>
+            <p class="header-desc">Download our PDF brochure</p>
+        </div>            
+    </div>
 
-    </section>
-
-    <!-- #body end-->
-    </article>
-</div>
-
+</div>  
