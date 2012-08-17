@@ -8,6 +8,13 @@ use File\Form,
 
 class FrontendController extends ActionController
 {
+
+    public function postAction($params = null)
+    {
+        $postModel = Api::_()->getModel('Blog\Model\Post');
+        $post = $postModel->setItemParams($params)->getPost();
+        return $post;
+    }
     
     public function postlistAction($params = null)
     {

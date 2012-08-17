@@ -34,57 +34,52 @@ $this->headTitle('爱尔医疗', 'SET');
 </div>
 <!-- END homepage slideshow -->
 <div id="left">
+
+    <?$post = $this->action('Aier\Api\Controller\FrontendController', 'postAction', 'welcome');?>
     <div class="clearfix">
-        <h2>Welcome to our company</h2>
-        <p class="header-desc">We bring value, innovation and growth to your business</p>
+        <h2><?=$post['title']?></h2>
     </div>
-    <p>
-    Ut dico exerci cum. Ipsum movet dolore sit ea, pri ea dicant mediocrem aliquando. Stet maiestatis ut pri, et vim melius legimus alienum. Nam nibh ipsum ad, pri dictas ornatus consequat te. Vel quem vidit posidonium in, brute dicunt maiorum vis te, mei veniam sanctus imperdiet ad.
-    </p>  
-    <p>
-    Ad officiis percipitur theophrastus quo, ubique impedit ancillae per eu, pri natum tritani copiosae in. Civibus molestie deseruisse mea an, sumo omittam adolescens has te. Atqui luptatum pro ei, his eu regione sensibus necessitatibus. Ne feugait consetetur temporibus nec, inani audiam interpretaris cu vis, qui aeque zzril dissentiunt ea. Ut lorem choro aliquid vix, dolor partem bonorum duo in. Enim cetero luptatum usu ne, soluta invidunt signiferumque id ius, eos eius idque audiam eu.        
-    </p>      
+    <div>
+        <?=$post['Text']['contentHtml']?>
+    </div>
 
     <div class="h-box-1"><!-- services overview box-->
+        <?$posts = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'news', 'rows' => 8));?>
+        <?$category = $this->action('Aier\Api\Controller\FrontendController', 'categoryAction',array('category' => 'news', 'rows' => 8));?>
         <img src="<?=$this->link('/src/aier/images/service1.png')?>" width="54" height="54" alt="" class="h-box-img" />
         <div class="h-box-title">
-            <h3>Services overview</h3>
-            <p class="header-desc">Our services at a glance</p>
+            <h3><a href="<?=$this->uri('/category/' . $category['urlName'])?>"><?=$category['categoryName']?></a></h3>
         </div>
         <div class="h-box-wrap">
-            <p>Phasellus ipsum nulla, dignissim condimentum mattis sit amet, feugiat a nulla.</p>
+            <p><?=$category['description']?></p>
             <ul class="h-services-list">
-                <li><a href="#">Corporate Publishing</a></li>
-                <li><a href="#">Interactive &amp; Onscreen Production</a></li>
-                <li><a href="#">Advertising</a></li>
-                <li><a href="#">Event Management</a></li>
-                <li><a href="#">Integrated Communications</a></li>                                
-                <li><a href="#">Public Relations</a></li>
+                <?foreach($posts as $post):?>
+                <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></li>
+                <?endforeach;?>
             </ul>
         </div>
     </div>
 
-    <div class="h-box-2"><!-- featured case study overview -->
-        <img src="<?=$this->link('/src/aier/images/service5.png')?>" width="53" height="54" alt="" class="h-box-img" />
+    <div class="h-box-2"><!-- services overview box-->
+        <?$posts = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'projects', 'rows' => 8));?>
+        <?$category = $this->action('Aier\Api\Controller\FrontendController', 'categoryAction',array('category' => 'projects', 'rows' => 8));?>
+        <img src="<?=$this->link('/src/aier/images/service5.png')?>" width="54" height="54" alt="" class="h-box-img" />
         <div class="h-box-title">
-            <h3>Services overview</h3>
-            <p class="header-desc">Investments and advertising campaigns</p>
+            <h3><a href="<?=$this->uri('/category/' . $category['urlName'])?>"><?=$category['categoryName']?></a></h3>
         </div>
         <div class="h-box-wrap">
-            <p>
-            Phasellus ipsum nulla, dignissim condimentum mattis sit amet, feugiat a nulla. Nulla molestie pellentesque lorem, eu lacinia sem pellentesque ut. Aenean tempor ligula ut massa feugiat quis lacinia sem sollicitudin.
-            </p>
-            <p>
-            Fusce mattis blandit libero a imperdiet. Sed lorem quam, imperdiet eu congue eget, pretium eget justo. 
-            </p>
-            <div class="body-rm"><a href="#">read more</a></div>
+            <p><?=$category['description']?></p>
+            <ul class="h-services-list">
+                <?foreach($posts as $post):?>
+                <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></li>
+                <?endforeach;?>
+            </ul>
         </div>
     </div>
 
 </div>
 <div id="right">
     <div class="newsletter"><!-- newsletter section -->
-        <h3>官方微博</h3>
-        <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=1&isWeibo=1&isFans=0&uid=2011927842&verifier=8ceb4535&dpc=1"></iframe>
+        <h3>官方微博</h3><iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2011927842&verifier=8ceb4535&dpc=1"></iframe>
     </div>
 </div>  

@@ -47,37 +47,41 @@
         <div id="myslidemenu" class="jqueryslidemenu">
             <ul class="primary-menu">
                 <li><a href="<?=$this->uri('/')?>">首页</a></li>
-                <li><a href="<?=$this->uri('/pages/company')?>">公司介绍</a></li>
-                <li><a href="<?=$this->uri('/category/news')?>">公司动态</a></li>
-                <li><a href="<?=$this->uri('/pages/solution')?>">解决方案</a></li>
-                <li><a href="<?=$this->uri('/pages/certificate')?>">技术资料</a></li>
-                <li><a href="<?=$this->uri('/pages/technical')?>">资质证书</a></li>
-                <li><a href="<?=$this->uri('/pages/contact')?>">联系方式</a></li>
-                <li><a href="<?=$this->uri('/order/')?>">留言反馈</a></li>
+                <li><a href="<?=$this->uri('/pages/about')?>">企业简介</a></li>
+                <li><a href="<?=$this->uri('/category/news')?>">学术动态</a></li>
+                <li><a href="<?=$this->uri('/category/bidding')?>">招标信息</a>
+                <ul>
+                    <li><a href="<?=$this->uri('/pages/solution')?>">解决方案</a></li>
+                    <li><a href="<?=$this->uri('/pages/technical')?>">技术资料</a></li>
+                    <li><a href="<?=$this->uri('/pages/certificate')?>">资质证书</a></li>
+                </ul>
+                </li>
+                <li><a href="<?=$this->uri('/category/projects')?>">推介项目</a></li>
+                <li><a href="<?=$this->uri('/order/')?>">联系我们</a></li>
             </ul>
         </div>
     </div>
 
     <?=$this->content?>
     <div id="footer">
-    	<ul>
-                <li><a href="<?=$this->uri('/')?>">首页</a></li>
-                <li><a href="<?=$this->uri('/pages/contact')?>">联系方式</a></li>
-                <li><a href="<?=$this->uri('/order/')?>">留言反馈</a></li>                                                         
+        <ul>
+            <li><a href="<?=$this->uri('/')?>">首页</a></li>
+            <li><a href="<?=$this->uri('/pages/contact')?>">联系方式</a></li>
+            <li><a href="<?=$this->uri('/order/')?>">留言反馈</a></li>                                                         
         </ul>
         <div class="copyright">&copy; 2012 <a href="#">甘肃金爱尔商贸有限公司</a>. All rights reserved.</div>
     </div>  
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){					   
-	$(".ln-list li").click(function(){//makes entire area "ln-list li" clickable
-    	window.location=$(this).find("a").attr("href");return false;
-	});
-	
-	$(".brochure").click(function(){//makes entire area "brochure" clickable
-    	window.location=$(this).find("a").attr("href");return false;
-	});	
+    $(document).ready(function(){					   
+            $(".ln-list li").click(function(){//makes entire area "ln-list li" clickable
+                window.location=$(this).find("a").attr("href");return false;
+        });
+
+        $(".brochure").click(function(){//makes entire area "brochure" clickable
+            window.location=$(this).find("a").attr("href");return false;
+    });	
 
 });
 </script>

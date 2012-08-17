@@ -1,0 +1,25 @@
+<div class="blog-categ">
+    <?$posts = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'news', 'rows' => 8));?>
+    <?$category = $this->action('Aier\Api\Controller\FrontendController', 'categoryAction',array('category' => 'news', 'rows' => 8));?>
+    <h3><a href="<?=$this->uri('/category/' . $category['urlName'])?>"><?=$category['categoryName']?></a></h3>
+    <ul class="services-box-list">
+        <?foreach($posts as $post):?>
+        <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></li>
+        <?endforeach;?>
+    </ul>             
+</div>
+
+<div class="blog-categ">
+    <?$posts = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'projects', 'rows' => 8));?>
+    <?$category = $this->action('Aier\Api\Controller\FrontendController', 'categoryAction',array('category' => 'projects', 'rows' => 8));?>
+    <h3><a href="<?=$this->uri('/category/' . $category['urlName'])?>"><?=$category['categoryName']?></a></h3>
+    <ul class="services-box-list">
+        <?foreach($posts as $post):?>
+        <li><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></li>
+        <?endforeach;?>
+    </ul>             
+</div>
+
+<div class="aboutus-box">
+    <h3>官方微博</h3><iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2011927842&verifier=8ceb4535&dpc=1"></iframe>
+</div>
