@@ -1,75 +1,52 @@
 <?
-$this->headTitle('在线订单', 'SET');
+$this->headTitle('联系我们', 'SET');
 $method = 'post';
-
-$gonggao = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'gonggao', 'rows' => 7));
-$zhuanti = $this->action('Aier\Api\Controller\FrontendController', 'postlistAction',array('category' => 'zhuanti', 'rows' => 7));
 
 if($this->form){
 	$form = $this->form;
 } else {
-    $form = Eva\Api::_()->getForm('Gwa\Form\ContactForm');
+    $form = Eva\Api::_()->getForm('Aier\Form\ContactForm');
 }
 $form->init(array(
     'action' => $this->uri('/order/'),
     'method' => $method,
     'values' => ''
 ));
+
+$post = $this->action('Aier\Api\Controller\FrontendController', 'postAction', 'contact');
 ?>
 
 <div id="left">
     <div class="interior-header">
-        <h2>Contact</h2>
-        <p class="intheader-paragraph">
-        Have a question? Want to leave feedback or just say hi? Please don’t hesitate to complete the form below if you want to 
-        discuss ways we could help you reach your objectives.
-        </p>
+        <h2><?=$post['title']?></h2>
     </div>
     <div class="interior-content">
-        <p>
-        Ad officiis percipitur theophrastus quo, ubique impedit ancillae per eu, pri natum tritani copiosae in. Civibus molestie deseruisse mea an, sumo omittam adolescens has te. Atqui luptatum pro ei, his eu regione sensibus necessitatibus.
-        </p>
-        <p>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-        </p>
-
-        <?php if(isset($hasError)) { //If errors are found ?>
-        <div class="contact-error">
-            <p>Please check if you've filled all the fields with valid information. Thank you.</p>
+        <div class="clearfix">
+            <?=$post['Text']['contentHtml']?>
         </div>
-        <?php } ?>
 
-        <?php if(isset($emailSent) && $emailSent == true) { //If email is sent ?>
-        <div class="contact-success">
-            <p>
-            <strong>Your message has been sent!</strong><br />
-            Thank you <strong><?php echo $name;?></strong> for emailing us! We will get in touch with you soon.
-            </p>
-        </div>
-        <?php } ?>  
-
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="contactform"><!-- Contact form -->
+        <form <?=$this->formAttr($form)?>><!-- Contact form -->
             <fieldset class="contact-fieldset">
-                <h3>Send us a message</h3>
+                <h3>留言板</h3>
                 <ul>
                     <li>
-                    <label for="contactname">Your Name:</label>
-                    <input type="text" name="contactname" id="contactname" value="" class="contact-input required" />
+                    <label for="contactname">你的名字:</label>
+                    <input type="text" name="name" id="contactname" value="" class="contact-input required" />
                     </li>
                     <li>
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" name="email" class="contact-input required email" />
-                    </li>     
-                    <li>
-                    <label for="subject">Subject:</label>
-                    <input type="text" name="subject" id="subject" class="contact-input required" />
+                    <label for="email">电话:</label>
+                    <input type="text" id="email" name="phone" class="contact-input required email" />
                     </li>
                     <li>
-                    <label for="message">Your message:</label>
+                    <label for="im">QQ:</label>
+                    <input type="text" id="im" name="im" class="contact-input" />
+                    </li>
+                    <li>
+                    <label for="message">留言内容:</label>
                     <textarea rows="6" cols="40" id="message" name="message" class="contact-textarea required"></textarea>
                     </li>
                     <li>
-                    <input type="submit" value="Send message" name="submit" class="contact-submit" />
+                    <input type="submit" value="提交" name="submit" class="contact-submit" />
                     </li>                      
                 </ul>
             </fieldset>
@@ -79,45 +56,6 @@ $form->init(array(
 
 </div>
 <div id="right">
-    <div class="address-box"><!-- address & map section -->
-        <h3>Map</h3>
-        <a rel="lightbox" title="blog detail image" href="img/map_big.jpg">
-            <img src="img/map_small.jpg" width="282" height="134" alt="" class="img-border map-img" />
-        </a>
-        <span class="map-txt">Click on the map to view a larger image.</span>
-        <h3>Address</h3>            
-        <address>
-            <span>
-                27 Tollit essent vituperata<br />
-                UK, London
-            </span>
-            <span>
-                Phone: 123 456 789<br />
-                Fax: 123 456 799<br />
-                Website: <a href="#">http://mediaconsult.com</a><br />
-                Email: <a href="#">info@mediaconsult.com</a> 
-            </span>
-        </address>
-    </div>
-
-    <div class="newsletter"><!-- newsletter section -->
-        <h3>Sign up for Newsletter</h3>
-        <form action="#" method="post">
-            <fieldset class="newsletter-fieldset">
-                <input type="text" class="newsletter-input" value="Your email address" name="newsletter" />
-                <input type="submit" value="" class="input-arrow" />
-            </fieldset>
-        </form>
-        <p>We will keep you up to date with news, events and other great features.</p>
-    </div>
-
-    <div class="brochure"><!-- brochure section -->
-        <a href="#"><img src="img/pdf_icon.png" width="43" height="53" alt="" /></a>
-        <div class="brochure-title">
-            <h3>Media Consult brochure</h3>
-            <p class="header-desc">Download our PDF brochure</p>
-        </div>            
-    </div>
-
+    <?=$this->widget('Aier', 'widgets/side', $this->vars())?>
 </div>  
 
