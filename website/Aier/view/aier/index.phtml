@@ -5,31 +5,7 @@ $this->headTitle('爱尔医疗', 'SET');
 <!-- START homepage slideshow -->
 <div id="slideshow-wrapper">
     <ul id="slideshow">
-        <li class="active"><!-- slide 1 -->
-        <a href="#"><img src="<?=$this->link('/src/aier/images/yl2.jpg')?>" width="641" height="281" alt="" class="slide-1-img" /></a>
-        <div class="slide-1-desc">
-            <h1>爱尔医疗</h1>
-            <p>
-            爱尔医疗有限公司是集开发、生产制造、经营销售三类植入材料及人工器官、二类矫形外科(骨科)手术器械专业生产企业。产品注册为“艾迪尔”商标。 
-            </p>
-            <p>
-            公司始终坚持以 “科技为本”为指导思想，以市场为导向，以需求为已任，追求科技创新的可持续发展战略。以优质的产品，真诚完善的服务，实现公司对顾客的承诺，满足顾客的需求。
-            </p>
-            <div class="slideshow-rm"><a href="#">learn more</a></div>
-        </div>
-        </li>
-
-        <li><!-- slide 2 -->
-        <a href="#"><img src="<?=$this->link('/src/aier/images/yl1.jpg')?>" width="960" height="281" alt="" /></a>
-        </li>
-
-        <li><!-- slide 3 -->
-        <div class="slide-txt">
-            <h3><a href="#">Learn how to protect your investments - a step by step guide</a></h3>
-
-        </div>
-        <a href="#"><img src="<?=$this->link('/src/aier/images/yl3.jpg')?>" width="960" height="281" alt="" /></a>
-        </li>
+        <?=$this->widget('Aier', 'components/slider')?>
     </ul>
 </div>
 <!-- END homepage slideshow -->
@@ -79,7 +55,10 @@ $this->headTitle('爱尔医疗', 'SET');
 
 </div>
 <div id="right">
-    <div class="newsletter"><!-- newsletter section -->
-        <h3>官方微博</h3><iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2011927842&verifier=8ceb4535&dpc=1"></iframe>
+    <div class="latest-news">
+        <?=$this->widget('Aier', 'components/qq')?>
     </div>
-</div>  
+    <div class="newsletter">
+        <?=$this->widget('Aier', 'components/weibo')?>
+    </div>
+</div> 

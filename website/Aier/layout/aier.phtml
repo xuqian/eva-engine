@@ -23,11 +23,17 @@
     <script src="<?=$this->link('/lib/js/jquery/jquery.min.js')?>"></script>
     <script src="<?=$this->link('/src/aier/js/jqueryslidemenu.js')?>"></script>
     <script src="<?=$this->link('/src/aier/js/slideswitch.js')?>"></script>
-	<style>
+    <style>
+        body {
+            font-size:12px;
+        }
         body, h1, h2, h3, h4, h5, h6 , .jqueryslidemenu  {
-		font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
-	}
-	</style>
+                font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
+        }
+        .jqueryslidemenu ul li a {
+                padding-bottom:8px;
+        }
+    </style>
 
 </head>
 <body>
@@ -38,7 +44,7 @@
         </div>
         <form action="#" method="post">
             <fieldset class="search-fieldset">
-                热线电话：0931-8888888
+                <?=$this->widget('Aier', 'components/phone')?>
             </fieldset>
         </form>
     </div>	

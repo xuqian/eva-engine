@@ -17,7 +17,13 @@ $this->headTitle($this->category['categoryName'], 'SET');
         <ul class="newslist-wrapper">
             <?foreach($this->posts as $key => $post):?>
             <li>
-            <a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><img src="<?=$this->link('/src/aier/images/post.png')?>" width="72" height="72" alt="" class="news-img" /></a>
+            <a href="<?=$this->uri('/pages/' . $post['urlName'])?>">
+                <?if($post['File']):?>
+                <img src="<?=$this->thumb($post['File']['Thumb'])?>" width="72" height="72" alt="" class="news-img" />
+                <?else:?>
+                <img src="<?=$this->link('/src/aier/images/post.png')?>" width="72" height="72" alt="" class="news-img" />
+                <?endif?>
+            </a>
             <h4><a href="<?=$this->uri('/pages/' . $post['urlName'])?>"><?=$post['title']?></a></h4>
             <span class="newslist-date">发布时间： <?=$post['createTime']?></span>
             <p><?=$post['preview']?>

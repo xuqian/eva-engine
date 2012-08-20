@@ -82,31 +82,24 @@ return array(
             'path' => 'components/slider',
             'description' => '首页轮播横幅'
         ),
-        'bbs' => array(
+        'qq' => array(
             'module' => 'Aier',
-            'name' => 'bbs',
-            'title' => '论坛RSS地址',
-            'path' => 'components/bbs',
-            'description' => '论坛RSS地址，用于显示首页论坛热贴列表'
+            'name' => 'qq',
+            'title' => 'QQ在线状态',
+            'path' => 'components/qq',
+            'description' => '代码获得地址：http://wp.qq.com/index.html'
         ),
-        'ad' => array(
+        'weibo' => array(
             'module' => 'Aier',
-            'name' => 'ad',
-            'title' => '首页广告位',
-            'path' => 'components/ad',
-            'description' => '首页广告位'
-        ),
-        'adside' => array(
-            'module' => 'Aier',
-            'name' => 'ad',
-            'title' => '侧栏广告位',
-            'path' => 'components/adside',
-            'description' => '侧栏广告位'
+            'name' => 'weibo',
+            'title' => '微博展示栏',
+            'path' => 'components/weibo',
+            'description' => '微博秀，代码获得：http://weibo.com/tool/weiboshow'
         ),
         'phone' => array(
             'module' => 'Aier',
             'name' => 'phone',
-            'title' => '热线电话',
+            'title' => '首页热线电话',
             'path' => 'components/phone',
             'description' => '热线电话'
         ),
