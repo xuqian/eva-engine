@@ -804,7 +804,7 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .code .st0{color:#ff0000;}
 .code .sy0{color:#66cc66;}
 a{color:#ac9217;}
-html,body,#page,#body,#main-wrap{height:100%;}
+html,body{height:100%;}
 body{color:#333;font-size:12px;font-family:Microsoft YaHei,Trebuchet MS,Verdana,Helvetica,Arial,sans-serif;}
 .container{width:1210px;}
 #header{background:#000;height:50px;}#header .navbar-inner{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;background:#000;border:0;}
@@ -813,6 +813,9 @@ body{color:#333;font-size:12px;font-family:Microsoft YaHei,Trebuchet MS,Verdana,
 #header .nav-main>li.active a,#header .nav-main>li:hover a{background-color:#977b0b;background-image:-moz-linear-gradient(top, #846703, #b49916);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#846703), to(#b49916));background-image:-webkit-linear-gradient(top, #846703, #b49916);background-image:-o-linear-gradient(top, #846703, #b49916);background-image:linear-gradient(to bottom, #846703, #b49916);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff846703', endColorstr='#ffb49916', GradientType=0);border-color:#654E00;color:#FFF;}#header .nav-main>li.active a small,#header .nav-main>li:hover a small{color:#FFF;}
 #header .brand{padding:0;}
 #header a{color:#ac9217;}
-#footer{padding:20px;background:#232323;color:#EAB119;}#footer a{display:inline;color:#EAB119;margin:0 10px;}#footer a:hover{background:none;color:#FFF;}
+#footer{padding:20px;background:#232323;color:#EAB119;-webkit-box-shadow:inset -1px -1px 7px #000000;-moz-box-shadow:inset -1px -1px 7px #000000;box-shadow:inset -1px -1px 7px #000000;}#footer a{display:inline;color:#EAB119;margin:0 10px;}#footer a:hover{background:none;color:#FFF;}
 #footer li{display:inline-block;zoom:1;*display:inline;}
 #footer li.first a{margin-left:0;}
+.page-header{border-bottom:1px solid #EEEEEE;margin:20px 0 30px;padding-bottom:9px;}.page-header .highlight{color:#ac9217;}
+.typo{background:none;}
+.hero-unit.typo{padding-bottom:0;}.hero-unit.typo h1{font-size:50px;}

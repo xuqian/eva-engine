@@ -9,7 +9,7 @@ a {
 	color:@golden;
 }
 
-html, body, #page, #body, #main-wrap {
+html, body{
 	height:100%;
 }
 
@@ -80,6 +80,7 @@ body {
 	padding:20px;
 	background:#232323;
 	color:#EAB119;
+	.box-shadow(inset -1px -1px 7px #000);
 
 	a {
 		display:inline;
@@ -98,5 +99,33 @@ body {
 
 	li.first a{
 		margin-left:0;
+	}
+}
+
+
+#page {
+	//background:#000;
+}
+
+
+.page-header {
+    border-bottom: 1px solid #EEEEEE;
+    margin: 20px 0 30px;
+    padding-bottom: 9px;
+
+	.highlight {
+		color:@golden;
+	}
+}
+
+.typo {
+	background:none;
+}
+
+
+.hero-unit.typo{
+	padding-bottom:0;
+	h1 {
+		font-size:50px;
 	}
 }

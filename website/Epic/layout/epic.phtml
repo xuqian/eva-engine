@@ -12,7 +12,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?=$this->link('/src/epic/css/epic.css')?>" media="all" rel="stylesheet" type="text/css" />
-    <?//=$this->evajs()?>
+    <?=$this->evajs()?>
 </head>
 
 <body class="">
@@ -21,13 +21,13 @@
     <div class="container">
         <div class="navbar navbar-inverse"><div class="navbar-inner">
                 <!--<a class="brand" href="/">Epicurissimo</a>-->
-                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>"></a>	
+                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <ul class="nav nav-main">
                     <li class="active"><a href="/"><?=$this->_('Home')?><small>Home</small></a></li>
                     <li><a href="/"><?=$this->_('飨活动')?><small>Events</small></a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="/"><?=$this->_('Pre-Registration')?></a></li>
+                    <li><a href="#signupform"><?=$this->_('Pre Sign Up')?></a></li>
                 </ul>
         </div></div>
     </div>
@@ -52,6 +52,7 @@
             </li>
         </ul>
         </nav>
+        <nav class="">
         <ul class="nav pull-left">
             <li class="first"><a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
