@@ -1,7 +1,102 @@
 @import "../../../eva/css/bootstrap.less";
 @import "../../../eva/css/src/type/wiki.less";
 @linkColor : #0099FF;
+@golden : #AC9217;
+
+
 
 a {
-	color:@linkColor;
+	color:@golden;
+}
+
+html, body, #page, #body, #main-wrap {
+	height:100%;
+}
+
+body {
+	color:#333;
+	font-size:12px;
+	font-family:@fontFamily;
+}
+
+.container {
+	width:1210px;
+}
+
+
+#header {
+	background:#000;
+	height:50px;
+
+	.navbar-inner {
+		.border-radius(0);
+		background:#000;
+		border:0;
+	}
+
+
+	.nav-main > li a{
+		padding:0 20px;
+		padding-top:6px;
+		border-bottom:4px solid #000;
+		height:40px;
+		font-size:15px;
+		font-weight:bold;
+		text-align:center;
+		background:#000;
+		-webkit-transition: all .5s ease-in-out;
+		-moz-transition: all .5s ease-in-out;
+		-o-transition: all .5s ease-in-out;
+		-ms-transition: all .5s ease-in-out;
+	}
+
+	.nav-main > li a small{
+		display:block;
+		font-size:9px;
+		color:#AAA;
+		font-weight:normal;
+		text-transform:uppercase;
+	}
+
+	.nav-main > li.active a, .nav-main > li:hover a{
+		#gradient > .vertical(#846703, #B49916);
+		border-color:#654E00;
+		color:#FFF;
+
+		small {
+			color:#FFF;
+		}
+	}
+
+	.brand {
+		padding:0;
+	}
+	a {
+		color:@golden;
+	}
+}
+
+#footer {
+	padding:20px;
+	background:#232323;
+	color:#EAB119;
+
+	a {
+		display:inline;
+		color:#EAB119;
+		margin:0 10px;
+
+		&:hover {
+			background:none;
+			color:#FFF;
+		}
+	}
+
+	li {
+		.inline-block();
+	}
+
+	li.first a{
+		margin-left:0;
+	}
 }
