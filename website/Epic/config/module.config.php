@@ -64,6 +64,7 @@ return array(
     'view_manager' => array(
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../layout/epic.phtml',
+            'layout/coming' => __DIR__ . '/../layout/coming.phtml',
             'epic/index' => __DIR__ . '/../view/epic/index.phtml',
             'epic/pages/get' => __DIR__ . '/../view/epic/pages/get.phtml',
         ),

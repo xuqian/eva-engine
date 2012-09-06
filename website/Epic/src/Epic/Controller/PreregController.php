@@ -12,6 +12,7 @@ class PreregController extends ActionController
     public function indexAction()
     {
         $res = array();
+        $this->layout('layout/coming');
 
         $view = new ViewModel(array(
         ));

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- Variation 1 -->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <?=$this->headTitle()?>
+        <!--[if lt IE 9]>
+        <meta http-equiv="PRAGMA" content="NO-CACHE" />
+        <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
+        <link rel="stylesheet" href="assets/css/ie.css" />
+        <![endif]-->
+        <?=$this->headMeta()?>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/epic/js/placeholder.js')?>"></script>  
+        <script type="text/javascript" src="<?=$this->link('/src/epic/js/supersized.3.2.7.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/epic/js/form.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/epic/js/subscribe.js')?>"></script>
+
+        <link href="<?=$this->link('/src/epic/css/coming.css')?>" media="all" rel="stylesheet" type="text/css" />
+        <?=$this->evajs()?>
+
+        <script type="text/javascript">
+            jQuery(function($){
+                    jQuery.supersized({
+                            slides:
+                            [	
+                            {image:'<?=$this->link('/src/epic/img/bg.jpg')?>'}
+                            ]
+                    });
+            });
+        </script>
+
+        <script type="text/javascript">
+            //Animate Pull Down Content
+            $(function() {
+                    $('#open').click(function(){
+                            $('#pull_down_content').animate({'top':'0px'},1000);
+                            $('#open').fadeTo('slow', 0); 
+                    });
+                    $('#close').click(function(){
+                            $('#pull_down_content').animate({'top':'-800px'},1000);
+                            $('#open').fadeTo('slow', 1);
+                    });
+
+                    $('.h1, .h2').click(function(){
+                            $('#pull_down_content').animate({'top':'0px'},1000);
+                            $('#open').fadeTo('slow', 0); 
+                    });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="container">
+            <!-- Pull Down -->
+            <div id="pull_down_content">
+                <div class="about">
+                    <div class="dropdown_heading">About Us</div>
+                    <!-- About Us -->
+                    <p>
+                    Epicurissimo is a private network and online publication, a trusted place for professionals and connoisseurs of gastronomy and fine drinks to meet, connect, stay informed, showcase their work, find experts, share ideas, ask questions, find jobs and make business.</p>
+
+                    <div class="social">
+                        <h4>Share this page</h4>
+                        <!-- Social Links -->
+                        <ul id="social">
+                            <li class="facebook">
+                            <a href="#" title="Facebook"></a>
+                            </li>
+                            <li class="twitter">
+                            <a href="#" title="Twitter"></a>
+                            </li>
+                            <li class="google">
+                            <a href="#" title="Google+"></a>
+                            </li>
+                            <li class="vimeo">
+                            <a href="#" title="Vimeo"></a>
+                            </li>
+                            <li class="tumblr">
+                            <a href="#" title="Tumblr"></a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div id="contactForm" class="contact">
+                    <!-- Contact Us -->
+                    <div class="dropdown_heading">Contact Us</div>
+
+                    <form class="pulldowncontact" method="post" action="<?=$this->link('/src/epic/php/submit-form.php')?>">
+                        <input type="text" id="email" class="text-input" name="email" placeholder="your email address" />
+                        <br />
+                        <span id="errorEmail" class="formError"></span>
+
+                        <textarea name="message" placeholder="type your message here" id="message" class="message"></textarea>
+                        <span id="errorMessage" class="formError"></span>
+                        <div class="complete">
+                            <input type="submit" value="Send" name="submit" id="submit" class="submit" />
+                            <span id="formProgress" class="formProgress"></span>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Close Pull Down -->
+                <a href="#" class="button_up" id="close"></a>
+            </div>
+            <!-- End Drop Down -->
+            <!-- Open Pull Down-->
+            <a href="#" class="button_down" id="open"></a>
+        </div>
+        <!-- Black Horizontal Banner -->
+        <div id="banner">
+            <div id="wrapper">
+                <!-- White Horizontal Rule -->
+                <div class="rule"></div>
+                <!-- Left block information -->
+                <div class="leftinfo">
+                </div>
+                <!-- Right block information -->
+                <div class="rightinfo">
+                </div>
+
+                <div class="heading">
+                    <!-- Coming soon main text -->
+                    <div class="h2">COMING SOON</div>
+                    <div class="h1">Epicurissimo</div>
+                </div>
+
+                <div id="countdown">
+                    <!-- Countdown -->
+                </div>
+
+                <div class="signup_wrap">
+                    <div class="signup"><a href="#">
+                            Pre Sign Up as <br >
+                            <span>Connoisseur</span>
+                    </a></div><div class="signup"><a href="#">
+                            Pre Sign Up as <br >
+                            <span>Professional</span>
+                    </a></div><div class="signup last"><a href="#">
+                            Pre Sign Up as <br >
+                            <span>Corporate</span>
+                    </a></div>
+                </div>
+                <div class="rule2">
+                    <!-- Bottom White horizontal rule -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
