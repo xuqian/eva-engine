@@ -13,12 +13,13 @@ class PagesController extends ActionController
     public function getAction()
     {
         $id = $this->params('id');
+        $this->layout('layout/empty');
         $postModel = Api::_()->getModel('Blog\Model\Post');
         $postinfo = $postModel->setItemParams($id)->getPost();
         $view = new ViewModel(array(
             'post' => $postinfo,
         ));
-        $view->setTemplate('gwa/pages/get');
+        $view->setTemplate('epic/pages/get');
         return $view;
     }
 }
