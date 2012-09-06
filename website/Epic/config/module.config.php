@@ -27,27 +27,16 @@ return array(
                 ),
                 'priority' => 2,
             ),
-            'frontcategory' => array(
+            'prereg' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/category[/:id][/]',
+                    'route' => '/reg/[:id]',
                     'constraints' => array(
-                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                        'id'     => '[a-zA-Z]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\CategoryController',
+                        'controller' => 'Epic\Controller\PreregController',
                         'action' => 'get',
-                    ),
-                ),
-                'priority' => 2,
-            ),
-            'frontorder' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/order/',
-                    'defaults' => array(
-                        'controller' => 'Epic\Controller\OrderController',
-                        'action'     => 'index',
                     ),
                 ),
                 'priority' => 2,
@@ -65,8 +54,12 @@ return array(
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../layout/epic.phtml',
             'layout/coming' => __DIR__ . '/../layout/coming.phtml',
+            'layout/empty' => __DIR__ . '/../layout/empty.phtml',
             'epic/index' => __DIR__ . '/../view/epic/index.phtml',
             'epic/pages/get' => __DIR__ . '/../view/epic/pages/get.phtml',
+            'epic/reg/connoisseur' => __DIR__ . '/../view/epic/reg/connoisseur.phtml',
+            'epic/reg/professional' => __DIR__ . '/../view/epic/reg/professional.phtml',
+            'epic/reg/corporate' => __DIR__ . '/../view/epic/reg/corporate.phtml',
         ),
 
     ),

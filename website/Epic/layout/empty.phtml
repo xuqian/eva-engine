@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=$this->language?>" lang="<?=$this->language?>">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+    <?=$this->headTitle()?>
+	<!--[if lt IE 9]>
+	<meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
+	<![endif]-->
+    <?=$this->headMeta()?>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="<?=$this->link('/src/epic/css/epic.css')?>" media="all" rel="stylesheet" type="text/css" />
+    <?=$this->evajs()?>
+</head>
+
+<body class="prereg">
+
+    <div id="page" class="page">
+        <?=$this->layout()->content;?>
+    </div><!-- #page end-->
+
+    <footer id="footer" class="footer"><div class="container">
+        <nav id="navbar_footer" class="">
+        <ul class="nav pull-right">
+            <li>
+            Copyright 2012 Epicurissimo | 
+            Language <select>
+              <option>English</option>
+              <option>Française</option>
+              <option>中文</option>
+            </select>
+            </li>
+        </ul>
+        </nav>
+        <nav class="">
+        <ul class="nav pull-left">
+            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Home')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/recruitment')?>"><?=$this->_('Recruitment')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a></li>
+        </ul>
+        </nav>
+        <div class="clearfix"></div>
+        <p>
+        </p>
+    </div></footer><!-- #footer end-->
+
+
+    <script src="<?=$this->link('/lib/js/jquery/jquery.min.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/bootstrap/bootstrap.min.js')?>"></script>
+    <script src="<?=$this->link('/eva/js/core.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/jquery/jquery.easing.1.3.js')?>"></script>
+    <script src="<?=$this->link('/eva/js/eva.jquery.evaSlider.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/init.js')?>"></script>
+</body>
+</html>

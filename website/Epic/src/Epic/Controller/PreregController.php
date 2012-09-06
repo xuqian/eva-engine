@@ -19,4 +19,14 @@ class PreregController extends ActionController
         $view->setTemplate('epic/index');
         return $view;
     }
+
+    public function getAction()
+    {
+        $res = array();
+        $this->layout('layout/empty');
+        $view = new ViewModel(array(
+        ));
+        $view->setTemplate('epic/reg/connoisseur');
+        return $view;
+    }
 }

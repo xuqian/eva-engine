@@ -62,27 +62,23 @@
                     <p>
                     Epicurissimo is a private network and online publication, a trusted place for professionals and connoisseurs of gastronomy and fine drinks to meet, connect, stay informed, showcase their work, find experts, share ideas, ask questions, find jobs and make business.</p>
 
+                    <div class="nav">
+                        <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Terms & Conditions')?></a> |
+                        <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a> |
+                        <a href="<?=$this->uri('/pages/recruitment')?>"><?=$this->_('Recruitment')?></a>
+                    </div>
                     <div class="social">
                         <h4>Share this page</h4>
-                        <!-- Social Links -->
-                        <ul id="social">
-                            <li class="facebook">
-                            <a href="#" title="Facebook"></a>
-                            </li>
-                            <li class="twitter">
-                            <a href="#" title="Twitter"></a>
-                            </li>
-                            <li class="google">
-                            <a href="#" title="Google+"></a>
-                            </li>
-                            <li class="vimeo">
-                            <a href="#" title="Vimeo"></a>
-                            </li>
-                            <li class="tumblr">
-                            <a href="#" title="Tumblr"></a>
-                            </li>
-                        </ul>
-
+                        <!-- AddThis Button BEGIN -->
+                        <div class="addthis_toolbox addthis_default_style ">
+                            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                            <a class="addthis_button_tweet"></a>
+                            <a class="addthis_button_pinterest_pinit"></a>
+                            <a class="addthis_counter addthis_pill_style"></a>
+                        </div>
+                        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=allovince"></script>
+                        <!-- AddThis Button END -->
                     </div>
                 </div>
 
@@ -135,13 +131,13 @@
                 </div>
 
                 <div class="signup_wrap">
-                    <div class="signup"><a href="#">
+                    <div class="signup"><a href="<?=$this->uri('/reg/connoisseur')?>">
                             Pre Sign Up as <br >
                             <span>Connoisseur</span>
-                    </a></div><div class="signup"><a href="#">
+                    </a></div><div class="signup"><a href="<?=$this->uri('/reg/professional')?>">
                             Pre Sign Up as <br >
                             <span>Professional</span>
-                    </a></div><div class="signup last"><a href="#">
+                    </a></div><div class="signup last"><a href="<?=$this->uri('/reg/corporate')?>">
                             Pre Sign Up as <br >
                             <span>Corporate</span>
                     </a></div>
