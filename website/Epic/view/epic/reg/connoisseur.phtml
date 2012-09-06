@@ -6,7 +6,7 @@ $form->setSubForms(array(
     'Account' => array('User\Form\AccountForm'),
 ));
 $form->init(array(
-    'action' => $this->uri('/admin/user/'),
+    'action' => '#', //$this->uri('/admin/user/'),
     'method' => 'post',
 ));
 ?>
@@ -51,7 +51,28 @@ $form->init(array(
                             <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
                         </div>
                     </div>
-
+                    <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'country'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <!--
                     <div class="control-group <?=$form->isError(array('Profile', 'birthday')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'birthday'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -73,20 +94,7 @@ $form->init(array(
                             <div class="help-block"><?=$form->helper(array('Profile', 'weight'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'country'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
+
                     <div class="control-group <?=$form->isError(array('Profile', 'addressMore')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'addressMore'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -164,13 +172,7 @@ $form->init(array(
                             <div class="help-block"><?=$form->helper(array('Profile', 'location'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
+
                     <div class="control-group <?=$form->isError(array('Profile', 'localIm')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'localIm'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -192,10 +194,11 @@ $form->init(array(
                             <div class="help-block"><?=$form->helper(array('Profile', 'otherIm'), 'formElementErrors')?></div>
                         </div>
                     </div>
+                    -->
                     <div class="control-group">
                         <div class="controls">
                             <label class="checkbox">
-                                <input type="checkbox"> By clicking Sign Up, you agree to our <a href="">Terms &amp; Conditions</a>.
+                                <input type="checkbox"> By clicking Sign Up, you agree to our <a href="<?=$this->uri('/pages/terms')?>" target="_blank">Terms &amp; Conditions</a>.
                             </label>
                             <button type="submit" class="btn btn-large">Sign Up</button>
                         </div>
@@ -228,11 +231,7 @@ $form->init(array(
                         <li>Get advices directly from experts</li>
                         <li>Enjoy and Explore</li>
                     </ul>
-                    <p>As&nbsp;<strong>Gourmets and Connoisseurs</strong>, Epicurissimo is&nbsp;<strong><em>the convivial table</em></strong>&nbsp;to share your experiences, meet people of the same passion, participate various events (from wine tasting to fashionable tea party), keep up with trends.</p>
-
-
-
-
+                    <p>As <strong>Gourmets and Connoisseurs</strong>, Epicurissimo is <strong><em>the convivial table</em></strong> to share your experiences, meet people of the same passion, participate various events (from wine tasting to fashionable tea party), keep up with trends.</p>
                 </div>
             </div>
         </div>
