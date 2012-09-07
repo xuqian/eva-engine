@@ -22,14 +22,15 @@
     <header id="header">
     <div class="container">
         <div class="navbar navbar-inverse"><div class="navbar-inner">
+                <?$view =$this->layout()->getChildren();$id = $view[0]->id;?>
                 <!--<a class="brand" href="/">Epicurissimo</a>-->
                 <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <ul class="nav nav-main">
                     <li><a href="/"><?=$this->_('Home')?><small>Epicurissimo</small></a></li>
-                    <li class="active"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?><small>Pre Sign Up</small></a></li>
-                    <li><a href="/reg/professional"><?=$this->_('Professional')?><small>Pre Sign Up</small></a></li>
-                    <li><a href="/reg/corporate"><?=$this->_('Corporate')?><small>Pre Sign Up</small></a></li>
-                    <li><a href="/pages/about"><?=$this->_('About Us')?><small>Who We Are</small></a></li>
+                    <li class="<?=$id == 'connoisseur' ? 'active' : ''?>"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?><small>Pre Sign Up</small></a></li>
+                    <li class="<?=$id == 'professional' ? 'active' : ''?>"><a href="/reg/professional"><?=$this->_('Professional')?><small>Pre Sign Up</small></a></li>
+                    <li class="<?=$id == 'corporate' ? 'active' : ''?>"><a href="/reg/corporate"><?=$this->_('Corporate')?><small>Pre Sign Up</small></a></li>
+                    <li class="<?=$id ? '' : 'active'?>"><a href="/pages/about"><?=$this->_('About Us')?><small>Who We Are</small></a></li>
                 </ul>
         </div></div>
     </div>

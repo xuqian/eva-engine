@@ -80,6 +80,15 @@
                                 <li class="google">
                                 <a href="#" title="Google+"></a>
                                 </li>
+
+                                <li class="vimeo">
+                                <a href="#" title="Vimeo"></a>
+                                </li>
+
+                    <li class="skype">
+						<a href="#" title="Skype"></a>
+					</li>
+
                             </ul>
                     </div>
                 </div>
@@ -115,11 +124,15 @@
             <div id="wrapper">
                 <!-- White Horizontal Rule -->
                 <div class="rule"></div>
+
                 <!-- Left block information -->
                 <div class="leftinfo">
                 </div>
                 <!-- Right block information -->
                 <div class="rightinfo">
+                    <?if(isset($_GET['reg']) && $_GET['reg']):?>
+                    <a href="<?=$this->uri('/')?>">Back</a>
+                    <?endif?>
                 </div>
 
                 <div class="heading">
@@ -137,12 +150,16 @@
                         <a href="<?=$this->uri('/reg/connoisseur')?>">
                             Sign Up as<br >
                             <span>Connoisseur Member</span>
+                            <small>Share Inspire Connect Inform Enjoy</small>
                         </a>
                     </div>
                     <div class="signup last">
                         <a href="<?=$this->uri('/reg/professional')?>">
                             Sign Up as <br >
                             <span>Professional Member</span>
+	
+<!--<small>Show Your Works, Exchange Ideas, Get Connected, Develop Your Career</small>-->
+                            <small>You work in relevant domains.</small>
                         </a>
                     </div>
                     <?else:?>

@@ -786,5 +786,7 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .signup a{text-decoration:none;}
 .signup a:hover{text-decoration:none;}
 .signup a span{color:#AC9217;font-size:30px;}
+.signup small{display:block;color:#AC9217;}
 .nav{margin:20px 0;}
 .heading{text-align:center;padding:20px 0;cursor:pointer;}
+.rightinfo{position:relative;}.rightinfo a{position:absolute;right:0;}

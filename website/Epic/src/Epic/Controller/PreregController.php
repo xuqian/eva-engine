@@ -26,6 +26,7 @@ class PreregController extends ActionController
         $res = array();
         $this->layout('layout/empty');
         $view = new ViewModel(array(
+            'id' => $this->params()->fromRoute('id')
         ));
         $view->setTemplate('epic/reg/connoisseur');
         return $view;
