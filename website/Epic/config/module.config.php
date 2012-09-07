@@ -41,12 +41,27 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'pay' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/pay/[:id]',
+                    'constraints' => array(
+                        'id'     => 'example|paypal|alipay',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Epic\Controller\PayController',
+                        'action' => 'get',
+                    ),
+                ),
+                'priority' => 2,
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'Epic\Controller\PreregController' => 'Epic\Controller\PreregController',
             'Epic\Controller\PagesController' => 'Epic\Controller\PagesController',
+            'Epic\Controller\PayController' => 'Epic\Controller\PayController',
         ),
     ),
 
@@ -60,6 +75,7 @@ return array(
             'epic/reg/connoisseur' => __DIR__ . '/../view/epic/reg/connoisseur.phtml',
             'epic/reg/professional' => __DIR__ . '/../view/epic/reg/professional.phtml',
             'epic/reg/corporate' => __DIR__ . '/../view/epic/reg/corporate.phtml',
+            'epic/pay/index' => __DIR__ . '/../view/epic/pay/index.phtml',
         ),
 
     ),
