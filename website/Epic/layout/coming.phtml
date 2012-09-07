@@ -45,7 +45,7 @@
                             $('#open').fadeTo('slow', 1);
                     });
 
-                    $('.h1, .h2').click(function(){
+                    $('.h1, .h2, .heading').click(function(){
                             $('#pull_down_content').animate({'top':'0px'},1000);
                             $('#open').fadeTo('slow', 0); 
                     });
@@ -69,17 +69,18 @@
                         <a href="<?=$this->uri('/pages/contact')?>"><?=$this->_('Contact')?></a>
                     </div>
                     <div class="social">
-                        <h4>Share this page</h4>
-                        <!-- AddThis Button BEGIN -->
-                        <div class="addthis_toolbox addthis_default_style ">
-                            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                            <a class="addthis_button_tweet"></a>
-                            <a class="addthis_button_pinterest_pinit"></a>
-                            <a class="addthis_counter addthis_pill_style"></a>
-                        </div>
-                        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=allovince"></script>
-                        <!-- AddThis Button END -->
+                            <!-- Social Links -->
+                            <ul id="social">
+                                <li class="facebook">
+                                <a href="#" title="Facebook"></a>
+                                </li>
+                                <li class="twitter">
+                                <a href="#" title="Twitter"></a>
+                                </li>
+                                <li class="google">
+                                <a href="#" title="Google+"></a>
+                                </li>
+                            </ul>
                     </div>
                 </div>
 
@@ -123,8 +124,7 @@
 
                 <div class="heading">
                     <!-- Coming soon main text -->
-                    <div class="h2">COMING SOON</div>
-                    <div class="h1">Epicurissimo</div>
+                        <img src="<?=$this->link('/src/epic/css/img/logofull.png')?>" height="90"  />    
                 </div>
 
                 <div id="countdown">
@@ -132,16 +132,39 @@
                 </div>
 
                 <div class="signup_wrap">
-                    <div class="signup"><a href="<?=$this->uri('/reg/connoisseur')?>">
-                            Pre Sign Up as <br >
-                            <span>Connoisseur</span>
-                    </a></div><div class="signup"><a href="<?=$this->uri('/reg/professional')?>">
-                            Pre Sign Up as <br >
-                            <span>Professional</span>
-                    </a></div><div class="signup last"><a href="<?=$this->uri('/reg/corporate')?>">
+                    <?if(isset($_GET['reg']) && $_GET['reg']):?>
+                    <div class="signup">
+                        <a href="<?=$this->uri('/reg/connoisseur')?>">
+                            Sign Up as<br >
+                            <span>Connoisseur Member</span>
+                        </a>
+                    </div>
+                    <div class="signup last">
+                        <a href="<?=$this->uri('/reg/professional')?>">
+                            Sign Up as <br >
+                            <span>Professional Member</span>
+                        </a>
+                    </div>
+                    <?else:?>
+                    <div class="signup">
+                        <a href="<?=$this->uri('/?reg=1')?>">
+                            Sign Up as<br >
+                            <span>Individual Member</span>
+                        </a>
+                    </div>
+                    <div class="signup last">
+                        <a href="<?=$this->uri('/reg/corporate')?>">
+                            Sign Up as <br >
+                            <span>Corporate Member</span>
+                        </a>
+                    </div>
+                    <?endif?>
+                    <!--
+                    <div class="signup last"><a href="<?=$this->uri('/reg/corporate')?>">
                             Pre Sign Up as <br >
                             <span>Corporate</span>
                     </a></div>
+                    -->
                 </div>
                 <div class="rule2">
                     <!-- Bottom White horizontal rule -->

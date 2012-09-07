@@ -15,6 +15,7 @@ class PreregController extends ActionController
         $this->layout('layout/coming');
 
         $view = new ViewModel(array(
+            'reg' => $this->params()->fromQuery('reg')
         ));
         $view->setTemplate('epic/index');
         return $view;
