@@ -69,27 +69,24 @@
                         <a href="<?=$this->uri('/pages/contact')?>"><?=$this->_('Contact')?></a>
                     </div>
                     <div class="social">
-                            <!-- Social Links -->
-                            <ul id="social">
-                                <li class="facebook">
-                                <a href="#" title="Facebook"></a>
-                                </li>
-                                <li class="twitter">
-                                <a href="#" title="Twitter"></a>
-                                </li>
-                                <li class="google">
-                                <a href="#" title="Google+"></a>
-                                </li>
-
-                                <li class="vimeo">
-                                <a href="#" title="Vimeo"></a>
-                                </li>
-
-                    <li class="skype">
-						<a href="#" title="Skype"></a>
-					</li>
-
-                            </ul>
+                        <!-- Social Links -->
+                        <ul id="social">
+                            <li class="facebook">
+                            <a href="#" title="Facebook"></a>
+                            </li>
+                            <li class="twitter">
+                            <a href="#" title="Twitter"></a>
+                            </li>
+                            <li class="google">
+                            <a href="#" title="Google+"></a>
+                            </li>
+                            <li class="vimeo">
+                            <a href="#" title="Vimeo"></a>
+                            </li>
+                            <li class="skype">
+                            <a href="#" title="Skype"></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -97,7 +94,7 @@
                     <!-- Contact Us -->
                     <div class="dropdown_heading">Contact Us</div>
 
-                    <form class="pulldowncontact" method="post" action="<?=$this->link('/src/epic/php/submit-form.php')?>">
+                    <form class="pulldowncontact" method="post" action="<?=$this->link('/src/epic/php/submit-form-ajax.php')?>">
                         <input type="text" id="email" class="text-input" name="email" placeholder="your email address" />
                         <br />
                         <span id="errorEmail" class="formError"></span>
@@ -117,7 +114,7 @@
             </div>
             <!-- End Drop Down -->
             <!-- Open Pull Down-->
-            <a href="#" class="button_down" id="open"></a>
+            <a href="#" class="button_down" id="open">About &amp; Contact</a>
         </div>
         <!-- Black Horizontal Banner -->
         <div id="banner">
@@ -137,7 +134,7 @@
 
                 <div class="heading">
                     <!-- Coming soon main text -->
-                        <img src="<?=$this->link('/src/epic/css/img/logofull.png')?>" height="90"  />    
+                    <img src="<?=$this->link('/src/epic/css/img/logofull.png')?>" height="90"  />    
                 </div>
 
                 <div id="countdown">
@@ -157,8 +154,8 @@
                         <a href="<?=$this->uri('/reg/professional')?>">
                             Sign Up as <br >
                             <span>Professional Member</span>
-	
-<!--<small>Show Your Works, Exchange Ideas, Get Connected, Develop Your Career</small>-->
+
+                            <!--<small>Show Your Works, Exchange Ideas, Get Connected, Develop Your Career</small>-->
                             <small>You work in relevant domains.</small>
                         </a>
                     </div>
