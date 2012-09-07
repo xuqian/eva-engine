@@ -790,3 +790,4 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .nav{margin:20px 0;}
 .heading{text-align:center;padding:20px 0;cursor:pointer;}
 .rightinfo{position:relative;}.rightinfo a{position:absolute;right:0;}
+#open{padding:0 10px;line-height:29px;color:#FFF;width:100px;background:#999;text-decoration:none;}#open:hover{background:#FFF;color:#999;}
