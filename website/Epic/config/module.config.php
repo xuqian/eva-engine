@@ -41,6 +41,20 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'language' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/language/[:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Epic\Controller\LanguageController',
+                        'action' => 'switch',
+                    ),
+                ),
+                'priority' => 2,
+            ),
             'pay' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -62,6 +76,7 @@ return array(
             'Epic\Controller\PreregController' => 'Epic\Controller\PreregController',
             'Epic\Controller\PagesController' => 'Epic\Controller\PagesController',
             'Epic\Controller\PayController' => 'Epic\Controller\PayController',
+            'Epic\Controller\LanguageController' => 'Epic\Controller\LanguageController',
         ),
     ),
 
@@ -70,6 +85,7 @@ return array(
             'layout/layout' => __DIR__ . '/../layout/empty.phtml',
             'layout/coming' => __DIR__ . '/../layout/coming.phtml',
             'layout/empty' => __DIR__ . '/../layout/empty.phtml',
+            'blank' => __DIR__ . '/../view/epic.phtml',
             'epic/index' => __DIR__ . '/../view/epic/index.phtml',
             'epic/pages/get' => __DIR__ . '/../view/epic/pages/get.phtml',
             'epic/reg/connoisseur' => __DIR__ . '/../view/epic/reg/connoisseur.phtml',

@@ -10,7 +10,6 @@ a {
 }
 
 html, body {
-	min-height:100%;
 }
 
 body {
@@ -26,11 +25,13 @@ body {
 #header {
 	background:#000;
 	height:50px;
+	overflow:hidden;
 
 	.navbar-inner {
 		.border-radius(0);
 		background:#000;
 		border:0;
+		.reset-filter();
 	}
 
 
