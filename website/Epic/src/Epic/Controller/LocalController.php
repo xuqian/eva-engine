@@ -16,7 +16,7 @@ class LocalController extends ActionController
         if ($params['city'] == 1) {
             include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipcity.inc');
             include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipregionvars.php');
-            $gi = geoip_open(EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/GeoLiteCity',GEOIP_STANDARD);
+            $gi = geoip_open(EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/GeoLiteCity.dat',GEOIP_STANDARD);
             $record = geoip_record_by_addr($gi, $ip);
             $country = $record->city;
             geoip_close($gi);
