@@ -99,5 +99,29 @@ return array(
     'page_components' => array(
 
     ),
-
+    
+    'translator' => array(
+        'locale' => 'en',
+        'force_locale' => '',  //force_locale will cover locale
+        'languages' => array(
+            'en', 'zh', 'fr', 'zh_TW'
+        ),
+        'sub_languages' => array(
+            'zh_TW'
+        ),
+        'translation_files' => array(
+            'zh' => array(
+                'type' => 'csv',
+                'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/zh/epic.csv',
+            ),
+            'zh_TW' => array(
+                'type' => 'csv',
+                'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/zh_TW/epic.csv',
+            ),
+            'fr' => array(
+                'type' => 'csv',
+                'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/fr/epic.csv',
+            ),
+        ),
+    ),
 );

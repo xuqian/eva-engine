@@ -58,10 +58,10 @@
             <!-- Pull Down -->
             <div id="pull_down_content">
                 <div class="about">
-                    <div class="dropdown_heading">About Us</div>
+                    <div class="dropdown_heading"><?=$this->_('About Us')?></div>
                     <!-- About Us -->
                     <p>
-                    Epicurissimo is a private network and online publication, a trusted place for professionals and connoisseurs of gastronomy and fine drinks to meet, connect, stay informed, showcase their work, find experts, share ideas, ask questions, find jobs and make business.</p>
+                    <?=$this->_('Epicurissimo is a private network and online publication, a trusted place for professionals and connoisseurs of gastronomy and fine drinks to meet, connect, stay informed, showcase their work, find experts, share ideas, ask questions, find jobs and make business.')?></p>
 
                     <div class="nav">
                         <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a> |
@@ -92,17 +92,17 @@
 
                 <div id="contactForm" class="contact">
                     <!-- Contact Us -->
-                    <div class="dropdown_heading">Contact Us</div>
+                    <div class="dropdown_heading"><?=$this->_('Contact Us')?></div>
 
                     <form class="pulldowncontact" method="post" action="<?=$this->link('/src/epic/php/submit-form-ajax.php')?>">
-                        <input type="text" id="email" class="text-input" name="email" placeholder="your email address" />
+                        <input type="text" id="email" class="text-input" name="email" placeholder="<?=$this->_('your email address')?>" />
                         <br />
                         <span id="errorEmail" class="formError"></span>
 
-                        <textarea name="message" placeholder="type your message here" id="message" class="message"></textarea>
+                        <textarea name="message" placeholder="<?=$this->_('type your message here')?>" id="message" class="message"></textarea>
                         <span id="errorMessage" class="formError"></span>
                         <div class="complete">
-                            <input type="submit" value="Send" name="submit" id="submit" class="submit" />
+                            <input type="submit" value="<?=$this->_('Send')?>" name="submit" id="submit" class="submit" />
                             <span id="formProgress" class="formProgress"></span>
                         </div>
                     </form>
@@ -114,7 +114,7 @@
             </div>
             <!-- End Drop Down -->
             <!-- Open Pull Down-->
-            <a href="#" class="button_down" id="open">About &amp; Contact</a>
+            <a href="#" class="button_down" id="open"><?=$this->_('About &amp; Contact')?></a>
         </div>
         <!-- Black Horizontal Banner -->
         <div id="banner">
@@ -128,7 +128,7 @@
                 <!-- Right block information -->
                 <div class="rightinfo">
                     <?if(isset($_GET['reg']) && $_GET['reg']):?>
-                    <a href="<?=$this->uri('/')?>">Back</a>
+                    <a href="<?=$this->uri('/')?>"><?=$this->_('Back')?></a>
                     <?endif?>
                 </div>
 
@@ -145,31 +145,31 @@
                     <?if(isset($_GET['reg']) && $_GET['reg']):?>
                     <div class="signup">
                         <a href="<?=$this->uri('/reg/connoisseur')?>">
-                            Sign Up as<br >
-                            <span>Connoisseur Member</span>
-                            <small>Share Inspire Connect Inform Enjoy</small>
+                            <?=$this->_('Sign Up as')?><br >
+                            <span><?=$this->_('Connoisseur Member')?></span>
+                            <small><?=$this->_('Share Inspire Connect Inform Enjoy')?></small>
                         </a>
                     </div>
                     <div class="signup last">
                         <a href="<?=$this->uri('/reg/professional')?>">
-                            Sign Up as <br >
-                            <span>Professional Member</span>
+                            <?=$this->_('Sign Up as')?> <br >
+                            <span><?=$this->_('Professional Member')?></span>
 
                             <!--<small>Show Your Works, Exchange Ideas, Get Connected, Develop Your Career</small>-->
-                            <small>You work in relevant domains.</small>
+                            <small><?=$this->_('You work in relevant domains.')?></small>
                         </a>
                     </div>
                     <?else:?>
                     <div class="signup">
                         <a href="<?=$this->uri('/?reg=1')?>">
-                            Sign Up as<br >
-                            <span>Individual Member</span>
+                            <?=$this->_('Sign Up as')?><br >
+                            <span><?=$this->_('Individual Member')?></span>
                         </a>
                     </div>
                     <div class="signup last">
                         <a href="<?=$this->uri('/reg/corporate')?>">
-                            Sign Up as <br >
-                            <span>Corporate Member</span>
+                            <?=$this->_('Sign Up as')?> <br >
+                            <span><?=$this->_('Corporate Member')?></span>
                         </a>
                     </div>
                     <?endif?>
