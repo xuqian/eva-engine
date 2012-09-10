@@ -1,0 +1,106 @@
+<?
+$this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
+$form = Eva\Api::_()->getForm('User\Form\UserForm');
+$form->setSubForms(array(
+    'Profile' => array('User\Form\ProfileForm'),
+    'Account' => array('User\Form\AccountForm'),
+));
+$form->init(array(
+    'action' => '#', //$this->uri('/admin/user/'),
+    'method' => 'post',
+));
+?>
+<div class="container">
+    <div id="singletitle" class="page-header typo img">
+        <!--<h1>Sign Up <span class="highlight">Connoisseur</span></h1>-->
+         <?=$this->widget('Epic', 'components/top')?>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span5">
+            <?=$this->widget('Epic', 'components/middle')?>
+        </div>
+
+        <div class="span7">
+            <?if($this->id == 'connoisseur'):?>
+            <div class="well typo">
+                <div class="page-header">
+                    <h1>You Are</h1>
+                </div>
+                <ul>
+                    <li>Gastronomy</li>
+                    <li>Oenology</li>
+                    <li>Spirit and Cocktails</li>
+                    <li>Other related topic</li>
+                </ul>
+                <div class="page-header">
+                    <h1>Benefit</h1>
+                </div>
+                <ul>
+                    <li>Get involved with hobby centered circles</li>
+                    <li>Share memorable experiences</li>
+                    <li>Participate in Events</li>
+                    <li>Get your voice heard</li>
+                    <li>Get advices directly from experts</li>
+                    <li>Enjoy and Explore</li>
+                </ul>
+                <p>As <strong>Gourmets and Connoisseurs</strong>, Epicurissimo is <strong><em>the convivial table</em></strong> to share your experiences, meet people of the same passion, participate various events (from wine tasting to fashionable tea party), keep up with trends.</p>
+            </div>
+            <?elseif($this->id == 'professional'):?>
+            <div class="well typo">
+                <div class="page-header">
+                    <h2>You Are</h2>
+                </div>
+                <ul>
+                    <li style="text-align: left;">Chefs, sommeliers, mixologists and other Practitioners in Hospitality Industry</li>
+                    <li>Food and Wine critiques, journalists, etc.</li>
+                    <li>Designers of Kitchen, culinary utensils, food stylists, photographs.</li>
+                    <li>Other Professionals</li>
+                </ul>
+                <div class="page-header">
+                    <h2>Benefit</h2>
+                </div>
+                <ul>
+                    <li>Showcase your work and achievement</li>
+                    <li>Career Opportunities: search for your perfect niche</li>
+                    <li>Access to 100 000+ decision makers</li>
+                    <li>Participate in International Events</li>
+                    <li>Share experiences and Exchange ideas</li>
+                    <li>Contact us for professional and personal support</li>
+                </ul>
+            </div>
+            <?else:?>
+            <div class="well typo">
+                <div class="page-header">
+                    <h2>Your Are</h2>
+                </div>
+                <ul>
+                    <li>Restauranteurs</li>
+                    <li>Houses of Fine Drinks (wine, spirit, gourmet beverage…)</li>
+                    <li>High-end Resorts and Luxury Hotel</li>
+                    <li>Other upscale Food and Drink establishment</li>
+                </ul>
+                <div class="page-header">
+                    <h2>Benefit</h2>
+                </div>
+                <ul>
+                    <li>Interact with customers and build business alliance globally</li>
+                    <li>Featuring your service and products on your corporate profile</li>
+                    <li>Host Events and invite guests within our gourmet circles</li>
+                    <li>Post jobs and recruiting talents</li>
+                    <li>Update your audience of company news</li>
+                    <li>Offer access of your employees to our exclusive club</li>
+                </ul>
+            </div>
+            <?endif?>
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <div id="singletitle" class="page-header typo img">
+        <!--<h1>Sign Up <span class="highlight">Connoisseur</span></h1>-->
+         <?=$this->widget('Epic', 'components/end')?>
+    </div>
+</div>

@@ -69,6 +69,17 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'ad' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/ad/',
+                    'defaults' => array(
+                        'controller' => 'Epic\Controller\AdController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
         ),
     ),
     'controllers' => array(
@@ -77,6 +88,7 @@ return array(
             'Epic\Controller\PagesController' => 'Epic\Controller\PagesController',
             'Epic\Controller\PayController' => 'Epic\Controller\PayController',
             'Epic\Controller\LanguageController' => 'Epic\Controller\LanguageController',
+            'Epic\Controller\AdController' => 'Epic\Controller\AdController',
         ),
     ),
 
@@ -92,12 +104,33 @@ return array(
             'epic/reg/professional' => __DIR__ . '/../view/epic/reg/professional.phtml',
             'epic/reg/corporate' => __DIR__ . '/../view/epic/reg/corporate.phtml',
             'epic/pay/index' => __DIR__ . '/../view/epic/pay/index.phtml',
+            'epic/ad/index' => __DIR__ . '/../view/epic/ad/index.phtml',
         ),
 
     ),
 
     'page_components' => array(
-
+        'top' => array(
+            'module' => 'Epic',
+            'name' => 'top',
+            'title' => 'Top Ad',
+            'path' => 'components/top',
+            'description' => 'Top Ad'
+        ),
+        'middle' => array(
+            'module' => 'Epic',
+            'name' => 'middle',
+            'title' => 'Middle Ad',
+            'path' => 'components/middle',
+            'description' => 'Middle Ad'
+        ),
+        'end' => array(
+            'module' => 'Epic',
+            'name' => 'end',
+            'title' => 'End Ad',
+            'path' => 'components/end',
+            'description' => 'End Ad'
+        ),
     ),
     
     'translator' => array(
