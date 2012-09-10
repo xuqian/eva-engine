@@ -45,16 +45,16 @@ class PayController extends ActionController
 
     public function paypal($price)
     {
+        $config['paypal']['sandbox'] = 0;
+        
         include (EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/paypal.class.php');
         $paypal = new \Epic\Payment\paypal_class();             // initiate an instance of the class
         $paypal->paypal_class();
 		$paypal->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
 
-        /*
         if(!$config['paypal']['sandbox']) {
 			$paypal->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
 		}
-        */
         
         $url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/example';
 
