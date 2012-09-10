@@ -113,7 +113,7 @@ return array(
             'zh' => array(
                 'type' => 'csv',
                 'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/zh/epic.csv',
-            ),
+            ),/*
             'zh_TW' => array(
                 'type' => 'csv',
                 'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/zh_TW/epic.csv',
@@ -121,7 +121,7 @@ return array(
             'fr' => array(
                 'type' => 'csv',
                 'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/fr/epic.csv',
-            ),
+            ),*/
         ),
     ),
 );
