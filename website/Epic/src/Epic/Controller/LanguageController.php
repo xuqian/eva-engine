@@ -22,11 +22,7 @@ class LanguageController extends ActionController
         $callback = @$_SERVER['HTTP_REFERER'];
         $callback = $callback ? $callback : '/';
 
-        if($language == $defaultLanguage){
-            $this->cookie()->clear('lang');
-        } else {
-            $this->cookie()->write('lang', $language, 3600*24*365);
-        }
+        $this->cookie()->write('lang', $language, 3600*24*365);
 
 
         $this->redirect()->toUrl($callback);
