@@ -113,23 +113,23 @@ return array(
         'top' => array(
             'module' => 'Epic',
             'name' => 'top',
-            'title' => 'Top Ad',
+            'title' => 'Top Advertisement',
             'path' => 'components/top',
-            'description' => 'Top Ad'
+            'description' => 'Top Advertisement Code Management'
         ),
         'middle' => array(
             'module' => 'Epic',
             'name' => 'middle',
-            'title' => 'Middle Ad',
+            'title' => 'Side Ad',
             'path' => 'components/middle',
-            'description' => 'Middle Ad'
+            'description' => 'Side Advertisement Code Management'
         ),
         'end' => array(
             'module' => 'Epic',
             'name' => 'end',
-            'title' => 'End Ad',
+            'title' => 'Bottom Advertisement',
             'path' => 'components/end',
-            'description' => 'End Ad'
+            'description' => 'Bottom Advertisement Code Management'
         ),
     ),
     

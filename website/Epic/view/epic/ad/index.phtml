@@ -1,26 +1,14 @@
 <?
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
-$form = Eva\Api::_()->getForm('User\Form\UserForm');
-$form->setSubForms(array(
-    'Profile' => array('User\Form\ProfileForm'),
-    'Account' => array('User\Form\AccountForm'),
-));
-$form->init(array(
-    'action' => '#', //$this->uri('/admin/user/'),
-    'method' => 'post',
-));
 ?>
 <div class="container">
-    <div id="singletitle" class="page-header typo img">
-        <!--<h1>Sign Up <span class="highlight">Connoisseur</span></h1>-->
+    <div class="page-header typo centeralign">
          <?=$this->widget('Epic', 'components/top')?>
     </div>
 </div>
 <div class="container">
     <div class="row">
-        <div class="span5">
-            <?=$this->widget('Epic', 'components/middle')?>
-        </div>
+
 
         <div class="span7">
             <?if($this->id == 'connoisseur'):?>
@@ -95,7 +83,9 @@ $form->init(array(
             </div>
             <?endif?>
         </div>
-
+        <div class="span5">
+            <?=$this->widget('Epic', 'components/middle')?>
+        </div>
     </div>
 </div>
 <div class="container">
