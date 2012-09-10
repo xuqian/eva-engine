@@ -109,19 +109,12 @@ return array(
         'sub_languages' => array(
             'zh_TW'
         ),
-        'translation_files' => array(
-            'zh' => array(
+        'translation_file_patterns' => array(
+            'epic' => array(
                 'type' => 'csv',
-                'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/zh/epic.csv',
-            ),/*
-            'zh_TW' => array(
-                'type' => 'csv',
-                'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/zh_TW/epic.csv',
+                'base_dir' => EVA_ROOT_PATH . '/website/Epic/data/languages/',
+                'pattern' => '%s/epic.csv'
             ),
-            'fr' => array(
-                'type' => 'csv',
-                'filename' =>  EVA_ROOT_PATH . '/website/Epic/data/languages/fr/epic.csv',
-            ),*/
         ),
     ),
 );

@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 ﻿
 "About & Contact", 
 "About Us",
+=======
+﻿"About &amp; Contact", 
+"About Us",À propos de nous
+>>>>>>> 97e0e64269bcf3f2dcd4b3c3ca9ad0d0b7631ca4
 "By clicking Sign Up, you agree to our",
 Corporate,
 Connoisseur,
@@ -20,7 +25,7 @@ Send,
 Back,
 "Share Inspire Connect Inform Enjoy",
 "You work in relevant domains.",
-"Privacy Policy",
+"Privacy Policy",Politique de confidentialité
 Contact,
 "Contact Us",
 "your email address",
