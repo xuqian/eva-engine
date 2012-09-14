@@ -130,7 +130,7 @@ class CorporateProfileForm extends \Eva\Form\RestfulForm
             'name' => 'bio',
             'type' => 'textarea',
             'options' => array (
-                'label' => 'Few	words about your brand',
+                'label' => 'Few words about your brand',
             ),
             'attributes' => array (
                 'value' => '',
