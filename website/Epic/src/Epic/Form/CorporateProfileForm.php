@@ -61,7 +61,7 @@ class CorporateProfileForm extends \Eva\Form\RestfulForm
             'name' => 'industryIndustrie',
             'type' => 'select',
             'options' => array (
-                'label' => 'Industry/Industrie',
+                'label' => 'Industry',
                 'value_options' => array (
                     array (
                         'label' => 'Food, Wine and Spirit Production',
@@ -110,7 +110,7 @@ class CorporateProfileForm extends \Eva\Form\RestfulForm
             'name' => 'phoneBusiness',
             'type' => 'text',
             'options' => array (
-                'label' => 'Phone no',
+                'label' => 'Phone no.',
             ),
             'attributes' => array (
                 'value' => '',

@@ -101,7 +101,7 @@ class ConnoisseurProfileForm extends \Eva\Form\RestfulForm
             'name' => 'bio',
             'type' => 'textarea',
             'options' => array (
-                'label' => 'Few	words about your yourself',
+                'label' => 'Few	words about yourself',
             ),
             'attributes' => array (
                 'value' => '',
