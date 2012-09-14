@@ -91,7 +91,8 @@
         }); 
         $("#signupform-titles").hide();
         $(".button-next").addClass('btn').css("margin-left", "160px");
-        $(".button-back").addClass('btn').css("margin-left", "270px").css("margin-top", "-90px");
+        $(".button-back:not(:last)").addClass('btn pull-right').css("margin-right", "100px");
+        $(".button-back:last").addClass('btn').css("margin-left", "270px").css("margin-top", "-90px");
         $("input[type='checkbox']").css("margin-right", "5px");
     </script>
 </body>

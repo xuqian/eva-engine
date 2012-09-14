@@ -100,6 +100,7 @@ return array(
             'blank' => __DIR__ . '/../view/epic.phtml',
             'epic/index' => __DIR__ . '/../view/epic/index.phtml',
             'epic/pages/get' => __DIR__ . '/../view/epic/pages/get.phtml',
+            'epic/reg/thankyou' => __DIR__ . '/../view/epic/reg/thankyou.phtml',
             'epic/reg/connoisseur' => __DIR__ . '/../view/epic/reg/connoisseur.phtml',
             'epic/reg/professional' => __DIR__ . '/../view/epic/reg/professional.phtml',
             'epic/reg/corporate' => __DIR__ . '/../view/epic/reg/corporate.phtml',

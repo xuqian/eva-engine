@@ -23,6 +23,13 @@ class PreregController extends ActionController
 
     public function getAction()
     {
+        if($_POST){
+        $this->layout('layout/empty');
+        $view = new ViewModel(array(
+        ));
+        $view->setTemplate('epic/reg/thankyou');
+        return $view;
+        }
         $res = array();
         $this->layout('layout/empty');
         $id = $this->params('id');
