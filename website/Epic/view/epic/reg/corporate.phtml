@@ -1,0 +1,284 @@
+<?
+$this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
+$form = new Epic\Form\UserForm();
+$form->useSubFormGroup()->setView($this);
+$form->setMethod('post');
+$form->setAction($this->uri('/reg/'));
+?>
+<div class="container">
+    <div id="singletitle" class="page-header typo img">
+        <!--<h1>Sign Up <span class="highlight">Connoisseur</span></h1>-->
+        <h1><img src="<?=$this->link('/src/epic/css/img/title-' . $this->id . '.png')?>" alt="logo"></h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span5">
+            <form id="signupform" <?=$this->formAttr($form)?> class="form">
+                <?=$form->restful();?>
+                <?=$form->helper('id');?>
+                <fieldset class="form-horizontal">
+                    <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
+                        <?=$form->helper('firstName', 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper('firstName', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper('firstName', 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError('lastName') ? 'error' : '';?>">
+                        <?=$form->helper('lastName', 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper('lastName', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper('lastName', 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError('gender') ? 'error' : '';?>">
+                        <?=$form->helper('gender', 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper('gender', 'formSelect', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper('gender', 'formElementErrors')?></div>
+                        </div>
+                    </div>
+
+                    <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
+                        <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper('email', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="control-group <?=$form->isError(array('Profile', 'birthday')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'birthday'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'birthday'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'birthday'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'height')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'height'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'height'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'height'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'weight')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'weight'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'weight'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'weight'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+
+                    <div class="control-group <?=$form->isError(array('Profile', 'addressMore')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'addressMore'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'addressMore'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'addressMore'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'city')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'city'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'city'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'city'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'province')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'province'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'province'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'province'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'state')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'state'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'state'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'state'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'zipcode')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'zipcode'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'zipcode'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'zipcode'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'phoneBusiness')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'phoneBusiness'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'phoneBusiness'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'phoneBusiness'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'phoneMobile')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'phoneMobile'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'phoneMobile'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'phoneMobile'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'phoneHome')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'phoneHome'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'phoneHome'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'phoneHome'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'fax')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'fax'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'fax'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'fax'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'signature')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'signature'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'signature'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'signature'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'location')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'location'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'location'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'location'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+
+                    <div class="control-group <?=$form->isError(array('Profile', 'localIm')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'localIm'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'localIm'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'localIm'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'internalIm')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'internalIm'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'internalIm'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'internalIm'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError(array('Profile', 'otherIm')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'otherIm'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('Profile', 'otherIm'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'otherIm'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    -->
+                    <div class="control-group">
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox"> By clicking Sign Up, you agree to our <a href="<?=$this->uri('/pages/terms')?>" target="_blank">Terms &amp; Conditions</a>.
+                            </label>
+                            <button type="submit" class="btn btn-large">Sign Up</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="span7">
+            <?if($this->id == 'connoisseur'):?>
+            <div class="well typo">
+                <div class="page-header">
+                    <h1>You Are</h1>
+                </div>
+                <ul>
+                    <li>Gastronomy</li>
+                    <li>Oenology</li>
+                    <li>Spirit and Cocktails</li>
+                    <li>Other related topic</li>
+                </ul>
+                <div class="page-header">
+                    <h1>Benefit</h1>
+                </div>
+                <ul>
+                    <li>Get involved with hobby centered circles</li>
+                    <li>Share memorable experiences</li>
+                    <li>Participate in Events</li>
+                    <li>Get your voice heard</li>
+                    <li>Get advices directly from experts</li>
+                    <li>Enjoy and Explore</li>
+                </ul>
+                <p>As <strong>Gourmets and Connoisseurs</strong>, Epicurissimo is <strong><em>the convivial table</em></strong> to share your experiences, meet people of the same passion, participate various events (from wine tasting to fashionable tea party), keep up with trends.</p>
+            </div>
+            <?elseif($this->id == 'professional'):?>
+            <div class="well typo">
+                <div class="page-header">
+                    <h2>You Are</h2>
+                </div>
+                <ul>
+                    <li style="text-align: left;">Chefs, sommeliers, mixologists and other Practitioners in Hospitality Industry</li>
+                    <li>Food and Wine critiques, journalists, etc.</li>
+                    <li>Designers of Kitchen, culinary utensils, food stylists, photographs.</li>
+                    <li>Other Professionals</li>
+                </ul>
+                <div class="page-header">
+                    <h2>Benefit</h2>
+                </div>
+                <ul>
+                    <li>Showcase your work and achievement</li>
+                    <li>Career Opportunities: search for your perfect niche</li>
+                    <li>Access to 100 000+ decision makers</li>
+                    <li>Participate in International Events</li>
+                    <li>Share experiences and Exchange ideas</li>
+                    <li>Contact us for professional and personal support</li>
+                </ul>
+            </div>
+            <?else:?>
+            <div class="well typo">
+                <div class="page-header">
+                    <h2>Your Are</h2>
+                </div>
+                <ul>
+                    <li>Restauranteurs</li>
+                    <li>Houses of Fine Drinks (wine, spirit, gourmet beverage…)</li>
+                    <li>High-end Resorts and Luxury Hotel</li>
+                    <li>Other upscale Food and Drink establishment</li>
+                </ul>
+                <div class="page-header">
+                    <h2>Benefit</h2>
+                </div>
+                <ul>
+                    <li>Interact with customers and build business alliance globally</li>
+                    <li>Featuring your service and products on your corporate profile</li>
+                    <li>Host Events and invite guests within our gourmet circles</li>
+                    <li>Post jobs and recruiting talents</li>
+                    <li>Update your audience of company news</li>
+                    <li>Offer access of your employees to our exclusive club</li>
+                </ul>
+            </div>
+            <?endif?>
+        </div>
+
+    </div>
+</div>
+
+

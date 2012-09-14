@@ -13,6 +13,9 @@ class LocalController extends ActionController
     {
         $ip = $_SERVER['REMOTE_ADDR'];
 
+        if(!file_exists(EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/GeoLiteCity.dat')) {
+            return;
+        }
         if ($params['city'] == 1) {
             include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipcity.inc');
             include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipregionvars.php');
