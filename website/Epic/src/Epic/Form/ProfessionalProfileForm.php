@@ -270,8 +270,8 @@ class ProfessionalProfileForm extends \Eva\Form\RestfulForm
                         'value' => 'Legal Issues',
                     ),
                     array (
-                        'label' => 'Academia and Research',
-                        'value' => 'Academia and Research',
+                        'label' => 'Academic and Research',
+                        'value' => 'Academic and Research',
                     ),
                     array (
                         'label' => 'Others',
