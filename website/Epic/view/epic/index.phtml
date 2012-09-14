@@ -1,14 +1,7 @@
 <?
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
-$form = Eva\Api::_()->getForm('User\Form\UserForm');
-$form->setSubForms(array(
-    'Profile' => array('User\Form\ProfileForm'),
-    'Account' => array('User\Form\AccountForm'),
-));
-$form->init(array(
-    'action' => $this->uri('/admin/user/'),
-    'method' => 'post',
-));
+$form = new Epic\Form\UserForm();
+$form->useSubFormGroup()->setView($this);
 ?>
 <div class="container"><div class="row">
         <div class="span12">

@@ -1,14 +1,9 @@
 <?
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
-$form = Eva\Api::_()->getForm('User\Form\UserForm');
-$form->setSubForms(array(
-    'Profile' => array('User\Form\ProfileForm'),
-    'Account' => array('User\Form\AccountForm'),
-));
-$form->init(array(
-    'action' => '#', //$this->uri('/admin/user/'),
-    'method' => 'post',
-));
+$form = new Epic\Form\UserForm();
+$form->useSubFormGroup()->setView($this);
+$form->setMethod('post');
+$form->setAction($this->uri('/reg/'));
 ?>
 <div class="container">
     <div id="singletitle" class="page-header typo img">
@@ -55,7 +50,7 @@ $form->init(array(
                     <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('Profile', 'country'), array('class' => ''))?>        
+                            <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => ''))?>        
                             <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
                         </div>
                     </div>
