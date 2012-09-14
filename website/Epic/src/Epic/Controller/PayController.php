@@ -89,6 +89,7 @@ class PayController extends ActionController
     public function alipay($price)
     {
         $url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/example';
+        $notify_url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/alipaysearch';
         
         $content = "Epic alipay test.";
 
@@ -106,6 +107,7 @@ class PayController extends ActionController
 			"service" => $config['alipay']['accountType'],
 			"partner" => $config['alipay']['partnerId'],            
 			"return_url" => $url, 
+		    "notify_url" => $notify_url, 
 			"_input_charset" => 'utf-8',
 			"subject" => $config['alipay']['orderTitle'],                                         
 			"body" => $content,                                         
