@@ -60,7 +60,7 @@ return array(
                 'options' => array(
                     'route' => '/pay/[:id]',
                     'constraints' => array(
-                        'id'     => 'example|paypal|alipay',
+                        'id'     => 'example|paypal|alipay|paypalsearch|alipaysearch',
                     ),
                     'defaults' => array(
                         'controller' => 'Epic\Controller\PayController',

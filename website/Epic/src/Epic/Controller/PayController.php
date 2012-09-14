@@ -33,8 +33,11 @@ class PayController extends ActionController
             $this->paypal($price);
         } else if ($id == "alipay" && $price > 0){
             $this->alipay($price);
+        } else if ($id == "paypalsearch" && $price > 0){
+            $this->paypalsearch($price);
+        } else if ($id == "alipaysearch"){
+            $this->alipaysearch($price);
         }
-        
         $view = new ViewModel(array(
             'id' => $id
         ));
@@ -45,7 +48,7 @@ class PayController extends ActionController
 
     public function paypal($price)
     {
-        $config['paypal']['sandbox'] = 0;
+        $config['paypal']['sandbox'] = 1;
         
         include (EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/paypal.class.php');
         $paypal = new \Epic\Payment\paypal_class();             // initiate an instance of the class
@@ -59,7 +62,7 @@ class PayController extends ActionController
         $url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/example';
 
         //buyer_1309337143_per@gmail.com 12345678
-        $config['paypal']['account'] = 'ss_1270582781_biz@gmail.com';
+        $config['paypal']['account'] = 'seller_1309335715_biz@gmail.com';
         $config['paypal']['orderTitle'] = 'epic test ' . $price;
         $config['paypal']['currency'] = 'USD';
             
@@ -123,5 +126,44 @@ class PayController extends ActionController
         $link = $alipay->create_url();
 
         $this->redirect()->toUrl($link);
+    }
+
+    public function paypalsearch($price)
+    {
+        $config['paypal']['sandbox'] = 0;
+        
+        include (EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/paypal.search.php');
+
+        $url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/example';
+
+        $order_id = $price;
+        $hash = md5($price . time());
+
+        $transactionID = urlencode($price);
+
+        $nvpStr = "&TRANSACTIONID=$transactionID";
+
+        $httpParsedResponseAr = PPHttpPost('GetTransactionDetails', $nvpStr);
+        
+        p($httpParsedResponseAr);exit;
+    }
+
+    public function alipaysearch()
+    {
+        $log = EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/alipay_notify.log';
+        
+        if (!file_exists($log)) {
+            exit;
+        }
+    
+        $logContent = file_get_contents($log);
+
+        $logContent .= "\n" . date("Y-m-d H:i:s") . "\n" . print_r($_POST,true);
+        
+        file_put_contents($log,$logContent);
+
+        echo "success";
+        
+        exit;
     }
 }
