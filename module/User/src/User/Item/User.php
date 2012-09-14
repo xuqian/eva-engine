@@ -31,16 +31,18 @@ class User extends AbstractItem
                 'limit' => false,
             ),
         ),
-        'FriendsWithMe' => array(
-            'targetEntity' => 'User\Item\User',
+        'Roles' => array(
+            'targetEntity' => 'User\Item\Role',
             'relationship' => 'ManyToMany',
-            'inversedBy' => 'User\Item\Friend',
+            'mappedBy' => 'Roles',
             'joinColumns' => array(
-                'joinColumn' => 'to_user_id',
+                'joinColumn' => 'user_id',
                 'referencedColumn' => 'id',
             ),
+            'inversedBy' => 'User\Item\RoleUser',
+            'inversedMappedBy' => 'RoleUser',
             'inverseJoinColumns' => array(
-                'joinColumn' => 'from_user_id',
+                'joinColumn' => 'role_id',
                 'referencedColumn' => 'id',
             ),
         ),
@@ -65,13 +67,21 @@ class User extends AbstractItem
         'create' => array(
             'getSalt()',
             'getPassword()',
+            'getOnlineStatus()',
         ),
     );
+
+    public function getOnlineStatus()
+    {
+        if(!$this->onlineStatus){
+            return $this->onlineStatus = 'offline';
+        }
+    }
 
     public function getRegisterTime()
     {
         if(!$this->registerTime){
-            return \Eva\Date\Date::getNow();
+            return $this->registerTime = \Eva\Date\Date::getNow();
         }
     }
 

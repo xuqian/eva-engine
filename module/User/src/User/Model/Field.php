@@ -8,6 +8,10 @@ use Eva\Api,
 class Field extends AbstractModelService
 {
 
+    public function toFormElements(array $roleArray)
+    {
+
+    }
 
     public function createField(array $data = array())
     {
@@ -19,8 +23,6 @@ class Field extends AbstractModelService
         
         $this->trigger('create.pre');
 
-            p($item->getLoadedRelationships());
-            exit;
         $itemId = $item->create();
 
         if($item->hasLoadedRelationships()){
@@ -68,6 +70,10 @@ class Field extends AbstractModelService
         $this->trigger('remove.pre');
 
         $item = $this->getItem();
+
+        $subItem = $item->join('Fieldoption');
+        $subItem->remove();
+
         $item->remove();
 
         $this->trigger('remove');

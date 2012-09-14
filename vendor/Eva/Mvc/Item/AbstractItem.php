@@ -292,9 +292,16 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
 
         $model = $this->getModel();
         foreach($this->relationships as $key => $relationship){
-            if(isset($relationship['dataSource']) && $relationship['dataSource'] && $relationship['targetEntity']){
+            if(isset($relationship['dataSource']) && $relationship['dataSource'] && isset($relationship['targetEntity']) && $relationship['targetEntity']){
                 $relItem = $this->join($key);
-                $relItem->mergeDataSource($relationship['dataSource']);
+
+                if(isset($relationship['dataSource'][0])){
+                    //Join Many use Set because may be join items total number change
+                    $relItem->setDataSource($relationship['dataSource']);
+                } else {
+                    //Join OneToOne use merge to passing referenced id
+                    $relItem->mergeDataSource($relationship['dataSource']);
+                }
                 $relationships[$key] = $relItem;
             }
         }
@@ -344,6 +351,11 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         }
     }
 
+    public function getArrayCopy()
+    {
+        return $this->toArray();
+    }
+
     protected function singleToArray($map)
     {
         if($map){
@@ -383,13 +395,34 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         }
 
         foreach($join as $key => $map){
-            if(isset($this->relationships[$key])){
-                if(isset($this->relationships[$key]['mappedBy'])){
-                    $mapKey = $this->relationships[$key]['mappedBy'];
-                    $self->$mapKey = $this->join($key)->toArray($map);
-                } else {
-                    $self->$key = $this->join($key)->toArray($map);
+            if(!isset($this->relationships[$key])){
+                continue;
+            }
+            
+            $relationship = $this->relationships[$key];
+            $joinedItem = $this->join($key);
+
+            //Insert manytomany join middle item to parent level
+            if(isset($relationship['inversedMappedBy'])){
+                $mapKey = $relationship['inversedMappedBy'];
+                $middleItems = array();
+                foreach($joinedItem as $key => $item){
+                    $item = $item->$mapKey;
+                    if($item && method_exists($item, 'toArray')){
+                        $item = $item->toArray();
+                        $middleItems[$key] = $item;
+                        $joinedItem[$key][$mapKey] = $item;
+                    }
                 }
+                $self->$mapKey = $middleItems;
+            }
+
+            $joinedArray = $joinedItem->toArray($map);
+            if(isset($relationship['mappedBy'])){
+                $mapKey = $relationship['mappedBy'];
+                $self->$mapKey = $joinedArray;
+            } else {
+                $self->$key = $joinedArray;
             }
         }
 
@@ -558,7 +591,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         $middleItem = clone $relItem->model->getItem($relationship['inversedBy']); 
         $middleItem->setDataSource(array());
         $params = array(
-            $joinLeftColumn => $middleItem->$referencedLeftColumn
+            $joinLeftColumn => $this->$referencedLeftColumn
         );
         if(isset($relationship['joinColumns']['joinParameters']) && is_array($relationship['joinColumns']['joinParameters'])){
             $params = array_merge($params, $relationship['joinColumns']['joinParameters']);
@@ -572,13 +605,9 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
             $rightItem = clone $relItem;
             $rightItem->setDataSource(array());
             $rightItem->$referencedRightColumn = $middleItem->$joinRightColumn;
-            if(isset($relationship['inversedMappedBy'])){
-                $rightItem->$relationship['inversedMappedBy'] = $middleItem; 
-            } else {
-                $middleKey = get_class($middleItem);
-                $rightItem->$middleKey = $middleItem; 
-            }
-            
+
+            $inversedMapKey = isset($relationship['inversedMappedBy']) ? $relationship['inversedMappedBy'] : get_class($middleItem);
+            $rightItem->$inversedMapKey = $middleItem; 
             $relItem[] = $rightItem;
         }
 

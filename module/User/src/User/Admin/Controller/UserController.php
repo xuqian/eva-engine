@@ -20,8 +20,9 @@ class UserController extends RestfulModuleController
 
         $query = $request->getQuery();
 
-        $form = Api::_()->getForm('User\Form\UserSearchForm');
-        $selectQuery = $form->fieldsMap($query, true);
+        $form = new Form\UserSearchForm();
+        $form->bind($query)->isValid();
+        $selectQuery = $form->getData();
 
         $itemModel = Api::_()->getModelService('User\Model\User');
         if(!$selectQuery){
@@ -34,16 +35,13 @@ class UserController extends RestfulModuleController
         $items = $items->toArray(array(
             'self' => array(
                 '*',
-                'userName',
             ),
             'join' => array(
                 'Profile' => array(
-                    //'*',
                     'site',
                     'birthday',
                     'phoneMobile',
                 ),
-                'Account' => array('*'),
             ),
         ));
         $paginator = $itemModel->getPaginator();
@@ -58,63 +56,23 @@ class UserController extends RestfulModuleController
 
     public function restGetUser()
     {
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        $id = $this->params('id');
         $itemModel = Api::_()->getModelService('User\Model\User');
         $item = $itemModel->getUser($id);
 
-        //p($item->self(array('*'))->toArray());
-
-        //$item = $itemModel->getUser(1);
-        //p($item->self(array('*'))->userName);
-        
-        //$credits = $item->join('Account')->self(array('*'))->credits;
-        //p($credits);
-
-        //$avatars = $item->proxy('File\Item\File::UserAvatar');
-        //$avatar = $avatars[0];
-        //p($avatar->self(array('*'))->toArray());
-
-        /*
         $item = $item->toArray(array(
             'self' => array(
                 '*',
-                'getRegisterIp()',
-                'getFullName()',
             ),
             'join' => array(
                 'Profile' => array(
-                    //'*',
-                    'site',
-                    'birthday',
-                    'phoneMobile',
+                    '*',
                 ),
                 'Account' => array('*'),
-                'MyFriends' => array(
-                    'self' => array(
-                        'userName',
-                    ),
-                    'join' => array(
-                        'Profile' => array()
-                    )
-                ),
-                'Oauth' => array(
-                    //'appExt'
-                ),
             ),
-            'proxy' => array(
-                'File\Item\File::UserAvatar' => array(
-                    'self' => array('*'),
-                ),
-            ) 
         ));
-
-        if(!$item){
-        }
-        p($item);
-        */
-
         return array(
-            'user' => $item,
+            'item' => $item,
             'flashMessenger' => $this->flashMessenger()->getMessages(),
         );
     }
@@ -124,17 +82,9 @@ class UserController extends RestfulModuleController
         $request = $this->getRequest();
         $postData = $request->getPost();
         $form = new Form\UserForm();
-        $subForms = array(
-            'Profile' => array('User\Form\ProfileForm'),
-            'Account' => array('User\Form\AccountForm'),
-        );
-        $form->setSubforms($subForms)
-             ->init()
-             ->setData($postData)
-             ->enableFilters();
+        $form->useSubFormGroup()->bind($postData);
 
         if ($form->isValid()) {
-
             $postData = $form->getData();
             $itemModel = Api::_()->getModelService('User\Model\User');
             $itemId = $itemModel->setItem($postData)->createUser();
@@ -142,11 +92,11 @@ class UserController extends RestfulModuleController
             $this->redirect()->toUrl('/admin/user/' . $itemId);
 
         } else {
+            p($form->getMessages());
         }
 
         return array(
             'form' => $form,
-            'post' => $postData,
         );
     }
 
@@ -156,14 +106,7 @@ class UserController extends RestfulModuleController
         $postData = $request->getPost();
 
         $form = new Form\UserEditForm();
-        $subForms = array(
-            'Profile' => array('User\Form\ProfileForm'),
-            'Account' => array('User\Form\AccountForm'),
-        );
-        $form->setSubforms($subForms)
-             ->init()
-             ->setData($postData)
-             ->enableFilters();
+        $form->useSubFormGroup()->bind($postData);
 
         if ($form->isValid()) {
             $postData = $form->getData();
@@ -180,8 +123,6 @@ class UserController extends RestfulModuleController
 
         return array(
             'form' => $form,
-            'user' => $postData,
-            //'flashMessenger' => $flashMesseger
         );
     }
 
@@ -192,7 +133,7 @@ class UserController extends RestfulModuleController
         $callback = $request->getPost()->get('callback');
 
         $form = new Form\UserDeleteForm();
-        $form->enableFilters()->setData($postData);
+        $form->bind($postData);
         if ($form->isValid()) {
 
             $postData = $form->getData();

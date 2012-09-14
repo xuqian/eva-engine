@@ -9,15 +9,17 @@ use User\Form,
 class FieldController extends RestfulModuleController
 {
     protected $addResources = array(
+        'userfield',
         'create',
         'remove',
     );
 
     protected $renders = array(
+        'restGetFieldUserfield' => 'user/field',
         'restGetFieldCreate' => 'field/get',
         'restPutField' => 'field/get',
         'restPostField' => 'field/get',
-        'restDeleteField' => 'remove/get',
+        'restDeleteField' => 'field/remove',
     );
 
     public function restIndexField()
@@ -47,17 +49,24 @@ class FieldController extends RestfulModuleController
 
     public function restGetFieldCreate()
     {
-        return array();
+
     }
 
     public function restGetFieldRemove()
     {
-        return array();
+        $id = (int)$this->params('id');
+        
+        $itemModel = Api::_()->getModelService('User\Model\Field');
+        $item = $itemModel->getField($id);
+        return array(
+            'callback' => $this->getRequest()->getQuery()->get('callback'),
+            'item' => $item,
+        );
     }
 
     public function restGetField()
     {
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+        $id = (int)$this->params('id');
         $itemModel = Api::_()->getModelService('User\Model\Field');
         $item = $itemModel->getField($id);
 
@@ -69,8 +78,63 @@ class FieldController extends RestfulModuleController
                 'Fieldoption' => array(
                     '*',
                 ),
+                'Roles' => array(
+                    '*',
+                )
             ),
         ));
+        return array(
+            'item' => $item,
+            'flashMessenger' => $this->flashMessenger()->getMessages(),
+        );
+    }
+
+    public function restGetFieldUserfield()
+    {
+        $id = (int)$this->params('id');
+        $itemModel = Api::_()->getModelService('User\Model\User');
+        $item = $itemModel->getUser($id);
+
+        $item = $item->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Roles' => array(
+                    'self' => array(
+                    ),
+                    'join' => array(
+                        'CommonFields' => array(
+                            'self' => array(
+                                '*'
+                            ),
+                            'join' => array(
+                                'Fieldoption' => array(
+                                    'self' => array(
+                                        '*'
+                                    ),
+                                ),
+                            ),
+                        ),
+                        'RoleFields' => array(
+                            'self' => array(
+                                '*'
+                            ),
+                            'join' => array(
+                                'Fieldoption' => array(
+                                    'self' => array(
+                                        '*'
+                                    ),
+                                ),
+                            ),
+                        ),
+                    )
+                )
+            ),
+        ));
+
+        p($item['Roles'][0], 1);
+
         return array(
             'item' => $item,
             'flashMessenger' => $this->flashMessenger()->getMessages(),
@@ -81,26 +145,22 @@ class FieldController extends RestfulModuleController
     {
         $request = $this->getRequest();
         $postData = $request->getPost();
+        
         $form = new Form\FieldForm();
-        $subForms = array();
-        $subForms = array(
-            'Fieldoption' => array('User\Form\FieldoptionForm'),
-        );
-        $form->setSubforms($subForms)
-             ->init()
-             ->setData($postData)
-             ->enableFilters();
+        $form->useSubFormGroup()
+        ->bind($postData);
 
         if ($form->isValid()) {
 
             $postData = $form->getData();
-
             $itemModel = Api::_()->getModelService('User\Model\Field');
             $itemId = $itemModel->setItem($postData)->createField();
             $this->flashMessenger()->addMessage('item-create-succeed');
             $this->redirect()->toUrl('/admin/user/field/' . $itemId);
 
         } else {
+            //p($form->getMessages());
+            //p($form->getData());
         }
 
         return array(
@@ -113,19 +173,10 @@ class FieldController extends RestfulModuleController
     {
         $request = $this->getRequest();
         $postData = $request->getPost();
-
+        
         $form = new Form\FieldEditForm();
-        $subForms = array();
-        /*
-        $subForms = array(
-            'Profile' => array('Field\Form\ProfileForm'),
-            'Account' => array('Field\Form\AccountForm'),
-        );
-        */
-        $form->setSubforms($subForms)
-             ->init()
-             ->setData($postData)
-             ->enableFilters();
+        $form->useSubFormGroup()
+        ->bind($postData);
 
         if ($form->isValid()) {
             $postData = $form->getData();
@@ -152,13 +203,14 @@ class FieldController extends RestfulModuleController
         $request = $this->getRequest();
         $postData = $request->getPost();
         $callback = $request->getPost()->get('callback');
-
+        
         $form = new Form\FieldDeleteForm();
-        $form->enableFilters()->setData($postData);
+        $form->bind($postData);
+
         if ($form->isValid()) {
 
             $postData = $form->getData();
-            $itemModel = Api::_()->getModelService('Field\Model\Field');
+            $itemModel = Api::_()->getModelService('User\Model\Field');
             $itemModel->setItem(array(
                 'id' => $postData['id']
             ))->removeField();

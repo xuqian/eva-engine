@@ -248,8 +248,12 @@ class Api
                 $modelClassName
             ));    
         }
-
+        
         $serviceManager = $this->event->getApplication()->getServiceManager();
+        if($serviceManager->has($modelClassName)){
+            return $serviceManager->get($modelClassName);
+        }
+
         $serviceManager->setInvokableClass($modelClassName, $modelClassName);
         return $serviceManager->get($modelClassName);
     }
@@ -329,5 +333,10 @@ class Api
             return $this->view;
         }
         return $this->view = $this->event->getApplication()->getServiceManager()->get('ViewManager')->getRenderer();
+    }
+
+    public function getServiceManager()
+    {
+        return $this->event->getApplication()->getServiceManager();
     }
 }
