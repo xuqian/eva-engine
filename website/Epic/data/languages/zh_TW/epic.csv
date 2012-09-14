@@ -39,14 +39,15 @@ Email,電子郵件
 Phone,電話
 Address,地址
 Hobbies,興趣愛好
-"A few words about yourself",簡單描述您自己
+"Few words about yourself",簡單描述您自己
 Education,教育信息
 School,學校
 Degree,學歷
 Industry,行業
-"Food,Wine and Spirit Production",食品/酒類生產商
+Others,其他
+"Food, Wine and Spirit Production",食品/酒類生產商
 Hospitality,酒店業
-"Restaurant,bar and club",餐廳/酒吧/俱樂部
+"Restaurant, bar and club",餐廳/酒吧/俱樂部
 "Distribution and Trade",分銷或貿易
 "Media and Press",媒體或出版
 "Marketing and Communication",市場營銷或傳媒
@@ -66,6 +67,7 @@ Consultancy,諮詢業
 "Marketing and Promotion",市場營銷 和 促銷
 "Events Planning",活動策劃
 "Financial Service(seed funding, venture capital. Insurance)",金融服務(種子基金，風險投資，保險)
+"Consulting Service",諮詢服務
 "Design",設計
 "Photographing",攝像
 "Creative Writing",創意寫作
@@ -74,14 +76,14 @@ Consultancy,諮詢業
 "Academic and Research",學者及研究
 "Central Interests",熱衷於
 "Gastronomy and Fine Dining",美食
-"Wine(oenology)",酒類(酒類研究)
+"Wine(oenology)",酒類及(酒類研究)
 "Fine Spirit: Rhum, Cognac, Armagnac, Whisky, Vodka, Gin",美酒：朗姆酒，白蘭地，威士忌，伏特加，杜松子酒等
 "Cocktails",雞尾酒
 "Cigar",雪茄
 "Cooking",烹飪
 "Photographing food",美食攝影
 "You might interested in",您或許對以下有興趣
-"Events(cocktail parties, wine tasting, tea party…)",活動（雞尾酒會，美酒品鑑會，茶會）
+"Events(cocktail parties,wine tasting,tea party…)",活動（雞尾酒會，美酒品鑑會，茶會）
 "Exhibitions",展會
 "Wine Trips",美酒之旅
 "Buying and collection Advices",購買和收藏建議
@@ -95,10 +97,11 @@ Consultancy,諮詢業
 "email address",電子郵件
 "phone no,",電話
 "public relation manager",公關部經理名稱
-"Few words about your brand:",簡單描述您的企業或品牌
-"How could we help you?",們如何能夠幫助您？
+"Few words about your brand",簡單描述您的企業或品牌
+"How could we help you?",我們如何能夠幫助您？
 "Business network events",商業活動
 "Branding",品牌建設
+"Exhibition",展会
 "Business partners, Merge and Acquisition",商業夥伴，兼併重組
 "Talents search and recruiting",人才招聘
 "Consulting Services",諮詢服務
@@ -107,7 +110,7 @@ Consultancy,諮詢業
 "Jobs, internship Opportunities",工作，實習機會
 "Exhibitions, Events",開辦展會，組織活動
 "Distribution and International Trade",分銷和國際貿易
-"By clicking Sign Up, you agree to our Terms & Conditions.",勾選此框，即代表您同意了我們的註冊條款
+"By clicking Sign Up, you agree to our Terms & Conditions.",勾選此框，即代表您同意了我們的網站條款
 "Select Gender",選擇
 Secret,保密
 Your City,您的城市
@@ -115,3 +118,5 @@ Language,選擇語言
 Previous,上一頁
 Next,下一頁
 Title,頭銜
+"Thank You",感謝
+"Once our website is completed, we will inform you by email",當我們的網站正式上線後，我們會通過電子郵件通知您
