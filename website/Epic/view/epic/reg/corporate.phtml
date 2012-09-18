@@ -25,7 +25,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
                         <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('email', array('class' => ''))?>        
+                            <?=$form->helper('email', array('class' => 'required email'))?>        
                             <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
                         </div>
                     </div>

@@ -33,7 +33,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
                         <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('email', array('class' => ''))?>        
+                            <?=$form->helper('email', array('class' => 'required email'))?>        
                             <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -41,14 +41,14 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                         <?=$form->helper('firstName', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('firstName', array('class' => ''))?>        
+                            <?=$form->helper('firstName', array('class' => 'required'))?>        
                             <div class="help-block"><?=$form->helper('firstName', 'formElementErrors')?></div>
                         </div>
                     </div>
                     <div class="control-group <?=$form->isError('lastName') ? 'error' : '';?>">
                         <?=$form->helper('lastName', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('lastName', array('class' => ''))?>        
+                            <?=$form->helper('lastName', array('class' => 'required'))?>        
                             <div class="help-block"><?=$form->helper('lastName', 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError(array('UserRoleFields', '2')) ? 'error' : '';?>">
                         <?=$form->helper(array('UserRoleFields', '2'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '2'), 'formMultiCheckbox', array('class' => ''))?>        
+                            <?=$form->helper(array('UserRoleFields', '2'), 'formMultiCheckbox', array('class' => 'required'))?>        
                             <div class="help-block"><?=$form->helper(array('UserRoleFields', '2'), 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError(array('UserRoleFields', '3')) ? 'error' : '';?>">
                         <?=$form->helper(array('UserRoleFields', '3'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '3'), 'formMultiCheckbox', array('class' => ''))?>        
+                            <?=$form->helper(array('UserRoleFields', '3'), 'formMultiCheckbox', array('class' => 'required'))?>        
                             <div class="help-block"><?=$form->helper(array('UserRoleFields', '3'), 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ $form->useSubFormGroup()
                     <div class="control-group">
                         <div class="controls">
                             <label class="checkbox">
-                                <input type="checkbox"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
+                                <input type="checkbox" class="required"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
                             <button type="submit" class="btn"><?=$this->_('Sign Up')?></button>
                         </div>
                     </div>

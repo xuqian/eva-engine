@@ -67,7 +67,7 @@ class PreregController extends ActionController
             //$this->redirect()->toUrl('/admin/user/' . $itemId);
 
         } else {
-            p($form->getMessages());
+            //p($form->getMessages());
         }
 
         return array();
