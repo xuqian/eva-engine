@@ -24,8 +24,14 @@ class UserForm extends \Eva\Form\RestfulForm
         'default' => array(
             'Profile' => 'User\Form\ProfileForm',
             'Account' => 'User\Form\AccountForm',
-            'RoleUser' => 'User\Form\RoleUserForm',
-        )
+            'RoleUser' => array(
+                'formClass' => 'User\Form\RoleUserForm',
+                'collection' => true,
+            ),
+            'CommonField' => 'User\Form\UserCommonFieldForm',
+        ),
+        'userfield' => array(
+        ),
     );
 
     /**
@@ -294,7 +300,7 @@ class UserForm extends \Eva\Form\RestfulForm
         ),
         'status' => array (
             'name' => 'status',
-            'required' => true,
+            'required' => false,
             'filters' => array (
             ),
             'validators' => array (
@@ -499,6 +505,70 @@ class UserForm extends \Eva\Form\RestfulForm
             ),
         ),
     );
+
+    /*
+    public function beforeBind($values)
+    {
+        $model = \Eva\Api::_()->getModelService('User\Model\Role');
+        $roles = $model->getRoleList()->toArray();
+        $roleUsers = array();
+        if(isset($values['RoleUser']) && $values['RoleUser']){
+            foreach($roles as $key => $role){
+                $value = array(
+                    'role_id' => $role['id']
+                );
+                foreach($values['RoleUser'] as $roleUser){
+                    if($role['id'] == $roleUser['role_id']){
+                        $value = $roleUser;
+                    }
+                }
+                $roleUsers[] = $value;
+            }
+        } else {
+            foreach($roles as $key => $role){
+                $roleUsers[] = array(
+                    'role_id' => $role['id']
+                );
+            }
+        }
+        $values['RoleUser'] = $roleUsers;
+        return $values;
+    }
+    */
+
+    public function prepareData($data)
+    {
+        if(isset($data['CommonField']) && is_array($data['CommonField'])){
+            $fieldvalues = array();
+            foreach($data['CommonField'] as $key => $fieldValue){
+                if(!$fieldValue){
+                    continue;
+                }
+                $fieldvalues[] = array(
+                    'field_id' => $key,
+                    'value' => $fieldValue,
+                );
+            }
+            $data['CommonField'] = $fieldvalues;
+        }
+
+
+
+        return $data;
+    }
+
+    public function beforeBind($data)
+    {
+        if(isset($data['UserCommonField'])){
+            $fieldValueArray = array();
+            $fieldValues = $data['UserCommonField'];
+            foreach($fieldValues as $fieldValue){
+                $fieldValueArray[$fieldValue['field_id']] = $fieldValue['value'];
+            }
+            $data['CommonField'] = $fieldValueArray;
+        }
+        return $data;
+    }
 
     public function getLanguages($element)
     {

@@ -46,6 +46,8 @@ class RestfulForm extends Form implements InputFilterProviderInterface
     */
     protected $mergeElements = array();
 
+    protected $mergedElements = array();
+
     /**
     * Filter definitions
     *
@@ -243,7 +245,12 @@ class RestfulForm extends Form implements InputFilterProviderInterface
     {
         //TODO: could merge parent class elements
         $elements = $elements ? $elements : $this->mergeElements;
-        return $this->merge($this->baseElements, $elements);
+        return $this->mergedElements = $this->merge($this->baseElements, $elements);
+    }
+
+    public function getElementsArray()
+    {
+        return $this->mergedElements;
     }
 
     public function mergeFilters()
@@ -278,33 +285,41 @@ class RestfulForm extends Form implements InputFilterProviderInterface
 
     public function addSubForm($formName, $formConfig = array())
     {
-        if(is_array($formConfig)) {
+        if($formConfig instanceof RestfulForm){
 
-            if(isset($formConfig[0])){
-                $subFormClass = $formConfig[0];
-            } elseif(isset($formConfig['formClass'])) {
-                $subFormClass = $formConfig['formClass'];
+            $subForm = $formConfig;
+            $subForm->setName($formName);
+
+        } else {
+
+            if(is_array($formConfig)) {
+
+                if(isset($formConfig[0])){
+                    $subFormClass = $formConfig[0];
+                } elseif(isset($formConfig['formClass'])) {
+                    $subFormClass = $formConfig['formClass'];
+                } else {
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'Subform %s not find defined class', $formName
+                    ));
+                }
+
+            } elseif(is_string($formConfig)){
+
+                $subFormClass = $formConfig;
+
             } else {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Subform %s not find defined class', $formName
+                    'Subform %s config not correct, require string or object', $formName
                 ));
             }
 
-        } elseif(is_string($formConfig)){
-
-            $subFormClass = $formConfig;
-
-        } else {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Subform %s config not correct, require string or object', $formName
-            ));
+            if(!class_exists($subFormClass)){
+                return $this;
+            }
+            $subForm = new $subFormClass($formName);
         }
 
-        if(!class_exists($subFormClass)){
-            return $this;
-        }
-
-        $subForm = new $subFormClass($formName);
         $subForm->setParent($this);
         if(is_array($formConfig) && isset($formConfig['collection']) && $formConfig['collection']) {
             $object = isset($formConfig['object']) ? $formConfig['object'] : array();
@@ -341,6 +356,11 @@ class RestfulForm extends Form implements InputFilterProviderInterface
         foreach($elements as $element){
             $this->initElement($element);
         }
+        return $this;
+    }
+
+    public function afterInit()
+    {
         return $this;
     }
 
@@ -468,8 +488,15 @@ class RestfulForm extends Form implements InputFilterProviderInterface
         return $data;
     }
 
+    public function beforeBind($valuesOrObject)
+    {
+        return $valuesOrObject;
+    }
+
     public function bind($valuesOrObject, $flags = FormInterface::VALUES_NORMALIZED)
     {
+        $valuesOrObject = $this->beforeBind($valuesOrObject);
+
         if(!$valuesOrObject){
             return $this;
         }
@@ -479,6 +506,13 @@ class RestfulForm extends Form implements InputFilterProviderInterface
         } else {
             parent::bind($valuesOrObject);
         }
+
+        $this->afterBind();
+        return $this;
+    }
+
+    public function afterBind()
+    {
         return $this;
     }
 
@@ -566,6 +600,10 @@ class RestfulForm extends Form implements InputFilterProviderInterface
             $options = $this->merge($element->getAttributes(), $options);
         }
 
+        if(isset($options['label'])){
+            $element->setLabel($options['label']);
+        }
+
         //Merge Value Options
         if(isset($options['value_options']) && method_exists($element, 'getValueOptions')){
             $element->setValueOptions($this->merge($element->getValueOptions(), $options['value_options']));
@@ -589,5 +627,6 @@ class RestfulForm extends Form implements InputFilterProviderInterface
     {
         parent::__construct($name);
         $this->init();
+        $this->afterInit();
     }
 }

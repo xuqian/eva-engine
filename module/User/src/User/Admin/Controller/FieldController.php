@@ -16,6 +16,7 @@ class FieldController extends RestfulModuleController
 
     protected $renders = array(
         'restGetFieldUserfield' => 'user/field',
+        'restPutFieldUserfield' => 'user/field',
         'restGetFieldCreate' => 'field/get',
         'restPutField' => 'field/get',
         'restPostField' => 'field/get',
@@ -102,42 +103,56 @@ class FieldController extends RestfulModuleController
             'join' => array(
                 'Roles' => array(
                     'self' => array(
+                        '*'
                     ),
-                    'join' => array(
-                        'CommonFields' => array(
-                            'self' => array(
-                                '*'
-                            ),
-                            'join' => array(
-                                'Fieldoption' => array(
-                                    'self' => array(
-                                        '*'
-                                    ),
-                                ),
-                            ),
-                        ),
-                        'RoleFields' => array(
-                            'self' => array(
-                                '*'
-                            ),
-                            'join' => array(
-                                'Fieldoption' => array(
-                                    'self' => array(
-                                        '*'
-                                    ),
-                                ),
-                            ),
-                        ),
-                    )
-                )
+                ),
+                'UserRoleFields' => array(),
             ),
         ));
-
-        p($item['Roles'][0], 1);
-
         return array(
             'item' => $item,
             'flashMessenger' => $this->flashMessenger()->getMessages(),
+        );
+    }
+
+    public function restPutFieldUserfield()
+    {
+        $request = $this->getRequest();
+        $postData = $request->getPost();
+
+        $roleId = $postData['role_id'];
+        $form = new Form\UserConnectForm();
+        $form->addSubForm('UserRoleFields', new Form\UserRoleFieldForm(null, $roleId))
+        ->bind($postData);
+
+        if ($form->isValid()) {
+            $postData = $form->getData();
+            $itemModel = Api::_()->getModelService('User\Model\User');
+            $itemId = $itemModel->setItem($postData)->saveUser();
+            $this->flashMessenger()->addMessage('item-create-succeed');
+            $this->redirect()->toUrl('/admin/user/field/userfield/' . $itemId);
+
+        } else {
+            $id = $postData['id'];
+            $itemModel = Api::_()->getModelService('User\Model\User');
+            $item = $itemModel->getUser($id);
+            $item = $item->toArray(array(
+                'self' => array(
+                    '*',
+                ),
+                'join' => array(
+                    'Roles' => array(
+                        'self' => array(
+                            '*'
+                        ),
+                    )
+                ),
+            ));
+        }
+
+
+        return array(
+            'item' => $postData,
         );
     }
 
@@ -145,7 +160,7 @@ class FieldController extends RestfulModuleController
     {
         $request = $this->getRequest();
         $postData = $request->getPost();
-        
+
         $form = new Form\FieldForm();
         $form->useSubFormGroup()
         ->bind($postData);
@@ -153,6 +168,7 @@ class FieldController extends RestfulModuleController
         if ($form->isValid()) {
 
             $postData = $form->getData();
+
             $itemModel = Api::_()->getModelService('User\Model\Field');
             $itemId = $itemModel->setItem($postData)->createField();
             $this->flashMessenger()->addMessage('item-create-succeed');
@@ -173,7 +189,7 @@ class FieldController extends RestfulModuleController
     {
         $request = $this->getRequest();
         $postData = $request->getPost();
-        
+
         $form = new Form\FieldEditForm();
         $form->useSubFormGroup()
         ->bind($postData);
@@ -203,7 +219,7 @@ class FieldController extends RestfulModuleController
         $request = $this->getRequest();
         $postData = $request->getPost();
         $callback = $request->getPost()->get('callback');
-        
+
         $form = new Form\FieldDeleteForm();
         $form->bind($postData);
 

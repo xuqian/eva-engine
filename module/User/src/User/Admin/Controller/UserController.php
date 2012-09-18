@@ -66,9 +66,13 @@ class UserController extends RestfulModuleController
             ),
             'join' => array(
                 'Profile' => array(
-                    '*',
+                    '*'
+                ),
+                'Roles' => array(
+                    '*'
                 ),
                 'Account' => array('*'),
+                'UserCommonField' => array('*'),
             ),
         ));
         return array(
