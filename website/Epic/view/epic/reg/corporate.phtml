@@ -1,9 +1,12 @@
 <?
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
 $form = new Epic\Form\CorporateForm();
-$form->useSubFormGroup()->setView($this);
-$form->setMethod('post');
-$form->setAction($this->uri('/reg/'));
+$form->useSubFormGroup()
+    ->addSubForm('UserRoleFields', new User\Form\UserRoleFieldForm(null, 11))
+    ->setView($this)
+    ->setMethod('post')
+    ->setAction($this->uri('/reg/corporate'))
+    ->prepare();
 ?>
 <div class="container">
     <div id="singletitle" class="page-header typo img">
@@ -26,13 +29,16 @@ $form->setAction($this->uri('/reg/'));
                             <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'companyName')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'companyName'), 'label', array('class' => 'control-label'))?>
+
+                    <!-- companyName 4 -->
+                    <div class="control-group <?=$form->isError(array('UserRoleFields', '4')) ? 'error' : '';?>">
+                        <?=$form->helper(array('UserRoleFields', '4'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'companyName'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'companyName'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('UserRoleFields', '4'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '4'), 'formElementErrors')?></div>
                         </div>
                     </div>
+
                     <div class="control-group <?=$form->isError(array('CorporateProfile', 'country')) ? 'error' : '';?>">
                         <?=$form->helper(array('CorporateProfile', 'country'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -40,11 +46,11 @@ $form->setAction($this->uri('/reg/'));
                             <div class="help-block"><?=$form->helper(array('CorporateProfile', 'country'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'industryIndustrie')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'industryIndustrie'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'industry')) ? 'error' : '';?>">
+                        <?=$form->helper(array('CorporateProfile', 'industry'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'industryIndustrie'), 'formSelect', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'industryIndustrie'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('CorporateProfile', 'industry'), 'formSelect', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'industry'), 'formElementErrors')?></div>
                         </div>
                     </div>
                     <div class="control-group <?=$form->isError(array('CorporateProfile', 'phoneBusiness')) ? 'error' : '';?>">
@@ -70,20 +76,25 @@ $form->setAction($this->uri('/reg/'));
                     </div>
                 </fieldset>
                 <fieldset class="form-horizontal">
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'howCouldWehelpYou')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'howCouldWehelpYou'), 'label', array('class' => 'control-label'))?>
+
+		            <!-- How could we help you? -->
+                    <div class="control-group <?=$form->isError(array('UserRoleFields', '6')) ? 'error' : '';?>">
+                        <?=$form->helper(array('UserRoleFields', '6'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'howCouldWehelpYou'), 'formMultiCheckbox', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'howCouldWehelpYou'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('UserRoleFields', '6'), 'formMultiCheckbox', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '6'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'whatYouAreOffering')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'whatYouAreOffering'), 'label', array('class' => 'control-label'))?>
+
+		            <!-- How could we help you? -->
+                    <div class="control-group <?=$form->isError(array('UserRoleFields', '7')) ? 'error' : '';?>">
+                        <?=$form->helper(array('UserRoleFields', '7'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'whatYouAreOffering'), 'formMultiCheckbox', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'whatYouAreOffering'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('UserRoleFields', '7'), 'formMultiCheckbox', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '7'), 'formElementErrors')?></div>
                         </div>
                     </div>
+
                     <div class="control-group">
                         <div class="controls">
                             <label class="checkbox">
