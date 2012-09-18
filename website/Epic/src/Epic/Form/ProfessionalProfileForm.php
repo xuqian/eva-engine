@@ -22,6 +22,11 @@ class ProfessionalProfileForm extends \User\Form\ProfileForm
 {
 
     protected $mergeElements = array (
+        'bio' => array (
+            'options' => array (
+                'label' => 'Few words about yourself',
+            ),
+        ),
         'industry' => array (
             'name' => 'industry',
             'type' => 'select',

@@ -22,7 +22,7 @@ class ProfessionalForm extends RegForm
 {
     protected $subFormGroups = array(
         'default' => array(
-            'ProfessionalProfile' => 'Epic\Form\ProfessionalProfileForm',
+            'Profile' => 'Epic\Form\ProfessionalProfileForm',
             'CommonField' => 'User\Form\UserCommonFieldForm',
         )
     );

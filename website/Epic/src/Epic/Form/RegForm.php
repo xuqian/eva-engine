@@ -199,6 +199,13 @@ class RegForm extends \Eva\Form\RestfulForm
             $data['userName'] = $data['email'];
         }
 
+        $data['status'] = 'inactive';
+        $data['Account'] = array(
+            'discount'  => 0,
+            'credits' => 0,
+            'points' => 0,
+        );
+
         return $data;
     }
 }

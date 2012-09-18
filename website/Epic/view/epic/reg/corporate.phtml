@@ -39,39 +39,39 @@ $form->useSubFormGroup()
                         </div>
                     </div>
 
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'country')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'country'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'country'), 'formSelect', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'country'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'industry')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'industry'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'industry'), 'formSelect', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'industry'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('Profile', 'industry'), 'formSelect', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'industry'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'phoneBusiness')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'phoneBusiness'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('Profile', 'phoneBusiness')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'phoneBusiness'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'phoneBusiness'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'phoneBusiness'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('Profile', 'phoneBusiness'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'phoneBusiness'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'address')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'address'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'address'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'address'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                    <div class="control-group <?=$form->isError(array('CorporateProfile', 'bio')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CorporateProfile', 'bio'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
+                        <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('CorporateProfile', 'bio'), 'formTextarea', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CorporateProfile', 'bio'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
                         </div>
                     </div>
                 </fieldset>
