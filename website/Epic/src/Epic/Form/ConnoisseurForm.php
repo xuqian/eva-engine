@@ -18,7 +18,7 @@ namespace Epic\Form;
  * @category   Eva
  * @package    Eva_Form
  */
-class ConnoisseurForm extends \User\Form\UserForm
+class ConnoisseurForm extends RegForm
 {
     protected $subFormGroups = array(
         'default' => array(

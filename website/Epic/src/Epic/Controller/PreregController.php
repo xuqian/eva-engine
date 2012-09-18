@@ -2,7 +2,9 @@
 namespace Epic\Controller;
 
 use Eva\Mvc\Controller\ActionController,
-    Eva\View\Model\ViewModel;
+    Eva\View\Model\ViewModel,
+    Eva\Api,
+    Epic\Form;
 
 class PreregController extends ActionController
 {
@@ -24,11 +26,11 @@ class PreregController extends ActionController
     public function getAction()
     {
         if($_POST){
-        $this->layout('layout/empty');
-        $view = new ViewModel(array(
-        ));
-        $view->setTemplate('epic/reg/thankyou');
-        return $view;
+            $this->layout('layout/empty');
+            $reg = $this->regAction();
+            $view = new ViewModel($reg);
+            $view->setTemplate('epic/reg/thankyou');
+            return $view;
         }
         $res = array();
         $this->layout('layout/empty');
@@ -38,5 +40,36 @@ class PreregController extends ActionController
         ));
         $view->setTemplate('epic/reg/' . $id);
         return $view;
+    }
+
+    public function regAction()
+    {
+        $id = $this->params('id');
+        $request = $this->getRequest();
+        $postData = $request->getPost();
+
+        $idMap = array(
+            'corporate' => 11,
+            'connoisseur' => 12,
+            'professional' => 13,
+        );
+        $roleId = $idMap[$id];
+        $form = new Form\ProfessionalForm();
+        $form->addSubForm('UserRoleFields', new \User\Form\UserRoleFieldForm(null, $roleId))
+        ->useSubFormGroup()
+        ->bind($postData);
+
+        if ($form->isValid()) {
+            $postData = $form->getData();
+            $itemModel = Api::_()->getModelService('Epic\Model\User');
+            $itemId = $itemModel->setItem($postData)->preRegister();
+            //$this->flashMessenger()->addMessage('item-create-succeed');
+            //$this->redirect()->toUrl('/admin/user/' . $itemId);
+
+        } else {
+            p($form->getMessages());
+        }
+
+        return array();
     }
 }
