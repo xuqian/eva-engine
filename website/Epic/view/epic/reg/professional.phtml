@@ -16,19 +16,10 @@ $form->useSubFormGroup()
 </div>
 <div class="container">
     <div class="row">
-        <div class="span5">
-            <form id="signupform" <?=$this->formAttr($form)?> class="form">
+            <form id="signupform" <?=$this->formAttr($form)?> class="form span6">
                 <?=$form->restful();?>
                 <?=$form->helper('id');?>
-                <fieldset class="form-horizontal">
-                    <!-- title -->
-                    <div class="control-group <?=$form->isError(array('CommonField', '13')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CommonField', '13'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('CommonField', '13'), 'formSelect', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CommonField', '13'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
+                <fieldset class="span3">
 
                     <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
                         <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
@@ -37,7 +28,14 @@ $form->useSubFormGroup()
                             <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
                         </div>
                     </div>
-
+                    <!-- title -->
+                    <div class="control-group <?=$form->isError(array('CommonField', '13')) ? 'error' : '';?>">
+                        <?=$form->helper(array('CommonField', '13'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls controls-row">
+                            <?=$form->helper(array('CommonField', '13'), 'formRadio', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('CommonField', '13'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
                     <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                         <?=$form->helper('firstName', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -52,6 +50,7 @@ $form->useSubFormGroup()
                             <div class="help-block"><?=$form->helper('lastName', 'formElementErrors')?></div>
                         </div>
                     </div>
+
 
                     <div class="control-group <?=$form->isError(array('Profile', 'birthday')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'birthday'), 'label', array('class' => 'control-label'))?>
@@ -78,9 +77,6 @@ $form->useSubFormGroup()
                             </div>
                         </div>
                     </div>
-
-                </fieldset>
-                <fieldset class="form-horizontal">
                     <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -88,6 +84,19 @@ $form->useSubFormGroup()
                             <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
                         </div>
                     </div>
+                  <!-- How could we help you?:11 -->
+                    <div class="control-group <?=$form->isError(array('UserRoleFields', '11')) ? 'error' : '';?>">
+                        <?=$form->helper(array('UserRoleFields', '11'), 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper(array('UserRoleFields', '11'), 'formMultiCheckbox', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '11'), 'formElementErrors')?></div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset class="span2">
+
+
                     <!-- school:9 -->
                     <div class="control-group <?=$form->isError(array('UserRoleFields', '9')) ? 'error' : '';?>">
                         <?=$form->helper(array('UserRoleFields', '9'), 'label', array('class' => 'control-label'))?>
@@ -126,16 +135,6 @@ $form->useSubFormGroup()
                             <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                </fieldset>
-                <fieldset class="form-horizontal">
-                    <!-- How could we help you?:11 -->
-                    <div class="control-group <?=$form->isError(array('UserRoleFields', '11')) ? 'error' : '';?>">
-                        <?=$form->helper(array('UserRoleFields', '11'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '11'), 'formMultiCheckbox', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '11'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
 
                     <!-- Your Expertise:12 -->
                     <div class="control-group <?=$form->isError(array('UserRoleFields', '12')) ? 'error' : '';?>">
@@ -146,20 +145,20 @@ $form->useSubFormGroup()
                         </div>
                     </div>
 
-                    <div class="control-group">
+                </fieldset>
+
+                <div class="row">
+                    <div class="control-group span6">
                         <div class="controls">
-                            <label class="checkbox">
-                                <input type="checkbox" class=""><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
-                            <button type="submit" class="btn"><?=$this->_('Sign Up')?></button>
+                            <label><hr><input name="agree" class="validate[required]" type="checkbox" checke="checked"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
+                            <br>
+                            <button type="submit" class="btn btn-large"><?=$this->_('Sign Up')?></button>
                         </div>
                     </div>
-
-
-                </fieldset>
+                </div>
             </form>
-        </div>
 
-        <div class="span7">
+        <div class="span6">
             <div class="well typo">
                 <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
                 <?if($locale == 'en'):?>

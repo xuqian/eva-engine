@@ -816,17 +816,22 @@ body{color:#333;font-size:12px;font-family:'Philosopher',sans-serif;}
 #footer{padding:20px;background:#232323;color:#EAB119;-webkit-box-shadow:inset -1px -1px 7px #000000;-moz-box-shadow:inset -1px -1px 7px #000000;box-shadow:inset -1px -1px 7px #000000;}#footer a{display:inline;color:#EAB119;margin:0 10px;}#footer a:hover{background:none;color:#FFF;}
 #footer li{display:inline-block;zoom:1;*display:inline;}
 #footer li.first a{margin-left:0;}
-.page-header{border-bottom:1px solid #DDD;margin:20px 0 30px;padding-bottom:9px;}.page-header .highlight{color:#ac9217;}
+.page-header{border-bottom:1px solid #AAA;margin:20px 0 30px;padding-bottom:9px;color:#999;}.page-header .highlight{color:#ac9217;}
 .typo{background:none;}
 .hero-unit.typo{padding-bottom:0;}.hero-unit.typo h1{font-size:50px;}
-.well.typo{padding:10px 30px;background:#EFEFEF;}
+.well.typo{margin-top:-20px;padding:0 10px 0 10px;background:#000;color:#999;border:0;}
 .prereg{background:#000;}.prereg .form label{color:#ac9217;}
 .prereg .form label.checkbox{padding-left:0;}
-.prereg .form input[type="text"],.prereg .form input[type="password"],.prereg .form input[type="datetime"],.prereg .form input[type="datetime-local"],.prereg .form input[type="date"],.prereg .form input[type="month"],.prereg .form input[type="time"],.prereg .form input[type="week"],.prereg .form input[type="number"],.prereg .form input[type="email"],.prereg .form input[type="url"],.prereg .form input[type="search"],.prereg .form input[type="tel"],.prereg .form input[type="color"],.prereg .form .uneditable-input{height:16px;line-height:16px;}
+.prereg .form input[type="text"],.prereg .form input[type="password"],.prereg .form input[type="datetime"],.prereg .form input[type="datetime-local"],.prereg .form input[type="date"],.prereg .form input[type="month"],.prereg .form input[type="time"],.prereg .form input[type="week"],.prereg .form input[type="number"],.prereg .form input[type="email"],.prereg .form input[type="url"],.prereg .form input[type="search"],.prereg .form input[type="tel"],.prereg .form input[type="color"],.prereg .form .uneditable-input{height:14px;line-height:14px;background:#000;color:#999;border-color:#666;}
+.prereg .form select{padding:2px 3px;height:26px;line-height:26px;background:#000;color:#999;border-color:#666;}
+.prereg .form textarea{background:#000;color:#999;border-color:#666;}
+.prereg .controls label{color:#999;}
 .prereg #singletitle{padding:30px 0;border:0;text-align:center;}.prereg #singletitle h1{color:#6B520F;font-size:60px;font-family:'Philosopher',sans-serif;}
 .prereg #singletitle.img{margin-bottom:-20px;padding:0;}
 .prereg #header{border-bottom:1px solid #ac9217;}
 .prereg #footer{margin-top:40px;}
+.prereg .typo h1,.prereg .typo h2,.prereg .typo h3,.prereg .typo h4,.prereg .typo h5,.prereg .typo h6{color:#999;}
+.prereg hr{margin:20px 20px 20px 0;}
 .formError{z-index:990;}
 .formError .formErrorContent{z-index:991;}
 .formError .formErrorArrow{z-index:996;}
