@@ -26,4 +26,10 @@ class CorporateForm extends RegForm
             'CommonFields' => 'User\Form\UserCommonFieldsForm',
         )
     );
+
+    protected $mergeFilters = array(
+        'email' => array(
+            'required' => true
+        ),
+    );
 }

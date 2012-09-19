@@ -816,11 +816,11 @@ body{color:#333;font-size:12px;font-family:'Philosopher',sans-serif;}
 #footer{padding:20px;background:#232323;color:#EAB119;-webkit-box-shadow:inset -1px -1px 7px #000000;-moz-box-shadow:inset -1px -1px 7px #000000;box-shadow:inset -1px -1px 7px #000000;}#footer a{display:inline;color:#EAB119;margin:0 10px;}#footer a:hover{background:none;color:#FFF;}
 #footer li{display:inline-block;zoom:1;*display:inline;}
 #footer li.first a{margin-left:0;}
-.page-header{border-bottom:1px solid #AAA;margin:20px 0 30px;padding-bottom:9px;color:#999;}.page-header .highlight{color:#ac9217;}
-.typo{background:none;}
-.hero-unit.typo{padding-bottom:0;}.hero-unit.typo h1{font-size:50px;}
-.well.typo{margin-top:-20px;padding:0 10px 0 10px;background:#000;color:#999;border:0;}
-.prereg{background:#000;}.prereg .form label{color:#ac9217;}
+.prereg{background:#000;}.prereg .page-header{border-bottom:1px solid #AAA;margin:20px 0 30px;padding-bottom:9px;color:#999;}.prereg .page-header .highlight{color:#ac9217;}
+.prereg .typo{background:none;}
+.prereg .hero-unit.typo{padding-bottom:0;}.prereg .hero-unit.typo h1{font-size:50px;}
+.prereg .well.typo{margin-top:-20px;padding:0 10px 0 10px;background:#000;color:#999;border:0;}
+.prereg .form label{color:#ac9217;}
 .prereg .form label.checkbox{padding-left:0;}
 .prereg .form input[type="text"],.prereg .form input[type="password"],.prereg .form input[type="datetime"],.prereg .form input[type="datetime-local"],.prereg .form input[type="date"],.prereg .form input[type="month"],.prereg .form input[type="time"],.prereg .form input[type="week"],.prereg .form input[type="number"],.prereg .form input[type="email"],.prereg .form input[type="url"],.prereg .form input[type="search"],.prereg .form input[type="tel"],.prereg .form input[type="color"],.prereg .form .uneditable-input{height:14px;line-height:14px;background:#000;color:#999;border-color:#666;}
 .prereg .form select{padding:2px 3px;height:26px;line-height:26px;background:#000;color:#999;border-color:#666;}
@@ -861,3 +861,10 @@ body[dir='rtl'] .formError .formErrorArrow,body.rtl .formError .formErrorArrow{m
 .formError .formErrorArrow .line3{width:1px;border-left:2px solid #ddd;border-right:2px solid #ddd;border-bottom:0 solid #ddd;}
 .formError .formErrorArrow .line2{width:3px;border:none;background:#ddd;}
 .formError .formErrorArrow .line1{width:1px;border:none;background:#ddd;}
+.scrolling{background:#000;padding-top:50px;}.scrolling #header{height:auto;}
+.guide{margin-top:-100px;}
+.bg{width:100%;background:url(../img/bg0.jpg) 50% 0 no-repeat fixed;height:600px;margin:0 auto;padding-top:50px;position:relative;}
+.bg-1{background:url(../img/bg1.jpg) 50% 0 no-repeat fixed;}
+.bg-2{background:url(../img/bg2.jpg) 50% 0 no-repeat fixed;}
+.bg-3{background:url(../img/bg3.jpg) 50% 0 no-repeat fixed;}
+#loginform{position:absolute;right:30px;top:30px;}

@@ -26,4 +26,14 @@ class ProfessionalForm extends RegForm
             'CommonFields' => 'User\Form\UserCommonFieldsForm',
         )
     );
+
+
+    protected $mergeFilters = array(
+        'firstName' => array(
+            'required' => true
+        ),
+        'lastName' => array(
+            'required' => true
+        ),
+    );
 }

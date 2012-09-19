@@ -80,6 +80,17 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'login' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/login/',
+                    'defaults' => array(
+                        'controller' => 'Epic\Controller\LoginController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
         ),
     ),
     'controllers' => array(
@@ -89,6 +100,7 @@ return array(
             'Epic\Controller\PayController' => 'Epic\Controller\PayController',
             'Epic\Controller\LanguageController' => 'Epic\Controller\LanguageController',
             'Epic\Controller\AdController' => 'Epic\Controller\AdController',
+            'Epic\Controller\LoginController' => 'Epic\Controller\LoginController',
         ),
     ),
 
@@ -97,6 +109,7 @@ return array(
             'layout/layout' => __DIR__ . '/../layout/empty.phtml',
             'layout/coming' => __DIR__ . '/../layout/coming.phtml',
             'layout/empty' => __DIR__ . '/../layout/empty.phtml',
+            'layout/login' => __DIR__ . '/../layout/login.phtml',
             'blank' => __DIR__ . '/../view/epic.phtml',
             'epic/index' => __DIR__ . '/../view/epic/index.phtml',
             'epic/pages/get' => __DIR__ . '/../view/epic/pages/get.phtml',
@@ -106,6 +119,7 @@ return array(
             'epic/reg/corporate' => __DIR__ . '/../view/epic/reg/corporate.phtml',
             'epic/pay/index' => __DIR__ . '/../view/epic/pay/index.phtml',
             'epic/ad/index' => __DIR__ . '/../view/epic/ad/index.phtml',
+            'epic/login/index' => __DIR__ . '/../view/epic/login/index.phtml',
         ),
 
     ),

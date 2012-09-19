@@ -1,0 +1,57 @@
+<?
+$this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
+$form = Eva\Api::_()->getForm('User\Form\AdminLoginForm');
+$url = $this->uri('/login/');
+$form->init(array(
+    'action' => $url,
+    'method' => 'put',
+));
+?>
+<div class="bg bg-1">
+    <div class="container">
+        <div id="bg-0" class="guide"></div>
+        <div id="loginform" class="well span3">
+            <form class="form" <?=$this->formAttr($form)?> >
+                <?=$form->restful();?>
+                <fieldset>
+                    <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">
+                        <?=$form->helper('userName', 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper('userName', array('class' => 'input-xlarge'))?>
+                            <div class="help-block"><?=$form->helper('userName', 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="control-group <?=$form->isError('password') ? 'error' : '';?>">
+                        <?=$form->helper('password', 'label', array('class' => 'control-label'))?>
+                        <div class="controls">
+                            <?=$form->helper('password', array('class' => 'input-xlarge'))?>
+                            <div class="help-block"><?=$form->helper('password', 'formElementErrors')?></div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input name="callback" type="hidden" value="<?=$this->callback?>" />
+                        <button class="btn btn-primary" type="submit"><?=$this->_('Login')?></button>
+                    </div>
+                </fieldset>
+            </form>
+        </div><!--slate end-->
+    </div>
+</div>
+
+<div class="bg bg-1">
+    <div class="container">
+        <div id="bg-1" class="guide"></div>
+    </div>
+</div>
+
+<div class="bg bg-2">
+    <div class="container">
+        <div id="bg-2" class="guide"></div>
+    </div>
+</div>
+
+<div class="bg bg-3">
+    <div class="container">
+        <div id="bg-3" class="guide"></div>
+    </div>
+</div>
