@@ -48,7 +48,7 @@ class PayController extends ActionController
 
     public function paypal($price)
     {
-        $config['paypal']['sandbox'] = 1;
+        $config['paypal']['sandbox'] = 0;
         
         include (EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/paypal.class.php');
         $paypal = new \Epic\Payment\paypal_class();             // initiate an instance of the class
