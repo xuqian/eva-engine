@@ -2,7 +2,7 @@
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
 $form = new Epic\Form\CorporateForm();
 $form->useSubFormGroup()
-    ->addSubForm('UserRoleFields', new User\Form\UserRoleFieldForm(null, 11))
+    ->addSubForm('UserRoleFields', new User\Form\UserRoleFieldsForm(null, 11))
     ->setView($this)
     ->setMethod('post')
     ->setAction($this->uri('/reg/corporate'))

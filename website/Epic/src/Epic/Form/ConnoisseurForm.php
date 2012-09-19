@@ -23,7 +23,7 @@ class ConnoisseurForm extends RegForm
     protected $subFormGroups = array(
         'default' => array(
             'Profile' => 'Epic\Form\ConnoisseurProfileForm',
-            'CommonField' => 'User\Form\UserCommonFieldForm',
+            'CommonFields' => 'User\Form\UserCommonFieldsForm',
         )
     );
 }

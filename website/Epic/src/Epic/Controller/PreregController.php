@@ -55,7 +55,7 @@ class PreregController extends ActionController
         );
         $roleId = $idMap[$id];
         $form = new Form\ProfessionalForm();
-        $form->addSubForm('UserRoleFields', new \User\Form\UserRoleFieldForm(null, $roleId))
+        $form->addSubForm('UserRoleFields', new \User\Form\UserRoleFieldsForm(null, $roleId))
         ->useSubFormGroup()
         ->bind($postData);
 

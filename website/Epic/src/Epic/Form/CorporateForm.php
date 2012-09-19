@@ -23,7 +23,7 @@ class CorporateForm extends RegForm
     protected $subFormGroups = array(
         'default' => array(
             'Profile' => 'Epic\Form\CorporateProfileForm',
-            'CommonField' => 'User\Form\UserCommonFieldForm',
+            'CommonFields' => 'User\Form\UserCommonFieldsForm',
         )
     );
 }

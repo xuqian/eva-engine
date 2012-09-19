@@ -2,7 +2,7 @@
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
 $form = new Epic\Form\ProfessionalForm();
 $form->useSubFormGroup()
-    ->addSubForm('UserRoleFields', new User\Form\UserRoleFieldForm(null, 13))
+    ->addSubForm('UserRoleFields', new User\Form\UserRoleFieldsForm(null, 13))
     ->setView($this)
     ->setMethod('post')
     ->setAction($this->uri('/reg/professional'))
@@ -29,11 +29,11 @@ $form->useSubFormGroup()
                         </div>
                     </div>
                     <!-- title -->
-                    <div class="control-group <?=$form->isError(array('CommonField', '13')) ? 'error' : '';?>">
-                        <?=$form->helper(array('CommonField', '13'), 'label', array('class' => 'control-label'))?>
+                    <div class="control-group <?=$form->isError(array('CommonFields', '13')) ? 'error' : '';?>">
+                        <?=$form->helper(array('CommonFields', '13'), 'label', array('class' => 'control-label'))?>
                         <div class="controls controls-row">
-                            <?=$form->helper(array('CommonField', '13'), 'formRadio', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('CommonField', '13'), 'formElementErrors')?></div>
+                            <?=$form->helper(array('CommonFields', '13'), 'formRadio', array('class' => ''))?>        
+                            <div class="help-block"><?=$form->helper(array('CommonFields', '13'), 'formElementErrors')?></div>
                         </div>
                     </div>
                     <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">

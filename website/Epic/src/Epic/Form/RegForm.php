@@ -155,22 +155,7 @@ class RegForm extends \Eva\Form\RestfulForm
 
     public function prepareData($data)
     {
-        if(isset($data['CommonField']) && is_array($data['CommonField'])){
-            $fieldvalues = array();
-            foreach($data['CommonField'] as $key => $fieldValue){
-                if(!$fieldValue){
-                    continue;
-                }
-                $fieldvalues[] = array(
-                    'field_id' => $key,
-                    'value' => $fieldValue,
-                );
-            }
-            $data['CommonField'] = $fieldvalues;
-        }
-
         if(isset($data['UserRoleFields']) && is_array($data['UserRoleFields'])){
-            $roleForm = $this->get('UserRoleFields');
             $fieldvalues = array();
             foreach($data['UserRoleFields'] as $key => $fieldValue){
                 if(!$fieldValue){
@@ -182,6 +167,20 @@ class RegForm extends \Eva\Form\RestfulForm
                 );
             }
             $data['UserRoleFields'] = $fieldvalues;
+        }
+
+        if(isset($data['CommonFields']) && is_array($data['CommonFields'])){
+            $fieldvalues = array();
+            foreach($data['CommonFields'] as $key => $fieldValue){
+                if(!$fieldValue){
+                    continue;
+                }
+                $fieldvalues[] = array(
+                    'field_id' => $key,
+                    'value' => \Zend\Json\Json::encode($fieldValue),
+                );
+            }
+            $data['UserCommonFields'] = $fieldvalues;
         }
 
         if($this->has('UserRoleFields')){
