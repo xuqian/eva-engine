@@ -868,3 +868,8 @@ body[dir='rtl'] .formError .formErrorArrow,body.rtl .formError .formErrorArrow{m
 .bg-2{background:url(../img/bg2.jpg) 50% 0 no-repeat fixed;}
 .bg-3{background:url(../img/bg3.jpg) 50% 0 no-repeat fixed;}
 #loginform{position:absolute;right:30px;top:30px;}
+.loginblock{position:absolute;width:250px;height:250px;}
+.block-1{top:50px;left:100px;background:url(../img/example1.jpg) 50% 0 no-repeat;}
+.block-2{right:100px;bottom:100px;background:url(../img/example2.jpg) 50% 0 no-repeat;}
+.block-3{right:100px;top:100px;background:url(../img/example3.jpg) 50% 0 no-repeat;}
+.block-4{right:400px;top:100px;background:url(../img/example4.jpg) 50% 0 no-repeat;}
