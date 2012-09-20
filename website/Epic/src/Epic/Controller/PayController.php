@@ -62,7 +62,8 @@ class PayController extends ActionController
         $url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/example';
 
         //buyer_1309337143_per@gmail.com 12345678
-        $config['paypal']['account'] = 'seller_1309335715_biz@gmail.com';
+  //    $config['paypal']['account'] = 'seller_1309335715_biz@gmail.com';
+        $config['paypal']['account'] = 'info@shishijia.com';
         $config['paypal']['orderTitle'] = 'epic test ' . $price;
         $config['paypal']['currency'] = 'USD';
             
@@ -100,7 +101,7 @@ class PayController extends ActionController
         $config['alipay']['account'] = "allo.vince@gmail.com";
         $config['alipay']['securityCode'] = "uanlpqbswv5rpuwucfueynyhyz2hw1r7";
             
-        $order_id = $price;
+        $order_id = time();
         $hash = md5($price . time());  
         
         $parameter = array(
