@@ -100,7 +100,7 @@ class PayController extends ActionController
         $config['alipay']['account'] = "allo.vince@gmail.com";
         $config['alipay']['securityCode'] = "uanlpqbswv5rpuwucfueynyhyz2hw1r7";
             
-        $order_id = $price;
+        $order_id = time();
         $hash = md5($price . time());  
         
         $parameter = array(
