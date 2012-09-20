@@ -82,4 +82,5 @@ class ProfessionalProfileForm extends \User\Form\ProfileForm
             ),
         ),
     );
+
 }

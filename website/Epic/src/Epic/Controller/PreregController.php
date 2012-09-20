@@ -54,7 +54,8 @@ class PreregController extends ActionController
             'professional' => 13,
         );
         $roleId = $idMap[$id];
-        $form = new Form\ProfessionalForm();
+        $formName = 'Epic\\Form\\' . ucfirst($id) . 'Form';
+        $form = new $formName();
         $form->addSubForm('UserRoleFields', new \User\Form\UserRoleFieldsForm(null, $roleId))
         ->useSubFormGroup()
         ->bind($postData);

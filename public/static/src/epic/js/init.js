@@ -4,15 +4,20 @@ eva.construct = function(){
 	});
 
 
+
 	var lang = eva.config.lang;
 	var langMap = {
 		'en' : 'en',
-		'zh' : 'zh_CN'
+		'fr' : 'fr',
+		'zh' : 'zh_CN',
+		'zh_TW' : 'zh_TW',
+		'ja' : 'ja'
 	}
 	var jsLang = langMap[lang];
 	eva.loader(eva.s('/lib/js/jquery/jquery.validationEngine/jquery.validationEngine-' + jsLang + '.js'), function(){
-		$("#signupform").validationEngine();
+		$("form").validationEngine();
 	});
+
 	return false;
 };
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=$this->language?>" lang="<?=$this->language?>">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+    <?=$this->headTitle()?>
+	<!--[if lt IE 9]>
+	<meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
+	<![endif]-->
+    <?=$this->headMeta()?>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
+    <link href="<?=$this->link('/src/epic/css/epic.css')?>" media="all" rel="stylesheet" type="text/css" />
+    <?=$this->evajs()?>
+</head>
+
+<body class="scrolling">
+    <header id="header">
+        <div class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-inner">
+    <div class="container">
+                <?$view =$this->layout()->getChildren();$id = $view[0]->id;?>
+                <!--<a class="brand" href="/">Epicurissimo</a>-->
+                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
+                <ul class="nav nav-main">
+                    <li><a href="javascript:;"><?=$this->_('Home')?><small>Epicurissimo</small></a></li>
+                    <li class=""><a href="#bg-0"><?=$this->_('Connoisseur')?><small>Pre Sign Up</small></a></li>
+                    <li class=""><a href="#bg-1"><?=$this->_('Professional')?><small>Pre Sign Up</small></a></li>
+                    <li class=""><a href="#bg-2"><?=$this->_('Corporate')?><small>Pre Sign Up</small></a></li>
+                    <li class=""><a href="#bg-3"><?=$this->_('About Us')?><small>Who We Are</small></a></li>
+                </ul>
+        </div></div>
+    </div>
+    </header>
+
+        <?=$this->layout()->content;?>
+
+    <footer id="footer" class="footer"><div class="container">
+        <nav id="navbar_footer" class="">
+        <ul class="nav pull-right">
+            <li>
+            Copyright 2012 Epicurissimo | 
+            <select id="lang">
+                <option value="">Language</option>
+                <option value="<?=$this->uri('/language/en')?>">English</option>
+                <option value="<?=$this->uri('/language/fr')?>">Française</option>
+                <option value="<?=$this->uri('/language/zh')?>">中文</option>
+                <option value="<?=$this->uri('/language/zh-TW')?>">繁体中文</option>
+            </select>
+            </li>
+        </ul>
+        </nav>
+        <nav class="">
+        <ul class="nav pull-left">
+            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Home')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
+            <a href="#" class="last"><?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></a></li>
+        </ul>
+        </nav>
+        <div class="clearfix"></div>
+        <p>
+        </p>
+    </div></footer><!-- #footer end-->
+
+
+    <script src="<?=$this->link('/lib/js/labjs/labjs.min.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/jquery/jquery.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/jquery/jquery.validationEngine.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/jquery.stepy.min.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/jquery.scrollTo-1.4.2-min.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/jquery.localscroll-1.2.7-min.js')?>"></script>
+    <script src="<?=$this->link('/eva/js/core.js')?>"></script>
+    <script src="<?=$this->link('/eva/js/ui.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/init.js')?>"></script>
+
+    <script>
+        eva.init(eva_config);
+        $("#header").localScroll(2000);
+    </script>
+</body>
+</html>

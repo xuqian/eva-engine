@@ -24,7 +24,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
                         <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('email', array('class' => 'validate[required] email'))?>        
+                            <?=$form->helper('email', array('class' => 'validate[required,custom[email]]'))?>        
                             <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -39,14 +39,14 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                         <?=$form->helper('firstName', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('firstName', array('class' => 'validate[required]'))?>        
+                            <?=$form->helper('firstName', array('class' => ''))?>        
                             <div class="help-block"><?=$form->helper('firstName', 'formElementErrors')?></div>
                         </div>
                     </div>
                     <div class="control-group <?=$form->isError('lastName') ? 'error' : '';?>">
                         <?=$form->helper('lastName', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper('lastName', array('class' => 'validate[required]'))?>        
+                            <?=$form->helper('lastName', array('class' => ''))?>        
                             <div class="help-block"><?=$form->helper('lastName', 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('Profile', 'address'), array('class' => 'validate[required]'))?>        
+                            <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
                             <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ $form->useSubFormGroup()
                     <div class="control-group <?=$form->isError(array('UserRoleFields', '12')) ? 'error' : '';?>">
                         <?=$form->helper(array('UserRoleFields', '12'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '12'), 'formMultiCheckbox', array('class' => 'validate[required]'))?>        
+                            <?=$form->helper(array('UserRoleFields', '12'), 'formMultiCheckbox', array('class' => ''))?>        
                             <div class="help-block"><?=$form->helper(array('UserRoleFields', '12'), 'formElementErrors')?></div>
                         </div>
                     </div>
