@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=$this->language?>" lang="<?=$this->language?>">
 <head>
@@ -15,27 +16,41 @@
     <link href="<?=$this->link('/src/epic/css/epic.css')?>" media="all" rel="stylesheet" type="text/css" />
     <?=$this->evajs()?>
 </head>
-
+<?
+$form = new User\Form\AdminLoginForm();
+$form->setView($this)
+    ->setAction('#');
+?>
 <body class="scrolling">
-    <header id="header">
-        <div class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-inner">
-    <div class="container">
-                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
-                <ul class="nav nav-main">
-                    <li><a href="#"><?=$this->_('Home')?><small>Epicurissimo</small></a></li>
-                    <li class=""><a href="#bg-0"><?=$this->_('Connoisseur')?><small>Pre Sign Up</small></a></li>
-                    <li class=""><a href="#bg-1"><?=$this->_('Professional')?><small>Pre Sign Up</small></a></li>
-                    <li class=""><a href="#bg-2"><?=$this->_('Corporate')?><small>Pre Sign Up</small></a></li>
-                    <li class=""><a href="#bg-3"><?=$this->_('About Us')?><small>Who We Are</small></a></li>
+    <div id="loginheader" class="navbar navbar-inverse navbar-fixed-top"><div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/img/logo.jpg')?>" alt="logo" height="60"></a>	
+                <ul class="nav nav-main pull-right">
+                    <li class=""><a href="#bg-0"><?=$this->_('GASTRONOMY')?></a></li>
+                    <li class=""><a href="#bg-1"><?=$this->_('WINE')?></a></li>
+                    <li class=""><a href="#bg-2"><?=$this->_('SPIRIT & COCKTAIL')?></a></li>
+                    <li class=""><a href="#bg-3"><?=$this->_('HOTEL & RESORT')?></a></li>
+                    <li class=""><a href="#bg-4"><?=$this->_('ART & DESIGN')?></a></li>
+                    <li class=""><a href="#bg-5"><?=$this->_('EVENT')?></a></li>
                 </ul>
-        </div></div>
-    </div>
-    </header>
+                <div id="loginform" class="">
+                    <form class="form form-inline span4" <?=$this->formAttr($form)?> >
+                        <a href="/">Membership Request</a> or
+                        <?=$form->restful();?>
+                        <?=$form->helper('userName', array('class' => 'input-small', 'placeholder' => 'Email' ))?>
+                        <?=$form->helper('password', array('class' => 'input-small', 'placeholder' => 'Password'))?>
+                        <input name="callback" type="hidden" value="<?=$this->callback?>" />
+                        <button class="btn btn-inverse" type="submit"><?=$this->_('Login')?></button>
+                    </form>
+                </div>
+            </div>
+    </div></div>
 
-<?=$this->layout()->content;?>
+    <?=$this->layout()->content;?>
 
-    <footer id="footer" class="footer"><div class="container">
+    <footer id="loginfooter" class="navbar navbar-fixed-bottom"><div class="container">
         <nav id="navbar_footer" class="">
+
         <ul class="nav pull-right">
             <li>
             Copyright 2012 Epicurissimo | 
@@ -48,19 +63,21 @@
             </select>
             </li>
         </ul>
-        </nav>
-        <nav class="">
         <ul class="nav pull-left">
-            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Home')?></a>|</li><li>
-            <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
-            <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
-            <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
-            <a href="#" class="last"><?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></a></li>
+            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Membership Information')?></a>|</li>
+            <li><a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li>
+            <li><a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a></li>
+            <li id="social">
+            <a href="https://www.facebook.com/pages/Epicurissimo-Compass/478175602201443" title="Facebook" class="facebook"></a>
+            <a href="https://twitter.com/Epicurissimo" title="Twitter" class="twitter"></a>
+            <a href="https://plus.google.com/102220617896813322867" title="Google+" class="google"></a>
+            <a href="http://pinterest.com/pin/524739794052354407/" title="Pinterest" class="vimeo"></a>
+            <a href="http://weibo.com/2936625884" title="Weibo" class="skype"></a>
+            </li>
+            <li> | <?=$this->_('Your City')?> : <a href="#" class="last"><?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></a></li>
         </ul>
+
         </nav>
-        <div class="clearfix"></div>
-        <p>
-        </p>
     </div></footer><!-- #footer end-->
 
 
@@ -83,12 +100,12 @@
                     }, {
                         duration: 2000, 
                         specialEasing: {
-                            scrollTop:'easeOutExpo'
+                                scrollTop:'easeOutExpo'
                         } 
                 });
                 return false;
         });
-    	$('.loginblock').parallax("100%", 0.3);
+        $('.loginblock').parallax("100%", 0.3);
     </script>
 </body>
 </html>

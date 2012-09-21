@@ -1,40 +1,11 @@
 <?
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
-$form = Eva\Api::_()->getForm('User\Form\AdminLoginForm');
-$url = $this->uri('/login/');
-$form->init(array(
-    'action' => $url,
-    'method' => 'put',
-));
+
 ?>
 <div class="bg bg-0">
     <div class="container">
         <div id="bg-0" class="guide"></div>
-        <div id="loginform" class="well span3">
-            <form class="form" <?=$this->formAttr($form)?> >
-                <?=$form->restful();?>
-                <fieldset>
-                    <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">
-                        <?=$form->helper('userName', 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper('userName', array('class' => 'input-xlarge'))?>
-                            <div class="help-block"><?=$form->helper('userName', 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="control-group <?=$form->isError('password') ? 'error' : '';?>">
-                        <?=$form->helper('password', 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper('password', array('class' => 'input-xlarge'))?>
-                            <div class="help-block"><?=$form->helper('password', 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <input name="callback" type="hidden" value="<?=$this->callback?>" />
-                        <button class="btn btn-primary" type="submit"><?=$this->_('Login')?></button> or <a href="/">Sign Up</a>
-                    </div>
-                </fieldset>
-            </form>
-        </div><!--slate end-->
+
         <div class="loginblock block-text-1">
             <div class="typo">
                 <a href="#">About Us: Epicurissimo is a private network and online publication, a trusted place for professionals and connoisseurs of gastronomy and fine drinks to meet, connect, stay informed, showcase their work, find experts, share ideas, ask questions, find jobs and make business.</a>
@@ -76,6 +47,28 @@ $form->init(array(
 <div class="bg bg-3">
     <div class="container">
         <div id="bg-3" class="guide"></div>
+    </div>
+        <div class="loginblock block-text-4">
+            <div class="typo">
+                <a href="#">Party: life without a friend is a life without a sun. <br >Be slow in choosing a friend; slower in changing.</a>
+            </div>
+        </div>
+</div>
+
+<div class="bg bg-4">
+    <div class="container">
+        <div id="bg-4" class="guide"></div>
+    </div>
+        <div class="loginblock block-text-4">
+            <div class="typo">
+                <a href="#">Party: life without a friend is a life without a sun. <br >Be slow in choosing a friend; slower in changing.</a>
+            </div>
+        </div>
+</div>
+
+<div class="bg bg-5">
+    <div class="container">
+        <div id="bg-5" class="guide"></div>
     </div>
         <div class="loginblock block-text-4">
             <div class="typo">
