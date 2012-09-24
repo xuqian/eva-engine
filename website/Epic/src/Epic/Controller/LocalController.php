@@ -11,6 +11,9 @@ class LocalController extends ActionController
 
     public function indexAction($params = null)
     {
+        if($this->cookie()->crypt(true)->read('city')){
+            return $this->cookie()->crypt(true)->read('city');
+        }
         $ip = $_SERVER['REMOTE_ADDR'];
 
         if(!file_exists(EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/GeoLiteCity.dat')) {

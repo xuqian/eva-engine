@@ -62,7 +62,7 @@
             <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
-            <a href="#" class="last"><?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></a></li>
+            　<?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?> </li>
         </ul>
         </nav>
         <div class="clearfix"></div>
@@ -85,6 +85,10 @@
         $("input[type='checkbox'], input[type='radio']").css("margin-right", "10px");
         $("input[type='radio']").parent().addClass('span1').parent().wrapInner('<div class="row"></div>');
         $("input[type='radio']:not(:first)").parent().css("margin-left", "5px");
+        $("#change-city a").on("click", function(){
+            window.location.href = "/city/?city=" + $(this).html()
+            return false;
+        });
         /*
         $('#signupform').stepy({
                 description:  false,

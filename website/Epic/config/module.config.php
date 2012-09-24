@@ -91,6 +91,17 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'city' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/city/',
+                    'defaults' => array(
+                        'controller' => 'Epic\Controller\CityController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
         ),
     ),
     'controllers' => array(
@@ -101,6 +112,7 @@ return array(
             'Epic\Controller\LanguageController' => 'Epic\Controller\LanguageController',
             'Epic\Controller\AdController' => 'Epic\Controller\AdController',
             'Epic\Controller\LoginController' => 'Epic\Controller\LoginController',
+            'Epic\Controller\CityController' => 'Epic\Controller\CityController',
         ),
     ),
 
@@ -120,6 +132,7 @@ return array(
             'epic/pay/index' => __DIR__ . '/../view/epic/pay/index.phtml',
             'epic/ad/index' => __DIR__ . '/../view/epic/ad/index.phtml',
             'epic/login/index' => __DIR__ . '/../view/epic/login/index.phtml',
+            'epic/city/index' => __DIR__ . '/../view/epic/city/index.phtml',
         ),
 
     ),

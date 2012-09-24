@@ -74,7 +74,7 @@ $form->setView($this)
             <a href="http://pinterest.com/pin/524739794052354407/" title="Pinterest" class="vimeo"></a>
             <a href="http://weibo.com/2936625884" title="Weibo" class="skype"></a>
             </li>
-            <li> | <?=$this->_('Your City')?> : <a href="#" class="last"><?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></a></li>
+            <li> | <?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?><a href="<?=$this->uri('/city/')?>" class="last">[<?=$this->_('Change Your City')?>]</a></li>
         </ul>
 
         </nav>
@@ -92,7 +92,7 @@ $form->setView($this)
 
     <script>
         eva.init(eva_config);
-        $("#header .nav a").on('click', function(e){
+        $("#loginheader .nav a").on('click', function(e){
                 var to = $(this).attr("href");
                 var pos = $(to).offset();
                 $('body,html').animate({
