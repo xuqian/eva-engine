@@ -11,6 +11,7 @@
 
 namespace Eva\Form;
 
+use Eva\Api;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\Form\FormInterface;
@@ -426,6 +427,17 @@ class RestfulForm extends Form implements InputFilterProviderInterface
         }
 
         $filters = $this->mergeFilters();
+        //Note: some Validators need inject full user input data
+        foreach($filters as $key => $filter){
+            if(isset($filter['validators']) && is_array($filter['validators'])) {
+                foreach($filter['validators'] as $validKey => $validator){
+                    if(isset($validator['injectdata']) && $validator['injectdata']){
+                        $filters[$key]['validators'][$validKey]['options']['data'] = $this->data;
+                    }
+                }
+            }
+        }
+
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
 
@@ -719,5 +731,12 @@ class RestfulForm extends Form implements InputFilterProviderInterface
         parent::__construct($name);
         $this->init();
         $this->afterInit();
+
+        /*
+        if(Api::_()->getServiceManager()->has('translator')){
+            Api::_()->getServiceManager()->get('translator')->setLocale('zh');
+            \Zend\Validator\AbstractValidator::setDefaultTranslator(Api::_()->getServiceManager()->get('translator'));
+        }
+        */
     }
 }

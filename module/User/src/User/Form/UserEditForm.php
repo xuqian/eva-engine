@@ -24,9 +24,6 @@ class UserEditForm extends UserCreateForm
         'id' => array (
             'required' => true,
         ),
-    );
-
-    protected $mergeFilters = array(
         'userName' => array (
             'required' => true,
         ),
@@ -35,9 +32,13 @@ class UserEditForm extends UserCreateForm
             'validators' => array (
                 'db' => array(
                     'name' => 'Eva\Validator\Db\NoRecordExists',
+                    'injectdata' => true,
                     'options' => array(
                         'field' => 'email',
                         'table' => 'user_users',
+                        'exclude' => array(
+                            'field' => 'id',
+                        ),
                     ),
                 ),
             ),
