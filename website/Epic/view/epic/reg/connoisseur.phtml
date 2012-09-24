@@ -8,18 +8,110 @@ $form->useSubFormGroup()
     ->setAction($this->uri('/reg/connoisseur'))
     ->prepare();
 ?>
+
 <div class="container">
-    <div id="singletitle" class="page-header typo img">
-        <!--<h1>Sign Up <span class="highlight">Connoisseur</span></h1>-->
-        <h1><img src="<?=$this->link('/src/epic/css/img/title-' . $this->id . '.png')?>" alt="logo"></h1>
+    <div id="titleblock">
+        <div class="row">
+            <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
+            <?if($locale == 'en'):?>
+
+            <div class="span12">
+                <h1>Your Benefits</h1>
+            </div>
+
+            <div class="span6">
+                <ul>
+                    <li>Sharing recipes, insights, gastronomic experiences</li>
+                    <li>Meeting people of same hobbies</li>
+                    <li>Network : Private and Professional</li>
+
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
+                    <li>Events : wine tasting, cocktails party, cooking lessons</li>
+                    <li>Advices : Finding a professional and ask for advices</li>
+                    <li>Exploring epicurean world</li>
+                </ul>
+            </div>
+
+            <?elseif($locale == 'fr'):?>
+
+            <div class="span12">
+                <h1>Comment vous pouvez profiter de vous joindre à nous?</h1>
+            </div>
+
+            <div class="span6">
+                <ul>
+                    <li>Partage de vos expériences gastronomiques</li>
+                    <li>Rencontrer des gens avec les mêmes passe-temps</li>
+
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
+                    <li>Network Privé et Professionnel</li>
+                    <li>Evénements: dégustation de vins, cocktails, parties de thé Fashion Party</li>
+                </ul>
+            </div>
+
+
+            <?elseif($locale == 'zh'):?>
+
+            <div class="span12">
+                <h1>加入我们，您将受益于：</h1>
+            </div>
+
+            <div class="span6">
+                <ul>
+                    <li>更多曝光：展示您的工作</li>
+                    <li>更多机会：帮助您找到更多职业机会</li>
+                    <li>更多人脉：近距离接触超过10,000+名行业决策者</li>
+
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
+                    <li>更多活动：组织和参与展会、活动或高端酒会</li>
+                    <li>更多创新：将您的想法与其他职业人士分享</li>
+                    <li>更多视野：洞悉及讨论行业发展趋势</li>
+                </ul>
+            </div>
+
+            <?elseif($locale == 'zh_TW'):?>
+            <div class="span12">
+                <h1>加入我們，您將受益於：</h1>
+            </div>
+
+            <div class="span6">
+                <ul>
+                    <li>更多曝光：展示您的工作</li>
+                    <li>更多機會：幫助您找到更多職業機會</li>
+                    <li>更多人脈：近距離接觸超過10,000+名行業決策者</li>
+
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
+                    <li>更多活動：組織和參與展會、活動或高端酒會</li>
+                    <li>更多創新：將您的想法與其他職業人士分享</li>
+                    <li>更多視野：洞悉及討論行業發展趨勢</li>
+                </ul>
+            </div>
+
+
+            <?endif?>
+        </div>
     </div>
 </div>
+
+
 <div class="container">
     <div class="row">
-            <form id="signupform" <?=$this->formAttr($form)?> class="form span6">
+            <form id="signupform" <?=$this->formAttr($form)?> class="form">
                 <?=$form->restful();?>
                 <?=$form->helper('id');?>
-                <fieldset class="span3">
+                <div class="span6">
                     <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
                         <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -73,8 +165,8 @@ $form->useSubFormGroup()
                             <div class="help-block"><?=$form->helper(array('UserRoleFields', '2'), 'formElementErrors')?></div>
                         </div>
                     </div>
-                </fieldset>
-                <fieldset class="span3">
+                </div>
+                <div class="span6">
                     <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -125,117 +217,16 @@ $form->useSubFormGroup()
                         </div>
                     </div>
 
-                </fieldset>
+                </div>
 
-                <div class="row">
-                    <div class="control-group span6">
+                    <div class="control-group span12">
                         <div class="controls">
-                            <label><hr><input name="agree" class="validate[required]" type="checkbox" checke="checked"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
+                            <label><input name="agree" class="validate[required]" type="checkbox" checke="checked"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
                             <br>
                             <button type="submit" class="btn btn-large"><?=$this->_('Sign Up')?></button>
                         </div>
                     </div>
-                </div>
             </form>
-
-        <div class="span6">
-            <div class="well typo">
-                <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
-                <?if($locale == 'en'):?>
-
-                <div class="page-header">
-                    <h1>You are passionate about</h1>
-                </div>
-                <ul>
-                    <li>Gastronomy, Wine, Cocktail and fine Spirit….</li>
-                </ul>
-                <div class="page-header">
-                    <h1>How you can benefit from joining us?</h1>
-                </div>
-                <ul>
-                    <li>Sharing recipes, insights, gastronomic experiences</li>
-                    <li>Meeting people of same hobbies</li>
-                    <li>Network : Private and Professional</li>
-                    <li>Events : wine tasting, cocktails party, cooking lessons</li>
-                    <li>Advices : Finding a professional and ask for advices</li>
-                    <li>Exploring epicurean world</li>
-                </ul>
-
-                <?elseif($locale == 'fr'):?>
-
-                <div class="page-header">
-                    <h1>Vous êtes passionné</h1>
-                </div>
-                <ul>
-                    <li>Gastronomie, vin et bien-Esprit</li>
-                </ul>
-                <div class="page-header">
-                    <h1>Comment vous pouvez profiter de vous joindre à nous?</h1>
-                </div>
-                <ul>
-                    <li>Partage de vos expériences gastronomiques</li>
-                    <li>Rencontrer des gens avec les mêmes passe-temps</li>
-                    <li>Network Privé et Professionnel</li>
-                    <li>Evénements: dégustation de vins, cocktails, parties de thé Fashion Party</li>
-                </ul>
-                <div class="page-header">
-                    <h1>Party</h1>
-                </div>
-                <ul>
-                    <li>Conseils: Trouver un professionnel et demander des conseils</li>
-                    <li>Explorer du monde épicurien.</li>
-                </ul>
-
-                <?elseif($locale == 'zh'):?>
-
-                <div class="page-header">
-                    <h1>如果您的职业是：</h1>
-                </div>
-                <ul>
-                    <li>厨师，调酒师，侍酒师</li>
-                    <li>美食家，红酒或洋酒制造商</li>
-                    <li>美食评论家，行业记者</li>
-                    <li>或其他与本行业相关的职业</li>
-                </ul>
-                <div class="page-header">
-                    <h1>加入我们，您将受益于：</h1>
-                </div>
-                <ul>
-                    <li>更多曝光：展示您的工作</li>
-                    <li>更多机会：帮助您找到更多职业机会</li>
-                    <li>更多人脉：近距离接触超过10,000+名行业决策者</li>
-                    <li>更多活动：组织和参与展会、活动或高端酒会</li>
-                    <li>更多创新：将您的想法与其他职业人士分享</li>
-                    <li>更多视野：洞悉及讨论行业发展趋势</li>
-                </ul>
-
-                <?elseif($locale == 'zh_TW'):?>
-
-                <div class="page-header">
-                    <h1>如果您的職業是：</h1>
-                </div>
-                <ul>
-                    <li>廚師，調酒師，侍酒師</li>
-                    <li>美食家，紅酒或洋酒制造商</li>
-                    <li>美食評論家，行業記者</li>
-                    <li>或其他與本行業相關的職業</li>
-                </ul>
-                <div class="page-header">
-                    <h1>加入我們，您將受益於：</h1>
-                </div>
-                <ul>
-                    <li>更多曝光：展示您的工作</li>
-                    <li>更多機會：幫助您找到更多職業機會</li>
-                    <li>更多人脈：近距離接觸超過10,000+名行業決策者</li>
-                    <li>更多活動：組織和參與展會、活動或高端酒會</li>
-                    <li>更多創新：將您的想法與其他職業人士分享</li>
-                    <li>更多視野：洞悉及討論行業發展趨勢</li>
-                </ul>
-
-                <?endif?>
-            </div>
-        </div>
-
     </div>
 </div>
 

@@ -27,11 +27,11 @@
                 <!--<a class="brand" href="/">Epicurissimo</a>-->
                 <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <ul class="nav nav-main">
-                    <li><a href="/"><?=$this->_('Home')?><small>Epicurissimo</small></a></li>
-                    <li class="<?=$id == 'connoisseur' ? 'active' : ''?>"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?><small>Pre Sign Up</small></a></li>
-                    <li class="<?=$id == 'professional' ? 'active' : ''?>"><a href="/reg/professional"><?=$this->_('Professional')?><small>Pre Sign Up</small></a></li>
-                    <li class="<?=$id == 'corporate' ? 'active' : ''?>"><a href="/reg/corporate"><?=$this->_('Corporate')?><small>Pre Sign Up</small></a></li>
-                    <li class="<?=$id ? '' : 'active'?>"><a href="/pages/about"><?=$this->_('About Us')?><small>Who We Are</small></a></li>
+                    <li><a href="/"><?=$this->_('Home')?></a></li>
+                    <li class="<?=$id == 'connoisseur' ? 'active' : ''?>"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?></a></li>
+                    <li class="<?=$id == 'professional' ? 'active' : ''?>"><a href="/reg/professional"><?=$this->_('Professional')?></a></li>
+                    <li class="<?=$id == 'corporate' ? 'active' : ''?>"><a href="/reg/corporate"><?=$this->_('Corporate')?></a></li>
+                    <li class="<?=$id ? '' : 'active'?>"><a href="/pages/about"><?=$this->_('About Us')?></a></li>
                 </ul>
         </div></div>
     </div>
@@ -49,7 +49,7 @@
             <select id="lang">
                 <option value="">Language</option>
                 <option value="<?=$this->uri('/language/en')?>">English</option>
-                <option value="<?=$this->uri('/language/fr')?>">Française</option>
+                <option value="<?=$this->uri('/language/fr')?>">Français</option>
                 <option value="<?=$this->uri('/language/zh')?>">中文</option>
                 <option value="<?=$this->uri('/language/zh-TW')?>">繁体中文</option>
             </select>
@@ -82,7 +82,7 @@
     <script>
         eva.init(eva_config);
         eva.ui.init();
-        $("input[type='checkbox'], input[type='radio']").css("margin-right", "5px");
+        $("input[type='checkbox'], input[type='radio']").css("margin-right", "10px");
         $("input[type='radio']").parent().addClass('span1').parent().wrapInner('<div class="row"></div>');
         $("input[type='radio']:not(:first)").parent().css("margin-left", "5px");
         /*

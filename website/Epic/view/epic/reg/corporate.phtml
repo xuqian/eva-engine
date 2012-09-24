@@ -9,225 +9,191 @@ $form->useSubFormGroup()
     ->prepare();
 ?>
 <div class="container">
-    <div id="singletitle" class="page-header typo img">
-        <!--<h1>Sign Up <span class="highlight">Connoisseur</span></h1>-->
-        <h1><img src="<?=$this->link('/src/epic/css/img/title-' . $this->id . '.png')?>" alt="logo"></h1>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-            <form id="signupform" <?=$this->formAttr($form)?> class="form span6">
-                <?=$form->restful();?>
-                <?=$form->helper('id');?>
-                <fieldset class="span3">
-                    <?=$form->helper('id', array('class' => ''))?>
-                    <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
-                        <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper('email', array('class' => 'validate[required,custom[email]]'))?>        
-                            <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
-                        </div>
-                    </div>
+    <div id="titleblock">
+        <div class="row">
+            <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
+            <?if($locale == 'en'):?>
 
-                    <!-- companyName 4 -->
-                    <div class="control-group <?=$form->isError(array('UserRoleFields', '4')) ? 'error' : '';?>">
-                        <?=$form->helper(array('UserRoleFields', '4'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '4'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '4'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
+            <div class="span12">
+                <h1>Your Benefits</h1>
+            </div>
 
-                    <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'industry'), 'formSelect', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'industry'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'phoneBusiness')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'phoneBusiness'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'phoneBusiness'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'phoneBusiness'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                    <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
-                        <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="span3">
-
-		            <!-- How could we help you? -->
-                    <div class="control-group <?=$form->isError(array('UserRoleFields', '6')) ? 'error' : '';?>">
-                        <?=$form->helper(array('UserRoleFields', '6'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '6'), 'formMultiCheckbox', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '6'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-
-		            <!-- How could we help you? -->
-                    <div class="control-group <?=$form->isError(array('UserRoleFields', '7')) ? 'error' : '';?>">
-                        <?=$form->helper(array('UserRoleFields', '7'), 'label', array('class' => 'control-label'))?>
-                        <div class="controls">
-                            <?=$form->helper(array('UserRoleFields', '7'), 'formMultiCheckbox', array('class' => ''))?>        
-                            <div class="help-block"><?=$form->helper(array('UserRoleFields', '7'), 'formElementErrors')?></div>
-                        </div>
-                    </div>
-
-
-                </fieldset>
-
-                <div class="row">
-                    <div class="control-group span6">
-                        <div class="controls">
-                            <label><hr><input name="agree" class="validate[required]" type="checkbox" checke="checked"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
-                            <br>
-                            <button type="submit" class="btn btn-large"><?=$this->_('Sign Up')?></button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        <div class="span6">
-            <div class="well typo">
-                <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
-                <?if($locale == 'en'):?>
-
-                <div class="page-header">
-                    <h1>You are:</h1>
-                </div>
-                <ul>
-                    <li>Gourmet Restaurant</li>
-                    <li>Fine Spirits/Wine House</li>
-                    <li>Hotel/Resort</li>
-                    <li>Gourmet Food, drink Company</li>
-                    <li>Other</li>
-                </ul>
-
-
-                <div class="page-header">
-                    <h1>How you can benefit from joining us?</h1>
-                </div>
-
-
+            <div class="span6">
                 <ul>
                     <li>Branding : reach your customers and audiences </li>
                     <li>Global Vision : profit our international.</li>
                     <li>Communicating : raise local attention</li>
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
+
                     <li>Human Capitals : post jobs and search for talents </li>
                     <li>Network : meet and connect with business contacts</li>
                     <li>Events : Hosing and promoting your events</li>
                 </ul>
+            </div>
 
-                <?elseif($locale == 'fr'):?>
+            <?elseif($locale == 'fr'):?>
 
-                <div class="page-header">
-                    <h1>Vous êtes:</h1>
-                </div>
-                <ul>
-                    <li>Restaurant gastronomique </li>
-                    <li>Maison du Vin/ Spiritueux </li>
-                    <li>Hôtel / Resort</li>
-                    <li>Gourmet Food et Société boisson</li>
-                    <li>Autre</li>
-                </ul>
+            <div class="span12">
+                <h1>Comment vous pouvez profiter de vous joindre à nous?</h1>
+            </div>
 
-
-                <div class="page-header">
-                    <h1>Comment vous pouvez profiter de vous joindre à nous?</h1>
-                </div>
-
-
+            <div class="span6">
                 <ul>
                     <li>Branding: atteindre vos clients et le public</li>
                     <li>Vision globale: notre but international.</li>
                     <li>Communication Publique: attirer l'attention locale</li>
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
                     <li>Talents: emplois poster et chercher des capitales de l'homme</li>
                     <li>Réseau: rencontrer et communiquer avec des contacts d'affaires</li>
                     <li>Evénements: tunning et la promotion de vos événements</li>
                 </ul>
-
-                <?elseif($locale == 'zh'):?>
-
-                <div class="page-header">
-                    <h1>如果您拥有：</h1>
-                </div>
-                <ul>
-                    <li>美食餐厅</li>
-                    <li>洋酒/红酒酒吧</li>
-                    <li>高端酒店/豪华酒店</li>
-                    <li>美食/饮品公司</li>
-                    <li>其他</li>
-                </ul>
+            </div>
 
 
-                <div class="page-header">
-                    <h1>加入我们，您将受益于：</h1>
-                </div>
+            <?elseif($locale == 'zh'):?>
 
+            <div class="span12">
+                <h1>加入我们，您将受益于：</h1>
+            </div>
 
+            <div class="span6">
                 <ul>
                     <li>品牌提升：近距离接触您的客户和潜在市场</li>
                     <li>全球视野：进入国际市场</li>
                     <li>参与互动：提升本地市场份额</li>
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
                     <li>人力资源：发布工作信息，找到企业所需人才</li>
                     <li>社交网络：认识和结交同行，发掘更多商业机会</li>
                     <li>组织活动：发起和宣传您的线下市场营销活动</li>
                 </ul>
+            </div>
 
-                <?elseif($locale == 'zh_TW'):?>
-
-                <div class="page-header">
-                    <h1>如果您擁有：</h1>
-                </div>
-                <ul>
-                    <li>美食餐廳</li>
-                    <li>洋酒/紅酒酒吧</li>
-                    <li>高端酒店/豪華酒店</li>
-                    <li>美食/飲品公司</li>
-                    <li>其他</li>
-                </ul>
+            <?elseif($locale == 'zh_TW'):?>
 
 
-                <div class="page-header">
-                    <h1>加入我們，您將受益於：</h1>
-                </div>
+            <div class="span12">
+                <h1>加入我們，您將受益於：</h1>
+            </div>
 
-
+            <div class="span6">
                 <ul>
                     <li>品牌提升：近距離接觸您的客戶和潛在市場</li>
                     <li>全球視野：進入國際市場</li>
                     <li>參與互動：提升本地市場份額</li>
+                </ul>
+            </div>
+            <div class="span6">
+                <ul>
                     <li>人力資源：發布工作信息，找到企業所需人才</li>
                     <li>社交網絡：認識和結交同行，發掘更多商業機會</li>
                     <li>組織活動：發起和宣傳您的線下市場營銷活動</li>
                 </ul>
-
-                <?endif?>
             </div>
-        </div>
 
+            <?endif?>
+        </div>
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <form id="signupform" <?=$this->formAttr($form)?> class="form">
+            <?=$form->restful();?>
+            <?=$form->helper('id');?>
+            <div class="span6">
+                <?=$form->helper('id', array('class' => ''))?>
+                <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
+                    <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper('email', array('class' => 'validate[required,custom[email]]'))?>        
+                        <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
+                    </div>
+                </div>
 
+                <!-- companyName 4 -->
+                <div class="control-group <?=$form->isError(array('UserRoleFields', '4')) ? 'error' : '';?>">
+                    <?=$form->helper(array('UserRoleFields', '4'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('UserRoleFields', '4'), array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('UserRoleFields', '4'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+
+                <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
+                    <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+                <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
+                    <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('Profile', 'industry'), 'formSelect', array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('Profile', 'industry'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+                <div class="control-group <?=$form->isError(array('Profile', 'phoneBusiness')) ? 'error' : '';?>">
+                    <?=$form->helper(array('Profile', 'phoneBusiness'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('Profile', 'phoneBusiness'), array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('Profile', 'phoneBusiness'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+                <div class="control-group <?=$form->isError(array('Profile', 'address')) ? 'error' : '';?>">
+                    <?=$form->helper(array('Profile', 'address'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('Profile', 'address'), array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+                <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
+                    <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+
+                <!-- How could we help you? -->
+                <div class="control-group <?=$form->isError(array('UserRoleFields', '6')) ? 'error' : '';?>">
+                    <?=$form->helper(array('UserRoleFields', '6'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('UserRoleFields', '6'), 'formMultiCheckbox', array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('UserRoleFields', '6'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+
+                <!-- How could we help you? -->
+                <div class="control-group <?=$form->isError(array('UserRoleFields', '7')) ? 'error' : '';?>">
+                    <?=$form->helper(array('UserRoleFields', '7'), 'label', array('class' => 'control-label'))?>
+                    <div class="controls">
+                        <?=$form->helper(array('UserRoleFields', '7'), 'formMultiCheckbox', array('class' => ''))?>        
+                        <div class="help-block"><?=$form->helper(array('UserRoleFields', '7'), 'formElementErrors')?></div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="control-group span12">
+                <div class="controls">
+                    <label><input name="agree" class="validate[required]" type="checkbox" checke="checked"><?=$this->_('By clicking Sign Up, you agree to our Terms & Conditions.')?></label>
+                    <br>
+                    <button type="submit" class="btn btn-large"><?=$this->_('Sign Up')?></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
