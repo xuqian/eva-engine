@@ -13,7 +13,7 @@ class CityController extends ActionController
     {
         $city = $this->params()->fromQuery('city');
         if($city) {
-            $this->cookie()->crypt(true)->write('city', urldecode($city));
+            $this->cookie()->crypt(true)->write('city', $city);
             return $this->redirect()->toUrl('/login/');
         }
         $this->layout('layout/empty');

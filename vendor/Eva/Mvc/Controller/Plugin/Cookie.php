@@ -51,7 +51,7 @@ class Cookie extends AbstractPlugin
 			return '';
 		}
 
-		$value = gzuncompress($value);
+		$value = @gzuncompress($value);
 		if(false == $value) {
 			return '';
 		}
