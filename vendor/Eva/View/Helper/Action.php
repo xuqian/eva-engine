@@ -11,13 +11,13 @@
 
 namespace Eva\View\Helper;
 
-use Zend\Mvc\Router\RouteStackInterface,
-    Zend\Mvc\Router\RouteMatch,
-    Zend\View\Exception,
-    Eva\Uri\Uri as CoreUri;
+use Zend\View\Helper\AbstractHelper,
+    Zend\ServiceManager\ServiceLocatorAwareInterface,
+    Zend\ServiceManager\ServiceLocatorInterface,
+    Zend\View\Exception;
 
 /**
- * Render View Partial Cross Module
+ * Call a Controller action
  * 
  * @category   Eva
  * @package    Eva_View
@@ -25,31 +25,41 @@ use Zend\Mvc\Router\RouteStackInterface,
  * @copyright  Copyright (c) 2012 AlloVince (http://avnpc.com/)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Action extends \Zend\View\Helper\AbstractHelper
+class Action extends \Zend\View\Helper\AbstractHelper implements ServiceLocatorAwareInterface
 {
 
+
     /**
-     * Renders a template fragment within a variable scope distinct from the
-     * calling View object.
+    * @var ServiceLocatorInterface
+    */
+    protected $serviceLocator;
+
+    /**
+    * Set the service locator.
+    *
+    * @param ServiceLocatorInterface $serviceLocator
+    * @return AbstractHelper
+    */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * Get the service locator.
      *
-     * If no arguments are passed, returns the helper instance.
-     *
-     * If the $model is an array, it is passed to the view object's assign()
-     * method.
-     *
-     * If the $model is an object, it first checks to see if the object
-     * implements a 'toArray' method; if so, it passes the result of that
-     * method to to the view object's assign() method. Otherwise, the result of
-     * get_object_vars() is passed.
-     *
-     * @param  string $name Name of view script
-     * @param  array $model Variables to populate in the view
-     * @return string|Partial
-     * @throws Exception\RuntimeException
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
      */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+
     public function __invoke($controllerName, $actionName, $params = array())
     {
-        $controllerLoader = \Eva\Api::_()->getEvent()->getApplication()->getServiceManager()->get('ControllerLoader');
+        $controllerLoader = $this->serviceLocator->getServiceLocator()->get('ControllerLoader');
         $controllerLoader->setInvokableClass($controllerName, $controllerName);
         $controller = $controllerLoader->get($controllerName);
         return $controller->$actionName($params);

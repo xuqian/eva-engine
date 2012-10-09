@@ -12,7 +12,7 @@
 namespace Eva\Mvc\Item;
 
 
-use Eva\Mvc\Model\AbstractModelService,
+use Eva\Mvc\Model\AbstractModel,
     Eva\Paginator\Paginator,
     Zend\Mvc\Exception,
     Zend\ServiceManager\ServiceLocatorAwareInterface,
@@ -41,7 +41,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     protected $count = null;
 
     /**
-     * @var Eva\Mvc\Model\AbstractModelService
+     * @var Eva\Mvc\Model\AbstractModel
      */
     protected $model;
 
@@ -58,6 +58,8 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     protected $dataSourceClass = '';
 
     protected $relationships = array();
+    
+    protected $inverseRelationships = array();
 
     protected $initialized = false;
 
@@ -120,7 +122,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
 
     public function setModel($model)
     {
-        if(!$model instanceof AbstractModelService){
+        if(!$model instanceof AbstractModel){
             throw new Exception\MissingLocatorException(printf('Model Service Locator not set by class %s',
             get_class($this)));
         }
@@ -273,10 +275,28 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         return false;
     }
 
+
+    public function hasInverseRelationship($key)
+    {
+        if(isset($this->inverseRelationships[$key]) && is_array($this->inverseRelationships[$key])){
+            return true;
+        }
+        return false;
+    }
+
+
     public function getRelationship($key)
     {
         if(isset($this->relationships[$key]) && is_array($this->relationships[$key]) && $this->relationships[$key]){
             return $this->relationships[$key];
+        }
+        return array(); 
+    }
+
+    public function getInverseRelationship($key)
+    {
+        if(isset($this->inverseRelationships[$key]) && is_array($this->inverseRelationships[$key]) && $this->inverseRelationships[$key]){
+            return $this->inverseRelationships[$key];
         }
         return array(); 
     }
@@ -394,11 +414,28 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
             return $self;
         }
 
+        foreach($proxy as $key => $map){
+            list($moduleItemClass, $relationshipKey) = explode('::', $key);
+            $modulesLoaded = $this->serviceLocator->get('modulemanager')->getLoadedModules();
+            $module = explode('\\', $moduleItemClass);
+            $module = array_shift($module);
+            if(!isset($modulesLoaded[$module])){
+                continue;
+            }
+
+            $proxyItem = $this->model->getItem($moduleItemClass);
+            if($proxyItem->hasInverseRelationship($relationshipKey)){
+                $relationshipArray = $proxyItem->getInverseRelationship($relationshipKey);
+                $this->addRelationship($relationshipKey, $relationshipArray);
+                $join[$relationshipKey] = $map;
+            }
+        }
+
         foreach($join as $key => $map){
             if(!isset($this->relationships[$key])){
                 continue;
             }
-            
+
             $relationship = $this->relationships[$key];
             $joinedItem = $this->join($key);
 
@@ -430,11 +467,19 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     }
 
 
-    public function collections(array $params)
+    public function collections($params = null)
     {
         $dataClass = $this->getDataClass();
         if($params && method_exists($dataClass, 'setParameters')){
-            $params = new \Zend\Stdlib\Parameters($params);
+            if(is_array($params)){
+                $params = new \Zend\Stdlib\Parameters($params);
+            } elseif($params instanceof \Zend\Stdlib\Parameters){
+                $params = $params;
+            } else {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Item collection require array or Zend\Stdlib\Parameters input'
+                ));
+            }
             $dataClass->setParameters($params);
         }
         $items = $dataClass->find('all');
@@ -488,14 +533,6 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
             }
         }
 
-        //Auto complete
-        if($functions){
-            foreach($functions as $key => $function){
-                if(true === method_exists($this, $function)){
-                    $this->$function();
-                }
-            }
-        }
 
         //Merge to original DataSource
         $originalDataSource = $this->getDataSource();
@@ -508,11 +545,22 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         }
         $dataSource = $originalDataSource;
 
+
         if(!$dataSource){
             $this->setDataSource(array());
         } else {
             $this->setDataSource((array) $dataSource);
         }
+
+        //Auto complete
+        if($functions){
+            foreach($functions as $key => $function){
+                if(true === method_exists($this, $function)){
+                    $this->$function();
+                }
+            }
+        }
+
         return $this;
     }
 
@@ -555,7 +603,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         $joinColumn = $relationship['joinColumn'];
         $referencedColumn = $relationship['referencedColumn'];
         $relItem->$joinColumn = $this->$referencedColumn;
-        //p(sprintf('joinOneToOne Joined Class %s : joinColumn %s => %s joined %s => %s', get_class($relItem), $joinColumn, $relItem->$joinColumn , $referencedColumn, $this->$referencedColumn));
+        //p(sprintf('%s joinOneToOne with %s : joinColumn %s => %s joined %s => %s', get_class($this), get_class($relItem), $joinColumn, $relItem->$joinColumn , $referencedColumn, $this->$referencedColumn));
         return $this;
     }
 
@@ -625,8 +673,8 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         }
 
         $proxyItem = $this->model->getItem($moduleItemClass);
-        if($proxyItem->hasRelationship($relationshipKey)){
-            $this->addRelationship($relationshipKey, $proxyItem->getRelationship($relationshipKey));
+        if($proxyItem->hasInverseRelationship($relationshipKey)){
+            $this->addRelationship($relationshipKey, $proxyItem->getInverseRelationship($relationshipKey));
         }
 
         return $this->join($relationshipKey);

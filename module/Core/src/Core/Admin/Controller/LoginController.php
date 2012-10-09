@@ -3,40 +3,43 @@ namespace Core\Admin\Controller;
 
 use Eva\Api,
     Eva\Mvc\Controller\ActionController,
-    Eva\View\Model\ViewModel;
-use Zend\Authentication\Result;
+    Eva\View\Model\ViewModel,
+    Zend\Authentication\Result,
+    Core\Form,
+    Core\Auth;
+    
 
 class LoginController extends ActionController
 {
 
     protected function superAdminLogin()
     {
-        $request = $this->getRequest();
-        $postData = $request->getPost();
+        $postData = $this->params()->fromPost();
         
-        $flashMesseger = array();
-        $form = Api::_()->getForm('Core\Form\SuperAdminLoginForm');
-
+        $form = new Form\SuperAdminLoginForm();
         $viewVariables = array(
             'form' => $form,
-            'user' => $postData,
-            'flashMessenger' => &$flashMesseger
+            'item' => $postData,
         );
 
-        if (!$request->isPost()) {
+        if (!$this->getRequest()->isPost()) {
             return $viewVariables;
         }
 
-        $form->init()->enableFilters()->setData($postData);
+        $form->bind($postData);
         if (!$form->isValid()) {
             return $viewVariables;
         }
 
-        $auth = new \Core\Auth();
-        $authResult = $auth->configAuthenticate($postData['userName'], $postData['password']);
+        $auth = new Auth('Config', 'Session');
+        //$auth = new Auth('DbTable', 'Session');
+        $authResult = $auth->authenticate(array(
+            'username' => $postData['userName'],
+            'password' => $postData['password'],
+        ));
 
         if($authResult->isValid()){
-            $auth->getStorage()->write($authResult->getIdentity());
+            $auth->getAuthStorage()->write($authResult->getIdentity());
             $callback = $this->params()->fromPost('callback');
             $callback = $callback ? $callback : '/admin/core/dashboard';
             $this->redirect()->toUrl($callback);
@@ -57,7 +60,6 @@ class LoginController extends ActionController
 
     public function indexAction()
     {
-
         $viewVariables = $this->superAdminLogin();
         $model = new ViewModel();
         $this->layout('layout/adminblank');

@@ -5,15 +5,22 @@
  * @link      https://github.com/AlloVince/eva-engine
  * @copyright Copyright (c) 2012 AlloVince (http://avnpc.com/)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Eva_Api.php
+ * @package   Eva_Form
  * @author    AlloVince
  */
 
 namespace Eva\Form;
 
+use Eva\Api;
+use Zend\Form\Fieldset;
+use Zend\Form\FormInterface;
+use Zend\Form\FieldsetInterface;
 use Zend\Config\Config;
 use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\Factory as FilterFactory;
+use Eva\File\Transfer\TransferFactory;
 
 /**
  * Eva Form will automatic combination form Elements & Validators & Filters
@@ -22,31 +29,167 @@ use Zend\InputFilter\Factory as FilterFactory;
  * @category   Eva
  * @package    Eva_Form
  */
-class Form extends \Zend\Form\Form
+class Form extends \Zend\Form\Form implements InputFilterProviderInterface
 {
-    protected $baseElements = array();
-    protected $mergeElements = array();
-    protected $subElements = array();
-    
-    protected $baseFilters = array();
-    protected $mergeFilters = array();
-    protected $subFilters = array();
 
-    protected $formMethod;
+    /**
+    * Element definitions
+    *
+    * @var array
+    */
+    protected $baseElements = array();
+
+    /**
+    * Tobe Merge Element definitions
+    *
+    * @var array
+    */
+    protected $mergeElements = array();
+
+    /**
+    * Merged Element definitions
+    *
+    * @var array
+    */
+    protected $mergedElements = array();
+
+    /**
+    * Filter definitions
+    *
+    * @var array
+    */
+    protected $baseFilters = array();
+
+    /**
+    * Tobe Merge Filter definitions
+    *
+    * @var array
+    */
+    protected $mergeFilters = array();
+
+    /**
+    * Merged Filter definitions
+    *
+    * @var array
+    */
+    protected $mergedFilters = array();
+
+    /**
+    * Resful form method
+    *
+    * @var array
+    */
     protected $restfulMethod;
 
+    /**
+    * If true, will generate elements id
+    *
+    * @var boolean
+    */
     protected $autoElementId = true;
+
+    /**
+    * Element id prefix
+    *
+    * @var string
+    */
     protected $idPrefix;
 
-    protected $fieldsMap = array();
+    //protected $fieldsMap = array();
 
+    /**
+    * Sub Forms
+    *
+    * @var array
+    */
     protected $subForms = array();
 
-    protected $elementInited = false;
-    protected $subFormInited = array();
+    /**
+    * Form element inited
+    *
+    * @var boolean
+    */
+    protected $elementsInited = false;
 
+    /**
+    * Form filters inited
+    *
+    * @var boolean
+    */
+    protected $filtersInited = false;
+
+    /**
+    * File Transfer
+    *
+    * @var Eva\File\Transfer\TransferFactory
+    */
     protected $fileTransfer;
+
+    /**
+    * File Transfer Options
+    *
+    * @var array
+    */
     protected $fileTransferOptions = array();
+
+    /**
+    * Sub Form Groups
+    *
+    * @var array
+    */
+    protected $subFormGroups = array(
+        'default' => array()
+    );
+
+    /**
+    * Parent Form
+    *
+    * @var Eva\Form\RestfulForm
+    */
+    protected $parent;
+
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function add($elementOrFieldset, array $flags = array())
+    {
+        parent::add($elementOrFieldset, $flags);
+        if(is_array($elementOrFieldset) && isset($elementOrFieldset['name'])){
+            $elementOrFieldset = $this->get($elementOrFieldset['name']);
+        }
+        if ($elementOrFieldset instanceof RestfulForm) {
+            $this->setParent($this);
+        }
+        return $this;
+    }
+
+    /**
+    * Mvc View
+    *
+    * @var Zend\View
+    */
+    protected $view;
+
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    public function setView($view)
+    {
+        $this->view = $view;
+        return $this;
+    }
+
 
     public function setFileTransferOptions($fileTransferOptions)
     {
@@ -59,7 +202,7 @@ class Form extends \Zend\Form\Form
         return $this->fileTransferOptions;
     }
 
-    public function setFileTransfer($fileTransfer)
+    public function setFileTransfer(TransferFactory $fileTransfer)
     {
         $this->fileTransfer = $fileTransfer;
         return $this;
@@ -70,13 +213,19 @@ class Form extends \Zend\Form\Form
         if($this->fileTransfer){
             return $this->fileTransfer;
         }
-        return $this->fileTransfer = \Eva\File\Transfer\TransferFactory::factory($this->getFileTransferOptions());
+        $this->initFileTransfer();
+        return $this->fileTransfer = TransferFactory::factory($this->getFileTransferOptions());
     }
 
     public function setAutoElementId($autoElementId)
     {
         $this->autoElementId = (boolean) $autoElementId;
         return $this;
+    }
+
+    public function getAutoElementId()
+    {
+        return $this->autoElementId;
     }
 
     public function setIdPrefix($idPrefix)
@@ -94,174 +243,224 @@ class Form extends \Zend\Form\Form
         return $this->idPrefix = get_class($this);
     }
 
-    public function getMergedElements()
+
+    public function setMergeElements(array $elements = array())
     {
-        return $this->merge($this->baseElements, $this->mergeElements);
+        $this->mergeElements = $elements;
+        return $this;
     }
 
-    public function getMergedFilters()
+    public function getMergeElements()
     {
-        return $this->merge($this->baseFilters, $this->mergeFilters);
+        return $this->mergeElements;
+    }
+
+    public function mergeElements(array $elements = array())
+    {
+        if($this->mergedElements){
+            return $this->mergedElements;
+        }
+        //TODO: could merge parent class elements
+        $elements = $elements ? $elements : $this->mergeElements;
+        return $this->mergedElements = $this->merge($this->baseElements, $elements);
+    }
+
+    public function getElementsArray()
+    {
+        return $this->mergedElements;
+    }
+
+    public function searchElementsArray($elementName)
+    {
+        if(isset($this->mergedElements[$elementName])){
+            return $this->mergedElements[$elementName];
+        }
+        return array();
+    }
+
+    public function mergeFilters()
+    {
+        if($this->mergedFilters){
+            return $this->mergedFilters;
+        }
+        return $this->mergedFilters = $this->merge($this->baseFilters, $this->mergeFilters);
+    }
+
+    public function getFiltersArray()
+    {
+        return $this->mergedFilters;
+    }
+
+    public function searchFiltersArray($filterName)
+    {
+        if(isset($this->mergedFilters[$filterName])){
+            return $this->mergedFilters[$filterName];
+        }
+        return array();
+    }
+
+    public function useSubFormGroup($groupName = 'default')
+    {
+        if(!isset($this->subFormGroups[$groupName])){
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Sub Form Group %s not defined in Form %s', $groupName, get_class($this)
+            ));
+        }
+        $subForms = $this->subFormGroups[$groupName];
+        $this->setSubForms($subForms);
+        return $this;
     }
 
     public function setSubForms(array $subForms = array())
     {
-        foreach($subForms as $formName => $subForm){
-            $this->addSubForm($formName, $subForm);
+        foreach($subForms as $formName => $formConfig){
+            $this->addSubForm($formName, $formConfig);
         }
         return $this;
     }
 
-    public function subForm($subFormName)
+    public function getSubForm($subFormName)
     {
         return $this->get($subFormName);
     }
 
-    protected function addSubForm($formName, array $subFormConfig = array()) 
+    public function addSubForm($formName, $formConfig = array())
     {
-        //Sub form will be allow init once
-        if(isset($this->subFormInited[$formName]) && true === $this->subFormInited[$formName]){
-            return $this;
-        }
+        if($formConfig instanceof RestfulForm){
 
-        $subFormClass = $subFormConfig[0];
-        $subForm = new $subFormClass;
-        $this->subElements[$formName] = $subElements = $subForm->getMergedElements();
-        $this->subFilters[$formName] = $subFilters = $subForm->getMergedFilters();
+            $subForm = $formConfig;
+            $subForm->setName($formName);
 
-        $fieldset = new \Zend\Form\Fieldset($formName);
-        $factory = $this->getFormFactory();
-        foreach($subElements as $subElementKey => $subElement){
-            $subElement['attributes']['data-subform-name'] = $formName;
-            $subElement = $this->initElement($subElement);
-            $subElement = $this->autoElementId($subElement, $subFormClass);
-            $fieldset->add($factory->create($subElement));
-        }
-        $this->add($fieldset);
-
-
-        $this->baseFilters = array_merge($this->baseFilters, 
-            array(
-                $formName => array_merge( array('type' => 'Zend\InputFilter\InputFilter'), $subFilters)
-            )
-        );
-
-        $this->subFormInited[$formName] = true;
-        return $this; 
-    }
-
-    //TODO: $form->get('title') when title is null should throw a new Exception 
-    public function fieldsMap($data = array(), $quickMode = false, $skipFieldStart = '_')
-    {
-        if(is_object($data)){
-            $data = $data->toArray();
-        }
-
-        if(!$data || !$this->fieldsMap && $quickMode === false){
-            return $data;
-        }
-
-        if(true === $quickMode){
-            foreach($data as $key => $value){
-                if(false === strpos($key, $skipFieldStart)){
-                    continue;
-                }
-
-                unset($data[$key]);
-            }
         } else {
 
-            $fieldsMap = $this->fieldsMap;
-            $newData = array();
-            foreach($data as $key => $value){
-                if(isset($fieldsMap[$key])){
-                    $newData[$fieldsMap[$key]] = $value;
+            if(is_array($formConfig)) {
+
+                if(isset($formConfig[0])){
+                    $subFormClass = $formConfig[0];
+                } elseif(isset($formConfig['formClass'])) {
+                    $subFormClass = $formConfig['formClass'];
+                } else {
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        'Subform %s not find defined class', $formName
+                    ));
                 }
+
+            } elseif(is_string($formConfig)){
+
+                $subFormClass = $formConfig;
+
+            } else {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Subform %s config not correct, require string or object', $formName
+                ));
             }
-            $data = $newData;
-            unset($newData);
+
+            if(!class_exists($subFormClass)){
+                return $this;
+            }
+            $subForm = new $subFormClass($formName);
         }
 
+        $subForm->setParent($this);
+        if(is_array($formConfig) && isset($formConfig['collection']) && $formConfig['collection']) {
+            $object = isset($formConfig['object']) ? $formConfig['object'] : array();
+            if(is_object($object) && method_exists($object, 'toArray')) {
+                $values = $object->toArray();
+            } else {
+                $values = (array) $object;
+            }
 
-        return $data;
+            $options = array(
+                'allow_add' => true,
+                'target_element' => $subForm,
+            );
+            $options = array_merge($options, $formConfig);
+            if($values) {
+                $options['count'] = count($values);
+            }
+
+            $this->add(array(
+                'type' => 'Zend\Form\Element\Collection',
+                'name' => $formName,
+                'options' => $options,
+            ));
+            $this->get($formName)->populateValues($object);
+        } else {
+            $this->add($subForm);
+        }
+        return $this; 
     }
 
     public function init(array $options = array())
     {
-        $defaultOptions = array(
-            'action' => '',
-            'values' => array(),
-            'method' => 'get',    
-        );
-
-        $options = array_merge($defaultOptions, $options);
-
-        $method = $options['method'];
-        if($method){
-            $this->setMethod($method);
+        $elements = $this->mergeElements();
+        foreach($elements as $element){
+            $this->initElement($element);
         }
+        return $this;
+    }
 
-        $action = $options['action'];
-        if($action){
-            $this->setAttribute('action', $action);
-        }
-
-        if(false === $this->elementInited){
-            $elements = $this->getMergedElements();
-
-            foreach($elements as $name => $element){
-                $element = $this->autoElementId($element);
-                $element = $this->initElement($element);
-                $this->add($element);
-            }
-            $this->elementInited = true;
-        }
-
-
-        $values = $options['values'];
-        if($values){
-            if($values instanceof \ArrayObject){
-                $this->bind($values);
-            } elseif(is_array($values)) {
-                $this->bind(new \ArrayObject((array) $values));
-            } elseif(is_object($values) && method_exists($values, 'toArray')) {
-                $this->bind(new \ArrayObject($values->toArray()));
-            } else {
-                $this->bind($values);
-            }
-        }
-
+    public function afterInit()
+    {
         return $this;
     }
 
     protected function initElement(array $element)
     {
-        $element = $this->uniformMultiInputInterface($element);
-        //Element must have a certain type in new zf2 changes
-        if(!isset($element['type']) && isset($element['attributes']['type'])){
-            //TODO: maybe here will have custom
-            $element['type'] = 'Zend\Form\Element\\' . ucfirst($element['attributes']['type']);
+        $element = $this->autoElementId($element);
+        if(isset($element['type']) && false === strpos($element['type'], '\\')){
+            $element['type'] = 'Zend\Form\Element\\' . ucfirst($element['type']);
         }
-
-        if(!isset($element['options']['label']) && isset($element['attributes']['label'])){
-            $element['options']['label'] = $element['attributes']['label'];
+        if(isset($element['callback']) && $element['callback']){
+            $callback = (string) $element['callback'];
+            if(method_exists($this, $callback)){
+                $element = $this->$callback($element);
+            }
         }
-
-        //TODO: just for following zf2 changes, will be removed
-        if(!isset($element['options']['value_options']) && isset($element['attributes']['options'])){
-            $element['options']['value_options'] = $element['attributes']['options'];
-            unset($element['attributes']['options']);
-        }
-
-        return $element;
+        return $this->add($element);
     }
 
-    public function enableFileTransfer()
+    protected function initFilters()
     {
-        $elements = $this->getMergedElements();
+        if(true === $this->filtersInited){
+            return $this;
+        }
+
+        $filters = $this->mergeFilters();
+        //Note: some Validators need inject full user input data
+        foreach($filters as $key => $filter){
+            if(isset($filter['validators']) && is_array($filter['validators'])) {
+                foreach($filter['validators'] as $validKey => $validator){
+                    if(isset($validator['injectdata']) && $validator['injectdata']){
+                        $filters[$key]['validators'][$validKey]['options']['data'] = $this->data;
+                    }
+                }
+            }
+        }
+
+        $formFactory  = $this->getFormFactory();
+        $inputFactory = $formFactory->getInputFilterFactory();
+
+        if (null === $this->filter) {
+            $inputFilter = $this->filter = new InputFilter();
+        } else {
+            $inputFilter = $this->filter;
+        }
+
+        foreach($filters as $name => $filter){
+            $input = $inputFactory->createInput($filter);
+            $inputFilter->add($input, $name);
+        }
+        $this->filtersInited = true;
+        return $this;
+    }
+
+    public function initFileTransfer()
+    {
+        $elements = $this->getElementsArray();
         $fileElements = array();
         foreach($elements as $key => $element){
-            if(isset($element['attributes']['type']) && $element['attributes']['type'] == 'file'){
+            if(isset($element['type']) && $element['type'] == 'file'){
                 $fileElements[$key] = $element;
             }
         }
@@ -288,7 +487,7 @@ class Form extends \Zend\Form\Form
             )
         ));
 
-        $mergeFilters = $this->getMergedFilters();
+        $mergeFilters = $this->getFiltersArray();
         foreach($fileElements as $key => $element){
             if(isset($mergeFilters[$key]['validators'])){
                 foreach($mergeFilters[$key]['validators'] as $validator){
@@ -308,52 +507,12 @@ class Form extends \Zend\Form\Form
         }
 
         $this->fileTransferOptions = $config;
-        $this->getFileTransfer();
         return $this;
     }
 
-    public function enableFilters(array $filterOptions = array())
+    public function getInputFilterSpecification()
     {
-        $filters = $this->merge($this->getMergedFilters(), $filterOptions);
-
-        if(!$filters){
-            $inputFilter = new InputFilter;
-            $this->setInputFilter($inputFilter);
-            return $this;
-        }
-
-        //TODO: use di here
-        $requireDbAdapter = array(
-            'dbnorecordexists',
-            'dbrecordexists',
-            'eva\validator\db\norecordexistsexcludeself',
-        );
-        foreach($filters as $key => $filter){
-            //Auto close received option here
-            //if(!isset($filters[$key]['required'])){
-               // $filters[$key]['required'] = false;
-            //}
-
-            if(!isset($filter['validators']) || !is_array($filter['validators'])){
-                continue;
-            }
-
-
-
-            foreach($filter['validators'] as $validateKey => $validator){
-                if(isset($validator['name']) && in_array(strtolower($validator['name']), $requireDbAdapter)){
-                    $filters[$key]['validators'][$validateKey]['options']['adapter'] = \Eva\Api::_()->getDbAdapter();
-                }
-                if(isset($validator['options']['exclude']['field']) && $validator['options']['exclude']['field'] && !isset($validator['options']['exclude']['value'])){
-                    $filters[$key]['validators'][$validateKey]['options']['exclude']['value'] = $this->data[$validator['options']['exclude']['field']];
-                }
-            }
-        }
-
-        $factory = new FilterFactory();
-        $inputFilter = $factory->createInputFilter($filters);
-        $this->setInputFilter($inputFilter);
-        return $this;
+        return $this->mergeFilters();
     }
 
     public function setMethod($method = '')
@@ -372,7 +531,6 @@ class Form extends \Zend\Form\Form
                 $method
             ));
         }
-
 
         $restfulMethod = 'get';
         switch($method){
@@ -394,48 +552,26 @@ class Form extends \Zend\Form\Form
 
         $this->setAttribute('method', $method);
         $this->restfulMethod = $restfulMethod;
-
         return $this;
     }
 
-    public function restful()
+    public function setAction($action)
     {
-        //TODO: restful input name should be able to custom
-        return sprintf('<input type="hidden" name="_method" value="%s">', $this->restfulMethod);
+        $this->setAttribute('action', $action);
+        return $this;
     }
 
-    public function populateValues($data)
+    public function restful($inputName = '_method')
     {
-        if (!is_array($data) && !$data instanceof Traversable) {
-            throw new \Zend\Form\Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable set of data; received "%s"',
-                __METHOD__,
-                (is_object($data) ? get_class($data) : gettype($data))
-            ));
-        }
-
-        foreach ($data as $name => $value) {
-            if (!$this->has($name)) {
-                continue;
-            }
-
-            $element = $this->get($name);
-            //Fixed if bind value is ArrayObject;
-            if ($element instanceof \Zend\Form\FieldsetInterface && (is_array($value) || $value instanceof \ArrayObject)) {
-                $element->populateValues((array) $value);
-                continue;
-            }
-
-            $element->setAttribute('value', $value);
-        }
+        return sprintf('<input type="hidden" name="' . $inputName . '" value="%s">', $this->restfulMethod);
     }
 
     public function isValid()
     {
+        $this->initFilters();
         if(!$this->fileTransfer){
             return parent::isValid();
         }
-
         $elementValid = parent::isValid();
         $fileValid = $this->fileTransfer->isValid();
         $result = $elementValid && $fileValid;
@@ -446,30 +582,61 @@ class Form extends \Zend\Form\Form
         return $result;
     }
 
-    public function getElement($elementNameOrArray)
+
+    public function getData($flag = FormInterface::VALUES_NORMALIZED)
     {
-        if(true === is_string($elementNameOrArray)){
-            return $this->get($elementNameOrArray);
-        }
-
-        if(true === is_array($elementNameOrArray) && isset($elementNameOrArray[0]) && isset($elementNameOrArray[1])){
-            $fieldset = $this->get($elementNameOrArray[0]);
-            return $fieldset->get($elementNameOrArray[1]);
-        }
-
-        throw new Exception\UnexpectedElementException(sprintf(
-            '%s Request element %s not correct',
-            __METHOD__,
-            $elementNameOrArray
-        ));
+        $data = parent::getData($flag);
+        $data = $this->prepareData($data);
+        return $data;
     }
 
-    public function autoElementId(array $element, $idPrefix = null)
+    public function prepareData($data)
+    {
+        return $data;
+    }
+
+    public function beforeBind($valuesOrObject)
+    {
+        return $valuesOrObject;
+    }
+
+    public function bind($valuesOrObject, $flags = FormInterface::VALUES_NORMALIZED)
+    {
+        $valuesOrObject = $this->beforeBind($valuesOrObject);
+
+        if(!$valuesOrObject){
+            return $this;
+        }
+
+        if(is_array($valuesOrObject) || $valuesOrObject instanceof \Zend\Stdlib\Parameters){
+            $this->setData((array) $valuesOrObject);
+        } else {
+            parent::bind($valuesOrObject);
+        }
+
+        $this->afterBind();
+        return $this;
+    }
+
+    public function afterBind()
+    {
+        return $this;
+    }
+
+    public function isError($elementNameOrArray)
+    {
+        $element = $this->getElement($elementNameOrArray);
+        return $element->getMessages() ? true : false;
+    }
+
+
+    protected function autoElementId(array $element, $idPrefix = null)
     {
         if(!$this->autoElementId){
             return $element;
         }
 
+        //TODO:form collection fix
         $idPrefix = $idPrefix ? $idPrefix : $this->getIdPrefix();
         $elementId = isset($element['attributes']['id']) ? $element['attributes']['id'] : $element['name'];
         $elementId = $idPrefix . '-' . $elementId;
@@ -479,58 +646,131 @@ class Form extends \Zend\Form\Form
         return $element;
     }
 
-    public function uniformMultiInputInterface(array $element)
+    public function getElement($elementNameOrArray)
     {
-        if(!isset($element['attributes']['type'])){
-            return $element;
+        if(true === is_string($elementNameOrArray)){
+            return $this->get($elementNameOrArray);
         }
 
-        if($element['attributes']['type'] == 'radio' && isset($element['attributes']['options'][0]['value'])){
-            $options = array();
-            foreach($element['attributes']['options'] as $key => $option){
-                $options[$option['label']] = $option['value'];
-            }
-            $element['attributes']['options'] = $options;
+        if(true === is_array($elementNameOrArray) && isset($elementNameOrArray[0]) && isset($elementNameOrArray[1])){
+            $fieldsetName = $elementNameOrArray[0];
+            $elementName = $elementNameOrArray[1];
+        } elseif(is_string($elementNameOrArray)) {
+            $fieldsetName = '';
+            $elementName = $elementNameOrArray;
+        } else {
+            throw new Exception\InvalidArgumentException(sprintf('Element Name require string or array'));
+        }
+
+        if($fieldsetName) {
+            $element = $this->get($fieldsetName)->get($elementName);
+        } else {
+            $element = $this->get($elementName);
+        }
+
+        if(!$element){
+            throw new Exception\InvalidArgumentException(sprintf('Request Element %s not found', $elementName));
         }
 
         return $element;
     }
 
-    public function helper($elementName, $optionOrInputType = null, array $options = array(), array $setting = array())
+    public function getFilter($filterNameOrArray)
     {
-        $defaultSetting = array(
+        $this->mergeFilters();
+        if(true === is_string($filterNameOrArray)){
+            return $this->searchFiltersArray($filterNameOrArray);
+        }
+
+        if(true === is_array($filterNameOrArray) && isset($filterNameOrArray[0]) && isset($filterNameOrArray[1])){
+            $fieldsetName = $filterNameOrArray[0];
+            $filterName = $filterNameOrArray[1];
+        } elseif(is_string($filterNameOrArray)) {
+            $fieldsetName = '';
+            $filterName = $filterNameOrArray;
+        } else {
+            throw new Exception\InvalidArgumentException(sprintf('Filter Name require string or array'));
+        }
+
+        if($fieldsetName) {
+            $this->get($fieldsetName)->mergeFilters();
+            $filter = $this->get($fieldsetName)->searchFiltersArray($filterName);
+        } else {
+            $filter = $this->searchFiltersArray($filterNameOrArray);
+        }
+
+        if(!$filter){
+            throw new Exception\InvalidArgumentException(sprintf('Request Filter %s not found', $filterName));
+        }
+
+        return $filter;
+    }
+
+
+    public function helper($elementNameOrArray, $attrsOrInputType = null, array $attrs = array(), array $options = array())
+    {
+        $view = $this->getView();
+        if(!$view && $this->parent){
+            $view = $this->parent->getView();
+        }
+        if(!$view){
+            throw new Exception\InvalidArgumentException(sprintf('Form view not found'));
+        }
+
+        $element = $this->getElement($elementNameOrArray);
+        if(!$element){
+            throw new Exception\InvalidArgumentException(sprintf('Request element %s not found', $elementNameOrArray));
+        }
+
+        $defaultOptions = array(
             'i18n' => true,
             'replace' => true,
             'reorder' => false,
+            'args' => array(),
+            'type' => 'formInput',
+            'validator' => true,
         );
-        $setting = array_merge($defaultSetting, $setting);
+        $options = array_merge($defaultOptions, $options);
 
-        $element = $this->getElement($elementName);
-        $view = \Eva\Api::_()->getView();
-        if($optionOrInputType){
-            if(is_string($optionOrInputType)){
-                $options = array_merge(array('type' => $optionOrInputType), $options);
+        if($attrsOrInputType){
+            if(is_string($attrsOrInputType)){
+                //TODO:: if type changed, should re-generate new element
+                $options['type'] = $attrsOrInputType;
+            } elseif(is_array($attrsOrInputType)){
+                $attrs = $attrsOrInputType;
             } else {
-                $options = array_merge($optionOrInputType, $options);
+                throw new Exception\InvalidArgumentException(sprintf('Element %s attributes require array.', $elementNameOrArray));
             }
         }
 
-        //Merge options with element attributes
-        if(false === $setting['replace']){
-            $options = $this->merge($element->getAttributes(), $options);
+        if(isset($attrs['type']) && $attrs['type']){
+            $options['type'] = $attrs['type'];
+            unset($attrs['type']);
         }
 
-        if(method_exists($element, 'getValueOptions') && isset($options['value_options'])){
-            $element->setValueOptions($this->merge($element->getValueOptions(), $options['value_options']));
+        //Merge attributes
+        if(false === $options['replace']){
+            $attrs = $this->merge($element->getAttributes(), $attrs);
+        } else {
+            $attrs = array_merge($element->getAttributes(), $attrs);
+        }
+        $element->setAttributes($attrs);
+
+
+        if(isset($attrs['label'])){
+            $element->setLabel($attrs['label']);
         }
 
-        return $view->input($element, $options); 
-    }
+        if(isset($attrs['value'])){
+            $element->setValue($attrs['value']);
+        }
 
-    public function isError($elementName)
-    {
-        $element = $this->getElement($elementName);
-        return $element->getMessages() ? true : false;
+        $filter = $this->getFilter($elementNameOrArray);
+        //Merge Value Options
+        if(isset($attrs['value_options']) && method_exists($element, 'getValueOptions')){
+            $element->setValueOptions($this->merge($element->getValueOptions(), $attrs['value_options']));
+        }
+        return $view->input($element, $options, $filter); 
     }
 
     protected function merge(array $global, array $local)
@@ -543,5 +783,19 @@ class Form extends \Zend\Form\Form
         $local = new Config($local);
         $global->merge($local);
         return $global->toArray();
+    }
+
+    public function __construct($name = null, $subFormGroup = null)
+    {
+        parent::__construct($name);
+        $this->init();
+        $this->afterInit();
+
+        /*
+        if(Api::_()->getServiceManager()->has('translator')){
+            Api::_()->getServiceManager()->get('translator')->setLocale('zh');
+            \Zend\Validator\AbstractValidator::setDefaultTranslator(Api::_()->getServiceManager()->get('translator'));
+        }
+        */
     }
 }

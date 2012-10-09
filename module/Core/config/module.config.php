@@ -54,12 +54,13 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout' => EVA_MODULE_PATH . '/Core/view/layout/layout.phtml',
-            'layout/admin' => EVA_MODULE_PATH . '/Core/view/layout/admin.phtml',
-            'layout/adminblank' => EVA_MODULE_PATH . '/Core/view/layout/adminblank.phtml',
+            'layout/layout' => EVA_MODULE_PATH . '/Core/layout/layout.phtml',
+            'layout/admin' => EVA_MODULE_PATH . '/Core/layout/admin.phtml',
+            'layout/adminblank' => EVA_MODULE_PATH . '/Core/layout/adminblank.phtml',
             'index/index'   => EVA_MODULE_PATH . '/Core/view/index/index.phtml',
             'error/404'     => EVA_MODULE_PATH . '/Core/view/error/404.phtml',
             'error/index'   => EVA_MODULE_PATH . '/Core/view/error/index.phtml',
+            'blank' => EVA_MODULE_PATH . '/Core/view/blank.phtml',
         ),
         'module_namespace_layout_map' => array(
             'Admin' => 'layout/admin'
@@ -175,7 +176,8 @@ return array(
     ),
 
     'authentication' => array(
-
+        'default_adapter' => 'DbTable',
+        'default_storage' => 'Session',
     ),
 
     'cache' => array(
@@ -228,6 +230,23 @@ return array(
                 'public_dir' => EVA_PUBLIC_PATH . '/static/cache',
             ),
         ),
+        /*
+        'page_capture' => array(
+            'enable' => 1,
+            'adapter' => 'memcached', 
+            'page_extension' => 'html', 
+            'options' => array( 
+                'ttl' => 6000,
+                'servers' => array(
+                    array('127.0.0.1', 11211),
+                ),
+                'namespace' => null,
+                'lib_options' => array(
+                    'COMPRESSION' => false
+                ),
+            ),
+        ), 
+        */
     ),
 );
 

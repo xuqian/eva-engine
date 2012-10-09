@@ -10,21 +10,30 @@ class FileController extends RestfulModuleController
 {
     public function restIndexFile()
     {
-        $request = $this->getRequest();
+        $query = $this->getRequest()->getQuery();
 
-        $query = $request->getQuery();
+        $form = new Form\FileSearchForm();
+        $form->bind($query);
+        if($form->isValid()){
+            $query = $form->getData();
+        }
 
-        $form = Api::_()->getForm('File\Form\FileSearchForm');
-        $selectQuery = $form->fieldsMap($query, true);
+        $itemModel = Api::_()->getModel('File\Model\File');
+        $items = $itemModel->setItemList($query)->getFileList(array(
+            'self' => array(
+                '*',
+                'getUrl()',
+                'getThumb()',
+                'getReadableFileSize()',
+            ),
+        ));
+        $paginator = $itemModel->getPaginator();
 
-        $fileModel = Api::_()->getModel('File\Model\File');
-        $files = $fileModel->setItemListParams($selectQuery)->getFiles();
-        $paginator = $fileModel->getPaginator();
         $this->layout('layout/adminblank');
 
         return array(
             'form' => $form,
-            'files' => $files,
+            'items' => $items,
             'query' => $query,
             'paginator' => $paginator,
         );
@@ -32,30 +41,35 @@ class FileController extends RestfulModuleController
 
     public function restPostFile()
     {
-        $request = $this->getRequest();
-        $postData = $request->getPost();
+        $postData = $this->params()->fromPost();
         $form = new Form\UploadForm();
-        $form->init()
-             ->setData($postData)
-             ->enableFilters()
-             ->enableFileTransfer();
+        $form->bind($postData);
 
-        $fileModel = Api::_()->getModel('File\Model\File');
+        $itemModel = Api::_()->getModel('File\Model\File');
+
         $response = array();
         if ($form->isValid() && $form->getFileTransfer()->isUploaded()) {
             if($form->getFileTransfer()->receive()){
+                
                 $files = $form->getFileTransfer()->getFileInfo();
-                $fileModel->setUploadFiles($files);
-                $fileModel->setConfigKey('default')->createFiles();
-                $lastFileId = $fileModel->getLastFileId();
+                $itemModel->setUploadFiles($files);
+                $itemModel->setConfigKey('default')->createFiles();
+                $lastFileId = $itemModel->getLastFileId();
+
                 if($lastFileId) {
-                    $fileinfo = $fileModel->setItemParams($lastFileId)->getFile();
+                    $item = $itemModel->getFile($lastFileId, array(
+                        'self' => array(
+                            '*',
+                            'getUrl()',
+                            'getThumb()',
+                        ),
+                    ));
                     $file = array(
-                        'id' => $fileinfo['id'],
-                        'name' => $fileinfo['originalName'],
-                        'size' => (int)$fileinfo['fileSize'],
-                        'url' => $fileinfo['Url'],
-                        'thumbnail_url' => $fileinfo['Thumb'],
+                        'id' => $item['id'],
+                        'name' => $item['originalName'],
+                        'size' => (int)$item['fileSize'],
+                        'url' => $item['Url'],
+                        'thumbnail_url' => $item['Thumb'],
                     );
                     $response = array(
                         $file

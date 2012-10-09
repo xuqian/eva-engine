@@ -26,6 +26,16 @@ class UserCreateForm extends UserForm
         'language' => array (
             'callback' => 'getLanguages',
         ),
+        'inputPassword' => array (
+            'name' => 'inputPassword',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'Password',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
     );
 
     protected $mergeFilters = array(
@@ -48,12 +58,32 @@ class UserCreateForm extends UserForm
                 ),
             ),
         ),
+        'inputPassword' => array (
+            'name' => 'inputPassword',
+            'required' => false,
+            'filters' => array (
+                'stripTags' => array (
+                    'name' => 'StripTags',
+                ),
+                'stringTrim' => array (
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array (
+                'stringLength' => array (
+                    'name' => 'StringLength',
+                    'options' => array (
+                        'max' => '128',
+                    ),
+                ),
+            ),
+        ),
     );
 
     /*
     public function beforeBind($values)
     {
-        $model = \Eva\Api::_()->getModelService('User\Model\Role');
+        $model = \Eva\Api::_()->getModel('User\Model\Role');
         $roles = $model->getRoleList()->toArray();
         $roleUsers = array();
         if(isset($values['RoleUser']) && $values['RoleUser']){
@@ -96,6 +126,7 @@ class UserCreateForm extends UserForm
         $locale = $translator->getLocale();
         $languages = \Eva\Locale\Data::getList($locale, 'language');
         $element['options']['value_options'] = $languages;
+        $element['attributes']['value'] = $locale;
         return $element;
     }
 

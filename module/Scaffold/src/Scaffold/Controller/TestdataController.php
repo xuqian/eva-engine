@@ -19,15 +19,12 @@ class TestdataController extends RestfulModuleController
     
     public function restGetTestdataPosts()
     {
-        $request = $this->getRequest();
-        
-        $query = $request->getQuery();
+        $query = $this->getRequest()->getQuery();
 
-        $form = Api::_()->getForm('Blog\Form\CategoryForm');
-        $selectQuery = $form->fieldsMap($query, true);
+        $form = new \Blog\Form\CategoryForm();
        
         $categoryModel = Api::_()->getModel('Blog\Model\Category');
-        $categories = $categoryModel->setItemListParams($selectQuery)->getCategories();
+        $categories = $categoryModel->setItemList($query)->getCategoryList();
         $paginator = $categoryModel->getPaginator();
 
         return array(

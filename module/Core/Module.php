@@ -63,7 +63,9 @@ class Module
         if(!$lang){
             return $this;
         }
-        $lang = array_shift(array_keys($lang));
+        
+        $lang = array_keys($lang);
+        $lang = array_shift($lang);
         $subLang = explode('_', $lang);
         if(isset($subLang[1]) 
             && isset($config['translator']['sub_languages'])
@@ -98,8 +100,9 @@ class Module
         if($controller == 'core' && $action == 'index' || $controller == 'logout' && $action == 'index' || $controller == 'login' && $action = 'index'){
             return;
         }
-        $auth = new Auth();
-        $isAuthed = $auth->getStorage()->read();
+
+        $auth = new Auth('Config', 'Session');
+        $isAuthed = $auth->getAuthStorage()->read();
         if(!$isAuthed){
             $application = $e->getApplication();
             $event = $application->getEventManager();

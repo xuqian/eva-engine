@@ -18,7 +18,7 @@ namespace User\Form;
  * @category   Eva
  * @package    Eva_Form
  */
-class UserForm extends \Eva\Form\RestfulForm
+class UserForm extends \Eva\Form\Form
 {
     /**
      * Form basic elements
@@ -241,12 +241,6 @@ class UserForm extends \Eva\Form\RestfulForm
             'name' => 'userName',
             'required' => false,
             'filters' => array (
-                'stripTags' => array (
-                    'name' => 'StripTags',
-                ),
-                'stringTrim' => array (
-                    'name' => 'StringTrim',
-                ),
             ),
             'validators' => array (
                 'notEmpty' => array (
@@ -354,12 +348,6 @@ class UserForm extends \Eva\Form\RestfulForm
             'name' => 'password',
             'required' => false,
             'filters' => array (
-                'stripTags' => array (
-                    'name' => 'StripTags',
-                ),
-                'stringTrim' => array (
-                    'name' => 'StringTrim',
-                ),
             ),
             'validators' => array (
                 'stringLength' => array (
