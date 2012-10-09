@@ -3,9 +3,9 @@
 namespace Epic\Model;
 
 use Eva\Api,
-    Eva\Mvc\Model\AbstractModelService;
+    Eva\Mvc\Model\AbstractModel;
 
-class User extends AbstractModelService
+class User extends AbstractModel
 {
     protected $itemClass = 'User\Item\User';
 

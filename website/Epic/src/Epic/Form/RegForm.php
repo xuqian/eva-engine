@@ -18,7 +18,7 @@ namespace Epic\Form;
  * @category   Eva
  * @package    Eva_Form
  */
-class RegForm extends \Eva\Form\RestfulForm
+class RegForm extends \Eva\Form\Form
 {
 
     /**
