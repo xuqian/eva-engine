@@ -863,8 +863,8 @@ body[dir='rtl'] .formError .formErrorArrow,body.rtl .formError .formErrorArrow{m
 .formError .formErrorArrow .line1{width:1px;border:none;background:#ddd;}
 .scrolling{background:#000;padding-top:50px;}.scrolling #header{height:auto;}
 .guide{margin-top:-100px;}
-.bg{width:100%;height:600px;margin:0 auto;padding-top:50px;position:relative;}
-.bg-0{width:100%;background:url(../img/bg0.jpg) 50% 0 no-repeat fixed;height:600px;margin:0 auto;padding-top:50px;position:relative;}
+.bg{width:100%;height:800px;margin:0 auto;padding-top:50px;position:relative;}
+.bg-0{width:100%;background:url(../img/bg0.jpg) 50% 0 no-repeat fixed;margin:0 auto;padding-top:50px;position:relative;}
 .bg-1{background:url(../img/bg1.jpg) 50% 0 no-repeat fixed;}
 .bg-2{background:url(../img/bg2.jpg) 50% 0 no-repeat fixed;}
 .bg-3{background:url(../img/bg3.jpg) 50% 0 no-repeat fixed;}
