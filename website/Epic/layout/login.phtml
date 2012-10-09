@@ -37,8 +37,8 @@ $form->setView($this)
                     <form class="form form-inline span4" <?=$this->formAttr($form)?> >
                         <a href="/">Membership Request</a> or
                         <?=$form->restful();?>
-                        <?=$form->helper('userName', array('class' => 'input-small', 'placeholder' => 'Email' ))?>
-                        <?=$form->helper('password', array('class' => 'input-small', 'placeholder' => 'Password'))?>
+                        <?=$form->helper('loginName', array('class' => 'input-small', 'placeholder' => 'Email' ))?>
+                        <?=$form->helper('inputPassword', array('class' => 'input-small', 'placeholder' => 'Password'))?>
                         <input name="callback" type="hidden" value="<?=$this->callback?>" />
                         <button class="btn btn-inverse" type="submit"><?=$this->_('Login')?></button>
                     </form>
