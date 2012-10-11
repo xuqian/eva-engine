@@ -13,6 +13,13 @@ $form->useSubFormGroup()
     <div id="titleblock">
         <div class="row">
             <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
+            <div class="span5">
+                <img src="<?=$this->link('/src/epic/img/connoisseur-' . $locale . '-1.png')?>" />
+            </div>
+            <div class="span5">
+                <img src="<?=$this->link('/src/epic/img/connoisseur-' . $locale . '-2.png')?>" />
+            </div>
+            <?$locale="abc";?>
             <?if($locale == 'en'):?>
 
             <div class="span12">
@@ -111,7 +118,7 @@ $form->useSubFormGroup()
             <form id="signupform" <?=$this->formAttr($form)?> class="form">
                 <?=$form->restful();?>
                 <?=$form->helper('id');?>
-                <div class="span6">
+                <div class="span5">
                     <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
                         <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
                         <div class="controls">
@@ -166,7 +173,7 @@ $form->useSubFormGroup()
                         </div>
                     </div>
                 </div>
-                <div class="span6">
+                <div class="span5">
                     <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
                         <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">

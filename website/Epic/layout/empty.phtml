@@ -45,7 +45,19 @@
         <nav id="navbar_footer" class="">
         <ul class="nav pull-right">
             <li>
-            Copyright 2012 Epicurissimo | 
+            Copyright 2012 Epicurissimo　| 　 
+            <div class="btn-group dropup pull-right">
+                <a class="btn dropdown-toggle btn-small btn-inverse" data-toggle="dropdown" href="#">Language
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="<?=$this->uri('/language/en')?>">English</a></li>
+                    <li><a href="<?=$this->uri('/language/fr')?>">Français</a></li>
+                    <li><a href="<?=$this->uri('/language/zh')?>">中文</a></li>
+                    <li><a href="<?=$this->uri('/language/zh-TW')?>">繁体中文</a></li>
+                </ul>
+            </div>
+            <!--
             <select id="lang">
                 <option value="">Language</option>
                 <option value="<?=$this->uri('/language/en')?>">English</option>
@@ -53,6 +65,7 @@
                 <option value="<?=$this->uri('/language/zh')?>">中文</option>
                 <option value="<?=$this->uri('/language/zh-TW')?>">繁体中文</option>
             </select>
+            -->
             </li>
         </ul>
         </nav>
