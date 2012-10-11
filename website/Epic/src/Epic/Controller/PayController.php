@@ -48,8 +48,10 @@ class PayController extends ActionController
 
     public function paypal($price)
     {
-        $config['paypal']['sandbox'] = 0;
+        $config = \Eva\Api::_()->getModuleConfig('Epic');
         
+        $config = $config['payment'];
+
         include (EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/paypal.class.php');
         $paypal = new \Epic\Payment\paypal_class();             // initiate an instance of the class
         $paypal->paypal_class();
@@ -61,11 +63,7 @@ class PayController extends ActionController
         
         $url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/example';
 
-        //buyer_1309337143_per@gmail.com 12345678
-  //    $config['paypal']['account'] = 'seller_1309335715_biz@gmail.com';
-        $config['paypal']['account'] = 'info@shishijia.com';
-        $config['paypal']['orderTitle'] = 'epic test ' . $price;
-        $config['paypal']['currency'] = 'USD';
+        $config['paypal']['orderTitle'] .= $price;
             
         $order_id = $price;
         $hash = md5($price . time());
@@ -93,14 +91,9 @@ class PayController extends ActionController
         $notify_url = \Eva\Api::_()->getView()->ServerUrl() . '/pay/alipaysearch';
         
         $content = "Epic alipay test.";
+        $config = \Eva\Api::_()->getModuleConfig('Epic');
+        $config = $config['payment'];
 
-        $config['alipay']['sandbox'] = 0;
-        $config['alipay']['accountType'] = 'create_partner_trade_by_buyer';
-        $config['alipay']['partnerId'] = '2088002015728687';
-        $config['alipay']['orderTitle'] = 'Epic alipay test.';
-        $config['alipay']['account'] = "allo.vince@gmail.com";
-        $config['alipay']['securityCode'] = "uanlpqbswv5rpuwucfueynyhyz2hw1r7";
-            
         $order_id = time();
         $hash = md5($price . time());  
         
@@ -133,7 +126,8 @@ class PayController extends ActionController
 
     public function paypalsearch($price)
     {
-        $config['paypal']['sandbox'] = 0;
+        $config = \Eva\Api::_()->getModuleConfig('Epic');
+        $config = $config['payment'];
         
         include (EVA_ROOT_PATH . '/website/Epic/src/Epic/Payment/paypal.search.php');
 
