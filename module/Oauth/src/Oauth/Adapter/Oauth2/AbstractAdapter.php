@@ -1,11 +1,11 @@
 <?php
     
-namespace Oauth\Adapter\Oauth1;
+namespace Oauth\Adapter\Oauth2;
 
 use Oauth\Adapter\AdapterInterface;
 use Oauth\Exception;
 use ZendOAuth\OAuth as ZendOAuth;
-use ZendOAuth\Consumer;
+use Oauth\Service\Consumer;
 use ZendOAuth\Token\Access as AccessToken;
 
 
@@ -65,12 +65,10 @@ abstract class AbstractAdapter
     {
 		$defaultOptions = array(
             'requestScheme' => ZendOAuth::REQUEST_SCHEME_HEADER,
-			'version' => '1.0', 
-			'signatureMethod' => 'HMAC-SHA1', 
+            'version' => '2.0', 
             'callbackUrl' =>  $this->getCallback(),
             'consumerKey' => $this->getConsumerKey(),
             'consumerSecret' => $this->getConsumerSecret(),
-            'requestTokenUrl' => $this->requestTokenUrl,
             'authorizeUrl' => $this->authorizeUrl,
             'accessTokenUrl' => $this->accessTokenUrl,
 		);
@@ -164,7 +162,7 @@ abstract class AbstractAdapter
             'adapterKey' => $this->getAdapterKey(),
             'token' => $accessToken->getToken(),
             'tokenSecret' => $accessToken->getTokenSecret(),
-            'version' => 'Oauth1',
+            'version' => 'Oauth2',
         );
     }
 
