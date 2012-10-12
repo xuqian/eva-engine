@@ -26,15 +26,15 @@ $form->setView($this)
             <div class="container">
                 <a class="brand" href="/"><img src="<?=$this->link('/src/epic/img/logo.jpg')?>" alt="logo" height="60"></a>	
                 <ul class="nav nav-main pull-right">
-                    <li class=""><a href="#bg-0"><?=$this->_('GASTRONOMY')?></a></li>
-                    <li class=""><a href="#bg-1"><?=$this->_('WINE')?></a></li>
-                    <li class=""><a href="#bg-2"><?=$this->_('SPIRIT & COCKTAIL')?></a></li>
-                    <li class=""><a href="#bg-3"><?=$this->_('HOTEL & RESORT')?></a></li>
-                    <li class=""><a href="#bg-4"><?=$this->_('ART & DESIGN')?></a></li>
+                    <li class=""><a href="#bg-0"><?=$this->_('HOME')?></a></li>
+                    <li class=""><a href="#bg-1"><?=$this->_('GASTRONOMY')?></a></li>
+                    <li class=""><a href="#bg-2"><?=$this->_('WINE')?></a></li>
+                    <li class=""><a href="#bg-3"><?=$this->_('COCKTAIL')?></a></li>
+                    <li class=""><a href="#bg-4"><?=$this->_('RESORT')?></a></li>
                     <li class=""><a href="#bg-5"><?=$this->_('EVENT')?></a></li>
                 </ul>
                 <div id="loginform" class="">
-                    <form class="form form-inline span4" <?=$this->formAttr($form)?> >
+                    <form class="form form-inline" <?=$this->formAttr($form)?> >
                         <a href="/">Membership Request</a> or
                         <?=$form->restful();?>
                         <?=$form->helper('loginName', array('class' => 'input-small', 'placeholder' => 'Email' ))?>
@@ -53,7 +53,16 @@ $form->setView($this)
 
         <ul class="nav pull-right">
             <li>
-            Copyright 2012 Epicurissimo | 
+            Copyright 2012 Epicurissimo　
+            </li>
+            <li id="social">
+            <a href="https://www.facebook.com/pages/Epicurissimo-Compass/478175602201443" title="Facebook" class="facebook"></a>
+            <a href="https://twitter.com/Epicurissimo" title="Twitter" class="twitter"></a>
+            <a href="https://plus.google.com/102220617896813322867" title="Google+" class="google"></a>
+            <a href="http://pinterest.com/pin/524739794052354407/" title="Pinterest" class="vimeo"></a>
+            <a href="http://weibo.com/2936625884" title="Weibo" class="skype"></a>
+            </li>
+            <li>
             <select id="lang">
                 <option value="">Language</option>
                 <option value="<?=$this->uri('/language/en')?>">English</option>
@@ -62,18 +71,13 @@ $form->setView($this)
                 <option value="<?=$this->uri('/language/zh-TW')?>">繁体中文</option>
             </select>
             </li>
+
         </ul>
         <ul class="nav pull-left">
             <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Membership Info')?></a>|</li>
             <li><a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li>
             <li><a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a></li>
-            <li id="social">
-            <a href="https://www.facebook.com/pages/Epicurissimo-Compass/478175602201443" title="Facebook" class="facebook"></a>
-            <a href="https://twitter.com/Epicurissimo" title="Twitter" class="twitter"></a>
-            <a href="https://plus.google.com/102220617896813322867" title="Google+" class="google"></a>
-            <a href="http://pinterest.com/pin/524739794052354407/" title="Pinterest" class="vimeo"></a>
-            <a href="http://weibo.com/2936625884" title="Weibo" class="skype"></a>
-            </li>
+
             <li> | <?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?><a href="<?=$this->uri('/city/')?>" class="last">[<?=$this->_('Change')?>]</a></li>
         </ul>
 
