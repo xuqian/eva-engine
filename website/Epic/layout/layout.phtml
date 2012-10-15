@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=$this->language?>" lang="<?=$this->language?>">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+    <?=$this->headTitle()?>
+	<!--[if lt IE 9]>
+	<meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
+	<![endif]-->
+    <?=$this->headMeta()?>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
+    <link href="<?=$this->link('/lib/css/fontawesome/css/font-awesome.css')?>" media="all" rel="stylesheet" type="text/css" />
+    <link href="<?=$this->link('/src/epic/css/main.css')?>" media="all" rel="stylesheet" type="text/css" />
+    <?=$this->evajs()?>
+</head>
+
+<body class="prereg">
+
+
+    <header id="header">
+    <div class="container">
+        <div class="navbar navbar-inverse"><div class="navbar-inner">
+                <?$view =$this->layout()->getChildren();$id = $view[0]->id;?>
+                <!--<a class="brand" href="/">Epicurissimo</a>-->
+                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
+                <ul class="nav nav-main">
+                    <li><a href="/"><?=$this->_('Home')?></a></li>
+                    <li class="<?=$id == 'connoisseur' ? 'active' : ''?>"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?></a></li>
+                    <li class="<?=$id == 'professional' ? 'active' : ''?>"><a href="/reg/professional"><?=$this->_('Professional')?></a></li>
+                    <li class="<?=$id == 'corporate' ? 'active' : ''?>"><a href="/reg/corporate"><?=$this->_('Corporate')?></a></li>
+                </ul>
+        </div></div>
+    </div>
+    </header>
+
+    <div id="page" class="page">
+        <?=$this->layout()->content;?>
+    </div><!-- #page end-->
+
+    <footer id="footer" class="footer"><div class="container">
+        <nav id="navbar_footer" class="">
+        <ul class="nav pull-right">
+            <li>
+            Copyright 2012 Epicurissimo　| 　 
+            <div class="btn-group dropup pull-right">
+                <a class="btn dropdown-toggle btn-small btn-inverse" data-toggle="dropdown" href="#">Language
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="<?=$this->uri('/language/en')?>">English</a></li>
+                    <li><a href="<?=$this->uri('/language/fr')?>">Français</a></li>
+                    <li><a href="<?=$this->uri('/language/zh')?>">中文</a></li>
+                    <li><a href="<?=$this->uri('/language/zh-TW')?>">繁体中文</a></li>
+                </ul>
+            </div>
+
+            </li>
+        </ul>
+        </nav>
+        <nav class="">
+        <ul class="nav pull-left">
+            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Home')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
+            <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
+            　<?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?> </li>
+        </ul>
+        </nav>
+        <div class="clearfix"></div>
+        <p>
+        </p>
+    </div></footer><!-- #footer end-->
+
+
+    <script src="<?=$this->link('/lib/js/labjs/labjs.min.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/jquery/jquery.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/jquery/jquery.validationEngine.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/jquery.stepy.min.js')?>"></script>
+    <script src="<?=$this->link('/eva/js/core.js')?>"></script>
+    <script src="<?=$this->link('/eva/js/ui.js')?>"></script>
+    <script src="<?=$this->link('/src/epic/js/init.js')?>"></script>
+
+    <script>
+        eva.init(eva_config);
+        eva.ui.init();
+    </script>
+</body>
+</html>

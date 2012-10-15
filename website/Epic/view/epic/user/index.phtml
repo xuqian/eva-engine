@@ -1,0 +1,227 @@
+<?
+$this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
+
+$form = new Blog\Form\PostCreateForm();
+$form->useSubFormGroup()
+     ->setMethod('post')
+     ->setView($this)
+     ->setAction($this->uri('/admin/blog/'))
+     ->prepare();
+
+?>
+
+<div class="page-inner">
+    <div class="container">
+        <div class="profile-cover">
+            <ul class="nav profile-nav">
+                    <li class="active"><a href="/"><?=$this->_('Home')?></a></li>
+                    <li class=""><a href="/reg/connoisseur"><?=$this->_('Profile')?></a></li>
+                    <li class=""><a href="/reg/professional"><?=$this->_('Blog')?></a></li>
+                    <li class=""><a href="/reg/corporate"><?=$this->_('Album')?></a></li>
+                    <li class=""><a href="/pages/about"><?=$this->_('Event')?></a></li>
+                    <li class=""><a href="/pages/about"><?=$this->_('Group')?></a></li>
+                </ul>
+                <p class="profile-url">http://epicurissimo.net/testuser</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="profile-main">
+            <div class="row">
+                <div class="span8">
+                    <div class="thumbnail profile-face">
+                        <img alt="" src="<?=$this->link('/src/epic/css/img/face.jpg')?>">
+                        <div class="caption">
+                            <p><a class="highlight" href="#">9999</a>好友</p>
+                        </div>
+                    </div>
+                    <div class="profile-intro">
+                        <div class="profile-title">
+                            <h2>Sophia</h2>
+                            <small class="highlight">Professional / VIP</small>
+                        </div>
+
+                        <dl class="dl-horizontal">
+                            <dt>Title</dt>
+                            <dd>Miss</dd>
+                            <dt>Location</dt>
+                            <dd>Lanzhou, China</dd>
+                        </dl>
+
+                        <p>Tags : 
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        <a href="#">Wine</a>
+                        </p>
+                        <p>
+                            
+                        <a class="btn btn-brown btn-mini" href="#">Add Friend</a>
+                        <a class="btn btn-gray btn-mini" href="#">Send Message</a>
+                        </p>
+                    </div>
+
+                    <div class="profile-activities">
+                        <div class="row">
+                        <form <?=$this->formAttr($form)?> class="activity-box span7">
+                            <div class="page-header">
+                                <h3>Say something...</h3>
+                            </div>
+                            <fieldset class="form">
+                                <div class="activity-box-wrap">
+                                    <div class="activity-box-content">
+                                    <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => '', 'rows' => '5',))?>
+                                </div>
+                                <div class="activity-box-buttons">
+                                    <a class="activity-box-func" href="#">Photo</a>
+                                    <a class="activity-box-func" href="#">Video</a>
+                                    There are <span class="highlight">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                        </div>
+
+                        <div class="page-header border-header">
+                            <h3>New Activities</h3>
+                        </div>
+
+                        <div class="activity-list vlist">
+                            <?for($i = 0; $i < 10; $i++):?>
+                            <div class="item ">
+                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                <div class="item-inline item-text span6">
+                                    <div class="text-content">
+                                        asdsafdsa
+                                    </div>
+                                    <div class="item-absolute item-action">
+                                        <p class="pull-right">
+                                        <a data-id="4" href="javascript:;" class="learn"><span class="icon icon_font icon_mini icon-pencil"></span> 学习</a>
+                                        </p>
+                                        <p class="pull-left">
+                                        <time class="agotime" data-jstime="Fri Apr 6 11:44:17 UTC+0800 2012" datetime="2012-04-06T03:44:17+00:00">6个月前</time>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?endfor?>
+                        </div><!--activity-list end-->
+
+
+                    </div><!--profile-activities end-->
+                </div>
+                <div class="span4">
+
+                    <div class="profile-side">
+                        <div class="calendar calendar-mini">
+                            <table class="table-condensed">
+                                <thead><tr><th class="prev" style=""><i class="icon-arrow-left"></i></th><th class="switch" colspan="5">October 2012</th><th class="next" style=""><i class="icon-arrow-right"></i></th>
+                                </tr><tr><th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th></tr></thead>
+                                <tbody><tr><td class="day old">30</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="day">4</td><td class="day">5</td><td class="day">6</td></tr><tr><td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td><td class="day">13</td></tr><tr><td class="day">14</td><td class="day active">15</td><td class="day">16</td><td class="day">17</td><td class="day">18</td><td class="day">19</td><td class="day">20</td></tr><tr><td class="day">21</td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td></tr><tr><td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">31</td><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td></tr><tr><td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td><td class="day new">8</td><td class="day new">9</td><td class="day new">10</td></tr></tbody>
+                            </table>
+                        </div>
+
+                        <div class="page-header border-header">
+                            <small class="pull-right"><a href="#">全部</a></small>
+                            <h4>My Friends (123)</h4>
+                        </div>
+                        <div class="side-user-list">
+                            <ul class="thumbnails">
+                                <?for($i = 0; $i < 16; $i++):?>
+                                <li>
+                                <a class="thumbnail" href="#">
+                                    <img src="<?=$this->link('/src/epic/css/img/face-04.jpg')?>" alt="" class="img-rounded" width="30" height="30" />
+                                </a>
+                                </li>
+                                <?endfor;?>
+                            </ul>
+                        </div>
+
+                        <div class="page-header border-header">
+                            <small class="pull-right"><a href="#">全部</a></small>
+                            <h4>My Blog (123)</h4>
+                        </div>
+                        <div class="side-blog-list">
+                            <?for($i = 0; $i < 10; $i++):?>
+                            <div class="item ">
+                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+                                <div class="item-inline item-text">
+                                    <div class="text-content">
+                                        <div class="item-title">
+                                            Blog title test
+                                            Blog title test
+                                        </div>
+                                        <p>Post content test</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?endfor?>
+                        </div><!--activity-list end-->
+                        <div class="page-header border-header">
+                            <small class="pull-right"><a href="#">全部</a></small>
+                            <h4>My Events (123)</h4>
+                        </div>
+                        <div class="side-blog-list">
+                            <?for($i = 0; $i < 10; $i++):?>
+                            <div class="item ">
+                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+                                <div class="item-inline item-text">
+                                    <div class="text-content">
+                                        <div class="item-title">
+                                           Event title test
+                                        </div>
+                                        <p>Event Members: 50</p>
+                                        <p>Event Time: <?=$this->datetime(time())?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?endfor?>
+                        </div><!--activity-list end-->
+
+                        <div class="page-header border-header">
+                            <small class="pull-right"><a href="#">全部</a></small>
+                            <h4>Albums</h4>
+                        </div>
+                        <div class="side-album-list">
+                            <ul class="thumbnails">
+                                <?for($i = 0; $i < 8; $i++):?>
+                                <li>
+                                <a class="thumbnail" href="#">
+                                    <img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="70" height="70" />
+                                </a>
+                                </li>
+                                <?endfor;?>
+                            </ul>
+                        </div>
+
+                       <div class="page-header border-header">
+                            <small class="pull-right"><a href="#">全部</a></small>
+                            <h4>My Groups</h4>
+                        </div>
+                        <div class="side-group-list">
+                            <ul class="thumbnails">
+                                <?for($i = 0; $i < 5; $i++):?>
+                                <li>
+                                <a class="thumbnail" href="#">
+                                    <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
+                                </a>
+                                </li>
+                                <?endfor;?>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

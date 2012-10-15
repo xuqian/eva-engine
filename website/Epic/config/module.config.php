@@ -102,6 +102,21 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'user' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/user/[:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Epic\Controller\UserController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
         ),
     ),
     'controllers' => array(
@@ -113,12 +128,13 @@ return array(
             'Epic\Controller\AdController' => 'Epic\Controller\AdController',
             'Epic\Controller\LoginController' => 'Epic\Controller\LoginController',
             'Epic\Controller\CityController' => 'Epic\Controller\CityController',
+            'Epic\Controller\UserController' => 'Epic\Controller\UserController',
         ),
     ),
 
     'view_manager' => array(
         'template_map' => array(
-            'layout/layout' => __DIR__ . '/../layout/empty.phtml',
+            'layout/layout' => __DIR__ . '/../layout/layout.phtml',
             'layout/coming' => __DIR__ . '/../layout/coming.phtml',
             'layout/empty' => __DIR__ . '/../layout/empty.phtml',
             'layout/login' => __DIR__ . '/../layout/login.phtml',
@@ -133,6 +149,7 @@ return array(
             'epic/ad/index' => __DIR__ . '/../view/epic/ad/index.phtml',
             'epic/login/index' => __DIR__ . '/../view/epic/login/index.phtml',
             'epic/city/index' => __DIR__ . '/../view/epic/city/index.phtml',
+            'epic/user/index' => __DIR__ . '/../view/epic/user/index.phtml',
         ),
 
     ),
