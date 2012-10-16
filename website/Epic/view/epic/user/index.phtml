@@ -21,7 +21,7 @@ $form->useSubFormGroup()
                 <li class=""><a href="/pages/about"><?=$this->_('Event')?></a></li>
                 <li class=""><a href="/pages/about"><?=$this->_('Group')?></a></li>
             </ul>
-            <p class="profile-url">http://epicurissimo.net/testuser</p>
+            <p class="profile-url"><a href="<?=$this->serverUrl()?>"><?=$this->serverUrl()?></a></p>
         </div>
     </div><!-- above container end -->
     <div class="container">
@@ -168,35 +168,7 @@ $form->useSubFormGroup()
                     <div class="profile-side">
                         <div class="calendar calendar-mini">
                             <div class="calendar-wrap">
-                                <table class="table-condensed">
-                                    <thead><tr>
-                                            <th class="prev" style=""><i class="icon-large icon-chevron-left highlight"></i></th>
-                                            <th class="switch" colspan="5">October 2012</th>
-                                            <th class="next" style=""><i class="icon-large icon-chevron-right highlight"></i></th>
-                                            </tr><tr>
-                                            <th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th>
-                                    </tr></thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="day old">30</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="day">4</td><td class="day">5</td><td class="day">6</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td><td class="day">13</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">14</td><td class="day active">15</td><td class="day"><span class="today">16</span></td><td class="day">17</td><td class="day">18</td><td class="day">19</td><td class="day">20</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day"><span class="event">21</span></td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">31</td><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td><td class="day new">8</td><td class="day new">9</td><td class="day new">10</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
                             </div>
                             <div class="calendar-caption">
                                 <i class="icon-stop green"></i> Coming Event
@@ -309,3 +281,14 @@ $form->useSubFormGroup()
         </div><!--profil-main end-->
     </div><!--container end-->
 </div><!--page inner end-->
+
+<script>
+eva.runtime = function(){
+        var calendarUrl = eva.d('event/calendar/');
+        $('.calendar-wrap').load(calendarUrl);
+        $('.calendar-wrap thead a').live("click", function(){
+            $('.calendar-wrap').load($(this).attr('href'));
+            return false;
+        });
+}
+</script>
