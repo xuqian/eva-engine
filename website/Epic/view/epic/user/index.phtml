@@ -3,10 +3,10 @@ $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les
 
 $form = new Blog\Form\PostCreateForm();
 $form->useSubFormGroup()
-     ->setMethod('post')
-     ->setView($this)
-     ->setAction($this->uri('/admin/blog/'))
-     ->prepare();
+->setMethod('post')
+->setView($this)
+->setAction($this->uri('/admin/blog/'))
+->prepare();
 
 ?>
 
@@ -14,16 +14,16 @@ $form->useSubFormGroup()
     <div class="container">
         <div class="profile-cover">
             <ul class="nav profile-nav">
-                    <li class="active"><a href="/"><?=$this->_('Home')?></a></li>
-                    <li class=""><a href="/reg/connoisseur"><?=$this->_('Profile')?></a></li>
-                    <li class=""><a href="/reg/professional"><?=$this->_('Blog')?></a></li>
-                    <li class=""><a href="/reg/corporate"><?=$this->_('Album')?></a></li>
-                    <li class=""><a href="/pages/about"><?=$this->_('Event')?></a></li>
-                    <li class=""><a href="/pages/about"><?=$this->_('Group')?></a></li>
-                </ul>
-                <p class="profile-url">http://epicurissimo.net/testuser</p>
+                <li class="active"><a href="/"><?=$this->_('Home')?></a></li>
+                <li class=""><a href="/reg/connoisseur"><?=$this->_('Profile')?></a></li>
+                <li class=""><a href="/reg/professional"><?=$this->_('Blog')?></a></li>
+                <li class=""><a href="/reg/corporate"><?=$this->_('Album')?></a></li>
+                <li class=""><a href="/pages/about"><?=$this->_('Event')?></a></li>
+                <li class=""><a href="/pages/about"><?=$this->_('Group')?></a></li>
+            </ul>
+            <p class="profile-url">http://epicurissimo.net/testuser</p>
         </div>
-    </div>
+    </div><!-- above container end -->
     <div class="container">
         <div class="profile-main">
             <div class="row">
@@ -37,7 +37,7 @@ $form->useSubFormGroup()
                     <div class="profile-intro">
                         <div class="profile-title">
                             <h2>Sophia</h2>
-                            <small class="highlight">Professional / VIP</small>
+                            <small class="profile-level">Professional  <a href="#" title="VIP User"><i class="icon-trophy"></i></a></small>
                         </div>
 
                         <table class="table-condensed">
@@ -79,7 +79,7 @@ $form->useSubFormGroup()
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div><!--profile-intro end-->
 
                     <div class="profile-activities">
                         <div class="row">
@@ -97,51 +97,119 @@ $form->useSubFormGroup()
                                             <a class="activity-box-func" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
                                             There are <span class="highlight highlight-large">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
                                         </div>
-                                    </fieldset>
-                                </form>
-                            </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
 
-                            <div class="page-header border-header">
-                                <h3>New Activities</h3>
-                            </div>
+                        <div class="page-header border-header">
+                            <h3>New Activities</h3>
+                        </div>
 
-                            <div class="activity-list vlist">
-                                <?for($i = 0; $i < 10; $i++):?>
-                                <div class="item ">
-                                    <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="60" height="60" /></a>
-                                    <div class="item-inline item-text span6">
-                                        <div class="text-content">
-                                            asdsafdsa
+                        <div class="activity-list vlist">
+                            <?for($i = 0; $i < 10; $i++):?>
+                            <div class="item">
+                                <a href="" title="" class="item-absolute item-userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                <div class="item-inline item-text span6">
+                                    <div class="item-content">
+                                        <div class="item-title"><a href="#" class="item-user">Sophia</a> Said:</div>
+                                        Hello world. 你好 <a href="#">Test</a>
+                                        <div class="item-image">
+                                            <img src="<?=$this->link('/src/epic/img/example4.jpg')?>" class="img-polaroid">
                                         </div>
-                                        <div class="item-absolute item-action">
+                                        <div class="item-action">
                                             <p class="pull-right">
-                                            <a data-id="4" href="javascript:;" class="learn"><span class="icon icon_font icon_mini icon-pencil"></span> 学习</a>
+                                            <a data-id="4" href="javascript:;" class="learn"><i class="icon-comment"></i> Comments (<span class="highlight">12</span>)</a>
                                             </p>
                                             <p class="pull-left">
-                                            <time class="agotime" data-jstime="Fri Apr 6 11:44:17 UTC+0800 2012" datetime="2012-04-06T03:44:17+00:00">6个月前</time>
+                                            <a href="" class="item-id"><time class="agotime" data-jstime="Fri Apr 6 11:44:17 UTC+0800 2012" datetime="2012-04-06T03:44:17+00:00">6个月前</time></a>
                                             </p>
                                         </div>
                                     </div>
+
+                                    <div class="item-sub-wrap">
+                                        <div class="item-sub-title">
+                                            12 Comments in Total
+                                        </div>
+
+                                        <div class="item-sub-form">
+                                            <form <?=$this->formAttr($form)?> class="">
+                                                <fieldset class="form">
+                                                    <div class="item-sub-textarea">
+                                                        <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => '', 'placeholder' => 'Add Comment'))?>
+                                                    </div>
+                                                    <div class="item-absolute item-sub-submit">
+                                                        <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+
+                                        <?for($j = 0; $j < 10; $j++):?>
+                                        <div class="item-sub">
+                                            <a href="" title="" class="item-absolute item-sub-userface"><img src="<?=$this->link('/src/epic/css/img/face-02.jpg')?>" alt="" class="img-rounded" width="30" height="30" /></a>
+                                            <div class="item-sub-content">
+                                                Hello world. 你好 <a href="#">Test</a>
+                                            </div>
+                                        </div>
+                                        <?endfor?>
+
+                                    </div>
                                 </div>
-                                <?endfor?>
-                            </div><!--activity-list end-->
+                            </div>
+                            <?endfor?>
+                        </div><!--activity-list end-->
 
 
-                        </div><!--profile-activities end-->
-                    </div>
-                    <div class="span4">
-
-                        <div class="profile-side">
-                            <div class="calendar calendar-mini">
+                    </div><!--profile-activities end-->
+                </div><!--left span8 end-->
+                <div class="span4">
+                    <div class="profile-side">
+                        <div class="calendar calendar-mini">
+                            <div class="calendar-wrap">
                                 <table class="table-condensed">
-                                    <thead><tr><th class="prev" style=""><i class="icon-chevron-left"></i></th><th class="switch" colspan="5">October 2012</th><th class="next" style=""><i class="icon-chevron-right"></i></th>
-                                    </tr><tr><th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th></tr></thead>
-                                    <tbody><tr><td class="day old">30</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="day">4</td><td class="day">5</td><td class="day">6</td></tr><tr><td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td><td class="day">13</td></tr><tr><td class="day">14</td><td class="day active">15</td><td class="day">16</td><td class="day">17</td><td class="day">18</td><td class="day">19</td><td class="day">20</td></tr><tr><td class="day">21</td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td></tr><tr><td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">31</td><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td></tr><tr><td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td><td class="day new">8</td><td class="day new">9</td><td class="day new">10</td></tr></tbody>
+                                    <thead><tr>
+                                            <th class="prev" style=""><i class="icon-large icon-chevron-left highlight"></i></th>
+                                            <th class="switch" colspan="5">October 2012</th>
+                                            <th class="next" style=""><i class="icon-large icon-chevron-right highlight"></i></th>
+                                            </tr><tr>
+                                            <th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th>
+                                    </tr></thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="day old">30</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="day">4</td><td class="day">5</td><td class="day">6</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td><td class="day">13</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day">14</td><td class="day active">15</td><td class="day"><span class="today">16</span></td><td class="day">17</td><td class="day">18</td><td class="day">19</td><td class="day">20</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><span class="event">21</span></td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">31</td><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td><td class="day new">8</td><td class="day new">9</td><td class="day new">10</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
+                            <div class="calendar-caption">
+                                <i class="icon-stop green"></i> Coming Event
+                                <i class="icon-stop orange"></i> Today
+                            </div>
+                        </div><!--calendar end-->
+
+                        <div class="subscription">
+                            <button class="btn"><i class="icon-mini icon-envelope-alt"></i> Subscription Epicurissimo Newsletters</button>
+                        </div>
+
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">全部</a></small>
+                            <small class="pull-right"><a href="#">All</a></small>
                             <h4>My Friends (123)</h4>
                         </div>
                         <div class="side-user-list">
@@ -157,7 +225,7 @@ $form->useSubFormGroup()
                         </div>
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">全部</a></small>
+                            <small class="pull-right"><a href="#">All</a></small>
                             <h4>My Blog (123)</h4>
                         </div>
                         <div class="side-blog-list">
@@ -177,7 +245,7 @@ $form->useSubFormGroup()
                             <?endfor?>
                         </div><!--activity-list end-->
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">全部</a></small>
+                            <small class="pull-right"><a href="#">All</a></small>
                             <h4>My Events (123)</h4>
                         </div>
                         <div class="side-blog-list">
@@ -187,7 +255,7 @@ $form->useSubFormGroup()
                                 <div class="item-inline item-text">
                                     <div class="text-content">
                                         <div class="item-title">
-                                           Event title test
+                                            Event title test
                                         </div>
                                         <p>Event Members: 50</p>
                                         <p>Event Time: <?=$this->datetime(time())?></p>
@@ -198,7 +266,7 @@ $form->useSubFormGroup()
                         </div><!--activity-list end-->
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">全部</a></small>
+                            <small class="pull-right"><a href="#">All</a></small>
                             <h4>Albums</h4>
                         </div>
                         <div class="side-album-list">
@@ -213,8 +281,8 @@ $form->useSubFormGroup()
                             </ul>
                         </div>
 
-                       <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">全部</a></small>
+                        <div class="page-header border-header">
+                            <small class="pull-right"><a href="#">All</a></small>
                             <h4>My Groups</h4>
                         </div>
                         <div class="side-group-list">
@@ -228,13 +296,9 @@ $form->useSubFormGroup()
                                 <?endfor;?>
                             </ul>
                         </div>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    </div><!--profile-side end-->
+                </div><!--right span4 end-->
+            </div><!--row end-->
+        </div><!--profil-main end-->
+    </div><!--container end-->
+</div><!--page inner end-->
