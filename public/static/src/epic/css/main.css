@@ -852,7 +852,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .page-header{margin:20px 0;}.page-header h2,.page-header h3{font-size:16px;color:#545454;}
 .page-header.border-header{border-bottom:2px solid #D8D8D8;margin:20px 0;}.page-header.border-header h3{font-size:16px;line-height:30px;}
 .page-header.border-header h4{font-size:14px;line-height:25px;color:#000;font-weight:bold;}
-.page-header.border-header small{line-height:30px;}
+.page-header.border-header small{font-size:12px;line-height:30px;}
 #header{background:#000;height:50px;overflow:hidden;}#header .navbar-inner{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;background:#000;border:0;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);}
 #header .nav-main>li a{margin-right:10px;padding:0 20px;padding-top:14px;border-bottom:4px solid #000;height:32px;font-size:15px;text-align:center;background:#000;-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out;text-transform:uppercase;font-family:'EB Garamond',serif;}
 #header .nav-main>li a small{display:block;font-size:9px;color:#AAA;font-weight:normal;text-transform:uppercase;}
@@ -877,7 +877,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .profile-nav li:hover a,.profile-nav li.active a{color:#e1500d;border-color:#e1500d;background:none;}
 .profile-activities{margin:0 50px;}
 .profile-side{margin-right:50px;}
-.activity-box .activity-box-wrap{background:#FFF;}
+.activity-box .activity-box-wrap{background:#FFF;-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;-webkit-box-shadow:0 1px 1px #999999;-moz-box-shadow:0 1px 1px #999999;box-shadow:0 1px 1px #999999;}
 .activity-box textarea{margin:0;padding-left:0;padding-right:0;width:100%;}
 .activity-box .buttons{margin:0;}
 .activity-box .activity-box-func{float:left;line-height:40px;font-size:13px;color:#333;margin-left:10px;}
@@ -898,9 +898,11 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .activity-list .item-content{margin:10px 15px;position:relative;}
 .activity-list .item-sub-wrap{background:#F8F8F8;padding:10px 15px;border-top:1px solid #D8D8D8;-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;border-bottom-right-radius:5px;}
 .activity-list .item-sub-title{color:#e1500d;font-weight:bold;}
-.activity-list .item-sub{clear:both;position:relative;height:30px;padding:5px 0;text-align:left;*zoom:1;}.activity-list .item-sub:before,.activity-list .item-sub:after{display:table;content:"";line-height:0;}
+.activity-list .item-sub{clear:both;position:relative;height:35px;padding:5px 0;text-align:left;*zoom:1;}.activity-list .item-sub:before,.activity-list .item-sub:after{display:table;content:"";line-height:0;}
 .activity-list .item-sub:after{clear:both;}
-.activity-list .item-sub-userface{left:0;top:5px;}
+.activity-list .item-sub-user{font-weight:bold;color:#333;}
+.activity-list .item-sub-id{margin-left:10px;font-weight:normal;color:#999;}
+.activity-list .item-sub-userface{left:0;top:8px;}
 .activity-list .item-sub-content{margin-left:40px;}
 .activity-list .item-sub-form{position:relative;}
 .activity-list .item-sub-submit{position:absolute;right:0;top:0;}
@@ -925,7 +927,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .side-blog-list .item-inline,.side-event-list .item-inline{min-height:60px;height:auto;}
 .side-blog-list .userface,.side-event-list .userface{left:0;top:10px;}
 .side-blog-list .item-text,.side-event-list .item-text{margin:0 0 0 60px;position:relative;}
-.side-blog-list .item-title,.side-event-list .item-title{font-weight:bold;}
+.side-blog-list .item-title,.side-event-list .item-title{font-weight:bold;}.side-blog-list .item-title a,.side-event-list .item-title a{color:#333;}
 .side-blog-list p,.side-event-list p{color:#999;}
 .side-user-list .thumbnails{margin-left:0;}
 .side-user-list .thumbnail{padding:0;}
@@ -936,3 +938,4 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .side-group-list .thumbnails{margin-left:0;}
 .side-group-list .thumbnail{padding:0;}
 .side-group-list .thumbnails li{margin:0 12px 15px 0;}
+.side-ad-list{margin:20px 0;height:160px;clear:both;}

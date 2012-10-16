@@ -149,6 +149,7 @@ $form->useSubFormGroup()
                                         <div class="item-sub">
                                             <a href="" title="" class="item-absolute item-sub-userface"><img src="<?=$this->link('/src/epic/css/img/face-02.jpg')?>" alt="" class="img-rounded" width="30" height="30" /></a>
                                             <div class="item-sub-content">
+                                                <div class="item-sub-title"><a href="#" class="item-sub-user">Sophia</a><a href="" class="item-sub-id"><time class="agotime" data-jstime="Fri Apr 6 11:44:17 UTC+0800 2012" datetime="2012-04-06T03:44:17+00:00">6个月前</time></a></div>
                                                 Hello world. 你好 <a href="#">Test</a>
                                             </div>
                                         </div>
@@ -209,7 +210,7 @@ $form->useSubFormGroup()
 
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">All</a></small>
+                            <small class="pull-right"><a href="#">View All</a></small>
                             <h4>My Friends (123)</h4>
                         </div>
                         <div class="side-user-list">
@@ -225,7 +226,7 @@ $form->useSubFormGroup()
                         </div>
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">All</a></small>
+                            <small class="pull-right"><a href="#">View All</a></small>
                             <h4>My Blog (123)</h4>
                         </div>
                         <div class="side-blog-list">
@@ -235,8 +236,8 @@ $form->useSubFormGroup()
                                 <div class="item-inline item-text">
                                     <div class="text-content">
                                         <div class="item-title">
-                                            Blog title test
-                                            Blog title test
+                                            <a href="#">Blog title test
+                                                Blog title test</a>
                                         </div>
                                         <p>Post content test</p>
                                     </div>
@@ -245,7 +246,7 @@ $form->useSubFormGroup()
                             <?endfor?>
                         </div><!--activity-list end-->
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">All</a></small>
+                            <small class="pull-right"><a href="#">View All</a></small>
                             <h4>My Events (123)</h4>
                         </div>
                         <div class="side-blog-list">
@@ -255,7 +256,7 @@ $form->useSubFormGroup()
                                 <div class="item-inline item-text">
                                     <div class="text-content">
                                         <div class="item-title">
-                                            Event title test
+                                            <a href="#">Event title test</a>
                                         </div>
                                         <p>Event Members: 50</p>
                                         <p>Event Time: <?=$this->datetime(time())?></p>
@@ -266,7 +267,7 @@ $form->useSubFormGroup()
                         </div><!--activity-list end-->
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">All</a></small>
+                            <small class="pull-right"><a href="#">View All</a></small>
                             <h4>Albums</h4>
                         </div>
                         <div class="side-album-list">
@@ -282,7 +283,7 @@ $form->useSubFormGroup()
                         </div>
 
                         <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">All</a></small>
+                            <small class="pull-right"><a href="#">View All</a></small>
                             <h4>My Groups</h4>
                         </div>
                         <div class="side-group-list">
@@ -296,6 +297,12 @@ $form->useSubFormGroup()
                                 <?endfor;?>
                             </ul>
                         </div>
+
+                        <div class="side-ad-list">
+                            <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
+                            <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
+                        </div>
+
                     </div><!--profile-side end-->
                 </div><!--right span4 end-->
             </div><!--row end-->
