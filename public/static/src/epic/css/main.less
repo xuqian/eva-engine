@@ -8,6 +8,19 @@
 
 a {
 	color:@orange;
+
+	&:hover {
+		text-decoration:none;
+	}
+}
+
+.highlight {
+	color:@orange;
+}
+
+.highlight-large {
+	font-size:20px;
+	line-height:20px;
 }
 
 html, body {
@@ -17,13 +30,46 @@ html, body {
 body {
 	color:#333;
 	font-size:12px;
-	//font-family: 'Philosopher', sans-serif;
-	font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; 
+	font-family: 'Philosopher', sans-serif;
+	//font-family:"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; 
 }
 
 .container {
 	max-width:1210px;
 }
+
+.btn-light-brown {
+	.buttonBackground(#D3B146, #DAA51B);
+	color:#FFF;
+
+}
+.btn-brown {
+	.buttonBackground(#CDBB95, #BAA77D);
+	font-size:12px;
+	color:#333;
+	text-shadow:none;
+	border-color:#957F68;
+	&:hover {
+		color:#333;
+	}
+}
+.btn-gray {
+	.buttonBackground(#ECE9E0, #E7E4D3);
+	font-size:12px;
+	color:#333;
+	text-shadow:none;
+	border-color:#BCAEA1;
+	&:hover {
+		color:#333;
+	}
+
+	.icon-envelope-alt {
+		color:#AEA48B;
+	}
+	
+}
+
+
 
 #header {
 	background:#000;
@@ -120,10 +166,12 @@ body {
 	background:#545454;
 }
 
+/* Profile Page Start */
+
 .profile-cover {
 	height:250px;
 	position:relative;
-	background:url(img/cover-3.jpg) no-repeat;
+	background:url(img/cover-2.jpg) no-repeat;
 }
 .profile-main {
 	background:#F0F0F0;
@@ -133,16 +181,34 @@ body {
 	position:absolute;
 	width:175px;
 	background:#FFF;
-	top:-100px;
+	top:-80px;
 	left:50px;
+	text-align:center;
+	.border-radius(0);
+	.box-shadow(0 3px 3px rgba(0,0,0,.095));
+
+	.caption {
+		height:30px;
+		line-height:40px;
+	}
 }
+
 .profile-intro {
 	margin-left:270px;
 
 	.profile-title {
 		h2, h3 {
 			display:inline;
-			font-size:40px;
+			font-size:30px;
+		}
+	}
+
+	.social a{
+		color:#999;
+		font-size:18px;
+
+		&:hover {
+			color:@orange;
 		}
 	}
 }
@@ -156,7 +222,7 @@ body {
 
 .profile-nav {
 	position:absolute;
-	top:150px;
+	top:170px;
 	left:270px;
 
 	li {
@@ -170,10 +236,13 @@ body {
 
 	a {
 		display:block;
-		color:#544E50;
-		border-bottom:3px solid #544E50;
+		//color:#544E50;
+		color:#FFF;
+
+		border-bottom:3px solid #FFF;
 		font-size:16px;
 		text-transform:uppercase;
+		text-align:center;
 	}
 
 	li:hover a, li.active a {
@@ -190,23 +259,6 @@ body {
 
 .profile-side {
 	margin-right:50px;
-}
-
-.btn-light-brown {
-	.buttonBackground(#D3B146, #DAA51B);
-	color:#FFF;
-}
-.btn-brown {
-	.buttonBackground(#CDBB95, #BAA77D);
-	font-size:12px;
-	color:#666;
-	text-shadow:none;
-}
-.btn-gray {
-	.buttonBackground(#ECE9E0, #E7E4D3);
-	font-size:12px;
-	color:#666;
-	text-shadow:none;
 }
 
 
@@ -289,6 +341,12 @@ body {
 		background:#FFF;
 		.border-radius(5px);
 		border:1px solid #D8D8D8;
+		-webkit-filter: drop-shadow(0 1px 5px rgba(0,0,0,.5));
+		-moz-filter: drop-shadow(0 1px 5px rgba(0,0,0,.5));
+		-ms-filter: drop-shadow(0 1px 5px rgba(0,0,0,.5));
+		-o-filter: drop-shadow(0 1px 5px rgba(0,0,0,.5));
+		filter: drop-shadow(0 1px 5px rgba(0,0,0,.5));
+		
 	}
 
 	.item-text:after {
@@ -348,6 +406,14 @@ body {
 	tbody .day.new {
 		color:#999;
 		font-weight:normal;
+	}
+}
+
+.page-header {
+	margin:20px 0;
+	h2, h3 {
+		font-size:16px;
+		color:#545454
 	}
 }
 

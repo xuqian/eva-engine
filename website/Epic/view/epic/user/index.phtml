@@ -31,7 +31,7 @@ $form->useSubFormGroup()
                     <div class="thumbnail profile-face">
                         <img alt="" src="<?=$this->link('/src/epic/css/img/face.jpg')?>">
                         <div class="caption">
-                            <p><a class="highlight" href="#">9999</a>好友</p>
+                            <a class="highlight highlight-large" href="#">123</a> Friends
                         </div>
                     </div>
                     <div class="profile-intro">
@@ -40,92 +40,105 @@ $form->useSubFormGroup()
                             <small class="highlight">Professional / VIP</small>
                         </div>
 
-                        <dl class="dl-horizontal">
-                            <dt>Title</dt>
-                            <dd>Miss</dd>
-                            <dt>Location</dt>
-                            <dd>Lanzhou, China</dd>
-                        </dl>
-
-                        <p>Tags : 
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        <a href="#">Wine</a>
-                        </p>
-                        <p>
-                            
-                        <a class="btn btn-brown btn-mini" href="#">Add Friend</a>
-                        <a class="btn btn-gray btn-mini" href="#">Send Message</a>
-                        </p>
+                        <table class="table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td>Title: Miss</td>
+                                    <td colspan="2">Profession : Food Critic</td>
+                                </tr>
+                                <tr>
+                                    <td>Location : Lanzhou, China</td>
+                                    <td>Birthday : 1980-10-01</td>
+                                    <td>Events : <a href="">3</a> Times</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Tags : 
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a>
+                                        <a href="#">Wine</a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a class="btn btn-brown btn-mini" href="#"><i class="icon-mini icon-plus"></i> Add Friend</a>
+                                        <a class="btn btn-gray btn-mini" href="#"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
+                                    </td>
+                                    <td class="social">
+                                        Social Networking : 
+                                        <a href="#"><i class="icon-facebook-sign"></i></a>
+                                        <a href="#"><i class="icon-pinterest"></i></a>
+                                        <a href="#"><i class="icon-twitter"></i></a>
+                                        <a href="#"><i class="icon-google-plus"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="profile-activities">
                         <div class="row">
-                        <form <?=$this->formAttr($form)?> class="activity-box span7">
-                            <div class="page-header">
-                                <h3>Say something...</h3>
+                            <form <?=$this->formAttr($form)?> class="activity-box span7">
+                                <div class="page-header">
+                                    <h3>Say something...</h3>
+                                </div>
+                                <fieldset class="form">
+                                    <div class="activity-box-wrap">
+                                        <div class="activity-box-content">
+                                            <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => '', 'rows' => '5',))?>
+                                        </div>
+                                        <div class="activity-box-buttons">
+                                            <a class="activity-box-func" href="#"><i class="icon-mini icon-picture"></i> Photo</a>
+                                            <a class="activity-box-func" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
+                                            There are <span class="highlight highlight-large">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </div>
-                            <fieldset class="form">
-                                <div class="activity-box-wrap">
-                                    <div class="activity-box-content">
-                                    <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => '', 'rows' => '5',))?>
-                                </div>
-                                <div class="activity-box-buttons">
-                                    <a class="activity-box-func" href="#">Photo</a>
-                                    <a class="activity-box-func" href="#">Video</a>
-                                    There are <span class="highlight">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                        </div>
 
-                        <div class="page-header border-header">
-                            <h3>New Activities</h3>
-                        </div>
-
-                        <div class="activity-list vlist">
-                            <?for($i = 0; $i < 10; $i++):?>
-                            <div class="item ">
-                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="60" height="60" /></a>
-                                <div class="item-inline item-text span6">
-                                    <div class="text-content">
-                                        asdsafdsa
-                                    </div>
-                                    <div class="item-absolute item-action">
-                                        <p class="pull-right">
-                                        <a data-id="4" href="javascript:;" class="learn"><span class="icon icon_font icon_mini icon-pencil"></span> 学习</a>
-                                        </p>
-                                        <p class="pull-left">
-                                        <time class="agotime" data-jstime="Fri Apr 6 11:44:17 UTC+0800 2012" datetime="2012-04-06T03:44:17+00:00">6个月前</time>
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="page-header border-header">
+                                <h3>New Activities</h3>
                             </div>
-                            <?endfor?>
-                        </div><!--activity-list end-->
+
+                            <div class="activity-list vlist">
+                                <?for($i = 0; $i < 10; $i++):?>
+                                <div class="item ">
+                                    <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                    <div class="item-inline item-text span6">
+                                        <div class="text-content">
+                                            asdsafdsa
+                                        </div>
+                                        <div class="item-absolute item-action">
+                                            <p class="pull-right">
+                                            <a data-id="4" href="javascript:;" class="learn"><span class="icon icon_font icon_mini icon-pencil"></span> 学习</a>
+                                            </p>
+                                            <p class="pull-left">
+                                            <time class="agotime" data-jstime="Fri Apr 6 11:44:17 UTC+0800 2012" datetime="2012-04-06T03:44:17+00:00">6个月前</time>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?endfor?>
+                            </div><!--activity-list end-->
 
 
-                    </div><!--profile-activities end-->
-                </div>
-                <div class="span4">
+                        </div><!--profile-activities end-->
+                    </div>
+                    <div class="span4">
 
-                    <div class="profile-side">
-                        <div class="calendar calendar-mini">
-                            <table class="table-condensed">
-                                <thead><tr><th class="prev" style=""><i class="icon-arrow-left"></i></th><th class="switch" colspan="5">October 2012</th><th class="next" style=""><i class="icon-arrow-right"></i></th>
-                                </tr><tr><th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th></tr></thead>
-                                <tbody><tr><td class="day old">30</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="day">4</td><td class="day">5</td><td class="day">6</td></tr><tr><td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td><td class="day">13</td></tr><tr><td class="day">14</td><td class="day active">15</td><td class="day">16</td><td class="day">17</td><td class="day">18</td><td class="day">19</td><td class="day">20</td></tr><tr><td class="day">21</td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td></tr><tr><td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">31</td><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td></tr><tr><td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td><td class="day new">8</td><td class="day new">9</td><td class="day new">10</td></tr></tbody>
-                            </table>
-                        </div>
+                        <div class="profile-side">
+                            <div class="calendar calendar-mini">
+                                <table class="table-condensed">
+                                    <thead><tr><th class="prev" style=""><i class="icon-chevron-left"></i></th><th class="switch" colspan="5">October 2012</th><th class="next" style=""><i class="icon-chevron-right"></i></th>
+                                    </tr><tr><th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th></tr></thead>
+                                    <tbody><tr><td class="day old">30</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="day">4</td><td class="day">5</td><td class="day">6</td></tr><tr><td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td><td class="day">13</td></tr><tr><td class="day">14</td><td class="day active">15</td><td class="day">16</td><td class="day">17</td><td class="day">18</td><td class="day">19</td><td class="day">20</td></tr><tr><td class="day">21</td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td><td class="day">27</td></tr><tr><td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">31</td><td class="day new">1</td><td class="day new">2</td><td class="day new">3</td></tr><tr><td class="day new">4</td><td class="day new">5</td><td class="day new">6</td><td class="day new">7</td><td class="day new">8</td><td class="day new">9</td><td class="day new">10</td></tr></tbody>
+                                </table>
+                            </div>
 
                         <div class="page-header border-header">
                             <small class="pull-right"><a href="#">全部</a></small>
