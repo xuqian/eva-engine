@@ -1,8 +1,16 @@
 <?php
-namespace Payment;
+namespace Event;
 
 class Module
 {
+    public function onBootstrap($e)
+    {
+        $app = $e->getParam('application');
+        $serviceManager = $app->getServiceManager();
+        $serviceManager->setInvokableClass('Event\Event\Listener', 'Event\Event\Listener');
+        $app->getEventManager()->attach($serviceManager->get('Event\Event\Listener'));
+    }
+
     public function getAutoloaderConfig()
     {
         return array(

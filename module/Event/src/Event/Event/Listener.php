@@ -8,7 +8,7 @@
  * @package   Zend_Mvc
  */
 
-namespace Payment\Event;
+namespace Event\Event;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -32,7 +32,6 @@ class Listener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('payment.model.log.logstep.response', array($this, 'onLogstepResponse'));
     }
 
     /**
@@ -50,21 +49,4 @@ class Listener implements ListenerAggregateInterface
         }
     }
 
-    public function onLogstepResponse($e)
-    {
-        $userId = $e->getTarget()->getItem()->user_id;
-        $isUserModule = \Eva\Api::_()->isModuleLoaded('User');
-
-        if ($userId && $isUserModule) {
-            $table = \Eva\Api::_()->getDbTable('User\DbTable\RolesUsers'); 
-            $role['user_id'] = $userId;
-            $role['role_id'] = 2;
-            $table->where(array(
-                'user_id' => $userId,
-                'role_id' => $role['role_id'],
-            ))->remove();
-            $table->create($role);
-        } 
-    }
 }
-    
