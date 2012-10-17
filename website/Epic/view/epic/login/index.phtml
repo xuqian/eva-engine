@@ -110,7 +110,6 @@ eva.runtime = function(){
         $(".bg").height(heightStep[i]);
         $(".bg").each(function(index){
                 var bgDir = 'url("' + imgDir + '/' + widthStep[i] + '/' + 'bg' + index + '.jpg")';
-                console.log(bgDir);
                 $(this).css('background-image', bgDir);
         });
     }
