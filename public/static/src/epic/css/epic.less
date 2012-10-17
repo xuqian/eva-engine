@@ -484,8 +484,12 @@ body.rtl .formError .formErrorArrow {
 .loginblock {
 	position:absolute;
 	width:250px;
-	height:250px;
+	height:230px;
 	font-size:14px;
+	
+	padding:20px;
+	background:#000;
+	.opacity(80);
 
 	.typo{
 		background:none;
@@ -493,10 +497,11 @@ body.rtl .formError .formErrorArrow {
 		width:250px;
 		height:250px;
 		position:absolute;
-		top:0;
-		left:0;
+		top:20px;
+		left:20px;
 	}
 
+	/*
 	a {
 		display:block;
 		width:250px;
@@ -506,6 +511,41 @@ body.rtl .formError .formErrorArrow {
 	}
 	a:hover {
 		text-decoration:none;
+	}
+		*/
+}
+
+.nobg {
+	background:none !important;
+	.opacity(100) !important;
+}
+
+.loginformblock {
+	padding:20px 20px 40px 20px;
+	top:100px;
+	right:100px;
+	background:#000;
+	.opacity(80);
+
+	label {
+		color:#FFF;
+	}
+
+	label.checkbox{
+		padding-left:0;
+	}
+
+	input.checkbox {
+		margin-right:5px;
+	}
+
+	hr {
+		margin:10px 0;
+		clear:both;
+	}
+
+	i {
+		font-size:14px;
 	}
 }
 
@@ -581,7 +621,6 @@ body.rtl .formError .formErrorArrow {
 	width:180px;
 	left:100px;
 	top:100px;
-	.opacity(90);
 	background:url(../img/example6.jpg) 50% 0 no-repeat;
 }
 
@@ -590,7 +629,6 @@ body.rtl .formError .formErrorArrow {
 	height:200px;
 	bottom:100px;
 	right:100px;
-	.opacity(70);
 	background:url(../img/example7.jpg) 50% 0 no-repeat;
 }
 
