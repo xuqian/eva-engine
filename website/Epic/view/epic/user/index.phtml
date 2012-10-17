@@ -284,7 +284,7 @@ $form->useSubFormGroup()
 
 <script>
 eva.runtime = function(){
-        var calendarUrl = eva.d('event/calendar/');
+        var calendarUrl = eva.d('/event/calendar/');
         $('.calendar-wrap').load(calendarUrl);
         $('.calendar-wrap thead a').live("click", function(){
             $('.calendar-wrap').load($(this).attr('href'));
