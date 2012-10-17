@@ -893,14 +893,8 @@ body[dir='rtl'] .formError .formErrorArrow,body.rtl .formError .formErrorArrow{m
 .formError .formErrorArrow .line1{width:1px;border:none;background:#ddd;}
 .scrolling{background:#000;padding-top:50px;}.scrolling #header{height:auto;}
 .guide{margin-top:-100px;}
-.bg{width:100%;height:800px;margin:0 auto;padding-top:50px;position:relative;}
-.bg-0{width:100%;background:url(../img/bg0.jpg) 50% 0 no-repeat fixed;margin:0 auto;padding-top:50px;position:relative;}
-.bg-1{background:url(../img/bg1.jpg) 50% 0 no-repeat fixed;}
-.bg-2{background:url(../img/bg2.jpg) 50% 0 no-repeat fixed;}
-.bg-3{background:url(../img/bg3.jpg) 50% 0 no-repeat fixed;}
-.bg-4{background:url(../img/bg4.jpg) 50% 0 no-repeat fixed;}
-.bg-5{background:url(../img/bg5.jpg) 50% 0 no-repeat fixed;}
-.bg-6{background:url(../img/bg6.jpg) 50% 0 no-repeat fixed;}
+.bg{width:100%;height:800px;margin:0 auto;padding-top:50px;position:relative;background-position:50% 0;background-repeat:no-repeat;background-attachment:fixed;}
+.bg-0{width:100%;margin:0 auto;padding-top:50px;position:relative;}
 #loginform{position:absolute;right:30px;top:30px;}
 #titleblock{margin:40px 0;}#titleblock h1{color:#6B520F;font-size:40px;font-family:'Philosopher',sans-serif;border:0;}
 #titleblock ul{list-style:disc inside none;color:#555555;font:500 14px/1.8 'Hiragino Sans GB',Microsoft YaHei,sans-serif;}

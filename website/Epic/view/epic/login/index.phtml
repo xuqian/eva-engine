@@ -87,3 +87,36 @@ $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les
             </div>
         </div>
 </div>
+
+<script>
+eva.runtime = function(){
+    var widthStep = [1024, 1280, 1366, 1440, 1920];
+    var heightStep = [640, 680, 640, 780, 960];
+    var imgDir = eva.s('/src/epic/img');
+    var i = 0;
+
+    var setBg = function(){
+        var screenWidth = $(document).width();
+        for(i in widthStep){
+                if(screenWidth < widthStep[i]){
+                    break;
+                }
+        }
+        $(".bg").height(heightStep[i]);
+        $(".bg").each(function(index){
+                var bgDir = 'url("' + imgDir + '/' + widthStep[i] + '/' + 'bg' + index + '.jpg")';
+                console.log(bgDir);
+                $(this).css('background-image', bgDir);
+        });
+    }
+
+    setBg();
+
+    $(window).resize(function(){
+        setBg();
+    });
+    
+
+
+}
+</script>
