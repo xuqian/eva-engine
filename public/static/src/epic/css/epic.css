@@ -898,7 +898,7 @@ body[dir='rtl'] .formError .formErrorArrow,body.rtl .formError .formErrorArrow{m
 #loginform{position:absolute;right:30px;top:30px;}
 #titleblock{margin:40px 0;}#titleblock h1{color:#6B520F;font-size:40px;font-family:'Philosopher',sans-serif;border:0;}
 #titleblock ul{list-style:disc inside none;color:#555555;font:500 14px/1.8 'Hiragino Sans GB',Microsoft YaHei,sans-serif;}
-.loginblock{position:absolute;width:250px;height:250px;}.loginblock .typo{background:none;color:#FFF;width:250px;height:250px;position:absolute;top:0;left:0;}
+.loginblock{position:absolute;width:250px;height:250px;font-size:14px;}.loginblock .typo{background:none;color:#FFF;width:250px;height:250px;position:absolute;top:0;left:0;}
 .loginblock a{display:block;width:250px;height:250px;color:#FFF;font-family:'Philosopher',sans-serif;}
 .loginblock a:hover{text-decoration:none;}
 .block-text-1{bottom:50px;left:100px;}
