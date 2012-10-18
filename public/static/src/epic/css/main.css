@@ -882,6 +882,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .activity-box .buttons{margin:0;}
 .activity-box .activity-box-func{float:left;line-height:40px;font-size:13px;color:#333;margin-left:10px;}
 .activity-box .activity-box-buttons{text-align:right;}
+#fileupload-modal{margin:0;margin-top:10px;width:200px;position:absolute;}
 .activity-list .item{clear:both;position:relative;height:70px;padding:10px 0;text-align:left;}
 .activity-list .item-inline{display:inline-block;zoom:1;*display:inline;height:70px;}
 .activity-list .item-absolute{height:70px;position:absolute;top:10px;}

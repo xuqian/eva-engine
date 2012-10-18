@@ -1,13 +1,11 @@
 <?
 $this->headTitle('Epicurissimo compass | communauté privé pour les pros et les connaisseur du gastronomie et vin', 'SET');
-
-$form = new Blog\Form\PostCreateForm();
+$form = new Activity\Form\MessageCreateForm();
 $form->useSubFormGroup()
-->setMethod('post')
-->setView($this)
-->setAction($this->uri('/admin/blog/'))
-->prepare();
-
+     ->setMethod('post')
+     ->setView($this)
+     ->setAction($this->uri('/activity/'))
+     ->prepare();
 ?>
 
 <div class="page-inner">
@@ -84,17 +82,20 @@ $form->useSubFormGroup()
                     <div class="profile-activities">
                         <div class="row">
                             <form <?=$this->formAttr($form)?> class="activity-box span7">
+                                <?=$form->helper('messageType', 'formHidden', array('class' => ''))?>        
+                                <?=$form->helper('connect_id', array('class' => ''))?>
+                                <?=$form->helper(array('MessageFile', 'file_id'), array('class' => ''))?>
                                 <div class="page-header">
                                     <h3>Say something...</h3>
                                 </div>
                                 <fieldset class="form">
                                     <div class="activity-box-wrap">
                                         <div class="activity-box-content">
-                                            <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => '', 'rows' => '5',))?>
+                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5))?>        
                                         </div>
                                         <div class="activity-box-buttons">
-                                            <a class="activity-box-func" href="#"><i class="icon-mini icon-picture"></i> Photo</a>
-                                            <a class="activity-box-func" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
+                                            <a id="activity-box-image-button" class="activity-box-func" href="#"><i class="icon-mini icon-picture"></i> Photo</a>
+                                            <a id="activity-box-video-button" class="activity-box-func" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
                                             There are <span class="highlight highlight-large">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
                                         </div>
                                     </div>
@@ -134,9 +135,12 @@ $form->useSubFormGroup()
 
                                         <div class="item-sub-form">
                                             <form <?=$this->formAttr($form)?> class="">
+                                                <?=$form->helper('messageType', 'formHidden', array('class' => ''))?>        
+                                                <?=$form->helper('connect_id', array('class' => ''))?>
+                                                <?=$form->helper(array('MessageFile', 'file_id'), array('class' => ''))?>
                                                 <fieldset class="form">
                                                     <div class="item-sub-textarea">
-                                                        <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => '', 'placeholder' => 'Add Comment'))?>
+                                                        <?=$form->helper('content', 'formTextarea', array('placeholder' => 'Add Comment'))?>        
                                                     </div>
                                                     <div class="item-absolute item-sub-submit">
                                                         <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
@@ -282,13 +286,41 @@ $form->useSubFormGroup()
     </div><!--container end-->
 </div><!--page inner end-->
 
+<?=$this->widget('File', 'file/index')?>
+
 <script>
-eva.runtime = function(){
-        var calendarUrl = eva.d('/event/calendar/');
-        $('.calendar-wrap').load(calendarUrl);
-        $('.calendar-wrap thead a').live("click", function(){
-            $('.calendar-wrap').load($(this).attr('href'));
-            return false;
+var calendarUrl = eva.d('/event/calendar/');
+$('.calendar-wrap').load(calendarUrl);
+$('.calendar-wrap thead a').live("click", function(){
+    $('.calendar-wrap').load($(this).attr('href'));
+    return false;
+});
+
+var modal = $("#fileupload-modal");
+modal.hide();
+eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
+    modal.hide();
+    $('#activity-box-image-button').on('click', function() {
+        $(this).evaTip("show", {
+            'tip' : modal,
+            'offsetX' : -75,
+            'offsetY' : 30,
+            'direction' : 'bottom'			
         });
-}
+        return false;
+    });
+
+    modal.find(".close").on("click", function(){
+            modal.hide();
+    });
+});
+
+var uploader = $('#singlefileupload');
+var form = $("#activity-form");
+uploader.bind('fileuploaddone', function (e, data) {
+        var file = data.result;
+        form.find('input[name="MessageFile[file_id]"]').val(file.id);
+        modal.find(".close").hide();
+});
 </script>
+
