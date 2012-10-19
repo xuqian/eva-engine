@@ -15,8 +15,6 @@ class AdController extends ActionController
         $this->layout('layout/empty');
 
         $view = new ViewModel();
-        
-        $view->setTemplate('epic/ad/index');
         return $view;
     }
 }

@@ -46,7 +46,6 @@ class PagesController extends ActionController
         $view = new ViewModel(array(
             'post' => $item,
         ));
-        $view->setTemplate('epic/pages/get');
         return $view;
     }
 }

@@ -15,8 +15,6 @@ class LoginController extends ActionController
         $this->layout('layout/login');
 
         $view = new ViewModel();
-        
-        $view->setTemplate('epic/login/index');
         return $view;
     }
 }

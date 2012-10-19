@@ -18,7 +18,6 @@ class CityController extends ActionController
         }
         $this->layout('layout/empty');
         $view = new ViewModel();
-        $view->setTemplate('epic/city/index');
         return $view;
     }
 }

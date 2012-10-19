@@ -7,7 +7,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\PreregController',
+                        'controller' => 'PreregController',
                         'action'     => 'index',
                     ),
                 ),
@@ -21,7 +21,7 @@ return array(
                         'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\PagesController',
+                        'controller' => 'PagesController',
                         'action' => 'get',
                     ),
                 ),
@@ -35,7 +35,7 @@ return array(
                         'id'     => '[a-zA-Z]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\PreregController',
+                        'controller' => 'PreregController',
                         'action' => 'get',
                     ),
                 ),
@@ -49,7 +49,7 @@ return array(
                         'id'     => '[a-zA-Z-]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\LanguageController',
+                        'controller' => 'LanguageController',
                         'action' => 'switch',
                     ),
                 ),
@@ -63,7 +63,7 @@ return array(
                         'id'     => 'example|paypal|alipay|paypalsearch|alipaysearch',
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\PayController',
+                        'controller' => 'PayController',
                         'action' => 'get',
                     ),
                 ),
@@ -74,7 +74,7 @@ return array(
                 'options' => array(
                     'route'    => '/ad/',
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\AdController',
+                        'controller' => 'AdController',
                         'action'     => 'index',
                     ),
                 ),
@@ -85,7 +85,7 @@ return array(
                 'options' => array(
                     'route'    => '/login/',
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\LoginController',
+                        'controller' => 'LoginController',
                         'action'     => 'index',
                     ),
                 ),
@@ -96,7 +96,7 @@ return array(
                 'options' => array(
                     'route'    => '/city/',
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\CityController',
+                        'controller' => 'CityController',
                         'action'     => 'index',
                     ),
                 ),
@@ -110,48 +110,54 @@ return array(
                         'id'     => '[a-zA-Z-]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\UserController',
+                        'controller' => 'UserController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+            'feed' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/feed[/]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'FeedController',
                         'action' => 'index',
                     ),
                 ),
                 'priority' => 2,
             ),
 
+
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'Epic\Controller\PreregController' => 'Epic\Controller\PreregController',
-            'Epic\Controller\PagesController' => 'Epic\Controller\PagesController',
-            'Epic\Controller\PayController' => 'Epic\Controller\PayController',
-            'Epic\Controller\LanguageController' => 'Epic\Controller\LanguageController',
-            'Epic\Controller\AdController' => 'Epic\Controller\AdController',
-            'Epic\Controller\LoginController' => 'Epic\Controller\LoginController',
-            'Epic\Controller\CityController' => 'Epic\Controller\CityController',
-            'Epic\Controller\UserController' => 'Epic\Controller\UserController',
+            'PreregController' => 'Epic\Controller\PreregController',
+            'PagesController' => 'Epic\Controller\PagesController',
+            'PayController' => 'Epic\Controller\PayController',
+            'LanguageController' => 'Epic\Controller\LanguageController',
+            'AdController' => 'Epic\Controller\AdController',
+            'LoginController' => 'Epic\Controller\LoginController',
+            'CityController' => 'Epic\Controller\CityController',
+            'UserController' => 'Epic\Controller\UserController',
+            'FeedController' => 'Epic\Controller\FeedController',
         ),
     ),
 
     'view_manager' => array(
+        'template_path_stack' => array(
+            'epic' => __DIR__ . '/../view',
+        ),
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../layout/layout.phtml',
             'layout/coming' => __DIR__ . '/../layout/coming.phtml',
             'layout/empty' => __DIR__ . '/../layout/empty.phtml',
             'layout/login' => __DIR__ . '/../layout/login.phtml',
-            'blank' => __DIR__ . '/../view/epic.phtml',
-            'epic/index' => __DIR__ . '/../view/epic/index.phtml',
-            'epic/pages/get' => __DIR__ . '/../view/epic/pages/get.phtml',
-            'epic/reg/thankyou' => __DIR__ . '/../view/epic/reg/thankyou.phtml',
-            'epic/reg/connoisseur' => __DIR__ . '/../view/epic/reg/connoisseur.phtml',
-            'epic/reg/professional' => __DIR__ . '/../view/epic/reg/professional.phtml',
-            'epic/reg/corporate' => __DIR__ . '/../view/epic/reg/corporate.phtml',
-            'epic/pay/index' => __DIR__ . '/../view/epic/pay/index.phtml',
-            'epic/ad/index' => __DIR__ . '/../view/epic/ad/index.phtml',
-            'epic/login/index' => __DIR__ . '/../view/epic/login/index.phtml',
-            'epic/city/index' => __DIR__ . '/../view/epic/city/index.phtml',
-            'epic/user/index' => __DIR__ . '/../view/epic/user/index.phtml',
         ),
-
     ),
 
     'page_components' => array(
