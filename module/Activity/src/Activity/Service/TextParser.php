@@ -117,14 +117,18 @@ class TextParser
         return $this;
     }
 
-    public function getUsers()
+    public function getUserNames()
     {
         $text = trim($this->getText());
         if(!$text){
             return $this->users;
         }
 
-
+        $matches = array();
+        preg_match_all('/@([^\s]+)/', $text, $matches);
+        if(isset($matches[1]) && $matches[1]){
+            $this->users = array_unique($matches[1]);
+        }
         return $this->users;
     }
 
@@ -138,7 +142,7 @@ class TextParser
         $options = $this->getOptions();
         $urlTarget = $options['urlTarget'] ? ' target="' .  $options['urlTarget']. '"'  : '';
 
-        $text = preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@',
+        $text = preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.-]*(\?\S+)?(#\S+)?)?)?)@',
         '<a href="$1" ' . $urlTarget . '>$1</a>', $text);
 
         $userUrl = sprintf($options['userUrl'], '$1');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Activity\DbTable;
+namespace Message\DbTable;
 
 use Eva\Db\TableGateway\TableGateway;
 use Zend\Stdlib\Parameters;
@@ -8,25 +8,16 @@ use Zend\Stdlib\Parameters;
 class Indexes extends TableGateway
 {
     protected $tableName = 'indexes';
-
-    protected $primaryKey = array(
-        'user_id',
-        'author_id',
-        'message_id',
-    );
+    protected $primaryKey = array('user_id', 'author_id', 'conversation_id');
 
     public function setParameters(Parameters $params)
     {
-        if($params->user_id) {
-            $this->where(array('user_id' => $params->user_id));
+        if($params->page){
+            $this->enableCount();
         }
 
         if($params->author_id){
             $this->where(array('author_id' => $params->author_id));
-        }
-
-        if($params->message_id){
-            $this->where(array('message_id' => $params->message_id));
         }
 
         if ($params->rows) {
@@ -34,13 +25,12 @@ class Indexes extends TableGateway
         }
 
         if($params->page){
-            $this->enableCount();
             $this->page($params->page);
         }
-
+ 
         $orders = array(
-            'idasc' => 'message_id ASC',
-            'iddesc' => 'message_id DESC',
+            'timeasc' => 'messageTime ASC',
+            'timedesc' => 'messageTime DESC',
         );
         if($params->order){
             $order = $orders[$params->order];
@@ -48,8 +38,7 @@ class Indexes extends TableGateway
                 $this->order($order);
             }
         }
-
-
+        
         return $this;
     }
 }
