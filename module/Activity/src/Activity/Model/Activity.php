@@ -9,6 +9,41 @@ class Activity extends AbstractModel
 {
     protected $itemClass = 'Activity\Item\Message';
 
+    protected $userList;
+
+    public function setUserList($userList)
+    {
+        $this->userList = $userList;
+        return $this;
+    }
+
+    public function getUserList(array $map = array())
+    {
+        if($this->userList){
+            return $this->userList;
+        }
+
+        $itemList = $this->getItemList();
+        $idArray = array();
+
+        foreach($itemList as $item){
+            $idArray[] = $item['user_id'];
+        }
+
+        $userModel = Api::_()->getModel('User\Model\User');
+        if(!$idArray){
+            $userModel->setItemList(array(
+                'noResult' => true
+            ));
+        } else {
+            $userModel->setItemList(array(
+                'id' => $idArray
+            ));
+        }
+        $userList = $userModel->getUserList($map);
+        return $this->userList = $userList;
+    }
+
     public function getUserActivityList($userId)
     {
         $indexItem = $this->getItem('Activity\Item\Index');
@@ -20,13 +55,73 @@ class Activity extends AbstractModel
         foreach($indexItem as $index){
             $messageIdArray[] = $index['message_id'];
         }
-        $this->setItemList(array(
-            'idArray' => $messageIdArray
-        ));
+        if(!$messageIdArray){
+            $this->setItemList(array(
+                'noResult' => true
+            ));
+        } else {
+            $this->setItemList(array(
+                'id' => $messageIdArray,
+                'order' => 'idarray'
+            ));
+        }
         return $this;
     }
 
-    //public function get
+    public function getForwardActivityList()
+    {
+        $itemList = $this->getItemList();
+        $idArray = array();
+
+        if(!$itemList){
+            return array();
+        }
+
+        foreach($itemList as $item){
+            if(!$item['reference_id']){
+                continue;
+            }
+            $idArray[] = $item['reference_id'];
+        }
+        if($idArray){
+            $this->setItemList(array(
+                'id' => $idArray
+            ));
+        } else {
+            $this->setItemList(array(
+                'noResult' => true
+            ));
+        }
+        return $this;
+    }
+
+    public function getCommentActivityList()
+    {
+        $item = $this->getItem();
+        $referenceItem = $this->getItem('Activity\Item\Reference');
+        $referenceList = $referenceItem->collections(array(
+            'reference_message_id' => $item->id,
+            'messageType' => 'comment',
+            'order' => 'iddesc',
+        ));
+
+        $messageIdArray = array();
+        foreach($referenceList as $reference){
+            $messageIdArray[] = $reference['message_id'];
+        }
+        if(!$messageIdArray){
+            $this->setItemList(array(
+                'noResult' => true
+            ));
+        } else {
+            $this->setItemList(array(
+                'id' => $messageIdArray,
+                'order' => 'idarray'
+            ));
+        }
+        return $this;
+    }
+
 
     public function getActivity($idOrUrlName = null, array $map = array())
     {
@@ -36,7 +131,7 @@ class Activity extends AbstractModel
             $this->setItem(array(
                 'id' => $idOrUrlName,
             ));
-        } elseif(is_string($postIdOrUrlName)) {
+        } elseif(is_string($idOrUrlName)) {
             $item = $this->getItem()->getDataClass()->columns(array('id'))->where(array(
                 'messageHash' => $idOrUrlName
             ))->find('one');

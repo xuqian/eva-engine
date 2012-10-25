@@ -4,6 +4,7 @@ namespace Activity\DbTable;
 
 use Eva\Db\TableGateway\TableGateway;
 use Zend\Stdlib\Parameters;
+use Zend\Db\Sql\Expression;
 
 class Messages extends TableGateway
 {
@@ -17,6 +18,10 @@ class Messages extends TableGateway
             $this->enableCount();
         }
 
+        if($params->noResult) {
+            $this->setNoResult(true);
+        }
+
         if($params->keyword){
             $keyword = $params->keyword;
             $this->where(function($where) use ($keyword){
@@ -25,8 +30,12 @@ class Messages extends TableGateway
             });
         }
 
-        if($params->idArray){
-            $this->where(array('id' => $params->idArray));
+        if($params->id){
+            if(is_array($params->id)){
+                $this->where(array('id' => array_unique($params->id)));
+            } else {
+                $this->where(array('id' => $params->id));
+            }
         }
 
         if($params->user_id){
@@ -36,11 +45,21 @@ class Messages extends TableGateway
         $orders = array(
             'idasc' => 'id ASC',
             'iddesc' => 'id DESC',
+            'idarray' => 'FIELD(id, %s)',
         );
         if($params->order){
             $order = $orders[$params->order];
             if($order){
-                $this->order($order);
+                if($params->order == 'idarray') {
+                    if($params->id && is_array($params->id)){
+                        $idArray = array_unique($params->id);
+                        $order = sprintf($order, implode(',', array_fill(0, count($idArray), Expression::PLACEHOLDER)));
+                        $this->order(array(new Expression($order, $idArray)));
+
+                    }
+                } else {
+                    $this->order($order);
+                }
             }
         }
 

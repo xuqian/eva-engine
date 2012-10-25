@@ -470,6 +470,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     public function collections($params = null)
     {
         $dataClass = $this->getDataClass();
+        $this->setDataSource(array());
         if($params && method_exists($dataClass, 'setParameters')){
             if(is_array($params)){
                 $params = new \Zend\Stdlib\Parameters($params);
@@ -482,11 +483,17 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
             }
             $dataClass->setParameters($params);
         }
+
         $items = $dataClass->find('all');
-        foreach($items as $key => $dataSource){
-            $item = clone $this;
-            $item->setDataSource((array) $dataSource);
-            $this->dataSource[] = $item;
+
+        if(!$items){
+            $this->setDataSource(array());
+        } else {
+            foreach($items as $key => $dataSource){
+                $item = clone $this;
+                $item->setDataSource((array) $dataSource);
+                $this->dataSource[] = $item;
+            }
         }
         return $this;
     }
@@ -602,7 +609,9 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     {
         $joinColumn = $relationship['joinColumn'];
         $referencedColumn = $relationship['referencedColumn'];
-        $relItem->$joinColumn = $this->$referencedColumn;
+        if($this->$referencedColumn) {
+            $relItem->$joinColumn = $this->$referencedColumn;
+        }
         //p(sprintf('%s joinOneToOne with %s : joinColumn %s => %s joined %s => %s', get_class($this), get_class($relItem), $joinColumn, $relItem->$joinColumn , $referencedColumn, $this->$referencedColumn));
         return $this;
     }
@@ -626,7 +635,9 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     {
         $joinColumn = $relationship['joinColumn'];
         $referencedColumn = $relationship['referencedColumn'];
-        $relItem->$joinColumn = $this->$referencedColumn;
+        if($this->$referencedColumn) {
+            $relItem->$joinColumn = $this->$referencedColumn;
+        }
         //p(sprintf('joinManyToOne Joined Class %s : joinColumn %s => %s joined %s => %s', get_class($relItem), $joinColumn, $relItem->$joinColumn , $referencedColumn, $this->$referencedColumn));
         return $this;
     }
@@ -726,6 +737,40 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         $dataClass->where($where)->remove();
         return true;
     }
+
+    public function fill(AbstractItem $fillItemList, $fillByName, array $keyMap)
+    {
+        if(!$this->dataSource || !$fillItemList->getDataSource()){
+            return $this;
+        }
+
+        if(!isset($this[0])){
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s must be a item list', get_class($this)
+            ));
+        }
+
+        if(!isset($fillItemList[0])){
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Filled item %s must be a list', get_class($fillItemList)
+            ));
+        }
+
+
+        list($primaryKey) = array_keys($keyMap);
+        list($foreignKey) = array_values($keyMap);
+
+        foreach($this as $key => $item){
+            foreach($fillItemList as $fillItem){
+                if($item->$primaryKey == $fillItem->$foreignKey) {
+                    $this[$key][$fillByName] = $fillItem;
+                }
+            }
+        }
+
+        return $this;
+    }
+
 
     protected function getPrimaryArray()
     {

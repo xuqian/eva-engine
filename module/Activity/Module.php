@@ -3,6 +3,12 @@ namespace Activity;
 
 class Module
 {
+    protected $dependModules = array(
+        'User',
+        'File',
+        'Video',
+    );
+
     public function onBootstrap($e)
     {
         $app = $e->getParam('application');
