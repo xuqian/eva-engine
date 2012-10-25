@@ -13,20 +13,6 @@ return array(
                 ),
                 'priority' => 2,
             ),
-            'frontposts' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route' => '/pages[/:id]',
-                    'constraints' => array(
-                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'PagesController',
-                        'action' => 'get',
-                    ),
-                ),
-                'priority' => 2,
-            ),
             'prereg' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -37,20 +23,6 @@ return array(
                     'defaults' => array(
                         'controller' => 'PreregController',
                         'action' => 'get',
-                    ),
-                ),
-                'priority' => 2,
-            ),
-            'language' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route' => '/language/[:id]',
-                    'constraints' => array(
-                        'id'     => '[a-zA-Z-]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'LanguageController',
-                        'action' => 'switch',
                     ),
                 ),
                 'priority' => 2,
@@ -80,19 +52,25 @@ return array(
                 ),
                 'priority' => 2,
             ),
-            'login' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+            'frontposts' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/login/',
+                    'route' => '/pages[/:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                    ),
                     'defaults' => array(
-                        'controller' => 'LoginController',
-                        'action'     => 'index',
+                        'controller' => 'PagesController',
+                        'action' => 'get',
                     ),
                 ),
                 'priority' => 2,
             ),
+
+
+
             'city' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Literal',
                 'options' => array(
                     'route'    => '/city/',
                     'defaults' => array(
@@ -102,10 +80,66 @@ return array(
                 ),
                 'priority' => 2,
             ),
-            'user' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
+
+
+            'home' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/user/[:id]',
+                    'route' => '/home[/]',
+                    'defaults' => array(
+                        'controller' => 'HomeController',
+                        'action' => 'index'
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'register' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/register[/]',
+                    'defaults' => array(
+                        'controller' => 'UserController',
+                        'action' => 'register',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'login' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/login[/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'LoginController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'language' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/language/[:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'LanguageController',
+                        'action' => 'switch',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'user' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/user[/]',
                     'constraints' => array(
                         'id'     => '[a-zA-Z-]+',
                     ),
@@ -114,34 +148,84 @@ return array(
                         'action' => 'index',
                     ),
                 ),
-                'priority' => 2,
-            ),
-            'feed' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route' => '/feed[/]',
-                    'constraints' => array(
-                        'id'     => '[a-zA-Z-]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'FeedController',
-                        'action' => 'index',
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'profile' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '[/][:user_id][/]',
+                            'constraints' => array(
+                                'user_id' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'get'
+                            ),
+                        ),
+                        'child_routes' => array(
+                            'post' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/post/[:post_id][/]',
+                                    'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'post'
+                                    )
+                                )
+                            ),
+                            'group' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/group/[:group_id][/]',
+                                    'constraints' => array(
+                                        'group_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'post'
+                                    )
+                                )
+                            ),
+                            'friend' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/friend[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'friend'
+                                    )
+                                )
+                            ),
+                            'album' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '/album[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'album'
+                                    )
+                                )
+                            ),
+                        ),
                     ),
                 ),
                 'priority' => 2,
             ),
-
-
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'PreregController' => 'Epic\Controller\PreregController',
-            'PagesController' => 'Epic\Controller\PagesController',
             'PayController' => 'Epic\Controller\PayController',
-            'LanguageController' => 'Epic\Controller\LanguageController',
             'AdController' => 'Epic\Controller\AdController',
+
+            'HomeController' => 'Epic\Controller\HomeController',
+            'PagesController' => 'Epic\Controller\PagesController',
+            'LanguageController' => 'Epic\Controller\LanguageController',
             'LoginController' => 'Epic\Controller\LoginController',
+            'RegisterController' => 'Epic\Controller\RegisterController',
             'CityController' => 'Epic\Controller\CityController',
             'UserController' => 'Epic\Controller\UserController',
             'FeedController' => 'Epic\Controller\FeedController',

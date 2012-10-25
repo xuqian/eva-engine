@@ -30,19 +30,59 @@
 
 
     <header id="header">
-    <div class="container">
-        <div class="navbar navbar-inverse"><div class="navbar-inner">
-                <?$view =$this->layout()->getChildren();$id = $view[0]->id;?>
-                <!--<a class="brand" href="/">Epicurissimo</a>-->
-                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
-                <ul class="nav nav-main">
-                    <li><a href="/"><?=$this->_('Home')?></a></li>
-                    <li class="<?=$id == 'connoisseur' ? 'active' : ''?>"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?></a></li>
-                    <li class="<?=$id == 'professional' ? 'active' : ''?>"><a href="/reg/professional"><?=$this->_('Professional')?></a></li>
-                    <li class="<?=$id == 'corporate' ? 'active' : ''?>"><a href="/reg/corporate"><?=$this->_('Corporate')?></a></li>
-                </ul>
-        </div></div>
-    </div>
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand pull-left" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
+                <div class="nav-collapse">
+                    <ul class="nav nav-main">
+                        <li data-highlight-url="^/$"><a href="<?=$this->url('home')?>"><?=$this->_('Home')?></a></li>
+                        <li class=""><a href="<?=$this->uri('/pages/magazine/')?>"><?=$this->_('Magazine')?></a></li>
+                        <li class=""><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
+                        <li class=""><a href="<?=$this->uri('/pages/')?>"><?=$this->_('Topics')?></a></li>
+                        <li class=""><a href="<?=$this->uri('/user/')?>"><?=$this->_('Members')?></a></li>
+                        <li class=""><a href="<?=$this->uri('/pages/partners/')?>"><?=$this->_('Partners')?></a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li>
+                        <form class="form form-search">
+                            <div class="input-append">
+                                <input type="text" class="span1 search-query">
+                                <button type="submit" class="btn"><i class="icon-search"></i></button>
+                            </div>
+                        </form>
+                        </li>
+                        <li>
+                        <a href="<?=$this->uri('/message/')?>" class="nav-icon"><i class="icon-envelope-alt"></i></a>
+                        </li>
+                        <?if($this->hasModule('User')):?>
+                        <?if($this->loginUser):?>
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle nav-last" data-toggle="dropdown"><?=$this->loginUser['userName']?> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Setting</a></li>
+                            <li class="divider"></li>
+                            <li><a href="<?=$this->uri('/user/logout/?callback=/login/')?>">Logout</a></li>
+                        </ul>
+                        </li>
+                        <?else:?>
+                        <li data-highlight-url="/register/*"><a href="/register/"><?=$this->_('Register')?></a></li>
+                        <li data-highlight-url="/login/*"><a href="/login/"><?=$this->_('Login')?></a></li>
+                        <?endif?>
+                        <?endif?>
+
+                    </ul>
+                </div><!-- /.nav-collapse -->
+            </div>
+        </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+
     </header>
 
     <div id="page" class="page">
