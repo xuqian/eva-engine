@@ -185,6 +185,7 @@ body, .en body, .fr body {
 	}
 
 	.brand {
+		height:50px;
 		margin-left:0;
 		padding-top:0;
 		padding-right:0;
@@ -666,4 +667,74 @@ body, .en body, .fr body {
 	margin:20px 0;
 	height:160px;
 	clear:both;
+}
+
+
+/*********** List Start ************/
+
+.grid_sm(5);
+
+.normal-page {
+	background:#E6E6E6;
+
+	.page-main {
+		background:#F0F0F0;
+		padding:40px;
+		.box-shadow(-3px 0 5px #CCC);
+	}
+
+	vertical-align:top;
+
+}
+
+
+.page-side {
+	margin-top:40px;
+	.nav li{
+		border:0;
+	}
+
+	.nav li a {
+		border:0;
+		color:#000;
+		font-size:16px;
+		font-weight:normal;
+	}
+
+
+	.nav li.active a {
+		color:@orange;
+		border:0;
+		position:relative;
+		z-index:3;
+	}
+
+	.nav li{
+		margin-bottom:10px;
+		position: relative;
+		z-index:2;
+	}
+	.nav li.active:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 4px;
+		.border-radius(50%);
+		.box-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+		z-index: 1;
+	}
+
+}
+
+.page-main-header {
+	border-bottom:1px dashed #CCC;
+	margin-bottom:40px;
+	line-height:30px;
+
+	h1,h2, h3, h4 {
+		color:#000;
+		font-size:18px;
+	}
 }

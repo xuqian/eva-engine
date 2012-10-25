@@ -1,76 +1,65 @@
-<? 
-$title = $this->_('Members');
-$this->headTitle($title, 'SET');
+<?
 $item = $this->item;
-if($this->form){
-	$form = $this->form;
-} else {
-    $form = new User\Form\RegisterForm();
-}
-
-$form
-->setView($this)
-->useSubFormGroup()
-->setMethod('post')
-->setAction($this->uri('/register/'))
-->bind($item)
-->prepare();
-
+$title = 'Members';
+$title = $this->_($title);
+$this->headTitle($title, 'SET');
 ?>
+
 <div class="container">
+    <div class="normal-page">
+        <div class="body grid-s5m0">
 
-    <form <?=$this->formAttr($form)?> class="form form-horizontal well">
+            <div class="main-wrap"><div id="main" class="main">
+                    <div class="page-main">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="page-main-header">
+                                    <h3><?=$this->_('Members')?></h3>
+                                </div>
+                            </div><!--page main left end-->
+                            <div class="span3">
+                                <div class="page-extra">
+                                    <div class="side-blog-list">
+                                        <div class="page-header border-header">
+                                            <small class="pull-right"><a href="#">View All</a></small>
+                                            <h4>My Blog (123)</h4>
+                                        </div>
+                                        <?for($i = 0; $i < 10; $i++):?>
+                                        <div class="item ">
+                                            <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+                                            <div class="item-inline item-text">
+                                                <div class="text-content">
+                                                    <div class="item-title">
+                                                        <a href="#">Blog title test
+                                                            Blog title test</a>
+                                                    </div>
+                                                    <p>Post content test</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?endfor?>
+                                    </div>
+                                </div>
+                            </div><!--page main right end-->
+                        </div>
 
-        <header class="page-header">
-        <h2 class=""><?=$title?></h2>
-        </header>
+                    </div><!--page-main end-->
+            </div></div><!-- #main end-->
 
-        <?=$form->restful();?>
-        <?=$form->helper('id', array('class' => ''))?>
-        <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">
-            <?=$form->helper('userName', 'label', array('class' => 'control-label'))?>
-            <div class="controls">
-                <?=$form->helper('userName', array('class' => ''))?>        
-                <div class="help-block"><?=$form->helper('userName', 'formElementErrors')?></div>
-            </div>
-        </div>
-        <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
-            <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
-            <div class="controls">
-                <?=$form->helper('email', array('class' => ''))?>        
-                <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
-            </div>
-        </div>
+            <div class="sidebar">
+                <div class="page-side">
+                    <ul class="nav nav-tabs nav-stacked">
+                        <li data-highlight-url="^/account/profile/?$"><a href="<?=$this->uri('/user/' . $this->loginUser['userName'] . '/friend/')?>"><i class="icon-user"></i> My Friends</a></li>
+                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-envelope-alt"></i> My Messages</a></li>
+                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-paste"></i> My Posts</a></li>
+                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-picture"></i> My Albums</a></li>
+                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-group"></i> My Groups</a></li>
+                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-calendar"></i> My Events</a></li>
+                    </ul>
+                </div>
+            </div><!--sider end-->
 
-        <div class="control-group <?=$form->isError('screenName') ? 'error' : '';?>">
-            <?=$form->helper('screenName', 'label', array('class' => 'control-label'))?>
-            <div class="controls">
-                <?=$form->helper('screenName', array('class' => ''))?>        
-                <div class="help-block"><?=$form->helper('screenName', 'formElementErrors')?></div>
-            </div>
-        </div>
+        </div><!-- #body end-->
+    </div><!-- normal end-->
+</div><!--container end-->
 
-        <div class="control-group <?=$form->isError('inputPassword') ? 'error' : '';?>">
-            <?=$form->helper('inputPassword', 'label', array('class' => 'control-label'))?>
-            <div class="controls">
-                <?=$form->helper('inputPassword', array('class' => ''))?>        
-                <div class="help-block"><?=$form->helper('inputPassword', 'formElementErrors')?></div>
-            </div>
-        </div>
-        <div class="control-group <?=$form->isError('repeatPassword') ? 'error' : '';?>">
-            <?=$form->helper('repeatPassword', 'label', array('class' => 'control-label'))?>
-            <div class="controls">
-                <?=$form->helper('repeatPassword', array('class' => ''))?>        
-                <div class="help-block"><?=$form->helper('repeatPassword', 'formElementErrors')?></div>
-            </div>
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-inverse btn-large"><?=$this->_('Register');?></button>
-            or <a href="<?=$this->uri('/login/')?>">Login</a>
-        </div>
-
-
-    </form>
-
-
-</div>
