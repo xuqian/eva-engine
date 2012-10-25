@@ -90,6 +90,7 @@ $form->useSubFormGroup()
                                 <?=$form->helper('messageType', 'formHidden', array('class' => ''))?>        
                                 <?=$form->helper('reference_id', array('class' => ''))?>
                                 <?=$form->helper(array('MessageFile', 'file_id'), 'formHidden', array('class' => ''))?>
+                                <input name="callback" type="hidden" value="<?=$this->uri('/home/')?>" />
                                 <div class="page-header">
                                     <h3>Say something...</h3>
                                 </div>
@@ -127,7 +128,7 @@ $form->useSubFormGroup()
                                         </div>
                                         <?endif?>
 
-                                        <?if($item['ForwardActivity']): $subItem = $item['ForwardActivity'];?>
+                                        <?if(isset($item['ForwardActivity']) && $item['ForwardActivity']): $subItem = $item['ForwardActivity'];?>
                                         <div class="well">
                                             <p><?=$subItem['ContentHtml']?></p>
                                             <?if($subItem['File']):?>
