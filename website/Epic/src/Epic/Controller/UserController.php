@@ -10,7 +10,6 @@ class UserController extends ActionController
 
     public function indexAction()
     {
-        
     }
 
     public function getAction()
@@ -22,6 +21,26 @@ class UserController extends ActionController
             'viewAsGuest' => 1
         ));
         return $viewModel;
+    }
+
+    public function blogAction()
+    {
+    }
+
+    public function friendAction()
+    {
+    }
+
+    public function albumAction()
+    {
+    }
+
+    public function groupAction()
+    {
+    }
+
+    public function eventAction()
+    {
     }
 
     public function registerAction()

@@ -1,0 +1,39 @@
+<?
+$item = $this->item;
+$title = 'Albums';
+$title = $this->_($title);
+$this->headTitle($title, 'SET');
+?>
+
+<div class="container">
+    <div class="normal-page">
+        <div class="body grid-s5m0">
+
+            <div class="main-wrap"><div id="main" class="main">
+                    <div class="page-main">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="page-main-header">
+                                    <h3><?=$this->_($title)?></h3>
+                                </div>
+                            </div><!--page main left end-->
+                            <div class="span3">
+                                <div class="page-extra">
+                                    <?=$this->widget('Epic', 'widgets/userextra')?>
+                                </div>
+                            </div><!--page main right end-->
+                        </div>
+
+                    </div><!--page-main end-->
+            </div></div><!-- #main end-->
+
+            <div class="sidebar">
+                <div class="page-side">
+                    <?=$this->widget('Epic', 'widgets/userside')?>
+                </div>
+            </div><!--sider end-->
+
+        </div><!-- #body end-->
+    </div><!-- normal end-->
+</div><!--container end-->
+

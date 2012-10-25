@@ -207,15 +207,26 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
-                            'post' => array(
+                            'blog' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'post/[:post_id][/]',
+                                    'route' => 'blog[/]',
                                     'constraints' => array(
-                                        'post_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
-                                        'action' => 'post'
+                                        'action' => 'blog'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'event' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'event[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'event'
                                     )
                                 ),
                                 'may_terminate' => true,
@@ -223,12 +234,11 @@ return array(
                             'group' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'group/[:group_id][/]',
+                                    'route' => 'group[/]',
                                     'constraints' => array(
-                                        'group_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
-                                        'action' => 'post'
+                                        'action' => 'group'
                                     )
                                 ),
                                 'may_terminate' => true,
