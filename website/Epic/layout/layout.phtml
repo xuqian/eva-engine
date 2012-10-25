@@ -41,12 +41,12 @@
                 <a class="brand pull-left" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <div class="nav-collapse">
                     <ul class="nav nav-main">
-                        <li data-highlight-url="^/$"><a href="<?=$this->url('home')?>"><?=$this->_('Home')?></a></li>
-                        <li class=""><a href="<?=$this->uri('/pages/magazine/')?>"><?=$this->_('Magazine')?></a></li>
-                        <li class=""><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
-                        <li class=""><a href="<?=$this->uri('/pages/')?>"><?=$this->_('Topics')?></a></li>
-                        <li class=""><a href="<?=$this->uri('/user/')?>"><?=$this->_('Members')?></a></li>
-                        <li class=""><a href="<?=$this->uri('/pages/partners/')?>"><?=$this->_('Partners')?></a></li>
+                        <li data-highlight-url="^/home/?$"><a href="<?=$this->url('home')?>"><?=$this->_('Home')?></a></li>
+                        <li class="" data-highlight-url="^/pages/magazine/?$"><a href="<?=$this->uri('/pages/magazine/')?>"><?=$this->_('Magazine')?></a></li>
+                        <li class="" data-highlight-url="^/events/?"><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
+                        <li class="" data-highlight-url="^/pages/?"><a href="<?=$this->uri('/pages/')?>"><?=$this->_('Topics')?></a></li>
+                        <li class="" data-highlight-url="^/user.*"><a href="<?=$this->uri('/user/')?>"><?=$this->_('Members')?></a></li>
+                        <li class="" data-highlight-url="^/pages/partners/?$"><a href="<?=$this->uri('/pages/partners/')?>"><?=$this->_('Partners')?></a></li>
                     </ul>
                     <ul class="nav pull-right">
                         <li>
@@ -57,11 +57,11 @@
                             </div>
                         </form>
                         </li>
-                        <li>
-                        <a href="<?=$this->uri('/message/')?>" class="nav-icon"><i class="icon-envelope-alt"></i></a>
-                        </li>
                         <?if($this->hasModule('User')):?>
                         <?if($this->loginUser):?>
+                       <li>
+                        <a href="<?=$this->uri('/message/')?>" class="nav-icon"><i class="icon-envelope-alt"></i></a>
+                        </li>
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-last" data-toggle="dropdown"><?=$this->loginUser['userName']?> <b class="caret"></b></a>
                         <ul class="dropdown-menu">

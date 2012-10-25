@@ -74,8 +74,8 @@ class FeedController extends ActionController
 
 
         $itemModel = Api::_()->getModel('User\Model\User');
-        $item = $itemModel->getUser($item['user_id']);
-        $user = $item->toArray(array(
+        $user = $itemModel->getUser($item['user_id']);
+        $user = $user->toArray(array(
             'self' => array(
                 '*',
             ),
