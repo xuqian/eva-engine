@@ -141,26 +141,28 @@ return array(
                 'options' => array(
                     'route' => '/user[/]',
                     'constraints' => array(
-                        'id'     => '[a-zA-Z-]+',
                     ),
                     'defaults' => array(
                         'controller' => 'UserController',
                         'action' => 'index',
                     ),
                 ),
+                'priority' => 2,
                 'may_terminate' => true,
                 'child_routes' => array(
                     'profile' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '[/][:user_id][/]',
+                            'route' => '[/:id]',
                             'constraints' => array(
-                                'user_id' => '[a-zA-Z0-9_-]+'
+                                'id' => '[a-zA-Z0-9_-]+'
                             ),
                             'defaults' => array(
+                                'controller' => 'UserController',
                                 'action' => 'get'
                             ),
                         ),
+                        'priority' => 2,
                         'child_routes' => array(
                             'post' => array(
                                 'type' => 'Segment',
@@ -211,7 +213,6 @@ return array(
                         ),
                     ),
                 ),
-                'priority' => 2,
             ),
         ),
     ),
