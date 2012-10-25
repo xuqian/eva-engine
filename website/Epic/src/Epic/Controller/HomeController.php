@@ -2,11 +2,11 @@
 namespace Epic\Controller;
 
 use Zend\View\Model\ViewModel;
-use Eva\Mvc\Controller\RestfulModuleController;
+use Eva\Mvc\Controller\ActionController;
 use Activity\Form;
 use Eva\Api;
 
-class HomeController extends RestfulModuleController
+class HomeController extends ActionController
 {
 
     public function indexAction()

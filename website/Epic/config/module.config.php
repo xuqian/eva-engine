@@ -121,6 +121,21 @@ return array(
                 'priority' => 2,
             ),
 
+            'logout' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/logout[/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'LoginController',
+                        'action' => 'logout',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'language' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -131,6 +146,21 @@ return array(
                     'defaults' => array(
                         'controller' => 'LanguageController',
                         'action' => 'switch',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'feed' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/feed/[:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'FeedController',
+                        'action' => 'get',
                     ),
                 ),
                 'priority' => 2,
@@ -153,68 +183,71 @@ return array(
                     'profile' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '[/:id]',
+                            'route' => '[:id][/]',
                             'constraints' => array(
                                 'id' => '[a-zA-Z0-9_-]+'
                             ),
                             'defaults' => array(
-                                'controller' => 'UserController',
                                 'action' => 'get'
                             ),
                         ),
-                        'priority' => 2,
+                        'may_terminate' => true,
                         'child_routes' => array(
                             'post' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => '/post/[:post_id][/]',
+                                    'route' => 'post/[:post_id][/]',
                                     'constraints' => array(
                                         'post_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
                                         'action' => 'post'
                                     )
-                                )
+                                ),
+                                'may_terminate' => true,
                             ),
                             'group' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => '/group/[:group_id][/]',
+                                    'route' => 'group/[:group_id][/]',
                                     'constraints' => array(
                                         'group_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
                                         'action' => 'post'
                                     )
-                                )
+                                ),
+                                'may_terminate' => true,
                             ),
                             'friend' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => '/friend[/]',
+                                    'route' => 'friend[/]',
                                     'constraints' => array(
                                     ),
                                     'defaults' => array(
                                         'action' => 'friend'
                                     )
-                                )
+                                ),
+                                'may_terminate' => true,
                             ),
                             'album' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => '/album[/]',
+                                    'route' => 'album[/]',
                                     'constraints' => array(
                                     ),
                                     'defaults' => array(
                                         'action' => 'album'
                                     )
-                                )
+                                ),
+                                'may_terminate' => true,
                             ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
+                        ), //profile child_routes end
+                    ), //profile end
+                ), //user child_routes end
+            ), //user end
+        ), //routes end
     ),
     'controllers' => array(
         'invokables' => array(

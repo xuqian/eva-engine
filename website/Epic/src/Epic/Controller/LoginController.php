@@ -4,11 +4,26 @@ namespace Epic\Controller;
 use Eva\Mvc\Controller\ActionController;
 use Eva\View\Model\ViewModel;
 use Eva\Api;
+use Core\Auth;
 
 class LoginController extends ActionController
 {
     protected $addResources = array(
     );
+
+    public function logoutAction()
+    {
+        $callback = $this->params()->fromQuery('callback');
+        if(!$callback && $this->getRequest()->getServer('HTTP_REFERER')){
+            $callback = $this->getRequest()->getServer('HTTP_REFERER');
+        }
+        $callback = $callback ? $callback : '/';
+        $model = new ViewModel();
+        $auth = Auth::factory();
+        $auth->getAuthStorage()->clear();
+        $this->cookie()->clear('realm');
+        return $this->redirect()->toUrl($callback);
+    }
 
     public function indexAction()
     {

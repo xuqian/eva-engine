@@ -2,10 +2,10 @@
 namespace Epic\Controller;
 
 use Eva\Api,
-    Eva\Mvc\Controller\RestfulModuleController,
+    Eva\Mvc\Controller\ActionController,
     Eva\View\Model\ViewModel;
 
-class UserController extends RestfulModuleController
+class UserController extends ActionController
 {
 
     public function indexAction()
@@ -13,11 +13,22 @@ class UserController extends RestfulModuleController
         
     }
 
+    public function getAction()
+    {
+        $viewModel = $this->forward()->dispatch('HomeController', array(
+            'action' => 'index',
+        )); 
+        $viewModel->setVariables(array(
+            'viewAsGuest' => 1
+        ));
+        return $viewModel;
+    }
+
     public function registerAction()
     {
         $request = $this->getRequest();
         if ($request->isPost()) {
-            
+
             $item = $request->getPost();
             $form = new \User\Form\RegisterForm();
             $form->bind($item);
