@@ -65,8 +65,8 @@
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-last" data-toggle="dropdown"><?=$this->loginUser['userName']?> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="<?=$this->uri('/account/profile/')?>">Profile</a></li>
+                            <li><a href="<?=$this->uri('/account/setting/')?>#">Setting</a></li>
                             <li class="divider"></li>
                             <li><a href="<?=$this->uri('/logout/?callback=/login/')?>">Logout</a></li>
                         </ul>

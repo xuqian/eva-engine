@@ -151,6 +151,20 @@ return array(
                 'priority' => 2,
             ),
 
+            'account' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/account/[:action][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'AccountController',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'feed' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -262,6 +276,7 @@ return array(
             'RegisterController' => 'Epic\Controller\RegisterController',
             'CityController' => 'Epic\Controller\CityController',
             'UserController' => 'Epic\Controller\UserController',
+            'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
         ),
     ),
