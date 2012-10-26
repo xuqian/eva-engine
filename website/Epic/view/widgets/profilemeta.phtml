@@ -1,0 +1,56 @@
+<?
+$user = $this->user;
+$viewAsGuest = $this->viewAsGuest;
+?>
+<div class="thumbnail profile-face">
+    <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
+    <div class="caption">
+        <a class="highlight highlight-large" href="#">123</a> Friends
+    </div>
+</div>
+<div class="profile-intro">
+    <div class="profile-title">
+        <h2><?=$user['userName']?></h2>
+        <small class="profile-level">Professional  <a href="#" title="VIP User"><i class="icon-trophy"></i></a></small>
+    </div>
+
+    <table class="table-condensed">
+        <tbody>
+            <tr>
+                <td>Title: Miss</td>
+                <td colspan="2">Profession : Food Critic</td>
+            </tr>
+            <tr>
+                <td>Location : Lanzhou, China</td>
+                <td>Birthday : 1980-10-01</td>
+                <td>Events : <a href="">3</a> Times</td>
+            </tr>
+            <tr>
+                <td colspan="3">Tags : 
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a>
+                    <a href="#">Wine</a></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a class="btn btn-brown btn-mini" href="#"><i class="icon-mini icon-plus"></i> Add Friend</a>
+                    <a class="btn btn-gray btn-mini" href="#"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
+                </td>
+                <td class="social">
+                    Social Networking : 
+                    <a href="#"><i class="icon-facebook-sign"></i></a>
+                    <a href="#"><i class="icon-pinterest"></i></a>
+                    <a href="#"><i class="icon-twitter"></i></a>
+                    <a href="#"><i class="icon-google-plus"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div><!--profile-intro end-->

@@ -18,6 +18,18 @@ eva.highlightmenu = function(){
 	})
 };
 
+eva.miniCalendar = function(){
+	if(!$('.calendar-wrap')[0]){
+		return false;
+	}
+    var calendarUrl = eva.d('/event/calendar/');
+    $('.calendar-wrap').load(calendarUrl);
+    $('.calendar-wrap thead a').live("click", function(){
+            $('.calendar-wrap').load($(this).attr('href'));
+            return false;
+    });
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -25,6 +37,7 @@ eva.construct = function(){
 
 
 	eva.highlightmenu();
+	eva.miniCalendar();
 
 	var lang = eva.config.lang;
 	var langMap = {

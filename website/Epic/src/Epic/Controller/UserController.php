@@ -1,12 +1,51 @@
 <?php
 namespace Epic\Controller;
 
-use Eva\Api,
-    Eva\Mvc\Controller\ActionController,
-    Eva\View\Model\ViewModel;
+use Eva\Api;
+use Eva\Mvc\Controller\ActionController;
+use Eva\View\Model\ViewModel;
+use Zend\Mvc\MvcEvent;
 
 class UserController extends ActionController
 {
+    protected $user;
+
+    public function getUser()
+    {
+        if($this->user){
+            return $this->user;
+        }
+
+        $userId = $this->getEvent()->getRouteMatch()->getParam('id');
+        $userModel = Api::_()->getModel('User\Model\User');
+        $user = $userModel->getUser($userId)->toArray();
+        return $this->user = $user;
+    }
+
+    protected function attachDefaultListeners()
+    {
+        parent::attachDefaultListeners();
+        $events = $this->getServiceLocator()->get('Application')->getEventManager();
+        $events->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'));
+    }
+
+    public function setUserToView($event)
+    {
+        $user = $this->getUser();
+        $viewModel = $this->getEvent()->getViewModel();
+        $viewModel->setVariables(array(
+            'user' => $user,
+            'viewAsGuest' => 1
+        ));
+        $viewModelChildren = $viewModel->getChildren();
+        foreach($viewModelChildren as $childViewModel){
+            $childViewModel->setVariables(array(
+                'user' => $user,
+                'viewAsGuest' => 1
+            ));
+        }
+    }
+
 
     public function indexAction()
     {
@@ -17,9 +56,6 @@ class UserController extends ActionController
         $viewModel = $this->forward()->dispatch('HomeController', array(
             'action' => 'index',
         )); 
-        $viewModel->setVariables(array(
-            'viewAsGuest' => 1
-        ));
         return $viewModel;
     }
 
@@ -30,7 +66,7 @@ class UserController extends ActionController
             'page' => $page,
         );
 
-        $user = \Core\Auth::getLoginUser();
+        $user = $this->getUser();
         $itemListQuery = array_merge(array(
             'user_id' => $user['id'],
             'order' => 'iddesc',
