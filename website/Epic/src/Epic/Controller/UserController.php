@@ -17,6 +17,9 @@ class UserController extends ActionController
         }
 
         $userId = $this->getEvent()->getRouteMatch()->getParam('id');
+        if(!$userId){
+            return array();
+        }
         $userModel = Api::_()->getModel('User\Model\User');
         $user = $userModel->getUser($userId)->toArray();
         return $this->user = $user;
@@ -49,6 +52,39 @@ class UserController extends ActionController
 
     public function indexAction()
     {
+        $request = $this->getRequest();
+        $query = $request->getQuery();
+
+        $form = new \User\Form\UserSearchForm();
+        $form->bind($query)->isValid();
+        $selectQuery = $form->getData();
+
+        $itemModel = Api::_()->getModel('User\Model\User');
+        if(!$selectQuery){
+            $selectQuery = array(
+                'page' => 1
+            );
+        }
+        $items = $itemModel->setItemList($selectQuery)->getUserList();
+        $items = $items->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Profile' => array(
+                    'site',
+                    'birthday',
+                    'phoneMobile',
+                ),
+            ),
+        ));
+        $paginator = $itemModel->getPaginator();
+        return array(
+            'form' => $form,
+            'users' => $items,
+            'query' => $query,
+            'paginator' => $paginator,
+        );
     }
 
     public function getAction()

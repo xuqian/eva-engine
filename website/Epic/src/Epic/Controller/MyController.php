@@ -9,22 +9,6 @@ use Core\Auth;
 class MyController extends ActionController
 {
 
-    public function indexAction()
-    {
-    }
-
-    public function getAction()
-    {
-
-        $viewModel = $this->forward()->dispatch('HomeController', array(
-            'action' => 'index',
-        )); 
-        $viewModel->setVariables(array(
-            'viewAsGuest' => 1
-        ));
-        return $viewModel;
-    }
-
     public function blogAction()
     {
         $user = Auth::getLoginUser();
@@ -32,9 +16,7 @@ class MyController extends ActionController
             'action' => 'blog',
             'id' => $user['userName'],
         )); 
-        $viewModel->setVariables(array(
-            'viewAsOwner' => 1
-        ));
+        $viewModel->setTemplate('epic/my/blog');
         return $viewModel;
     }
 

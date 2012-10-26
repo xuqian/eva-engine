@@ -6,7 +6,7 @@ $viewAsGuest = $this->viewAsGuest;
 <?if($viewAsGuest):?>
 <ul class="nav profile-nav">
     <li class="" data-highlight-url="^/home/?"><a href="<?=$this->uri('/home/')?>"><?=$this->_('Home')?></a></li>
-    <li class="" data-highlight-url="^/user/\w+/?"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$this->_('Profile')?></a></li>
+    <li class="" data-highlight-url="^/user/\w+/?$"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$this->_('Profile')?></a></li>
     <li class="" data-highlight-url="^/user/\w+/blog/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/blog/')?>"><?=$this->_('Blog')?></a></li>
     <li class="" data-highlight-url="^/user/\w+/album/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/album/')?>"><?=$this->_('Album')?></a></li>
     <li class="" data-highlight-url="^/user/\w+/event/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/event/')?>"><?=$this->_('Event')?></a></li>

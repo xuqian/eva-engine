@@ -7,59 +7,39 @@ $this->headTitle($title, 'SET');
 
 <div class="container">
     <div class="normal-page">
-        <div class="body grid-s5m0">
-
-            <div class="main-wrap"><div id="main" class="main">
-                    <div class="page-main">
-                        <div class="row">
-                            <div class="span6">
-                                <div class="page-main-header">
-                                    <h3><?=$this->_('Members')?></h3>
-                                </div>
-                            </div><!--page main left end-->
-                            <div class="span3">
-                                <div class="page-extra">
-                                    <div class="side-blog-list">
-                                        <div class="page-header border-header">
-                                            <small class="pull-right"><a href="#">View All</a></small>
-                                            <h4>My Blog (123)</h4>
+        <div class="page-main"><div class="row"><div class="span12">
+            <div class="row">
+                <div class="span8">
+                    <div class="page-main-header">
+                        <h3><?=$this->_('Members')?></h3>
+                    </div>
+                </div><!--page main left end-->
+                <div class="span3">
+                    <div class="page-extra">
+                        <div class="side-blog-list">
+                            <div class="page-header border-header">
+                                <small class="pull-right"><a href="#">View All</a></small>
+                                <h4>My Blog (123)</h4>
+                            </div>
+                            <?for($i = 0; $i < 10; $i++):?>
+                            <div class="item ">
+                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+                                <div class="item-inline item-text">
+                                    <div class="text-content">
+                                        <div class="item-title">
+                                            <a href="#">Blog title test
+                                                Blog title test</a>
                                         </div>
-                                        <?for($i = 0; $i < 10; $i++):?>
-                                        <div class="item ">
-                                            <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
-                                            <div class="item-inline item-text">
-                                                <div class="text-content">
-                                                    <div class="item-title">
-                                                        <a href="#">Blog title test
-                                                            Blog title test</a>
-                                                    </div>
-                                                    <p>Post content test</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?endfor?>
+                                        <p>Post content test</p>
                                     </div>
                                 </div>
-                            </div><!--page main right end-->
+                            </div>
+                            <?endfor?>
                         </div>
-
-                    </div><!--page-main end-->
-            </div></div><!-- #main end-->
-
-            <div class="sidebar">
-                <div class="page-side">
-                    <ul class="nav nav-tabs nav-stacked">
-                        <li data-highlight-url="^/account/profile/?$"><a href="<?=$this->uri('/user/' . $this->loginUser['userName'] . '/friend/')?>"><i class="icon-user"></i> My Friends</a></li>
-                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-envelope-alt"></i> My Messages</a></li>
-                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-paste"></i> My Posts</a></li>
-                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-picture"></i> My Albums</a></li>
-                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-group"></i> My Groups</a></li>
-                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-calendar"></i> My Events</a></li>
-                    </ul>
-                </div>
-            </div><!--sider end-->
-
-        </div><!-- #body end-->
+                    </div>
+                </div><!--page main right end-->
+            </div>
+    </div></div></div><!--page-main end-->
     </div><!-- normal end-->
 </div><!--container end-->
 
