@@ -54,7 +54,7 @@ $form->useSubFormGroup()
                                 </div><!--activity-list end-->
                                     
                                          <div class="item-sub-form">
-                                             <form <?=$this->formAttr($form)?> class="activity-box span6">
+                                             <form <?=$this->formAttr($form)?> class="activity-box span5">
                                              <?=$form->restful();?>
                                                 <?=$form->helper(array('Conversation', 'recipient_id'), array('class' => ''))?>        
                                                 <fieldset class="form">
@@ -62,7 +62,11 @@ $form->useSubFormGroup()
                                                         <?=$form->helper('body', 'formTextarea', array('rows' => 5, 'placeholder' => 'Write a replay..'))?>        
                                                     </div>
                                                     <div class="item-absolute item-sub-submit">
+                                                    <?if($items):?>
                                                         <button type="submit" class="btn btn-light-brown btn-large"><?=$this->_('Replay')?></button>
+                                                    <?else:?>
+                                                        <button type="submit" class="btn btn-light-brown btn-large"><?=$this->_('Submit')?></button>
+                                                    <?endif;?>
                                                     </div>
                                                 </fieldset>
                                                 <input name="callback" type="hidden" value="<?=$this->uri('/messages/' . $this->user['userName'])?>" />

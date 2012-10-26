@@ -97,12 +97,20 @@ class MessagesController extends ActionController
                 'items' => array(),
             );
         }
-        
+
+        if (!$user) {
+           return $this->getResponse()->setStatusCode(401);  
+        }
+
         if (!isset($query['author_id'])) {
             $author = \Core\Auth::getLoginUser();
             $query['author_id'] = $author['id']; 
         }
-            
+
+        if ($user['id'] == $query['author_id']) {
+            $this->redirect()->toUrl('/messages/'); 
+        }
+
         $query['user_id'] = $user['id'];
 
         $itemModel = Api::_()->getModel('Message\Model\Conversation');

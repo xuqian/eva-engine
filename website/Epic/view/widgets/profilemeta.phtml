@@ -41,7 +41,7 @@ $viewAsGuest = $this->viewAsGuest;
             <tr>
                 <td colspan="2">
                     <a class="btn btn-brown btn-mini" href="#"><i class="icon-mini icon-plus"></i> Add Friend</a>
-                    <a class="btn btn-gray btn-mini" href="#"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
+                    <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
                 </td>
                 <td class="social">
                     Social Networking : 

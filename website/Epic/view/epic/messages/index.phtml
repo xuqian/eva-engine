@@ -59,7 +59,7 @@ $form->useSubFormGroup()
                                 <a href="<?=$this->uri('/messages/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatar($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                 <div class="item-inline item-text span5">
                                     <div class="item-content">
-                                        <div class="item-title"><a href="<?=$this->uri('/messages/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a> Said:</div>
+                                        <div class="item-title"><a href="<?=$this->uri('/messages/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a></div>
                                         <p><a href="<?=$this->uri('/messages/' . $item['User']['userName'])?>" class="item-user"><?=$item['Conversation']['Message']['body']?></a></p>
 
                                         <div class="item-action">
