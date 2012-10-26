@@ -850,6 +850,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .btn-gray:hover{color:#333;}
 .btn-gray .icon-envelope-alt{color:#AEA48B;}
 .btn-orange{background:#E25110;color:#FFF;font-weight:bold;text-shadow:none;}
+.btn-tiny-white{background:#FFF;border:1px solid #808080;color:#808080;padding:1px 3px;-webkit-border-radius:1px;-moz-border-radius:1px;border-radius:1px;}
 .icon-font-large{font-size:16px;}
 .page-header{margin:20px 0;}.page-header h2,.page-header h3{font-size:16px;color:#545454;}
 .page-header.border-header{border-bottom:2px solid #D8D8D8;margin:20px 0;}.page-header.border-header h3{font-size:16px;line-height:30px;}
@@ -967,3 +968,18 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .blog-list .item-meta{height:20px;color:#999;}.blog-list .item-meta a{color:#999;}
 .blog-list .item-meta a:hover{color:#e1500d;}
 .blog-list .item-content{margin:10px 15px;position:relative;}
+.user-list .item{clear:both;position:relative;height:100px;padding:10px 0;text-align:left;}
+.user-list .item-inline{display:inline-block;zoom:1;*display:inline;height:100px;}
+.user-list .item-absolute{height:100px;position:absolute;top:10px;}
+.user-list .item{height:auto;*zoom:1;margin-bottom:10px;border-bottom:1px dashed #CCC;}.user-list .item:before,.user-list .item:after{display:table;content:"";line-height:0;}
+.user-list .item:after{clear:both;}
+.user-list .item-inline{height:auto;}
+.user-list .item-userface{left:5px;top:10px;text-align:center;}
+.user-list .userface{display:block;}
+.user-list .item-text{margin:0 0 0 100px;position:relative;font-size:13px;}
+.user-list .item-title{margin-bottom:5px;}.user-list .item-title h1,.user-list .item-title h2,.user-list .item-title h3,.user-list .item-title h4{display:inline;margin-right:10px;}.user-list .item-title h1 a,.user-list .item-title h2 a,.user-list .item-title h3 a,.user-list .item-title h4 a{font-size:14px;font-weight:bold;}
+.user-list .item-image{margin:0 10px 10px 0;}
+.user-list .item-meta a:hover{color:#e1500d;}
+.user-list .item-content{margin:10px 0;position:relative;height:20px;color:#999;}.user-list .item-content a{color:#999;}
+.user-list .item-action{right:0;top:10px;}
+.user-list .item-action-main{margin-top:30px;}

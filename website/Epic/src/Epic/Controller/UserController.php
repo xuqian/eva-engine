@@ -72,16 +72,16 @@ class UserController extends ActionController
             ),
             'join' => array(
                 'Profile' => array(
-                    'site',
-                    'birthday',
-                    'phoneMobile',
+                    'self' => array(
+                        '*'
+                    ),
                 ),
             ),
         ));
         $paginator = $itemModel->getPaginator();
         return array(
             'form' => $form,
-            'users' => $items,
+            'items' => $items,
             'query' => $query,
             'paginator' => $paginator,
         );

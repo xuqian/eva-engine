@@ -101,6 +101,14 @@ body, .en body, .fr body {
 	text-shadow:none;
 	//text-transform:uppercase;
 }
+.btn-tiny-white {
+	background:#FFF;
+	border:1px solid #808080;
+	color:#808080;
+	padding:1px 3px;
+	//text-transform:uppercase;
+	.border-radius(1px);
+}
 
 .icon-font-large {
 	font-size:16px;
@@ -801,5 +809,75 @@ body, .en body, .fr body {
 	.item-content {
 		margin:10px 15px;
 		position:relative;
+	}
+}
+
+
+.user-list {
+	.vlist-creater(120px, 100px);
+	.item {
+		height:auto;
+		.clearfix();
+		margin-bottom:10px;
+		border-bottom:1px dashed #CCC;
+	}	
+	.item-inline{
+		height:auto;
+	}
+	.item-userface {
+		left:5px;
+		top:10px;
+		text-align:center;
+	}
+
+	.userface {
+		display:block;
+	}
+
+	.item-text {
+		margin:0 0 0 100px;
+		position:relative;
+		font-size:13px;
+	}
+
+	.item-title {
+		margin-bottom:5px;
+		h1, h2, h3, h4 {
+			display:inline;
+			margin-right:10px;
+			a {
+				font-size:14px;
+				font-weight:bold;
+			}
+		}
+	}
+
+	.item-image {
+		margin:0 10px 10px 0;
+	}
+
+	.item-meta {
+		a:hover {
+			color:@orange;
+		}
+	}
+
+	.item-content {
+		margin:10px 0;
+		position:relative;
+		height:20px;
+		color:#999;
+		a {
+			color:#999;
+		}
+	}
+
+	.item-action {
+		right:0;
+		top:10px;
+	}
+
+	.item-action-main {
+		margin-top:30px;
 	}
 }
