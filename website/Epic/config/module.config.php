@@ -346,6 +346,48 @@ return array(
                     ), //profile end
                 ), //user child_routes end
             ), //user end
+            'messages' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/messages[/]',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MessagesController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'conversation' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '[:id][/]',
+                            'constraints' => array(
+                                'id' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'get'
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ), //conversation end
+                    'remove' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'remove/[:id][/]',
+                            'constraints' => array(
+                                'id' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'remove'
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ), //conversation end
+                ), //message child_routes end
+            ), //message end
         ), //routes end
     ),
     'controllers' => array(
@@ -363,6 +405,7 @@ return array(
             'UserController' => 'Epic\Controller\UserController',
             'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
+            'MessagesController' => 'Epic\Controller\MessagesController',
             'MyController' => 'Epic\Controller\MyController',
         ),
     ),
@@ -402,7 +445,7 @@ return array(
             'description' => 'Bottom Advertisement Code Management'
         ),
     ),
-    
+
     'translator' => array(
         'locale' => 'en',
         'force_locale' => '',  //force_locale will cover locale
