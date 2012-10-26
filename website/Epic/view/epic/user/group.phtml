@@ -1,39 +1,42 @@
 <?
-$item = $this->item;
 $title = 'Groups';
-$title = $this->_($title);
 $this->headTitle($title, 'SET');
+$user = $this->user;
+$items = $this->items;
+$viewAsGuest = $this->viewAsGuest;
 ?>
 
-<div class="container">
-    <div class="normal-page">
-        <div class="body grid-s5m0">
+<div class="page-inner">
+    <div class="container">
+        <div class="profile-cover">
+            <?=$this->widget('Epic', 'widgets/profilenav', $this->vars())?>
+        </div>
+    </div><!-- above container end -->
+    <div class="container">
+        <div class="profile-main">
+            <div class="row">
+                <div class="span8">
+                    <?=$this->widget('Epic', 'widgets/profilemeta', $this->vars())?>
 
-            <div class="main-wrap"><div id="main" class="main">
-                    <div class="page-main">
-                        <div class="row">
-                            <div class="span6">
-                                <div class="page-main-header">
-                                    <h3><?=$this->_($title)?></h3>
-                                </div>
-                            </div><!--page main left end-->
-                            <div class="span3">
-                                <div class="page-extra">
-                                    <?=$this->widget('Epic', 'widgets/userextra')?>
-                                </div>
-                            </div><!--page main right end-->
+                    <div class="profile-activities">
+
+                        <div class="page-header border-header">
+                            <h3><?=$this->_($title);?></h3>
                         </div>
 
-                    </div><!--page-main end-->
-            </div></div><!-- #main end-->
+                        Under building
+                        <?if($this->paginator):?>
+                        <?=$this->paginator->setPath('/user/' . $user['userName'] . '/blog/')->setBaseQuery($this->query);?>
+                        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                        <?endif;?>
 
-            <div class="sidebar">
-                <div class="page-side">
-                    <?=$this->widget('Epic', 'widgets/userside')?>
-                </div>
-            </div><!--sider end-->
 
-        </div><!-- #body end-->
-    </div><!-- normal end-->
-</div><!--container end-->
-
+                    </div><!--profile-activities end-->
+                </div><!--left span8 end-->
+                <div class="span4">
+                    <?=$this->widget('Epic', 'widgets/profileside', $this->vars())?>
+                </div><!--right span4 end-->
+            </div><!--row end-->
+        </div><!--profil-main end-->
+    </div><!--container end-->
+</div><!--page inner end-->

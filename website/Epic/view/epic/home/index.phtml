@@ -14,76 +14,16 @@ $form->useSubFormGroup()
 <div class="page-inner">
     <div class="container">
         <div class="profile-cover">
-            <ul class="nav profile-nav">
-                <li class="" data-highlight-url="^/home/?"><a href="<?=$this->uri('/home/')?>"><?=$this->_('Home')?></a></li>
-                <li class="" data-highlight-url="^/user/\w+/?"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$this->_('Profile')?></a></li>
-                <li class="" data-highlight-url="^/user/\w+/blog/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/blog/')?>"><?=$this->_('Blog')?></a></li>
-                <li class="" data-highlight-url="^/user/\w+/album/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/album/')?>"><?=$this->_('Album')?></a></li>
-                <li class="" data-highlight-url="^/user/\w+/event/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/event/')?>"><?=$this->_('Event')?></a></li>
-                <li class="" data-highlight-url="^/user/\w+/group/?"><a href="<?=$this->uri('/user/' . $user['userName'] . '/group/')?>"><?=$this->_('Group')?></a></li>
-            </ul>
-            <p class="profile-url"><a href="<?=$this->serverUrl() . '/user/' . $user['userName']?>"><?=$this->serverUrl() . '/user/' . $user['userName']?></a></p>
+            <?=$this->widget('Epic', 'widgets/profilenav', $this->vars())?>
         </div>
     </div><!-- above container end -->
     <div class="container">
         <div class="profile-main">
             <div class="row">
                 <div class="span8">
-                    <div class="thumbnail profile-face">
-                        <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
-                        <div class="caption">
-                            <a class="highlight highlight-large" href="#">123</a> Friends
-                        </div>
-                    </div>
-                    <div class="profile-intro">
-                        <div class="profile-title">
-                            <h2><?=$user['userName']?></h2>
-                            <small class="profile-level">Professional  <a href="#" title="VIP User"><i class="icon-trophy"></i></a></small>
-                        </div>
-
-                        <table class="table-condensed">
-                            <tbody>
-                                <tr>
-                                    <td>Title: Miss</td>
-                                    <td colspan="2">Profession : Food Critic</td>
-                                </tr>
-                                <tr>
-                                    <td>Location : Lanzhou, China</td>
-                                    <td>Birthday : 1980-10-01</td>
-                                    <td>Events : <a href="">3</a> Times</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Tags : 
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a>
-                                        <a href="#">Wine</a></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a class="btn btn-brown btn-mini" href="#"><i class="icon-mini icon-plus"></i> Add Friend</a>
-                                        <a class="btn btn-gray btn-mini" href="#"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
-                                    </td>
-                                    <td class="social">
-                                        Social Networking : 
-                                        <a href="#"><i class="icon-facebook-sign"></i></a>
-                                        <a href="#"><i class="icon-pinterest"></i></a>
-                                        <a href="#"><i class="icon-twitter"></i></a>
-                                        <a href="#"><i class="icon-google-plus"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div><!--profile-intro end-->
+                    <?=$this->widget('Epic', 'widgets/profilemeta', $this->vars())?>
 
                     <div class="profile-activities">
-
                         <?if(!$viewAsGuest):?>
                         <div class="row">
                             <form id="activity-form" <?=$this->formAttr($form)?> class="activity-box span7">
@@ -165,117 +105,7 @@ $form->useSubFormGroup()
                     </div><!--profile-activities end-->
                 </div><!--left span8 end-->
                 <div class="span4">
-                    <div class="profile-side">
-                        <div class="calendar calendar-mini">
-                            <div class="calendar-wrap">
-
-                            </div>
-                            <div class="calendar-caption">
-                                <i class="icon-stop green"></i> Coming Event
-                                <i class="icon-stop orange"></i> Today
-                            </div>
-                        </div><!--calendar end-->
-
-                        <div class="subscription">
-                            <button class="btn"><i class="icon-mini icon-envelope-alt"></i> Subscription Epicurissimo Newsletters</button>
-                        </div>
-
-
-                        <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">View All</a></small>
-                            <h4>My Friends (123)</h4>
-                        </div>
-                        <div class="side-user-list">
-                            <ul class="thumbnails">
-                                <?for($i = 0; $i < 16; $i++):?>
-                                <li>
-                                <a class="thumbnail" href="#">
-                                    <img src="<?=$this->link('/src/epic/css/img/face-04.jpg')?>" alt="" class="img-rounded" width="30" height="30" />
-                                </a>
-                                </li>
-                                <?endfor;?>
-                            </ul>
-                        </div>
-
-                        <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">View All</a></small>
-                            <h4>My Blog (123)</h4>
-                        </div>
-                        <div class="side-blog-list">
-                            <?for($i = 0; $i < 10; $i++):?>
-                            <div class="item ">
-                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
-                                <div class="item-inline item-text">
-                                    <div class="text-content">
-                                        <div class="item-title">
-                                            <a href="#">Blog title test
-                                                Blog title test</a>
-                                        </div>
-                                        <p>Post content test</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <?endfor?>
-                        </div><!--activity-list end-->
-                        <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">View All</a></small>
-                            <h4>My Events (123)</h4>
-                        </div>
-                        <div class="side-blog-list">
-                            <?for($i = 0; $i < 10; $i++):?>
-                            <div class="item ">
-                                <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
-                                <div class="item-inline item-text">
-                                    <div class="text-content">
-                                        <div class="item-title">
-                                            <a href="#">Event title test</a>
-                                        </div>
-                                        <p>Event Members: 50</p>
-                                        <p>Event Time: <?=$this->datetime(time())?></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <?endfor?>
-                        </div><!--activity-list end-->
-
-                        <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">View All</a></small>
-                            <h4>Albums</h4>
-                        </div>
-                        <div class="side-album-list">
-                            <ul class="thumbnails">
-                                <?for($i = 0; $i < 8; $i++):?>
-                                <li>
-                                <a class="thumbnail" href="#">
-                                    <img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="70" height="70" />
-                                </a>
-                                </li>
-                                <?endfor;?>
-                            </ul>
-                        </div>
-
-                        <div class="page-header border-header">
-                            <small class="pull-right"><a href="#">View All</a></small>
-                            <h4>My Groups</h4>
-                        </div>
-                        <div class="side-group-list">
-                            <ul class="thumbnails">
-                                <?for($i = 0; $i < 5; $i++):?>
-                                <li>
-                                <a class="thumbnail" href="#">
-                                    <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
-                                </a>
-                                </li>
-                                <?endfor;?>
-                            </ul>
-                        </div>
-
-                        <div class="side-ad-list">
-                            <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
-                            <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
-                        </div>
-
-                    </div><!--profile-side end-->
+                    <?=$this->widget('Epic', 'widgets/profileside', $this->vars())?>
                 </div><!--right span4 end-->
             </div><!--row end-->
         </div><!--profil-main end-->
@@ -285,13 +115,6 @@ $form->useSubFormGroup()
 <?=$this->widget('File', 'file/index')?>
 
 <script>
-    var calendarUrl = eva.d('/event/calendar/');
-    $('.calendar-wrap').load(calendarUrl);
-    $('.calendar-wrap thead a').live("click", function(){
-            $('.calendar-wrap').load($(this).attr('href'));
-            return false;
-    });
-
     var modal = $("#fileupload-modal");
     modal.hide();
     eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){

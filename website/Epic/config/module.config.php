@@ -180,6 +180,81 @@ return array(
                 'priority' => 2,
             ),
 
+            'my' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/my[/]',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MyController',
+                    ),
+                ),
+                'priority' => 2,
+                'child_routes' => array(
+                    'blog' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'blog[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'blog'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'event' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'event[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'event'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'group' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'group[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'group'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'friend' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'friend[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'friend'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'album' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'album[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'album'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ), //my child_routes end
+            ), //my end
+
             'user' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -331,6 +406,7 @@ return array(
             'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
             'MessagesController' => 'Epic\Controller\MessagesController',
+            'MyController' => 'Epic\Controller\MyController',
         ),
     ),
 
