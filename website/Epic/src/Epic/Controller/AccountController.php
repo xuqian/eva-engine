@@ -5,32 +5,55 @@ use Eva\Api;
 use Eva\Mvc\Controller\ActionController;
 use Eva\View\Model\ViewModel;
 use Core\Auth;
+use Epic\Form;
 
 class AccountController extends ActionController
 {
 
     public function profileAction()
     {
-        $user = Auth::getLoginUser();
-        $itemModel = Api::_()->getModel('User\Model\User');
-        $item = $itemModel->getUser($user['id']);
+        $request = $this->getRequest();
+        $form = array();
 
-        $item = $item->toArray(array(
-            'self' => array(
-                '*',
-            ),
-            'join' => array(
-                'Profile' => array(
-                    '*'
+        if ($request->isPost()) {
+            $item = $request->getPost();
+            $form = new Form\AccountEditForm();
+            $form->useSubFormGroup();
+            $form->bind($item);
+            if ($form->isValid()) {
+                $callback = $this->params()->fromPost('callback');
+                $callback = $callback ? $callback : '/';
+
+                $item = $form->getData();
+                $itemModel = Api::_()->getModel('User\Model\User');
+                $itemModel->setItem($item)->saveUser();
+                $this->redirect()->toUrl($callback);
+            } else {
+                $item = $form->getData();
+            }
+        } else {
+            $user = Auth::getLoginUser();
+            $itemModel = Api::_()->getModel('User\Model\User');
+            $item = $itemModel->getUser($user['id']);
+
+            $item = $item->toArray(array(
+                'self' => array(
+                    '*',
                 ),
-                'Roles' => array(
-                    '*'
+                'join' => array(
+                    'Profile' => array(
+                        '*'
+                    ),
+                    'Roles' => array(
+                        '*'
+                    ),
+                    'Account' => array('*'),
                 ),
-                'Account' => array('*'),
-            ),
-        ));
+            ));
+        }
         return array(
             'item' => $item,
+            'form' => $form,
         );
     }
 
@@ -45,28 +68,4 @@ class AccountController extends ActionController
         return $viewModel;
     }
 
-    public function registerAction()
-    {
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-
-            $item = $request->getPost();
-            $form = new \User\Form\RegisterForm();
-            $form->bind($item);
-            if ($form->isValid()) {
-                $callback = $this->params()->fromPost('callback');
-                $callback = $callback ? $callback : '/';
-
-                $item = $form->getData();
-                $itemModel = Api::_()->getModel('User\Model\Register');
-                $itemModel->setItem($item)->register();
-                $this->redirect()->toUrl($callback);
-            } else {
-            }
-            return array(
-                'form' => $form,
-                'item' => $item,
-            );
-        }
-    }
 }

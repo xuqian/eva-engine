@@ -1,20 +1,17 @@
 <?
 $item = $this->item;
-$title = $item['id'] ? 'Edit User' : 'Create User';
+$title = 'Edit Profile';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
-$this->textDelay('breadcrumbText', $title);
 
-if($this->form){
-	$form = $this->form;
-} else {
-    $form = $item['id'] ? new User\Form\UserEditForm() : new User\Form\UserCreateForm();
+if(!$this->form){
+    $form = new Epic\Form\AccountEditForm();
     $form->useSubFormGroup();
 }
 
 $form->setMethod($item['id'] ? 'put' : 'post');
 $form->setView($this)
-     ->setAction($this->uri('/account/edit'))
+    ->setAction($this->uri('/account/profile/'))
      ->bind($item)
      ->prepare();
 
@@ -32,9 +29,11 @@ $form->setView($this)
                         <form <?=$this->formAttr($form)?> class="form">
                             <?=$form->restful();?>
                             <?=$form->helper('id');?>
+                            <input type="hidden" name="callback" value="<?=$this->uri('/account/profile/')?>" />
 
                             <fieldset class="form-horizontal">
 
+                                <!--
                                 <div class="control-group <?=$form->isError('screenName') ? 'error' : '';?>">
                                     <?=$form->helper('screenName', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -42,6 +41,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper('screenName', 'formElementErrors')?></div>
                                     </div>
                                 </div>
+                                -->
                                 <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                                     <?=$form->helper('firstName', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -102,13 +102,6 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'address'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
-                                <div class="control-group <?=$form->isError(array('Profile', 'addressMore')) ? 'error' : '';?>">
-                                    <?=$form->helper(array('Profile', 'addressMore'), 'label', array('class' => 'control-label'))?>
-                                    <div class="controls">
-                                        <?=$form->helper(array('Profile', 'addressMore'), array('class' => ''))?>        
-                                        <div class="help-block"><?=$form->helper(array('Profile', 'addressMore'), 'formElementErrors')?></div>
-                                    </div>
-                                </div>
                                 <div class="control-group <?=$form->isError(array('Profile', 'city')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'city'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -123,13 +116,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'province'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
-                                <div class="control-group <?=$form->isError(array('Profile', 'state')) ? 'error' : '';?>">
-                                    <?=$form->helper(array('Profile', 'state'), 'label', array('class' => 'control-label'))?>
-                                    <div class="controls">
-                                        <?=$form->helper(array('Profile', 'state'), array('class' => ''))?>        
-                                        <div class="help-block"><?=$form->helper(array('Profile', 'state'), 'formElementErrors')?></div>
-                                    </div>
-                                </div>
+                                <!--
                                 <div class="control-group <?=$form->isError(array('Profile', 'zipcode')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'zipcode'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -137,6 +124,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'zipcode'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
+                                -->
 
                                 <div class="control-group <?=$form->isError(array('Profile', 'phoneMobile')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'phoneMobile'), 'label', array('class' => 'control-label'))?>
@@ -154,6 +142,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="control-group <?=$form->isError(array('Profile', 'localIm')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'localIm'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -161,6 +150,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'localIm'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
+                                -->
                                 <div class="form-actions">
                                     <button id="save-publish" class="btn btn-success btn-large"><?=$this->_('Save')?></button>
                                 </div>

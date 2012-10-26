@@ -3,6 +3,14 @@ $title = 'Members';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
 $items = $this->items;
+
+$form = new Activity\Form\FollowForm();
+$form
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/activity/follow/'))
+->prepare();
 ?>
 
 <div class="container">
@@ -24,18 +32,24 @@ $items = $this->items;
                             <div class="item-inline item-text">
                                 <div class="item-title">
                                     <h2><a href="<?=$this->uri('/user/' . $item['userName'])?>" class="item-user"><?=$item['userName']?></a></h2>
-                                    Lanzhou Gansu
-                                    <?//=$item['Profile']['country']?>
+                                    <?=$item['Profile']['city']?> <?=$item['Profile']['province']?> <?=$item['Profile']['country']?> 
                                 </div>
                                 <div class="item-meta">
-                                    Abc sakldaskd lksajd lka
+                                    <?=$item['gender']?>
                                 </div>
                                 <div class="item-content">
-                                    <p>ABC<?//=$item['Profile']['bio']?></p>
+                                    <p><?=$item['Profile']['bio']?></p>
                                 </div>
                             </div>
                             <div class="item-absolute item-action">
-                                <a href="<?=$this->uri('/message/' . $item['id'])?>" title="" class="btn btn-small item-action-main">Follow</a>
+                                <form <?=$this->formAttr($form)?>>
+                                    <?=$form->restful();?>
+                                    <?=$form->helper('user_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$form->helper('follower_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main">Follow</button>
+                                </form>
+
                             </div>
                         </div>
                         <?endforeach?>
