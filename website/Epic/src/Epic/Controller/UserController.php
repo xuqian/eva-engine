@@ -25,6 +25,47 @@ class UserController extends ActionController
 
     public function blogAction()
     {
+        $page = $this->params()->fromQuery('page', 1);
+        $query = array(
+            'page' => $page,
+        );
+
+        $user = \Core\Auth::getLoginUser();
+        $itemListQuery = array_merge(array(
+            'user_id' => $user['id'],
+            'order' => 'iddesc',
+        ), $query);
+        $itemModel = Api::_()->getModel('Blog\Model\Post');
+        $items = $itemModel->setItemList($itemListQuery)->getPostList(array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                        'getContentHtml()',
+                    ),
+                ),
+            ),
+            'proxy' => array(
+                'File\Item\File::PostCover' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    ),
+                )
+            ),
+        ));
+        $userList = $itemModel->getUserList()->toArray();
+        $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
+
+        $paginator = $itemModel->getPaginator();
+        return array(
+            'items' => $items,
+            'query' => $query,
+            'paginator' => $paginator,
+        );
     }
 
     public function friendAction()
@@ -47,7 +88,6 @@ class UserController extends ActionController
     {
         $request = $this->getRequest();
         if ($request->isPost()) {
-
             $item = $request->getPost();
             $form = new \User\Form\RegisterForm();
             $form->bind($item);

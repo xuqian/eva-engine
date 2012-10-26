@@ -94,6 +94,13 @@ body, .en body, .fr body {
 		color:#AEA48B;
 	}
 }
+.btn-orange {
+	background:#E25110;
+	color:#FFF;
+	font-weight:bold;
+	text-shadow:none;
+	//text-transform:uppercase;
+}
 
 .icon-font-large {
 	font-size:16px;
@@ -736,5 +743,63 @@ body, .en body, .fr body {
 	h1,h2, h3, h4 {
 		color:#000;
 		font-size:18px;
+	}
+}
+
+
+
+
+
+.blog-list {
+	.vlist-creater(150px, 130px);
+	.item {
+		height:auto;
+		.clearfix();
+		margin-bottom:20px;
+		padding-bottom:20px;
+		border-bottom:1px dashed #CCC;
+	}	
+	.item-inline{
+		min-height:100px;
+		height:auto;
+	}
+	.item-userface {
+		left:5px;
+		top:10px;
+	}
+	.item-text {
+		position:relative;
+		font-size:13px;
+	}
+
+	.item-title {
+		margin-bottom:5px;
+		h1, h2, h3, h4 {
+			a {
+				font-size:18px;
+				font-weight:bold;
+			}
+		}
+	}
+
+	.item-image {
+		margin:0 10px 10px 0;
+	}
+
+	.item-meta {
+		height:20px;
+		color:#999;
+		a {
+			color:#999;
+		}
+
+		a:hover {
+			color:@orange;
+		}
+	}
+
+	.item-content {
+		margin:10px 15px;
+		position:relative;
 	}
 }

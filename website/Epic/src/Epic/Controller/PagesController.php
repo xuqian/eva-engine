@@ -14,7 +14,6 @@ class PagesController extends ActionController
     {
         $id = $this->params('id');
         $this->layout('layout/empty');
-        $id = $this->params('id');
         $itemModel = Api::_()->getModel('Blog\Model\Post');
         $item = $itemModel->getPost($id, array(
             'self' => array(

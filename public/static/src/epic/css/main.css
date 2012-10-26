@@ -849,6 +849,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .btn-gray:active,.btn-gray.active{background-color:#d5d0b2 \9;}
 .btn-gray:hover{color:#333;}
 .btn-gray .icon-envelope-alt{color:#AEA48B;}
+.btn-orange{background:#E25110;color:#FFF;font-weight:bold;text-shadow:none;}
 .icon-font-large{font-size:16px;}
 .page-header{margin:20px 0;}.page-header h2,.page-header h3{font-size:16px;color:#545454;}
 .page-header.border-header{border-bottom:2px solid #D8D8D8;margin:20px 0;}.page-header.border-header h3{font-size:16px;line-height:30px;}
@@ -953,3 +954,16 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .page-side .nav li{margin-bottom:10px;position:relative;z-index:2;}
 .page-side .nav li.active:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;-webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.4);-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.4);box-shadow:0 0 10px rgba(0, 0, 0, 0.4);z-index:1;}
 .page-main-header{border-bottom:1px dashed #CCC;margin-bottom:40px;line-height:30px;}.page-main-header h1,.page-main-header h2,.page-main-header h3,.page-main-header h4{color:#000;font-size:18px;}
+.blog-list .item{clear:both;position:relative;height:130px;padding:10px 0;text-align:left;}
+.blog-list .item-inline{display:inline-block;zoom:1;*display:inline;height:130px;}
+.blog-list .item-absolute{height:130px;position:absolute;top:10px;}
+.blog-list .item{height:auto;*zoom:1;margin-bottom:20px;padding-bottom:20px;border-bottom:1px dashed #CCC;}.blog-list .item:before,.blog-list .item:after{display:table;content:"";line-height:0;}
+.blog-list .item:after{clear:both;}
+.blog-list .item-inline{min-height:100px;height:auto;}
+.blog-list .item-userface{left:5px;top:10px;}
+.blog-list .item-text{position:relative;font-size:13px;}
+.blog-list .item-title{margin-bottom:5px;}.blog-list .item-title h1 a,.blog-list .item-title h2 a,.blog-list .item-title h3 a,.blog-list .item-title h4 a{font-size:18px;font-weight:bold;}
+.blog-list .item-image{margin:0 10px 10px 0;}
+.blog-list .item-meta{height:20px;color:#999;}.blog-list .item-meta a{color:#999;}
+.blog-list .item-meta a:hover{color:#e1500d;}
+.blog-list .item-content{margin:10px 15px;position:relative;}
