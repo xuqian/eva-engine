@@ -9,17 +9,59 @@ use Message\Form,
 class MessagesController extends RestfulModuleController
 {
     protected $renders = array(
-        'restPutMessages' => 'messages/get',    
-        'restPostMessages' => 'messages/get',    
-        'restDeleteMessages' => 'remove/get',    
+        'restGetMessagesRemove' => 'messages/delete',    
     );
     
     protected $addResources = array(
-        'new'
+        'remove',
+        'new',
+        'unreadcount',
     );
-    
+
+    public function restGetMessagesUnreadcount()
+    {
+        $mine = \Core\Auth::getLoginUser(); 
+        
+        $count = 0;
+
+        if ($mine) {
+            $query = array(
+                'author_id' => $mine['id'],
+                'noLimit' => true,
+            );
+            
+            $itemModel = Api::_()->getModel('Message\Model\Index');
+            $items = $itemModel->setItemList($query)->getIndexList();
+      
+            if ($items) {
+                foreach ($items as $item) {
+                    $count += $item->messageCount;
+                }
+            }
+        }
+        
+        return $count;
+    }
+
     public function restGetMessagesNew()
     {
+    }
+    
+    public function restGetMessagesRemove()
+    {
+        $id = $this->params('id');
+        $itemModel = Api::_()->getModel('Message\Model\Conversation');
+        $item = $itemModel->getConversation($id)->toArray();
+
+        $user = \Core\Auth::getLoginUser(); 
+        if ($user['id'] != $item['author_id']) {
+            exit; 
+        }
+
+        return array(
+            'callback' => $this->params()->fromQuery('callback'),
+            'item' => $item,
+        ); 
     }
 
     public function restIndexMessages()
@@ -35,7 +77,7 @@ class MessagesController extends RestfulModuleController
                 'items' => array(),
             );
         }
-        
+
         $user = \Core\Auth::getLoginUser(); 
 
         if ($user['id'] != $query['author_id']) {
@@ -129,88 +171,5 @@ class MessagesController extends RestfulModuleController
             'query' => $query,
             'paginator' => $paginator,
         );
-    }
-
-    public function restPostMessages()
-    {
-        $postData = $this->params()->fromPost();
-        $form = new Form\MessageForm();
-        $form->useSubFormGroup()
-            ->bind($postData);
-
-        if ($form->isValid()) {
-            $messageData = $form->getData();
-
-            $userModel = Api::_()->getModel('User\Model\User');
-            $recipient = $userModel->getUser($messageData['Conversation']['recipient_id']); 
-            $sender = \Core\Auth::getLoginUser();
-
-            if (!isset($recipient['id']) || !isset($sender['id']) || $recipient['id'] == $sender['id']) {
-                exit;
-            }
-            
-            $itemModel = Api::_()->getModel('Message\Model\Message');
-            $messageId = $itemModel->setItem($messageData)->createMessage();
-            $this->flashMessenger()->addMessage('message-create-succeed');
-            $this->redirect()->toUrl('/message/messages/' . $recipient['id']);
-
-        } else {
-            
-        }
-
-        return array(
-            'form' => $form,
-            'message' => $messageData,
-        );
-    }
-
-    public function restPutMessages()
-    {
-        $postData = $this->params()->fromPost();
-        $form = new Form\PostEditForm();
-        $form->useSubFormGroup()
-             ->bind($postData);
-
-        $flashMesseger = array();
-
-        if ($form->isValid()) {
-            $postData = $form->getData();
-            $itemModel = Api::_()->getModel('Blog\Model\Post');
-            $postId = $itemModel->setItem($postData)->savePost();
-
-            $this->flashMessenger()->addMessage('post-edit-succeed');
-            $this->redirect()->toUrl('/admin/blog/' . $postData['id']);
-
-        } else {
-        }
-
-        return array(
-            'form' => $form,
-            'item' => $postData,
-        );
-    }
-
-    public function restDeleteMessages()
-    {
-        $postData = $this->params()->fromPost();
-        $callback = $this->params()->fromPost('callback');
-
-        $form = new Form\PostDeleteForm();
-        $form->bind($postData);
-        if ($form->isValid()) {
-
-            $postData = $form->getData();
-            $itemModel = Api::_()->getModel('Blog\Model\Post');
-            $itemModel->setItem($postData)->removePost();
-
-            if($callback){
-                $this->redirect()->toUrl($callback);
-            }
-
-        } else {
-            return array(
-                'post' => $postData,
-            );
-        }
     }
 }
