@@ -61,6 +61,7 @@ class MessagesController extends ActionController
                 'Conversation' => array(
                     'self' => array(
                         'message_id',
+                        'sender_id',
                     ),
                     'join' => array(
                         'Message' => array(
@@ -123,10 +124,12 @@ class MessagesController extends ActionController
             ),
             'join' => array(
                 'Sender' => array(
+                    'id',
                     'userName',
                     'email',
                 ),
                 'Recipient' => array(
+                    'id',
                     'userName',
                 ),
                 'Message' => array(
@@ -135,7 +138,10 @@ class MessagesController extends ActionController
             ),
         ));
         $paginator = $itemModel->getPaginator();
-        
+
+        unset($query['author_id']);
+        unset($query['user_id']);
+
         return array(
             'user' => $user,
             'items' => $items,

@@ -25,13 +25,20 @@ $this->headTitle($title, 'SET');
                                         <a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatar($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                         <div class="item-inline item-text span5">
                                             <div class="item-content">
-                                                <div class="item-title">To <a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a> : </div>
+                                                <div class="item-title">
+                                                <?if($item['Conversation']['sender_id'] == $item['author_id']):?>
+                                                    To
+                                                <?else:?>
+                                                    From
+                                                <?endif;?>    
+                                                    <a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a> : 
+                                                </div>
                                                 <?=$item['Conversation']['Message']['body']?>
                                             </div>
                                             <div class="item-action">
                                                 <p class="pull-right"><a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="highlight">Reply</a></p>
-                                                <?if($item['messageCount'] > 0):?>
-                                                <p class="pull-right"><a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="highlight"><?=$item['messageCount']?> unread messages</a></p>
+                                                <?if($item['unreadCount'] > 0):?>
+                                                <p class="pull-right"><a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="highlight"><?=$item['unreadCount']?> unread messages</a></p>
                                                 <?endif;?>
                                                 <p class="pull-left">
                                                 <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['messageTime'])?>" datetime="<?=$this->datetime()->isoTime($item['messageTime'])?>"><?=$this->datetime($item['messageTime'])?></time>
@@ -40,6 +47,11 @@ $this->headTitle($title, 'SET');
                                         </div>
                                     </div>
                                     <?endforeach?>
+
+                                     <?if($this->paginator):?>
+                                        <?=$this->paginator->setPath('/messages/')->setBaseQuery($this->query);?>
+                                        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                                    <?endif;?>
                                 </div><!--activity-list end-->
                             </div><!--page main left end-->
                             <div class="span3">

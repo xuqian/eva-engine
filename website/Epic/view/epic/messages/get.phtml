@@ -51,7 +51,11 @@ $form->useSubFormGroup()
                                         <a href="<?=$this->uri('/messages/conversation/' . $item['Sender']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatar($item['Sender']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                         <div class="item-inline item-text span5">
                                             <div class="item-content">
-                                                <div class="item-title">To <a href="<?=$this->uri('/messages/conversation/' . $item['Sender']['userName'])?>" class="item-user"><?=$item['Sender']['userName']?></a> : </div>
+                                                <?if($item['Sender']['id'] == $item['author_id']):?>
+                                                <div class="item-title">To <a href="<?=$this->uri('/messages/conversation/' . $item['Recipient']['userName'])?>" class="item-user"><?=$item['Recipient']['userName']?></a> : </div>
+                                                <?else:?>    
+                                                <div class="item-title">From <a href="<?=$this->uri('/messages/conversation/' . $item['Sender']['userName'])?>" class="item-user"><?=$item['Sender']['userName']?></a> : </div>
+                                                <?endif;?>
                                                 <?=$item['Message']['body']?>
                                             </div>
                                             <div class="item-action">
@@ -65,6 +69,11 @@ $form->useSubFormGroup()
                                         </div>
                                     </div>
                                     <?endforeach?>
+
+                                    <?if($this->paginator):?>
+                                        <?=$this->paginator->setPath('/messages/conversation/' . $this->user['userName'])->setBaseQuery($this->query);?>
+                                        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                                    <?endif;?>
                                 </div><!--activity-list end-->
 
 
