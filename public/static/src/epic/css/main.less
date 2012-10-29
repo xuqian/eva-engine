@@ -994,3 +994,225 @@ body, .en body, .fr body {
 	}
 
 }
+
+
+
+/*******************************
+*  Pricing
+********************************/
+
+.plans {
+
+	@planRowWidth : 150px;
+
+	vertical-align:top;
+	.plan-header, .plan-data, .plan-row {
+		.inline-block();
+		vertical-align:top;
+	}
+
+	.plan-header {
+		width:120px;
+		padding-top:160px;
+	}
+
+	.plan-row {
+		margin-top:15px;
+		width:150px;
+		position:relative;
+	}
+
+	.plan-wrap {
+		margin:0 5px;
+		width:140px;
+		border:1px solid #CCC;
+		background:#FFF;
+		.border-radius(5px);
+		.box-shadow(0 3px 3px rgba(0,0,0,.095));
+	}
+
+	.cell {
+		margin-top:15px;
+		height:35px;
+		line-height:35px;
+		font-size:16px;
+		font-weight:bold;
+		color:#666;
+		text-align:center;
+	}
+
+	.cell.last {
+		height:80px;
+	}
+
+	.plan-header .cell {
+		height:34px;
+		font-size:14px;
+		font-weight:normal;
+		border-bottom:1px dashed #CCC;
+		color:#999;
+	}
+
+	h3 {
+		text-align:center;
+		font-size:20px;
+	}
+
+	.planname {
+		height:155px;
+		text-align:center;
+	}
+
+	.planprice {
+		width:149px;
+		height:64px;
+		line-height:80px;
+		position:absolute;
+		top:35px;
+		left:1px;
+		margin-bottom:5px;
+		background:#659B2B;
+		color:#FFF;
+		font-weight:bold;
+		font-size:16px;
+		.box-shadow(0 3px 3px rgba(0,0,0,.095));
+
+		.price {
+			font-size:40px;
+			line-height:54px;	
+		}
+	}
+
+	.planprice:after,  .planprice:before{
+		content:"";
+		position:absolute;
+		border-style:solid;
+		display:block; 
+		width:0;
+		top:-5px;
+		right:0;
+		border-width: 5px 0 0 5px;
+		border-color:transparent #6A8B4E;
+	}
+
+	.planprice:before {
+		top:-5px;
+		right:auto;
+		left:0;
+		border-width: 5px 5px 0 0;
+	}
+}
+
+.planname .btn-plan {
+	margin-top:75px;
+}
+
+.mainplan.plan-row {
+	margin-top:0;
+
+	.planname {
+		height:170px;
+	}
+
+	.planname .btn-plan {
+		margin-top:90px;
+	}
+}
+
+.btn-plan {
+  	.buttonBackground(#92D20C, #77B900);
+	text-transform:uppercase;
+}
+
+/*
+.btn-plan {
+	.inline-block();
+	padding:5px 25px;
+	color:#FFF;
+	font-weight:bold;
+	font-size:14px;
+	line-height:14px;
+	text-align:center;
+	background:#CCC;
+	border:1px solid #999;
+	cursor:pointer;
+	text-decoration:none;
+	.border-radius(5px);
+}
+
+.plan1 {
+	h3 {
+		color:#FEBF00;
+	}
+	.planprice {
+		background-image:url(os/plan1.png);
+	}
+
+	.btn_plan {
+		background:#FEBF00;
+		border-color:#D5A71F;
+	}
+}
+
+.plan2 {
+	h3 {
+		color:#659B2B;
+	}
+	.planprice {
+		background-image:url(os/plan2.png);
+	}
+
+	.btn_plan {
+		background:#659B2B;
+		border-color:#6A8B4E;
+	}
+}
+
+.plan3 {
+	h3 {
+		color:#017E9A;
+	}
+	.planprice {
+		background-image:url(os/plan3.png);
+	}
+
+	.btn_plan {
+		background:#017E9A;
+		border-color:#075F74;
+	}
+}
+
+.plan4 {
+	h3 {
+		color:#39A0AF;
+	}
+	.planprice {
+		background-image:url(os/plan4.png);
+	}
+
+	.btn_plan {
+		background:#39A0AF;
+		border-color:#257681;
+	}
+}
+
+.plan5 {
+	h3 {
+		color:#4FA7D7;
+	}
+	.planprice {
+		background-image:url(os/plan5.png);
+	}
+
+	.btn_plan {
+		background:#4FA7D7;
+		border-color:#3982A9;
+	}
+}
+
+
+.plandescription {
+	margin:20px;
+}
+*/
+

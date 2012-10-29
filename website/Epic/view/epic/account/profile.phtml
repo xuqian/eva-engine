@@ -161,10 +161,7 @@ $form->setView($this)
 
             <div class="sidebar">
                 <div class="page-side">
-                    <ul class="nav nav-tabs nav-stacked">
-                        <li data-highlight-url="^/account/profile/?$"><a href="<?=$this->uri('/account/profile/')?>"><i class="icon-user"></i> Profile</a></li>
-                        <li data-highlight-url="^/account/setting/?$"><a href="<?=$this->uri('/account/setting/')?>"><i class="icon-cogs"></i> Setting</a></li>
-                    </ul>
+                    <?=$this->widget('Epic', 'widgets/accountnav', $this->vars())?>
                 </div>
             </div><!--sider end-->
 
