@@ -877,6 +877,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .profile-intro{margin-left:270px;}.profile-intro .profile-title h2,.profile-intro .profile-title h3{display:inline;font-size:30px;}
 .profile-intro .profile-level{margin-left:10px;font-size:14px;}
 .profile-intro .social a{color:#999;font-size:18px;}.profile-intro .social a:hover{color:#e1500d;}
+.profile-intro .follow-form{display:inline;}
 .profile-url{position:absolute;top:20px;right:20px;color:#FFF;}.profile-url a{color:#FFF;}
 .profile-nav{position:absolute;top:170px;left:270px;}.profile-nav li{display:inline-block;zoom:1;*display:inline;width:100px;}
 .profile-nav li:hover{background:none;}
@@ -972,7 +973,7 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .user-list .item{clear:both;position:relative;height:100px;padding:10px 0;text-align:left;}
 .user-list .item-inline{display:inline-block;zoom:1;*display:inline;height:100px;}
 .user-list .item-absolute{height:100px;position:absolute;top:10px;}
-.user-list .item{height:auto;*zoom:1;margin-bottom:10px;border-bottom:1px dashed #CCC;}.user-list .item:before,.user-list .item:after{display:table;content:"";line-height:0;}
+.user-list .item{min-height:100px;*zoom:1;margin-bottom:10px;border-bottom:1px dashed #CCC;}.user-list .item:before,.user-list .item:after{display:table;content:"";line-height:0;}
 .user-list .item:after{clear:both;}
 .user-list .item-inline{height:auto;}
 .user-list .item-userface{left:5px;top:10px;text-align:center;}

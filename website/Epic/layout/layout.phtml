@@ -50,9 +50,9 @@
                     </ul>
                     <ul class="nav pull-right">
                         <li>
-                        <form class="form form-search">
+                        <form action="<?=$this->uri('/user/')?>" class="form form-search">
                             <div class="input-append">
-                                <input type="text" class="span1 search-query">
+                                <input name="keyword" type="text" class="span1 search-query">
                                 <button type="submit" class="btn"><i class="icon-search"></i></button>
                             </div>
                         </form>

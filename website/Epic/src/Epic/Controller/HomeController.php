@@ -33,7 +33,6 @@ class HomeController extends ActionController
                 'Roles' => array(
                     '*'
                 ),
-                'Account' => array('*'),
             ),
         ));
 
