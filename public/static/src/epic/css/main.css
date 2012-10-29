@@ -1000,3 +1000,4 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .message-list .item-action a{color:#999;}
 .message-list .item-action .highlight{color:#e1500d;}
 .message-list .item-content{margin:10px 15px;position:relative;}
+.message-notice-count{position:relative;}.message-notice-count .count-number{position:absolute;top:10px;right:0;width:12px;height:12px;font-size:14px;line-height:7px;padding:2px;-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;}
