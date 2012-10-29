@@ -1,0 +1,61 @@
+<?
+$title = 'Blogs';
+$this->headTitle($title, 'SET');
+$user = $this->user;
+$item = $this->item;
+$viewAsGuest = $this->viewAsGuest;
+?>
+
+<div class="page-inner">
+    <div class="container">
+        <div class="profile-cover">
+            <?=$this->widget('Epic', 'widgets/profilenav', $this->vars())?>
+        </div>
+    </div><!-- above container end -->
+    <div class="container">
+        <div class="profile-main">
+            <div class="row">
+                <div class="span8">
+                    <?=$this->widget('Epic', 'widgets/profilemeta', $this->vars())?>
+
+                    <div class="profile-activities">
+
+                        <div class="page-header border-header">
+                            <h3><?=$this->_($item['title']);?></h3>
+                        </div>
+                        <article class="typo">
+                        <?=$item['Text']['ContentHtml']?>
+                        </article>
+
+                        <div class="neighbors">
+                           <?if($item['Next']):?>
+                           <a href="<?=$this->uri('/user/' . $item['user_id'] . '/blog/' . $item['Next']['urlName'])?>" class="pull-right" title="<?=$this->escapeHtmlAttr($item['Next']['title'])?>"><?=$item['Next']['title']?>»</a>
+                            <?endif;?>
+                            <?if($item['Prev']):?>
+                            <a href="<?=$this->uri('/user/' . $item['user_id'] . '/blog/' . $item['Prev']['urlName'])?>" class="pull-left" title="<?=$this->escapeHtmlAttr($item['Prev']['title'])?>">«<?=$item['Prev']['title']?></a>
+                            <?endif;?>
+                        </div>
+
+                        <?if($item['commentStatus'] == 'open'):?>
+                        <div id="disqus_thread"></div>
+                        <div class="ds-thread"></div>
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name: "avnpc"};
+                            (function() {
+                                    var ds = document.createElement('script');
+                                    ds.type = 'text/javascript';ds.async = true;
+                                    ds.src = 'http://static.duoshuo.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                            })();
+                        </script>
+                        <?endif?>
+
+                    </div><!--profile-activities end-->
+                </div><!--left span8 end-->
+                <div class="span4">
+                    <?=$this->widget('Epic', 'widgets/profileside', $this->vars())?>
+                </div><!--right span4 end-->
+            </div><!--row end-->
+        </div><!--profil-main end-->
+    </div><!--container end-->
+</div><!--page inner end-->

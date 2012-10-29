@@ -839,6 +839,7 @@ html,body{-webkit-text-size-adjust:none;}
 body{color:#333;font-size:12px;}
 body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .zh body,.zh_TW body{font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}
+.typo{background:none;}
 .container{max-width:1210px;}
 .btn-light-brown{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#d6ac35;background-image:-moz-linear-gradient(top, #d3b146, #daa51b);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#d3b146), to(#daa51b));background-image:-webkit-linear-gradient(top, #d3b146, #daa51b);background-image:-o-linear-gradient(top, #d3b146, #daa51b);background-image:linear-gradient(to bottom, #d3b146, #daa51b);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd3b146', endColorstr='#ffdaa51b', GradientType=0);border-color:#daa51b #daa51b #967113;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*background-color:#daa51b;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);color:#FFF;font-size:16px !important;}.btn-light-brown:hover,.btn-light-brown:active,.btn-light-brown.active,.btn-light-brown.disabled,.btn-light-brown[disabled]{color:#ffffff;background-color:#daa51b;*background-color:#c39418;}
 .btn-light-brown:active,.btn-light-brown.active{background-color:#ad8315 \9;}

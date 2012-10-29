@@ -20,7 +20,7 @@ $this->headTitle($title, 'SET');
                                 <div class="blog-list vlist">
                                     <?foreach($items as $item):?>
                                     <div class="item">
-                                        <div class="item-title"><h2><a href="<?=$this->uri('/pages/' . $item['urlName'])?>"><?=$item['title']?></a></h2></div>
+                                        <div class="item-title"><h2><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/' . $item['urlName'])?>"><?=$item['title']?></a></h2></div>
                                         <div class="item-meta">
                                             <p class="pull-right"><i class="icon-comment"></i> Comments (<span class="highlight"><?=$item['commentCount']?></span>)</p>
                                             <p class="pull-left">

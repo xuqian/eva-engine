@@ -293,6 +293,21 @@ return array(
                                     )
                                 ),
                                 'may_terminate' => true,
+                                'child_routes' => array(
+                                    'post' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '[:post_id][/]',
+                                            'constraints' => array(
+                                                'post_id' => '[a-zA-Z0-9_-]+'
+                                            ),
+                                            'defaults' => array(
+                                                'action' => 'post'
+                                            )
+                                        ),
+                                        'may_terminate' => true,
+                                    ),
+                                ),
                             ),
                             'event' => array(
                                 'type' => 'Segment',
