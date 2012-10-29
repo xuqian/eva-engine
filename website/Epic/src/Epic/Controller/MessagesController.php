@@ -144,4 +144,8 @@ class MessagesController extends ActionController
             'paginator' => $paginator,
         );
     }
+
+    public function sendAction()
+    {
+    }
 }

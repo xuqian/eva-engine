@@ -983,3 +983,19 @@ body,.en body,.fr body{font-family:'Philosopher',sans-serif;}
 .user-list .item-content{margin:10px 0;position:relative;height:20px;color:#999;}.user-list .item-content a{color:#999;}
 .user-list .item-action{right:0;top:10px;}
 .user-list .item-action-main{margin-top:30px;}
+.message-list .item{clear:both;position:relative;height:60px;padding:10px 0;text-align:left;}
+.message-list .item-inline{display:inline-block;zoom:1;*display:inline;height:60px;}
+.message-list .item-absolute{height:60px;position:absolute;top:10px;}
+.message-list .item{height:auto;*zoom:1;margin-bottom:20px;}.message-list .item:before,.message-list .item:after{display:table;content:"";line-height:0;}
+.message-list .item:after{clear:both;}
+.message-list .item-inline{min-height:80px;height:auto;}
+.message-list .item-userface{left:5px;top:10px;}
+.message-list .item-content{min-height:35px;}
+.message-list .item-text{margin:0 0 0 100px;position:relative;background:#FFF;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;border:1px solid #D8D8D8;-webkit-filter:drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));-moz-filter:drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));-ms-filter:drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));-o-filter:drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));filter:drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));font-size:13px;}
+.message-list .item-title{margin-bottom:5px;display:inline;font-weight:bold;color:#000;}.message-list .item-title a{color:#000;}
+.message-list .item-text:after{content:"";position:absolute;border-style:solid;display:block;width:0;top:15px;left:-10px;bottom:auto;border-width:0 10px 10px 0;border-color:transparent #FFF;}
+.message-list .item-image{margin:10px 0 10px;}
+.message-list .item-action{margin:0 15px;height:20px;color:#999;clear:both;}.message-list .item-action p.pull-right{margin-left:10px;}
+.message-list .item-action a{color:#999;}
+.message-list .item-action .highlight{color:#e1500d;}
+.message-list .item-content{margin:10px 15px;position:relative;}

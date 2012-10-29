@@ -360,10 +360,23 @@ return array(
                 'priority' => 2,
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'send' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'send[/][:id][/]',
+                            'constraints' => array(
+                                'id' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'send'
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ), //conversation end
                     'conversation' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '[:id][/]',
+                            'route' => 'conversation/[:id][/]',
                             'constraints' => array(
                                 'id' => '[a-zA-Z0-9_-]+'
                             ),
