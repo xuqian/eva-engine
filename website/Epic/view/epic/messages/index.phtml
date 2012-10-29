@@ -30,8 +30,8 @@ $this->headTitle($title, 'SET');
                                             </div>
                                             <div class="item-action">
                                                 <p class="pull-right"><a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="highlight">Reply</a></p>
-                                                <?if($item['messageCount'] > 0):?>
-                                                <p class="pull-right"><a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="highlight"><?=$item['messageCount']?> unread messages</a></p>
+                                                <?if($item['unreadCount'] > 0):?>
+                                                <p class="pull-right"><a href="<?=$this->uri('/messages/conversation/' . $item['User']['userName'])?>" title="" class="highlight"><?=$item['unreadCount']?> unread messages</a></p>
                                                 <?endif;?>
                                                 <p class="pull-left">
                                                 <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['messageTime'])?>" datetime="<?=$this->datetime()->isoTime($item['messageTime'])?>"><?=$this->datetime($item['messageTime'])?></time>
