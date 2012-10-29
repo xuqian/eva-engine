@@ -71,8 +71,10 @@ class MessagesController extends ActionController
                 ),
             ),
         ));
+        unset($query['author_id']);
+        
         $paginator = $itemModel->getPaginator();
-
+        
         return array(
             'items' => $items,
             'query' => $query,
