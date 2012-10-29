@@ -30,6 +30,42 @@ eva.miniCalendar = function(){
     });
 }
 
+eva.notice = function(){
+	if(!$(".message-notice-count")[0]) {
+		return false;
+	}
+
+	var checkNewUnread = function(){
+		$.ajax({
+			'url' : eva.d('/message/messages/unreadcount'),
+			'type' : 'get',
+			'dataType' : 'json',
+			'success' : function(response){
+				if(response.count > 0) {
+					$(".message-notice-count .count-number").html(response.count).show();
+					var title = $('title').text();
+					if(title.match(/^\(\d+\)/)){
+						title = title.replace(/^\(\d+\)/, '(' + response.count + ') ');
+						$('title').html(title);
+					} else {
+						$('title').prepend('(' + response.count + ') ');
+					}				
+				} else {
+					$(".message-notice-count .count-number").hide();
+					var title = $('title').text();
+					if(title.match(/^\(\d+\)/)){
+						title = title.replace(/^\(\d+\)/, '');
+						$('title').html(title);
+					}		
+				}
+			}
+		});
+	}
+
+	checkNewUnread();
+	setInterval(function(){ checkNewUnread() }, 50000);
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -38,6 +74,7 @@ eva.construct = function(){
 
 	eva.highlightmenu();
 	eva.miniCalendar();
+	eva.notice();
 
 	var lang = eva.config.lang;
 	var langMap = {

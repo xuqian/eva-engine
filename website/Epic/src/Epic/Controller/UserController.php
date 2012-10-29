@@ -21,7 +21,19 @@ class UserController extends ActionController
             return array();
         }
         $userModel = Api::_()->getModel('User\Model\User');
-        $user = $userModel->getUser($userId)->toArray();
+        $user = $userModel->getUser($userId)->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Profile' => array(
+                    '*'
+                ),
+                'Roles' => array(
+                    '*'
+                ),
+            ),
+        ));
         return $this->user = $user;
     }
 

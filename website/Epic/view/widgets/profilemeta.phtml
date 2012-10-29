@@ -1,6 +1,14 @@
 <?
 $user = $this->user;
 $viewAsGuest = $this->viewAsGuest;
+$form = new Activity\Form\FollowForm();
+$form
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/activity/follow'))
+->prepare();
+
 ?>
 <div class="thumbnail profile-face">
     <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
@@ -64,7 +72,13 @@ $viewAsGuest = $this->viewAsGuest;
             </tr>
             <tr>
                 <td colspan="2">
-                    <a class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-plus"></i> Follow</a>
+                    <form <?=$this->formAttr($form)?> class="follow-form">
+                        <?=$form->restful();?>
+                        <?=$form->helper('user_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$form->helper('follower_id', array('class' => ''))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-plus"></i> Follow</button>
+                    </form>
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/send/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
                 </td>
                 <td class="social">
