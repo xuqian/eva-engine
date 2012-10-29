@@ -155,5 +155,8 @@ class MessagesController extends ActionController
 
     public function sendAction()
     {
+        return array(
+            'to' => $this->params('id')
+        );
     }
 }

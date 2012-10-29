@@ -17,31 +17,55 @@ $viewAsGuest = $this->viewAsGuest;
     <table class="table-condensed">
         <tbody>
             <tr>
-                <td>Title: Miss</td>
-                <td colspan="2">Profession : Food Critic</td>
+                <td>Title: 
+                    <?if($user['gender'] =='male'):?>
+                        Mr.
+                    <?elseif($user['gender'] == 'femail'):?>
+                        Miss.
+                    <?endif?>
+                    
+                    <?if($user['firstName'] && $user['lastName']):?>
+                    <?=$user['lastName']?> <?=$user['firstName']?>
+                    <?endif?>
+                </td>
+                <td colspan="2">Website : 
+                    <?if($user['Profile']['site']):?>
+                    <a href="<?=$user['Profile']['site']?>"><?=$user['Profile']['site']?></a>
+                    <?endif?>
+                </td>
             </tr>
             <tr>
-                <td>Location : Lanzhou, China</td>
-                <td>Birthday : 1980-10-01</td>
-                <td>Events : <a href="">3</a> Times</td>
+                <td>Location : 
+                    <?if($user['Profile']['city']):?>
+                    <?=$user['Profile']['city']?>
+                    <?endif?>
+                    <?if($user['Profile']['city']):?>
+                    <?=$user['Profile']['province']?>
+                    <?endif?>
+                    <?if($user['Profile']['country']):?>
+                    <?=$this->locale('territory', $user['Profile']['country'])?>
+                    <?endif?>
+                </td>
+                <td>Birthday : 
+                    <?if($user['Profile']['birthday'] && $user['Profile']['birthday'] != '0000-00-00'):?>
+                    <?=$user['Profile']['birthday']?>
+                    <?else:?>
+                    Secret
+                    <?endif?>
+                </td>
+                <td>Events : <a href="">0</a> Times</td>
             </tr>
             <tr>
-                <td colspan="3">Tags : 
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a>
-                    <a href="#">Wine</a></td>
+                <td colspan="3">Bio : 
+                    <?if($user['Profile']['bio']):?>
+                    <?=$user['Profile']['bio']?>
+                    <?endif?>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <a class="btn btn-brown btn-mini" href="#"><i class="icon-mini icon-plus"></i> Add Friend</a>
-                    <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
+                    <a class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-plus"></i> Follow</a>
+                    <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/send/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
                 </td>
                 <td class="social">
                     Social Networking : 
