@@ -337,6 +337,8 @@ body {
 		position:absolute;
 		top:20px;
 		left:20px;
+		font-family: 'Forum', cursive;
+		font-size:15px;
 	}
 
 	/*
@@ -395,11 +397,13 @@ body {
 .block-text-2 {
 	top:100px;
 	left:400px;
+	background:none;
 }
 
 .block-text-3 {
 	top:300px;
 	right:100px;
+	background:none;
 }
 
 .block-text-4 {
@@ -501,7 +505,7 @@ body {
 	}
 
 	.nav-main {
-		margin-top:40px;
+		margin-top:25px;
 	}
 
 	.nav-main > li a{
@@ -513,12 +517,14 @@ body {
 		font-weight:bold;
 		text-align:center;
 		background:#000;
+		color:#FFF;
 		-webkit-transition: all .5s ease-in-out;
 		-moz-transition: all .5s ease-in-out;
 		-o-transition: all .5s ease-in-out;
 		-ms-transition: all .5s ease-in-out;
 	}
 
+	/*
 	.nav-main > li a small{
 		display:block;
 		font-size:9px;
@@ -526,15 +532,20 @@ body {
 		font-weight:normal;
 		text-transform:uppercase;
 	}
+		*/
 
 	.nav-main > li.active a, .nav-main > li:hover a{
+		background:none;
+		color:@golden;
+		text-decoration:underline;
+		/*
 		#gradient > .vertical(#846703, #B49916);
 		border-color:#654E00;
 		color:#FFF;
-
 		small {
 			color:#FFF;
 		}
+		*/
 	}
 
 	.brand {
