@@ -33,6 +33,8 @@ class UserController extends ActionController
                 'Roles' => array(
                     '*'
                 ),
+                'FriendsCount' => array(
+                ),
             ),
         ));
         return $this->user = $user;
@@ -113,9 +115,40 @@ class UserController extends ActionController
 
     public function getAction()
     {
-        $viewModel = $this->forward()->dispatch('HomeController', array(
-            'action' => 'index',
-        )); 
+        $user = $this->getUser();
+        $itemModel = Api::_()->getModel('Activity\Model\Activity');
+
+        $feedMap = array(
+            'self' => array(
+                '*',
+                'getContentHtml()',
+            ),
+            'join' => array(
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        );
+        $activityList = $itemModel->getUserActivityList($user['id'], true)->getActivityList($feedMap);
+
+        $userList = array();
+        $userList = $itemModel->getUserList()->toArray();
+
+        $forwardActivityList = $itemModel->getForwardActivityList()->getActivityList($feedMap);
+        
+        $activityList = $itemModel->combineList($activityList, $userList, 'User', array('user_id' => 'id'));
+        $items = $itemModel->combineList($activityList, $forwardActivityList, 'ForwardActivity', array('reference_id' => 'id'));
+
+
+        $viewModel = new ViewModel(array(
+            'user' => $user,
+            'items' => $items,
+        ));
+        $viewModel->setTemplate('epic/home/index');
+
         return $viewModel;
     }
 
