@@ -11,6 +11,9 @@ $form
 ->setMethod('post')
 ->setAction($this->uri('/activity/follow/'))
 ->prepare();
+
+$unfollowForm = clone $form;
+$unfollowForm->setMethod('delete');
 ?>
 
 <div class="container">
@@ -77,6 +80,16 @@ $form
                                         </div>
                                     </div>
                                     <div class="item-absolute item-action">
+
+                                        <?if(isset($item['Follow']) && $item['Follow']):?>
+                                        <form <?=$this->formAttr($unfollowForm)?>>
+                                            <?=$unfollowForm->restful();?>
+                                            <?=$unfollowForm->helper('user_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                            <?=$unfollowForm->helper('follower_id', array('class' => ''))?>
+                                            <?=$this->callback()?>
+                                            <button class="btn btn-small item-action-main">Unfollow</button>
+                                        </form>
+                                        <?else:?>
                                         <form <?=$this->formAttr($form)?>>
                                             <?=$form->restful();?>
                                             <?=$form->helper('user_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
@@ -84,6 +97,8 @@ $form
                                             <?=$this->callback()?>
                                             <button class="btn btn-small item-action-main">Follow</button>
                                         </form>
+                                        <?endif?>
+
 
                                     </div>
                                 </div>

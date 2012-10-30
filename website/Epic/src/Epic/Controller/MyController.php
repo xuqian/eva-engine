@@ -22,6 +22,40 @@ class MyController extends ActionController
 
     public function friendAction()
     {
+        $user = Auth::getLoginUser();
+        $selectQuery = array(
+            'from_user_id' => $user['id'],
+            'relationshiopStatus' => 'approved',
+            'page' => $this->params()->fromQuery('page', 1),
+        );
+
+        $itemModel = Api::_()->getModel('User\Model\Friend');
+        $items = $itemModel->setItemList($selectQuery)->getFriendList();
+        $items->toArray(array(
+            'self' => array(
+            
+            ),
+            'join' => array(
+                'User' => array(
+                    'self' => array(
+                        '*'
+                    ), 
+                    'join' => array(
+                        'Profile' => array(
+                            '*'
+                        ),
+                    ),
+                ),
+            ),
+        ));
+
+        $paginator = $itemModel->getPaginator();
+
+        return array(
+            'items' => $items,
+            'query' => $selectQuery,
+            'paginator' => $paginator,
+        );
     }
 
     public function albumAction()

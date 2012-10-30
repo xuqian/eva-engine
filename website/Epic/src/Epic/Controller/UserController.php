@@ -5,6 +5,7 @@ use Eva\Api;
 use Eva\Mvc\Controller\ActionController;
 use Eva\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
+use Core\Auth;
 
 class UserController extends ActionController
 {
@@ -80,7 +81,6 @@ class UserController extends ActionController
         $items = $itemModel->setItemList($selectQuery)->getUserList();
         $items = $items->toArray(array(
             'self' => array(
-                '*',
             ),
             'join' => array(
                 'Profile' => array(
@@ -91,6 +91,18 @@ class UserController extends ActionController
             ),
         ));
         $paginator = $itemModel->getPaginator();
+
+        $user = Auth::getLoginUser();
+        $followList = array();
+        if($user) {
+            $followModel = Api::_()->getModel('Activity\Model\Follow');
+            $followList = $followModel->setUserList($items)->setItemList(array(
+                'follower_id' => $user['id']
+            ))->getFollowList()->toArray();
+        }
+        
+        $items = $itemModel->combineList($items, $followList, 'Follow', array('id' => 'user_id'));
+
         return array(
             'form' => $form,
             'items' => $items,
