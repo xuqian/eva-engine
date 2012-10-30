@@ -33,6 +33,8 @@ class HomeController extends ActionController
                 'Roles' => array(
                     '*'
                 ),
+                'FriendsCount' => array(
+                ),
             ),
         ));
 
