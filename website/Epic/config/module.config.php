@@ -491,4 +491,8 @@ return array(
             ),
         ),
     ),
+
+    'oauth' => array(
+        'login_url_path' => '/home/'
+    ),
 );
