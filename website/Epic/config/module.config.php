@@ -109,7 +109,7 @@ return array(
             'login' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/login[/]',
+                    'route' => '/login[/][:action][/]',
                     'constraints' => array(
                         'action'     => '[a-zA-Z]+',
                     ),

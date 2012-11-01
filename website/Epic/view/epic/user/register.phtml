@@ -2,10 +2,11 @@
 $title = $this->_('Register');
 $this->headTitle($title, 'SET');
 $item = $this->item;
+$token = $this->token;
 if($this->form){
 	$form = $this->form;
 } else {
-    $form = new User\Form\RegisterForm();
+    $form = $token ? new User\Form\QuickRegisterForm() : new User\Form\RegisterForm();
 }
 
 $form
@@ -19,15 +20,55 @@ $form
 ?>
 <div class="container">
 
+
+
+    <?if($token):?>
     <form <?=$this->formAttr($form)?> class="form form-horizontal well">
-
-        <header class="page-header">
-        <h2 class=""><?=$title?></h2>
-        </header>
-
+	<header class="page-header">
+    <h2 class=""><?=$title?></h2>
+	</header>
         <?=$form->restful();?>
         <?=$form->helper('id', array('class' => ''))?>
-        <input name="callback" type="hidden" value="<?=$this->uri('/login/')?>" />
+        <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">
+            <?=$form->helper('userName', 'label', array('class' => 'control-label'))?>
+            <div class="controls">
+                <?=$form->helper('userName', array('class' => ''))?>        
+                <div class="help-block"><?=$form->helper('userName', 'formElementErrors')?></div>
+            </div>
+        </div>
+        <div class="control-group <?=$form->isError('email') ? 'error' : '';?>">
+            <?=$form->helper('email', 'label', array('class' => 'control-label'))?>
+            <div class="controls">
+                <?=$form->helper('email', array('class' => ''))?>        
+                <div class="help-block"><?=$form->helper('email', 'formElementErrors')?></div>
+                <?if($token):?>
+                <div class="help-block">
+                   Account will bind to your
+                    <?if($this->websiteName):?>
+                        <?if($this->profileUrl):?>
+                        <a href="<?=$this->profileUrl?>"><?=$this->websiteName?></a>
+                        <?else:?>
+                        <?=$this->websiteName?>
+                        <?endif?>
+                        Id.
+                    <?else:?>
+                    3rd website Id.
+                    <?endif?>
+                </div>
+                <?endif?>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-info btn-large"><?=$this->_('Register');?></button> or <a href="<?=$this->uri('/login/')?>">Bind to other account</a>.
+        </div>
+    </form>
+    <?else:?>
+    <form <?=$this->formAttr($form)?> class="form form-horizontal well">
+	<header class="page-header">
+    <h2 class=""><?=$title?></h2>
+	</header>
+        <?=$form->restful();?>
+        <?=$form->helper('id', array('class' => ''))?>
         <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">
             <?=$form->helper('userName', 'label', array('class' => 'control-label'))?>
             <div class="controls">
@@ -68,12 +109,10 @@ $form
             </div>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-inverse btn-large"><?=$this->_('Register');?></button>
-            or <a href="<?=$this->uri('/login/')?>">Login</a>
+            <button type="submit" class="btn btn-info btn-large"><?=$this->_('Register');?></button> or <a href="<?=$this->uri('/login/')?>">Login</a>
         </div>
-
-
     </form>
+    <?endif?>
 
 
 </div>

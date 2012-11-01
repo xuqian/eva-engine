@@ -82,4 +82,35 @@ class LoginController extends ActionController
         return $this->redirect()->toUrl($callback);
     }
 
+
+    public function oauthAction()
+    {
+        $oauth = new \Oauth\OauthService();
+        $oauth->setServiceLocator($this->getServiceLocator());
+        $oauth->initByAccessToken();
+        $accessTokenArray = $oauth->getStorage()->getAccessToken();
+        $accessToken = $oauth->getAdapter()->getAccessToken();
+        $websiteName = $oauth->getAdapter()->getWebsiteName();
+        $profileUrl =  $oauth->getAdapter()->getWebsiteProfileUrl();
+
+        $itemModel = Api::_()->getModel('Oauth\Model\AccessToken');
+        $itemModel->setItem($accessTokenArray)->login();
+        $loginResult = $itemModel->getLoginResult();
+        if($loginResult && $loginResult->isValid()) {
+            $config = $this->getServiceLocator()->get('Config');
+            $callback = $config['oauth']['login_url_path'];
+            $callback = $callback ? $callback : '/';
+            return $this->redirect()->toUrl($callback);
+        }
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/user/register');
+        $viewModel->setVariables(array(
+            'token' => $accessToken,
+            'websiteName' => $websiteName,
+            'profileUrl' => $profileUrl,
+        ));
+        return $viewModel;
+    }
+
 }
