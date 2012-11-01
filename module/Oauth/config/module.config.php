@@ -3,6 +3,7 @@ return array(
     'oauth' => array(
         'request_url_path' => '/oauth/',
         'access_url_path' => '/oauth/access/',
+        'login_url_path' => '/',
         'oauth1' => array(
             'twitter' => array(
                 'enable' => 1,
@@ -32,6 +33,11 @@ return array(
                 'consumer_secret' => ''
             ),
             'baidu' => array(
+                'enable' => 1,
+                'consumer_key' => '',
+                'consumer_secret' => ''
+            ),
+            'douban' => array(
                 'enable' => 1,
                 'consumer_key' => '',
                 'consumer_secret' => ''
@@ -81,7 +87,21 @@ return array(
                 'consumer_key' => '',
                 'consumer_secret' => ''
             ),
-
+            'msn' => array(
+                'enable' => 1,
+                'scope' => '',
+                'consumer_secret' => ''
+            ),
+            'google' => array(
+                'enable' => 1,
+                'scope' => '',
+                'consumer_secret' => ''
+            ),
+            'github' => array(
+                'enable' => 1,
+                'consumer_key' => '',
+                'consumer_secret' => ''
+            ),
         )
     ),
 );

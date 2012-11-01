@@ -10,7 +10,6 @@ class LoginController extends RestfulModuleController
 
     public function indexAction()
     {
-
         $request = $this->getRequest();
         if (!$request->isPost()) {
             return;
@@ -71,6 +70,44 @@ class LoginController extends RestfulModuleController
 
     public function oauthAction()
     {
+        $oauth = new \Oauth\OauthService();
+        $oauth->setServiceLocator($this->getServiceLocator());
+        $oauth->initByAccessToken();
+        $accessTokenArray = $oauth->getStorage()->getAccessToken();
+        $accessToken = $oauth->getAdapter()->getAccessToken();
+        $websiteName = $oauth->getAdapter()->getWebsiteName();
+        $profileUrl =  $oauth->getAdapter()->getWebsiteProfileUrl();
+
+        $itemModel = Api::_()->getModel('Oauth\Model\AccessToken');
+        $itemModel->setItem($accessTokenArray)->login();
+        $loginResult = $itemModel->getLoginResult();
+        p($loginResult);
+        if($loginResult && $loginResult->isValid()) {
+            $config = $this->getServiceLocator()->get('Config');
+            $callback = $config['oauth']['login_url_path'];
+            $callback = $callback ? $callback : '/';
+            return $this->redirect()->toUrl($callback);
+        }
+
+        /*
+        $client = $oauth->getAdapter()->getHttpClient();
+        $client->setUri('https://api.weibo.com/2/users/show.json');
+        $client->setParameterGet(array(
+            'screen_name' => 'Allo'
+        ));
+        $response = $client->send();
+        p($accessToken);
+        p($response->getBody());
+        */
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('engine/user/register');
+        $viewModel->setVariables(array(
+            'token' => $accessToken,
+            'websiteName' => $websiteName,
+            'profileUrl' => $profileUrl,
+        ));
+        return $viewModel;
     }
 
 }

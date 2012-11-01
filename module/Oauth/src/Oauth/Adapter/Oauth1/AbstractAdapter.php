@@ -36,7 +36,7 @@ abstract class AbstractAdapter extends \Oauth\Adapter\AbstractAdapter implements
         }
 
         if(!$options['callbackUrl']){
-            throw new Exception\InvalidArgumentException(sprintf('No callback url found in %s', get_class($this)));
+            //throw new Exception\InvalidArgumentException(sprintf('No callback url found in %s', get_class($this)));
         }
 
         $this->setConsumerKey($options['consumerKey']);
@@ -61,14 +61,16 @@ abstract class AbstractAdapter extends \Oauth\Adapter\AbstractAdapter implements
         return $this->consumer = $consumer;
     }
 
-    /**
-    * Redirect to oauth service page
-    */
-    public function getAccessToken($queryData, $token, $httpMethod = null, $request = null)
+    public function getHttpClient(array $oauthOptions = array(), $uri = null, $config = null, $excludeCustomParamsFromHeader = true)
     {
-        return $this->getConsumer()->getAccessToken($queryData, $token, $httpMethod, $request);
+        $consumer = $this->getConsumer();
+        $defaultOptions = array(
+            'consumerKey' => $consumer->getConsumerKey(),
+            'consumerSecret' => $consumer->getConsumerSecret(),
+        );
+        $oauthOptions = array_merge($defaultOptions, $this->httpClientOptions, $oauthOptions);
+        return $this->getAccessToken()->getHttpClient($oauthOptions, $uri, $config, $excludeCustomParamsFromHeader);
     }
-
 
     public function accessTokenToArray(AccessToken $accessToken)
     {
@@ -78,5 +80,14 @@ abstract class AbstractAdapter extends \Oauth\Adapter\AbstractAdapter implements
             'tokenSecret' => $accessToken->getTokenSecret(),
             'version' => 'Oauth1',
         );
+    }
+
+
+    public function arrayToAccessToken(array $accessTokenArray)
+    {
+        $accessToken = new AccessToken();
+        $accessToken->setToken($accessTokenArray['token']);
+        $accessToken->setTokenSecret($accessTokenArray['tokenSecret']);
+        return $accessToken;
     }
 }
