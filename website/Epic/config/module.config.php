@@ -180,6 +180,22 @@ return array(
                 'priority' => 2,
             ),
 
+            'blog' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/blog[/:action][/:id][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'BlogController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'my' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -435,6 +451,7 @@ return array(
             'FeedController' => 'Epic\Controller\FeedController',
             'MessagesController' => 'Epic\Controller\MessagesController',
             'MyController' => 'Epic\Controller\MyController',
+            'BlogController' => 'Epic\Controller\BlogController',
         ),
     ),
 

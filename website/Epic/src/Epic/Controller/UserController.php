@@ -6,6 +6,7 @@ use Eva\Mvc\Controller\ActionController;
 use Eva\View\Model\ViewModel;
 use Zend\Mvc\MvcEvent;
 use Core\Auth;
+use Oauth\OauthService;
 
 class UserController extends ActionController
 {
@@ -273,9 +274,12 @@ class UserController extends ActionController
             $item = $request->getPost();
 
             $oauth = new \Oauth\OauthService();
-            $oauth->setServiceLocator($this->getServiceLocator());
-            $oauth->initByAccessToken();
-            $accessToken = $oauth->getAdapter()->getAccessToken();
+            $accessToken = array();
+            if($oauth->getStorage()->getAccessToken()) {
+                $oauth->setServiceLocator($this->getServiceLocator());
+                $oauth->initByAccessToken();
+                $accessToken = $oauth->getAdapter()->getAccessToken();
+            }
 
             $form = $accessToken ? new \User\Form\QuickRegisterForm : new \User\Form\RegisterForm();
             $form->bind($item);
