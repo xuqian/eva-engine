@@ -106,7 +106,7 @@ $form->useSubFormGroup()
                                                 </div>
                                             </div>
 
-                                            <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?>">
+                                            <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?> hide">
                                                 <?=$form->helper('visibility', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
                                                     <?=$form->helper('visibility', 'formSelect', array('class' => ''))?>
@@ -120,7 +120,7 @@ $form->useSubFormGroup()
                                                     <div class="help-block"><?=$form->helper('language', 'formElementErrors')?></div>
                                                 </div>
                                             </div>
-                                            <div class="control-group <?=$form->isError('commentStatus') ? 'error' : '';?>">
+                                            <div class="control-group <?=$form->isError('commentStatus') ? 'error' : '';?> hide">
                                                 <?=$form->helper('commentStatus', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
                                                     <?=$form->helper('commentStatus', 'formSelect', array('class' => ''))?>        
@@ -137,9 +137,8 @@ $form->useSubFormGroup()
                                             </div>
                                         </fieldset>
 
-                                        <div class="span10 listing-buttons">
-                                            <button id="save-draft" class="btn btn-info btn-large"><?=$this->_('Save As Draft')?></button>
-                                            <button id="save-publish" class="btn btn-success btn-large"><?=$this->_('Save')?></button>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
                                         </div>
                                     </form>
                                 </div><!--main form end-->
