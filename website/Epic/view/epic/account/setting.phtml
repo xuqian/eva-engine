@@ -4,16 +4,23 @@ $title = 'Account Setting';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
 
-if(!$this->form){
-    $form = new Epic\Form\AccountEditForm();
-    $form->useSubFormGroup();
-}
+$emailForm = new User\Form\ChangeEmailForm();
+$emailForm
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/account/changeemail/'))
+->bind($item)
+->prepare();
 
-$form->setMethod($item['id'] ? 'put' : 'post');
-$form->setView($this)
-    ->setAction($this->uri('/account/setting/'))
-     ->bind($item)
-     ->prepare();
+$pwForm = new User\Form\ChangePasswordForm();
+$pwForm
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/account/changepassword/'))
+->bind($item)
+->prepare();
 
 ?>
 
@@ -35,27 +42,37 @@ $form->setView($this)
                                 </div>
                                 <div id="collapseOne" class="accordion-body collapse in">
                                     <div class="accordion-inner">
-                        <form <?=$this->formAttr($form)?> class="form">
-                            <?=$form->restful();?>
-                            <?=$form->helper('id');?>
-                            <input type="hidden" name="callback" value="<?=$this->uri('/account/profile/')?>" />
 
-                            <fieldset class="form-horizontal">
+                                        <form <?=$this->formAttr($pwForm)?> class="form">
+                                            <?=$pwForm->restful();?>
+                                            <?=$pwForm->helper('id', array('class' => ''))?>
+                                            <div class="control-group <?=$pwForm->isError('verifyPassword') ? 'error' : '';?>">
+                                                <?=$pwForm->helper('verifyPassword', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$pwForm->helper('verifyPassword', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$pwForm->helper('verifyPassword', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group <?=$pwForm->isError('inputPassword') ? 'error' : '';?>">
+                                                <?=$pwForm->helper('inputPassword', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$pwForm->helper('inputPassword', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$pwForm->helper('inputPassword', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group <?=$pwForm->isError('repeatPassword') ? 'error' : '';?>">
+                                                <?=$pwForm->helper('repeatPassword', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$pwForm->helper('repeatPassword', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$pwForm->helper('repeatPassword', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
 
+                                            <div class="form-action">
+                                                <button class="btn">Change</button>
+                                            </div>
+                                        </form>
 
-                                <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
-                                    <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
-                                    <div class="controls">
-                                        <?=$form->helper(array('Profile', 'bio'), 'formTextarea', array('class' => ''))?>        
-                                        <div class="help-block"><?=$form->helper(array('Profile', 'bio'), 'formElementErrors')?></div>
-                                    </div>
-                                </div>
-
-                                <div class="form-actions">
-                                    <button id="save-publish" class="btn btn-success btn-large"><?=$this->_('Save')?></button>
-                                </div>
-                            </fieldset>
-                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -67,6 +84,23 @@ $form->setView($this)
                                 </div>
                                 <div id="collapseTwo" class="accordion-body collapse">
                                     <div class="accordion-inner">
+
+                                        <form <?=$this->formAttr($emailForm)?> class="form form-inline">
+                                            <?=$emailForm->restful();?>
+                                            <?=$emailForm->helper('id', array('class' => ''))?>
+                                            <div class="control-group <?=$emailForm->isError('email') ? 'error' : '';?>">
+                                                <?=$emailForm->helper('email', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$emailForm->helper('email', array('class' => '', 'value' => '', 'placeholder' => $item['email']))?>        
+                                                    <div class="help-block"><?=$emailForm->helper('email', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-action">
+                                                <button class="btn">Change</button>
+                                            </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>

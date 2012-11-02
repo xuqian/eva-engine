@@ -1,11 +1,104 @@
-@import "../../../eva/css/bootstrap.less";
+/**
+ * Eva Project CSS LESS Main File
+ *
+ * @copyright  Copyright (c) 2009-2010 Easthv Team @ East Hui Van Business Consulting Co., Ltd.(http://www.easthv.com)
+ * @license    http://framework.zend.com/license/   BSD License
+ * @version    1.1
+ * @link       http://www.easthv.com
+ * @since      1.0
+*/
+
+/*******************************
+*	   Import Basic Variables & Classes
+********************************/
+@import "../../../eva/css/basic/variables.less";
+@import "../../../eva/css/basic/mixins.less";
+@import "../../../eva/css/basic/utilities.less";
+
+@import "../../../eva/css/src/basic/reset.less";
+@import "../../../eva/css/src/basic/variables.less";
+@import "../../../eva/css/src/basic/sprites.less";
+@import "../../../eva/css/src/basic/utilities.less";
+/*******************************
+*	   Import Layout & Grid
+********************************/
+@import "../../../eva/css/layout/grid.less";
+@import "../../../eva/css/layout/layouts.less";
+@import "../../../eva/css/src/layout/grid.less";
+@import "../../../eva/css/src/layout/gridpercent.less";
+/*******************************
+*	   Import Typography
+********************************/
+@import "../../../eva/css/src/type/tables.less";
+@import "../../../eva/css/type/thumbnails.less";
+@import "../../../eva/css/src/type/type.less";
+@import "../../../eva/css/src/type/code.less";
+@import "../../../eva/css/src/type/scaffolding.less";
+.tb {
+	.typography();
+	.codepre();
+}
+@import "../../../eva/css/src/type/typo.less";
+.typo {
+	.cntypography();
+	.codepre();
+}
+
+/*******************************
+*	   Import Forms & Buttons
+********************************/
+@import "../../../eva/css/src/form/forms.less";
+@import "../../../eva/css/form/button-groups.less";
+@import "../../../eva/css/form/buttons.less";
+.form{
+	.forms();
+}
+/*******************************
+*	   Import Components
+********************************/
+@import "../../../eva/css/components/alerts.less";
+@import "../../../eva/css/components/close.less";
+@import "../../../eva/css/components/navbar.less";
+@import "../../../eva/css/components/pagination.less";
+@import "../../../eva/css/components/labels.less";
+@import "../../../eva/css/components/labels-badges.less";
+@import "../../../eva/css/components/dropdowns.less";
+
+@import "../../../eva/css/components/accordion.less";
+@import "../../../eva/css/components/breadcrumbs.less";
+@import "../../../eva/css/components/carousel.less";
+@import "../../../eva/css/components/component-animations.less";
+@import "../../../eva/css/components/modals.less";
+@import "../../../eva/css/components/navs.less";
+@import "../../../eva/css/components/pager.less";
+@import "../../../eva/css/components/popovers.less";
+@import "../../../eva/css/components/progress-bars.less";
+@import "../../../eva/css/components/tooltip.less";
+@import "../../../eva/css/components/wells.less";
+@import "../../../eva/css/components/hero-unit.less";
+/*******************************
+*	   Icon
+********************************/
+@import "../../../eva/css/src/icon/icon.less";
+/*******************************
+*	   Responsive
+********************************/
+
+
 @import "formerror.less";
 @import  'http://fonts.googleapis.com/css?family=Forum';
+
+@gridColumnWidth:     70px;
+@gridGutterWidth:     30px;
+@gridRowWidth:        (@gridColumns * @gridColumnWidth1200) + (@gridGutterWidth1200 * (@gridColumns - 1));
+
 @linkColor : #0099FF;
 @golden : #AC9217;
 @orange:#E1500D;
 @green:#7DBC49;
 @brown:#BBA87E;
+
+@pageWidth:1200px;
 
 .vlist-creater(@itemOuterHeight:170px, @itemInnerHeight:120px){
 	.item {
@@ -51,6 +144,7 @@ html, body {
 body {
 	color:#333;
 	font-size:12px;
+	background:#545454;
 }
 
 body, .en body, .fr body {
@@ -66,7 +160,7 @@ body, .en body, .fr body {
 }
 
 .container {
-	max-width:1210px;
+	max-width:@pageWidth;
 }
 
 .btn-light-brown {
@@ -155,6 +249,11 @@ body, .en body, .fr body {
 #header {
 	background:#000;
 	height:50px;
+	
+	.navbar {
+		width:@pageWidth;
+		margin:0 auto;
+	}
 
 	.navbar-inner {
 		.border-radius(0);
@@ -217,6 +316,10 @@ body, .en body, .fr body {
 	.form-search {
 		margin-top:10px;
 		margin-right:10px;
+
+		.search-query {
+			width:50px;
+		}
 	}
 
 	/*
@@ -267,10 +370,6 @@ body, .en body, .fr body {
 	}
 }
 
-
-#page {
-	background:#545454;
-}
 
 /*********** Profile Page Start ************/
 .profile-cover {

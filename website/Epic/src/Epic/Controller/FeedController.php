@@ -86,7 +86,8 @@ class FeedController extends ActionController
                 'Roles' => array(
                     '*'
                 ),
-                'Account' => array('*'),
+                'FriendsCount' => array(
+                ),
             ),
         ));
 

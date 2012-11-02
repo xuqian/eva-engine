@@ -107,4 +107,12 @@ class AccountController extends ActionController
     
     }
 
+    public function changeemailAction()
+    {
+    }
+
+    public function changepasswordAction()
+    {
+    }
+
 }
