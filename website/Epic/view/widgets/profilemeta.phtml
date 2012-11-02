@@ -84,13 +84,18 @@ $form
                 </td>
                 <td class="social">
                 <?else:?>
-                <td colspan="3" class="social">
+                <td>
+                    <a class="btn btn-gray btn-mini" href="<?=$this->uri('/user/' . $this->user['userName'])?>"><i class="icon-mini icon-eye-open"></i> View As Guest</a>
+                </td>
+                <td colspan="2" class="social">
                 <?endif?>
                     Social Networking : 
                     <a href="#"><i class="icon-facebook-sign"></i></a>
                     <a href="#"><i class="icon-pinterest"></i></a>
+                    <!--
                     <a href="#"><i class="icon-twitter"></i></a>
                     <a href="#"><i class="icon-google-plus"></i></a>
+                    -->
                 </td>
             </tr>
         </tbody>
