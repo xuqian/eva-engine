@@ -30,13 +30,36 @@
         </ul>
     </div>
 
+<script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+<div class="page-header border-header">
+    <small class="pull-right"><a href="#">View All</a></small>
+    <h4>Blogs ({%=o.paginator.rowCount%})</h4>
+</div>
+<div class="side-blog-list">
+{% for (var i=0, item; item=o.items[i]; i++) { %}
+<div class="item">
+    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+    <div class="item-inline item-text">
+        <div class="text-content">
+            <div class="item-title">
+                <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+            </div>
+            <p>{%=item.Text.content%}</p>
+        </div>
+    </div>
+</div>
+{% } %}
+</div>
+</script>
+
+    <?if(0):?>
     <div class="page-header border-header">
         <small class="pull-right"><a href="#">View All</a></small>
         <h4>My Blog (123)</h4>
     </div>
     <div class="side-blog-list">
         <?for($i = 0; $i < 10; $i++):?>
-        <div class="item ">
+        <div class="item">
             <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
             <div class="item-inline item-text">
                 <div class="text-content">
@@ -50,6 +73,8 @@
         </div>
         <?endfor?>
     </div><!--activity-list end-->
+    <?endif?>
+
     <div class="page-header border-header">
         <small class="pull-right"><a href="#">View All</a></small>
         <h4>My Events (123)</h4>

@@ -107,6 +107,7 @@
 		height:@itemInnerHeight;
 		padding:(@itemOuterHeight - @itemInnerHeight)/2 0;
 		text-align:left;	
+		overflow:hidden;
 	}
 	.item-inline{
 		.inline-block();
@@ -738,8 +739,10 @@ body, .en body, .fr body {
 	}
 	.item-title {
 		font-weight:bold;
+		.wordbreak();
 
 		a {
+			.wordbreak();
 			color:#333;
 		}
 	}

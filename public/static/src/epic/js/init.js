@@ -66,6 +66,21 @@ eva.notice = function(){
 	setInterval(function(){ checkNewUnread() }, 50000);
 }
 
+eva.templates = function(){
+	$('script[data-url]').each(function(){
+		var template = $(this);
+		var url = template.attr('data-url');
+		$.ajax({
+			url : url,
+			dataType : 'json',
+			success : function(response){
+				var t = tmpl(template.html(), response);
+				template.after(t);
+			}
+		})
+	});
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -88,6 +103,10 @@ eva.construct = function(){
 	eva.loader(eva.s('/lib/js/jquery/jquery.validationEngine/jquery.validationEngine-' + jsLang + '.js'), function(){
 		$("form").validationEngine();
 	});
+
+	eva.loader(eva.s('/lib/js/jstemplates/tmpl.js'), function(){
+		eva.templates();
+	});	
 
 	return false;
 };

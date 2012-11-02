@@ -196,6 +196,45 @@ return array(
                 'priority' => 2,
             ),
 
+            'data' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/data[/]',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                    ),
+                ),
+                'priority' => 2,
+                'child_routes' => array(
+                    'blog' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'blog[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Blog\Controller\BlogController',
+                                'action' => 'index'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'event' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'event[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'event'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ), //my child_routes end
+            ), //my end
+
             'my' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -439,6 +478,8 @@ return array(
             'PreregController' => 'Epic\Controller\PreregController',
             'PayController' => 'Epic\Controller\PayController',
             'AdController' => 'Epic\Controller\AdController',
+
+            'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
 
             'HomeController' => 'Epic\Controller\HomeController',
             'PagesController' => 'Epic\Controller\PagesController',
