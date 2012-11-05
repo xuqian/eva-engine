@@ -927,6 +927,7 @@ body,.en body,.fr body{font-family:'Forum',cursive;}
 .side-blog-list .userface,.side-event-list .userface{left:0;top:10px;}
 .side-blog-list .item-text,.side-event-list .item-text{margin:0 0 0 60px;position:relative;}
 .side-blog-list .item-title,.side-event-list .item-title{font-weight:bold;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.side-blog-list .item-title a,.side-event-list .item-title a{word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333;}
+.side-blog-list .text-content,.side-event-list .text-content{height:57px;overflow:hidden;}
 .side-blog-list p,.side-event-list p{color:#999;}
 .side-user-list .thumbnails{margin-left:0;}
 .side-user-list .thumbnail{padding:0;}
