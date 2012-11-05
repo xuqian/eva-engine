@@ -423,8 +423,18 @@ body, .en body, .fr body {
 		}
 	}
 
-	.follow-form {
+
+}
+
+.follow-form, .unfollow-form {
+	display:inline;
+
+	&.show {
 		display:inline;
+	}
+
+	&.hide {
+		display:none;
 	}
 }
 

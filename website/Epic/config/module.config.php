@@ -233,6 +233,19 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'isfriend' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'isfriend[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'controller' => 'User\Controller\FriendController',
+                                'action' => 'isfriend'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
                     'event' => array(
                         'type' => 'Segment',
                         'options' => array(

@@ -8,6 +8,9 @@ $form
 ->setMethod('post')
 ->setAction($this->uri('/activity/follow'))
 ->prepare();
+$unfollowForm = clone $form;
+$unfollowForm->setMethod('delete');
+
 function checkOauth($key, $user)
 {
     if(!isset($user['Oauth'])) {
@@ -98,6 +101,14 @@ function checkOauth($key, $user)
                         <?=$this->callback()?>
                         <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-plus"></i> Follow</button>
                     </form>
+                    <form <?=$this->formAttr($unfollowForm)?> class="unfollow-form hide follow-check" data-url="<?=$this->uri('/data/isfriend/')?>">
+                        <?=$unfollowForm->restful();?>
+                        <?=$unfollowForm->helper('user_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$unfollowForm->helper('follower_id', array('class' => ''))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-minus"></i> Unfollow</button>
+                    </form>
+
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/send/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
                 </td>
                 <td class="social">

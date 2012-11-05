@@ -867,7 +867,8 @@ body,.en body,.fr body{font-family:'Forum',cursive;}
 .profile-intro{margin-left:270px;}.profile-intro .profile-title h2,.profile-intro .profile-title h3{display:inline;font-size:30px;}
 .profile-intro .profile-level{margin-left:10px;font-size:14px;}
 .profile-intro .social a{color:#999;font-size:18px;}.profile-intro .social a:hover{color:#e1500d;}
-.profile-intro .follow-form{display:inline;}
+.follow-form,.unfollow-form{display:inline;}.follow-form.show,.unfollow-form.show{display:inline;}
+.follow-form.hide,.unfollow-form.hide{display:none;}
 .profile-url{position:absolute;top:20px;right:20px;color:#FFF;}.profile-url a{color:#FFF;}
 .profile-nav{position:absolute;top:170px;left:270px;}.profile-nav li{display:inline-block;zoom:1;*display:inline;width:100px;}
 .profile-nav li:hover{background:none;}

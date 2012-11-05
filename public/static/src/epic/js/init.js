@@ -92,6 +92,30 @@ eva.select2 = function(){
 	});
 }
 
+eva.checkFollow = function(){
+	if(!$(".follow-check")[0]){
+		return false;
+	}
+
+	var followCheck = $(".follow-check");
+	var userid = followCheck.find('input[name=user_id]').val();
+	var url = followCheck.attr('data-url');
+
+	$.ajax({
+		url : url,
+		dataType : 'json',
+		type : 'get',
+		data : {"user_id" : userid},
+		success : function(response){
+			if(!response.item || response.item.length < 1) {
+				return false;
+			}
+			$(".follow-form").toggleClass('hide');
+			$(".unfollow-form").toggleClass('hide');
+		}
+	});
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -102,6 +126,7 @@ eva.construct = function(){
 	eva.miniCalendar();
 	eva.notice();
 	eva.select2();
+	eva.checkFollow();
 
 	var lang = eva.config.lang;
 	var langMap = {
