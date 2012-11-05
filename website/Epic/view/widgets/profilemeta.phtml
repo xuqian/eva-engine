@@ -8,7 +8,19 @@ $form
 ->setMethod('post')
 ->setAction($this->uri('/activity/follow'))
 ->prepare();
-
+function checkOauth($key, $user)
+{
+    if(!isset($user['Oauth'])) {
+        return false;
+    }
+    $oauth = $user['Oauth'];
+    foreach($oauth as $oauthinfo){
+        if($key == $oauthinfo['adapterKey']) {
+            return true;
+        }
+    }
+    return false;
+}
 ?>
 <div class="thumbnail profile-face">
     <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
@@ -90,10 +102,10 @@ $form
                 <td colspan="2" class="social">
                 <?endif?>
                     Social Networking : 
-                    <a href="#"><i class="icon-facebook-sign"></i></a>
-                    <a href="#"><i class="icon-pinterest"></i></a>
+                    <a href="javascript:;"><i class="icon-facebook-sign <?=checkOauth('facebook', $user) ? 'highlight' : ''?>"></i></a>
+                    <a href="javascript:;"><i class="icon-twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>"></i></a>
                     <!--
-                    <a href="#"><i class="icon-twitter"></i></a>
+                    <a href="#"><i class="icon-pinterest"></i></a>
                     <a href="#"><i class="icon-google-plus"></i></a>
                     -->
                 </td>

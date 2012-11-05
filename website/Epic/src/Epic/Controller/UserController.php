@@ -37,6 +37,11 @@ class UserController extends ActionController
                 'FriendsCount' => array(
                 ),
             ),
+            'proxy' => array(
+                'Oauth\Item\Accesstoken::Oauth' => array(
+                    '*'
+                ),
+            ),
         ));
         return $this->user = $user;
     }

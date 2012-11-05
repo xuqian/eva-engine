@@ -220,6 +220,19 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'friend' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'friend[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'controller' => 'User\Controller\FriendController',
+                                'action' => 'index'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
                     'event' => array(
                         'type' => 'Segment',
                         'options' => array(
@@ -480,6 +493,7 @@ return array(
             'AdController' => 'Epic\Controller\AdController',
 
             'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
+            'User\Controller\FriendController' => 'User\Controller\FriendController',
 
             'HomeController' => 'Epic\Controller\HomeController',
             'PagesController' => 'Epic\Controller\PagesController',

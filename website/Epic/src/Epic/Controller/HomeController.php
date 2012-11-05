@@ -36,6 +36,11 @@ class HomeController extends ActionController
                 'FriendsCount' => array(
                 ),
             ),
+            'proxy' => array(
+                'Oauth\Item\Accesstoken::Oauth' => array(
+                    '*'
+                ),
+            ),
         ));
 
         $feedMap = array(

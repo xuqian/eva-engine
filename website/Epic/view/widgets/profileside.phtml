@@ -13,7 +13,25 @@
         <button class="btn"><i class="icon-mini icon-envelope-alt"></i> Subscription Epicurissimo Newsletters</button>
     </div>
 
+<script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/', array('user_id' => $this->user['id']))?>">
+<div class="page-header border-header">
+    <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+    <h4>Friends ({%=o.paginator.rowCount%})</h4>
+</div>
+<div class="side-user-list">
+    <ul class="thumbnails">
+    {% for (var i=0, item; item=o.items[i]; i++) { %}
+        <li>
+        <a class="thumbnail" href="<?=$this->uri('/user/')?>{%=item.User.userName%}">
+            <img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="30" height="30" />
+        </a>
+        </li>
+    {% } %}
+    </ul>
+</div>
+</script>
 
+<?if(0):?>
     <div class="page-header border-header">
         <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
         <h4>My Friends (123)</h4>
@@ -29,16 +47,17 @@
             <?endfor;?>
         </ul>
     </div>
+<?endif?>
 
 <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="#">View All</a></small>
+    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>">View All</a></small>
     <h4>Blogs ({%=o.paginator.rowCount%})</h4>
 </div>
 <div class="side-blog-list">
 {% for (var i=0, item; item=o.items[i]; i++) { %}
 <div class="item">
-    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
     <div class="item-inline item-text">
         <div class="text-content">
             <div class="item-title">
