@@ -4,7 +4,7 @@ $title = 'Account Setting';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
 
-$emailForm = new User\Form\ChangeEmailForm();
+$emailForm = $this->emailForm ? $this->emailForm : new User\Form\ChangeEmailForm();
 $emailForm
 ->setView($this)
 ->useSubFormGroup()
@@ -13,7 +13,7 @@ $emailForm
 ->bind($item)
 ->prepare();
 
-$pwForm = new User\Form\ChangePasswordForm();
+$pwForm = $this->pwForm ? $this->pwForm : new User\Form\ChangePasswordForm();
 $pwForm
 ->setView($this)
 ->useSubFormGroup()
@@ -37,7 +37,7 @@ $pwForm
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                        Change Email
+                                        Change Password
                                     </a>
                                 </div>
                                 <div id="collapseOne" class="accordion-body collapse in">
@@ -79,7 +79,7 @@ $pwForm
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                                        Change Password
+                                        Change Email
                                     </a>
                                 </div>
                                 <div id="collapseTwo" class="accordion-body collapse">
