@@ -16,18 +16,20 @@
 <script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/', array('user_id' => $this->user['id']))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
-    <h4>Friends ({%=o.paginator.rowCount%})</h4>
+    <h4>Friends ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-user-list">
+    {% if(o.items.length > 0) { %}
     <ul class="thumbnails">
     {% for (var i=0, item; item=o.items[i]; i++) { %}
         <li>
         <a class="thumbnail" href="<?=$this->uri('/user/')?>{%=item.User.userName%}">
-            <img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="30" height="30" />
+            <img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="{%=item.User.userName%}" class="img-rounded" width="30" height="30" />
         </a>
         </li>
     {% } %}
     </ul>
+    {% } %}
 </div>
 </script>
 
@@ -52,9 +54,10 @@
 <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>">View All</a></small>
-    <h4>Blogs ({%=o.paginator.rowCount%})</h4>
+    <h4>Blogs  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-blog-list">
+{% if(o.items.length > 0) { %}
 {% for (var i=0, item; item=o.items[i]; i++) { %}
 <div class="item">
     <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
@@ -67,6 +70,7 @@
         </div>
     </div>
 </div>
+{% } %}
 {% } %}
 </div>
 </script>
