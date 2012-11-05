@@ -77,7 +77,7 @@ $form->setView($this)
                                 <div class="control-group <?=$form->isError('language') ? 'error' : '';?>">
                                     <?=$form->helper('language', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <?=$form->helper('language', 'formSelect', array('class' => ''))?>        
+                                        <?=$form->helper('language', 'formSelect', array('class' => 'select2 input-large'))?>        
                                         <div class="help-block"><?=$form->helper('language', 'formElementErrors')?></div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ $form->setView($this)
                                 <div class="control-group <?=$form->isError(array('Profile', 'country')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'country'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => ''))?>        
+                                        <?=$form->helper(array('Profile', 'country'), 'formSelect', array('class' => 'select2 input-large'))?>        
                                         <div class="help-block"><?=$form->helper(array('Profile', 'country'), 'formElementErrors')?></div>
                                     </div>
                                 </div>

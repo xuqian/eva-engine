@@ -81,6 +81,17 @@ eva.templates = function(){
 	});
 }
 
+eva.select2 = function(){
+	if(!$('.select2')[0]){
+		return false;
+	}
+
+	eva.loadcss(eva.s('/lib/js/jquery/jquery.select2/select2.css'));
+	eva.loader(eva.s('/lib/js/jquery/jquery.select2/select2.js'), function(){
+		$('.select2').select2();
+	});
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -90,6 +101,7 @@ eva.construct = function(){
 	eva.highlightmenu();
 	eva.miniCalendar();
 	eva.notice();
+	eva.select2();
 
 	var lang = eva.config.lang;
 	var langMap = {
