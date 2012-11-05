@@ -23,7 +23,13 @@ function checkOauth($key, $user)
 }
 ?>
 <div class="thumbnail profile-face">
-    <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
+    <?if($viewAsGuest):?>
+    <a href="<?=$this->uri('/user/' . $user['userName'])?>">
+    <?else:?>
+    <a href="<?=$this->uri('/account/profile/')?>">
+    <?endif?>
+        <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
+    </a>
     <div class="caption">
         <a class="highlight highlight-large" href="<?=$this->uri('/my/friend/')?>"><?=$user['FriendsCount']['friendsCount']?></a> Friends
     </div>

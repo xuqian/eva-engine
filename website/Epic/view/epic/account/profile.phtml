@@ -33,6 +33,16 @@ $form->setView($this)
 
                             <fieldset class="form-horizontal">
 
+                                <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
+                                    <div class="controls">
+                                        <a class="" href="http://gravatar.com">
+                                            <img src="<?=$this->gravatar($item['email'], 175)?>" class="img-circle" alt="">
+                                        </a>
+                                        <p>
+                                        Change your avatar at <a href="http://gravatar.com">Gravatar.com</a>.
+                                        </p>
+                                    </div>
+                                </div>
                                 <!--
                                 <div class="control-group <?=$form->isError('screenName') ? 'error' : '';?>">
                                     <?=$form->helper('screenName', 'label', array('class' => 'control-label'))?>
