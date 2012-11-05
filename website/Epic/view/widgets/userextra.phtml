@@ -21,3 +21,80 @@
 </div>
 </script>
 
+<script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/', array('user_id' => $this->user['id']))?>">
+<div class="page-header border-header">
+    <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+    <h4>Friends ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+</div>
+<div class="side-user-list">
+    {% if(o.items.length > 0) { %}
+    <ul class="thumbnails">
+    {% for (var i=0, item; item=o.items[i]; i++) { %}
+        <li>
+        <a class="thumbnail" href="<?=$this->uri('/user/')?>{%=item.User.userName%}">
+            <img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="{%=item.User.userName%}" class="img-rounded" width="30" height="30" />
+        </a>
+        </li>
+    {% } %}
+    </ul>
+    {% } %}
+</div>
+</script>
+
+
+    <div class="page-header border-header">
+        <small class="pull-right"><a href="#">View All</a></small>
+        <h4>My Events (123)</h4>
+    </div>
+    <div class="side-blog-list">
+        <?for($i = 0; $i < 10; $i++):?>
+        <div class="item ">
+            <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
+            <div class="item-inline item-text">
+                <div class="text-content">
+                    <div class="item-title">
+                        <a href="#">Event title test</a>
+                    </div>
+                    <p>Event Members: 50</p>
+                    <p>Event Time: <?=$this->datetime(time())?></p>
+                </div>
+            </div>
+        </div>
+        <?endfor?>
+    </div><!--activity-list end-->
+
+    <div class="page-header border-header">
+        <small class="pull-right"><a href="#">View All</a></small>
+        <h4>Albums</h4>
+    </div>
+    <div class="side-album-list">
+        <ul class="thumbnails">
+            <?for($i = 0; $i <6; $i++):?>
+            <li>
+            <a class="thumbnail" href="#">
+                <img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="70" height="70" />
+            </a>
+            </li>
+            <?endfor;?>
+        </ul>
+    </div>
+
+    <div class="page-header border-header">
+        <small class="pull-right"><a href="#">View All</a></small>
+        <h4>My Groups</h4>
+    </div>
+    <div class="side-group-list">
+        <ul class="thumbnails">
+            <?for($i = 0; $i < 4; $i++):?>
+            <li>
+            <a class="thumbnail" href="#">
+                <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
+            </a>
+            </li>
+            <?endfor;?>
+        </ul>
+    </div>
+
+    <div class="side-ad-list">
+        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
+    </div>
