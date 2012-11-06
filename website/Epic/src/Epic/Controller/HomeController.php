@@ -13,7 +13,7 @@ class HomeController extends ActionController
     public function indexAction()
     {
         $query = array(
-            'order' => 'iddesc'
+            'page' => $this->params()->fromQuery('page', 1),
         );
 
         $user = \Core\Auth::getLoginUser();
@@ -28,11 +28,10 @@ class HomeController extends ActionController
         ));
 
 
-        $items = $this->forward()->dispatch('FeedController', array(
+        list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
             'action' => 'index',
             'user_id' => $user['id'],
         ));
-
 
         $this->getServiceLocator()->get('Application')->getEventManager()->attach(MvcEvent::EVENT_RENDER, function($e) {
             $viewModel = $this->getEvent()->getViewModel();
@@ -51,6 +50,7 @@ class HomeController extends ActionController
             'user' => $user,
             'items' => $items,
             'query' => $query,
+            'paginator' => $paginator,
         );
     }
 }

@@ -12,6 +12,7 @@ class FeedController extends ActionController
     public function indexAction()
     {
         $userId = $this->params('user_id');
+        $page = $this->params()->fromQuery('page', 1);
 
         $feedMap = array(
             'self' => array(
@@ -29,7 +30,11 @@ class FeedController extends ActionController
             ),
         );
         $itemModel = Api::_()->getModel('Activity\Model\Activity');
-        $activityList = $itemModel->getUserActivityList($userId)->getActivityList($feedMap);
+        $activityList = $itemModel->getUserActivityList(array(
+            'user_id' => $userId,
+            'page' => $page,
+        ))->getActivityList($feedMap);
+        $paginator = $itemModel->getUserActivityPaginator();
 
         $userList = array();
         $userList = $itemModel->getUserList()->toArray();
@@ -39,7 +44,7 @@ class FeedController extends ActionController
         $activityList = $itemModel->combineList($activityList, $userList, 'User', array('user_id' => 'id'));
         $items = $itemModel->combineList($activityList, $forwardActivityList, 'ForwardActivity', array('reference_id' => 'id'));
 
-        return $items;
+        return array($items, $paginator);
     }
 
     public function getAction()

@@ -114,6 +114,11 @@ $form->useSubFormGroup()
                                 </div>
                             </div>
                             <?endforeach?>
+
+                            <?if($this->paginator):?>
+                            <?=$this->paginator->setPath('/home/')->setBaseQuery($this->query);?>
+                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                            <?endif;?>
                         </div><!--activity-list end-->
 
 

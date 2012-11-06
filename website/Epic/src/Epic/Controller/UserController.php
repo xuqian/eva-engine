@@ -53,9 +53,6 @@ class UserController extends ActionController
     protected function attachDefaultListeners()
     {
         parent::attachDefaultListeners();
-        //$events = $this->getServiceLocator()->get('Application')->getEventManager();
-        //$events->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'), 100);
-        
         $events = $this->getServiceLocator()->get('Application')->getEventManager();
         $events->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'), 100);
     }
@@ -130,7 +127,7 @@ class UserController extends ActionController
     {
         $user = $this->userAction();
 
-        $items = $this->forward()->dispatch('FeedController', array(
+        list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
             'action' => 'index',
             'user_id' => $user['id'],
         ));
@@ -138,6 +135,7 @@ class UserController extends ActionController
         $viewModel = new ViewModel(array(
             'user' => $user,
             'items' => $items,
+            'paginator' => $paginator,
         ));
         $viewModel->setTemplate('epic/home/index');
 
