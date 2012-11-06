@@ -33,8 +33,8 @@ class HomeController extends ActionController
             'user_id' => $user['id'],
         ));
 
-        $this->getServiceLocator()->get('Application')->getEventManager()->attach(MvcEvent::EVENT_RENDER, function($e) {
-            $viewModel = $this->getEvent()->getViewModel();
+        $this->getServiceLocator()->get('Application')->getEventManager()->attach(MvcEvent::EVENT_RENDER, function($event) {
+            $viewModel = $event->getViewModel();
             $viewModel->setVariables(array(
                 'viewAsGuest' => 0
             ));
