@@ -12,7 +12,7 @@ class UserController extends ActionController
 {
     protected $user;
 
-    public function getUser()
+    public function userAction()
     {
         if($this->user){
             return $this->user;
@@ -53,13 +53,16 @@ class UserController extends ActionController
     protected function attachDefaultListeners()
     {
         parent::attachDefaultListeners();
+        //$events = $this->getServiceLocator()->get('Application')->getEventManager();
+        //$events->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'), 100);
+        
         $events = $this->getServiceLocator()->get('Application')->getEventManager();
-        $events->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'));
+        $events->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'), 100);
     }
 
     public function setUserToView($event)
     {
-        $user = $this->getUser();
+        $user = $this->userAction();
         $viewModel = $this->getEvent()->getViewModel();
         $viewModel->setVariables(array(
             'user' => $user,
@@ -125,34 +128,12 @@ class UserController extends ActionController
 
     public function getAction()
     {
-        $user = $this->getUser();
-        $itemModel = Api::_()->getModel('Activity\Model\Activity');
+        $user = $this->userAction();
 
-        $feedMap = array(
-            'self' => array(
-                '*',
-                'getContentHtml()',
-                'getVideo()',
-            ),
-            'join' => array(
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
-                ),
-            ),
-        );
-        $activityList = $itemModel->getUserActivityList($user['id'], true)->getActivityList($feedMap);
-
-        $userList = array();
-        $userList = $itemModel->getUserList()->toArray();
-
-        $forwardActivityList = $itemModel->getForwardActivityList()->getActivityList($feedMap);
-        
-        $activityList = $itemModel->combineList($activityList, $userList, 'User', array('user_id' => 'id'));
-        $items = $itemModel->combineList($activityList, $forwardActivityList, 'ForwardActivity', array('reference_id' => 'id'));
-
+        $items = $this->forward()->dispatch('FeedController', array(
+            'action' => 'index',
+            'user_id' => $user['id'],
+        ));
 
         $viewModel = new ViewModel(array(
             'user' => $user,
@@ -170,7 +151,7 @@ class UserController extends ActionController
             'page' => $page,
         );
 
-        $user = $this->getUser();
+        $user = $this->userAction();
         $itemListQuery = array_merge(array(
             'user_id' => $user['id'],
             'order' => 'iddesc',
