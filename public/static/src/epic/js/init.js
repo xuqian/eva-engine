@@ -116,6 +116,24 @@ eva.checkFollow = function(){
 	});
 }
 
+eva.preview = function(){
+	$(document).on('click', '.item-preview', function(){
+		var btn = $(this);
+		var replace = {
+			url : btn.attr('data-url'),
+			width : btn.attr('data-width'),
+			height : btn.attr('data-height')
+		};
+		if(btn.hasClass('video')){
+			btn.html(eva.template('<embed src="{url}" quality="high" width="{width}" height="{height}" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>', replace));
+		} else {
+			btn.html(eva.template('<img class="img-polaroid" alt="" src="{url}" width="{width}" />', replace));
+		}
+		btn.off('click', '*');
+		return false;
+	});
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -127,6 +145,7 @@ eva.construct = function(){
 	eva.notice();
 	eva.select2();
 	eva.checkFollow();
+	eva.preview();
 
 	var lang = eva.config.lang;
 	var langMap = {

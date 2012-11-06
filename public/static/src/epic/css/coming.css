@@ -311,44 +311,6 @@ a.thumbnail:hover{border-color:#0099ff;-webkit-box-shadow:0 1px 4px rgba(0, 105,
 .typo pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:20px;word-break:break-all;word-wrap:break-word;white-space:pre;white-space:pre-wrap;background-color:#f5f5f5;border:1px solid #ccc;border:1px solid rgba(0, 0, 0, 0.15);-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}.typo pre.prettyprint{margin-bottom:20px;}
 .typo pre code{padding:0;color:inherit;background-color:transparent;border:0;}
 .typo .pre-scrollable{max-height:340px;overflow-y:scroll;}
-.uneditable-input,.uneditable-textarea{color:#999999;background-color:#fcfcfc;border-color:#cccccc;-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);cursor:not-allowed;}
-.uneditable-input{overflow:hidden;white-space:nowrap;}
-.uneditable-textarea{width:auto;height:auto;}
-input:-moz-placeholder,textarea:-moz-placeholder{color:#999999;}
-input:-ms-input-placeholder,textarea:-ms-input-placeholder{color:#999999;}
-input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#999999;}
-.radio,.checkbox{min-height:18px;padding-left:18px;}
-.radio input[type="radio"],.checkbox input[type="checkbox"]{float:left;margin-left:-18px;}
-.controls>.radio:first-child,.controls>.checkbox:first-child{padding-top:5px;}
-.radio.inline,.checkbox.inline{display:inline-block;padding-top:5px;margin-bottom:0;vertical-align:middle;}
-.radio.inline+.radio.inline,.checkbox.inline+.checkbox.inline{margin-left:10px;}
-.input-mini{width:60px;}
-.input-small{width:90px;}
-.input-medium{width:150px;}
-.input-large{width:210px;}
-.input-xlarge{width:270px;}
-.input-xxlarge{width:530px;}
-input[class*="span"],select[class*="span"],textarea[class*="span"],.uneditable-input[class*="span"],.row-fluid input[class*="span"],.row-fluid select[class*="span"],.row-fluid textarea[class*="span"],.row-fluid .uneditable-input[class*="span"]{float:none;margin-left:0;}
-.input-append input[class*="span"],.input-append .uneditable-input[class*="span"],.input-prepend input[class*="span"],.input-prepend .uneditable-input[class*="span"],.row-fluid input[class*="span"],.row-fluid select[class*="span"],.row-fluid textarea[class*="span"],.row-fluid .uneditable-input[class*="span"],.row-fluid .input-prepend [class*="span"],.row-fluid .input-append [class*="span"]{display:inline-block;}
-input,textarea,.uneditable-input{margin-left:0;}
-.controls-row [class*="span"]+[class*="span"]{margin-left:20px;}
-input.span12, textarea.span12, .uneditable-input.span12{width:926px;}
-input.span11, textarea.span11, .uneditable-input.span11{width:846px;}
-input.span10, textarea.span10, .uneditable-input.span10{width:766px;}
-input.span9, textarea.span9, .uneditable-input.span9{width:686px;}
-input.span8, textarea.span8, .uneditable-input.span8{width:606px;}
-input.span7, textarea.span7, .uneditable-input.span7{width:526px;}
-input.span6, textarea.span6, .uneditable-input.span6{width:446px;}
-input.span5, textarea.span5, .uneditable-input.span5{width:366px;}
-input.span4, textarea.span4, .uneditable-input.span4{width:286px;}
-input.span3, textarea.span3, .uneditable-input.span3{width:206px;}
-input.span2, textarea.span2, .uneditable-input.span2{width:126px;}
-input.span1, textarea.span1, .uneditable-input.span1{width:46px;}
-.controls-row{*zoom:1;}.controls-row:before,.controls-row:after{display:table;content:"";line-height:0;}
-.controls-row:after{clear:both;}
-.controls-row [class*="span"]{float:left;}
-input[disabled],select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[readonly]{cursor:not-allowed;background-color:#eeeeee;}
-input[type="radio"][disabled],input[type="checkbox"][disabled],input[type="radio"][readonly],input[type="checkbox"][readonly]{background-color:transparent;}
 .control-group.warning>label,.control-group.warning .help-block,.control-group.warning .help-inline{color:#c09853;}
 .control-group.warning .checkbox,.control-group.warning .radio,.control-group.warning input,.control-group.warning select,.control-group.warning textarea{color:#c09853;}
 .control-group.warning input,.control-group.warning select,.control-group.warning textarea{border-color:#c09853;-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);}.control-group.warning input:focus,.control-group.warning select:focus,.control-group.warning textarea:focus{border-color:#a47e3c;-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;}
@@ -497,6 +459,44 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini{*padding-top:1px;*padding-
 .form select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
 .form select[multiple],.form select[size]{height:auto;}
 .form select:focus,.form input[type="file"]:focus,.form input[type="radio"]:focus,.form input[type="checkbox"]:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
+.form .uneditable-input,.form .uneditable-textarea{color:#999999;background-color:#fcfcfc;border-color:#cccccc;-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);cursor:not-allowed;}
+.form .uneditable-input{overflow:hidden;white-space:nowrap;}
+.form .uneditable-textarea{width:auto;height:auto;}
+.form input:-moz-placeholder,.form textarea:-moz-placeholder{color:#999999;}
+.form input:-ms-input-placeholder,.form textarea:-ms-input-placeholder{color:#999999;}
+.form input::-webkit-input-placeholder,.form textarea::-webkit-input-placeholder{color:#999999;}
+.form .radio,.form .checkbox{min-height:18px;padding-left:18px;}
+.form .radio input[type="radio"],.form .checkbox input[type="checkbox"]{float:left;margin-left:-18px;}
+.form .controls>.radio:first-child,.form .controls>.checkbox:first-child{padding-top:5px;}
+.form .radio.inline,.form .checkbox.inline{display:inline-block;padding-top:5px;margin-bottom:0;vertical-align:middle;}
+.form .radio.inline+.radio.inline,.form .checkbox.inline+.checkbox.inline{margin-left:10px;}
+.form .input-mini{width:60px;}
+.form .input-small{width:90px;}
+.form .input-medium{width:150px;}
+.form .input-large{width:210px;}
+.form .input-xlarge{width:270px;}
+.form .input-xxlarge{width:530px;}
+.form input[class*="span"],.form select[class*="span"],.form textarea[class*="span"],.form .uneditable-input[class*="span"],.form .row-fluid input[class*="span"],.form .row-fluid select[class*="span"],.form .row-fluid textarea[class*="span"],.form .row-fluid .uneditable-input[class*="span"]{float:none;margin-left:0;}
+.form .input-append input[class*="span"],.form .input-append .uneditable-input[class*="span"],.form .input-prepend input[class*="span"],.form .input-prepend .uneditable-input[class*="span"],.form .row-fluid input[class*="span"],.form .row-fluid select[class*="span"],.form .row-fluid textarea[class*="span"],.form .row-fluid .uneditable-input[class*="span"],.form .row-fluid .input-prepend [class*="span"],.form .row-fluid .input-append [class*="span"]{display:inline-block;}
+.form input,.form textarea,.form .uneditable-input{margin-left:0;}
+.form .controls-row [class*="span"]+[class*="span"]{margin-left:20px;}
+.form input.span12, textarea.span12, .uneditable-input.span12{width:926px;}
+.form input.span11, textarea.span11, .uneditable-input.span11{width:846px;}
+.form input.span10, textarea.span10, .uneditable-input.span10{width:766px;}
+.form input.span9, textarea.span9, .uneditable-input.span9{width:686px;}
+.form input.span8, textarea.span8, .uneditable-input.span8{width:606px;}
+.form input.span7, textarea.span7, .uneditable-input.span7{width:526px;}
+.form input.span6, textarea.span6, .uneditable-input.span6{width:446px;}
+.form input.span5, textarea.span5, .uneditable-input.span5{width:366px;}
+.form input.span4, textarea.span4, .uneditable-input.span4{width:286px;}
+.form input.span3, textarea.span3, .uneditable-input.span3{width:206px;}
+.form input.span2, textarea.span2, .uneditable-input.span2{width:126px;}
+.form input.span1, textarea.span1, .uneditable-input.span1{width:46px;}
+.form .controls-row{*zoom:1;}.form .controls-row:before,.form .controls-row:after{display:table;content:"";line-height:0;}
+.form .controls-row:after{clear:both;}
+.form .controls-row [class*="span"]{float:left;}
+.form input[disabled],.form select[disabled],.form textarea[disabled],.form input[readonly],.form select[readonly],.form textarea[readonly]{cursor:not-allowed;background-color:#eeeeee;}
+.form input[type="radio"][disabled],.form input[type="checkbox"][disabled],.form input[type="radio"][readonly],.form input[type="checkbox"][readonly]{background-color:transparent;}
 .alert{padding:8px 35px 8px 14px;margin-bottom:20px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#fcf8e3;border:1px solid #fbeed5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;color:#c09853;}
 .alert h4{margin:0;}
 .alert .close{position:relative;top:-2px;right:-21px;line-height:20px;}

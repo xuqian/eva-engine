@@ -5,10 +5,10 @@ use Eva\Api,
     Eva\Mvc\Controller\ActionController,
     Core\Auth,
     Eva\View\Model\ViewModel;
+use Activity\Form;
 
 class FeedController extends ActionController
 {
-
     public function indexAction()
     {
         $userId = $this->params('user_id');
@@ -48,6 +48,40 @@ class FeedController extends ActionController
     }
 
     public function getAction()
+    {
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            return $this->deleteAction();
+        }
+        return $this->feedAction();
+    }
+
+    public function deleteAction()
+    {
+        $postData = $this->params()->fromPost();
+        $callback = $this->params()->fromPost('callback');
+
+        $form = new Form\MessageDeleteForm();
+        $form->bind($postData);
+        if ($form->isValid()) {
+
+            $postData = $form->getData();
+            $itemModel = Api::_()->getModel('Activity\Model\Activity');
+            $itemModel->setItem($postData)->removeActivity();
+
+            if($callback){
+                $this->redirect()->toUrl($callback);
+            }
+
+        } else {
+            return array(
+                'post' => $postData,
+            );
+        }
+    
+    }
+
+    public function feedAction()
     {
         $id = $this->params('id');
         $itemModel = Api::_()->getModel('Activity\Model\Activity');
