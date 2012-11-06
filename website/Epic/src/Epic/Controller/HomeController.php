@@ -47,6 +47,7 @@ class HomeController extends ActionController
             'self' => array(
                 '*',
                 'getContentHtml()',
+                'getVideo()',
             ),
             'join' => array(
                 'File' => array(
@@ -68,7 +69,6 @@ class HomeController extends ActionController
         
         $activityList = $itemModel->combineList($activityList, $userList, 'User', array('user_id' => 'id'));
         $items = $itemModel->combineList($activityList, $forwardActivityList, 'ForwardActivity', array('reference_id' => 'id'));
-
 
         return array(
             'user' => $user,

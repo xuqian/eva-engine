@@ -41,7 +41,7 @@ $form->useSubFormGroup()
                                         </div>
                                         <div class="activity-box-buttons">
                                             <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
-                                            <a id="activity-box-video-button" class="activity-box-func" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
+                                            <a id="activity-box-video-button" class="activity-box-func hide" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
                                             There are <span class="highlight highlight-large activity-box-count">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
                                         </div>
                                     </div>
@@ -65,6 +65,16 @@ $form->useSubFormGroup()
                                         <?if($item['File']):?>
                                         <div class="item-image">
                                             <p><a href="<?=$item['File'][0]['Thumb']?>"><img src="<?=$this->thumb($item['File'][0]['Thumb'], array('w_200'))?>" alt="" class="img-polaroid" /></a></p>
+                                        </div>
+                                        <?endif?>
+
+                                        <?if($item['Video']):$video = $item['Video'];?>
+                                        <div class="item-image">
+                                            <?if($video['thumbnail']):?>
+                                            <img src="<?=$video['thumbnail']?>" alt="" class="img-polaroid" />
+                                            <?else:?>
+                                            <embed src="<?=$video['swf']?>" quality="high" width="<?=$video['width']?>" height="<?=$video['height']?>" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+                                            <?endif?>
                                         </div>
                                         <?endif?>
 

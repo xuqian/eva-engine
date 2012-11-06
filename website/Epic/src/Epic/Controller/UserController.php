@@ -27,7 +27,7 @@ class UserController extends ActionController
         if(!$user){
             return array();
         }
-        $user->toArray(array(
+        $user = $user->toArray(array(
             'self' => array(
                 '*',
             ),
@@ -132,6 +132,7 @@ class UserController extends ActionController
             'self' => array(
                 '*',
                 'getContentHtml()',
+                'getVideo()',
             ),
             'join' => array(
                 'File' => array(
