@@ -145,7 +145,39 @@ class AccountController extends ActionController
 
     public function importAction()
     {
-        
     
+    }
+
+    public function addfriendAction()
+    {
+        $adapter = $this->params()->fromQuery('service');
+        
+        $user = Auth::getLoginUser();
+    
+        if(!$adapter){
+            throw new \Contacts\Exception\InvalidArgumentException(sprintf(
+                'No contacts service key found'
+            ));
+        }
+        
+        $config = $this->getServiceLocator()->get('config');
+        $import = new \Contacts\ContactsImport($adapter, false, array(
+            'cacheConfig' => $config['cache']['contacts_import'],
+        ));
+        $contacts = $import->getStorage()->loadContacts();
+        
+        $itemModel = \Eva\Api::_()->getModel('Contacts\Model\Contacts');
+        $itemModel->setUser($user);
+        $itemModel->setService($adapter);
+        $contacts = $itemModel->getUserContactsInfo($contacts);
+        return array(
+            'contacts' => $contacts,
+            'service'  => $adapter,
+        );
+    }
+
+    public function inviteAction()
+    {
+        return $this->addfriendAction();
     }
 }
