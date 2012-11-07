@@ -21,6 +21,35 @@ abstract class AbstractAdapter implements AdapterInterface
 
     protected $options;
 
+    protected $websiteName;
+
+    protected $websiteProfileUrl;
+
+    protected $accessToken;
+    
+    protected $defaultOptions = array();
+
+    protected $httpClientOptions = array();
+
+    public function getWebsiteName()
+    {
+        return $this->websiteName;
+    }
+
+    public function setWebsiteName($websiteName)
+    {
+        $this->websiteName = $websiteName;
+        return $this;
+    }
+
+    public function getWebsiteProfileUrl()
+    {
+        $accessToken = $this->getAccessToken();
+        if($remoteUserId = $accessToken->getParam('remoteUserId')) {
+            return sprintf($this->websiteProfileUrl, $remoteUserId);
+        }
+    }
+
     public function getCallback()
     {
         return $this->callback;
@@ -61,40 +90,6 @@ abstract class AbstractAdapter implements AdapterInterface
         return strtolower(array_pop($className));
     }
 
-    public function setOptions(array $options = array())
-    {
-		$defaultOptions = array(
-            'requestScheme' => ZendOAuth::REQUEST_SCHEME_HEADER,
-            'version' => '2.0', 
-            'callbackUrl' =>  $this->getCallback(),
-            'consumerKey' => $this->getConsumerKey(),
-            'consumerSecret' => $this->getConsumerSecret(),
-            'authorizeUrl' => $this->authorizeUrl,
-            'accessTokenUrl' => $this->accessTokenUrl,
-		);
-
-        $options = array_merge($defaultOptions, $options);
-
-        if(!$options['consumerKey']){
-            throw new Exception\InvalidArgumentException(sprintf('No consumer key found in %s', get_class($this)));
-        }
-
-        if(!$options['consumerSecret']){
-            throw new Exception\InvalidArgumentException(sprintf('No consumer secret found in %s', get_class($this)));
-        }
-
-        if(!$options['callbackUrl']){
-            throw new Exception\InvalidArgumentException(sprintf('No callback url found in %s', get_class($this)));
-        }
-
-        $this->setConsumerKey($options['consumerKey']);
-        $this->setConsumerSecret($options['consumerSecret']);
-        $this->setCallback($options['callbackUrl']);
-
-        $this->options = $options;
-        return $this;
-    }
-
     public function getOptions()
     {
         return $this->options;
@@ -116,9 +111,15 @@ abstract class AbstractAdapter implements AdapterInterface
 
     }
 
-    public function getHttpClient()
+    public function getConsumerHttpClient()
     {
         return $this->getConsumer()->getHttpClient(); 
+    }
+
+    public function getHttpClient(array $oauthOptions = array(), $uri = null, $config = null, $excludeCustomParamsFromHeader = true)
+    {
+        $oauthOptions = array_merge($this->httpClientOptions, $oauthOptions);
+        return $this->getAccessToken()->getHttpClient($oauthOptions, $uri, $config, $excludeCustomParamsFromHeader);
     }
 
     public function getRequest()
@@ -147,16 +148,25 @@ abstract class AbstractAdapter implements AdapterInterface
         return $this->getConsumer()->getRedirectUrl();
     }
 
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+        return $this;
+    }
+
     /**
     * Redirect to oauth service page
     */
-    public function getAccessToken($queryData, $token, $httpMethod = null, $request = null)
+    public function getAccessToken($queryData = null, $token = null, $httpMethod = null, $request = null)
     {
-        return $this->getConsumer()->getAccessToken($queryData, $token, $httpMethod, $request);
+        if($this->accessToken){
+            return $this->accessToken;
+        }
+        return $this->accessToken = $this->getConsumer()->getAccessToken($queryData, $token, $httpMethod, $request);
     }
 
 
-    public function __construct(array $options = array())
+    public function __construct($options = array())
     {
         if($options){
             $this->setOptions($options);

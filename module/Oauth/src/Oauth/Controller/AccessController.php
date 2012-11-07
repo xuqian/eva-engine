@@ -11,7 +11,7 @@ class AccessController extends AbstractActionController
     public function indexAction()
     {
         $adapter = $this->params()->fromQuery('service');
-        $callback = $this->params()->fromQuery('callback');
+        $callback = $this->params()->fromQuery('r');
         $version = (int) $this->params()->fromQuery('version');
 
         if(!$adapter){
@@ -29,7 +29,7 @@ class AccessController extends AbstractActionController
         $config = $this->getServiceLocator()->get('config');
         $helper = $this->getEvent()->getApplication()->getServiceManager()->get('viewhelpermanager')->get('serverurl');
         $url = $helper() . $config['oauth']['access_url_path'] . '?' . http_build_query(array(
-            'callback' => $callback,
+            'r' => $callback,
             'service' => $adapter,
             'version' => $version
         ));
@@ -45,17 +45,20 @@ class AccessController extends AbstractActionController
         $query = $this->params()->fromQuery();
         $requestToken = $oauth->getStorage()->getRequestToken();
         $accessToken = $oauth->getAdapter()->getAccessToken($query, $requestToken);
-        
+
         //$request = $oauth->getAdapter()->getRequest();
         //$response = $oauth->getAdapter()->getResponse();
 
         $accessTokenArray = $oauth->getAdapter()->accessTokenToArray($accessToken);
         $oauth->getStorage()->saveAccessToken($accessTokenArray);
+        $oauth->getStorage()->clearRequestToken();
         return $this->redirect()->toUrl($callback);
 
+        /*
         $view = new ViewModel();
         $view = new \Zend\View\Model\JsonModel();
         $view->setTemplate('blank');
         return $view;
+        */
     }
 }

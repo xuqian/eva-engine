@@ -15,7 +15,13 @@ class UserController extends RestfulModuleController
         if ($request->isPost()) {
             
             $item = $request->getPost();
-            $form = new \User\Form\RegisterForm();
+
+            $oauth = new \Oauth\OauthService();
+            $oauth->setServiceLocator($this->getServiceLocator());
+            $oauth->initByAccessToken();
+            $accessToken = $oauth->getAdapter()->getAccessToken();
+
+            $form = $accessToken ? new \User\Form\QuickRegisterForm : new \User\Form\RegisterForm();
             $form->bind($item);
             if ($form->isValid()) {
                 $callback = $this->params()->fromPost('callback');
@@ -28,6 +34,7 @@ class UserController extends RestfulModuleController
             } else {
             }
             return array(
+                'token' => $accessToken,
                 'form' => $form,
                 'item' => $item,
             );
@@ -39,7 +46,7 @@ class UserController extends RestfulModuleController
         $user = Auth::getLoginUser();
     
         if(isset($user['isSuperAdmin']) || !$user){
-            exit;;
+            exit;
         } 
         
         $itemModel = Api::_()->getModel('User\Model\User');
@@ -62,6 +69,54 @@ class UserController extends RestfulModuleController
         
         return array(
             'item' => $item,
+        );
+    }
+
+    public function contactsAction()
+    {
+    }
+
+    public function inviteAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        $adapter = $this->params()->fromQuery('service');
+        
+        $user = Auth::getLoginUser();
+    
+        if(isset($user['isSuperAdmin']) || !$user){
+            exit;
+        } 
+
+        if(!$adapter){
+            throw new \Contacts\Exception\InvalidArgumentException(sprintf(
+                'No contacts service key found'
+            ));
+        }
+        
+        $config = $this->getServiceLocator()->get('config');
+        $import = new \Contacts\ContactsImport($adapter, false, array(
+            'cacheConfig' => $config['cache']['contacts_import'],
+        ));
+        $contacts = $import->getStorage()->loadContacts();
+        
+        $itemModel = \Eva\Api::_()->getModel('Contacts\Model\Contacts');
+        $itemModel->setUser($user);
+        $itemModel->setService($adapter);
+        $contacts = $itemModel->getUserContactsInfo($contacts);
+        
+        if ($id == 'add') {
+            $count = isset($contacts['onSiteContactsCount']) ? $contacts['onSiteContactsCount'] : 0;
+            $contacts = isset($contacts['onSiteContacts']) ? $contacts['onSiteContacts'] : array();
+        } else {
+            $count = isset($contacts['outSiteContactsCount']) ? $contacts['outSiteContactsCount'] : 0;
+            $contacts = isset($contacts['outSiteContacts']) ? $contacts['outSiteContacts'] : array();
+        }
+
+        return array(
+            'id'       => $id,
+            'count'    => $count,
+            'contacts' => $contacts,
+            'service'  => $adapter,
         );
     }
 }

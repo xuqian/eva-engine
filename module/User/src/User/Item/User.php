@@ -21,16 +21,6 @@ class User extends AbstractItem
             'joinColumn' => 'user_id',
             'referencedColumn' => 'id',
         ),
-        'Oauth' => array(
-            'targetEntity' => 'User\Item\Oauth',
-            'relationship' => 'OneToMany',
-            'joinColumn' => 'user_id',
-            'referencedColumn' => 'id',
-            'joinParameters' => array(
-                'columns' => array('user_id', 'appType', 'token', 'tokenSecret'),
-                'limit' => false,
-            ),
-        ),
         'Roles' => array(
             'targetEntity' => 'User\Item\Role',
             'relationship' => 'ManyToMany',
@@ -68,6 +58,17 @@ class User extends AbstractItem
             'joinColumn' => 'user_id',
             'referencedColumn' => 'id',
             'joinParameters' => array(
+            ),
+        ),
+        'FriendsCount' => array(
+            'targetEntity' => 'User\Item\Friend',
+            'relationship' => 'OneToMany',
+            'joinColumn' => 'from_user_id',
+            'referencedColumn' => 'id',
+            'asCount' => true,
+            'countKey' => 'friendsCount',
+            'joinParameters' => array(
+                'count' => true,
             ),
         ),
         'MyFriends' => array(
@@ -134,5 +135,12 @@ class User extends AbstractItem
         $bcrypt->setSalt($salt);
 
         return $this->password = $bcrypt->create($this->password);
+    }
+
+    public function getEmailHash()
+    {
+        if($this->email){
+            return $this->EmailHash = md5($this->email);
+        }
     }
 }

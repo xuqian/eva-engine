@@ -55,7 +55,7 @@ abstract class AbstractAdapter extends \Oauth\Adapter\AbstractAdapter implements
             'accessTokenFormat' => $this->accessTokenFormat,
 		);
 
-        $options = array_merge($defaultOptions, $options);
+        $options = array_merge($defaultOptions, $this->defaultOptions, $options);
 
         if(!$options['consumerKey']){
             throw new Exception\InvalidArgumentException(sprintf('No consumer key found in %s', get_class($this)));
@@ -92,13 +92,34 @@ abstract class AbstractAdapter extends \Oauth\Adapter\AbstractAdapter implements
         return $this->consumer = $consumer;
     }
 
+    public function getHttpClient(array $oauthOptions = array(), $uri = null, $config = null, $excludeCustomParamsFromHeader = true)
+    {
+        $defaultHttpClientOptions = array(
+            'requestScheme' => ZendOAuth::REQUEST_SCHEME_QUERYSTRING,
+        );
+        $oauthOptions = array_merge($defaultHttpClientOptions, $this->httpClientOptions, $oauthOptions);
+        return $this->getAccessToken()->getHttpClient($oauthOptions, $uri, $config, $excludeCustomParamsFromHeader);
+    }
+
     public function accessTokenToArray(AccessToken $accessToken)
     {
         return array(
             'adapterKey' => $this->getAdapterKey(),
             'token' => $accessToken->getToken(),
-            //'tokenSecret' => $accessToken->getTokenSecret(),
+            'expireTime' => $accessToken->getExpiredTime(),
+            'refreshToken' => $accessToken->getRefreshToken(),
             'version' => 'Oauth2',
         );
+    }
+
+    public function arrayToAccessToken(array $accessTokenArray)
+    {
+        $accessToken = new AccessToken();
+        $accessToken->setToken($accessTokenArray['token']);
+        $accessToken->setTokenSecret($accessTokenArray['tokenSecret']);
+        foreach($accessTokenArray as $key => $value) {
+            $accessToken->setParam($key, $value);
+        }
+        return $accessToken;
     }
 }

@@ -111,6 +111,32 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            'findfriends' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/findfriends[/]',
+                    'defaults' => array(
+                        'controller' => 'UserController',
+                        'action' => 'contacts',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'step' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '[/][:id][/]',
+                            'constraints' => array(
+                                'id' => 'add|invite'
+                            ),
+                            'defaults' => array(
+                                'action' => 'invite'
+                            )
+                        )
+                    ),
+                ),
+                'priority' => 2,
+            ),
         ),
     ),
     'controllers' => array(
@@ -121,5 +147,9 @@ return array(
             'UserController' => 'Engine\Controller\UserController',
             'FeedController' => 'Engine\Controller\FeedController',
         ),
+    ),
+
+    'oauth' => array(
+        'login_url_path' => '/home/'
     ),
 );
