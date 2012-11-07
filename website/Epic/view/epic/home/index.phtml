@@ -41,12 +41,15 @@ $form->useSubFormGroup()
                                         </div>
                                         <div class="activity-box-buttons">
                                             <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
-                                            <a id="activity-box-video-button" class="activity-box-func hide" href="#"><i class="icon-mini icon-facetime-video"></i> Video</a>
+                                            <a id="activity-box-video-button" class="activity-box-func" href="javascript:;" data-placement="bottom" rel="popover"><i class="icon-mini icon-facetime-video"></i> Video</a>
                                             There are <span class="highlight highlight-large activity-box-count">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
                                         </div>
                                     </div>
                                 </fieldset>
+
                             </form>
+
+
                         </div>
                         <?endif?>
 
@@ -132,11 +135,28 @@ $form->useSubFormGroup()
     </div><!--container end-->
 </div><!--page inner end-->
 
+<div id="video-popover" class="popover bottom">
+    <div class="arrow"></div>
+    <h3 class="popover-title">Add Video
+        <span class="close">×</span>
+    </h3>
+    <div class="popover-content">
+        <div class="form">
+            <div class="input-append">
+                <input name="url" class="input-medium" type="text" placeholder="Video Url..." />
+                <button id="add-video" class="btn" type="button">Add</button>
+            </div>
+        </div>
+        <div class="ajax-video-preview">
+        </div>
+    </div>
+</div>
 <?=$this->widget('File', 'file/index')?>
 
 <script>
     var modal = $("#fileupload-modal");
     modal.hide();
+    var videoPopover = $("#video-popover");
     eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
             modal.hide();
             $('#activity-box-image-button').on('click', function() {
@@ -151,6 +171,20 @@ $form->useSubFormGroup()
 
             modal.find(".close").on("click", function(){
                     modal.hide();
+            });
+
+            $("#activity-box-video-button").on('click', function() {
+                    $(this).evaTip("show", {
+                            'tip' : videoPopover,
+                            'offsetX' : -90,
+                            'offsetY' : 30,
+                            'direction' : 'bottom'			
+                    });
+                    return false;
+            });
+
+            videoPopover.find(".close").on("click", function(){
+                    videoPopover.hide();
             });
     });
 
@@ -219,6 +253,32 @@ $form->useSubFormGroup()
             var item = $(this).parentsUntil('.item').parent();
             var removeForm = item.find('.item-remove');
             removeForm.hide();
+            return false;
+    });
+
+    $("#add-video").on('click', function(){
+            var popover = $("#video-popover");
+            var url = popover.find("input[name=url]").val();
+            if(url == ''){
+                return false;
+            }
+
+            if(!/https?:\/\/[A-Za-z0-9\.-]{3,}\.[A-Za-z]{3}/i.test(url)) {
+                    return false;
+            }
+
+            $.ajax({
+                url : eva.d('/video/parser/'),
+                data : {
+                    url : url
+                },
+                dataType : 'json',
+                success : function(response){
+                        popover.find(".ajax-video-preview").html(eva.template('<embed src="{swf}" quality="high" width="200" height="120" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>', response));
+                        textarea.val(textarea.val() + ' ' + response.url);
+                }
+            });
+
             return false;
     });
 

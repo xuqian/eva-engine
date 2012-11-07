@@ -49,16 +49,16 @@ $deleteForm->setView($this)
                                         <p><?=$item['ContentHtml']?></p>
                                         <?if($item['File']):?>
                                         <div class="item-image">
-                                            <p><a href="<?=$item['File'][0]['Thumb']?>"><img src="<?=$this->thumb($item['File'][0]['Thumb'], array('w_200'))?>" alt="" class="img-polaroid" /></a></p>
+                                            <p><a href="<?=$item['File'][0]['Thumb']?>" class="item-preview image" data-preview-type="image" data-url="<?=$this->thumb($item['File'][0]['Thumb'], array('w_400'))?>" data-width="400"><img src="<?=$this->thumb($item['File'][0]['Thumb'], array('w_200'))?>" alt="" class="img-polaroid" /></a></p>
                                         </div>
                                         <?endif?>
 
-                                        <?if($item['Video']):$video = $item['Video'];?>
-                                        <div class="item-image">
+                                         <?if($item['Video']):$video = $item['Video'];?>
+                                        <div class="item-video">
                                             <?if($video['thumbnail']):?>
-                                            <img src="<?=$video['thumbnail']?>" alt="" class="img-polaroid" />
+                                            <a href="<?=$video['url']?>" class="item-preview video" data-preview-type="video" data-url="<?=$video['swf']?>" data-width="<?=$video['width']?>" data-height="<?=$video['height']?>"><img src="<?=$video['thumbnail']?>" alt="video preview" class="img-polaroid" width="200" /><i class="icon-play btn-play"></i></a>
                                             <?else:?>
-                                            <embed src="<?=$video['swf']?>" quality="high" width="<?=$video['width']?>" height="<?=$video['height']?>" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+                                            <a href="<?=$video['url']?>" class="item-preview video" data-preview-type="video" data-url="<?=$video['swf']?>" data-width="<?=$video['width']?>" data-height="<?=$video['height']?>"><div class="video-no-preview"></div><i class="icon-play btn-play"></i></a>
                                             <?endif?>
                                         </div>
                                         <?endif?>
