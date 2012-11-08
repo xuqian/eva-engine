@@ -28,7 +28,6 @@ class LoginController extends ActionController
     public function indexAction()
     {
         $this->layout('layout/login');
-
         $request = $this->getRequest();
         if (!$request->isPost()) {
             return;
@@ -43,14 +42,21 @@ class LoginController extends ActionController
 
             $item = $form->getData();
             $itemModel = Api::_()->getModel('User\Model\Login');
-            $loginResult = $itemModel->setItem($item)->login();
+            $itemModel->setItem($item)->login();
+            $loginResult = $itemModel->getLoginResult();
 
             if($item['rememberMe']){
                 $tokenString = $itemModel->createToken();
                 //Cookie expired after 60 days
                 $this->cookie()->crypt(false)->write('realm', $tokenString, 3600 * 24 * 60);
             }
-            $this->redirect()->toUrl($callback);
+
+            if($loginResult->isValid()){
+                return $this->redirect()->toUrl($callback);
+            } else {
+                $this->flashMessenger()->setNamespace('login-result')->addMessage($loginResult);
+                return $this->redirect()->toUrl('/login/');
+            }
         } else {
             $item = $form->getData();
         }

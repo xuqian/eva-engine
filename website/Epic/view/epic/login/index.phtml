@@ -10,6 +10,8 @@ $form
 ->bind($item)
 ->prepare();
 
+$loginResult = $this->flashMessenger()->setNamespace('login-result')->getMessages();
+$loginResult = $loginResult ? $loginResult[0] : array();
 ?>
 <div class="bg bg-0">
     <div class="container">
@@ -17,6 +19,15 @@ $form
        <div class="loginblock loginformblock">
            <form <?=$this->formAttr($form)?> class="form">
                 <?=$form->restful();?>
+                <?if($loginResult):?>
+                    <div class="alert alert-error">
+                        <?if($loginResult->getCode() == -1):?>
+                        User not found.
+                        <?elseif($loginResult->getCode() == -3):?>
+                        Password not match
+                        <?endif?>
+                    </div>
+                <?endif?>
                 <div class="control-group <?=$form->isError('loginName') ? 'error' : '';?>">
                     <?=$form->helper('loginName', 'label', array('class' => 'control-label'))?>
                     <div class="controls">
