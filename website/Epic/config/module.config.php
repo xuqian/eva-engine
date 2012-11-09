@@ -333,6 +333,19 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'upgrade' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'upgrade[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'controller' => 'User\Controller\UpgradeController',
+                                'action' => 'index'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
                 ), //my child_routes end
             ), //my end
 
@@ -507,6 +520,7 @@ return array(
 
             'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
             'User\Controller\FriendController' => 'User\Controller\FriendController',
+            'User\Controller\UpgradeController' => 'User\Controller\UpgradeController',
 
             'HomeController' => 'Epic\Controller\HomeController',
             'PagesController' => 'Epic\Controller\PagesController',

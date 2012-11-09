@@ -116,7 +116,7 @@ $form->setView($this)
 							<p class="planprice"><span class="price"><?=$this->_('FREE')?></span></p>
 							<?else:?>
                             <p class="planprice">$<span class="price"><?=$plan['price']?></span> / <?=$this->_($plan['per'])?></p>
-                            <a href="<?=$this->uri('/payment/request/', array('callback' => $this->serverUrl() . '/account/membership/', 'adapter' => 'paypalec', 'amount' => $plan['price']))?>" class="btn btn-plan btn-success"><?=$this->_('Upgrade')?></a>
+                            <a href="<?=$this->uri('/my/upgrade/', array('callback' => $this->serverUrl() . '/account/membership/', 'adapter' => 'paypalec', 'plan' => $plan['title']))?>" class="btn btn-plan btn-success"><?=$this->_('Upgrade')?></a>
 							<?endif?>
 						</div>
 						
