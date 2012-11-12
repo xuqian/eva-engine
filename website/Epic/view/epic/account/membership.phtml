@@ -134,8 +134,12 @@ $form->setView($this)
 						<?endforeach;?>
 						<?endif;?>
 
-						<div class="cell last">
-                            <a href="<?=$this->uri('/pages/membership-plans')?>" class="btn btn-plan btn-success"><?=$this->_('More')?></a>
+                        <div class="cell last">
+                        <?if($plan['price'] == 0):?>
+                            <a href="<?=$this->uri('/account/membership/');?>" class="btn btn-plan btn-success"><?=$this->_('More')?></a>
+                        <?else:?>
+                            <a href="<?=$this->uri('/my/upgrade/', array('callback' => $this->serverUrl() . '/account/membership/', 'adapter' => 'alipayec', 'plan' => $plan['title']))?>" class="btn btn-plan btn-success"><?=$this->_('Upgrade')?></a>
+                        <?endif;?>
 						</div>
 					</div>
 				<!-- Plan row End -->
