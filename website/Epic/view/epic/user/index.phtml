@@ -14,6 +14,14 @@ $form
 
 $unfollowForm = clone $form;
 $unfollowForm->setMethod('delete');
+
+
+$userSearchForm = $this->form ? $this->form : new User\Form\UserSearchForm();
+$userSearchForm->setView($this)
+     ->setMethod('get')
+     ->setAction($this->uri('/user/'))
+     ->prepare();
+
 ?>
 
 <div class="container">
@@ -29,6 +37,17 @@ $unfollowForm->setMethod('delete');
                                     | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
                                     <?endif?>
                                 </h3>
+                            </div>
+                            <div class="search-filter">
+                                <form <?=$this->formAttr($userSearchForm)?> class="form form-inline">
+                                    <?=$userSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                                    <?//=$userSearchForm->helper('gender', 'formSelect', array('class' => 'span2'))?>
+                                    <?//=$userSearchForm->helper('onlineStatus', 'formSelect', array('class' => 'span2'))?>
+                                    <?//=$userSearchForm->helper('country', 'formSelect', array('class' => 'span2'))?>  
+                                    <?=$userSearchForm->helper('city', 'formSelect', array('class' => 'span2', 'placeholder' => 'City'))?>        
+                                    <?=$userSearchForm->helper('industry', array('class' => 'span2', 'placeholder' => 'Industry'))?>  
+                                    <button class="btn" type="submit"><?=$this->_('Filter Users')?></button>
+                                </form>
                             </div>
                             <div class="user-list vlist">
                                 <?foreach($items as $item):?>

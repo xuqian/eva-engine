@@ -80,7 +80,7 @@ class UserController extends ActionController
         $request = $this->getRequest();
         $query = $request->getQuery();
 
-        $form = new \User\Form\UserSearchForm();
+        $form = new \Epic\Form\UserSearchForm();
         $form->bind($query)->isValid();
         $selectQuery = $form->getData();
 
