@@ -148,6 +148,7 @@ $form->useSubFormGroup()
             </div>
         </div>
         <div class="ajax-video-preview">
+            <p>Support video sites: Youtube, Youku</p>
         </div>
     </div>
 </div>
@@ -274,8 +275,12 @@ $form->useSubFormGroup()
                 },
                 dataType : 'json',
                 success : function(response){
-                        popover.find(".ajax-video-preview").html(eva.template('<embed src="{swf}" quality="high" width="200" height="120" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>', response));
-                        textarea.val(textarea.val() + ' ' + response.url);
+                        if(response.remoteId){
+                                popover.find(".ajax-video-preview").html(eva.template('<embed src="{swf}" quality="high" width="200" height="120" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>', response));
+                                textarea.val(textarea.val() + ' ' + response.url);
+                        } else {
+                    
+                        }
                 }
             });
 
