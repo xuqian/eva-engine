@@ -41,6 +41,11 @@ function checkOauth($key, $user)
     <div class="profile-title">
         <h2><?=$user['userName']?></h2>
         <small class="profile-level">Professional  <a href="<?=$this->uri('/account/membership/')?>" title="VIP User"><i class="icon-trophy"></i></a></small>
+        <?if($user['onlineStatus'] == 'online'):?>
+        <span class="label label-success">Online</span> 
+        <?else:?>
+        <span class="label">Offline</span> 
+        <?endif?>
     </div>
 
     <table class="table-condensed">

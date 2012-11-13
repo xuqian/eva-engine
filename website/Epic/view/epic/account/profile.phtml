@@ -115,7 +115,7 @@ $form->setView($this)
                                 <div class="control-group <?=$form->isError(array('Profile', 'city')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'city'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <?=$form->helper(array('Profile', 'city'), array('class' => ''))?>        
+                                        <?=$form->helper(array('Profile', 'city'), 'formSelect', array('class' => 'select2 input-large'))?>        
                                         <div class="help-block"><?=$form->helper(array('Profile', 'city'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
