@@ -24,7 +24,7 @@ if($contacts['outSiteContacts']){
                         </div>
 
                         <?if($items):?> 
-                        <form action="<?=$this->uri('/contacts/invite/', array('r' => '/findfriends/invite/?service=' . $this->service, 'service' => $this->service))?>" method="post" class="">
+                        <form action="<?=$this->uri('/contacts/invite/', array('r' => '/account/invite/?service=' . $this->service, 'service' => $this->service))?>" method="post" class="">
                             <div class="well typo">
                                 <ul class="row">
                                     <?foreach($items as $item):?>
