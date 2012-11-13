@@ -19,7 +19,7 @@ if($contacts['outSiteContacts']){
             <div class="main-wrap"><div id="main" class="main">
                     <div class="page-main">
                         <div class="page-main-header">
-                            <small class="pull-right">Found your <span class="highlight"><?=$contacts['outSiteContactsCount']?></span> friends on our site</small>
+                            <small class="pull-right">You could invite <span class="highlight"><?=$contacts['outSiteContactsCount']?></span> friends.</small>
                             <h3><?=$this->_('Invite Friends')?></h3>
                         </div>
 
@@ -30,7 +30,7 @@ if($contacts['outSiteContacts']){
                                     <?foreach($items as $item):?>
                                     <li class="span4">
                                     <label>
-                                        <input name="email[]" type="checkbox" class="multiform-item-checkbox" value="<?=$item['email'] ?>" checked="checked" />
+                                        <input name="email[]" type="checkbox" class="multiform-item-checkbox" value="<?=$item['email'] ?>" />
                                         <?=$item['email']?>
                                         <?if(isset($item['name']) && $item['name']):?>
                                         (<?=$item['name']?>)
