@@ -27,7 +27,7 @@ class LoginController extends RestfulModuleController
             $item = $form->getData();
 
             if($item['isSuperAdmin']){
-                $auth = new Auth('Config', 'Session');
+                $auth = new Auth('Config', 'Session', 'Auth_Admin');
                 $authResult = $auth->authenticate(array(
                     'username' => $item['loginName'],
                     'password' => $item['inputPassword'],
@@ -45,7 +45,7 @@ class LoginController extends RestfulModuleController
                 $loginModel = Api::_()->getModel('User\Model\Login');
                 $authResult = $loginModel->loginByPassword($item['loginName'], $item['inputPassword']);
                 if($authResult->isValid()){
-                    $user = Auth::getLoginUser();
+                    $user = Auth::getLoginUser('Auth_Admin');
                     if(!isset($user['Roles']) || !in_array('Admin', $user['Roles'])){
                         $this->getResponse()->setStatusCode(401);
                         $this->flashMessenger()->addMessage('permission-not-enough');
