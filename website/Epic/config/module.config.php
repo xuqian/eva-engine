@@ -136,6 +136,21 @@ return array(
                 'priority' => 2,
             ),
 
+            'reset' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/reset[/][:action][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'ResetController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'language' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -526,6 +541,7 @@ return array(
             'PagesController' => 'Epic\Controller\PagesController',
             'LanguageController' => 'Epic\Controller\LanguageController',
             'LoginController' => 'Epic\Controller\LoginController',
+            'ResetController' => 'Epic\Controller\ResetController',
             'RegisterController' => 'Epic\Controller\RegisterController',
             'CityController' => 'Epic\Controller\CityController',
             'UserController' => 'Epic\Controller\UserController',
