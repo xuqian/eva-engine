@@ -939,7 +939,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .activity-list .item-sub-content{margin-left:40px;}
 .activity-list .item-sub-form{position:relative;}
 .activity-list .item-sub-submit{position:absolute;right:0;top:0;}
-.activity-list .item-sub-textarea{margin-right:100px;}.activity-list .item-sub-textarea textarea{width:100%;overflow:auto;height:30px;}
+.activity-list .item-sub-textarea{margin-right:110px;}.activity-list .item-sub-textarea textarea{width:100%;overflow:auto;height:35px;}
 .activity-list .item-preview{display:inline-block;zoom:1;*display:inline;position:relative;text-align:center;}
 .activity-list .btn-play{width:40px;padding-right:10px;height:50px;line-height:55px;position:absolute;top:28%;left:38%;color:#999;font-size:40px;text-align:right;border:1px solid #CCC;background:#FFF;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;opacity:0.5;filter:alpha(opacity=50);}
 .activity-list .item-video{margin:10px 0;}

@@ -257,6 +257,21 @@ $form->useSubFormGroup()
             return false;
     });
 
+    $(".activity-list").on("submit", ".item-sub-form form", function(){
+            var form = $(this);
+            var item = form.parentsUntil('.item').parent();
+            var feedUrl = form.find('input[name=callback]').val();
+            $.ajax({
+                    url : form.attr('action'),
+                    data : form.serialize(),
+                    type : form.attr('method'),
+                    success : function(){
+                            item.find('.item-sub-ajax').load(feedUrl + ' .item-sub-wrap');
+                    }
+            });
+            return false;
+    });
+
     $("#add-video").on('click', function(){
             var popover = $("#video-popover");
             var url = popover.find("input[name=url]").val();
