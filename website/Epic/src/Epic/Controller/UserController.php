@@ -270,7 +270,7 @@ class UserController extends ActionController
                 $accessToken = $oauth->getAdapter()->getAccessToken();
             }
 
-            $form = $accessToken ? new \User\Form\QuickRegisterForm : new \User\Form\RegisterForm();
+            $form = $accessToken ? new \User\Form\QuickRegisterForm : new \Epic\Form\RegisterForm();
             $form->bind($item);
             if ($form->isValid()) {
                 $callback = $this->params()->fromPost('callback');
