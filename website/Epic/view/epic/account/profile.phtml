@@ -74,6 +74,15 @@ $form->setView($this)
                                     </div>
                                 </div>
 
+                                <div class="control-group <?=$form->isError('role') ? 'error' : '';?>">
+                                    <?=$form->helper('role', 'label', array('class' => 'control-label'))?>
+                                    <div class="controls">
+                                        <?=$form->helper('role', 'formSelect', array('class' => ''))?>        
+                                        <div class="help-block"><?=$form->helper('role', 'formElementErrors')?></div>
+                                    </div>
+                                </div>
+
+
                                 <div class="control-group <?=$form->isError('language') ? 'error' : '';?>">
                                     <?=$form->helper('language', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -119,6 +128,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'city'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="control-group <?=$form->isError(array('Profile', 'province')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'province'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -126,6 +136,7 @@ $form->setView($this)
                                         <div class="help-block"><?=$form->helper(array('Profile', 'province'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
+                                -->
                                 <!--
                                 <div class="control-group <?=$form->isError(array('Profile', 'zipcode')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'zipcode'), 'label', array('class' => 'control-label'))?>
@@ -141,6 +152,14 @@ $form->setView($this)
                                     <div class="controls">
                                         <?=$form->helper(array('Profile', 'phoneMobile'), array('class' => ''))?>        
                                         <div class="help-block"><?=$form->helper(array('Profile', 'phoneMobile'), 'formElementErrors')?></div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
+                                    <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
+                                    <div class="controls">
+                                        <?=$form->helper(array('Profile', 'industry'), array('class' => ''))?>        
+                                        <div class="help-block"><?=$form->helper(array('Profile', 'industry'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
 

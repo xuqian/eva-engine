@@ -12,6 +12,7 @@
 namespace Epic\Form;
 
 use Epic\Form\UserCreateForm;
+use Eva\Api;
 
 /**
  * Eva Form will automatic combination form Elements & Validators & Filters
@@ -22,12 +23,19 @@ use Epic\Form\UserCreateForm;
  */
 class AccountEditForm extends UserCreateForm
 {
+    protected $subFormGroups = array(
+        'default' => array(
+            'Profile' => 'Epic\Form\ProfileForm',
+        ),
+    );
+
     protected $validationGroup = array(
         'id',
         'firstName',
         'lastName',
         'gender',
         'language',
+        'role',
         'Profile' => array(
             'site',
             'birthday',
@@ -36,7 +44,88 @@ class AccountEditForm extends UserCreateForm
             'city',
             'province',
             'phoneMobile',
+            'industry',
             'bio'
         ),
     );
+
+    protected $mergeElements = array(
+        'timezone' => array (
+            'callback' => 'getTimezones',
+        ),
+        'language' => array (
+            'callback' => 'getLanguages',
+        ),
+        'inputPassword' => array (
+            'name' => 'inputPassword',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'Password',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
+        'role' => array (
+            'name' => 'role',
+            'type' => 'select',
+            'options' => array (
+                'label' => 'Register As',
+                'value_options' => array (
+                    array (
+                        'label' => 'Corporate Member',
+                        'value' => 'CORPORATE_MEMBER',
+                    ),
+                    array (
+                        'label' => 'Connoisseur',
+                        'value' => 'CONNOISSEUR_MEMBER',
+                    ),
+                    array (
+                        'label' => 'Professional',
+                        'value' => 'PROFESSIONAL_MEMBER',
+                    ),
+                ),
+            ),
+            'attributes' => array (
+                'value' => 'CONNOISSEUR_MEMBER',
+            ),
+        ),
+    );
+
+    public function beforeBind($data)
+    {
+        if(isset($data['Roles'][0])){
+            $allowRoles =  array (
+               'CORPORATE_MEMBER',
+               'CONNOISSEUR_MEMBER',
+               'PROFESSIONAL_MEMBER',
+            );
+            foreach($data['Roles'] as $role){
+                if(in_array($role['roleKey'], $allowRoles)){
+                    $data['role'] = $role['roleKey'];
+                    break;
+                }
+            }
+        }
+
+        return $data;
+    }
+
+
+    public function prepareData($data)
+    {
+        $roleKey = $data['role'] ? $data['role'] : 'CONNOISSEUR_MEMBER';
+        $itemModel = Api::_()->getModel('User\Model\Role');
+        $role = $itemModel->getRole($roleKey);
+        $data['RoleUser'] = array(
+            array(
+                'user_id' => null,
+                'role_id' => $role->id,
+                'status' => 'active',
+            )
+        );
+        unset($data['role']);
+        return $data;
+    }
+
 }
