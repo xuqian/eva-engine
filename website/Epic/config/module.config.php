@@ -151,6 +151,21 @@ return array(
                 'priority' => 2,
             ),
 
+            'share' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/share[/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'ShareController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'language' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -550,6 +565,7 @@ return array(
             'MessagesController' => 'Epic\Controller\MessagesController',
             'MyController' => 'Epic\Controller\MyController',
             'BlogController' => 'Epic\Controller\BlogController',
+            'ShareController' => 'Epic\Controller\ShareController',
         ),
     ),
 
