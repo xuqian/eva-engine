@@ -25,7 +25,7 @@ class AccountController extends ActionController
                 $callback = $callback ? $callback : '/';
 
                 $item = $form->getData();
-                $itemModel = Api::_()->getModel('User\Model\User');
+                $itemModel = Api::_()->getModel('Epic\Model\User');
                 $itemModel->setItem($item)->saveUser();
                 $this->redirect()->toUrl($callback);
             } else {

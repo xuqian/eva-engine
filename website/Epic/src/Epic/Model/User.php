@@ -44,6 +44,16 @@ class User extends AbstractModel
         
         $this->trigger('save.pre');
 
+        $roleUserItem = $this->getItem('User\Item\RoleUser');
+        $roleUserItem->getDataClass()->where(array(
+            'user_id' => $item->id,
+            'role_id' => 12,
+        ))->remove();
+        $roleUserItem->getDataClass()->where(array(
+            'user_id' => $item->id,
+            'role_id' => 13,
+        ))->remove();
+
         $item->save();
 
         if($item->hasLoadedRelationships()){
