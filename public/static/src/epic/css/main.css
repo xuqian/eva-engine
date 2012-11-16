@@ -884,7 +884,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 #header .navbar-inner{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;background:#000;border:0;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);}
 #header .nav>li>a{margin-right:0px;padding:0 20px;padding-top:14px;border-bottom:4px solid #000;height:32px;font-size:15px;text-align:center;background:#000;-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out;font-family:Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;}
 #header .nav-main{text-transform:uppercase;}
-#header .nav>li.active>a,#header .nav-main>li:hover>a{background-color:#977b0b;background-image:-moz-linear-gradient(top, #846703, #b49916);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#846703), to(#b49916));background-image:-webkit-linear-gradient(top, #846703, #b49916);background-image:-o-linear-gradient(top, #846703, #b49916);background-image:linear-gradient(to bottom, #846703, #b49916);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff846703', endColorstr='#ffb49916', GradientType=0);border-color:#654E00;color:#FFF;}#header .nav>li.active>a small,#header .nav-main>li:hover>a small{color:#FFF;}
+#header .nav>li.active>a,#header .nav-main>li:hover>a{border-color:#ac9217;color:#FFF;}#header .nav>li.active>a small,#header .nav-main>li:hover>a small{color:#FFF;}
 #header .nav-icon{padding-left:5px !important;padding-right:5px !important;}
 #header .nav-last{padding-left:5px !important;}
 #header .brand{height:50px;margin-left:0;padding-top:0;padding-right:0;padding-bottom:0;}

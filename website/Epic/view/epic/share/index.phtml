@@ -32,7 +32,7 @@ $paginator = $paginator ? $paginator->toArray() : array();
                     </div>
                     <?if($paginator['nextPage']):?>
                     <div class="pager">
-                        <a href="<?=$this->uri('/share/?page=' . $paginator['nextPage'])?>" class="btn btn-block load-more">More</a>
+                        <a href="<?=$this->uri('/share/?page=' . $paginator['nextPage'])?>" class="btn load-more span11">More</a>
                     </div>
                     <?endif?>
                 </div>
@@ -46,6 +46,7 @@ $paginator = $paginator ? $paginator->toArray() : array();
 
 
 <script>
+    /*
     $(function(){
             eva.loader(eva.s('/lib/js/jquery/jquery.masonry.js'), function(){
                     var $container = $('#feed-wall');
@@ -58,5 +59,6 @@ $paginator = $paginator ? $paginator->toArray() : array();
 
 
     });
+    */
 </script>
 
