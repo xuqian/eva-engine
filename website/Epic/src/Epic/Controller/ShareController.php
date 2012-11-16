@@ -11,6 +11,33 @@ class ShareController extends ActionController
 {
     public function indexAction()
     {
+        $feedMap = array(
+            'self' => array(
+                '*',
+                'getContentHtml()',
+                'getVideo()',
+            ),
+            'join' => array(
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        );
+        $itemModel = Api::_()->getModel('Activity\Model\Activity');
+        $activityList = $itemModel->getUserActivityList(array(
+            'hasFile' => 1,
+            'page' => $this->params()->fromQuery('page', 1),
+        ))->getActivityList($feedMap);
+        $paginator = $itemModel->getPaginator();
+
+        return array(
+            'items' => $activityList,
+            'paginator' => $paginator,
+        );
+
     }
 
 }

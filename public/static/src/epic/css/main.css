@@ -1050,3 +1050,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .mainplan.plan-row .planname .btn-plan{margin-top:90px;}
 .btn-plan{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#87c807;background-image:-moz-linear-gradient(top, #92d20c, #77b900);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#92d20c), to(#77b900));background-image:-webkit-linear-gradient(top, #92d20c, #77b900);background-image:-o-linear-gradient(top, #92d20c, #77b900);background-image:linear-gradient(to bottom, #92d20c, #77b900);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff92d20c', endColorstr='#ff77b900', GradientType=0);border-color:#77b900 #77b900 #466d00;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*background-color:#77b900;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);text-transform:uppercase;}.btn-plan:hover,.btn-plan:active,.btn-plan.active,.btn-plan.disabled,.btn-plan[disabled]{color:#ffffff;background-color:#77b900;*background-color:#67a000;}
 .btn-plan:active,.btn-plan.active{background-color:#568600 \9;}
+#feed-wall{width:1100px;margin:20px auto;}#feed-wall .box{width:250px;margin-right:15px;margin-bottom:10px;background:#FFF;position:relative;}
+#feed-wall .text-wrap{width:100%;position:absolute;bottom:0;left:0;visibility:hidden;}
+#feed-wall .text{margin:5px;padding:5px;background:#000;color:#FFF;opacity:0.7;filter:alpha(opacity=70);}
+#feed-wall .box:hover .text-wrap{visibility:visible;}
