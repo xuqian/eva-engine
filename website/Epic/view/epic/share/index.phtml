@@ -3,6 +3,8 @@ $title = 'Share';
 $this->headTitle($title, 'SET');
 $user = $this->user;
 $items = $this->items;
+$paginator = $this->paginator;
+$paginator = $paginator ? $paginator->toArray() : array();
 ?>
 <div class="page-inner">
 
@@ -28,7 +30,14 @@ $items = $this->items;
                         <?endforeach;?>
                         <?endif?>
                     </div>
+                    <?if($paginator['nextPage']):?>
+                    <div class="pager">
+                        <a href="<?=$this->uri('/share/?page=' . $paginator['nextPage'])?>" class="btn btn-block load-more">More</a>
+                    </div>
+                    <?endif?>
                 </div>
+
+
 
             </div><!--row end-->
         </div><!--profil-main end-->

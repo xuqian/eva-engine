@@ -27,9 +27,10 @@ class ShareController extends ActionController
             ),
         );
         $itemModel = Api::_()->getModel('Activity\Model\Activity');
-        $activityList = $itemModel->getUserActivityList(array(
+        $activityList = $itemModel->setItemList(array(
             'hasFile' => 1,
             'page' => $this->params()->fromQuery('page', 1),
+            'order' => 'iddesc',
         ))->getActivityList($feedMap);
         $paginator = $itemModel->getPaginator();
 
