@@ -287,6 +287,10 @@ class UserController extends ActionController
                 'form' => $form,
                 'item' => $item,
             );
+        } else {
+            return array(
+                'item' => $this->getRequest()->getQuery()
+            );
         }
     }
 }

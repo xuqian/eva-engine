@@ -72,10 +72,12 @@ class AccountEditForm extends UserCreateForm
             'options' => array (
                 'label' => 'Register As',
                 'value_options' => array (
+                    /*
                     array (
                         'label' => 'Corporate Member',
                         'value' => 'CORPORATE_MEMBER',
                     ),
+                    */
                     array (
                         'label' => 'Connoisseur',
                         'value' => 'CONNOISSEUR_MEMBER',
@@ -96,7 +98,7 @@ class AccountEditForm extends UserCreateForm
     {
         if(isset($data['Roles'][0])){
             $allowRoles =  array (
-               'CORPORATE_MEMBER',
+               //'CORPORATE_MEMBER',
                'CONNOISSEUR_MEMBER',
                'PROFESSIONAL_MEMBER',
             );

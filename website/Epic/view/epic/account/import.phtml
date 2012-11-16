@@ -4,8 +4,7 @@ $title = 'Find Friends';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
 
-$contacts = $this->contacts;
-
+$inviteCode = $this->inviteCode;
 ?>
 
 <div class="container">
@@ -23,7 +22,18 @@ $contacts = $this->contacts;
                             <a class="btn btn-large btn-block" href="<?=$this->uri('/contacts/import/', array('r' => $this->serverUrl() . '/account/addfriend/?service=msn','service' => 'msn'))?>">Find friends by Hotmail/Live/MSN Contacts</a>
                         </div>
 
+                        <div class="page-main-header">
+                            <h3><?=$this->_('Invite Friends')?></h3>
+                        </div>
 
+                        <div class="well form">
+                            <div class="control-group">
+                                <label class="control-label" for="invite-url">Invite Link</label>
+                                <div class="controls">
+                                    <input type="text" id="invite-url" class="span8" value="<?=$this->serverUrl() . '/register/?code=' . $inviteCode?>" readonly="readonly" >
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div><!--page-main end-->

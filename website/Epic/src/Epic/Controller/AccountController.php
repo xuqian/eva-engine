@@ -145,6 +145,12 @@ class AccountController extends ActionController
 
     public function importAction()
     {
+        $user = Auth::getLoginUser();
+        $itemModel = Api::_()->getModel('User\Model\Invite');
+        $code = $itemModel->setUser($user)->getUserInviteHash();
+        return array(
+            'inviteCode' => $code
+        );
     
     }
 

@@ -17,6 +17,7 @@ class RegisterForm extends \User\Form\UserForm
         'inputPassword',
         'repeatPassword',
         'role',
+        'code',
     );
 
     protected $mergeElements = array(
@@ -50,14 +51,16 @@ class RegisterForm extends \User\Form\UserForm
         ),
         'role' => array (
             'name' => 'role',
-            'type' => 'select',
+            'type' => 'radio',
             'options' => array (
                 'label' => 'Register As',
                 'value_options' => array (
+                    /*
                     array (
                         'label' => 'Corporate Member',
                         'value' => 'CORPORATE_MEMBER',
                     ),
+                    */
                     array (
                         'label' => 'Connoisseur',
                         'value' => 'CONNOISSEUR_MEMBER',
@@ -70,6 +73,16 @@ class RegisterForm extends \User\Form\UserForm
             ),
             'attributes' => array (
                 'value' => 'CONNOISSEUR_MEMBER',
+            ),
+        ),
+        'code' => array (
+            'name' => 'code',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'Invite Code',
+            ),
+            'attributes' => array (
+                'value' => '',
             ),
         ),
     );
@@ -175,12 +188,20 @@ class RegisterForm extends \User\Form\UserForm
                     'name' => 'InArray',
                     'options' => array (
                         'haystack' => array (
-                            'CORPORATE_MEMBER',
+                            //'CORPORATE_MEMBER',
                             'CONNOISSEUR_MEMBER',
                             'PROFESSIONAL_MEMBER',
                         ),
                     ),
                 ),
+            ),
+        ),
+        'code' => array (
+            'name' => 'code',
+            'required' => false,
+            'filters' => array (
+            ),
+            'validators' => array (
             ),
         ),
     );
@@ -211,6 +232,7 @@ class RegisterForm extends \User\Form\UserForm
             )
         );
         unset($data['role']);
+        unset($data['code']);
         return $data;
     }
 

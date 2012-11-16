@@ -109,8 +109,17 @@ $form
         <div class="control-group <?=$form->isError('role') ? 'error' : '';?>">
             <?=$form->helper('role', 'label', array('class' => 'control-label'))?>
             <div class="controls">
-                <?=$form->helper('role', 'formSelect', array('class' => ''))?>        
+                <?=$form->helper('role', 'formRadio', array('class' => 'inline'))?>        
+                <div class="help-block"><a href="<?=$this->uri('/')?>">See difference</a></div>
                 <div class="help-block"><?=$form->helper('role', 'formElementErrors')?></div>
+            </div>
+        </div>
+
+        <div class="control-group hide <?=$form->isError('code') ? 'error' : '';?>">
+            <?=$form->helper('code', 'label', array('class' => 'control-label'))?>
+            <div class="controls">
+                <?=$form->helper('code', 'formText', array('class' => ''))?>        
+                <div class="help-block"><?=$form->helper('code', 'formElementErrors')?></div>
             </div>
         </div>
 

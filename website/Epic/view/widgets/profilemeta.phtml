@@ -24,6 +24,36 @@ function checkOauth($key, $user)
     }
     return false;
 }
+
+function personalRole($roles)
+{
+    if(!$roles){
+        return false;
+    }
+    $allowRoles =  array (
+        'CORPORATE_MEMBER',
+        'CONNOISSEUR_MEMBER',
+        'PROFESSIONAL_MEMBER',
+    );
+    foreach($roles as $role){
+        if(in_array($role['roleKey'], $allowRoles)){
+            return $role['roleName'];
+        }
+    }
+}
+
+function isPaidRole($roles)
+{
+    if(!$roles){
+        return false;
+    }
+    foreach($roles as $role){
+        if($role['roleKey'] == 'PAID_MEMBER'){
+            return $role;
+        }
+    }
+    return false;
+}
 ?>
 <div class="thumbnail profile-face">
     <?if($viewAsGuest):?>
@@ -40,7 +70,11 @@ function checkOauth($key, $user)
 <div class="profile-intro">
     <div class="profile-title">
         <h2><?=$user['userName']?></h2>
-        <small class="profile-level">Professional  <a href="<?=$this->uri('/account/membership/')?>" title="VIP User"><i class="icon-trophy"></i></a></small>
+        <small class="profile-level"><?=$this->_(personalRole($user['Roles']))?>
+            <?if(isPaidRole($user['Roles'])):?>
+            <a href="<?=$this->uri('/account/membership/')?>" title="VIP User"><i class="icon-trophy"></i></a>
+            <?endif?>
+        </small>
         <?if($user['onlineStatus'] == 'online'):?>
         <span class="label label-success">Online</span> 
         <?else:?>
