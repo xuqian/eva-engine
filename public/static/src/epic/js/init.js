@@ -167,7 +167,7 @@ eva.story = function(){
 			}).masonry( 'reload' );
 		});
 
-		//container.imagesLoaded( function(){
+		container.imagesLoaded( function(){
 			container.masonry({
 				itemSelector : '.box',
 				//columnWidth : $(window).width() > 800 ? 320 : 260,
@@ -177,7 +177,7 @@ eva.story = function(){
 			var items = container.find(".box:not(.inited)");
 			//eva.p(items.length);
 			initStory(items);
-		//});
+		});
 
 		loadArea.hide();
 		function inArray(stringToSearch, arrayToSearch) {
