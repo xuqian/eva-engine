@@ -186,4 +186,40 @@ class AccountController extends ActionController
     {
         return $this->addfriendAction();
     }
+
+
+    public function corporateAction()
+    {
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $postData = $request->getPost();
+            
+            $user = Auth::getLoginUser(); //Could not get user info after form valid
+
+            $form = new \Core\Form\SendEmailForm();
+            $form->bind($postData);
+            if ($form->isValid()) {
+                $item = $form->getData();
+
+                $itemModel = Api::_()->getModel('User\Model\User');
+                $user = $itemModel->getUser($user['id']);
+
+                $mail = new \Core\Mail();
+                $mail->getMessage()
+                ->setSubject($item['subject'])
+                ->setData(array(
+                    'user' => $user,
+                    'content' => $item['content'],
+                ))
+                ->setTo($user->email, $user->userName)
+                ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
+                ->setTemplate('mail/corporate');
+                $mail->send();
+
+            } else {
+            }
+        } else {
+        }
+    }
 }
