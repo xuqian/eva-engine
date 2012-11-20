@@ -77,11 +77,11 @@ $form
                                     <div class="help-block">Please provide your company informations</div>
                                 </div>
                             </div>
-                            <div class="control-group <?=$form->isError('upload') ? 'error' : '';?>">
-                                <?=$form->helper('upload', 'label', array('class' => 'control-label'))?>
+                            <div class="control-group <?=$form->isError('attachment') ? 'error' : '';?>">
+                                <?=$form->helper('attachment', 'label', array('class' => 'control-label'))?>
                                 <div class="controls">
-                                    <?=$form->helper('upload', array('class' => ''))?>        
-                                    <div class="help-block"><?=$form->helper('upload', 'formElementErrors')?></div>
+                                    <?=$form->helper('attachment', array('class' => ''))?>        
+                                    <div class="help-block"><?=$form->helper('attachment', 'formElementErrors')?></div>
                                     <div class="help-block">Please upload certificate of your company qualification</div>
                                 </div>
                             </div>
