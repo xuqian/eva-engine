@@ -224,35 +224,12 @@ class AccountController extends ActionController
                 ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
                 ->setTemplate('mail/corporate');
 
-                $zendMessage = new \Zend\Mail\Message();
-                $zendMessage->setHeaders($message->getHeaders());
-                $mimeMessage = new \Zend\Mime\Message();
-                $messageText = new \Zend\Mime\Part($message->getTemplateText());
-                $messageText->type = 'text/html';
-                $mimeMessage->setParts(array(
-                    $messageText
-                ));
-
-
-                if($file){
-                    $attachment = new \Zend\Mime\Part(fopen($file['tmp_name'], 'r'));
-                    $attachment->encoding = \Zend\Mime\Mime::ENCODING_BASE64;
-                    $attachment->filename = 'loading.jpg';
-                    $attachment->disposition = \Zend\Mime\Mime::DISPOSITION_ATTACHMENT;
-
-                    $mimeMessage->addPart($attachment);
-                }
-
-                $zendMessage->setBody($mimeMessage);
-                $mail->send($zendMessage);
-
-
-                /*
                 if($file){
                     $message->addAttachment($file['tmp_name']);
                 }
                 $mail->send();
-                */
+
+                return $this->redirect()->toUrl('/account/corporate/');
 
             } else {
             }
