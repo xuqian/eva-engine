@@ -626,4 +626,12 @@ return array(
     'oauth' => array(
         'login_url_path' => '/home/'
     ),
+
+    'contacts' => array(
+        'invite_mail' => array(
+            'subject' => 'Invite',
+            'templatePath' => EVA_ROOT_PATH . '/website/Epic/view/',
+            'template' => 'mail/invite',
+        ),
+    ),
 );
