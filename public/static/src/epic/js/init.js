@@ -242,6 +242,22 @@ eva.story = function(){
 };
 
 
+eva.refreshOnline = function(){
+	var refreshOnline = function(){
+		$.ajax({
+			'url' : eva.d('/user/refresh/online/'),
+			'type' : 'get',
+			'dataType' : 'json',
+			'success' : function(response){
+			}
+		});
+	}
+
+	refreshOnline();
+	setInterval(function(){ refreshOnline() }, 50000);
+	
+};
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -254,6 +270,8 @@ eva.construct = function(){
 	eva.select2();
 	eva.checkFollow();
 	eva.preview();
+
+	eva.refreshOnline();
 
 	eva.story();
 
