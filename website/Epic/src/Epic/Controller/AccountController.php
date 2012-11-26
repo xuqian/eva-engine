@@ -10,6 +10,22 @@ use Epic\Form;
 
 class AccountController extends ActionController
 {
+    public function activeAction()
+    {
+        $itemModel = Api::_()->getModel('User\Model\Code');
+        $itemModel->setItem(array(
+            'code' => $this->params()->fromQuery('code'),
+            'codeType' => 'activeAccount',
+        ));
+        if($itemModel->isValid()){
+            $itemModel->activeAccount();
+        }
+
+        return array(
+            'code' => $itemModel->getResultCode(),
+            'messages' => $itemModel->getMessages(),
+        );
+    }
 
     public function profileAction()
     {

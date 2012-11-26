@@ -279,6 +279,21 @@ class UserController extends ActionController
                 $item = $form->getData();
                 $itemModel = Api::_()->getModel('User\Model\Register');
                 $itemModel->setItem($item)->register();
+
+                $userItem = $itemModel->getItem();
+                $codeItem = $itemModel->getItem('User\Item\Code');
+                $mail = new \Core\Mail();
+                $mail->getMessage()
+                ->setSubject("Please Confirm Your Email Address")
+                ->setData(array(
+                    'user' => $userItem,
+                    'code' => $codeItem,
+                ))
+                ->setTo($userItem->email, $userItem->userName)
+                ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
+                ->setTemplate('mail/active');
+                $mail->send();
+
                 $this->redirect()->toUrl($callback);
             } else {
             }
