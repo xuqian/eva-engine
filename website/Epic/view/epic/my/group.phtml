@@ -14,14 +14,14 @@ $this->headTitle($title, 'SET');
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/event/create/')?>" class="btn btn-small btn-orange pull-right">Write New</a>
+                                    <a href="<?=$this->uri('/group/create/')?>" class="btn btn-small btn-orange pull-right">Write New</a>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
-                                <div class="event-list vlist">
+                                <div class="group-list vlist">
                                     Under Building
                                 </div><!--activity-list end-->
                                 <?if($this->paginator):?>
-                                <?=$this->paginator->setPath('/my/event/')->setBaseQuery($this->query);?>
+                                <?=$this->paginator->setPath('/my/group/')->setBaseQuery($this->query);?>
                                 <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                                 <?endif;?>
 

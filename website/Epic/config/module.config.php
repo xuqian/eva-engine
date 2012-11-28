@@ -225,6 +225,66 @@ return array(
                 ),
                 'priority' => 2,
             ),
+            
+            'event' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/event[/:action][/:id][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'EventController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+            
+            'events' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/events[/]',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                        'controller' => 'EventController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'group' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/group[/:action][/:id][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                        'id'     => '[0-9a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'GroupController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+            
+            'groups' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/groups[/]',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                        'controller' => 'GroupController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
 
             'data' => array(
                 'type' => 'Segment',
@@ -565,6 +625,8 @@ return array(
             'MessagesController' => 'Epic\Controller\MessagesController',
             'MyController' => 'Epic\Controller\MyController',
             'BlogController' => 'Epic\Controller\BlogController',
+            'EventController' => 'Epic\Controller\EventController',
+            'GroupController' => 'Epic\Controller\GroupController',
             'ShareController' => 'Epic\Controller\ShareController',
         ),
     ),

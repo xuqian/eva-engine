@@ -68,6 +68,13 @@ class MyController extends ActionController
 
     public function eventAction()
     {
+        $user = Auth::getLoginUser();
+        $viewModel = $this->forward()->dispatch('UserController', array(
+            'action' => 'event',
+            'id' => $user['userName'],
+        )); 
+        $viewModel->setTemplate('epic/my/event');
+        return $viewModel;
     }
 
     public function registerAction()
