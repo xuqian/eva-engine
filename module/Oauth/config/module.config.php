@@ -1,5 +1,13 @@
 <?php
 return array(
+    'crontab' => array(
+        'tasks' => array(
+            'expireToken' => array(
+                'commond' => '*/1 * * * * curl %serverUrl%/oauth/refresh/expire/',
+                'required' => true,
+            ),
+        ),
+    ),
     'oauth' => array(
         'request_url_path' => '/oauth/',
         'access_url_path' => '/oauth/access/',
@@ -16,6 +24,16 @@ return array(
                 'consumer_secret' => ''
             ),
             'weibo' => array(
+                'enable' => 1,
+                'consumer_key' => '',
+                'consumer_secret' => ''
+            ),
+            'flickr' => array(
+                'enable' => 1,
+                'consumer_key' => '',
+                'consumer_secret' => ''
+            ),
+            'dropbox' => array(
                 'enable' => 1,
                 'consumer_key' => '',
                 'consumer_secret' => ''
@@ -89,12 +107,12 @@ return array(
             ),
             'msn' => array(
                 'enable' => 1,
-                'scope' => '',
+                'consumer_key' => '',
                 'consumer_secret' => ''
             ),
             'google' => array(
                 'enable' => 1,
-                'scope' => '',
+                'consumer_key' => '',
                 'consumer_secret' => ''
             ),
             'github' => array(
