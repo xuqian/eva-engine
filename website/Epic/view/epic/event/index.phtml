@@ -1,0 +1,114 @@
+<?
+$title = 'Events';
+$title = $this->_($title);
+$this->headTitle($title, 'SET');
+$items = $this->items;
+
+$form = new Event\Form\EventUserForm();
+$form
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/event/join/'))
+->prepare();
+
+$unjoinForm = clone $form;
+$unjoinForm->setMethod('delete');
+
+
+$eventSearchForm = $this->form ? $this->form : new Epic\Form\EventSearchForm();
+$eventSearchForm->setView($this)
+     ->setMethod('get')
+     ->setAction($this->uri('/events/'))
+     ->prepare();
+
+?>
+
+<div class="container">
+    <div class="normal-page">
+        <div class="page-main"><div class="row"><div class="span12">
+                    <div class="row">
+                        <div class="span8">
+                            <div class="page-main-header">
+                                <h3>
+                                    <?=$this->_('Events')?>
+                                    <?if($this->query['keyword']):?>
+                                    | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
+                                    <?endif?>
+                                </h3>
+                            </div>
+                            <div class="search-filter">
+                                <form <?=$this->formAttr($eventSearchForm)?> class="form form-inline">
+                                    <?=$eventSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                                    <button class="btn" type="submit"><?=$this->_('Filter Events')?></button>
+                                </form>
+                            </div>
+                            <div class="user-list vlist">
+                                <?foreach($items as $item):?>
+                                <div class="item">
+                                    <div class="item-inline item-text">
+                                        <div class="item-title">
+                                            <h2><a href="<?=$this->uri('/events/' . $item['urlName'])?>" class="item-user"><?=$item['title']?></a></h2>
+                                        </div>
+                                        <div class="item-meta">
+                                            <table class="table-condensed">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?=$this->_('Start Time')?>: 
+                                                            <?=$item['startTime']?>
+                                                        </td>
+                                                        <td><?=$this->_('End Time')?>: 
+                                                            <?=$item['endTime']?>
+                                                        </td>
+                                                        <td><?=$this->_('Members')?> : <a href="">0</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="item-content">
+                                            <p><?=$this->_('Location')?> : <?=$item['location']?></p>
+                                        </div>
+                                    </div>
+                                    <div class="item-absolute item-action">
+
+                                        <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
+                                        <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
+                                        <form <?=$this->formAttr($unjoinForm)?>>
+                                            <?=$unjoinForm->restful();?>
+                                            <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                            <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                                            <?=$this->callback()?>
+                                            <button class="btn btn-small item-action-main">Unjoin</button>
+                                        </form>
+                                        <?else:?>
+                                        <form <?=$this->formAttr($form)?>>
+                                            <?=$form->restful();?>
+                                            <?=$form->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                            <?=$form->helper('user_id', array('class' => ''))?>
+                                            <?=$this->callback()?>
+                                            <button class="btn btn-small item-action-main">Join</button>
+                                        </form>
+                                        <?endif?>
+
+
+                                    </div>
+                                </div>
+                                <?endforeach?>
+                            </div><!--activity-list end-->
+
+                            <?if($this->paginator):?>
+                            <?=$this->paginator->setPath('/events/')->setBaseQuery($this->query);?>
+                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                            <?endif;?>
+
+                        </div><!--page main left end-->
+                        <div class="span3">
+                            <div class="page-extra">
+                                <?=$this->widget('Epic', 'widgets/userextra')?>
+                            </div>
+                        </div><!--page main right end-->
+                    </div>
+        </div></div></div><!--page-main end-->
+    </div><!-- normal end-->
+</div><!--container end-->
+

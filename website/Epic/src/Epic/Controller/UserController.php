@@ -249,17 +249,93 @@ class UserController extends ActionController
 
     public function groupAction()
     {
+        $page = $this->params()->fromQuery('page', 1);
+        $query = array(
+            'page' => $page,
+        );
+
+        $user = $this->userAction();
+        $itemListQuery = array_merge(array(
+            'user_id' => $user['id'],
+            'order' => 'iddesc',
+        ), $query);
+        $itemModel = Api::_()->getModel('Group\Model\Group');
+        $items = $itemModel->setItemList($itemListQuery)->getGroupList(array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+        $userList = $itemModel->getUserList()->toArray();
+        $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
+
+        $paginator = $itemModel->getPaginator();
+        return array(
+            'items' => $items,
+            'query' => $query,
+            'paginator' => $paginator,
+        );
     }
 
     public function eventAction()
     {
+        $page = $this->params()->fromQuery('page', 1);
+        $query = array(
+            'page' => $page,
+        );
+
+        $user = $this->userAction();
+        $itemListQuery = array_merge(array(
+            'user_id' => $user['id'],
+            'order' => 'iddesc',
+        ), $query);
+        $itemModel = Api::_()->getModel('Event\Model\Event');
+        $items = $itemModel->setItemList($itemListQuery)->getEventdataList(array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+        $userList = $itemModel->getUserList()->toArray();
+        $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
+
+        $paginator = $itemModel->getPaginator();
+        return array(
+            'items' => $items,
+            'query' => $query,
+            'paginator' => $paginator,
+        );
     }
 
     public function registerAction()
     {
         $request = $this->getRequest();
         if ($request->isPost()) {
-            
+
             $item = $request->getPost();
 
             $oauth = new \Oauth\OauthService();
@@ -284,14 +360,14 @@ class UserController extends ActionController
                 $codeItem = $itemModel->getItem('User\Item\Code');
                 $mail = new \Core\Mail();
                 $mail->getMessage()
-                ->setSubject("Please Confirm Your Email Address")
-                ->setData(array(
-                    'user' => $userItem,
-                    'code' => $codeItem,
-                ))
-                ->setTo($userItem->email, $userItem->userName)
-                ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
-                ->setTemplate('mail/active');
+                    ->setSubject("Please Confirm Your Email Address")
+                    ->setData(array(
+                        'user' => $userItem,
+                        'code' => $codeItem,
+                    ))
+                    ->setTo($userItem->email, $userItem->userName)
+                    ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
+                    ->setTemplate('mail/active');
                 $mail->send();
 
                 $this->redirect()->toUrl($callback);

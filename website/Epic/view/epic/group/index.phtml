@@ -1,0 +1,111 @@
+<?
+$title = 'Groups';
+$title = $this->_($title);
+$this->headTitle($title, 'SET');
+$items = $this->items;
+
+$form = new Group\Form\GroupUserForm();
+$form
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/group/join/'))
+->prepare();
+
+$unjoinForm = clone $form;
+$unjoinForm->setMethod('delete');
+
+
+$groupSearchForm = $this->form ? $this->form : new Epic\Form\GroupSearchForm();
+$groupSearchForm->setView($this)
+     ->setMethod('get')
+     ->setAction($this->uri('/groups/'))
+     ->prepare();
+
+?>
+
+<div class="container">
+    <div class="normal-page">
+        <div class="page-main"><div class="row"><div class="span12">
+                    <div class="row">
+                        <div class="span8">
+                            <div class="page-main-header">
+                                <h3>
+                                    <?=$this->_('Groups')?>
+                                    <?if($this->query['keyword']):?>
+                                    | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
+                                    <?endif?>
+                                </h3>
+                            </div>
+                            <div class="search-filter">
+                                <form <?=$this->formAttr($groupSearchForm)?> class="form form-inline">
+                                    <?=$groupSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                                    <button class="btn" type="submit"><?=$this->_('Filter Groups')?></button>
+                                </form>
+                            </div>
+                            <div class="user-list vlist">
+                                <?foreach($items as $item):?>
+                                <div class="item">
+                                    <div class="item-inline item-text">
+                                        <div class="item-title">
+                                            <h2><a href="<?=$this->uri('/groups/' . $item['groupKey'])?>" class="item-user"><?=$item['groupName']?></a></h2>
+                                        </div>
+                                        <div class="item-meta">
+                                            <table class="table-condensed">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?=$this->_('Create Time')?>: 
+                                                            <?=$item['createTime']?>
+                                                        </td>
+                                                        <td><?=$this->_('Members')?> : <a href="">0</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="item-content">
+                                            <p><?=$this->_('Summary')?> : <?=$item['summary']?></p>
+                                        </div>
+                                    </div>
+                                    <div class="item-absolute item-action">
+
+                                        <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
+                                        <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
+                                        <form <?=$this->formAttr($unjoinForm)?>>
+                                            <?=$unjoinForm->restful();?>
+                                            <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                            <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                                            <?=$this->callback()?>
+                                            <button class="btn btn-small item-action-main">Unjoin</button>
+                                        </form>
+                                        <?else:?>
+                                        <form <?=$this->formAttr($form)?>>
+                                            <?=$form->restful();?>
+                                            <?=$form->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                            <?=$form->helper('user_id', array('class' => ''))?>
+                                            <?=$this->callback()?>
+                                            <button class="btn btn-small item-action-main">Join</button>
+                                        </form>
+                                        <?endif?>
+
+
+                                    </div>
+                                </div>
+                                <?endforeach?>
+                            </div><!--activity-list end-->
+
+                            <?if($this->paginator):?>
+                            <?=$this->paginator->setPath('/groups/')->setBaseQuery($this->query);?>
+                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                            <?endif;?>
+
+                        </div><!--page main left end-->
+                        <div class="span3">
+                            <div class="page-extra">
+                                <?=$this->widget('Epic', 'widgets/userextra')?>
+                            </div>
+                        </div><!--page main right end-->
+                    </div>
+        </div></div></div><!--page-main end-->
+    </div><!-- normal end-->
+</div><!--container end-->
+
