@@ -64,6 +64,13 @@ class MyController extends ActionController
 
     public function groupAction()
     {
+        $user = Auth::getLoginUser();
+        $viewModel = $this->forward()->dispatch('UserController', array(
+            'action' => 'group',
+            'id' => $user['userName'],
+        )); 
+        $viewModel->setTemplate('epic/my/group');
+        return $viewModel;
     }
 
     public function eventAction()

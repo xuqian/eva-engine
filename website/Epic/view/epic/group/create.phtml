@@ -10,11 +10,11 @@ if($this->form){
 } else {
     if($item['id']) {
         $form = new Epic\Form\GroupEditForm();
-        $form->setAction($this->uri('/group/edit/'));
+        $form->setAction($this->uri('/groups/edit/'));
 
     } else {
         $form = new Epic\Form\GroupCreateForm();
-        $form->setAction($this->uri('/group/create/'));
+        $form->setAction($this->uri('/groups/create/'));
     }
 }
 $form->useSubFormGroup()
@@ -34,7 +34,7 @@ $form->useSubFormGroup()
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/group/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Write New</a>
+                                    <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Write New</a>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
                                 <div class="blog-list vlist">

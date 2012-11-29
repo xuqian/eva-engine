@@ -53,6 +53,10 @@ class EventController extends ActionController
         );   
     }
 
+    public function getAction()
+    {
+    }
+
     public function removeAction()
     {
         $request = $this->getRequest();
@@ -107,7 +111,7 @@ class EventController extends ActionController
             $postData = $form->getData();
             $itemModel = Api::_()->getModel('Event\Model\Event');
             $eventId = $itemModel->setItem($postData)->createEventdata();
-            $callback = $callback ? $callback : '/event/edit/' . $eventId;
+            $callback = $callback ? $callback : '/events/edit/' . $eventId;
             $this->redirect()->toUrl($callback);
         } else {
 
@@ -135,7 +139,7 @@ class EventController extends ActionController
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Event\Model\Event');
                 $eventId = $itemModel->setItem($postData)->saveEventdata();
-                $callback = $callback ? $callback : '/event/edit/' . $eventId;
+                $callback = $callback ? $callback : '/events/edit/' . $eventId;
                 $this->redirect()->toUrl($callback);
 
             } else {

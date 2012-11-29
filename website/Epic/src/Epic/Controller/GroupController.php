@@ -51,6 +51,10 @@ class GroupController extends ActionController
         );   
     }
 
+    public function getAction()
+    {
+    }
+
     public function removeAction()
     {
         $request = $this->getRequest();
@@ -59,7 +63,7 @@ class GroupController extends ActionController
             $postData = $this->params()->fromPost();
             $callback = $this->params()->fromPost('callback');
 
-            $form = new Group\Form\GroupDeleteForm();
+            $form = new \Group\Form\GroupDeleteForm();
             $form->bind($postData);
             if ($form->isValid()) {
 
@@ -106,7 +110,7 @@ class GroupController extends ActionController
             $postData['status'] = 'active';
             $itemModel = Api::_()->getModel('Group\Model\Group');
             $groupId = $itemModel->setItem($postData)->createGroup();
-            $callback = $callback ? $callback : '/group/edit/' . $groupId;
+            $callback = $callback ? $callback : '/groups/edit/' . $groupId;
             $this->redirect()->toUrl($callback);
         } else {
 
@@ -134,7 +138,7 @@ class GroupController extends ActionController
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Group\Model\Group');
                 $groupId = $itemModel->setItem($postData)->saveGroup();
-                $callback = $callback ? $callback : '/group/edit/' . $groupId;
+                $callback = $callback ? $callback : '/groups/edit/' . $groupId;
                 $this->redirect()->toUrl($callback);
 
             } else {

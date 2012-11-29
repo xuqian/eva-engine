@@ -257,29 +257,35 @@ class UserController extends ActionController
         $user = $this->userAction();
         $itemListQuery = array_merge(array(
             'user_id' => $user['id'],
-            'order' => 'iddesc',
+            'order' => 'timedesc',
         ), $query);
-        $itemModel = Api::_()->getModel('Group\Model\Group');
-        $items = $itemModel->setItemList($itemListQuery)->getGroupList(array(
+        $itemModel = Api::_()->getModel('Group\Model\GroupUser');
+        $items = $itemModel->setItemList($itemListQuery)->getGroupUserList();
+        $items = $items->toArray(array(
             'self' => array(
                 '*',
             ),
             'join' => array(
-                'Text' => array(
+                'Group' => array(
                     'self' => array(
                         '*',
+                    ),  
+                    'join' => array(
+                        'Text' => array(
+                            'self' => array(
+                                '*',
+                            ),
+                        ),
+                        'File' => array(
+                            'self' => array(
+                                '*',
+                                'getThumb()',
+                            )
+                        ),
                     ),
-                ),
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
                 ),
             ),
         ));
-        $userList = $itemModel->getUserList()->toArray();
-        $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
 
         $paginator = $itemModel->getPaginator();
         return array(
@@ -299,29 +305,35 @@ class UserController extends ActionController
         $user = $this->userAction();
         $itemListQuery = array_merge(array(
             'user_id' => $user['id'],
-            'order' => 'iddesc',
+            'order' => 'timedesc',
         ), $query);
-        $itemModel = Api::_()->getModel('Event\Model\Event');
-        $items = $itemModel->setItemList($itemListQuery)->getEventdataList(array(
+        $itemModel = Api::_()->getModel('Event\Model\EventUser');
+        $items = $itemModel->setItemList($itemListQuery)->getEventUserList();
+        $items = $items->toArray(array(
             'self' => array(
                 '*',
             ),
             'join' => array(
-                'Text' => array(
+                'Event' => array(
                     'self' => array(
                         '*',
+                    ),  
+                    'join' => array(
+                        'Text' => array(
+                            'self' => array(
+                                '*',
+                            ),
+                        ),
+                        'File' => array(
+                            'self' => array(
+                                '*',
+                                'getThumb()',
+                            )
+                        ),
                     ),
-                ),
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
                 ),
             ),
         ));
-        $userList = $itemModel->getUserList()->toArray();
-        $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
 
         $paginator = $itemModel->getPaginator();
         return array(

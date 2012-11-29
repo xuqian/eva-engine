@@ -3,6 +3,14 @@ $item = $this->item;
 $title = 'Event';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
+
+$unjoinForm = new Event\Form\EventUserForm();
+$unjoinForm
+->setView($this)
+->useSubFormGroup()
+->setMethod('delete')
+->setAction($this->uri('/event/join/'))
+->prepare();
 ?>
 
 <div class="container">
@@ -14,11 +22,44 @@ $this->headTitle($title, 'SET');
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/event/create/')?>" class="btn btn-small btn-orange pull-right">Write New</a>
+                                    <a href="<?=$this->uri('/events/create/')?>" class="btn btn-small btn-orange pull-right">Write New</a>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
-                                <div class="event-list vlist">
-                                    Under Building
+                                <div class="blog-list vlist">
+                                    <?foreach($items as $item):?>
+                                    <?if(isset($item['Event']['id'])) {$event = $item['Event'];}else{continue;}?> 
+                                    <div class="item">
+                                        <div class="item-title"><h2><a href="<?=$this->uri('/events/' . $event['urlName'])?>"><?=$event['title']?></a></h2></div>
+                                        <div class="item-meta">
+                                            <?if($item['user_id'] == $event['user_id']):?>
+                                            <p class="pull-right hide"><i class="icon-comment"></i> <?=$this->_('Members')?> (<span class="highlight">0</span>)</p>
+                                            <p class="pull-right"><a href="<?=$this->uri('/events/edit/' . $event['id'])?>"><i class="icon-edit"></i> Edit</a> <a href="<?=$this->uri('/events/remove/' . $event['id'])?>"><i class="icon-remove"></i> Delete</a></p>
+                                            <?else:?>
+                                            <p class="pull-right">
+                                            <form <?=$this->formAttr($unjoinForm)?>>
+                                                <?=$unjoinForm->restful();?>
+                                                <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $event['id']))?>
+                                                <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                                                <?=$this->callback()?>
+                                                <button class="btn btn-small item-action-main">Unjoin</button>
+                                            </form>
+                                            </p>
+                                            <?endif;?>
+                                            <p class="pull-left">
+                                            <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['requestTime'])?>" datetime="<?=$this->datetime()->isoTime($item['requestTime'])?>"><?=$this->datetime($item['requestTime'])?></time>
+                                            </p>
+                                        </div>
+                                        <div class="item-inline item-text">
+                                                <?if($event['File']):?>
+                                                <div class="item-image pull-left">
+                                                    <p><a href="<?=$event['File'][0]['Thumb']?>"><img src="<?=$this->thumb($event['File'][0]['Thumb'], array('w_200'))?>" alt="" class="img-polaroid" /></a></p>
+                                                </div>
+                                                <?endif?>
+
+                                                <?=$this->subText($event['Text']['content'], 250)?>
+                                        </div>
+                                    </div>
+                                    <?endforeach?>
                                 </div><!--activity-list end-->
                                 <?if($this->paginator):?>
                                 <?=$this->paginator->setPath('/my/event/')->setBaseQuery($this->query);?>

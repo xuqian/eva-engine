@@ -1,12 +1,12 @@
 <?
 $item = $this->item;
-$title = $this->_('Delete Post');
+$title = $this->_('Delete Event');
 $this->headTitle($title, 'SET');
-$form = new Blog\Form\PostDeleteForm();
+$form = new Event\Form\EventDeleteForm();
 
 $form->setView($this)
 ->setMethod('delete')
-->setAction($this->uri('/blog/remove/'))
+->setAction($this->uri('/events/remove/'))
 ->bind($item)
 ->prepare();
 ?>
@@ -20,7 +20,7 @@ $form->setView($this)
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/blog/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Write New</a>
+                                    <a href="<?=$this->uri('/events/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Write New</a>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
                                 <div class="">
@@ -28,7 +28,7 @@ $form->setView($this)
                                     <div class="alert alert-block">
                                         <div class="typo">
                                         <h2 class="alert-heading"><?=$title?></h2>
-                                        <p><?=$this->_(array('Post %title% will be deleted, are you sure?', $item['title']))?></p>
+                                        <p><?=$this->_(array('Event %title% will be deleted, are you sure?', $item['title']))?></p>
                                         <p>
                                         <form class="form-horizontal" <?=$this->formAttr($form)?>>
                                             <?=$form->restful();?>
@@ -41,12 +41,12 @@ $form->setView($this)
                                     </div>
                                     <?else:?>
                                     <div class="alert alert-success container">
-                                        <h2 class="alert-heading"<?=$this->_('>Post have been deleted')?></h2>
+                                        <h2 class="alert-heading"<?=$this->_('>Event have been deleted')?></h2>
                                     </div>
                                     <?endif?>
                                 </div><!--main form end-->
                                 <?if($this->paginator):?>
-                                <?=$this->paginator->setPath('/my/blog/')->setBaseQuery($this->query);?>
+                                <?=$this->paginator->setPath('/my/event/')->setBaseQuery($this->query);?>
                                 <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                                 <?endif;?>
 
