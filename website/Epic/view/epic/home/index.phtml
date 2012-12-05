@@ -42,6 +42,7 @@ $form->useSubFormGroup()
                                         <div class="activity-box-buttons">
                                             <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
                                             <a id="activity-box-video-button" class="activity-box-func" href="javascript:;" data-placement="bottom" rel="popover"><i class="icon-mini icon-facetime-video"></i> Video</a>
+                                            <label id="activity-box-sync-twitter" class="activity-box-func" title="Sync to Twitter"><i class="icon-mini icon-twitter"></i><input type="checkbox" /></label>
                                             There are <span class="highlight highlight-large activity-box-count">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
                                         </div>
                                     </div>
@@ -156,8 +157,53 @@ $form->useSubFormGroup()
 
 <script>
     var modal = $("#fileupload-modal");
-    modal.hide();
     var videoPopover = $("#video-popover");
+    var uploader = $('#singlefileupload');
+    var form = $("#activity-form");
+    var textarea = form.find('textarea');
+    var submit = form.find('button[type=submit]');
+    var syncTwitter = form.find('#activity-box-sync-twitter input');
+    modal.hide();
+
+    if(!$(".icon-twitter.highlight")[0]){
+        syncTwitter.parent().hide();
+    }
+
+    form.on('submit', function(){
+        
+        if(syncTwitter.attr('checked')){
+            form.data('allowSubmit', false);
+            submit.addClass('disabled').html('Sync To Twitter...');
+
+            $.ajax({
+                    url : eva.d('/webservice/feed/sync/'),
+                    data : {
+                        'content' : textarea.val(),
+                        'service' : 'twitter',
+                        'type' : 'oauth1'
+                    },
+
+                    error : function(){
+                        form.data('allowSubmit', true);
+                        syncTwitter.removeAttr('checked');
+                        submit.removeClass('disabled').html('Submit');
+                        form.submit();
+                    },
+
+                    success : function(){
+                        form.data('allowSubmit', true);
+                        syncTwitter.removeAttr('checked');
+                        submit.removeClass('disabled').html('Submit');
+                        form.submit();
+                    }
+            });
+        } else {
+            form.data('allowSubmit', true);
+        }
+
+        return true === form.data('allowSubmit') ? true : false;
+    });
+
     eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
             modal.hide();
             $('#activity-box-image-button').on('click', function() {
@@ -189,28 +235,7 @@ $form->useSubFormGroup()
             });
     });
 
-    var modal = $("#fileupload-modal");
-    modal.hide();
-    eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
-            modal.hide();
-            $('#activity-box-image-button').on('click', function() {
-                    $(this).evaTip("show", {
-                            'tip' : modal,
-                            'offsetX' : -75,
-                            'offsetY' : 30,
-                            'direction' : 'bottom'			
-                    });
-                    return false;
-            });
 
-            modal.find(".close").on("click", function(){
-                    modal.hide();
-            });
-    });
-
-    var uploader = $('#singlefileupload');
-    var form = $("#activity-form");
-    var textarea = form.find('textarea');
     uploader.bind('fileuploaddone', function (e, data) {
             var file = data.result[0];
             form.find('input[name="MessageFile[file_id]"]').val(file.id);
