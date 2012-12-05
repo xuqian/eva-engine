@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	var path = eva.s() + '/src/yicheng/';
+
 	// initial fade effect for the entire screen
 	var $content = $('#wrapper');
 	$content.css('opacity',0);
@@ -41,14 +43,14 @@ $(document).ready(function() {
 		function infopage() {
 			if  ($("#infopage").is(":hidden")) {
 
-				$("a.info").css({"background":"url(images/home.png) no-repeat scroll 0 0"});
-				$("a.contact").css({"background":"url(images/home.png) no-repeat scroll 0 0"});
+				$("a.info").css({"background":"url(" + path + "images/home.png) no-repeat scroll 0 0"});
+				$("a.contact").css({"background":"url(" + path + "images/home.png) no-repeat scroll 0 0"});
 				$("#homepage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 				$("#infopage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 			}
 			else {
-				$("a.info").css({"background":"url(images/info.png) no-repeat scroll 0 0"});
-				$("a.contact").css({"background":"url(images/contact.png) no-repeat scroll 0 0"});
+				$("a.info").css({"background":"url(" + path + "images/info.png) no-repeat scroll 0 0"});
+				$("a.contact").css({"background":"url(" + path + "images/contact.png) no-repeat scroll 0 0"});
 				$("#infopage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 				$("#homepage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 			}
@@ -62,14 +64,14 @@ $(document).ready(function() {
 		function contactpage() {
 			if ($("#contactpage").is(":hidden"))
 				{
-					$("a.contact").css({"background":"url(images/home.png) no-repeat scroll 0 0"});
-					$("a.info").css({"background":"url(images/home.png) no-repeat scroll 0 0"});
+					$("a.contact").css({"background":"url(" + path + "images/home.png) no-repeat scroll 0 0"});
+					$("a.info").css({"background":"url(" + path + "images/home.png) no-repeat scroll 0 0"});
 					$("#homepage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 					$("#contactpage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 				}
 				else{
-					$("a.contact").css({"background":"url(images/contact.png) no-repeat scroll 0 0"});
-					$("a.info").css({"background":"url(images/info.png) no-repeat scroll 0 0"});
+					$("a.contact").css({"background":"url(" + path + "images/contact.png) no-repeat scroll 0 0"});
+					$("a.info").css({"background":"url(" + path + "images/info.png) no-repeat scroll 0 0"});
 					$("#contactpage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 					$("#homepage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 				}
@@ -83,12 +85,12 @@ $(document).ready(function() {
 		function infocontact() {
 			if ($("#contactpage").is(":hidden"))
 				{
-					$("a.contact").css({"background":"url(images/home.png) no-repeat scroll 0 0"});
+					$("a.contact").css({"background":"url(" + path + "images/home.png) no-repeat scroll 0 0"});
 					$("#infopage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 					$("#contactpage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 				}
 				else{
-					$("a.contact").css({"background":"url(images/contact.png) no-repeat scroll 0 0"});
+					$("a.contact").css({"background":"url(" + path + "images/contact.png) no-repeat scroll 0 0"});
 					$("#contactpage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 					$("#infopage").animate({height: "toggle", opacity: "toggle"}, "slow" );
 				}
