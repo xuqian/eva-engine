@@ -9,10 +9,17 @@ class Roles extends TableGateway
 {
     protected $tableName ='roles';
     protected $primaryKey = 'id';
+    protected $uniqueIndex = array(
+        'roleKey',
+    );
 
 
     public function setParameters(Parameters $params)
     {
+        if($params->noLimit) {
+            $this->disableLimit();
+        }
+
         return $this;
     }
 }

@@ -4,6 +4,9 @@ return array(
         'template_path_stack' => array(
             'engine' => __DIR__ . '/../view',
         ),
+        'template_map' => array(
+            'layout/layout' => __DIR__ . '/../layout/layout.phtml',
+        ),
     ),
     'router' => array(
         'routes' => array(
@@ -150,6 +153,6 @@ return array(
     ),
 
     'oauth' => array(
-        'login_url_path' => '/home/'
+        'login_url_path' => '/feed/'
     ),
 );

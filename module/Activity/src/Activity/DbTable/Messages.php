@@ -16,10 +16,19 @@ class Messages extends TableGateway
     {
         if($params->page){
             $this->enableCount();
+            $this->page($params->page);
         }
 
         if($params->noResult) {
             $this->setNoResult(true);
+        }
+
+        if($params->hasFile) {
+            $this->where(array('hasFile' => $params->hasFile));
+        }
+
+        if($params->hasVideo) {
+            $this->where(array('hasVideo' => $params->hasVideo));
         }
 
         if($params->keyword){

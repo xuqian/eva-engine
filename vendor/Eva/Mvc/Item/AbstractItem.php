@@ -257,6 +257,12 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         return $this;
     }
 
+    public function clear()
+    {
+        $this->setDataSource(array());
+        return $this;
+    }
+
     public function hasLoadedRelationships()
     {
         $hasRelationships = false;
@@ -471,7 +477,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     public function dataCount($params = null, $countKey = self::DEFAULT_COUNT_KEY)
     {
         $dataClass = $this->getDataClass();
-        $this->setDataSource(array());
+        $this->clear();
         if($params && method_exists($dataClass, 'setParameters')){
             if(is_array($params)){
                 $params = new \Zend\Stdlib\Parameters($params);
@@ -492,7 +498,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     public function collections($params = null)
     {
         $dataClass = $this->getDataClass();
-        $this->setDataSource(array());
+        $this->clear();
         if($params && method_exists($dataClass, 'setParameters')){
             if(is_array($params)){
                 $params = new \Zend\Stdlib\Parameters($params);
@@ -509,7 +515,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         $items = $dataClass->find('all');
 
         if(!$items){
-            $this->setDataSource(array());
+            $this->clear();
         } else {
             foreach($items as $key => $dataSource){
                 $item = clone $this;
@@ -552,12 +558,12 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
             if(false === $selectAll){
                 $dataClass->columns($columns);
             }
-            $where = $this->getPrimaryArray();
+            $where = $this->autoDetectWhere();
             $dataSource = $dataClass->where($where)->find('one');
 
             //Not find in DB
             if(!$dataSource){
-                $this->setDataSource(array());
+                $this->clear();
                 return $this;
             }
         }
@@ -578,7 +584,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
 
 
         if(!$dataSource){
-            $this->setDataSource(array());
+            $this->clear();
         } else {
             $this->setDataSource((array) $dataSource);
         }
@@ -599,9 +605,9 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     public function selfExist()
     {
         $dataClass = $this->getDataClass();
-        $columns = array_keys($this->getPrimaryArray());
+        $columns = array_keys($this->autoDetectWhere());
         $dataClass->columns($columns);
-        $where = $this->getPrimaryArray();
+        $where = $this->autoDetectWhere();
         $dataSource = $dataClass->where($where)->find('one');
 
         //Not find in DB
@@ -623,7 +629,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         //Important : here must use clone to create many entities
         $relItem = clone $model->getItem($relationship['targetEntity']); 
         //Important : Joined item should have no dataSource
-        $relItem->setDataSource(array());
+        $relItem->clear();
 
         $joinFuncName = 'join' . ucfirst($key);
         if(method_exists($this, $joinFuncName)){
@@ -702,7 +708,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         $referencedLeftColumn = $relationship['joinColumns']['referencedColumn'];
 
         $middleItem = clone $relItem->model->getItem($relationship['inversedBy']); 
-        $middleItem->setDataSource(array());
+        $middleItem->clear();
         $params = array(
             $joinLeftColumn => $this->$referencedLeftColumn
         );
@@ -716,7 +722,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
 
         foreach($middleItems as $middleItem){
             $rightItem = clone $relItem;
-            $rightItem->setDataSource(array());
+            $rightItem->clear();
             $rightItem->$referencedRightColumn = $middleItem->$joinRightColumn;
 
             $inversedMapKey = isset($relationship['inversedMappedBy']) ? $relationship['inversedMappedBy'] : get_class($middleItem);
@@ -755,11 +761,11 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         return $this->join($relationshipKey);
     }
 
-    public function create()
+    public function create($mapKey = 'create')
     {
         $dataClass = $this->getDataClass();
         $data = $this->toArray(
-            isset($this->map['create']) ? $this->map['create'] : array()
+            isset($this->map[$mapKey]) ? $this->map[$mapKey] : array()
         );
         $primaryKey = $dataClass->getPrimaryKey();
         if($dataClass->create($data)){
@@ -773,13 +779,13 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         }
     }
 
-    public function save()
+    public function save($mapKey = 'save')
     {
         $dataClass = $this->getDataClass();
         $data = $this->toArray(
-            isset($this->map['save']) ? $this->map['save'] : array()
+            isset($this->map[$mapKey]) ? $this->map[$mapKey] : array()
         );
-        $where = $this->getPrimaryArray();
+        $where = $this->primaryWhere();
         $dataClass->where($where)->save($data);
         return true;
     }
@@ -787,7 +793,7 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
     public function remove()
     {
         $dataClass = $this->getDataClass();
-        $where = $this->getPrimaryArray();
+        $where = $this->primaryWhere();
         $dataClass->where($where)->remove();
         return true;
     }
@@ -825,24 +831,73 @@ abstract class AbstractItem implements ArrayAccess, Iterator, ServiceLocatorAwar
         return $this;
     }
 
+    protected function autoDetectWhere()
+    {
+        $where = $this->primaryWhere();
+        if($where){
+            return $where;
+        }
 
-    protected function getPrimaryArray()
+        $where = $this->uniqueWhere();
+        if(!$where){
+            throw new Exception\InvalidArgumentException(sprintf('Primary Key not set in item %s', get_class($this)));
+        }
+        return $where;
+    }
+
+    protected function uniqueWhere()
+    {
+        $dataClass = $this->getDataClass();
+        $uniqueIndex = $dataClass->getUniqueIndex();
+        if(!$uniqueIndex){
+            return array();
+        }
+
+        $where = array();
+        foreach($uniqueIndex as $uniqueIndexKey){
+            if(is_array($uniqueIndexKey)){
+                $multiWhere = array();
+                foreach($uniqueIndexKey as $multiIndexKey){
+                    if($this->$multiIndexKey){
+                        $multiWhere[$multiIndexKey] = $this->$multiIndexKey;
+                    }
+                    if(count($multiWhere) === count($uniqueIndexKey)){
+                        $where = $multiWhere;
+                        break;
+                    }
+                }
+            } elseif(is_string($uniqueIndexKey)){
+                if($this->$uniqueIndexKey){
+                    $where = array($uniqueIndexKey => $this->$uniqueIndexKey);
+                    break;
+                }
+            } else {
+                throw new Exception\InvalidArgumentException(sprintf('Unique Index require string or array in item %s', get_class($this)));
+            }
+        }
+        return $where;
+    }
+
+    protected function primaryWhere()
     {
         $dataClass = $this->getDataClass();
         $primaryKey = $dataClass->getPrimaryKey();
+        $where = array();
 
         if(is_string($primaryKey)){
             if(!$this->$primaryKey){
-                throw new Exception\InvalidArgumentException(sprintf('Primary Key %s not set in item %s', $primaryKey, get_class($this)));
+                return $where;
             }
             $where = array($primaryKey => $this->$primaryKey);
         } elseif(is_array($primaryKey)) {
-            $where = array();
+            $multiWhere = array();
             foreach($primaryKey as $key){
-                if(!$this->$key){
-                    throw new Exception\InvalidArgumentException(sprintf('Primary Key not set in item %s', get_class($this)));
+                if($this->$key){
+                    $multiWhere[$key] = $this->$key;
                 }
-                $where[$key] = $this->$key;
+            }
+            if(count($primaryKey) === count($multiWhere)){
+                $where = $multiWhere;
             }
         } else {
             throw new Exception\InvalidArgumentException(sprintf('Primary Key not found or not correct in class %s', get_class($dataClass)));

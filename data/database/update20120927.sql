@@ -29,3 +29,11 @@ ALTER TABLE `eva_user_users` ADD `mobile` VARCHAR( 20 ) NULL AFTER `email` ;
 
 ALTER TABLE `eva_user_friends` CHANGE `relationShipStatus` `relationshipStatus` ENUM( 'pending', 'refused', 'active', 'blocked' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending';
 ALTER TABLE `eva_user_friends` CHANGE `relationshipStatus` `relationshipStatus` ENUM( 'pending', 'refused', 'approved', 'blocked' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending';
+
+
+
+ALTER TABLE `eva_user_users` CHANGE `lastFleshTime` `lastFreshTime` DATETIME NULL DEFAULT NULL;
+
+
+ALTER TABLE `eva_user_codes` CHANGE `codeType` `codeType` ENUM( 'invite', 'activeAccount', 'verifyEmail', 'verifyMobile', 'resetPassword', 'other' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
+ALTER TABLE `eva_oauth_accesstokens` ADD `tokenStatus` ENUM( 'active', 'expried' ) NOT NULL DEFAULT 'active' AFTER `version`;

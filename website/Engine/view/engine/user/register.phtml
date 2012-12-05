@@ -18,14 +18,14 @@ $form
 ->prepare();
 
 ?>
-<div class="container">
+<div class="container typo">
 
-	<header class="page-header">
+	<header class="typo page-header">
     <h2 class=""><?=$title?></h2>
 	</header>
 
     <?if($token):?>
-    <form <?=$this->formAttr($form)?> class="form-horizontal">
+    <form <?=$this->formAttr($form)?> class="form form-horizontal">
         <?=$form->restful();?>
         <?=$form->helper('id', array('class' => ''))?>
         <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">
@@ -62,7 +62,7 @@ $form
         </div>
     </form>
     <?else:?>
-    <form <?=$this->formAttr($form)?> class="form-horizontal">
+    <form <?=$this->formAttr($form)?> class="form form-horizontal">
         <?=$form->restful();?>
         <?=$form->helper('id', array('class' => ''))?>
         <div class="control-group <?=$form->isError('userName') ? 'error' : '';?>">

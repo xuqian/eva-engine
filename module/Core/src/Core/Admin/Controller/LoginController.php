@@ -31,15 +31,17 @@ class LoginController extends ActionController
             return $viewVariables;
         }
 
-        $auth = new Auth('Config', 'Session');
+        $auth = new Auth('Config', 'Session', 'Auth_Admin');
         $authResult = $auth->authenticate(array(
             'username' => $item['loginName'],
             'password' => $item['inputPassword'],
         ));
 
         if($authResult->isValid()){
+
+            $config = $this->getServiceLocator()->get('config');
             $auth->saveLoginUser(array(
-                'id' => '0',
+                'id' => $config['superadmin']['id'],
                 'userName' => $item['loginName'],
                 'isSuperAdmin' => true,
             ));

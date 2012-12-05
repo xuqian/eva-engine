@@ -34,14 +34,13 @@ class Module
             $event->attach(MvcEvent::EVENT_DISPATCH, array('User\Module', 'authority'), 100);
         }
 
-        $event->attach(MvcEvent::EVENT_DISPATCH, array($this, 'language'));
+        $this->language($e);
     }
 
     public function language($e)
     {
-        //TODO:: should init language on Bootstrap
-        $controller = $e->getTarget();
-        $language = $controller->cookie()->crypt(false)->read('lang');
+        $cookie = $e->getRequest()->getHeaders()->get('cookie');
+        $language = isset($cookie->lang) ? $cookie->lang : '';
         $config = $e->getApplication()->getConfig();
         if(!$language){
             if(isset($config['translator']['auto_switch']) && $config['translator']['auto_switch']){
@@ -101,7 +100,7 @@ class Module
             return;
         }
 
-        $auth = new Auth('Config', 'Session');
+        $auth = new Auth('Config', 'Session', 'Auth_Admin');
         $isAuthed = $auth->getAuthStorage()->read();
         if(!$isAuthed){
             $application = $e->getApplication();

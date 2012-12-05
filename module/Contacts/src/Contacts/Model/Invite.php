@@ -26,8 +26,12 @@ class Invite extends AbstractModel
     
     public function getRegUrl()
     {
+        $user = $this->user;
+        $itemModel = Api::_()->getModel('User\Model\Invite');
+        $code = $itemModel->setUser($user)->getUserInviteHash();
+        
         if ($this->regUrl) {
-            return $this->regUrl . "?invitees=" . $this->user['userName'];
+            return $this->regUrl . "?code=" . $code;
         }    
     }
 
@@ -36,22 +40,14 @@ class Invite extends AbstractModel
         $this->regUrl = $regUrl;
         return $this;
     }
-    
-    public function getBody()
-    {
-        return "Your friend " . $this->user['userName'] . "invite you join :\n" . $this->getRegUrl();
-    }
-    
-    public function getSubject()
-    {
-        return "Invite";
-    }
 
     public function sendInvite($params = array())
     {
-        $to = $params['to'];
+        $emails       = $params['emails'];
+        $template     = $params['template'];
+        $templatePath = $params['templatePath'];
         
-        if (!$to) {
+        if (!$emails || !$template || !$templatePath) {
             return array();
         }
 
@@ -63,17 +59,23 @@ class Invite extends AbstractModel
             return false;
         }
 
-        $body = isset($params['body']) ? $params['body'] : $this->getBody();
         $subject = isset($params['subject']) ? $params['subject'] : $this->getSubject();
 
-        $message = new Message();
-
-        $message->setSubject($subject);
-        $message->addFrom($mine['email'], $mine['userName']);
-        $message->addTo($to['email']);
-        $message->setBody($body);
-
         $mail = new Mail();
+        $message = $mail->getMessage();
+        $message->addFrom($mine['email'], $mine['userName']);
+
+        foreach ($emails as $email) {
+            $message->addBcc($email);
+        }
+        
+        $message->setSubject($subject)
+            ->setData(array(
+                'user' => $this->user,
+                'url' => $this->getRegUrl(),
+            ))
+            ->setTemplatePath($templatePath)
+            ->setTemplate($template);
 
         return $mail->send($message);
     }

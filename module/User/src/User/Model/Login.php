@@ -52,6 +52,7 @@ class Login extends AbstractModel
         }
 
 
+        p(1);
         $this->trigger('login.post');
         return true;
     }
@@ -70,6 +71,7 @@ class Login extends AbstractModel
         ))->save(array(
             'onlineStatus' => 'online',
             'lastLoginTime' => \Eva\Date\Date::getNow(),
+            'lastFreshTime' => \Eva\Date\Date::getNow(),
             'lastLoginIp' => $_SERVER["REMOTE_ADDR"],
         ));
     

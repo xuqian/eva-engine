@@ -10,12 +10,11 @@ class UserCreateForm extends UserForm
         'default' => array(
             'Profile' => 'User\Form\ProfileForm',
             'Account' => 'User\Form\AccountForm',
-            /*
             'RoleUser' => array(
                 'formClass' => 'User\Form\RoleUserForm',
                 'collection' => true,
+                'optionsCallback' => 'initRoles',
             ),
-            */
         ),
     );
 
@@ -80,47 +79,48 @@ class UserCreateForm extends UserForm
         ),
     );
 
-    /*
-    public function beforeBind($values)
+    public function beforeBind($data)
     {
-        $model = \Eva\Api::_()->getModel('User\Model\Role');
-        $roles = $model->getRoleList()->toArray();
-        $roleUsers = array();
-        if(isset($values['RoleUser']) && $values['RoleUser']){
-            foreach($roles as $key => $role){
-                $value = array(
-                    'role_id' => $role['id']
-                );
-                foreach($values['RoleUser'] as $roleUser){
-                    if($role['id'] == $roleUser['role_id']){
-                        $value = $roleUser;
+        //Data is array is for display
+        if(isset($data['RoleUser']) && is_array($data)){
+            $roleUsers = array();
+            $subForms = $this->get('RoleUser');
+            foreach($subForms as $key => $subForm){
+                $roleUser = array();
+                $role = $subForm->getRole()->toArray();
+                $roleUser['role_id'] = $role['id'];
+                foreach($data['RoleUser'] as $roleUserArray){
+                    if($roleUser['role_id'] == $roleUserArray['role_id']){
+                        $roleUser = array_merge($roleUser, $roleUserArray);
+                        break;
                     }
                 }
-                $roleUsers[] = $value;
+                $roleUsers[] = $roleUser;
             }
-        } else {
-            foreach($roles as $key => $role){
-                $roleUsers[] = array(
-                    'role_id' => $role['id']
-                );
-            }
+            $data['RoleUser'] = $roleUsers;
         }
-        $values['RoleUser'] = $roleUsers;
-        return $values;
+        return $data;
     }
-    */
 
     public function prepareData($data)
     {
         if(isset($data['inputPassword'])){
             $data['password'] = $data['inputPassword'];
             unset($data['inputPassword']);
+        } else {
+            unset($data['password']);
         }
-        return $data;
-    }
 
-    public function beforeBind($data)
-    {
+        $roleUsers = array();
+        if(isset($data['RoleUser']) && $data['RoleUser']){
+            foreach($data['RoleUser'] as $roleUser){
+                if(isset($roleUser['role_id']) && $roleUser['role_id']){
+                    $roleUsers[] = $roleUser;
+                }
+            }
+            $data['RoleUser'] = $roleUsers;
+        }
+
         return $data;
     }
 

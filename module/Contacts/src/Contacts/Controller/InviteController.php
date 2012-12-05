@@ -24,16 +24,24 @@ class InviteController extends AbstractActionController
             exit;
         }
         
+        $config = $this->getServiceLocator()->get('config');
         $helper = $this->getEvent()->getApplication()->getServiceManager()->get('viewhelpermanager')->get('serverurl');
-        $url = $helper();
+        $url = $helper() . '/register/';
+        
+        if (!isset($config['contacts']['invite_mail'])) {
+            exit;
+        }
 
         $inviteModel = Api::_()->getModel('Contacts\Model\Invite');
         $inviteModel->setUser($user);
         $inviteModel->setRegUrl($url);
         
+        $params['emails']       = $emails;
+        $params['subject']      = $config['contacts']['invite_mail']['subject'];
+        $params['template']     = $config['contacts']['invite_mail']['template'];
+        $params['templatePath'] = $config['contacts']['invite_mail']['templatePath'];
+        $inviteModel->sendInvite($params);
         foreach ($emails as $email) {
-            $params['to'] = array('email' => $email);
-            $inviteModel->sendInvite($params);
             $this->removeContacts($service, $email);
         }
 
@@ -45,7 +53,7 @@ class InviteController extends AbstractActionController
         if (!$adapter || !$email) {
             return false;
         }
-        
+
         $config = $this->getServiceLocator()->get('config');
         $import = new \Contacts\ContactsImport($adapter, false, array(
             'cacheConfig' => $config['cache']['contacts_import'],
