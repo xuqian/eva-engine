@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <?=$this->headTitle()?>
+        <?$this->link('/src/admin/css/bootstrap.css')?>
+        <!--[if lt IE 9]>
+        <meta http-equiv="PRAGMA" content="NO-CACHE" />
+        <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
+        <![endif]-->
+        <?=$this->headMeta()?>
+        <?=$this->googleAnalytics()?>
+        <link href="<?=$this->link('/lib/css/fontawesome/css/font-awesome.css')?>" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->link('/src/engine/css/ee.css')?>" media="all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?=$this->link('/src/yicheng/style.css')?>" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?=$this->link('/src/yicheng/colors/blue.css')?>" type="text/css" media="screen" />
+        <?=$this->evajs()?>
+        <script src="<?=$this->link('/lib/js/labjs/labjs.min.js')?>"></script>
+        <script src="<?=$this->link('/lib/js/jquery/jquery.min.js')?>"></script>
+        <script src="<?=$this->link('/eva/js/core.js')?>"></script>
+
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.easing.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/supersized.3.2.7.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/supersized.shutter.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.contact.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.core.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.widget.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.mouse.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.draggable.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/custom.js')?>"></script>
+        <style>
+            body {
+                    font-family:'微软雅黑';
+            }
+            #subsubmit{
+                    display:block;
+                    margin-left:auto;
+                    margin-right:auto;
+                    background:#48AFCF;
+                    color:#FFF;
+                    padding:5px 10px;
+                    width:50px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <div id="container">
+
+                <div id="progress"></div>					
+
+                <ul class="top-buttons"> <!-- drag and toggle buttons-->
+                    <li><a class="trigger">toggle me</a></li>
+                    <li><a class="drag">drag me with your mouse</a></li>
+                </ul><!--end top-buttons-->
+
+                <div id="totoggle">
+                    <div id="infopage">
+                        <div class="content">
+                            <h2>告庄西双景景真寨之亿成阳光国际公寓</h2>
+                            <p>亿成国际投资集团成立于2010年，是一家拥有能源产业、金融投资、房地产业、旅游产业、国际贸易、文化产业、生物科技等众多产业集群的大型集团公司。注册地为香港，总部设于北京，在内地下设20余家子公司，现有员工1000余人。</p>
+
+                            <p>亿成国际经营运作领域十分广泛，包含：项目投资、投资管理、资产管理、投资咨询、股权基金募集及管理、文化传媒、经济信息等。同时与政府平台合作对地方重大能源、资源项目和高科技技术产业进行投资和开发。</p>
+
+                            <p>亿成国际打造国内最顶极金融管理服务机构与通往国际商业舞台的最佳平台，提供最好的服务及投资理念给广大客户，让国内个人投资者以及国内的企业投资者拥有在国际市场资本增值的机会，并在竞争激烈的市场中，比其它竞争者优越一步，胜人一筹。 </p>
+
+                            <p>亿成国际以雄厚的经济实力、高素质的人才团队和高瞻远瞩的发展战略，在创造经济效益的同时，坚守社会责任心，以德为本，以信立身、和谐办企。放眼全球，打造百年企业是亿成国际发展的目标和理想，亿成人将继续努力，为人民、为社会、为祖国创造财富。</p>
+
+                        </div><!--end content-->
+
+                        <ul class="buttons">
+                            <li><a class="info">I show some info</a></li>
+                            <li><a class="infocontact">I reveal the contact form</a></li>
+                        </ul><!--end buttons-->	
+                    </div><!--end infopage-->
+
+                    <div id="contactpage">
+                        <div class="content">
+                            <div class="one-half">
+                                <h2>联系我们</h2>
+                                <p>亿成国际竭诚为您服务。</p>
+                                <p><span>电话:</span> 010-58207072</p>
+                                <p><span>传真:</span> 010-58207760</p>
+                                <p><span>邮编:</span> 100026</p>
+                                <p><span>地址:</span> 北京市朝阳区建国路93号万达广场A座21层 </p>
+                            </div><!--end one-half-->
+
+                            <div class="one-half last cf">
+                                <div id="contactform">
+                                    <div id="message"></div>
+                                    <form method="post" action="php/contact.php" name="cform" id="cform">
+                                        <input type="text" name="name" placeholder="Name" id="name" />
+                                        <input type="text" name="email" placeholder="Email" id="email" />
+                                        <textarea name="comments" placeholder="Message" id="comments"></textarea>					
+                                        <input type="submit" name="send" value="Send" id="submit" /> 
+                                    </form>
+                                </div><!--end contactform-->
+                            </div><!--end one-half-->
+                        </div><!--end content-->
+
+                        <div class="clear"></div>
+
+                        <ul class="buttons">
+                            <li><a class="contactinfo">I show some info</a></li>
+                            <li><a class="contact">I reveal the contact form</a></li>
+                        </ul><!--end buttons-->						
+                    </div><!--end contactpage-->			
+
+                    <div id="homepage">
+                        <a class="logo" href="#"><img src="<?=$this->link('/src/yicheng/images/logo.png')?>" alt="logo" /></a>
+
+                        <h1><span>七彩梦圆澜沧江畔——告庄西双景景真寨之亿成阳光国际公寓</span></h1>
+
+
+                        <div id="subscribe">
+                            <a href="" id="subsubmit" />点击进入</a>
+                        </div>
+
+                        <ul class="buttons">
+                            <li><a class="info">I show some info</a></li>
+                            <li><a class="contact">I reveal the contact form</a></li>
+                        </ul><!--end buttons-->				
+                    </div><!--end homepage-->
+                </div><!--end totoggle-->
+            </div><!--end container-->
+
+            <!--Thumbnail Navigation-->
+            <div id="prevthumb"></div>
+            <div id="nextthumb"></div>
+
+            <!--Arrow Navigation-->
+            <div id="thumb-tray" class="load-item">
+                <div id="thumb-back"></div>
+                <div id="thumb-forward"></div>
+            </div>
+
+            <!--Time Bar-->
+            <div id="progress-back" class="load-item">
+                <div id="progress-bar"></div>
+            </div>
+
+            <!--Control Bar-->
+            <div id="controls-wrapper" class="load-item">
+                <div id="controls">
+                    <div id="social">
+                        <h4>©亿成国际2012</h4>
+                        <!--
+                        <ul class="hide">
+                            <li><a class="rss" href="#"><img src="images/social/rss.png" alt="" /></a></li>
+                        </ul>
+                        -->
+                    </div><!--end social-->
+
+                    <div class="centered-controls">
+                        <a id="prevslide" class="load-item"><img src="<?=$this->link('/src/yicheng/images/back.png')?>" alt="" /></a>
+                        <a id="play-button"><img id="pauseplay" src="<?=$this->link('/src/yicheng/images/pause.png')?>" alt="" /></a>
+                        <a id="nextslide" class="load-item"><img src="<?=$this->link('/src/yicheng/images/forward.png')?>" alt="" /></a>
+                    </div><!--end centered-controls-->			
+
+                    <!--Thumb Tray button(the button from the bottom-right area)-->
+                    <a id="tray-button"><img id="tray-arrow" src="<?=$this->link('/src/yicheng/images/button-tray-up.png')?>" alt="" /></a>
+
+                </div><!--end controls-->
+            </div><!--end controls-wrapper-->
+        </div><!--end wrapper-->
+
+        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.placeholder.js')?>"></script>	<!-- placeholder html5 tag support for IE and Old Browsers -->
+
+        <script>
+            eva.init(eva_config);
+        </script>
+
+    </body>
+</html>

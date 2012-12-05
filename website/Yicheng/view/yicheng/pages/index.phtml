@@ -1,0 +1,34 @@
+<? 
+$title = $this->_('Blog Posts');
+$this->headTitle($title, 'SET');
+$items = $this->items;
+?>
+<div class="container">
+
+
+
+    <div class="typo typocn">
+
+	<header class="page-header">
+    <h2 class=""><?=$title?></h2>
+    </header>
+
+	<?if($this->items):?>
+	<?foreach($this->items as $key=>$item):?>
+	<div id="item_<?=$item['id'] ?>" class="table">
+        <h3><a href="<?=$this->Uri('/pages/' . $item['urlName'])?>" class="title"><?=$item['title'] ?></a></h3>
+        <p><?=$this->datetime($item['createTime'])?></p>
+		<p><?=$item['preview'];?></p>
+	</div>
+	<?endforeach;?>
+	<?else:?>
+    <p><?=$this->_('No blog item found')?></p>
+    <?endif;?>
+
+    </div>
+
+    <?if($this->paginator):?>
+    <?=$this->paginator->setPath('/pages/')->setBaseQuery($this->query);?>
+    <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+    <?endif;?>
+</div>
