@@ -1,13 +1,14 @@
 jQuery(document).ready(function(){
 	$('#cform').submit(function(){
 
+		var path = eva.s() + '/src/yicheng/';
 		var action = $(this).attr('action');
 
 		$("#message").slideUp(750,function() {
 		$('#message').hide();
 
  		$('#submit')
-			.after('<img src="images/ajax-loader.gif" class="contact-loader" />')
+			.after('<img src="' + path + 'images/ajax-loader.gif" class="contact-loader" />')
 			.attr('disabled','disabled');
 
 		$.post(action, {

@@ -90,11 +90,11 @@
                             <div class="one-half last cf">
                                 <div id="contactform">
                                     <div id="message"></div>
-                                    <form method="post" action="php/contact.php" name="cform" id="cform">
-                                        <input type="text" name="name" placeholder="Name" id="name" />
+                                    <form method="post" action="<?=$this->link('/src/yicheng/php/contact.php')?>" name="cform" id="cform">
+                                        <input type="text" name="name" placeholder="姓名" id="name" />
                                         <input type="text" name="email" placeholder="Email" id="email" />
-                                        <textarea name="comments" placeholder="Message" id="comments"></textarea>					
-                                        <input type="submit" name="send" value="Send" id="submit" /> 
+                                        <textarea name="comments" placeholder="留言" id="comments"></textarea>					
+                                        <input type="submit" name="send" value="发送" id="submit" /> 
                                     </form>
                                 </div><!--end contactform-->
                             </div><!--end one-half-->
