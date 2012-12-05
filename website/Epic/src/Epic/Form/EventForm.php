@@ -45,6 +45,16 @@ class EventForm extends \Eva\Form\Form
                 'value' => '',
             ),
         ),
+       'urlName' => array (
+            'name' => 'urlName',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'Url Name',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
         'eventStatus' => array (
             'name' => 'eventStatus',
             'type' => 'select',
@@ -93,11 +103,31 @@ class EventForm extends \Eva\Form\Form
                 'value' => 'public',
             ),
         ),
+       'startDay' => array (
+            'name' => 'startDay',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'Start Day',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
         'startTime' => array (
             'name' => 'startTime',
             'type' => 'text',
             'options' => array (
                 'label' => 'Start Time',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
+        'endDay' => array (
+            'name' => 'endDay',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'End Day',
             ),
             'attributes' => array (
                 'value' => '',
@@ -199,6 +229,7 @@ class EventForm extends \Eva\Form\Form
                 ),
             ),
         ),
+ 
         'eventStatus' => array (
             'name' => 'eventStatus',
             'required' => false,
@@ -236,6 +267,31 @@ class EventForm extends \Eva\Form\Form
             ),
         ),
 
+        'startDay' => array (
+            'name' => 'startDay',
+            'required' => false,
+            'filters' => array (
+                'stripTags' => array (
+                    'name' => 'StripTags',
+                ),
+                'stringTrim' => array (
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array (
+                'notEmpty' => array (
+                    'name' => 'NotEmpty',
+                    'options' => array (
+                    ),
+                ),
+                'stringLength' => array (
+                    'name' => 'StringLength',
+                    'options' => array (
+                        'max' => NULL,
+                    ),
+                ),
+            ),
+        ),
         'startTime' => array (
             'name' => 'startTime',
             'required' => false,
@@ -248,6 +304,25 @@ class EventForm extends \Eva\Form\Form
                 ),
             ),
             'validators' => array (
+            ),
+        ),
+        'endDay' => array (
+            'name' => 'endDay',
+            'required' => false,
+            'filters' => array (
+                'stripTags' => array (
+                    'name' => 'StripTags',
+                ),
+                'stringTrim' => array (
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array (
+                'notEmpty' => array (
+                    'name' => 'NotEmpty',
+                    'options' => array (
+                    ),
+                ),
                 'stringLength' => array (
                     'name' => 'StringLength',
                     'options' => array (
@@ -268,10 +343,29 @@ class EventForm extends \Eva\Form\Form
                 ),
             ),
             'validators' => array (
+            ),
+        ),
+        'urlName' => array (
+            'name' => 'urlName',
+            'required' => false,
+            'filters' => array (
+                'stripTags' => array (
+                    'name' => 'StripTags',
+                ),
+                'stringTrim' => array (
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array (
+                'notEmpty' => array (
+                    'name' => 'NotEmpty',
+                    'options' => array (
+                    ),
+                ),
                 'stringLength' => array (
                     'name' => 'StringLength',
                     'options' => array (
-                        'max' => NULL,
+                        'max' => '255',
                     ),
                 ),
             ),

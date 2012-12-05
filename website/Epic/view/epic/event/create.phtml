@@ -51,30 +51,6 @@ $form->useSubFormGroup()
                                                 </div>
                                             </div>
 
-                                            <div class="control-group <?=$form->isError('startTime') ? 'error' : '';?>">
-                                                <?=$form->helper('startTime', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('startTime', array('class' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                    <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="control-group <?=$form->isError('endTime') ? 'error' : '';?>">
-                                                <?=$form->helper('endTime', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('endTime', array('class' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                    <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?>">
-                                                <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('timezone', array('class' => 'span1'))?>        
-                                                    <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
-                                                </div>
-                                            </div> 
-
                                              <div class="control-group <?=$form->isError('location') ? 'error' : '';?>">
                                                 <?=$form->helper('location', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
@@ -83,8 +59,49 @@ $form->useSubFormGroup()
                                                 </div>
                                             </div>  
                                         </fieldset>
+                                        
+                                        <fieldset class="">
+                                            <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?> span3">
+                                                <?=$form->helper('startDay', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('startDay', array('class' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                    <div class="help-block"><?=$form->helper('startDay', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group <?=$form->isError('startTime') ? 'error' : '';?> span2">
+                                                <?=$form->helper('startTime', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('startTime', array('class' => 'timepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                    <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> span3">
+                                                <?=$form->helper('endDay', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('endDay', array('class' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                    <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group <?=$form->isError('endTime') ? 'error' : '';?> span2">
+                                                <?=$form->helper('endTime', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('endTime', array('class' => 'timepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                    <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            
+                                        </fieldset>
 
                                         <fieldset class="">
+                                            <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?>">
+                                                <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('timezone', array('class' => 'span1'))?>        
+                                                    <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
+                                                </div>
+                                            </div> 
                                             <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
                                                 <div id="editor-left" class="controls">
                                                     <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6', 'rows' => '15',))?>
@@ -126,7 +143,15 @@ $form->useSubFormGroup()
                                                     <?=$form->helper('latitude', array('class' => 'span3'))?>        
                                                     <div class="help-block"><?=$form->helper('latitude', 'formElementErrors')?></div>
                                                 </div>
-                                            </div>    
+                                            </div> 
+                                            
+                                            <div class="control-group <?=$form->isError('urlName') ? 'error' : '';?> hide">
+                                                <?=$form->helper('urlName', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('urlName', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('urlName', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>   
                                         </fieldset>
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>

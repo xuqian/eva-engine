@@ -36,7 +36,7 @@ $unjoinForm
                                             <p class="pull-right"><a href="<?=$this->uri('/groups/edit/' . $group['id'])?>"><i class="icon-edit"></i> Edit</a> <a href="<?=$this->uri('/groups/remove/' . $group['id'])?>"><i class="icon-remove"></i> Delete</a></p>
                                             <?else:?>
                                             <p class="pull-right">
-                                            <form <?=$this->formAttr($unjoinForm)?>>
+                                            <form <?=$this->formAttr($unjoinForm)?> class="pull-right">
                                                 <?=$unjoinForm->restful();?>
                                                 <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $group['id']))?>
                                                 <?=$unjoinForm->helper('user_id', array('class' => ''))?>
