@@ -165,6 +165,10 @@ $form->useSubFormGroup()
     var syncTwitter = form.find('#activity-box-sync-twitter input');
     modal.hide();
 
+    if(!$(".icon-twitter.highlight")[0]){
+        syncTwitter.parent().hide();
+    }
+
     form.on('submit', function(){
         
         if(syncTwitter.attr('checked')){
