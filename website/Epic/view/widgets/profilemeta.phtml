@@ -158,8 +158,9 @@ function isPaidRole($roles)
                 <td colspan="2" class="social">
                 <?endif?>
                     Social Networking : 
-                    <a href="javascript:;"><i class="icon-facebook-sign <?=checkOauth('facebook', $user) ? 'highlight' : ''?>"></i></a>
-                    <a href="javascript:;"><i class="icon-twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>"></i></a>
+                    <a href="javascript:;"><span class="lsf symbol <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">facebook</span></a>
+                    <a href="javascript:;"><span class="lsf symbol <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">twitter</span></a>
+                    <a href="javascript:;"><span class="lsf symbol <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
                     <!--
                     <a href="#"><i class="icon-pinterest"></i></a>
                     <a href="#"><i class="icon-google-plus"></i></a>
