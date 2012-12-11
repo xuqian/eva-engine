@@ -1082,3 +1082,10 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-grid .grid-3columns .event{width:32%;margin-right:1%;}
 .event-grid .grid-2columns .event{width:49%;}
 .event-grid .media-heading{font-size:13px;font-weight:bold;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.event-calendar{margin:0 auto;background:#FFF;}.event-calendar th{text-align:center;}
+.event-calendar thead .dow{color:#999;}
+.event-calendar thead td{border:0;text-align:center;}
+.event-calendar tbody td{width:90px;height:90px;font-size:12px;font-weight:bold;}
+.event-calendar .day.new,.event-calendar .day.old{color:#999;font-weight:normal;}
+.event-calendar .switch{font-weight:bold;}
+.event-calendar .today{padding:1px 5px;background:#e1500d;color:#FFF;}
