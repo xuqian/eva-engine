@@ -25,90 +25,229 @@ $eventSearchForm->setView($this)
 ?>
 
 <div class="container">
-    <div class="normal-page">
-        <div class="page-main"><div class="row"><div class="span12">
-                    <div class="row">
-                        <div class="span8">
-                            <div class="page-main-header">
-                                <h3>
-                                    <?=$this->_('Events')?>
-                                    <?if($this->query['keyword']):?>
-                                    | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
-                                    <?endif?>
-                                </h3>
+    <header class="event-header">
+    <div class="row">
+        <div class="span4">
+            <h2>Event</h2>
+        </div><!--page main right end-->
+        <div class="span8">
+            <nav class="nav-week">
+            <ul>
+                <li class="first"><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#" class="active"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <li><a href="#"><i class="icon-calendar"></i></a></li>
+            </ul>
+            </nav>
+        </div><!--page main left end-->
+    </div>
+    </header>
+</div>
+<div class="container">
+    <div class="page-bg">
+        <div class="row">
+            <div class="span4">
+                <div class="event-side">
+                    <div class="usercard media">
+                        <a class="pull-left" href="#">
+                            <img alt="userface" src="<?=$this->gravatar($user['email'], 120)?>" width="120" height="120" class="media-object"/>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?=$user['userName']?></h4>
+                            <h5>Joined Events: <span class="highlight">1234</span></h5>
+                            <div class="media">
+                                <a href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
+                                <p class="lowlight">Share your life</p>
                             </div>
-                            <div class="search-filter">
-                                <form <?=$this->formAttr($eventSearchForm)?> class="form form-inline">
-                                    <?=$eventSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
-                                    <button class="btn" type="submit"><?=$this->_('Filter Events')?></button>
-                                </form>
-                            </div>
-                            <div class="user-list vlist">
-                                <?foreach($items as $item):?>
-                                <div class="item">
-                                    <div class="item-inline item-text">
-                                        <div class="item-title">
-                                            <h2><a href="<?=$this->uri('/events/' . $item['urlName'])?>" class="item-user"><?=$item['title']?></a></h2>
-                                        </div>
-                                        <div class="item-meta">
-                                            <table class="table-condensed">
-                                                <tbody>
-                                                    <tr>
-                                                        <td><?=$this->_('Start Time')?>: 
-                                                            <?=$item['startTime']?>
-                                                        </td>
-                                                        <td><?=$this->_('End Time')?>: 
-                                                            <?=$item['endTime']?>
-                                                        </td>
-                                                        <td><?=$this->_('Members')?> : <a href="">0</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="item-content">
-                                            <p><?=$this->_('Location')?> : <?=$item['location']?></p>
+                        </div>
+                    </div>
+
+
+                    <div class="event-subscription">
+                        <p>Receive free new event notifications:</p>
+                        <form>
+                            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
+                        </form>
+                    </div>
+
+
+                    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+                        <div class="page-header border-header">
+                            <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+                        </div>
+                        <div class="side-blog-list">
+                            {% if(o.items.length > 0) { %}
+                                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                    <div class="item">
+                                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                                        <div class="item-inline item-text">
+                                            <div class="text-content">
+                                                <div class="item-title">
+                                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                                </div>
+                                                <p>{%=item.Text.Preview%}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="item-absolute item-action">
+                                    {% } %}
+                                {% } %}
+                        </div>
+                    </script>
+                    <div class="side-ad-list">
+                        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
+                        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
+                    </div>
+                </div>
+            </div><!--page main right end-->
+            <div class="span8">
+                <div class="event-main">
+                    <div class="event-thumbnails">
+                        <ul>
+                            <?for($i=1;$i<4;$i++):?>
+                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="https://lh5.googleusercontent.com/-vL5X4-JxlPc/UKbWocXl2sI/AAAAAAAAAi0/DRMB5o_EFPQ/s144-p/IMG_8215-Edit.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-0fRkkOtpZgI/UJIE7ylyX1I/AAAAAAAAAK8/TodR0qAAQFA/s144-p/_MG_4916-Edit.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-pY33_oEhGHE/UJOFk2rF3WI/AAAAAAAAOAc/JPAneeVkepk/s144-p/IMG_0100.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-v3krF838ZE4/UIGrxmOUueI/AAAAAAAABe0/4r8i1L6Xmg4/s144-p/GorillaBaby_1200.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="https://lh6.googleusercontent.com/-fHbJqv0sGaY/UKbNiy28BDI/AAAAAAAAiRY/3awxBQcyJuQ/s144-p/DSC_7501_L.jpg" alt=""></a></li>
+                            <li><a href="#"><img src="https://lh5.googleusercontent.com/-Cj1EXknBiwM/UK1XaCwD_XI/AAAAAAAAKCE/689A3x3bliQ/s144-p/DSC_1338_6529.jpg" alt=""></a></li>
+                            <?endfor?>
+                        </ul>
+                    </div>
 
-                                        <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
-                                        <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
-                                        <form <?=$this->formAttr($unjoinForm)?>>
-                                            <?=$unjoinForm->restful();?>
-                                            <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                            <?=$unjoinForm->helper('user_id', array('class' => ''))?>
-                                            <?=$this->callback()?>
-                                            <button class="btn btn-small item-action-main">Unjoin</button>
-                                        </form>
-                                        <?else:?>
-                                        <form <?=$this->formAttr($form)?>>
-                                            <?=$form->restful();?>
-                                            <?=$form->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                            <?=$form->helper('user_id', array('class' => ''))?>
-                                            <?=$this->callback()?>
-                                            <button class="btn btn-small item-action-main">Join</button>
-                                        </form>
-                                        <?endif?>
-
-
+                    <div class="event-grid">
+                        <header class="event-grid-header">
+                        <small class="pull-right">Hot Cities: <a href="#">New York</a> <a href="#">Tokyo</a> <a href="#">Los Angeles</a></small>
+                        <div class="page-header border-header">
+                            <h3>New Events </h3><a href="<?=$this->uri('/city/')?>" class="switch">[Switch City]</a>
+                        </div>
+                        <ul class="nav nav-pills">
+                            <li class="active"><a href="#">All City</a> |</li>
+                            <li><a href="#">My City</a> |</li>
+                            <li><a href="#">Red Wine</a> | </li>
+                            <li><a href="#">French cuisine</a> | </li>
+                            <li><a href="#">Cocktail party</a></li>
+                        </ul>
+                        </header>
+                        <div class="grid-3columns">
+                            <?for($i=0;$i<6;$i++):?>
+                            <div class="event media">
+                                <a class="pull-left" href="#">
+                                    <img  src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s144-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="90" height="90" class="media-object img-rounded"/>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#">Find best French cuisine in Tokyo</a></h4>
+                                    <div class="media">
+                                        <!--<a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>-->
+                                        <p class="lowlight">1234 members joined.</p>
                                     </div>
                                 </div>
-                                <?endforeach?>
-                            </div><!--activity-list end-->
-
-                            <?if($this->paginator):?>
-                            <?=$this->paginator->setPath('/events/')->setBaseQuery($this->query);?>
-                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                            <?endif;?>
-
-                        </div><!--page main left end-->
-                        <div class="span3">
-                            <div class="page-extra">
-                                <?=$this->widget('Epic', 'widgets/userextra')?>
                             </div>
-                        </div><!--page main right end-->
+                            <?endfor?>
+                        </div>
                     </div>
-        </div></div></div><!--page-main end-->
-    </div><!-- normal end-->
-</div><!--container end-->
 
+                    <div class="event-grid">
+                        <header class="event-grid-header">
+                        <div class="page-header border-header">
+                            <h3>Feature Events</h3>
+                        </div>
+                        <ul class="nav nav-pills">
+                            <li class="active"><a href="#">All City</a> |</li>
+                            <li><a href="#">My City</a> |</li>
+                            <li><a href="#">Red Wine</a> | </li>
+                            <li><a href="#">French cuisine</a> | </li>
+                            <li><a href="#">Cocktail party</a></li>
+                        </ul>
+                        </header>
+                        <div class="grid-2columns">
+                            <?for($i=0;$i<6;$i++):?>
+                            <div class="event media">
+                                <a class="pull-left" href="#">
+                                    <img  src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s144-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="90" height="90" class="media-object img-rounded"/>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#">Find best French cuisine in Tokyo</a></h4>
+                                    <div class="media">
+                                        <a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>
+                                        <p class="lowlight">1234 members joined.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?endfor?>
+                        </div>
+                    </div>
+
+                    <div class="search-filter">
+                        <form <?=$this->formAttr($eventSearchForm)?> class="form form-inline">
+                            <?=$eventSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                            <button class="btn" type="submit"><?=$this->_('Filter Events')?></button>
+                        </form>
+                    </div>
+                    <div class="user-list vlist">
+                        <?foreach($items as $item):?>
+                        <div class="item">
+                            <div class="item-inline item-text">
+                                <div class="item-title">
+                                    <h2><a href="<?=$this->uri('/events/' . $item['urlName'])?>" class="item-user"><?=$item['title']?></a></h2>
+                                </div>
+                                <div class="item-meta">
+                                    <table class="table-condensed">
+                                        <tbody>
+                                            <tr>
+                                                <td><?=$this->_('Start Time')?>: 
+                                                    <?=$item['startTime']?>
+                                                </td>
+                                                <td><?=$this->_('End Time')?>: 
+                                                    <?=$item['endTime']?>
+                                                </td>
+                                                <td><?=$this->_('Members')?> : <a href="">0</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="item-content">
+                                    <p><?=$this->_('Location')?> : <?=$item['location']?></p>
+                                </div>
+                            </div>
+                            <div class="item-absolute item-action">
+
+                                <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
+                                <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
+                                <form <?=$this->formAttr($unjoinForm)?>>
+                                    <?=$unjoinForm->restful();?>
+                                    <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main">Unjoin</button>
+                                </form>
+                                <?else:?>
+                                <form <?=$this->formAttr($form)?>>
+                                    <?=$form->restful();?>
+                                    <?=$form->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$form->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main">Join</button>
+                                </form>
+                                <?endif?>
+
+
+                            </div>
+                        </div>
+                        <?endforeach?>
+                    </div><!--activity-list end-->
+
+                    <?if($this->paginator):?>
+                    <?=$this->paginator->setPath('/events/')->setBaseQuery($this->query);?>
+                    <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                    <?endif;?>
+
+                </div><!--event main end-->
+            </div><!--page main left end-->
+        </div>
+    </div><!-- page-bg end-->
+</div><!--container end-->
