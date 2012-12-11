@@ -32,7 +32,9 @@ $unjoinForm
                                         <div class="item-title"><h2><a href="<?=$this->uri('/events/' . $event['urlName'])?>"><?=$event['title']?></a></h2></div>
                                         <div class="item-meta">
                                             <?if($item['user_id'] == $event['user_id']):?>
+                                            <!--
                                             <p class="pull-right hide"><i class="icon-comment"></i> <?=$this->_('Members')?> (<span class="highlight">0</span>)</p>
+                                            -->
                                             <p class="pull-right"><a href="<?=$this->uri('/events/edit/' . $event['id'])?>"><i class="icon-edit"></i> Edit</a> <a href="<?=$this->uri('/events/remove/' . $event['id'])?>"><i class="icon-remove"></i> Delete</a></p>
                                             <?else:?>
                                             <p class="pull-right">

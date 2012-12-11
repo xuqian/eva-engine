@@ -19,18 +19,14 @@ $viewAsGuest = $this->viewAsGuest;
                     <?=$this->widget('Epic', 'widgets/profilemeta', $this->vars())?>
 
                     <div class="profile-activities">
-
                         <div class="page-header border-header">
-                            <h3><?=$this->_($title);?></h3>
+                            <h3><?=$this->_($item['groupName']);?></h3>
                         </div>
 
-                        Under building
-                        <?if($this->paginator):?>
-                        <?=$this->paginator->setPath('/user/' . $user['userName'] . '/blog/')->setBaseQuery($this->query);?>
-                        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                        <?endif;?>
-
-
+                        <article class="typo">
+                        <?=$item['Text']['content']?>
+                        </article>
+                        
                     </div><!--profile-activities end-->
                 </div><!--left span8 end-->
                 <div class="span4">
