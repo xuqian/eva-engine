@@ -53,6 +53,41 @@ class GroupController extends ActionController
 
     public function getAction()
     {
+        $id = $this->params('id');
+        $itemModel = Api::_()->getModel('Group\Model\Group'); 
+        $item = $itemModel->getGroup($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+
+        if(!$item || $item['status'] != 'active'){
+            $item = array();
+            $this->getResponse()->setStatusCode(404);
+        }
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+        $view = new ViewModel(array(
+            'item' => $item,
+        ));
+        return $view; 
     }
 
     public function removeAction()
@@ -83,6 +118,14 @@ class GroupController extends ActionController
             $id = $this->params('id');
             $itemModel = Api::_()->getModel('Group\Model\Group');
             $item = $itemModel->getGroup($id)->toArray();
+
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+
             return array(
                 'callback' => $this->params()->fromQuery('callback'),
                 'item' => $item,
@@ -103,7 +146,7 @@ class GroupController extends ActionController
         $callback = $this->params()->fromPost('callback');
         $form = new Form\GroupCreateForm();
         $form->useSubFormGroup()
-        ->bind($postData);
+            ->bind($postData);
 
         if ($form->isValid()) {
             $postData = $form->getData();
@@ -113,7 +156,12 @@ class GroupController extends ActionController
             $callback = $callback ? $callback : '/groups/edit/' . $groupId;
             $this->redirect()->toUrl($callback);
         } else {
-
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
         }
 
         return array(
@@ -132,7 +180,7 @@ class GroupController extends ActionController
             $callback = $this->params()->fromPost('callback');
             $form = new Form\GroupEditForm();
             $form->useSubFormGroup()
-            ->bind($postData);
+                ->bind($postData);
 
             if ($form->isValid()) {
                 $postData = $form->getData();
@@ -172,7 +220,14 @@ class GroupController extends ActionController
             if(isset($item['GroupFile'][0])){
                 $item['GroupFile'] = $item['GroupFile'][0];
             }
-
+            
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+            
             $viewModel->setVariables(array(
                 'item' => $item,
             ));

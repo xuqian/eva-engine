@@ -71,7 +71,7 @@ $unjoinForm
                             </div><!--page main left end-->
                             <div class="span3">
                                 <div class="page-extra">
-                                    <?=$this->widget('Epic', 'widgets/userextra')?>
+                                    <?=$this->widget('Epic', 'widgets/userextra', $this->vars())?>
                                 </div>
                             </div><!--page main right end-->
                         </div>
@@ -81,7 +81,7 @@ $unjoinForm
 
             <div class="sidebar">
                 <div class="page-side">
-                    <?=$this->widget('Epic', 'widgets/userside')?>
+                    <?=$this->widget('Epic', 'widgets/userside', $this->vars())?>
                 </div>
             </div><!--sider end-->
 

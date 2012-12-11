@@ -66,7 +66,7 @@ class MyController extends ActionController
     {
         $user = Auth::getLoginUser();
         $viewModel = $this->forward()->dispatch('UserController', array(
-            'action' => 'group',
+            'action' => 'groups',
             'id' => $user['userName'],
         )); 
         $viewModel->setTemplate('epic/my/group');
@@ -77,7 +77,7 @@ class MyController extends ActionController
     {
         $user = Auth::getLoginUser();
         $viewModel = $this->forward()->dispatch('UserController', array(
-            'action' => 'event',
+            'action' => 'events',
             'id' => $user['userName'],
         )); 
         $viewModel->setTemplate('epic/my/event');
