@@ -258,6 +258,20 @@ eva.refreshOnline = function(){
 	
 };
 
+
+eva.topSearch = function(){
+	if(!$(".top-search")[0]){
+		return false;
+	}
+
+	var form = $(".top-search");
+	form.find(".dropdown-menu a").on("click", function(){
+		var link = $(this);
+		form.find(".current").html(link.html());
+		form.attr("action", link.attr("data-url"));
+	});
+};
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -274,6 +288,8 @@ eva.construct = function(){
 	eva.refreshOnline();
 
 	eva.story();
+
+	eva.topSearch();
 
 	var lang = eva.config.lang;
 	var langMap = {

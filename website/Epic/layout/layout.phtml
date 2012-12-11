@@ -50,17 +50,31 @@
                     </ul>
                     <ul class="nav pull-right">
                         <li>
-                        <form action="<?=$this->uri('/user/')?>" class="form form-search">
-                            <div class="input-append">
-                                <input name="keyword" type="text" class="input-mini search-query">
-                                <button type="submit" class="btn"><i class="icon-search"></i></button>
+                        <form action="<?=$this->uri('/user/')?>" class="form top-search">
+                            <div class="top-search-wrap">
+                                <button type="submit" class="btn submit"><i class="icon-search"></i></button>
+                                <div class="input-append">
+                                    <input name="keyword" type="text" class="input-mini search-query">
+                                </div>
                             </div>
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="caret"></span>
+                                    <span class="current">Users</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" data-url="/user/">Users</a></li>
+                                    <li><a href="#" data-url="/events/">Events</a></li>
+                                    <li><a href="#" data-url="/groups/">Groups</a></li>
+                                </ul>
+                            </div>
+
                         </form>
                         </li>
                         <?if($this->hasModule('User')):?>
                         <?if($this->loginUser):?>
-                       <li>
-                       <a href="<?=$this->uri('/messages/')?>" class="nav-icon message-notice-count"><i class="icon-envelope-alt"></i><span class="count-number badge badge-important hide"></span></a>
+                        <li>
+                        <a href="<?=$this->uri('/messages/')?>" class="nav-icon message-notice-count"><i class="icon-envelope-alt"></i><span class="count-number badge badge-important hide"></span></a>
                         </li>
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle nav-last" data-toggle="dropdown"><?=$this->loginUser['userName']?> <b class="caret"></b></a>

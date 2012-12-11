@@ -187,7 +187,7 @@ body, .en body, .fr body {
 
 	.nav > li > a{
 		margin-right:0px;
-		padding:0 20px;
+		padding:0 15px;
 		padding-top:14px;
 		border-bottom:4px solid #000;
 		height:32px;
@@ -237,14 +237,7 @@ body, .en body, .fr body {
 		color:@golden;
 	}
 
-	.form-search {
-		margin-top:10px;
-		margin-right:10px;
 
-		.search-query {
-			width:50px;
-		}
-	}
 
 	/*
 	.dropdown-menu{
@@ -257,6 +250,81 @@ body, .en body, .fr body {
 		}
 	}
 		*/
+}
+
+.top-search {
+	margin-top:15px;
+	margin-right:10px;
+	position:relative;
+
+	.top-search-wrap {
+		width:155px;
+		height:24px;
+		background:#434343;
+		overflow:hidden;
+		.border-radius(5px);
+	}
+
+	.input-append {
+		margin-top:-3px;
+	}
+
+	.btn-group {
+		margin:0;
+		margin-right:3px;
+		position:absolute;
+		top:0;
+		left:75px;
+		margin-top:-3px;
+
+		.btn {
+			background:0 !important;
+			border:0 !important;
+			color:#CCC !important;
+			padding:0 !important;
+			.box-shadow(0 0 0);
+		}
+	}
+
+	
+	.caret {
+		margin-top:0 !important;
+		border-bottom-color:#CCC !important;
+		border-top-color:#CCC !important;
+	}
+
+	input, .btn-group .btn {
+		margin:0;
+		background:#434343 !important;
+		border:0 !important;
+		color:#CCC;
+		text-shadow:none;
+		font-size:11px;
+	}
+
+	.search-query {
+		width:55px;
+		border-right:1px solid #AAA !important;
+		color:#CCC !important;
+		margin-top:-2px;
+	}
+
+	input {
+		float:left;
+	}
+	.submit {
+		float:right;
+		margin-top:-1px;
+		padding:3px;
+	}
+
+	.icon-search {
+		font-size:20px;
+	}
+
+	.dropdown-menu{
+		background:#232323;
+	}
 }
 
 /*********** Footer Start ************/
