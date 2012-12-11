@@ -41,7 +41,29 @@
 </div>
 </script>
 
-
+<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
+<div class="page-header border-header">
+    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>">View All</a></small>
+    <h4>My Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+</div>
+<div class="side-event-list">
+{% if(o.items.length > 0) { %}
+{% for (var i=0, item; item=o.items[i]; i++) { %}
+<div class="item">
+    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+    <div class="item-inline item-text">
+        <div class="text-content">
+            <div class="item-title">
+                <a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% } %}
+{% } %}
+</div>
+</script>
+    <?if(0):?>
     <div class="page-header border-header">
         <small class="pull-right"><a href="#">View All</a></small>
         <h4>My Events (123)</h4>
@@ -62,6 +84,7 @@
         </div>
         <?endfor?>
     </div><!--activity-list end-->
+    <?endif?>
 
     <div class="page-header border-header">
         <small class="pull-right"><a href="#">View All</a></small>
@@ -79,13 +102,34 @@
         </ul>
     </div>
 
+<script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id']))?>">
+<div class="page-header border-header">
+    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/groups/')?>">View All</a></small>
+    <h4>My Groups  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+</div>
+<div class="side-group-list">
+    <ul class="thumbnails">
+    {% if(o.items.length > 0) { %}
+    {% for (var i=0, item; item=o.items[i]; i++) { %}
+        <li>
+            <a class="thumbnail" href="<?=$this->uri('/groups/')?>{%=item.groupKey%}">
+                <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
+            </a>
+        </li>
+    {% } %}
+    {% } %}
+        </ul>
+    </div>
+</div>
+</script>
+    <?if(0):?>
     <div class="page-header border-header">
         <small class="pull-right"><a href="#">View All</a></small>
         <h4>My Groups</h4>
     </div>
     <div class="side-group-list">
         <ul class="thumbnails">
-            <?for($i = 0; $i < 4; $i++):?>
+            <?for($i = 0; $i < 5; $i++):?>
             <li>
             <a class="thumbnail" href="#">
                 <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
@@ -94,6 +138,7 @@
             <?endfor;?>
         </ul>
     </div>
+    <?endif;?>
 
     <div class="side-ad-list">
         <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>

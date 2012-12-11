@@ -61,6 +61,43 @@ class EventController extends ActionController
 
     public function getAction()
     {
+        $id = $this->params('id');
+        $itemModel = Api::_()->getModel('Event\Model\Event'); 
+        $item = $itemModel->getEventdata($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+
+        if(!$item || ($item['eventStatus'] != 'finished' && $item['eventStatus'] != 'active')){
+            $item = array();
+            $this->getResponse()->setStatusCode(404);
+        }
+        
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+
+        $view = new ViewModel(array(
+            'item' => $item,
+        ));
+        return $view; 
     }
 
     public function removeAction()
@@ -91,6 +128,14 @@ class EventController extends ActionController
             $id = $this->params('id');
             $itemModel = Api::_()->getModel('Event\Model\Event');
             $item = $itemModel->getEventdata($id)->toArray();
+
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+
             return array(
                 'callback' => $this->params()->fromQuery('callback'),
                 'item' => $item,
@@ -111,7 +156,7 @@ class EventController extends ActionController
         $callback = $this->params()->fromPost('callback');
         $form = new Form\EventCreateForm();
         $form->useSubFormGroup()
-        ->bind($postData);
+            ->bind($postData);
 
         if ($form->isValid()) {
             $postData = $form->getData();
@@ -120,7 +165,12 @@ class EventController extends ActionController
             $callback = $callback ? $callback : '/events/edit/' . $eventId;
             $this->redirect()->toUrl($callback);
         } else {
-
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
         }
 
         return array(
@@ -139,7 +189,7 @@ class EventController extends ActionController
             $callback = $this->params()->fromPost('callback');
             $form = new Form\EventEditForm();
             $form->useSubFormGroup()
-            ->bind($postData);
+                ->bind($postData);
 
             if ($form->isValid()) {
                 $postData = $form->getData();
@@ -179,7 +229,14 @@ class EventController extends ActionController
             if(isset($item['EventFile'][0])){
                 $item['EventFile'] = $item['EventFile'][0];
             }
-
+            
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+            
             $viewModel->setVariables(array(
                 'item' => $item,
             ));

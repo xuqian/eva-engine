@@ -28,7 +28,7 @@ $viewAsGuest = $this->viewAsGuest;
                             <?foreach($items as $item):?>
                             <?$item = $item['Group'];?>
                             <div class="item">
-                                <div class="item-title"><h2><a href="<?=$this->uri('/user/' . $item['user_id'] . '/groups/' . $item['groupKey'])?>"><?=$item['groupName']?></a></h2></div>
+                                <div class="item-title"><h2><a href="<?=$this->uri('/groups/' . $item['groupKey'])?>"><?=$item['groupName']?></a></h2></div>
                                 <div class="item-meta">
                                     <!--
                                     <p class="pull-right"><i class="icon-comment"></i> Members (<span class="highlight"><?=$item['memberCount']?></span>)</p>
