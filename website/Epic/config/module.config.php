@@ -373,7 +373,21 @@ return array(
                             'constraints' => array(
                             ),
                             'defaults' => array(
-                                'action' => 'event'
+                                'controller' => 'Event\Controller\EventController',
+                                'action' => 'index'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'group' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'group[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Group\Controller\GroupController',
+                                'action' => 'index'
                             )
                         ),
                         'may_terminate' => true,
@@ -523,29 +537,59 @@ return array(
                                     ),
                                 ),
                             ),
-                            'event' => array(
+                            'events' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'event[/]',
+                                    'route' => 'events[/]',
                                     'constraints' => array(
                                     ),
                                     'defaults' => array(
-                                        'action' => 'event'
+                                        'action' => 'events'
                                     )
                                 ),
                                 'may_terminate' => true,
+                                'child_routes' => array(
+                                    'event' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '[:event_id][/]',
+                                            'constraints' => array(
+                                                'event_id' => '[a-zA-Z0-9_-]+'
+                                            ),
+                                            'defaults' => array(
+                                                'action' => 'event'
+                                            )
+                                        ),
+                                        'may_terminate' => true,
+                                    ),
+                                ),
                             ),
-                            'group' => array(
+                            'groups' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'group[/]',
+                                    'route' => 'groups[/]',
                                     'constraints' => array(
                                     ),
                                     'defaults' => array(
-                                        'action' => 'group'
+                                        'action' => 'groups'
                                     )
                                 ),
                                 'may_terminate' => true,
+                                'child_routes' => array(
+                                    'group' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '[:group_id][/]',
+                                            'constraints' => array(
+                                                'group_id' => '[a-zA-Z0-9_-]+'
+                                            ),
+                                            'defaults' => array(
+                                                'action' => 'group'
+                                            )
+                                        ),
+                                        'may_terminate' => true,
+                                    ),
+                                ),
                             ),
                             'friend' => array(
                                 'type' => 'Segment',
@@ -639,6 +683,8 @@ return array(
             'AdController' => 'Epic\Controller\AdController',
 
             'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
+            'Event\Controller\EventController' => 'Event\Controller\EventController',
+            'Group\Controller\GroupController' => 'Group\Controller\GroupController',
             'User\Controller\FriendController' => 'User\Controller\FriendController',
             'User\Controller\UpgradeController' => 'User\Controller\UpgradeController',
 

@@ -246,8 +246,42 @@ class UserController extends ActionController
     public function albumAction()
     {
     }
-
+    
     public function groupAction()
+    {
+        $id = $this->params('group_id');
+        $itemModel = Api::_()->getModel('Group\Model\Group'); 
+        $item = $itemModel->getGroup($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+
+        if(!$item || $item['status'] != 'active'){
+            $item = array();
+            $this->getResponse()->setStatusCode(404);
+        }
+
+        $view = new ViewModel(array(
+            'item' => $item,
+        ));
+        return $view; 
+    }
+
+    public function groupsAction()
     {
         $page = $this->params()->fromQuery('page', 1);
         $query = array(
@@ -296,6 +330,40 @@ class UserController extends ActionController
     }
 
     public function eventAction()
+    {
+        $id = $this->params('event_id');
+        $itemModel = Api::_()->getModel('Event\Model\Event'); 
+        $item = $itemModel->getEventdata($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+
+        if(!$item || ($item['eventStatus'] != 'finished' && $item['eventStatus'] != 'active')){
+            $item = array();
+            $this->getResponse()->setStatusCode(404);
+        }
+
+        $view = new ViewModel(array(
+            'item' => $item,
+        ));
+        return $view; 
+    }
+
+    public function eventsAction()
     {
         $page = $this->params()->fromQuery('page', 1);
         $query = array(
