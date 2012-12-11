@@ -6,6 +6,7 @@ use Eva\Api,
     Eva\View\Model\ViewModel;
 use Core\Auth;
 use Epic\Form;
+use Eva\Date\Calendar;
 
 class EventController extends ActionController
 {
@@ -51,7 +52,12 @@ class EventController extends ActionController
         
         $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'event_id'));
 
+        $startDay = $this->params()->fromQuery('start');
+        $calendar = new Calendar();
+        $calendarArray = $calendar->toArray();
+
         return array(
+            'calendar' => $calendarArray,
             'form' => $form,
             'items' => $items,
             'query' => $query,

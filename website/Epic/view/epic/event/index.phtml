@@ -4,6 +4,7 @@ $title = $this->_($title);
 $this->headTitle($title, 'SET');
 $items = $this->items;
 
+
 $form = new Event\Form\EventUserForm();
 $form
 ->setView($this)
@@ -22,6 +23,11 @@ $eventSearchForm->setView($this)
      ->setAction($this->uri('/events/'))
      ->prepare();
 
+
+$calendar = $this->calendar;
+$prevPath = $this->prevPath;
+$nextPath = $this->nextPath;
+$dayPath = $this->dayPath;
 ?>
 
 <div class="container">
@@ -181,6 +187,46 @@ $eventSearchForm->setView($this)
                             <?endfor?>
                         </div>
                     </div>
+
+                    <table class="event-calendar table table-bordered table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <td class="prev">
+                                    <a href="<?=$this->uri($prevPath, array('start' => $calendar['prev']['startDay']))?>"><i class="icon-large icon-chevron-left highlight"></i></a>
+                                </td>
+                                <td class="switch" colspan="5"><a href="<?=$this->uri($prevPath, array('start' => $calendar['today']['startDay']))?>"><?=$calendar['monthName']?> <?=$calendar['yearName']?></a></td>
+                                <td class="next">
+                                    <a href="<?=$this->uri($prevPath, array('start' => $calendar['next']['startDay']))?>"><i class="icon-large icon-chevron-right highlight"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <?foreach($calendar['weekNames'] as $weekname):?>
+                                <th class="dow"><?=$weekname?></th>
+                                <?endforeach;?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?foreach($calendar['days'] as $week):?>
+                            <tr>
+                                <?foreach($week as $day):?>
+                                <th  title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "new" : ''?>">
+                                    <?if($day['datedb'] == $calendar['today']['datedb']):?>
+                                    <span class="today"><?=$day['day']?></span>
+                                    <?else:?>
+                                    <?=$day['day']?>
+                                    <?endif?>
+                                </th>
+                                <?endforeach;?>
+                            </tr>
+                            <tr>
+                                <?foreach($week as $day):?>
+                                <td title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "new" : ''?>">
+                                </th>
+                                <?endforeach;?>
+                            </tr>
+                            <?endforeach;?>
+                        </tbody>
+                    </table>
 
                     <div class="search-filter">
                         <form <?=$this->formAttr($eventSearchForm)?> class="form form-inline">
