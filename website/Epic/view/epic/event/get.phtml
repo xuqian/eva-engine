@@ -6,34 +6,132 @@ $items = $this->items;
 $viewAsGuest = $this->viewAsGuest;
 ?>
 
-<div class="page-inner">
-    <div class="container">
-        <div class="profile-cover">
-            <?=$this->widget('Epic', 'widgets/profilenav', $this->vars())?>
-        </div>
-    </div><!-- above container end -->
-    <div class="container">
-        <div class="profile-main">
-            <div class="row">
-                <div class="span8">
-                    <?=$this->widget('Epic', 'widgets/profilemeta', $this->vars())?>
-
-                    <div class="profile-activities">
-
-                        <div class="page-header border-header">
-                            <h3><?=$this->_($item['title']);?></h3>
+<div class="container">
+    <div class="page-bg">
+        <div class="row">
+            <div class="span4">
+                <div class="event-side">
+                    <div class="usercard media">
+                        <a class="pull-left" href="#">
+                            <img alt="userface" src="<?=$this->gravatar($user['email'], 120)?>" width="120" height="120" class="media-object"/>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?=$user['userName']?></h4>
+                            <h5>Joined Events: <span class="highlight">1234</span></h5>
+                            <div class="media">
+                                <a href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
+                                <p class="lowlight">Share your life</p>
+                            </div>
                         </div>
+                    </div>
 
-                        <article class="typo">
-                        <?=$item['Text']['content']?>
-                        </article>
-                        
-                    </div><!--profile-activities end-->
-                </div><!--left span8 end-->
-                <div class="span4">
-                    <?=$this->widget('Epic', 'widgets/profileside', $this->vars())?>
-                </div><!--right span4 end-->
-            </div><!--row end-->
-        </div><!--profil-main end-->
-    </div><!--container end-->
-</div><!--page inner end-->
+
+                    <div class="event-subscription">
+                        <p>Receive free new event notifications:</p>
+                        <form>
+                            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
+                        </form>
+                    </div>
+
+
+                    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+                        <div class="page-header border-header">
+                            <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+                        </div>
+                        <div class="side-blog-list">
+                            {% if(o.items.length > 0) { %}
+                                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                    <div class="item">
+                                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                                        <div class="item-inline item-text">
+                                            <div class="text-content">
+                                                <div class="item-title">
+                                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                                </div>
+                                                <p>{%=item.Text.Preview%}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% } %}
+                                {% } %}
+                        </div>
+                    </script>
+                    <div class="side-ad-list">
+                        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
+                        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
+                    </div>
+                </div>
+            </div><!--page main right end-->
+            <div class="span8">
+                <div class="event-main">
+
+                    <div class="event-detail media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s240-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="240" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href=""><?=$item['title'];?></a></h4>
+                            <div class="media typo">
+                                <dl class="dl-horizontal">
+                                    <dt>Start Time:</dt>
+                                    <dd>A description list is perfect for defining terms.</dd>
+                                    <dt>End Time:</dt>
+                                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                    <dt>Event Owner</dt>
+                                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                                    <dd></dd>
+                                </dl>
+                                <p><span class="highlight">123</span> Members Joined</p>
+                                <p><a href="" class="btn btn-orange"><i class="icon-user"></i> Join Now</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-header border-header">
+                        <h3>Event Members</h3>
+                    </div>
+
+                    <div class="side-user-list">
+                        <ul class="thumbnails">
+                            <?for($i = 0; $i < 32; $i++):?>
+                            <li>
+                            <a class="thumbnail" href="#">
+                                <img src="<?=$this->link('/src/epic/css/img/face-04.jpg')?>" alt="" class="img-rounded" width="30" height="30" />
+                            </a>
+                            </li>
+                            <?endfor;?>
+                        </ul>
+                    </div>
+
+                    <div class="page-header border-header">
+                        <h3>Event Description</h3>
+                    </div>
+
+
+                    <article class="typo typocn">
+                    <?=$item['Text']['content']?>
+                    </article>
+
+                    <div class="page-header border-header">
+                        <small class="pull-right"><a href="" class="btn btn-small btn-gray"><i class="icon-plus"></i>Add image</a></small>
+                        <h3>Event Images</h3>
+                    </div>
+
+
+                    <div>
+                        <ul class="thumbnails">
+                            <?for($i=0;$i<8;$i++):?>
+                            <li class="thumbnail"><a href="#"><img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt=""></a></li>
+                            <?endfor?>
+                        </ul>
+                    </div>
+
+                    <div class="page-header border-header">
+                        <h3>Event Talking</h3>
+                    </div>
+
+                </div><!--event main end-->
+            </div><!--page main left end-->
+        </div>
+    </div><!-- page-bg end-->
+</div><!--container end-->

@@ -25,6 +25,7 @@ $eventSearchForm->setView($this)
 
 
 $calendar = $this->calendar;
+$week = $this->week;
 $prevPath = $this->prevPath;
 $nextPath = $this->nextPath;
 $dayPath = $this->dayPath;
@@ -39,13 +40,11 @@ $dayPath = $this->dayPath;
         <div class="span8">
             <nav class="nav-week">
             <ul>
-                <li class="first"><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
-                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
-                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
-                <li><a href="#" class="active"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
-                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
-                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
-                <li><a href="#"><span class="day">Monday</span><span class="date">1st Dec</span></a></li>
+                <?foreach($week as $day):?>
+                <li>
+                <a href="#" class="<?if($day['datedb'] == $calendar['today']['datedb']):?>active<?endif?>"><span class="day"><?=$this->Datetime($day['datedb'], null, 'D')?></span><span class="date"><?=$this->Datetime($day['datedb'], null, 'jS M')?></span></a>
+                </li>
+                <?endforeach?>
                 <li><a href="#"><i class="icon-calendar"></i></a></li>
             </ul>
             </nav>

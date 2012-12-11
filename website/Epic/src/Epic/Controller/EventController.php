@@ -55,9 +55,23 @@ class EventController extends ActionController
         $startDay = $this->params()->fromQuery('start');
         $calendar = new Calendar();
         $calendarArray = $calendar->toArray();
+        $today = $calendarArray['today']['datedb'];
+        $week = array();
+        foreach($calendarArray['days'] as $weekArray){
+            if($week){
+                break;
+            }
+            foreach($weekArray as $day){
+                if($day['datedb'] == $today){
+                    $week = $weekArray;
+                    break;
+                }
+            }
+        }
 
         return array(
             'calendar' => $calendarArray,
+            'week' => $week,
             'form' => $form,
             'items' => $items,
             'query' => $query,

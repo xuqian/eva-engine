@@ -1070,7 +1070,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-header{height:100px;background:#333333;color:#e8b116;}.event-header h2{margin-left:40px;line-height:100px;font-size:50px;}
 .event-header .nav-week{margin:15px 0;}.event-header .nav-week li{margin-left:20px;float:left;}
 .event-header .nav-week .first{margin-left:0;}
-.event-header .nav-week a{display:block;color:#CCC;font-size:14px;text-align:center;padding:10px;width:50px;height:50px;border:1px solid #333;}.event-header .nav-week a:hover,.event-header .nav-week a.active{background:#4E4E4E;border:1px solid #CCC;color:#e8b116;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.event-header .nav-week a{display:block;color:#CCC;font-size:12px;text-align:center;padding:10px;width:50px;height:50px;border:1px solid #333;}.event-header .nav-week a:hover,.event-header .nav-week a.active{background:#4E4E4E;border:1px solid #CCC;color:#e8b116;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .event-header .nav-week .day{font-size:15px;margin-bottom:5px;}
 .event-header .nav-week .icon-calendar{margin-left:-5px;line-height:50px;font-size:50px;}
 .event-header .nav-week span{display:block;}
@@ -1098,3 +1098,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-calendar .day.new,.event-calendar .day.old{color:#999;font-weight:normal;}
 .event-calendar .switch{font-weight:bold;}
 .event-calendar .today{padding:1px 5px;background:#e1500d;color:#FFF;}
+.event-detail .pull-left{margin-right:30px;}
+.event-detail .media-heading{font-size:20px;font-weight:bold;}
+.event-detail .dl-horizontal dt{text-align:left;width:100px;}
+.event-detail .dl-horizontal dd{margin-left:100px;}
