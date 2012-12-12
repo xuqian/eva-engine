@@ -7,17 +7,29 @@ return array(
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../layout/layout.phtml',
             'layout/welcome' => __DIR__ . '/../layout/welcome.phtml',
+            'layout/index' => __DIR__ . '/../layout/index.phtml',
         ),
     ),
     'router' => array(
         'routes' => array(
-            'home' => array(
+            'index' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
                         'controller' => 'IndexController',
                         'action'     => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+            'home' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/home[/]',
+                    'defaults' => array(
+                        'controller' => 'IndexController',
+                        'action'     => 'home',
                     ),
                 ),
                 'priority' => 2,
@@ -98,45 +110,6 @@ return array(
                     'defaults' => array(
                         'controller' => 'LoginController',
                         'action' => 'index',
-                    ),
-                ),
-                'priority' => 2,
-            ),
-
-            //For test
-            'pricing' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/pricing[/]',
-                    'defaults' => array(
-                        'controller' => 'UserController',
-                        'action' => 'pricing',
-                    ),
-                ),
-                'priority' => 2,
-            ),
-            'findfriends' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/findfriends[/]',
-                    'defaults' => array(
-                        'controller' => 'UserController',
-                        'action' => 'contacts',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'step' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '[/][:id][/]',
-                            'constraints' => array(
-                                'id' => 'add|invite'
-                            ),
-                            'defaults' => array(
-                                'action' => 'invite'
-                            )
-                        )
                     ),
                 ),
                 'priority' => 2,

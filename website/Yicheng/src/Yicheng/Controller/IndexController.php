@@ -12,4 +12,12 @@ class IndexController extends ActionController
         $view = new ViewModel();
         return $view;
     }
+
+
+    public function homeAction()
+    {
+        $this->layout('layout/index');
+        $view = new ViewModel();
+        return $view;
+    }
 }
