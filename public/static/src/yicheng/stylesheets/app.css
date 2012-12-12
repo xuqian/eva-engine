@@ -98,8 +98,12 @@ a:hover{
 	/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/
 }
 
+#second .medium-para{
+	color:#FFF;
+}
+
 #second .bg{
-	background: url(../images/bg/02a.png) 50% 0 no-repeat fixed;
+	/*background: url(../images/bg/02a.png) 50% 0 no-repeat fixed;*/
 	min-height: 1300px;
 	margin: 0 auto;
 	position: absolute;
