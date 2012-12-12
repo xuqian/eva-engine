@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?
+$config = $this->getHelperPluginManager()->getServiceLocator()->get('config');
+$thumbUrl = $config['upload']['storage']['default']['thumburl'];
+?><!DOCTYPE html>
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -40,6 +43,7 @@
     </head>
 
     <body>
+
 
         <!--HEADER AND NAVIGATION AREA : STARTS-->
         <div id="full-arrow" class="on-normalscreen">
@@ -277,17 +281,17 @@
                     <ul class="myworks group clearfix"> 
                         <?for($i = 1; $i <=7; $i++):?>
                         <li class="item" data-id="id-shijing-<?=$i?>" data-type="shijing">
-                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shijing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产实景</h4></div><img src="http://s.e.com/thumb/album/shijing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shijing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产实景</h4></div><img src="<?=$thumbUrl?>album/shijing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
                         </li>
                         <?endfor;?>
                         <?for($i = 1; $i <=9; $i++):?>
                         <li class="item" data-id="id-yuanlin-<?=$i?>" data-type="yuanlin">
-                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/yuanlin/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓园林景观</h4></div><img src="http://s.e.com/thumb/album/yuanlin/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/yuanlin/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓园林景观</h4></div><img src="<?=$thumbUrl?>album/yuanlin/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
                         </li>
                         <?endfor;?>
                         <?for($i = 1; $i <=14; $i++):?>
                         <li class="item" data-id="id-shinei-<?=$i?>" data-type="shinei">
-                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shinei/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓室内精装效果</h4></div><img src="http://s.e.com/thumb/album/shinei/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shinei/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓室内精装效果</h4></div><img src="<?=$thumbUrl?>album/shinei/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
                         </li>
                         <?endfor;?>
 
@@ -363,7 +367,7 @@
                         <div class="row">
                             <?for($i = 1; $i <=24; $i++):?>
                             <article class="two columns">
-                            <a data-fancybox-group="gallery2" class="fancybox-effects-d" href="<?=$this->link('/upload/album/huxing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产户型</h4></div><img src="http://s.e.com/thumb/album/huxing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                            <a data-fancybox-group="gallery2" class="fancybox-effects-d" href="<?=$this->link('/upload/album/huxing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产户型</h4></div><img src="<?=$thumbUrl?>album/huxing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
                             </article>
                             <?endfor;?>
                         </div>
