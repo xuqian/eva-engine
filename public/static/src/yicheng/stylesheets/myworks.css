@@ -13,7 +13,7 @@ ul { list-style: none; }
 
 
 .demo-top { margin-bottom: 0.35714em; padding-bottom: 0.5em; border-bottom: 3px solid #000; }
-.credits { font-family: 'Quattrocento', serif; font-size: 1.28571em; line-height: 1.16667em; text-align: center; color: #444; margin-bottom: 2.66667em; }
+.credits {  font-size: 1.28571em; line-height: 1.16667em; text-align: center; color: #444; margin-bottom: 2.66667em; }
 .back-to-post { border-top: 1px solid #000; margin-bottom: 3em; }
 
 
@@ -26,7 +26,7 @@ color:#fff !important; }
 .filter li:after { content: "/"; color:#999;  font-size:32px;}
 .filter li:last-child:after { content: "";}
 .filter a { padding: 0 10px; color: #fff; text-decoration: none;
-font-family:"Ostrich_Sans_Regular"; font-size:32px; }
+ font-size:32px; }
 .filter a:hover, .current a { color: #00D3D3; }
 
 /* myworks Items */
