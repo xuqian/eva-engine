@@ -26,7 +26,7 @@
     <script src="<?=$this->link('/src/epic/js/init.js')?>"></script>
 </head>
 
-<body class="prereg">
+<body>
 
 
     <header id="header">
@@ -43,8 +43,8 @@
                     <ul class="nav nav-main">
                         <li data-highlight-url="^/home/?$"><a href="<?=$this->url('home')?>"><?=$this->_('Home')?></a></li>
                         <li class="" data-highlight-url="^/pages/magazine/?$"><a href="<?=$this->uri('/pages/magazine/')?>"><?=$this->_('Magazine')?></a></li>
-                        <li class="" data-highlight-url="^/events/?"><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
-                        <li class="" data-highlight-url="^/pages/?$"><a href="<?=$this->uri('/pages/')?>"><?=$this->_('Topics')?></a></li>
+                        <li class="" data-highlight-url="^/events.*"><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
+                        <li class="" data-highlight-url="^/groups.*"><a href="<?=$this->uri('/groups/')?>"><?=$this->_('Groups')?></a></li>
                         <li class="" data-highlight-url="^/user.*"><a href="<?=$this->uri('/user/')?>"><?=$this->_('Members')?></a></li>
                         <li class="" data-highlight-url="^/share.*$"><a href="<?=$this->uri('/share/')?>"><?=$this->_('Share')?></a></li>
                     </ul>
