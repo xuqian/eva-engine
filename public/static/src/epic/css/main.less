@@ -1815,7 +1815,7 @@ body, .en body, .fr body {
 	}
 }
 
-.groupcard {
+.group-usercard {
 	.media-heading {
 		color:#000;
 		font-size:14px;
@@ -1826,6 +1826,43 @@ body, .en body, .fr body {
 		margin-top:0;
 	}
 }
+
+.groupcard {
+	background:#FFF;
+	border:1px solid #CCC;
+	padding:15px;
+	margin-bottom:30px;
+
+	h5 {
+		font-size:16px;
+		font-weight:bold;
+		color:#000;
+	}
+	.media-heading {
+		font-size:20px;
+	}
+
+	.media {
+		margin-top:10px;
+	}
+	.content {
+		height:60px;
+		overflow:hidden;
+		color:#999;
+	}
+
+	.summary{
+		line-height:25px;
+	}
+	.summary .highlight{
+		margin-right:5px;
+		font-size:18px;
+		line-height:25px;
+	}
+
+}
+
+
 .group-mine {
 	li a {
 		display:block;
@@ -1952,5 +1989,72 @@ body, .en body, .fr body {
 		background-color:#6AA50B;
 		border-left-color:#5C8801;
 		border-right-color:#5C8801;
+	}
+}
+
+.group-forum {
+	font-size:14px;
+
+	thead th {
+		font-weight:normal;
+	}
+	.title {
+		font-weight:bold;
+	}
+	.comment-count a{
+		font-weight:bold;
+	}
+	.author a {
+		color:#999;
+	}
+	.comment-time {
+		color:#999;
+	}
+}
+
+.group-tab {
+	margin-bottom:10px;
+	font-size:15px;
+
+	li{
+		margin-right:5px;
+	}
+
+	li a {
+		color:#333;
+		#gradient > .vertical(#FFF, #E7E7E7);
+		border:1px solid #C0C0C0;
+		border-bottom-color:#DDD;
+	}
+	.active a {
+		color:@orange;
+		#gradient > .vertical(#ECE9E0, #E7E4D3);
+		border:1px solid #BCAEA1;
+		border-bottom-color:#DDD;
+	}
+
+	
+}
+
+.group-member-list {
+	.page-header {
+		margin-bottom:10px;
+	}
+	h5 {
+		color:#000;
+		font-size:14px;
+	}
+	li {
+		.inline-block();
+		width:49%;
+		margin-bottom:10px;
+	}
+
+	img {
+		margin-right:10px;
+	}
+
+	a {
+		color:#000;
 	}
 }
