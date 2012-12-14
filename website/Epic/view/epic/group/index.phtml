@@ -25,87 +25,290 @@ $groupSearchForm->setView($this)
 ?>
 
 <div class="container">
-    <div class="normal-page">
-        <div class="page-main"><div class="row"><div class="span12">
-                    <div class="row">
-                        <div class="span8">
-                            <div class="page-main-header">
-                                <h3>
-                                    <?=$this->_('Groups')?>
-                                    <?if($this->query['keyword']):?>
-                                    | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
-                                    <?endif?>
-                                </h3>
+    <header class="group-header">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="nav-collapse">
+                    <ul class="nav nav-main">
+                        <li data-highlight-url="^/groups/\?category=hot" class="active"><a href="<?=$this->uri('/groups/?category=hot')?>"><?=$this->_('Hot')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=gastronomy"><a href="<?=$this->uri('/groups/?category=gastronomy')?>"><?=$this->_('Gastronomy')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=wine"><a href="<?=$this->uri('/groups/?category=wine')?>"><?=$this->_('Wine')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=spirit"><a href="<?=$this->uri('/groups/?category=spirit')?>"><?=$this->_('Spirit')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=cocktail"><a href="<?=$this->uri('/groups/?category=cocktail')?>"><?=$this->_('Cocktail')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=hotel-resort"><a href="<?=$this->uri('/groups/?category=hotel-resort')?>"><?=$this->_('Hotel & Resort')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=art-design"><a href="<?=$this->uri('/groups/?category=art-design')?>"><?=$this->_('Art & Design')?></a></li>
+                        <li data-highlight-url="^/groups/\?category=event"><a href="<?=$this->uri('/groups/?category=event')?>"><?=$this->_('Event')?></a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+            </div>
+        </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+    </header>
+</div>
+
+<div class="container">
+    <div class="page-bg">
+        <div class="row">
+
+            <div class="span8">
+                <div class="group-main">
+
+                    <div id="myCarousel" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="https://lh6.googleusercontent.com/-NXbW5HO17mA/UJEZG-4xLEI/AAAAAAAC-Lw/9Qxbhz2_3H0/s1152/Fabrizio_Musacchio_018_120804_1106_muenchen_200_HDR_pan_v01.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <h4>First Thumbnail label</h4>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                </div>
                             </div>
-                            <div class="search-filter">
-                                <form <?=$this->formAttr($groupSearchForm)?> class="form form-inline">
-                                    <?=$groupSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
-                                    <button class="btn" type="submit"><?=$this->_('Filter Groups')?></button>
-                                </form>
+                            <div class="item">
+                                <img src="https://lh5.googleusercontent.com/-FJpAsu3eJwM/UIsrsb_o16I/AAAAAAAAWe0/zfDy_7gREak/s1152/_KMC7744.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <h4>Second Thumbnail label</h4>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                </div>
                             </div>
-                            <div class="user-list vlist">
-                                <?foreach($items as $item):?>
-                                <div class="item">
-                                    <div class="item-inline item-text">
-                                        <div class="item-title">
-                                            <h2><a href="<?=$this->uri('/groups/' . $item['groupKey'])?>" class="item-user"><?=$item['groupName']?></a></h2>
-                                        </div>
-                                        <div class="item-meta">
-                                            <table class="table-condensed">
-                                                <tbody>
-                                                    <tr>
-                                                        <td><?=$this->_('Create Time')?>: 
-                                                            <?=$item['createTime']?>
-                                                        </td>
-                                                        <td><?=$this->_('Members')?> : <a href="">0</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="item-content">
-                                            <p><?=$this->_('Summary')?> : <?=$item['summary']?></p>
-                                        </div>
-                                    </div>
-                                    <div class="item-absolute item-action">
+                            <div class="item">
+                                <img src="https://lh5.googleusercontent.com/-_A4lWEFZIRM/UEeptqGLA3I/AAAAAAAABro/x2rmlVafb-A/s1000/_MG_2471.jpg" alt="">
+                                <div class="carousel-caption">
+                                    <h4>Third Thumbnail label</h4>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                    </div>
 
-                                        <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
-                                        <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
-                                        <form <?=$this->formAttr($unjoinForm)?>>
-                                            <?=$unjoinForm->restful();?>
-                                            <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                            <?=$unjoinForm->helper('user_id', array('class' => ''))?>
-                                            <?=$this->callback()?>
-                                            <button class="btn btn-small item-action-main">Unjoin</button>
-                                        </form>
-                                        <?else:?>
-                                        <form <?=$this->formAttr($form)?>>
-                                            <?=$form->restful();?>
-                                            <?=$form->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                            <?=$form->helper('user_id', array('class' => ''))?>
-                                            <?=$this->callback()?>
-                                            <button class="btn btn-small item-action-main">Join</button>
-                                        </form>
-                                        <?endif?>
+                    <div class="page-header border-header">
+                        <h3>New Groups</h3>
+                    </div>
+
+                    <div class="group-thumbnails">
+                        <ul class="thumbnails">
+                            <?for($i=0;$i<6;$i++):?>
+                            <li><a href="#">
+                                <img width="90" height="90" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
+                                <p>Thumbnail caption...</p>
+                            </a></li>
+                            <?endfor?>
+                        </ul>
+                    </div>
 
 
+                    <div class="page-header border-header">
+                        <h3>Hot Groups</h3>
+                    </div>
+
+                    <div class="group-thumbnails">
+                        <ul class="thumbnails">
+                            <?for($i=0;$i<12;$i++):?>
+                            <li><a href="#">
+                                <img width="90" height="90" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
+                                <p>Thumbnail caption...</p>
+                            </a></li>
+                            <?endfor?>
+                        </ul>
+                    </div>
+
+                    <div class="page-header border-header">
+                        <h3>Topics of Groups</h3>
+                    </div>
+
+                    <div class="group-topics">
+                        <?for($i=0;$i<8;$i++):?>
+                        <div class="topic-wrap <?=$i%2 == 0 ? 'odd' : 'even'?>">
+                            <div class="topic">
+                                <div class="topic-heading">
+                                    <small class="pull-right"><a href="">More</a></small>
+                                    <h4><a href="">Gastronomy</a></h4>
+                                </div>
+                                <div class="topic-body-wrap">
+                                    <div class="topic-body">
+                                        <ul>
+                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
+                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
+                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
+                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
+                                        </ul>
                                     </div>
                                 </div>
-                                <?endforeach?>
-                            </div><!--activity-list end-->
-
-                            <?if($this->paginator):?>
-                            <?=$this->paginator->setPath('/groups/')->setBaseQuery($this->query);?>
-                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                            <?endif;?>
-
-                        </div><!--page main left end-->
-                        <div class="span3">
-                            <div class="page-extra">
-                                <?=$this->widget('Epic', 'widgets/userextra')?>
                             </div>
-                        </div><!--page main right end-->
+                        </div>
+                        <?endfor?>
                     </div>
-        </div></div></div><!--page-main end-->
-    </div><!-- normal end-->
+
+                    <div class="page-main-header">
+                        <h3>
+                            <?=$this->_('Groups')?>
+                            <?if($this->query['keyword']):?>
+                            | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
+                            <?endif?>
+                        </h3>
+                    </div>
+                    <div class="search-filter">
+                        <form <?=$this->formAttr($groupSearchForm)?> class="form form-inline">
+                            <?=$groupSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                            <button class="btn" type="submit"><?=$this->_('Filter Groups')?></button>
+                        </form>
+                    </div>
+                    <div class="user-list vlist">
+                        <?foreach($items as $item):?>
+                        <div class="item">
+                            <div class="item-inline item-text">
+                                <div class="item-title">
+                                    <h2><a href="<?=$this->uri('/groups/' . $item['groupKey'])?>" class="item-user"><?=$item['groupName']?></a></h2>
+                                </div>
+                                <div class="item-meta">
+                                    <table class="table-condensed">
+                                        <tbody>
+                                            <tr>
+                                                <td><?=$this->_('Create Time')?>: 
+                                                    <?=$item['createTime']?>
+                                                </td>
+                                                <td><?=$this->_('Members')?> : <a href="">0</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="item-content">
+                                    <p><?=$this->_('Summary')?> : <?=$item['summary']?></p>
+                                </div>
+                            </div>
+                            <div class="item-absolute item-action">
+
+                                <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
+                                <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
+                                <form <?=$this->formAttr($unjoinForm)?>>
+                                    <?=$unjoinForm->restful();?>
+                                    <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main">Unjoin</button>
+                                </form>
+                                <?else:?>
+                                <form <?=$this->formAttr($form)?>>
+                                    <?=$form->restful();?>
+                                    <?=$form->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$form->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main">Join</button>
+                                </form>
+                                <?endif?>
+
+
+                            </div>
+                        </div>
+                        <?endforeach?>
+                    </div><!--activity-list end-->
+
+                    <?if($this->paginator):?>
+                    <?=$this->paginator->setPath('/groups/')->setBaseQuery($this->query);?>
+                    <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                    <?endif;?>
+                </div><!--group main end-->
+            </div><!--page main left end-->
+            <div class="span4">
+                <div class="group-side">
+                    <div class="groupcard media">
+                        <a class="pull-left" href="#">
+                            <img alt="userface" src="<?=$this->gravatar($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?=$user['userName']?></h4>
+                            <div class="media">
+                                <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-gray btn-small"><i class="icon-plus"></i> Start New Group</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-header">
+                        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+                        <h4 class="txt-bold">My Groups (20)</h4>
+                    </div>
+                    <div class="group-mine">
+                        <ul>
+                            <?for($i=0;$i<5;$i++):?>
+                            <li><a href="#">
+                                <img width="50" height="50" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
+                                <p>Thumbnail caption...</p>
+                            </a></li>
+                            <?endfor?>
+                        </ul>
+                        <p><a href="#">My Topics (123)</a></p>
+                        <p><a href="#">My Comments (2833)</a></p>
+                    </div>
+
+
+                    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+                        <div class="page-header border-header">
+                            <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>">View All</a></small>
+                            <h4>Hot Topics  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+                        </div>
+                        <div class="side-blog-list">
+                            {% if(o.items.length > 0) { %}
+                                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                    <div class="item">
+                                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                                        <div class="item-inline item-text">
+                                            <div class="text-content">
+                                                <div class="item-title">
+                                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                                </div>
+                                                <p>{%=item.Text.Preview%}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% } %}
+                                {% } %}
+                        </div>
+                    </script>
+
+                    <div class="page-header border-header">
+                        <h4>Topics  Ranks</h4>
+                    </div>
+
+                    <div class="group-ranks">
+                        <ul>
+                            <?for($i=1;$i<11;$i++):?>
+                            <li>
+                            <em class="ranknum rank<?=$i?>"><?=$i?></em>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img alt="userface" src="<?=$this->gravatar($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a class="pull-left" href="#">Sleek, intuitive, and powerful front-end framework</a></h4>
+                                    <div class="media">
+                                        <div class="row">
+                                            <span class="span1"><span class="highlight txt-bold">123</span> Topics</span>
+                                            <span class="highlight txt-bold">123</span> Members
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </li>
+                            <?endfor?>
+                        </ul>
+                    </div>
+
+
+                    <div class="side-ad-list">
+                        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
+                        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
+                    </div>
+                </div><!--right side end-->
+            </div>
+
+        </div><!--page main right end-->
+    </div><!-- page-bg end-->
 </div><!--container end-->
+
 

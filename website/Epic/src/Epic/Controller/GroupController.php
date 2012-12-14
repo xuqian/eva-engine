@@ -43,6 +43,13 @@ class GroupController extends ActionController
         
         $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'group_id'));
 
+
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+
         return array(
             'form' => $form,
             'items' => $items,
