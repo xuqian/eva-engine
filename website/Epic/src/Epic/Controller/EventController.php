@@ -114,10 +114,9 @@ class EventController extends ActionController
             'id' => $user['id'],
         ));
 
-
         list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
             'action' => 'index',
-            'user_id' => $user['id'],
+            'event_id' => $item['id'],
         ));
 
         $view = new ViewModel(array(

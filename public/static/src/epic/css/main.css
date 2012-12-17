@@ -1073,7 +1073,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-header{height:100px;background:#333333;color:#e8b116;}.event-header h2{margin-left:40px;line-height:100px;font-size:50px;}
 .event-header .nav-week{margin:15px 0;}.event-header .nav-week li{margin-left:20px;float:left;}
 .event-header .nav-week .first{margin-left:0;}
-.event-header .nav-week a{display:block;color:#CCC;font-size:12px;text-align:center;padding:10px;width:50px;height:50px;border:1px solid #333;}.event-header .nav-week a:hover,.event-header .nav-week a.active{background:#4E4E4E;border:1px solid #CCC;color:#e8b116;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.event-header .nav-week a{display:block;color:#CCC;font-size:12px;text-align:center;padding:10px 8px;width:54px;height:50px;border:1px solid #333;}.event-header .nav-week a:hover,.event-header .nav-week a.active{background:#4E4E4E;border:1px solid #CCC;color:#e8b116;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .event-header .nav-week .day{font-size:15px;margin-bottom:5px;}
 .event-header .nav-week .icon-calendar{margin-left:-5px;line-height:50px;font-size:50px;}
 .event-header .nav-week span{display:block;}
@@ -1116,8 +1116,8 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .group-topics .topic-wrap{position:relative;display:inline-block;zoom:1;*display:inline;width:48%;margin:0 20px 30px 0;z-index:1;}
 .group-topics .topic-wrap.even{margin-right:0;}
 .group-topics .topic{position:relative;background:#FFF;border:1px solid #CCC;z-index:2;}
-.group-topics .topic-wrap:before,.group-topics .topic-wrap:after{position:absolute;content:"";bottom:15px;left:10px;width:50%;top:80%;max-width:300px;background:#000000;-webkit-box-shadow:0 15px 10px #000000;-moz-box-shadow:0 15px 10px #000000;box-shadow:0 15px 10px #000000;-webkit-transform:rotate(-3deg);-moz-transform:rotate(-3deg);-o-transform:rotate(-3deg);-ms-transform:rotate(-3deg);transform:rotate(-3deg);}
-.group-topics .topic-wrap:after{-webkit-transform:rotate(3deg);-moz-transform:rotate(3deg);-o-transform:rotate(3deg);-ms-transform:rotate(3deg);transform:rotate(3deg);right:10px;left:auto;}
+.group-topics .topic-wrap:before,.group-topics .topic-wrap:after{position:absolute;content:"";bottom:15px;left:10px;width:50%;top:80%;max-width:300px;background:#000000;-webkit-box-shadow:0 15px 10px #000000;-moz-box-shadow:0 15px 10px #000000;box-shadow:0 15px 10px #000000;-webkit-transform:rotate(-3deg);-moz-transform:rotate(-3deg);-ms-transform:rotate(-3deg);-o-transform:rotate(-3deg);transform:rotate(-3deg);}
+.group-topics .topic-wrap:after{-webkit-transform:rotate(3deg);-moz-transform:rotate(3deg);-ms-transform:rotate(3deg);-o-transform:rotate(3deg);transform:rotate(3deg);right:10px;left:auto;}
 .group-topics .topic-heading{margin:10px 15px;padding-bottom:10px;border-bottom:1px solid #CCC;}.group-topics .topic-heading h3,.group-topics .topic-heading h4,.group-topics .topic-heading h5{font-size:14px;font-weight:bold;}
 .group-topics .topic-heading small{font-size:12px;line-height:30px;}
 .group-topics .topic-body-wrap{margin-bottom:1px;border-bottom:1px solid #CCC;}

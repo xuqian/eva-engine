@@ -10,7 +10,7 @@ $form = new Activity\Form\MessageCreateForm();
 $form->useSubFormGroup()
      ->setMethod('post')
      ->setView($this)
-     ->setAction($this->uri('/activity/'))
+     ->setAction($this->uri('/event/feed/'))
      ->prepare();
 ?>
 
@@ -145,11 +145,12 @@ $form->useSubFormGroup()
                                 <?=$form->helper('messageType', 'formHidden', array('class' => ''))?>        
                                 <?=$form->helper('reference_id', array('class' => ''))?>
                                 <?=$form->helper(array('MessageFile', 'file_id'), 'formHidden', array('class' => ''))?>
+                                <input type="hidden" name="event_id" value="<?=$this->item['id']?>"> 
                                 <?=$this->callback()?>
                                 <fieldset class="form">
                                     <div class="activity-box-wrap">
                                         <div class="activity-box-content">
-                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5))?>        
+                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5, 'value' => 'In Event :' . $this->serverUrl() . '/events/' . $this->item['urlName']))?>        
                                         </div>
                                         <div class="activity-box-buttons">
                                             <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
