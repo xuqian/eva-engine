@@ -153,15 +153,17 @@ $form->useSubFormGroup()
                                                 </div>
                                             </div>   
                                         </fieldset>
+
+                                        <fieldset class="">
+                                            <?if($this->hasModule('File')):?>
+                                                <?=$form->helper(array('EventFile', 'file_id'), '')?>
+                                            <?endif?>
+                                        </fieldset>
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
                                         </div>
                                     </form>
                                 </div><!--main form end-->
-                                <?if($this->paginator):?>
-                                <?=$this->paginator->setPath('/my/blog/')->setBaseQuery($this->query);?>
-                                <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                                <?endif;?>
 
                             </div><!--page main left end-->
                             <div class="span3">
