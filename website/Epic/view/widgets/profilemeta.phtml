@@ -18,7 +18,7 @@ function checkOauth($key, $user)
     }
     $oauth = $user['Oauth'];
     foreach($oauth as $oauthinfo){
-        if($key == $oauthinfo['adapterKey']) {
+        if($key === $oauthinfo['adapterKey']) {
             return true;
         }
     }
@@ -158,9 +158,9 @@ function isPaidRole($roles)
                 <td colspan="2" class="social">
                 <?endif?>
                     Social Networking : 
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">facebook</span></a>
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">twitter</span></a>
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="lsf symbol <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol facebook <?=checkOauth('facebook', $user) ? 'highlight' : ''?>">facebook</span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>">twitter</span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="lsf symbol flickr <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
                     <!--
                     <a href="#"><i class="icon-pinterest"></i></a>
                     <a href="#"><i class="icon-google-plus"></i></a>
