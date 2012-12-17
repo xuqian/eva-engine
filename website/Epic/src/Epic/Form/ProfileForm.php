@@ -146,7 +146,7 @@ class ProfileForm extends \User\Form\ProfileForm
                      ),
 
                      array(
-                         'label' => 'Africa & Middle EAST',
+                         'label' => 'Amercia',
                          'options' => array(
                              array(
                                  'label' => 'Las Vegas',
@@ -188,7 +188,7 @@ class ProfileForm extends \User\Form\ProfileForm
                      ),
 
                      array(
-                         'label' => 'Africa & Middle EAST',
+                         'label' => 'Asia',
                          'options' => array(
                              array(
                                  'label' => 'Shanghai',
