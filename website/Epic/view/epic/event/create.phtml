@@ -38,11 +38,11 @@ $form->useSubFormGroup()
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
                                 <div class="blog-list vlist">
-                                    <form <?=$this->formAttr($form)?> class="form">
+                                    <form <?=$this->formAttr($form)?> class="form event-create-form">
                                         <?=$form->restful();?>
                                         <?=$form->helper('id');?>
 
-                                        <fieldset class="">
+                                        <fieldset class="row">
                                             <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
                                                 <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls docs-input-sizes">
@@ -58,9 +58,11 @@ $form->useSubFormGroup()
                                                     <div class="help-block"><?=$form->helper('location', 'formElementErrors')?></div>
                                                 </div>
                                             </div>  
-                                        </fieldset>
-                                        
-                                        <fieldset class="">
+
+                                            <div class="control-group span4">
+                                                <?=$this->widget('File', 'file/upload')?>
+                                            </div>  
+
                                             <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?> span3">
                                                 <?=$form->helper('startDay', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
@@ -187,129 +189,10 @@ $form->useSubFormGroup()
 </div><!--container end-->
 
 <script>
-eva.runtime = function(){
-      
-    eva.callback.connect = function(item, parentWindow){
-        $("#file-form-fileconnectform-file-id").val(item.attr("data-connect-id"));
-        var data = $.parseJSON(item.attr('data-connect-json'));
-        $("#post-image").attr("src", data.Thumb);
-        $.fn.colorbox.close();
-    }
-    eva.loadcss(eva.s('/lib/js/jquery/colorbox/colorbox.css'));
-    eva.loader(eva.s('/lib/js/jquery/colorbox/jquery.colorbox.js'), function(){
-        $("#connect-image").colorbox({
-            iframe:true,
-                width:"80%",
-                height:"80%"
-        });
+    var form = $(".event-create-form");
+    var uploader = $('#singlefileupload');
+    uploader.bind('fileuploaddone', function (e, data) {
+            var file = data.result[0];
+            form.find('input[name="EventFile[file_id]"]').val(file.id);
     });
-
-
-    $("#save-draft").on('click', function(){
-        $("#blog-form-posteditform-status").val('draft');
-    });
-
-    var editor = $("#blog-form-textform-content");
-
-    var editorMd;
-    var mdInited = false;
-    var initMd = function(_editor){
-        if(true === mdInited) {
-            return;
-        }
-        eva.loadcss(eva.s(['/lib/js/codemirror/lib/codemirror.css', '/lib/js/codemirror/theme/ambiance.css']));
-        eva.loader(eva.s(['/lib/js/codemirror/lib/codemirror.js', '/lib/js/codemirror/mode/xml/xml.js', '/lib/js/codemirror/mode/markdown/markdown.js', '/lib/js/showdown/showdown.js']), function(){
-            mdInited = true;
-            builtMdEditor(_editor);
-        });
-    }
-    var builtMdEditor = function(_editor){
-        if(!mdInited){
-            initMd(_editor); 
-            return;
-        }
-        editorMd = CodeMirror.fromTextArea(_editor[0], {
-            "mode":"markdown",
-                "theme":"ambiance",
-                "lineNumbers":true,
-                "lineWrapping":true,
-                onChange : function(){
-                }
-        });	
-    }
-    var removeMdEditor = function(){
-        if(!editorMd){
-                return;
-            }
-            editorMd.toTextArea();
-    }
-
-
-    var editorHtml;
-    var htmlInited = false;
-    var initHtml = function(_editor){
-            if(true === htmlInited) {
-                return;
-            }
-            eva.loader(eva.s(["/lib/js/tiny_mce/jquery.tinymce.js"]), function(){
-                    htmlInited = true;
-                    builtHtmlEditor(_editor);
-            });
-    }
-    var builtHtmlEditor = function(_editor){
-            if(!htmlInited){
-                    initHtml(_editor); 
-                    return;
-            }
-
-			var mceGlobelConfig = {
-				mode : "textareas",
-				theme : "advanced",
-				plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-
-				// Theme options
-                theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink",
-                theme_advanced_buttons2 : "formatselect,fontselect,fontsizeselect,|,forecolor,backcolor,image,media",
-                theme_advanced_buttons3 : "",
-				theme_advanced_toolbar_location : "top",
-				theme_advanced_toolbar_align : "left",
-				theme_advanced_statusbar_location : "bottom",
-				theme_advanced_resizing : true,
-				
-				remove_linebreaks : false,
-				extended_valid_elements : "pre[cols|rows|disabled|name|readonly|class]",
-				script_url : eva.s('/lib/js/tiny_mce/tiny_mce.js'),
-				
-				content_css: eva.s("/lib/css/typo/typo.min.css"),
-				spellchecker_rpc_url : eva.s('/lib/js/tiny_mce/plugins/spellchecker/rpc.php')
-			};
-
-            var mceconfig = mceGlobelConfig;
-            editorHtml = _editor.tinymce(mceconfig);
-    }
-
-    var removeHtmlEditor = function(_editor){
-            if(!editorHtml){
-                return;
-            }
-            tinyMCE.execCommand('mceToggleEditor', false, _editor.attr('id'));
-    }
-
-    var switchEditor = function(){
-            var codeType = $("input[name='codeType']:checked").val();
-            if(codeType == 'markdown'){
-                    removeHtmlEditor(editor);
-                    builtMdEditor(editor); 
-            } else if(codeType == 'html'){
-                    removeMdEditor(editor);
-                    builtHtmlEditor(editor);
-            }
-    }
-    switchEditor();
-    $("input[name='codeType']").on("change", function(){
-            if(confirm('Text format will not be keep, are you sure ?')){
-                switchEditor(); 
-            }
-    });
-}
 </script>

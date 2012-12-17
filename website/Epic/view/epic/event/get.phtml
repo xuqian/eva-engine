@@ -231,29 +231,29 @@ $form->useSubFormGroup()
                         </div><!--activity-list end-->
 
 
-                </div><!--event main end-->
-            </div><!--page main left end-->
-        </div>
-    </div><!-- page-bg end-->
-</div><!--container end-->
+                    </div><!--event main end-->
+                </div><!--page main left end-->
+            </div>
+        </div><!-- page-bg end-->
+    </div><!--container end-->
 
 
-<div id="video-popover" class="popover bottom">
-    <div class="arrow"></div>
-    <h3 class="popover-title">Add Video
-        <span class="close">×</span>
-    </h3>
-    <div class="popover-content">
-        <div class="form">
-            <div class="input-append">
-                <input name="url" class="input-medium" type="text" placeholder="Video Url..." />
-                <button id="add-video" class="btn" type="button">Add</button>
+    <div id="video-popover" class="popover bottom">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Add Video
+            <span class="close">×</span>
+        </h3>
+        <div class="popover-content">
+            <div class="form">
+                <div class="input-append">
+                    <input name="url" class="input-medium" type="text" placeholder="Video Url..." />
+                    <button id="add-video" class="btn" type="button">Add</button>
+                </div>
+            </div>
+            <div class="ajax-video-preview">
+                <p>Support video sites: Youtube, Youku</p>
             </div>
         </div>
-        <div class="ajax-video-preview">
-            <p>Support video sites: Youtube, Youku</p>
-        </div>
     </div>
-</div>
-<?=$this->widget('File', 'file/index')?>
-<script src="<?=$this->link('/src/epic/js/feed.js')?>"></script>
+    <?=$this->widget('File', 'file/index')?>
+    <script src="<?=$this->link('/src/epic/js/feed.js')?>"></script>
