@@ -97,13 +97,7 @@ $form->useSubFormGroup()
                                         </fieldset>
 
                                         <fieldset class="">
-                                            <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?>">
-                                                <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('timezone', array('class' => 'span1'))?>        
-                                                    <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
-                                                </div>
-                                            </div> 
+                                            
                                             <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
                                                 <div id="editor-left" class="controls">
                                                     <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6', 'rows' => '15',))?>
@@ -111,6 +105,13 @@ $form->useSubFormGroup()
                                                 <div id="editor-right" class="markdown-preview"></div>
                                                 <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
 
+                                            </div>
+                                            <div class="control-group <?=$form->isError(array('Profile', 'city')) ? 'error' : '';?>">
+                                                <?=$form->helper(array('Profile', 'city'), 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper(array('Profile', 'city'), 'formSelect', array('class' => 'select2 input-large'))?>        
+                                                    <div class="help-block"><?=$form->helper(array('Profile', 'city'), 'formElementErrors')?></div>
+                                                </div>
                                             </div>
                                         </fieldset>
                                         
@@ -122,7 +123,13 @@ $form->useSubFormGroup()
                                                     <div class="help-block"><?=$form->helper('eventStatus', 'formElementErrors')?></div>
                                                 </div>
                                             </div>
-
+                                            <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?> hide">
+                                                <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('timezone', array('class' => 'span1'))?>        
+                                                    <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
+                                                </div>
+                                            </div> 
                                             <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?> hide">
                                                 <?=$form->helper('visibility', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
@@ -160,6 +167,25 @@ $form->useSubFormGroup()
                                             <?if($this->hasModule('File')):?>
                                                 <?=$form->helper(array('EventFile', 'file_id'), '')?>
                                             <?endif?>
+                                        </fieldset>
+                                        <fieldset class="">
+                                            <?foreach($form->get('CategoryEvent') as $subForm):?>
+                                                <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
+                                                <div class="control-group <?=$subForm->isError('category_id') ? 'error' : '';?> span3">
+                                                    <?=$subForm->helper('category_id', 'label', array(
+                                                        'class' => 'control-label',
+                                                        'label' => $cate['categoryName'],
+                                                    ))?>
+                                                    <div class="controls">
+                                                        <?=$subForm->helper('category_id', 'formCheckbox', array(
+                                                            'class' => '',
+                                                            'checkedValue' => $cate['id'],
+                                                            'checked' => $subForm->get('event_id')->getValue() ? true : false
+                                                         ))?>
+                                                        <div class="help-block"><?=$subForm->helper('category_id', 'formElementErrors')?></div>
+                                                    </div>
+                                                </div>
+                                            <?endforeach?>
                                         </fieldset>
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>

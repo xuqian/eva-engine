@@ -99,6 +99,9 @@ class EventController extends ActionController
                         'getThumb()',
                     )
                 ),
+                'Category' => array(
+                    '*'
+                ),
             ),
         ));
 
@@ -106,7 +109,7 @@ class EventController extends ActionController
             $item = array();
             $this->getResponse()->setStatusCode(404);
         }
-        
+
         $user = Auth::getLoginUser(); 
         //Public User Area
         $this->forward()->dispatch('UserController', array(
@@ -179,7 +182,7 @@ class EventController extends ActionController
             return;
         }
 
-        $postData = $this->params()->fromPost();
+        $postData = $request->getPost();
         $callback = $this->params()->fromPost('callback');
         $form = new Form\EventCreateForm();
         $form->useSubFormGroup()
@@ -212,7 +215,7 @@ class EventController extends ActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/event/create');
         if ($request->isPost()) {
-            $postData = $this->params()->fromPost();
+            $postData = $request->getPost();
             $callback = $this->params()->fromPost('callback');
             $form = new Form\EventEditForm();
             $form->useSubFormGroup()
@@ -251,19 +254,22 @@ class EventController extends ActionController
                             'getThumb()',
                         )
                     ),
+                    'Category' => array(
+                        '*'
+                    ),
                 ),
             ));
             if(isset($item['EventFile'][0])){
                 $item['EventFile'] = $item['EventFile'][0];
             }
-            
+
             $user = Auth::getLoginUser(); 
             //Public User Area
             $this->forward()->dispatch('UserController', array(
                 'action' => 'user',
                 'id' => $user['id'],
             ));
-            
+
             $viewModel->setVariables(array(
                 'item' => $item,
             ));

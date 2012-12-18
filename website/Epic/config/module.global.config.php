@@ -16,4 +16,9 @@ return array(
             'securityCode' => "xxxxxxxxxxxxxxxxxxxx",
         ),
     ),
+    'event' => array(
+        'timezone' => array(
+            'default' => 8,
+        ),
+    ),
 );

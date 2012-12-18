@@ -78,6 +78,9 @@ class GroupController extends ActionController
                         'getThumb()',
                     )
                 ),
+                'Category' => array(
+                    '*'
+                ),
             ),
         ));
 
@@ -149,7 +152,7 @@ class GroupController extends ActionController
             return;
         }
 
-        $postData = $this->params()->fromPost();
+        $postData = $request->getPost();
         $callback = $this->params()->fromPost('callback');
         $form = new Form\GroupCreateForm();
         $form->useSubFormGroup()
@@ -183,7 +186,7 @@ class GroupController extends ActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/group/create');
         if ($request->isPost()) {
-            $postData = $this->params()->fromPost();
+            $postData = $request->getPost();
             $callback = $this->params()->fromPost('callback');
             $form = new Form\GroupEditForm();
             $form->useSubFormGroup()
@@ -222,19 +225,22 @@ class GroupController extends ActionController
                             'getThumb()',
                         )
                     ),
+                    'Category' => array(
+                        '*'
+                    ),
                 ),
             ));
             if(isset($item['GroupFile'][0])){
                 $item['GroupFile'] = $item['GroupFile'][0];
             }
-            
+
             $user = Auth::getLoginUser(); 
             //Public User Area
             $this->forward()->dispatch('UserController', array(
                 'action' => 'user',
                 'id' => $user['id'],
             ));
-            
+
             $viewModel->setVariables(array(
                 'item' => $item,
             ));

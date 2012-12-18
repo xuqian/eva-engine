@@ -7,6 +7,12 @@ class EventCreateForm extends EventForm
         'default' => array(
             'Text' => 'Event\Form\TextForm',
             'EventFile' => 'Event\Form\EventFileForm',
+            'CategoryEvent' => array(
+                'formClass' => 'Event\Form\CategoryEventForm',
+                'collection' => true,
+                'optionsCallback' => 'initCategories',
+            ),
+            'Profile' => 'Epic\Form\ProfileForm',
         ),
     );
 
@@ -31,10 +37,49 @@ class EventCreateForm extends EventForm
         ),
     );
 
+    public function beforeBind($data)
+    {
+        //Data is array is for display
+        if(isset($data['CategoryEvent']) && is_array($data)){
+            $categoryEvents = array();
+            $subForms = $this->get('CategoryEvent');
+            foreach($subForms as $key => $subForm){
+                $categoryEvent = array();
+                $category = $subForm->getCategory()->toArray();
+                $categoryEvent['category_id'] = $category['id'];
+                foreach($data['CategoryEvent'] as $categoryEventArray){
+                    if($categoryEvent['category_id'] == $categoryEventArray['category_id']){
+                        $categoryEvent = array_merge($categoryEvent, $categoryEventArray);
+                        break;
+                    }
+                }
+                $categoryEvents[] = $categoryEvent;
+            }
+            $data['CategoryEvent'] = $categoryEvents;
+        }
+        return $data;
+    }
+
     public function prepareData($data)
     {
         if(isset($data['EventFile'])){
             $data['EventFile']['event_id'] = $data['id'];
+        }
+        
+        if(isset($data['timezone'])){
+            $config = \Eva\Api::_()->getModuleConfig('Epic');
+            $timezone = $config['event']['timezone']['default'];
+            $data['timezone'] = $timezone ? $timezone : 0;
+        }
+
+        $categoryEvents = array();
+        if(isset($data['CategoryEvent']) && $data['CategoryEvent']){
+            foreach($data['CategoryEvent'] as $categoryEvent){
+                if(isset($categoryEvent['category_id']) && $categoryEvent['category_id']){
+                    $categoryEvents[] = $categoryEvent;
+                }
+            }
+            $data['CategoryEvent'] = $categoryEvents;
         }
 
         return $data;

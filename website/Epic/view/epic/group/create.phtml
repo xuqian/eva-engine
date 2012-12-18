@@ -77,6 +77,26 @@ $form->useSubFormGroup()
                                             <?endif?>
                                         </fieldset>
 
+                                        <fieldset class="">
+                                            <?foreach($form->get('CategoryGroup') as $subForm):?>
+                                                <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
+                                                <div class="control-group <?=$subForm->isError('category_id') ? 'error' : '';?> span3">
+                                                    <?=$subForm->helper('category_id', 'label', array(
+                                                        'class' => 'control-label',
+                                                        'label' => $cate['categoryName'],
+                                                    ))?>
+                                                    <div class="controls">
+                                                        <?=$subForm->helper('category_id', 'formCheckbox', array(
+                                                            'class' => '',
+                                                            'checkedValue' => $cate['id'],
+                                                            'checked' => $subForm->get('group_id')->getValue() ? true : false
+                                                         ))?>
+                                                        <div class="help-block"><?=$subForm->helper('category_id', 'formElementErrors')?></div>
+                                                    </div>
+                                                </div>
+                                            <?endforeach?>
+                                        </fieldset>
+
                                         <div class="form-actions">
                                             <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
                                         </div>
