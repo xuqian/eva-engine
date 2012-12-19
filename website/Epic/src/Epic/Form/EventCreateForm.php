@@ -45,7 +45,12 @@ class EventCreateForm extends EventForm
             $subForms = $this->get('CategoryEvent');
             foreach($subForms as $key => $subForm){
                 $categoryEvent = array();
-                $category = $subForm->getCategory()->toArray();
+                $category = $subForm->getCategory();
+                if (!$category) {
+                    continue;
+                }
+                $category = $category->toArray();
+
                 $categoryEvent['category_id'] = $category['id'];
                 foreach($data['CategoryEvent'] as $categoryEventArray){
                     if($categoryEvent['category_id'] == $categoryEventArray['category_id']){
