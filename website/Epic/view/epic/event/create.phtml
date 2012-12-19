@@ -28,7 +28,6 @@ $form->useSubFormGroup()
 <div class="container">
     <div class="normal-page">
         <div class="body grid-s5m0">
-
             <div class="main-wrap"><div id="main" class="main">
                     <div class="page-main">
                         <div class="row">
@@ -37,161 +36,146 @@ $form->useSubFormGroup()
                                     <a href="<?=$this->uri('/events/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Create Event</a>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
-                                <div class="blog-list vlist">
-                                    <form <?=$this->formAttr($form)?> class="form event-create-form">
-                                        <?=$form->restful();?>
-                                        <?=$form->helper('id');?>
-
-                                        <fieldset class="row">
-                                            <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
-                                                <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls docs-input-sizes">
-                                                    <?=$form->helper('title', array('class' => 'span6'))?>
-                                                    <div class="help-block"><?=$form->helper('title', 'formElementErrors')?></div>
-                                                </div>
+                                <form <?=$this->formAttr($form)?> class="form event-create-form">
+                                    <?=$form->restful();?>
+                                    <?=$form->helper('id');?>
+                                    <fieldset class="">
+                                        <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
+                                            <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls docs-input-sizes">
+                                                <?=$form->helper('title', array('class' => 'span6'))?>
+                                                <div class="help-block"><?=$form->helper('title', 'formElementErrors')?></div>
                                             </div>
-
-                                             <div class="control-group <?=$form->isError('location') ? 'error' : '';?>">
-                                                <?=$form->helper('location', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('location', array('class' => 'span5'))?>        
-                                                    <div class="help-block"><?=$form->helper('location', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>  
-
-                                            <div class="control-group span4">
-                                                <?=$this->widget('File', 'file/upload')?>
-                                            </div>  
-
-                                            <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?> span3">
-                                                <?=$form->helper('startDay', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('startDay', array('class' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                    <div class="help-block"><?=$form->helper('startDay', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-                                            <div class="control-group <?=$form->isError('startTime') ? 'error' : '';?> span2">
-                                                <?=$form->helper('startTime', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('startTime', array('class' => 'timepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                    <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> span3">
-                                                <?=$form->helper('endDay', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('endDay', array('class' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                    <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-                                            <div class="control-group <?=$form->isError('endTime') ? 'error' : '';?> span2">
-                                                <?=$form->helper('endTime', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('endTime', array('class' => 'timepicker', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                    <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-
-                                            
-                                        </fieldset>
-
-                                        <fieldset class="">
-                                            
-                                            <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
-                                                <div id="editor-left" class="controls">
-                                                    <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6', 'rows' => '15',))?>
-                                                </div>
-                                                <div id="editor-right" class="markdown-preview"></div>
-                                                <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
-
-                                            </div>
-                                            <div class="control-group <?=$form->isError(array('Profile', 'city')) ? 'error' : '';?>">
-                                                <?=$form->helper(array('Profile', 'city'), 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper(array('Profile', 'city'), 'formSelect', array('class' => 'select2 input-large'))?>        
-                                                    <div class="help-block"><?=$form->helper(array('Profile', 'city'), 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        
-                                        <fieldset class="">
-                                             <div class="control-group <?=$form->isError('eventStatus') ? 'error' : '';?> hide">
-                                                <?=$form->helper('eventStatus', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('eventStatus', 'formSelect', array('class' => ''))?>
-                                                    <div class="help-block"><?=$form->helper('eventStatus', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-                                            <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?> hide">
-                                                <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('timezone', array('class' => 'span1'))?>        
-                                                    <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
-                                                </div>
-                                            </div> 
-                                            <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?> hide">
-                                                <?=$form->helper('visibility', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('visibility', 'formSelect', array('class' => ''))?>
-                                                    <div class="help-block"><?=$form->helper('visibility', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="control-group <?=$form->isError('longitude') ? 'error' : '';?> hide">
-                                                <?=$form->helper('longitude', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('longitude', array('class' => 'span3'))?>        
-                                                    <div class="help-block"><?=$form->helper('longitude', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>  
-                    
-                                            <div class="control-group <?=$form->isError('latitude') ? 'error' : '';?> hide">
-                                                <?=$form->helper('latitude', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('latitude', array('class' => 'span3'))?>        
-                                                    <div class="help-block"><?=$form->helper('latitude', 'formElementErrors')?></div>
-                                                </div>
-                                            </div> 
-                                            
-                                            <div class="control-group <?=$form->isError('urlName') ? 'error' : '';?> hide">
-                                                <?=$form->helper('urlName', 'label', array('class' => 'control-label'))?>
-                                                <div class="controls">
-                                                    <?=$form->helper('urlName', array('class' => ''))?>        
-                                                    <div class="help-block"><?=$form->helper('urlName', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>   
-                                        </fieldset>
-
-                                        <fieldset class="">
-                                            <?if($this->hasModule('File')):?>
-                                                <?=$form->helper(array('EventFile', 'file_id'), '')?>
-                                            <?endif?>
-                                        </fieldset>
-                                        <fieldset class="">
-                                            <?foreach($form->get('CategoryEvent') as $subForm):?>
-                                                <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
-                                                <div class="control-group <?=$subForm->isError('category_id') ? 'error' : '';?> span3">
-                                                    <?=$subForm->helper('category_id', 'label', array(
-                                                        'class' => 'control-label',
-                                                        'label' => $cate['categoryName'],
-                                                    ))?>
-                                                    <div class="controls">
-                                                        <?=$subForm->helper('category_id', 'formCheckbox', array(
-                                                            'class' => '',
-                                                            'checkedValue' => $cate['id'],
-                                                            'checked' => $subForm->get('event_id')->getValue() ? true : false
-                                                         ))?>
-                                                        <div class="help-block"><?=$subForm->helper('category_id', 'formElementErrors')?></div>
-                                                    </div>
-                                                </div>
-                                            <?endforeach?>
-                                        </fieldset>
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
                                         </div>
-                                    </form>
-                                </div><!--main form end-->
+
+                                        <div class="control-group <?=$form->isError('city') ? 'error' : '';?>">
+                                            <?=$form->helper('city', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('city', 'formSelect', array('class' => 'select2 input-large'))?>        
+                                                <div class="help-block"><?=$form->helper('city', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group <?=$form->isError('location') ? 'error' : '';?>">
+                                            <?=$form->helper('location', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('location', array('class' => 'span6'))?>        
+                                                <div class="help-block"><?=$form->helper('location', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>  
+
+                                        <div class="control-group">
+                                            <label>Event Theme Photo</label>
+                                            <div class="row">
+                                                <div class="span4">
+                                                    <?=$this->widget('File', 'file/upload')?>
+                                                </div>
+                                            </div>
+                                        </div>  
+
+                                        <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?>  controls-row">
+                                            <?=$form->helper('startDay', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('startDay', array('class' => 'datepicker input-small', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                <?=$form->helper('startTime', array('class' => 'timepicker input-small', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                <div class="help-block"><?=$form->helper('startDay', 'formElementErrors')?></div>
+                                                <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> controls-row">
+                                            <?=$form->helper('endDay', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('endDay', array('class' => 'datepicker input-small', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                <?=$form->helper('endTime', array('class' => 'timepicker input-small', 'data-date-format' => 'yyyy-mm-dd'))?>        
+                                                <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
+                                                <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
+                                            <div id="editor-left" class="controls">
+                                                <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6', 'rows' => '15',))?>
+                                            </div>
+                                            <div id="editor-right" class="markdown-preview"></div>
+                                            <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
+
+                                        </div>
+
+                                    </fieldset>
+
+                                    <fieldset class="">
+                                        <div class="control-group <?=$form->isError('eventStatus') ? 'error' : '';?> ">
+                                            <?=$form->helper('eventStatus', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('eventStatus', 'formSelect', array('class' => ''))?>
+                                                <div class="help-block"><?=$form->helper('eventStatus', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?> hide">
+                                            <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('timezone', array('class' => 'span1'))?>        
+                                                <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
+                                            </div>
+                                        </div> 
+                                        <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?> hide">
+                                            <?=$form->helper('visibility', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('visibility', 'formSelect', array('class' => ''))?>
+                                                <div class="help-block"><?=$form->helper('visibility', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group <?=$form->isError('longitude') ? 'error' : '';?> hide">
+                                            <?=$form->helper('longitude', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('longitude', array('class' => 'span3'))?>        
+                                                <div class="help-block"><?=$form->helper('longitude', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>  
+
+                                        <div class="control-group <?=$form->isError('latitude') ? 'error' : '';?> hide">
+                                            <?=$form->helper('latitude', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('latitude', array('class' => 'span3'))?>        
+                                                <div class="help-block"><?=$form->helper('latitude', 'formElementErrors')?></div>
+                                            </div>
+                                        </div> 
+
+                                        <div class="control-group <?=$form->isError('urlName') ? 'error' : '';?> hide">
+                                            <?=$form->helper('urlName', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('urlName', array('class' => ''))?>        
+                                                <div class="help-block"><?=$form->helper('urlName', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>   
+
+                                        <?if($this->hasModule('File')):?>
+                                        <?=$form->helper(array('EventFile', 'file_id'), 'formHidden')?>
+                                        <?endif?>
+                                        <?foreach($form->get('CategoryEvent') as $subForm):?>
+                                        <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
+                                        <div class="control-group <?=$subForm->isError('category_id') ? 'error' : '';?> span3">
+                                            <?=$subForm->helper('category_id', 'label', array(
+                                                'class' => 'control-label',
+                                                'label' => $cate['categoryName'],
+                                            ))?>
+                                            <div class="controls">
+                                                <?=$subForm->helper('category_id', 'formCheckbox', array(
+                                                    'class' => '',
+                                                    'checkedValue' => $cate['id'],
+                                                    'checked' => $subForm->get('event_id')->getValue() ? true : false
+                                                ))?>
+                                                <div class="help-block"><?=$subForm->helper('category_id', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+                                        <?endforeach?>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
+                                    </div>
+                                </form>
 
                             </div><!--page main left end-->
                             <div class="span3">
@@ -221,4 +205,9 @@ $form->useSubFormGroup()
             var file = data.result[0];
             form.find('input[name="EventFile[file_id]"]').val(file.id);
     });
+
+	eva.loadcss(eva.s('/static/lib/js/jquery/jquery.timepicker/jquery.timepicker.css'));
+	eva.loader(eva.s('/static/lib/js/jquery/jquery.timepicker/jquery.timepicker.js'), function(){
+            $('.timepicker').timepicker();
+	});
 </script>
