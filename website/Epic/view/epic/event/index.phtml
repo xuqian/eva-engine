@@ -102,10 +102,7 @@ $dayPath = $this->dayPath;
                                 {% } %}
                         </div>
                     </script>
-                    <div class="side-ad-list">
-                        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
-                        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
-                    </div>
+                    <?=$this->widget('Epic', 'components/ad_event')?>
                 </div>
             </div><!--page main right end-->
             <div class="span8">

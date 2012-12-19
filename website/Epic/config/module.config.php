@@ -41,17 +41,6 @@ return array(
                 ),
                 'priority' => 2,
             ),
-            'ad' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/ad/',
-                    'defaults' => array(
-                        'controller' => 'AdController',
-                        'action'     => 'index',
-                    ),
-                ),
-                'priority' => 2,
-            ),
             'frontposts' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -680,7 +669,6 @@ return array(
         'invokables' => array(
             'PreregController' => 'Epic\Controller\PreregController',
             'PayController' => 'Epic\Controller\PayController',
-            'AdController' => 'Epic\Controller\AdController',
 
             'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
             'Event\Controller\EventController' => 'Event\Controller\EventController',
@@ -720,26 +708,40 @@ return array(
     ),
 
     'page_components' => array(
-        'top' => array(
+        'ad_home' => array(
             'module' => 'Epic',
-            'name' => 'top',
-            'title' => 'Top Advertisement',
-            'path' => 'components/top',
-            'description' => 'Top Advertisement Code Management'
+            'name' => 'ad_home',
+            'title' => 'Home Page Advertisement',
+            'path' => 'components/ad_home',
+            'description' => 'Home Page Advertisement'
         ),
-        'middle' => array(
+        'ad_user' => array(
             'module' => 'Epic',
-            'name' => 'middle',
-            'title' => 'Side Ad',
-            'path' => 'components/middle',
-            'description' => 'Side Advertisement Code Management'
+            'name' => 'ad_user',
+            'title' => 'User Page Advertisement',
+            'path' => 'components/ad_user',
+            'description' => 'User Page Advertisement'
         ),
-        'end' => array(
+        'ad_setting' => array(
             'module' => 'Epic',
-            'name' => 'end',
-            'title' => 'Bottom Advertisement',
-            'path' => 'components/end',
-            'description' => 'Bottom Advertisement Code Management'
+            'name' => 'ad_setting',
+            'title' => 'Management/Setting Page Advertisement',
+            'path' => 'components/ad_setting',
+            'description' => 'Management/Setting Page Advertisement'
+        ),
+        'ad_event' => array(
+            'module' => 'Epic',
+            'name' => 'ad_event',
+            'title' => 'Event Page Advertisement',
+            'path' => 'components/ad_event',
+            'description' => 'Event Page Advertisement'
+        ),
+        'ad_group' => array(
+            'module' => 'Epic',
+            'name' => 'ad_group',
+            'title' => 'Group Page Advertisement',
+            'path' => 'components/ad_group',
+            'description' => 'Group Page Advertisement'
         ),
     ),
 

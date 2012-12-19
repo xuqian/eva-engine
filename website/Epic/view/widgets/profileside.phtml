@@ -195,9 +195,9 @@
         </ul>
     </div>
     <?endif;?>
-    <div class="side-ad-list">
-        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
-        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
-    </div>
-
+    <?if($this->viewAsGuest):?>
+    <?=$this->widget('Epic', 'components/ad_user')?>
+    <?else:?>
+    <?=$this->widget('Epic', 'components/ad_home')?>
+    <?endif?>
 </div><!--profile-side end-->
