@@ -179,7 +179,9 @@ class EventController extends ActionController
     {
         $request = $this->getRequest();
         if (!$request->isPost()) {
-            return;
+            return array(
+                'params' => $request->getQuery()
+            );
         }
 
         $postData = $request->getPost();

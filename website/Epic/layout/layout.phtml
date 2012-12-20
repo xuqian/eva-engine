@@ -20,6 +20,7 @@
 
     <script src="<?=$this->link('/lib/js/labjs/labjs.min.js')?>"></script>
     <script src="<?=$this->link('/lib/js/jquery/jquery.js')?>"></script>
+    <script src="<?=$this->link('/lib/js/jquery/jquery.cookie.js')?>"></script>
     <script src="<?=$this->link('/lib/js/jquery/jquery.validationEngine.js')?>"></script>
     <script src="<?=$this->link('/eva/js/core.js')?>"></script>
     <script src="<?=$this->link('/eva/js/ui.js')?>"></script>
@@ -130,7 +131,7 @@
             <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
-            　<?=$this->_('Your City')?> : <?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?> </li>
+            　<?=$this->_('Your City')?> : <span id="my-city"><?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></span> </li>
         </ul>
         </nav>
         <div class="clearfix"></div>

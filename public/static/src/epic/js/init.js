@@ -272,6 +272,21 @@ eva.topSearch = function(){
 	});
 };
 
+eva.city = function(){
+	$(".switch-city a").on('click', function(){
+		$.cookie('city', $(this).text(), { expires: 365, path: '/'});
+		window.location.href = eva.d('/events/');
+	});
+
+	if($.cookie('city') != null){
+		$("#create-new-event").on('click', function(){
+			$(this).attr("href", $(this).attr("href") + '?city=' +  $.cookie('city'));
+			return true;
+		});
+		$("#my-city").html($.cookie('city'));
+	}
+}
+
 eva.construct = function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
@@ -286,6 +301,8 @@ eva.construct = function(){
 	eva.preview();
 
 	eva.refreshOnline();
+
+	eva.city();
 
 	eva.story();
 

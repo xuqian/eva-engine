@@ -56,21 +56,6 @@ return array(
                 'priority' => 2,
             ),
 
-
-
-            'city' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/city/',
-                    'defaults' => array(
-                        'controller' => 'CityController',
-                        'action'     => 'index',
-                    ),
-                ),
-                'priority' => 2,
-            ),
-
-
             'home' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -387,89 +372,16 @@ return array(
             'my' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/my[/]',
+                    'route' => '/my/[:action][/]',
                     'constraints' => array(
+                        'action' => '[a-zA-Z0-9]+'
                     ),
                     'defaults' => array(
                         'controller' => 'MyController',
                     ),
+                    'may_terminate' => true,
                 ),
                 'priority' => 2,
-                'child_routes' => array(
-                    'blog' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'blog[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'action' => 'blog'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'event' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'event[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'action' => 'event'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'group' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'group[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'action' => 'group'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'friend' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'friend[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'action' => 'friend'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'album' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'album[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'action' => 'album'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'upgrade' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'upgrade[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'controller' => 'User\Controller\UpgradeController',
-                                'action' => 'index'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                ), //my child_routes end
             ), //my end
 
             'user' => array(
@@ -682,7 +594,6 @@ return array(
             'LoginController' => 'Epic\Controller\LoginController',
             'ResetController' => 'Epic\Controller\ResetController',
             'RegisterController' => 'Epic\Controller\RegisterController',
-            'CityController' => 'Epic\Controller\CityController',
             'UserController' => 'Epic\Controller\UserController',
             'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
