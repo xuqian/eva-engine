@@ -149,7 +149,7 @@ $loginResult = $loginResult ? $loginResult[0] : array();
 </div>
 
 <script>
-eva.runtime = function(){
+eva.ready(function(){
     var widthStep = [1024, 1280, 1366, 1440, 1920];
     var heightStep = [640, 680, 640, 780, 960];
     var imgDir = eva.s('/src/epic/img');
@@ -175,7 +175,5 @@ eva.runtime = function(){
         setBg();
     });
     
-
-
-}
+});
 </script>

@@ -161,9 +161,10 @@ $deleteForm->setView($this)
 <?=$this->widget('File', 'file/index')?>
 
 <script>
+eva.ready(function(){
     var modal = $("#fileupload-modal");
     modal.hide();
-    eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
+    eva.loader(eva.s('/eva/js/eva.jquery.evaTip.js'), function(){
             modal.hide();
             $('#activity-box-image-button').on('click', function() {
                     $(this).evaTip("show", {
@@ -182,7 +183,7 @@ $deleteForm->setView($this)
 
     var modal = $("#fileupload-modal");
     modal.hide();
-    eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
+    eva.loader(eva.s('/eva/js/eva.jquery.evaTip.js'), function(){
             modal.hide();
             $('#activity-box-image-button').on('click', function() {
                     $(this).evaTip("show", {
@@ -255,5 +256,6 @@ $deleteForm->setView($this)
     textarea.live('keyup', function(){
             messageLetterCount();
     });
+});
 </script>
 
