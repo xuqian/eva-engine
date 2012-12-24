@@ -105,7 +105,7 @@ class EventController extends ActionController
             ),
         ));
 
-        if(!$item || ($item['eventStatus'] != 'finished' && $item['eventStatus'] != 'active')){
+        if(!$item || $item['eventStatus'] != 'active'){
             $item = array();
             $this->getResponse()->setStatusCode(404);
         }

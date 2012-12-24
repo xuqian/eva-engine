@@ -65,17 +65,13 @@ class EventForm extends \Eva\Form\Form
                         'label' => 'Active',
                         'value' => 'active',
                     ),
-                    'finished' => array (
-                        'label' => 'Finished',
-                        'value' => 'finished',
+                    'pending' => array (
+                        'label' => 'Pending',
+                        'value' => 'pending',
                     ),
-                    'disputed' => array (
-                        'label' => 'Disputed',
-                        'value' => 'disputed',
-                    ),
-                    'trashed' => array (
-                        'label' => 'Trashed',
-                        'value' => 'trashed',
+                    'deleted' => array (
+                        'label' => 'Deleted',
+                        'value' => 'deleted',
                     ),
                 ),
             ),
