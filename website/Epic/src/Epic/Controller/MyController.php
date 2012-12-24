@@ -9,6 +9,10 @@ use Core\Auth;
 class MyController extends ActionController
 {
 
+    public function cityAction()
+    {
+    }
+
     public function blogAction()
     {
         $user = Auth::getLoginUser();
