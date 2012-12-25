@@ -287,7 +287,7 @@ eva.city = function(){
 	}
 }
 
-eva.construct = function(){
+eva.ready(function(){
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
 	});
@@ -326,7 +326,4 @@ eva.construct = function(){
 	});	
 
 	return false;
-};
-
-eva.destruct = function(){
-};
+});

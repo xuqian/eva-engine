@@ -11,20 +11,24 @@
     <?=$this->headMeta()?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
-    <link href="<?=$this->link('/lib/css/fontawesome/css/font-awesome.css')?>" media="all" rel="stylesheet" type="text/css" />
-    <link href="<?=$this->link('/lib/css/LigatureSymbols/style.css')?>" media="all" rel="stylesheet" type="text/css" />
-    <link href="<?=$this->link('/src/epic/css/main.css')?>" media="all" rel="stylesheet" type="text/css" />
-
+    <?=$this->headStyle()?>
+    <?$this->cssAssets(array(
+        '/lib/css/fontawesome/css/font-awesome.css',
+        '/lib/css/LigatureSymbols/style.css',
+        '/module/epic/css/main.css',
+    ));?>
     <?=$this->evajs()?>
-
-    <script src="<?=$this->link('/lib/js/labjs/labjs.min.js')?>"></script>
-    <script src="<?=$this->link('/lib/js/jquery/jquery.js')?>"></script>
-    <script src="<?=$this->link('/lib/js/jquery/jquery.cookie.js')?>"></script>
-    <script src="<?=$this->link('/lib/js/jquery/jquery.validationEngine.js')?>"></script>
-    <script src="<?=$this->link('/eva/js/core.js')?>"></script>
-    <script src="<?=$this->link('/eva/js/ui.js')?>"></script>
-    <script src="<?=$this->link('/src/epic/js/init.js')?>"></script>
+    <?$this->jsAssets(array(
+        '/lib/js/labjs/labjs.js',
+        '/lib/js/jquery/jquery.js',
+        '/lib/js/jquery/jquery.cookie.js',
+        '/lib/js/jquery/jquery.validationEngine.js',
+        '/module/core/js/core.js',
+        '/module/core/js/ui.js',
+        '/module/epic/js/init.js',
+    ));?>
+    <?=$this->headLink()?>
+    <?=$this->headScript()?>
 </head>
 
 <body>
@@ -39,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand pull-left" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
+                <a class="brand pull-left" href="/"><img src="<?=$this->assets('/module/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <div class="nav-collapse">
                     <ul class="nav nav-main">
                         <li data-highlight-url="^/home/?$"><a href="<?=$this->url('home')?>"><?=$this->_('Home')?></a></li>

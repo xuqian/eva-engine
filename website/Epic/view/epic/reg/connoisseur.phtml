@@ -14,10 +14,10 @@ $form->useSubFormGroup()
         <div class="row">
             <?$locale = \Eva\Api::_()->getServiceManager()->get('translator')->getLocale();?>
             <div class="span5">
-                <img src="<?=$this->link('/src/epic/img/connoisseur-' . $locale . '-1.png')?>" />
+                <img src="<?=$this->assets('/module/epic/img/connoisseur-' . $locale . '-1.png')?>" />
             </div>
             <div class="span5">
-                <img src="<?=$this->link('/src/epic/img/connoisseur-' . $locale . '-2.png')?>" />
+                <img src="<?=$this->assets('/module/epic/img/connoisseur-' . $locale . '-2.png')?>" />
             </div>
             <?$locale="abc";?>
             <?if($locale == 'en'):?>
@@ -127,6 +127,7 @@ $form->useSubFormGroup()
                         </div>
                     </div>
                     <!-- title -->
+                    <?p($form->get('CommonFields'))?>
                     <div class="control-group <?=$form->isError(array('CommonFields', '13')) ? 'error' : '';?>">
                         <?=$form->helper(array('CommonFields', '13'), 'label', array('class' => 'control-label'))?>
                         <div class="controls">
