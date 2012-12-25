@@ -13,6 +13,24 @@ class EventSearchForm extends EventForm
             'attributes' => array(
             ),
         ),
+        'city' =>     array(
+            'name' => 'city',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'City',
+            ),
+            'attributes' => array(
+            ),
+        ),
+        'group' =>     array(
+            'name' => 'group',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Group',
+            ),
+            'attributes' => array(
+            ),
+        ),
         'beforeStartDay' =>     array(
             'name' => 'beforeStartDay',
             'type' => 'text',
@@ -100,6 +118,16 @@ class EventSearchForm extends EventForm
             ),
             'attributes' => array(
                 'value' => '',
+            ),
+        ),
+        'rows' =>     array(
+            'name' => 'rows',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Rows',
+            ),
+            'attributes' => array(
+                'value' => 10,
             ),
         ),
     );
