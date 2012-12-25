@@ -15,6 +15,24 @@
     <link href="<?=$this->link('/lib/css/fontawesome/css/font-awesome.css')?>" media="all" rel="stylesheet" type="text/css" />
     <link href="<?=$this->assets('/module/epic/css/epic.css')?>" media="all" rel="stylesheet" type="text/css" />
     <?=$this->evajs()?>
+    <?=$this->headStyle()?>
+    <?$this->cssAssets(array(
+        '/lib/css/fontawesome/css/font-awesome.css',
+        '/lib/css/LigatureSymbols/style.css',
+        '/module/epic/css/epic.css',
+    ));?>
+    <?=$this->evajs()?>
+    <?$this->jsAssets(array(
+        '/lib/js/labjs/labjs.js',
+        '/lib/js/jquery/jquery.js',
+        '/lib/js/jquery/jquery.cookie.js',
+        '/lib/js/jquery/jquery.validationEngine.js',
+        '/module/core/js/core.js',
+        '/module/core/js/ui.js',
+        '/module/epic/js/init.js',
+    ));?>
+    <?=$this->headLink()?>
+    <?=$this->headScript()?>
 </head>
 
 <body class="prereg">
@@ -25,7 +43,7 @@
         <div class="navbar navbar-inverse"><div class="navbar-inner">
                 <?$view =$this->layout()->getChildren();$id = $view[0]->id;?>
                 <!--<a class="brand" href="/">Epicurissimo</a>-->
-                <a class="brand" href="/"><img src="<?=$this->link('/src/epic/css/img/logo.png')?>" alt="logo"></a>	
+                <a class="brand" href="/"><img src="<?=$this->assets('/module/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <ul class="nav nav-main">
                     <li><a href="/"><?=$this->_('Home')?></a></li>
                     <li class="<?=$id == 'connoisseur' ? 'active' : ''?>"><a href="/reg/connoisseur"><?=$this->_('Connoisseur')?></a></li>
@@ -83,47 +101,18 @@
         </p>
     </div></footer><!-- #footer end-->
 
-
-    <script src="<?=$this->link('/lib/js/labjs/labjs.min.js')?>"></script>
-    <script src="<?=$this->link('/lib/js/jquery/jquery.js')?>"></script>
-    <script src="<?=$this->link('/lib/js/jquery/jquery.validationEngine.js')?>"></script>
-    <script src="<?=$this->link('/src/epic/js/jquery.stepy.min.js')?>"></script>
-    <script src="<?=$this->link('/eva/js/core.js')?>"></script>
-    <script src="<?=$this->link('/eva/js/ui.js')?>"></script>
-    <script src="<?=$this->link('/src/epic/js/init.js')?>"></script>
-
     <script>
         eva.init(eva_config);
-        $("input[type='checkbox'], input[type='radio']").css("margin-right", "10px");
-        $("input[type='radio']").parent().addClass('span1').parent().wrapInner('<div class="row"></div>');
-        $("input[type='radio']:not(:first)").parent().css("margin-left", "5px");
-        $("#change-city a").on("click", function(){
-            window.location.href = "/city/?city=" + $(this).html()
-            return false;
+        eva.ready(function(){
+            $("input[type='checkbox'], input[type='radio']").css("margin-right", "10px");
+            $("input[type='radio']").parent().addClass('span1').parent().wrapInner('<div class="row"></div>');
+            $("input[type='radio']:not(:first)").parent().css("margin-left", "5px");
+            $("#change-city a").on("click", function(){
+                window.location.href = "/city/?city=" + $(this).html()
+                return false;
+            });
+        
         });
-        /*
-        $('#signupform').stepy({
-                description:  false,
-                legend:       false,
-                block:          false,
-                titleClick: false,
-                nextLabel:      '<?=$this->_('Next')?> >', 
-                backLabel:      '< <?=$this->_('Previous')?>',
-                next : function(index){
-                    index = index - 2;
-                    var currentField = $("signupform-step-" + index);
-                    return $('#signupform').validationEngine('validate');
-                },
-                finish : function(){
-                    return $('#signupform').validationEngine('validate');
-                },
-                finishButton: false
-        }); 
-        $("#signupform-titles").hide();
-        $(".button-next").addClass('btn').css("margin-left", "160px");
-        $(".button-back:not(:last)").addClass('btn pull-right').css("margin-right", "100px");
-        $(".button-back:last").addClass('btn').css("margin-left", "270px").css("margin-top", "-90px");
-        */
     </script>
 </body>
 </html>
