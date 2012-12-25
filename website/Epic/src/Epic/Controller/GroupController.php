@@ -34,6 +34,11 @@ class GroupController extends ActionController
         $items = $items->toArray(array(
             'self' => array(
             ),
+            'join' => array(
+                'Count' => array(
+                    '*',
+                ),
+            ),
         ));
         $paginator = $itemModel->getPaginator();
 
@@ -85,6 +90,9 @@ class GroupController extends ActionController
                 ),
                 'Category' => array(
                     '*'
+                ),
+                'Count' => array(
+                    '*',
                 ),
             ),
         ));

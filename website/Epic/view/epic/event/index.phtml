@@ -81,22 +81,25 @@ $dayPath = $this->dayPath;
                             <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Cocktail party</a></li>
                         </ul>
                         </header>
-                        <div class="grid-3columns">
-                            <?for($i=0;$i<6;$i++):?>
+                        <script id="event-new" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('order' => 'timedesc','rows' => 6))?>">
+                        <div class="event-new grid-3columns">
+                            {% if(o.items.length > 0) { %}
+                            {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
-                                <a class="pull-left" href="#">
-                                    <img  src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s144-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="90" height="90" class="media-object img-rounded"/>
+                                <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                    <img  src="{%=item.urlName%}" width="90" height="90" class="media-object img-rounded"/>
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Find best French cuisine in Tokyo</a></h4>
+                                    <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
-                                        <!--<a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>-->
-                                        <p class="lowlight">1234 members joined.</p>
+                                        <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>
                             </div>
-                            <?endfor?>
+                            {% } %}
+                            {% } %}
                         </div>
+                        </script>
                     </div>
 
                     <div class="event-grid">
@@ -112,22 +115,27 @@ $dayPath = $this->dayPath;
                             <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Cocktail party</a></li>
                         </ul>
                         </header>
-                        <div class="grid-2columns">
-                            <?for($i=0;$i<6;$i++):?>
+                        
+                        <script id="event-feature" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('order' => 'memberdesc','rows' => 6))?>">
+                        <div class="event-Feature grid-2columns">
+                            {% if(o.items.length > 0) { %}
+                            {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
-                                <a class="pull-left" href="#">
-                                    <img  src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s144-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="90" height="90" class="media-object img-rounded"/>
+                                <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                    <img  src="{%=item.urlName%}" width="90" height="90" class="media-object img-rounded"/>
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Find best French cuisine in Tokyo</a></h4>
+                                    <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>
-                                        <p class="lowlight">1234 members joined.</p>
+                                        <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>
                             </div>
-                            <?endfor?>
+                            {% } %}
+                            {% } %}
                         </div>
+                        </script>
                     </div>
 
                     <table class="event-calendar table table-bordered table-condensed table-striped">
