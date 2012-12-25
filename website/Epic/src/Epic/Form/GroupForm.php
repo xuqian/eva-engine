@@ -17,7 +17,7 @@ namespace Epic\Form;
  * @category   Eva
  * @package    Eva_Form
  */
-class GroupForm extends \Eva\Form\Form
+class GroupForm extends \Group\Form\GroupForm
 {
     /**
      * Form basic elements

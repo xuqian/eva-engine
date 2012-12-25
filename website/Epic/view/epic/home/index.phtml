@@ -62,7 +62,7 @@ $form->useSubFormGroup()
                         <div class="activity-list vlist">
                             <?foreach($items as $item):?>
                             <div class="item">
-                                <a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatar($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                <a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatarLink($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                 <div class="item-inline item-text span6">
                                     <div class="item-content">
                                         <div class="item-title"><a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a> Said:</div>

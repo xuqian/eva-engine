@@ -11,6 +11,11 @@ class GroupController extends ActionController
 {
     public function indexAction()
     {
+        return $this->listAction();
+    }
+
+    public function listAction()
+    {
         $request = $this->getRequest();
         $query = $request->getQuery();
 
@@ -40,7 +45,7 @@ class GroupController extends ActionController
                 'user_id' => $user['id']
             ))->getGroupUserList()->toArray();
         }
-        
+
         $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'group_id'));
 
 
