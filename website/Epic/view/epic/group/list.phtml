@@ -87,64 +87,6 @@ $groupSearchForm->setView($this)
                         <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
                     </div>
 
-                    <div class="page-header border-header">
-                        <h3>New Groups</h3>
-                    </div>
-
-                    <div class="group-thumbnails">
-                        <ul class="thumbnails">
-                            <?for($i=0;$i<6;$i++):?>
-                            <li><a href="#">
-                                <img width="90" height="90" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
-                                <p>Thumbnail caption...</p>
-                            </a></li>
-                            <?endfor?>
-                        </ul>
-                    </div>
-
-
-                    <div class="page-header border-header">
-                        <h3>Hot Groups</h3>
-                    </div>
-
-                    <div class="group-thumbnails">
-                        <ul class="thumbnails">
-                            <?for($i=0;$i<12;$i++):?>
-                            <li><a href="#">
-                                <img width="90" height="90" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
-                                <p>Thumbnail caption...</p>
-                            </a></li>
-                            <?endfor?>
-                        </ul>
-                    </div>
-
-                    <div class="page-header border-header">
-                        <h3>Topics of Groups</h3>
-                    </div>
-
-                    <div class="group-topics">
-                        <?for($i=0;$i<8;$i++):?>
-                        <div class="topic-wrap <?=$i%2 == 0 ? 'odd' : 'even'?>">
-                            <div class="topic">
-                                <div class="topic-heading">
-                                    <small class="pull-right"><a href="">More</a></small>
-                                    <h4><a href="">Gastronomy</a></h4>
-                                </div>
-                                <div class="topic-body-wrap">
-                                    <div class="topic-body">
-                                        <ul>
-                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
-                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
-                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
-                                            <li><a href="">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?endfor?>
-                    </div>
-
                     <div class="page-main-header">
                         <h3>
                             <?=$this->_('Groups')?>
@@ -216,7 +158,7 @@ $groupSearchForm->setView($this)
                 </div><!--group main end-->
             </div><!--page main left end-->
             <div class="span4">
-                <?=$this->widget('Epic', 'widgets/groupside', $this->vars())?>
+               <?=$this->widget('Epic', 'widgets/groupside', $this->vars())?> 
             </div>
 
         </div><!--page main right end-->

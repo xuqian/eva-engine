@@ -13,13 +13,13 @@
         <?=$this->headMeta()?>
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/epic/js/placeholder.js')?>"></script>  
-        <script type="text/javascript" src="<?=$this->link('/src/epic/js/supersized.3.2.7.min.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/epic/js/form.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/epic/js/subscribe.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->assets('/module/epic/js/placeholder.js')?>"></script>  
+        <script type="text/javascript" src="<?=$this->assets('/module/epic/js/supersized.3.2.7.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->assets('/module/epic/js/form.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->assets('/module/epic/js/subscribe.js')?>"></script>
 
         <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
-        <link href="<?=$this->link('/src/epic/css/coming.css')?>" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?=$this->assets('/module/epic/css/coming.css')?>" media="all" rel="stylesheet" type="text/css" />
         <?=$this->evajs()?>
 
         <script type="text/javascript">
@@ -27,7 +27,7 @@
                     jQuery.supersized({
                             slides:
                             [	
-                            {image:'<?=$this->link('/src/epic/img/bg.jpg')?>'}
+                            {image:'<?=$this->assets('/module/epic/img/bg.jpg')?>'}
                             ]
                     });
             });
@@ -95,7 +95,7 @@
                     <!-- Contact Us -->
                     <div class="dropdown_heading"><?=$this->_('Contact Us')?></div>
 
-                    <form class="pulldowncontact" method="post" action="<?=$this->link('/src/epic/php/submit-form-ajax.php')?>">
+                    <form class="pulldowncontact" method="post" action="<?=$this->assets('/module/epic/php/submit-form-ajax.php')?>">
                         <input type="text" id="email" class="text-input" name="email" placeholder="<?=$this->_('your email address')?>" />
                         <br />
                         <span id="errorEmail" class="formError"></span>
@@ -135,7 +135,7 @@
 
                 <div class="heading">
                     <!-- Coming soon main text -->
-                    <img src="<?=$this->link('/src/epic/css/img/logofull.png')?>" height="90"  />    
+                    <img src="<?=$this->assets('/module/epic/css/img/logofull.png')?>" height="90"  />    
                 </div>
 
                 <div id="countdown">

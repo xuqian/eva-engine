@@ -58,6 +58,22 @@ if($this->form){
                                                 <div class="help-block"><?=$form->helper('city', 'formElementErrors')?></div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="control-group <?=$form->isError('memberEnable') ? 'error' : '';?>">
+                                            <?=$form->helper('memberEnable', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('memberEnable', 'formSelect', array('class' => ''))?>        
+                                                <div class="help-block"><?=$form->helper('memberEnable', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>                   
+                                       
+                                         <div class="control-group <?=$form->isError('memberLimit') ? 'error' : '';?>">
+                                            <?=$form->helper('memberLimit', 'label', array('class' => 'control-label'))?>
+                                            <div class="controls">
+                                                <?=$form->helper('memberLimit', array('class' => ''))?>        
+                                                <div class="help-block"><?=$form->helper('memberLimit', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
 
                                         <div class="control-group <?=$form->isError('location') ? 'error' : '';?>">
                                             <?=$form->helper('location', 'label', array('class' => 'control-label'))?>
@@ -69,6 +85,11 @@ if($this->form){
 
                                         <div class="control-group">
                                             <label>Event Theme Photo</label>
+                                            <?if($item['File']):?>
+                                                <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
+                                            <?else:?>
+                                                <img id="post-image" src="http://placehold.it/260x180" alt="" />
+                                            <?endif?>
                                             <div class="row">
                                                 <div class="span4">
                                                     <?=$this->widget('File', 'file/upload')?>
@@ -123,28 +144,6 @@ if($this->form){
                                             <div id="editor-right" class="markdown-preview"></div>
                                             <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
 
-                                        </div>
-
-                                        <div class="control-group <?=$form->isError('eventStatus') ? 'error' : '';?>">
-                                            <?=$form->helper('eventStatus', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('eventStatus', 'formSelect', array('class' => ''))?>
-                                                <div class="help-block"><?=$form->helper('eventStatus', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>
-                                        <div class="control-group <?=$form->isError('timezone') ? 'error' : '';?> hide">
-                                            <?=$form->helper('timezone', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('timezone', array('class' => 'span1'))?>        
-                                                <div class="help-block"><?=$form->helper('timezone', 'formElementErrors')?></div>
-                                            </div>
-                                        </div> 
-                                        <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?> hide">
-                                            <?=$form->helper('visibility', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('visibility', 'formSelect', array('class' => ''))?>
-                                                <div class="help-block"><?=$form->helper('visibility', 'formElementErrors')?></div>
-                                            </div>
                                         </div>
 
                                         <div class="control-group <?=$form->isError('longitude') ? 'error' : '';?> hide">

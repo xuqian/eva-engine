@@ -5,7 +5,6 @@ $user = $this->user;
 $items = $this->items;
 $viewAsGuest = $this->viewAsGuest;
 
-
 $form = new Activity\Form\MessageCreateForm();
 $form->useSubFormGroup()
      ->setMethod('post')
@@ -18,78 +17,32 @@ $form->useSubFormGroup()
     <div class="page-bg">
         <div class="row">
             <div class="span4">
-                <div class="event-side">
-                    <div class="usercard media">
-                        <a class="pull-left" href="#">
-                            <img alt="userface" src="<?=$this->gravatar($user['email'], 120)?>" width="120" height="120" class="media-object"/>
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?=$user['userName']?></h4>
-                            <h5>Joined Events: <span class="highlight">1234</span></h5>
-                            <div class="media">
-                                <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
-                                <p class="lowlight">Share your life</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="event-subscription">
-                        <p>Receive free new event notifications:</p>
-                        <form>
-                            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
-                        </form>
-                    </div>
-
-
-                    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
-                        <div class="page-header border-header">
-                            <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
-                        </div>
-                        <div class="side-blog-list">
-                            {% if(o.items.length > 0) { %}
-                                {% for (var i=0, item; item=o.items[i]; i++) { %}
-                                    <div class="item">
-                                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
-                                        <div class="item-inline item-text">
-                                            <div class="text-content">
-                                                <div class="item-title">
-                                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
-                                                </div>
-                                                <p>{%=item.Text.Preview%}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% } %}
-                                {% } %}
-                        </div>
-                    </script>
-                    <div class="side-ad-list">
-                        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
-                        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
-                    </div>
-                </div>
+                <?=$this->widget('Epic', 'widgets/eventside', $this->vars())?> 
             </div><!--page main right end-->
             <div class="span8">
                 <div class="event-main">
 
                     <div class="event-detail media">
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s240-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="240" />
+                            <?if($item['File']):?>
+                                <img class="media-object" src="<?=$this->thumb($item['File'][0]['Thumb'], array('w_240'))?>" width="240" />
+                             <?else:?>
+                                <img class="media-object" src="https://lh5.googleusercontent.com/-x3r23ub6kmI/UJY4NRadtrI/AAAAAAAACi4/Q17gfO-yHIo/s240-p/Sculptures%252520By%252520The%252520Sea-24.jpg" width="240" />
+                            <?endif?>
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><a href=""><?=$item['title'];?></a></h4>
                             <div class="media typo">
                                 <dl class="dl-horizontal">
                                     <dt>Start Time:</dt>
-                                    <dd>A description list is perfect for defining terms.</dd>
+                                    <dd><?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?></dd>
                                     <dt>End Time:</dt>
-                                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                    <dd><?=$item['endDay']?> <?=$item['endTime'] ? $item['endTime'] : null?></dd>
                                     <dt>Event Owner</dt>
-                                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                                    <dd><?=$item['user_name']?></dd>
                                     <dd></dd>
                                 </dl>
-                                <p><span class="highlight">123</span> Members Joined</p>
+                                <p><span class="highlight"><?=$item['Count']['memberCount']?></span> Members Joined</p>
                                 <p><a href="" class="btn btn-orange"><i class="icon-user"></i> Join Now</a></p>
                             </div>
                         </div>
@@ -101,13 +54,15 @@ $form->useSubFormGroup()
 
                     <div class="side-user-list">
                         <ul class="thumbnails">
-                            <?for($i = 0; $i < 32; $i++):?>
+                            <?if($this->members):?>
+                            <?foreach($this->members as $member):?>
                             <li>
-                            <a class="thumbnail" href="#">
-                                <img src="<?=$this->link('/src/epic/css/img/face-04.jpg')?>" alt="" class="img-rounded" width="30" height="30" />
+                            <a class="thumbnail" href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
+                                <img alt="userface" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>
                             </a>
                             </li>
-                            <?endfor;?>
+                            <?endforeach;?>
+                            <?endif;?>
                         </ul>
                     </div>
 
@@ -166,7 +121,7 @@ $form->useSubFormGroup()
                         <div class="activity-list vlist">
                             <?foreach($items as $item):?>
                             <div class="item">
-                                <a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatar($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                <a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatarLink($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                 <div class="item-inline item-text span6">
                                     <div class="item-content">
                                         <div class="item-title"><a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a> Said:</div>

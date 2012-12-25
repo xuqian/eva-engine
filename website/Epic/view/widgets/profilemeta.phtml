@@ -61,7 +61,7 @@ function isPaidRole($roles)
     <?else:?>
     <a href="<?=$this->uri('/account/profile/')?>">
     <?endif?>
-        <img alt="userface" src="<?=$this->gravatar($user['email'], 175)?>" width="175" height="175">
+        <img alt="userface" src="<?=$this->gravatarLink($user['email'], 175)?>" width="175" height="175">
     </a>
     <div class="caption">
         <a class="highlight highlight-large" href="<?=$this->uri('/my/friend/')?>"><?=$user['FriendsCount']['friendsCount']?></a> Friends

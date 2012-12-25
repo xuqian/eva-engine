@@ -13,6 +13,11 @@ class EventController extends ActionController
 
     public function indexAction()
     {
+        return $this->listAction();
+    }
+
+    public function listAction()
+    {
         $request = $this->getRequest();
         $query = $request->getQuery();
 
@@ -32,6 +37,25 @@ class EventController extends ActionController
         $items = $items->toArray(array(
             'self' => array(
             ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+                'Category' => array(
+                    '*'
+                ),
+                'Count' => array(
+                    '*'
+                ),
+            ),
         ));
         $paginator = $itemModel->getPaginator();
 
@@ -49,12 +73,14 @@ class EventController extends ActionController
             'action' => 'user',
             'id' => $user['id'],
         ));
-        
+
         $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'event_id'));
 
         $startDay = $this->params()->fromQuery('start');
-        $calendar = new Calendar();
-        $calendarArray = $calendar->toArray();
+        $calendarModel = Api::_()->getModel('Event\Model\Calendar');
+        $calendarArray = $calendarModel->getEventCalendar(array(
+            'startDay' => $startDay,
+        ));
         $today = $calendarArray['today']['datedb'];
         $week = array();
         foreach($calendarArray['days'] as $weekArray){
@@ -76,7 +102,7 @@ class EventController extends ActionController
             'items' => $items,
             'query' => $query,
             'paginator' => $paginator,
-        );   
+        );      
     }
 
     public function getAction()
@@ -102,10 +128,13 @@ class EventController extends ActionController
                 'Category' => array(
                     '*'
                 ),
+                'Count' => array(
+                    '*'
+                ),
             ),
         ));
 
-        if(!$item || ($item['eventStatus'] != 'finished' && $item['eventStatus'] != 'active')){
+        if(!$item || $item['eventStatus'] != 'active'){
             $item = array();
             $this->getResponse()->setStatusCode(404);
         }
@@ -116,15 +145,33 @@ class EventController extends ActionController
             'action' => 'user',
             'id' => $user['id'],
         ));
+        
+        
 
         list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
             'action' => 'index',
             'event_id' => $item['id'],
         ));
+        
+        $memberModel = Api::_()->getModel('Event\Model\EventUser'); 
+        $members = $memberModel->setItemList(array('event_id' => $item['id'], 'noLimit' => true))->getEventUserList();
+        $members = $members->toArray(
+            array(
+                'self' => array(
+                    '*',
+                ),
+                'join' => array(
+                    'User' => array(
+                        '*',
+                    ),
+                ),
+            )
+        );
 
         $view = new ViewModel(array(
             'item' => $item,
             'items' => $items,
+            'members' => $members,
             'paginator' => $paginator,
         ));
         return $view; 

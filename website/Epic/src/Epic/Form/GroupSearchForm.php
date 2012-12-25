@@ -32,6 +32,16 @@ class GroupSearchForm extends GroupForm
             'attributes' => array(
             ),
         ),
+        'rows' =>     array(
+            'name' => 'rows',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Rows',
+            ),
+            'attributes' => array(
+                'value' => 10,
+            ),
+        ),
     );
 
     public function prepareData($data)

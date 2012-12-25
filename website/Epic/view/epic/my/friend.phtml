@@ -34,7 +34,7 @@ $unfollowForm->setMethod('delete');
                                 ?>
                                 <div class="item">
                                     <div class="item-absolute item-userface">
-                                        <a href="<?=$this->uri('/user/' . $item['userName'])?>" title="" class="userface"><img src="<?=$this->gravatar($item['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                        <a href="<?=$this->uri('/user/' . $item['userName'])?>" title="" class="userface"><img src="<?=$this->gravatarLink($item['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                         <a href="<?=$this->uri('/messages/send/' . $item['userName'])?>" title="" class="item-quick-action btn btn-small btn-tiny-white">Message</a>
                                     </div>
                                     <div class="item-inline item-text">

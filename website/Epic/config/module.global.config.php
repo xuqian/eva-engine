@@ -20,5 +20,12 @@ return array(
         'timezone' => array(
             'default' => 8,
         ),
+        'status' => array(
+            'default' => 'active',
+        ),
+        'visibility' => array(
+            'default' => 'public',
+        
+        ),
     ),
 );

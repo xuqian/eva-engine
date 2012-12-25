@@ -48,7 +48,7 @@ $form->useSubFormGroup()
                                 <div class="message-list vlist">
                                     <?foreach($items as $item):?>
                                     <div class="item">
-                                        <a href="<?=$this->uri('/messages/conversation/' . $item['Sender']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatar($item['Sender']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                        <a href="<?=$this->uri('/messages/conversation/' . $item['Sender']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatarLink($item['Sender']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
                                         <div class="item-inline item-text span5">
                                             <div class="item-content">
                                                 <?if($item['Sender']['id'] == $item['author_id']):?>

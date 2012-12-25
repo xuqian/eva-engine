@@ -38,7 +38,7 @@ $form->useSubFormGroup()
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
                                 <div class="blog-list vlist">
-                                    <form <?=$this->formAttr($form)?> class="form">
+                                    <form <?=$this->formAttr($form)?> class="form group-create-form">
                                         <?=$form->restful();?>
                                         <?=$form->helper('id');?>
 
@@ -58,43 +58,65 @@ $form->useSubFormGroup()
                                                     <div class="help-block"><?=$form->helper('summary', 'formElementErrors')?></div>
                                                 </div>
                                             </div> 
-                                        </fieldset>
-
-                                        <fieldset class="">
-                                            <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
-                                                <div id="editor-left" class="controls">
-                                                    <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6', 'rows' => '15',))?>
-                                                </div>
-                                                <div id="editor-right" class="markdown-preview"></div>
-                                                <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
-
-                                            </div>
-                                        </fieldset>
                                         
-                                        <fieldset class="">
-                                            <?if($this->hasModule('File')):?>
-                                                <?=$form->helper(array('GroupFile', 'file_id'), '')?>
-                                            <?endif?>
-                                        </fieldset>
-
-                                        <fieldset class="">
-                                            <?foreach($form->get('CategoryGroup') as $subForm):?>
-                                                <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
-                                                <div class="control-group <?=$subForm->isError('category_id') ? 'error' : '';?> span3">
-                                                    <?=$subForm->helper('category_id', 'label', array(
-                                                        'class' => 'control-label',
-                                                        'label' => $cate['categoryName'],
-                                                    ))?>
-                                                    <div class="controls">
+                                            <div class="control-group <?=$form->isError('memberEnable') ? 'error' : '';?>">
+                                                <?=$form->helper('memberEnable', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('memberEnable', 'formSelect', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('memberEnable', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>                   
+                                       
+                                            <div class="control-group <?=$form->isError('memberLimit') ? 'error' : '';?>">
+                                                <?=$form->helper('memberLimit', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('memberLimit', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('memberLimit', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="control-group">
+                                                <label>Group Theme Photo</label>
+                                                <?if($item['File']):?>
+                                                    <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
+                                                <?else:?>
+                                                    <img id="post-image" src="http://placehold.it/260x180" alt="" />
+                                                <?endif?>
+                                                <div class="row">
+                                                    <div class="span4">
+                                                        <?=$this->widget('File', 'file/upload')?>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                            
+                                            <div class="control-group">
+                                                <label>Event Categories</label>
+                                                <div class="controls">
+                                                    <?foreach($form->get('CategoryGroup') as $subForm):?>
+                                                    <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
+                                                    <label class="checkbox inline">
                                                         <?=$subForm->helper('category_id', 'formCheckbox', array(
                                                             'class' => '',
                                                             'checkedValue' => $cate['id'],
                                                             'checked' => $subForm->get('group_id')->getValue() ? true : false
-                                                         ))?>
-                                                        <div class="help-block"><?=$subForm->helper('category_id', 'formElementErrors')?></div>
-                                                    </div>
+                                                        ))?>
+                                                        <?=$cate['categoryName']?>
+                                                    </label>
+                                                    <?endforeach?>
                                                 </div>
-                                            <?endforeach?>
+                                            </div>
+``` 
+                                            <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
+                                                <div id="editor-left" class="controls">
+                                                    <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6 editor-html simple', 'rows' => '15',))?>
+                                                </div>
+                                                <div id="editor-right" class="markdown-preview"></div>
+                                                <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
+                                            </div>
+
+                                            <?if($this->hasModule('File')):?>
+                                                <?=$form->helper(array('GroupFile', 'file_id'), 'formHidden')?>
+                                            <?endif?>
                                         </fieldset>
 
                                         <div class="form-actions">
@@ -126,128 +148,218 @@ $form->useSubFormGroup()
 
 <script>
 eva.ready(function(){
-      
-    eva.callback.connect = function(item, parentWindow){
-        $("#file-form-fileconnectform-file-id").val(item.attr("data-connect-id"));
-        var data = $.parseJSON(item.attr('data-connect-json'));
-        $("#post-image").attr("src", data.Thumb);
-        $.fn.colorbox.close();
-    }
-    eva.loadcss(eva.s('/lib/js/jquery/colorbox/colorbox.css'));
-    eva.loader(eva.s('/lib/js/jquery/colorbox/jquery.colorbox.js'), function(){
-        $("#connect-image").colorbox({
-            iframe:true,
-                width:"80%",
-                height:"80%"
-        });
+    var form = $(".group-create-form");
+    var uploader = $('#singlefileupload');
+    uploader.bind('fileuploaddone', function (e, data) {
+            var file = data.result[0];
+            form.find('input[name="GroupFile[file_id]"]').val(file.id);
     });
 
-
-    $("#save-draft").on('click', function(){
-        $("#blog-form-posteditform-status").val('draft');
-    });
-
-    var editor = $("#blog-form-textform-content");
-
-    var editorMd;
-    var mdInited = false;
-    var initMd = function(_editor){
-        if(true === mdInited) {
-            return;
-        }
-        eva.loadcss(eva.s(['/lib/js/codemirror/lib/codemirror.css', '/lib/js/codemirror/theme/ambiance.css']));
-        eva.loader(eva.s(['/lib/js/codemirror/lib/codemirror.js', '/lib/js/codemirror/mode/xml/xml.js', '/lib/js/codemirror/mode/markdown/markdown.js', '/lib/js/showdown/showdown.js']), function(){
-            mdInited = true;
-            builtMdEditor(_editor);
-        });
-    }
-    var builtMdEditor = function(_editor){
-        if(!mdInited){
-            initMd(_editor); 
-            return;
-        }
-        editorMd = CodeMirror.fromTextArea(_editor[0], {
-            "mode":"markdown",
-                "theme":"ambiance",
-                "lineNumbers":true,
-                "lineWrapping":true,
-                onChange : function(){
-                }
-        });	
-    }
-    var removeMdEditor = function(){
-        if(!editorMd){
-                return;
-            }
-            editorMd.toTextArea();
-    }
-
-
-    var editorHtml;
-    var htmlInited = false;
-    var initHtml = function(_editor){
-            if(true === htmlInited) {
-                return;
-            }
-            eva.loader(eva.s(["/lib/js/tiny_mce/jquery.tinymce.js"]), function(){
-                    htmlInited = true;
-                    builtHtmlEditor(_editor);
+    eva.loadcss(eva.s(['/lib/js/jquery/jquery.timepicker/jquery.timepicker.css', '/lib/js/bootstrap/datepicker/datepicker.css']));
+    eva.loader(eva.s(['/lib/js/jquery/jquery.timepicker/jquery.timepicker.js', "/lib/js/bootstrap/datepicker/bootstrap-datepicker.js"]), function(){
+        var dateFormat = 'Y-m-d';
+        var timeFormat = 'g:ia';
+        $('.datepair input.date').each(function(){
+            var $this = $(this);
+            $this.datepicker({
+                    'dateFormat': dateFormat,
+                    'autoclose': true
             });
-    }
-    var builtHtmlEditor = function(_editor){
-            if(!htmlInited){
-                    initHtml(_editor); 
-                    return;
+
+            if ($this.hasClass('start') || $this.hasClass('end')) {
+                $this.on('changeDate change', doDatepair);
             }
 
-			var mceGlobelConfig = {
-				mode : "textareas",
-				theme : "advanced",
-				plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+        });
 
-				// Theme options
-                theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink",
-                theme_advanced_buttons2 : "formatselect,fontselect,fontsizeselect,|,forecolor,backcolor,image,media",
-                theme_advanced_buttons3 : "",
-				theme_advanced_toolbar_location : "top",
-				theme_advanced_toolbar_align : "left",
-				theme_advanced_statusbar_location : "bottom",
-				theme_advanced_resizing : true,
-				
-				remove_linebreaks : false,
-				extended_valid_elements : "pre[cols|rows|disabled|name|readonly|class]",
-				script_url : eva.s('/lib/js/tiny_mce/tiny_mce.js'),
-				
-				content_css: eva.s("/lib/css/typo/typo.min.css"),
-				spellchecker_rpc_url : eva.s('/lib/js/tiny_mce/plugins/spellchecker/rpc.php')
-			};
+        $(".datepair input.date.start").on('change', function(){
+                if($(".datepair input.date.end").val() == ''){
+                        $(".datepair input.date.end").val($(".datepair input.date.start").val());
+                }
+        });
 
-            var mceconfig = mceGlobelConfig;
-            editorHtml = _editor.tinymce(mceconfig);
-    }
+        $('.datepair input.time').each(function() {
+            var $this = $(this);
+            var opts = { 'showDuration': true, 'timeFormat': timeFormat, 'scrollDefaultNow': true };
 
-    var removeHtmlEditor = function(_editor){
-            if(!editorHtml){
+            if ($this.hasClass('start') || $this.hasClass('end')) {
+                opts.onSelect = doDatepair;
+            }
+
+            $this.timepicker(opts);
+        });
+
+        $('.datepair').each(initDatepair);
+
+        function initDatepair()
+        {
+            var container = $(this);
+
+            var startDateInput = container.find('input.start.date');
+            var endDateInput = container.find('input.end.date');
+            var dateDelta = 0;
+
+            if (startDateInput.length && endDateInput.length) {
+                var startDate = new Date(startDateInput.val());
+                var endDate =  new Date(endDateInput.val());
+
+                dateDelta = endDate.getTime() - startDate.getTime();
+
+                container.data('dateDelta', dateDelta);
+            }
+
+            var startTimeInput = container.find('input.start.time');
+            var endTimeInput = container.find('input.end.time');
+
+            if (startTimeInput.length && endTimeInput.length) {
+                var startInt = startTimeInput.timepicker('getSecondsFromMidnight');
+                var endInt = endTimeInput.timepicker('getSecondsFromMidnight');
+
+                container.data('timeDelta', endInt - startInt);
+
+                if (dateDelta < 86400000) {
+                    endTimeInput.timepicker('option', 'minTime', startInt);
+                }
+            }
+        }
+
+        function doDatepair()
+        {
+            var target = $(this);
+            if (target.val() == '') {
                 return;
             }
-            tinyMCE.execCommand('mceToggleEditor', false, _editor.attr('id'));
-    }
 
-    var switchEditor = function(){
-            var codeType = $("input[name='codeType']:checked").val();
-            if(codeType == 'markdown'){
-                    removeHtmlEditor(editor);
-                    builtMdEditor(editor); 
-            } else if(codeType == 'html'){
-                    removeMdEditor(editor);
-                    builtHtmlEditor(editor);
+            var container = target.closest('.datepair');
+
+            if (target.hasClass('date')) {
+                updateDatePair(target, container);
+
+            } else if (target.hasClass('time')) {
+                updateTimePair(target, container);
             }
-    }
-    switchEditor();
-    $("input[name='codeType']").on("change", function(){
-            if(confirm('Text format will not be keep, are you sure ?')){
-                switchEditor(); 
+        }
+
+        function updateDatePair(target, container)
+        {
+            var start = container.find('input.start.date');
+            var end = container.find('input.end.date');
+
+            if (!start.length || !end.length) {
+                return;
             }
-    });
+
+            var startDate = new Date(start.val());
+            var endDate =  new Date(end.val());
+
+            var oldDelta = container.data('dateDelta');
+
+            if (oldDelta && target.hasClass('start')) {
+                var newEnd = new Date(startDate.getTime()+oldDelta);
+                end.val(newEnd.format(dateFormat));
+                end.datepicker('update');
+                return;
+
+            } else {
+                var newDelta = endDate.getTime() - startDate.getTime();
+
+                if (newDelta < 0) {
+                    newDelta = 0;
+
+                    if (target.hasClass('start')) {
+                        end.val(startDate.format(dateFormat));
+                        end.datepicker('update');
+                    } else if (target.hasClass('end')) {
+                        start.val(endDate.format(dateFormat));
+                        start.datepicker('update');
+                    }
+                }
+
+                if (newDelta < 86400000) {
+                    var startTimeVal = container.find('input.start.time').val();
+
+                    if (startTimeVal) {
+                        container.find('input.end.time').timepicker('option', {'minTime': startTimeVal});
+                    }
+                } else {
+                    container.find('input.end.time').timepicker('option', {'minTime': null});
+                }
+
+                container.data('dateDelta', newDelta);
+            }
+        }
+
+        function updateTimePair(target, container)
+        {
+            var start = container.find('input.start.time');
+            var end = container.find('input.end.time');
+
+            if (!start.length || !end.length) {
+                return;
+            }
+
+            var startInt = start.timepicker('getSecondsFromMidnight');
+            var endInt = end.timepicker('getSecondsFromMidnight');
+
+            var oldDelta = container.data('timeDelta');
+            var dateDelta = container.data('dateDelta');
+
+            if (target.hasClass('start') && (!dateDelta || dateDelta < 86400000)) {
+                end.timepicker('option', 'minTime', startInt);
+            }
+
+            var endDateAdvance = 0;
+            var newDelta;
+
+            if (oldDelta && target.hasClass('start')) {
+                // lock the duration and advance the end time
+
+                var newEnd = (startInt+oldDelta)%86400;
+
+                if (newEnd < 0) {
+                    newEnd += 86400;
+                }
+
+                end.timepicker('setTime', newEnd);
+                newDelta = newEnd - startInt;
+            } else if (startInt !== null && endInt !== null) {
+                newDelta = endInt - startInt;
+            } else {
+                return;
+            }
+
+            container.data('timeDelta', newDelta);
+
+            if (newDelta < 0 && (!oldDelta || oldDelta > 0)) {
+                // overnight time span. advance the end date 1 day
+                var endDateAdvance = 86400000;
+
+            } else if (newDelta > 0 && oldDelta < 0) {
+                // switching from overnight to same-day time span. decrease the end date 1 day
+                var endDateAdvance = -86400000;
+            }
+
+            var startInput = container.find('.start.date');
+            var endInput = container.find('.end.date');
+
+            if (startInput.val() && !endInput.val()) {
+                endInput.val(startInput.val());
+                endInput.datepicker('update');
+                dateDelta = 0;
+                container.data('dateDelta', 0);
+            }
+
+            if (endDateAdvance != 0) {
+                if (dateDelta || dateDelta === 0) {
+                    var endDate =  new Date(endInput.val());
+                    var newEnd = new Date(endDate.getTime() + endDateAdvance);
+                    endInput.val(newEnd.format(dateFormat));
+                    endInput.datepicker('update');
+                    container.data('dateDelta', dateDelta + endDateAdvance);
+                }
+            }
+        }
+	});
 });
+Date.prototype.format=function(format){var returnStr='';var replace=Date.replaceChars;for(var i=0;i<format.length;i++){var curChar=format.charAt(i);if(replace[curChar]){returnStr+=replace[curChar].call(this);}else{returnStr+=curChar;}}return returnStr;};Date.replaceChars={shortMonths:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],longMonths:['January','February','March','April','May','June','July','August','September','October','November','December'],shortDays:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],longDays:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],d:function(){return(this.getDate()<10?'0':'')+this.getDate();},D:function(){return Date.replaceChars.shortDays[this.getDay()];},j:function(){return this.getDate();},l:function(){return Date.replaceChars.longDays[this.getDay()];},N:function(){return this.getDay()+1;},S:function(){return(this.getDate()%10==1&&this.getDate()!=11?'st':(this.getDate()%10==2&&this.getDate()!=12?'nd':(this.getDate()%10==3&&this.getDate()!=13?'rd':'th')));},w:function(){return this.getDay();},z:function(){return"Not Yet Supported";},W:function(){return"Not Yet Supported";},F:function(){return Date.replaceChars.longMonths[this.getMonth()];},m:function(){return(this.getMonth()<9?'0':'')+(this.getMonth()+1);},M:function(){return Date.replaceChars.shortMonths[this.getMonth()];},n:function(){return this.getMonth()+1;},t:function(){return"Not Yet Supported";},L:function(){return(((this.getFullYear()%4==0)&&(this.getFullYear()%100!=0))||(this.getFullYear()%400==0))?'1':'0';},o:function(){return"Not Supported";},Y:function(){return this.getFullYear();},y:function(){return(''+this.getFullYear()).substr(2);},a:function(){return this.getHours()<12?'am':'pm';},A:function(){return this.getHours()<12?'AM':'PM';},B:function(){return"Not Yet Supported";},g:function(){return this.getHours()%12||12;},G:function(){return this.getHours();},h:function(){return((this.getHours()%12||12)<10?'0':'')+(this.getHours()%12||12);},H:function(){return(this.getHours()<10?'0':'')+this.getHours();},i:function(){return(this.getMinutes()<10?'0':'')+this.getMinutes();},s:function(){return(this.getSeconds()<10?'0':'')+this.getSeconds();},e:function(){return"Not Yet Supported";},I:function(){return"Not Supported";},O:function(){return(-this.getTimezoneOffset()<0?'-':'+')+(Math.abs(this.getTimezoneOffset()/60)<10?'0':'')+(Math.abs(this.getTimezoneOffset()/60))+'00';},P:function(){return(-this.getTimezoneOffset()<0?'-':'+')+(Math.abs(this.getTimezoneOffset()/60)<10?'0':'')+(Math.abs(this.getTimezoneOffset()/60))+':'+(Math.abs(this.getTimezoneOffset()%60)<10?'0':'')+(Math.abs(this.getTimezoneOffset()%60));},T:function(){var m=this.getMonth();this.setMonth(0);var result=this.toTimeString().replace(/^.+ \(?([^\)]+)\)?$/,'$1');this.setMonth(m);return result;},Z:function(){return-this.getTimezoneOffset()*60;},c:function(){return this.format("Y-m-d")+"T"+this.format("H:i:sP");},r:function(){return this.toString();},U:function(){return this.getTime()/1000;}};
 </script>

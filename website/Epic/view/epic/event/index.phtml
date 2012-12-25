@@ -4,7 +4,6 @@ $title = $this->_($title);
 $this->headTitle($title, 'SET');
 $items = $this->items;
 
-
 $form = new Event\Form\EventUserForm();
 $form
 ->setView($this)
@@ -23,7 +22,6 @@ $eventSearchForm->setView($this)
      ->setAction($this->uri('/events/'))
      ->prepare();
 
-
 $calendar = $this->calendar;
 $week = $this->week;
 $prevPath = $this->prevPath;
@@ -38,16 +36,7 @@ $dayPath = $this->dayPath;
             <h2>Event</h2>
         </div><!--page main right end-->
         <div class="span8">
-            <nav class="nav-week">
-            <ul>
-                <?foreach($week as $day):?>
-                <li>
-                <a href="#" class="<?if($day['datedb'] == $calendar['today']['datedb']):?>active<?endif?>"><span class="day"><?=$this->Datetime($day['datedb'], null, 'D')?></span><span class="date"><?=$this->Datetime($day['datedb'], null, 'jS M')?></span></a>
-                </li>
-                <?endforeach?>
-                <li><a href="#"><i class="icon-calendar"></i></a></li>
-            </ul>
-            </nav>
+            <?=$this->widget('Epic', 'widgets/eventnav', $this->vars())?>
         </div><!--page main left end-->
     </div>
     </header>
@@ -56,83 +45,40 @@ $dayPath = $this->dayPath;
     <div class="page-bg">
         <div class="row">
             <div class="span4">
-                <div class="event-side">
-                    <div class="usercard media">
-                        <a class="pull-left" href="#">
-                            <img alt="userface" src="<?=$this->gravatar($user['email'], 120)?>" width="120" height="120" class="media-object"/>
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?=$user['userName']?></h4>
-                            <h5>Joined Events: <span class="highlight">1234</span></h5>
-                            <div class="media">
-                                <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
-                                <p class="lowlight">Share your life</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="event-subscription">
-                        <p>Receive free new event notifications:</p>
-                        <form>
-                            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
-                        </form>
-                    </div>
-
-
-                    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
-                        <div class="page-header border-header">
-                            <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
-                        </div>
-                        <div class="side-blog-list">
-                            {% if(o.items.length > 0) { %}
-                                {% for (var i=0, item; item=o.items[i]; i++) { %}
-                                    <div class="item">
-                                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
-                                        <div class="item-inline item-text">
-                                            <div class="text-content">
-                                                <div class="item-title">
-                                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
-                                                </div>
-                                                <p>{%=item.Text.Preview%}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% } %}
-                                {% } %}
-                        </div>
-                    </script>
-                    <?=$this->widget('Epic', 'components/ad_event')?>
-                </div>
+                <?=$this->widget('Epic', 'widgets/eventside', $this->vars())?>
             </div><!--page main right end-->
             <div class="span8">
                 <div class="event-main">
+                    <script id="event-thumbnails" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('recommend' => 1,'rows' => 28))?>">
                     <div class="event-thumbnails">
                         <ul>
-                            <?for($i=1;$i<4;$i++):?>
-                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="https://lh5.googleusercontent.com/-vL5X4-JxlPc/UKbWocXl2sI/AAAAAAAAAi0/DRMB5o_EFPQ/s144-p/IMG_8215-Edit.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-0fRkkOtpZgI/UJIE7ylyX1I/AAAAAAAAAK8/TodR0qAAQFA/s144-p/_MG_4916-Edit.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-pY33_oEhGHE/UJOFk2rF3WI/AAAAAAAAOAc/JPAneeVkepk/s144-p/IMG_0100.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="https://lh4.googleusercontent.com/-v3krF838ZE4/UIGrxmOUueI/AAAAAAAABe0/4r8i1L6Xmg4/s144-p/GorillaBaby_1200.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="https://lh6.googleusercontent.com/-fHbJqv0sGaY/UKbNiy28BDI/AAAAAAAAiRY/3awxBQcyJuQ/s144-p/DSC_7501_L.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="https://lh5.googleusercontent.com/-Cj1EXknBiwM/UK1XaCwD_XI/AAAAAAAAKCE/689A3x3bliQ/s144-p/DSC_1338_6529.jpg" alt=""></a></li>
-                            <?endfor?>
+                            {% if(o.items.length > 0) { %}
+                            {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                <li><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                {% if(item.File) { %}
+                                    <img src="" alt="{%=item.urlName%}" />
+                                {% }else{ %}
+                                    <img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt="">
+                                {% } %}
+                                </a></li>
+                            {% } %}
+                            {% } %}
                         </ul>
-                    </div>
+                    </div> 
+                    </script>
 
                     <div class="event-grid">
                         <header class="event-grid-header">
-                        <small class="pull-right">Hot Cities: <a href="#">New York</a> <a href="#">Tokyo</a> <a href="#">Los Angeles</a></small>
+                        <small class="pull-right">Hot Cities: <a href="<?=$this->uri('/events/list/', array('city' => 'New York','order' => 'timedesc'));?>">New York</a> <a href="<?=$this->uri('/events/list/', array('city' => 'Tokyo','order' => 'timedesc'));?>">Tokyo</a> <a href="<?=$this->uri('/events/list/', array('city' => 'Los Angeles','order' => 'timedesc'));?>">Los Angeles</a></small>
                         <div class="page-header border-header">
                             <h3>New Events </h3><a href="<?=$this->uri('/my/city/')?>" class="switch">[Switch City]</a>
                         </div>
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="#">All Cities</a> |</li>
+                            <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">All Cities</a> |</li>
                             <li><a href="#">My City</a> |</li>
-                            <li><a href="#">Red Wine</a> | </li>
-                            <li><a href="#">French cuisine</a> | </li>
-                            <li><a href="#">Cocktail party</a></li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'timedesc'));?>">Red Wine</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'timedesc'));?>">French cuisine</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Cocktail party</a></li>
                         </ul>
                         </header>
                         <div class="grid-3columns">
@@ -159,11 +105,11 @@ $dayPath = $this->dayPath;
                             <h3>Feature Events</h3>
                         </div>
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="#">All Cities</a> |</li>
+                            <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>">All Cities</a> |</li>
                             <li><a href="#">My City</a> |</li>
-                            <li><a href="#">Red Wine</a> | </li>
-                            <li><a href="#">French cuisine</a> | </li>
-                            <li><a href="#">Cocktail party</a></li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'memberdesc'));?>">Red Wine</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'memberdesc'));?>">French cuisine</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Cocktail party</a></li>
                         </ul>
                         </header>
                         <div class="grid-2columns">
@@ -211,82 +157,24 @@ $dayPath = $this->dayPath;
                                     <?else:?>
                                     <?=$day['day']?>
                                     <?endif?>
+                                   
                                 </th>
                                 <?endforeach;?>
                             </tr>
                             <tr>
                                 <?foreach($week as $day):?>
                                 <td title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "new" : ''?>">
-                                </th>
+                                    <?if (isset($day['Events'])):?>
+                                        <?foreach ($day['Events'] as $event):?>
+                                            <a href="<?=$this->uri('/events/' . $event['urlName'])?>"><?=$event['title']?></a>
+                                        <?endforeach;?>
+                                    <?endif;?>
+                                </td>
                                 <?endforeach;?>
                             </tr>
                             <?endforeach;?>
                         </tbody>
                     </table>
-
-                    <div class="search-filter">
-                        <form <?=$this->formAttr($eventSearchForm)?> class="form form-inline">
-                            <?=$eventSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
-                            <button class="btn" type="submit"><?=$this->_('Filter Events')?></button>
-                        </form>
-                    </div>
-                    <div class="user-list vlist">
-                        <?foreach($items as $item):?>
-                        <div class="item">
-                            <div class="item-inline item-text">
-                                <div class="item-title">
-                                    <h2><a href="<?=$this->uri('/events/' . $item['urlName'])?>" class="item-user"><?=$item['title']?></a></h2>
-                                </div>
-                                <div class="item-meta">
-                                    <table class="table-condensed">
-                                        <tbody>
-                                            <tr>
-                                                <td><?=$this->_('Start Time')?>: 
-                                                    <?=$item['startTime']?>
-                                                </td>
-                                                <td><?=$this->_('End Time')?>: 
-                                                    <?=$item['endTime']?>
-                                                </td>
-                                                <td><?=$this->_('Members')?> : <a href="">0</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="item-content">
-                                    <p><?=$this->_('Location')?> : <?=$item['location']?></p>
-                                </div>
-                            </div>
-                            <div class="item-absolute item-action">
-
-                                <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
-                                <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
-                                <form <?=$this->formAttr($unjoinForm)?>>
-                                    <?=$unjoinForm->restful();?>
-                                    <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                    <?=$unjoinForm->helper('user_id', array('class' => ''))?>
-                                    <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main">Unjoin</button>
-                                </form>
-                                <?else:?>
-                                <form <?=$this->formAttr($form)?>>
-                                    <?=$form->restful();?>
-                                    <?=$form->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                    <?=$form->helper('user_id', array('class' => ''))?>
-                                    <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main">Join</button>
-                                </form>
-                                <?endif?>
-
-
-                            </div>
-                        </div>
-                        <?endforeach?>
-                    </div><!--activity-list end-->
-
-                    <?if($this->paginator):?>
-                    <?=$this->paginator->setPath('/events/')->setBaseQuery($this->query);?>
-                    <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                    <?endif;?>
 
                 </div><!--event main end-->
             </div><!--page main left end-->

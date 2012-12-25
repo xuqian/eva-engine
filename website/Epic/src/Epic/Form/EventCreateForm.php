@@ -38,6 +38,16 @@ class EventCreateForm extends EventForm
 
     public function beforeBind($data)
     {
+        $config = \Eva\Api::_()->getModuleConfig('Epic');
+        $status = $config['event']['status']['default'];
+        $visibility = $config['event']['visibility']['default'];
+        $timezone = $config['event']['timezone']['default'];
+
+        $data['eventStatus'] = $status; 
+        $data['visibility'] = $visibility; 
+        $data['isFullDayEvent'] = 1; 
+        $data['timezone'] = $timezone ? $timezone : 0;
+
         //Data is array is for display
         if(isset($data['CategoryEvent']) && is_array($data)){
             $categoryEvents = array();

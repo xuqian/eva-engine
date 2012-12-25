@@ -36,7 +36,7 @@ $form->setView($this)
                                 <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                                     <div class="controls">
                                         <a class="" href="http://gravatar.com">
-                                            <img src="<?=$this->gravatar($item['email'], 175)?>" class="img-circle" alt="">
+                                            <img src="<?=$this->gravatarLink($item['email'], 175)?>" class="img-circle" alt="">
                                         </a>
                                         <p>
                                         Change your avatar at <a href="http://gravatar.com">Gravatar.com</a>.
