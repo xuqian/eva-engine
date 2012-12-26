@@ -10,6 +10,10 @@ use Group\Form;
 class GroupController extends ActionController
 {
     protected $group;
+    
+    protected $post;
+    
+    protected $eventData;
    
     public function indexAction()
     {
@@ -93,7 +97,6 @@ class GroupController extends ActionController
             return array();
         }
 
-        $id = $this->params('id');
         $itemModel = Api::_()->getModel('Group\Model\Group'); 
         $item = $itemModel->getGroup($id, array(
             'self' => array(
@@ -294,6 +297,113 @@ class GroupController extends ActionController
 
         return $viewModel;
     }
+    
+    public function eventAction()
+    {
+        if($this->eventData){
+            return $this->eventData;
+        }   
+    
+        $id = $this->getEvent()->getRouteMatch()->getParam('event_id');
+        if(!$id){
+            return array();
+        }
+
+        $itemModel = Api::_()->getModel('Event\Model\Event'); 
+        $item = $itemModel->getEventdata($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+                'Category' => array(
+                    '*'
+                ),
+                'Count' => array(
+                    '*'
+                ),
+            ),
+        ));
+
+        if(!$item || $item['eventStatus'] != 'active'){
+            $item = array();
+            $this->getResponse()->setStatusCode(404);
+        }
+
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+        
+        if($user) {
+            $joinModel = Api::_()->getModel('Event\Model\EventUser');
+            $joinList = $joinModel->setItemList(array(
+                'user_id' => $user['id'],
+                'event_id' => $item['id'],
+            ))->getEventUserList()->toArray();
+        
+            if (count($joinList) > 0) {
+                $item['Join'] = $joinList[0];
+            }
+        }
+        
+        return $this->eventData = $item;
+    }
+    
+    public function postAction()
+    {
+        if($this->post){
+            return $this->post;
+        }   
+    
+        $id = $this->getEvent()->getRouteMatch()->getParam('post_id');
+        if(!$id){
+            return array();
+        }
+        
+        $itemModel = Api::_()->getModel('Blog\Model\Post');
+        $item = $itemModel->getPost($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                        'getContentHtml()',
+                    ),
+                ),
+                'Categories' => array(
+                ),
+            ),
+            'proxy' => array(
+                'File\Item\File::PostCover' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                )
+            ),
+        ));
+        if(!$item || $item['status'] != 'published'){
+            $item = array();
+            $this->getResponse()->setStatusCode(404);
+        }
+
+        return $this->post = $item;
+    }
 
     public function postCreateAction()
     {
@@ -306,6 +416,41 @@ class GroupController extends ActionController
             'item' => $item,
         );   
     }
+    
+    public function postEditAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/group/post-create');
+        
+        $item = $this->groupAction();
+        
+        $post = $this->postAction();
+        
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'post' => $post,
+        ));
+    
+        return $viewModel;
+    }
+
+    public function postGetAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        
+        $item = $this->groupAction();
+        
+        $post = $this->postAction();
+        
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'post' => $post,
+        ));
+    
+        return $viewModel;
+    }
 
     public function eventCreateAction()
     {
@@ -317,5 +462,40 @@ class GroupController extends ActionController
         return array(
             'item' => $item,
         );   
+    }
+
+    public function eventEditAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/group/event-create');
+        
+        $item = $this->groupAction();
+        
+        $event = $this->eventAction();
+        
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'event' => $event,
+        ));
+    
+        return $viewModel;
+    }
+
+    public function eventGetAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        
+        $item = $this->groupAction();
+        
+        $event = $this->eventAction();
+        
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'event' => $event,
+        ));
+    
+        return $viewModel;
     }
 }

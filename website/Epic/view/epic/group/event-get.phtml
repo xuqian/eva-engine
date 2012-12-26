@@ -2,26 +2,21 @@
 $title = 'Groups';
 $this->headTitle($title, 'SET');
 $user = $this->user;
-$item = $this->item;
-$event = $this->event;
+$item = $this->event;
 
-if($this->form){
-	$form = $this->form;
-} else {
-    if($event['id']) {
-        $form = new Epic\Form\EventEditForm();
-        $form->setAction($this->uri('/events/edit/'));
-
-    } else {
-        $form = new Epic\Form\EventCreateForm();
-        $form->setAction($this->uri('/data/group/event/'));
-    }
-}
+$form = new Activity\Form\MessageCreateForm();
 $form->useSubFormGroup()
-     ->setMethod($event['id'] ? 'put' : 'post')
+     ->setMethod('post')
      ->setView($this)
-     ->bind($event)
+     ->setAction($this->uri('/event/feed/'))
      ->prepare();
+
+$joinForm = new Event\Form\EventUserForm();
+$joinForm
+->setView($this)
+->setMethod('post')
+->setAction($this->uri('/event/join/'))
+->prepare();
 ?>
 
 <div class="container">
@@ -39,124 +34,192 @@ $form->useSubFormGroup()
 
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
 
-                  <form <?=$this->formAttr($form)?> class="form event-create-form">
-                                    <?=$form->restful();?>
-                                    <?=$form->helper('id');?>
-                                    <input type="hidden" name="group_id" value="<?=$this->item['id']?>"> 
+                  <div class="event-detail media">
+                        <a class="pull-left" href="#">
+                            <?if($item['File']):?>
+                                <img class="media-object" src="<?=$this->thumb($item['File'][0]['Thumb'], array('c_fill', 'h_240', 'w_240'))?>" width="240" />
+                             <?else:?>
+                                 <img class="media-object" src="<?=$this->assets('/module/epic/img/event-default-l.jpg')?>" width="240" />
+                            <?endif?>
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href=""><?=$item['title'];?></a></h4>
+                            <div class="media typo">
+                                <dl class="dl-horizontal">
+                                   
+                                    <dt>Start Time:</dt>
+                                    <dd><?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?></dd>
+                                    <dt>End Time:</dt>
+                                    <dd><?=$item['endDay']?> <?=$item['endTime'] ? $item['endTime'] : null?></dd>
+                                    <dt>City:</dt>
+                                    <dd><?=$item['city']?></dd>
+                                    <dt>Location:</dt>
+                                    <dd><?=$item['location']?></dd>
+                                    <dt>Event Owner</dt>
+                                    <dd><?=$item['user_name']?></dd>
+                                    <dd></dd>
+                                </dl>
+                                <p><span class="highlight"><?=$item['Count']['memberCount']?></span> Members Joined</p>
+                                <p>
+                                <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
+                                <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
+                                <form <?=$this->formAttr($unjoinForm)?>>
+                                    <?=$unjoinForm->restful();?>
+                                    <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Unjoin')?></button>
+                                </form>
+                                <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
+                                <form <?=$this->formAttr($joinForm)?>>
+                                    <?=$joinForm->restful();?>
+                                    <?=$joinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$joinForm->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Join Now')?></button>
+                                </form>
+                                <?endif?> 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <fieldset class="">
-                                        <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
-                                            <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls docs-input-sizes">
-                                                <?=$form->helper('title', array('class' => 'span6'))?>
-                                                <div class="help-block"><?=$form->helper('title', 'formElementErrors')?></div>
-                                            </div>
+                    <div class="page-header border-header">
+                        <h3>Event Members</h3>
+                    </div>
+
+                    <div class="side-user-list">
+                        <ul class="thumbnails">
+                            <?if($this->members):?>
+                            <?foreach($this->members as $member):?>
+                            <li>
+                            <a class="thumbnail" href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
+                                <img alt="userface" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>
+                            </a>
+                            </li>
+                            <?endforeach;?>
+                            <?endif;?>
+                        </ul>
+                    </div>
+
+                    <div class="page-header border-header">
+                        <h3>Event Description</h3>
+                    </div>
+
+
+                    <article class="typo typocn">
+                    <?=$item['Text']['content']?>
+                    </article>
+
+                    <div class="page-header border-header">
+                        <small class="pull-right"><a href="" class="btn btn-small btn-gray"><i class="icon-plus"></i>Add image</a></small>
+                        <h3>Event Images</h3>
+                    </div>
+
+
+                    <div>
+                        <ul class="thumbnails">
+                            <?for($i=0;$i<8;$i++):?>
+                            <li class="thumbnail"><a href="#"><img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt=""></a></li>
+                            <?endfor?>
+                        </ul>
+                    </div>
+
+                    <div class="page-header border-header">
+                        <h3>Event Talking</h3>
+                    </div>
+
+
+                    <div class="event-activities">
+                        <div class="row">
+                            <form id="activity-form" <?=$this->formAttr($form)?> class="activity-box span7">
+                                <?=$form->helper('messageType', 'formHidden', array('class' => ''))?>        
+                                <?=$form->helper('reference_id', array('class' => ''))?>
+                                <?=$form->helper(array('MessageFile', 'file_id'), 'formHidden', array('class' => ''))?>
+                                <input type="hidden" name="event_id" value="<?=$this->item['id']?>"> 
+                                <?=$this->callback()?>
+                                <fieldset class="form">
+                                    <div class="activity-box-wrap">
+                                        <div class="activity-box-content">
+                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5, 'value' => 'From Event :' . $this->serverUrl() . '/event/' . $this->item['urlName']))?>        
                                         </div>
-
-                                       <div class="datepair row">
-                                            <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?>  controls-row span3">
-                                                <div class="controls">
-                                                    <?=$form->helper('startDay', array('class' => 'input-small date start', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'Start Day'))?>        
-                                                    <?=$form->helper('startTime', array('class' => 'timepicker input-small time start', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'Start Time'))?>        
-                                                    <div class="help-block"><?=$form->helper('startDay', 'formElementErrors')?></div>
-                                                    <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> controls-row span3">
-                                                <div class="controls">
-                                                    <?=$form->helper('endDay', array('class' => 'input-small date end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Day'))?>        
-                                                    <?=$form->helper('endTime', array('class' => 'timepicker input-small time end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Day'))?>        
-                                                    <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
-                                                    <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
-                                                </div>
-                                            </div>
+                                        <div class="activity-box-buttons">
+                                            <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
+                                            <a id="activity-box-video-button" class="activity-box-func" href="javascript:;" data-placement="bottom" rel="popover"><i class="icon-mini icon-facetime-video"></i> Video</a>
+                                            <label id="activity-box-sync-twitter" class="activity-box-func" title="Sync to Twitter"><i class="icon-mini icon-twitter"></i><input type="checkbox" /></label>
+                                            There are <span class="highlight highlight-large activity-box-count">140</span> letters left <button type="submit" class="btn btn-light-brown btn-large">Submit</button>
                                         </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
 
-                                        <div class="control-group <?=$form->isError('city') ? 'error' : '';?>">
-                                            <?=$form->helper('city', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('city', 'formSelect', array('class' => 'select2 input-large', 'value' => $this->params['city']))?>        
-                                                <div class="help-block"><?=$form->helper('city', 'formElementErrors')?></div>
-                                            </div>
+                        <div class="activity-list vlist">
+                            <?foreach($items as $item):?>
+                            <div class="item">
+                                <a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatarLink($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                <div class="item-inline item-text span6">
+                                    <div class="item-content">
+                                        <div class="item-title"><a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" class="item-user"><?=$item['User']['userName']?></a> Said:</div>
+                                        <p><?=$item['ContentHtml']?></p>
+                                        <?if($item['File']):?>
+                                        <div class="item-image">
+                                            <p><a href="<?=$item['File'][0]['Thumb']?>" class="item-preview image" data-preview-type="image" data-url="<?=$this->thumb($item['File'][0]['Thumb'], array('w_400'))?>" data-width="400"><img src="<?=$this->thumb($item['File'][0]['Thumb'], array('w_200'))?>" alt="" class="img-polaroid" /></a></p>
                                         </div>
-
-                                        <div class="control-group <?=$form->isError('memberEnable') ? 'error' : '';?>">
-                                            <?=$form->helper('memberEnable', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('memberEnable', 'formRadio', array('class' => ''))?>        
-                                                <div class="help-block"><?=$form->helper('memberEnable', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>                   
-
-                                        <div class="control-group <?=$form->isError('memberLimit') ? 'error' : '';?>">
-                                            <?=$form->helper('memberLimit', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('memberLimit', array('class' => ''))?>        
-                                                <div class="help-block"><?=$form->helper('memberLimit', 'formElementErrors')?></div>
-                                                <div class="help-block">Set to 0 will be no limit</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group <?=$form->isError('location') ? 'error' : '';?>">
-                                            <?=$form->helper('location', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('location', array('class' => 'span6'))?>        
-                                                <div class="help-block"><?=$form->helper('location', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>  
-
-                                        <div class="control-group">
-                                            <label>Event Theme Photo</label>
-                                            <?if($item['File']):?>
-                                            <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
-                                            <?endif?>
-                                            <div class="row">
-                                                <div class="span4">
-                                                    <?=$this->widget('File', 'file/upload')?>
-                                                </div>
-                                            </div>
-                                        </div>  
-
- 
-
-                                        <div class="control-group">
-                                            <label>Event Categories</label>
-                                            <div class="controls">
-                                                <?foreach($form->get('CategoryEvent') as $subForm):?>
-                                                <?$cate = $subForm->getCategory();if(!$cate){continue;}?>
-                                                <label class="checkbox inline">
-                                                    <?=$subForm->helper('category_id', 'formCheckbox', array(
-                                                        'class' => '',
-                                                        'checkedValue' => $cate['id'],
-                                                        'checked' => $subForm->get('event_id')->getValue() ? true : false
-                                                    ))?>
-                                                    <?=$cate['categoryName']?>
-                                                </label>
-                                                <?endforeach?>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
-                                            <?=$form->helper(array('Text', 'content'), 'formLabel')?>
-                                            <div id="editor-left" class="controls">
-                                                <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6 editor-html simple', 'rows' => '15',))?>
-                                            </div>
-                                            <div id="editor-right" class="markdown-preview"></div>
-                                            <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
-
-                                        </div>
-
-                                        <?if($this->hasModule('File')):?>
-                                        <?=$form->helper(array('EventFile', 'file_id'), 'formHidden')?>
                                         <?endif?>
 
-                                    </fieldset>
-                                    <div class="form-actions">
-                                        <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
+                                        <?if($item['Video']):$video = $item['Video'];?>
+                                        <div class="item-video">
+                                            <?if($video['thumbnail']):?>
+                                            <a href="<?=$video['url']?>" class="item-preview video" data-preview-type="video" data-url="<?=$video['swf']?>" data-width="<?=$video['width']?>" data-height="<?=$video['height']?>"><img src="<?=$video['thumbnail']?>" alt="video preview" class="img-polaroid" width="200" /><i class="icon-play btn-play"></i></a>
+                                            <?else:?>
+                                            <a href="<?=$video['url']?>" class="item-preview video" data-preview-type="video" data-url="<?=$video['swf']?>" data-width="<?=$video['width']?>" data-height="<?=$video['height']?>"><div class="video-no-preview"></div><i class="icon-play btn-play"></i></a>
+                                            <?endif?>
+                                        </div>
+                                        <?endif?>
+
+                                        <?if(isset($item['ForwardActivity']) && $item['ForwardActivity']): $subItem = $item['ForwardActivity'];?>
+                                        <div class="well">
+                                            <p><?=$subItem['ContentHtml']?></p>
+                                            <?if($subItem['File']):?>
+                                            <div class="item-image">
+                                                <p><a href="<?=$subItem['File'][0]['Thumb']?>"><img src="<?=$this->thumb($subItem['File'][0]['Thumb'], array('w_200'))?>" alt="" class="img-polaroid" /></a></p>
+                                            </div>
+                                            <?endif?>
+                                            <div class="item-action">
+                                                <p class="pull-right"><a href="<?=$this->uri('/feed/' . $subItem['messageHash'])?>" class="" data-activity-comment="<?=$subItem['id']?>"><i class="icon-comment"></i> Comments (<span class="highlight"><?=$subItem['commentedCount']?></span>)</a></p>
+                                                <p class="pull-left">
+                                                <a href="<?=$this->uri('/feed/' . $subItem['messageHash'])?>"><time class="agotime" data-jstime="<?=$this->datetime()->jsTime($subItem['createTime'])?>" datetime="<?=$this->datetime()->isoTime($subItem['createTime'])?>"><?=$this->datetime($subItem['createTime'])?></time></a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <?endif?>
+
+                                        <div class="item-action">
+                                            <p class="pull-right">
+                                            <a href="javascript:;" class="item-func remove <?=$viewAsGuest ? 'hide' : ''?>"><i class="icon-remove"></i> Delete</a>
+                                            <a href="javascript:;" class="item-func comment" data-activity-comment="<?=$item['id']?>"><i class="icon-comment"></i> Comments (<span class="highlight"><?=$item['commentedCount']?></span>)</a>
+                                            </p>
+                                            <p class="pull-right hide"><a href="#activity-form" class="item-func reference" data-activity-reference="<?=$item['id']?>" data-activity-text="@<?=$item['User']['userName']?> "><i class="icon-share-alt"></i> RT (<span class="highlight"><?=$item['transferredCount']?></span>)</a></p>
+                                            <p class="pull-left">
+                                            <a href="<?=$this->uri('/feed/' . $item['messageHash'])?>" class="item-id"><time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['createTime'])?>" datetime="<?=$this->datetime()->isoTime($item['createTime'])?>"><?=$this->datetime($item['createTime'])?></time></a>
+                                            </p>
+                                        </div>
                                     </div>
-                                </form>
+
+                                    <div class="item-remove-ajax">
+                                    </div>
+                                    <div class="item-sub-ajax">
+                                    </div>
+                                </div>
+                            </div>
+                            <?endforeach?>
+
+                            <?if($this->paginator):?>
+                            <?=$this->paginator->setPath('/event/' . $this->item['urlName'] . '/')->setBaseQuery($this->query);?>
+                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                            <?endif;?>
+                        </div><!--activity-list end-->
 
 
                 </div><!--group main end-->
