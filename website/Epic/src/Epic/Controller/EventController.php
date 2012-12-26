@@ -146,7 +146,17 @@ class EventController extends ActionController
             'id' => $user['id'],
         ));
         
+        if($user) {
+            $joinModel = Api::_()->getModel('Event\Model\EventUser');
+            $joinList = $joinModel->setItemList(array(
+                'user_id' => $user['id'],
+                'event_id' => $item['id'],
+            ))->getEventUserList()->toArray();
         
+            if (count($joinList) > 0) {
+                $item['Join'] = $joinList[0];
+            }
+        }
 
         list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
             'action' => 'index',

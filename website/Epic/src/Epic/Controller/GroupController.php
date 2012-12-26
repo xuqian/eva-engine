@@ -107,6 +107,19 @@ class GroupController extends ActionController
             'action' => 'user',
             'id' => $user['id'],
         ));
+
+        if($user) {
+            $joinModel = Api::_()->getModel('Group\Model\GroupUser');
+            $joinList = $joinModel->setItemList(array(
+                'group_id' => $item['id'],
+                'user_id' => $user['id']
+            ))->getGroupUserList()->toArray();
+        
+            if (count($joinList) > 0) {
+                $item['Join'] = $joinList[0];
+            }
+        }
+
         $view = new ViewModel(array(
             'item' => $item,
         ));

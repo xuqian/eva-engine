@@ -141,7 +141,7 @@ $dayPath = $this->dayPath;
                             {% if(o.items.length > 0) { %}
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
-                                <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                <a class="pull-left" href="<?=$this->uri('/event/')?>{%=item.urlName%}">
                                     {% if(item.File) { %}
                                     <img  src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" height="90" class="media-object img-rounded"/>
                                     {% } else { %}
@@ -182,7 +182,7 @@ $dayPath = $this->dayPath;
                             {% if(o.items.length > 0) { %}
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
-                                <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                <a class="pull-left" href="<?=$this->uri('/event/')?>{%=item.urlName%}">
                                     {% if(item.File) { %}
                                         <img  src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" height="90" class="media-object img-rounded"/>
                                     {% } else { %}
