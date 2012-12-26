@@ -46,7 +46,7 @@ return array(
                 'options' => array(
                     'route' => '/pages[/:id]',
                     'constraints' => array(
-                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                        'id'     => '[a-zA-Z0-9_-]+',
                     ),
                     'defaults' => array(
                         'controller' => 'PagesController',
@@ -73,7 +73,7 @@ return array(
                 'options' => array(
                     'route' => '/register[/]',
                     'defaults' => array(
-                        'controller' => 'UserController',
+                        'controller' => 'Epic\Controller\UserController',
                         'action' => 'register',
                     ),
                 ),
@@ -528,7 +528,7 @@ return array(
                     'constraints' => array(
                     ),
                     'defaults' => array(
-                        'controller' => 'UserController',
+                        'controller' => 'Epic\Controller\UserController',
                         'action' => 'index',
                     ),
                 ),
@@ -734,6 +734,7 @@ return array(
             'ResetController' => 'Epic\Controller\ResetController',
             'RegisterController' => 'Epic\Controller\RegisterController',
             'UserController' => 'Epic\Controller\UserController',
+            'Epic\Controller\UserController' => 'Epic\Controller\UserController',
             'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
             'MessagesController' => 'Epic\Controller\MessagesController',
