@@ -1,69 +1,70 @@
 <div class="group-side">
-                    <div class="calendar calendar-mini">
-                        <div class="calendar-wrap">
+    <div class="calendar calendar-mini">
+        <div class="calendar-wrap">
 
-                        </div>
-                        <div class="calendar-caption">
-                            <i class="icon-stop green"></i> Coming Event
-                            <i class="icon-stop orange"></i> Today
-                        </div>
-                    </div><!--calendar end-->
-
-                    <div class="page-header  border-header">
-                        <h4 class="txt-bold">Group Members (20)</h4>
-                    </div>
-
-                    <div class="group-member-list">
-                        <div class="page-header">
-                        <h5 class="txt-bold">Group Admin</h5>
-                        </div>
-                        <ul>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                        </ul>
-                    </div>
-                    <div class="group-member-list">
-                        <div class="page-header">
-                            <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
-                            <h5 class="txt-bold">Group Members</h5>
-                        </div>
-                        <ul>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-                        </ul>
-                    </div>
-
-<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
-<div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>">View All</a></small>
-    <h4>Group Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
-</div>
-<div class="side-event-list">
-{% if(o.items.length > 0) { %}
-{% for (var i=0, item; item=o.items[i]; i++) { %}
-<div class="item">
-    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
-    <div class="item-inline item-text">
-        <div class="text-content">
-            <div class="item-title">
-                <a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a>
-            </div>
         </div>
-    </div>
-</div>
-{% } %}
-{% } %}
-</div>
-</script>
+        <div class="calendar-caption">
+            <i class="icon-stop green"></i> Coming Events
+            <i class="icon-stop brown"></i> Finished Events
+            <i class="icon-stop orange"></i> Today
+        </div>
+    </div><!--calendar end-->
 
-                    <div class="page-header">
-                        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
-                        <h4 class="txt-bold">Group Albums (20)</h4>
+    <div class="page-header  border-header">
+        <h4 class="txt-bold">Group Members (20)</h4>
+    </div>
+
+    <div class="group-member-list">
+        <div class="page-header">
+            <h5 class="txt-bold">Group Admin</h5>
+        </div>
+        <ul>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+        </ul>
+    </div>
+    <div class="group-member-list">
+        <div class="page-header">
+            <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+            <h5 class="txt-bold">Group Members</h5>
+        </div>
+        <ul>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+        </ul>
+    </div>
+
+    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
+        <div class="page-header border-header">
+            <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>">View All</a></small>
+            <h4>Group Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+        </div>
+        <div class="side-event-list">
+            {% if(o.items.length > 0) { %}
+                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                    <div class="item">
+                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <div class="item-inline item-text">
+                            <div class="text-content">
+                                <div class="item-title">
+                                    <a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    {% } %}
+                {% } %}
+        </div>
+    </script>
+
+    <div class="page-header">
+        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+        <h4 class="txt-bold">Group Albums (20)</h4>
+    </div>
     <div class="side-album-list">
         <ul class="thumbnails">
             <?for($i = 0; $i < 8; $i++):?>
@@ -76,37 +77,37 @@
         </ul>
     </div>
 
-                    <div class="page-header border-header">
-                        <h4>Group Ranks</h4>
-                    </div>
+    <div class="page-header border-header">
+        <h4>Group Ranks</h4>
+    </div>
 
-                    <div class="group-ranks">
-                        <ul>
-                            <?for($i=1;$i<11;$i++):?>
-                            <li>
-                            <em class="ranknum rank<?=$i?>"><?=$i?></em>
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img alt="userface" src="<?=$this->gravatarLink($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a class="pull-left" href="#">Sleek, intuitive, and powerful front-end framework</a></h4>
-                                    <div class="media">
-                                        <div class="row">
-                                            <span class="span1"><span class="highlight txt-bold">123</span> Topics</span>
-                                            <span class="highlight txt-bold">123</span> Members
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </li>
-                            <?endfor?>
-                        </ul>
+    <div class="group-ranks">
+        <ul>
+            <?for($i=1;$i<11;$i++):?>
+            <li>
+            <em class="ranknum rank<?=$i?>"><?=$i?></em>
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img alt="userface" src="<?=$this->gravatarLink($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a class="pull-left" href="#">Sleek, intuitive, and powerful front-end framework</a></h4>
+                    <div class="media">
+                        <div class="row">
+                            <span class="span1"><span class="highlight txt-bold">123</span> Topics</span>
+                            <span class="highlight txt-bold">123</span> Members
+                        </div>
                     </div>
+                </div>
+            </div>
+            </li>
+            <?endfor?>
+        </ul>
+    </div>
 
 
-                    <div class="side-ad-list">
-                        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
-                        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
-                    </div>
-                </div><!--right side end-->
+    <div class="side-ad-list">
+        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
+        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
+    </div>
+</div><!--right side end-->
