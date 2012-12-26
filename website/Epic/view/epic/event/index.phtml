@@ -234,7 +234,13 @@ $dayPath = $this->dayPath;
 eva.ready(function(){
         $(".nav-week a").on('click', function(){
                 var calendar = $(".event-calendar");
-                calendar.is(":visible") ? calendar.fadeOut() : calendar.fadeIn();
+                if(calendar.is(":visible")) {
+                    calendar.fadeOut();
+                    $(".event-thumbnails").fadeIn();
+                } else {
+                    calendar.fadeIn();
+                    $(".event-thumbnails").fadeOut();
+                }
                 return false;
         });
 

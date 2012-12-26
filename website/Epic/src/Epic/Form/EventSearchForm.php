@@ -4,6 +4,11 @@ namespace Epic\Form;
 class EventSearchForm extends EventForm
 {
     protected $mergeElements = array(
+        'city' => array(
+            'options' => array(
+                'empty_option' => 'All Cities',
+            ),
+        ),
         'keyword' =>     array(
             'name' => 'keyword',
             'type' => 'text',
