@@ -491,7 +491,7 @@ return array(
                             'event' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'post[/]',
+                                    'route' => 'event[/]',
                                     'constraints' => array(
                                     ),
                                     'defaults' => array(

@@ -39,15 +39,38 @@ $form->useSubFormGroup()
 
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
 
-                   <form <?=$this->formAttr($form)?> class="form event-create-form">
+                  <form <?=$this->formAttr($form)?> class="form event-create-form">
                                     <?=$form->restful();?>
                                     <?=$form->helper('id');?>
+                                    <input type="hidden" name="group_id" value="<?=$this->item['id']?>"> 
+                                    <?=$this->callback()?>
+
                                     <fieldset class="">
                                         <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
                                             <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
                                             <div class="controls docs-input-sizes">
                                                 <?=$form->helper('title', array('class' => 'span6'))?>
                                                 <div class="help-block"><?=$form->helper('title', 'formElementErrors')?></div>
+                                            </div>
+                                        </div>
+
+                                       <div class="datepair row">
+                                            <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?>  controls-row span3">
+                                                <div class="controls">
+                                                    <?=$form->helper('startDay', array('class' => 'input-small date start', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'Start Day'))?>        
+                                                    <?=$form->helper('startTime', array('class' => 'timepicker input-small time start', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'Start Time'))?>        
+                                                    <div class="help-block"><?=$form->helper('startDay', 'formElementErrors')?></div>
+                                                    <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> controls-row span3">
+                                                <div class="controls">
+                                                    <?=$form->helper('endDay', array('class' => 'input-small date end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Day'))?>        
+                                                    <?=$form->helper('endTime', array('class' => 'timepicker input-small time end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Day'))?>        
+                                                    <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
+                                                    <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -58,20 +81,21 @@ $form->useSubFormGroup()
                                                 <div class="help-block"><?=$form->helper('city', 'formElementErrors')?></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="control-group <?=$form->isError('memberEnable') ? 'error' : '';?>">
                                             <?=$form->helper('memberEnable', 'label', array('class' => 'control-label'))?>
                                             <div class="controls">
-                                                <?=$form->helper('memberEnable', 'formSelect', array('class' => ''))?>        
+                                                <?=$form->helper('memberEnable', 'formRadio', array('class' => ''))?>        
                                                 <div class="help-block"><?=$form->helper('memberEnable', 'formElementErrors')?></div>
                                             </div>
                                         </div>                   
-                                       
-                                         <div class="control-group <?=$form->isError('memberLimit') ? 'error' : '';?>">
+
+                                        <div class="control-group <?=$form->isError('memberLimit') ? 'error' : '';?>">
                                             <?=$form->helper('memberLimit', 'label', array('class' => 'control-label'))?>
                                             <div class="controls">
                                                 <?=$form->helper('memberLimit', array('class' => ''))?>        
                                                 <div class="help-block"><?=$form->helper('memberLimit', 'formElementErrors')?></div>
+                                                <div class="help-block">Set to 0 will be no limit</div>
                                             </div>
                                         </div>
 
@@ -86,9 +110,7 @@ $form->useSubFormGroup()
                                         <div class="control-group">
                                             <label>Event Theme Photo</label>
                                             <?if($item['File']):?>
-                                                <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
-                                            <?else:?>
-                                                <img id="post-image" src="http://placehold.it/260x180" alt="" />
+                                            <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
                                             <?endif?>
                                             <div class="row">
                                                 <div class="span4">
@@ -97,27 +119,7 @@ $form->useSubFormGroup()
                                             </div>
                                         </div>  
 
-                                        <div class="datepair row">
-                                        <div class="control-group <?=$form->isError('startDay') ? 'error' : '';?>  controls-row span3">
-                                            <?=$form->helper('startDay', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('startDay', array('class' => 'input-small date start', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                <?=$form->helper('startTime', array('class' => 'timepicker input-small time start', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                <div class="help-block"><?=$form->helper('startDay', 'formElementErrors')?></div>
-                                                <div class="help-block"><?=$form->helper('startTime', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> controls-row span3">
-                                            <?=$form->helper('endDay', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('endDay', array('class' => 'input-small date end', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                <?=$form->helper('endTime', array('class' => 'timepicker input-small time end', 'data-date-format' => 'yyyy-mm-dd'))?>        
-                                                <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
-                                                <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>
-                                        </div>
+ 
 
                                         <div class="control-group">
                                             <label>Event Categories</label>
@@ -132,7 +134,7 @@ $form->useSubFormGroup()
                                                     ))?>
                                                     <?=$cate['categoryName']?>
                                                 </label>
-                                        <?endforeach?>
+                                                <?endforeach?>
                                             </div>
                                         </div>
 
@@ -145,30 +147,6 @@ $form->useSubFormGroup()
                                             <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
 
                                         </div>
-
-                                        <div class="control-group <?=$form->isError('longitude') ? 'error' : '';?> hide">
-                                            <?=$form->helper('longitude', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('longitude', array('class' => 'span3'))?>        
-                                                <div class="help-block"><?=$form->helper('longitude', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>  
-
-                                        <div class="control-group <?=$form->isError('latitude') ? 'error' : '';?> hide">
-                                            <?=$form->helper('latitude', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('latitude', array('class' => 'span3'))?>        
-                                                <div class="help-block"><?=$form->helper('latitude', 'formElementErrors')?></div>
-                                            </div>
-                                        </div> 
-
-                                        <div class="control-group <?=$form->isError('urlName') ? 'error' : '';?> hide">
-                                            <?=$form->helper('urlName', 'label', array('class' => 'control-label'))?>
-                                            <div class="controls">
-                                                <?=$form->helper('urlName', array('class' => ''))?>        
-                                                <div class="help-block"><?=$form->helper('urlName', 'formElementErrors')?></div>
-                                            </div>
-                                        </div>   
 
                                         <?if($this->hasModule('File')):?>
                                         <?=$form->helper(array('EventFile', 'file_id'), 'formHidden')?>
