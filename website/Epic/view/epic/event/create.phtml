@@ -34,7 +34,6 @@ if($this->form){
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-
                                     <a href="<?=$this->uri('/events/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Create Event</a>
                                     <h3><?=$this->_($title)?> <?if($item['id']):?><a href="<?=$this->uri('/event/' . $item['urlName'])?>" class="">[View]</a><?endif?></h3>
                                 </div>
@@ -107,8 +106,6 @@ if($this->form){
                                             <label>Event Theme Photo</label>
                                             <?if($item['File']):?>
                                             <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
-                                            <?else:?>
-                                            <img id="post-image" src="http://placehold.it/260x180" alt="" />
                                             <?endif?>
                                             <div class="row">
                                                 <div class="span4">
