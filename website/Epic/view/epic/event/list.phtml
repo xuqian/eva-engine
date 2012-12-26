@@ -158,12 +158,13 @@ $dayPath = $this->dayPath;
                             </div>
                         </div>
                         <?endforeach?>
+
+                        <?if($this->paginator):?>
+                        <?=$this->paginator->setPath('/events/list/')->setBaseQuery($this->query);?>
+                        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                        <?endif;?>
                     </div><!--activity-list end-->
 
-                    <?if($this->paginator):?>
-                    <?=$this->paginator->setPath('/events/list/')->setBaseQuery($this->query);?>
-                    <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                    <?endif;?>
 
                 </div><!--event main end-->
             </div><!--page main left end-->

@@ -33,6 +33,9 @@ class EventController extends ActionController
         }
         $selectQuery['eventStatus'] = 'active';
         $selectQuery['visibility']  = 'public';
+        if($selectQuery['city'] == 'mycity'){
+            $selectQuery['city'] = $this->cookie()->crypt(false)->read('city');
+        }
         $items = $itemModel->setItemList($selectQuery)->getEventdataList();
         $items = $items->toArray(array(
             'self' => array(
