@@ -1102,6 +1102,8 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-calendar .day.new,.event-calendar .day.old{color:#999;font-weight:normal;}
 .event-calendar .switch{font-weight:bold;}
 .event-calendar .today{padding:1px 5px;background:#e1500d;color:#FFF;}
+.event-calendar .label-event{width:86px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#e1500d;}
+.event-calendar .passed .label-event{background:#CCC;}
 .event-detail .pull-left{margin-right:30px;}
 .event-detail .media-heading{font-size:20px;font-weight:bold;}
 .event-detail .dl-horizontal dt{text-align:left;width:100px;}

@@ -58,7 +58,7 @@ $dayPath = $this->dayPath;
                                 {% if(item.File) { %}
                                     <img src="{%=item.File.Thumb%}" alt="{%=item.title%}" />
                                 {% }else{ %}
-                                    <img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt="">
+                                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="">
                                 {% } %}
                                 </a></li>
                             {% } %}
@@ -69,16 +69,23 @@ $dayPath = $this->dayPath;
 
                     <div class="event-grid">
                         <header class="event-grid-header">
-                        <small class="pull-right">Hot Cities: <a href="<?=$this->uri('/events/list/', array('city' => 'New York','order' => 'timedesc'));?>">New York</a> <a href="<?=$this->uri('/events/list/', array('city' => 'Tokyo','order' => 'timedesc'));?>">Tokyo</a> <a href="<?=$this->uri('/events/list/', array('city' => 'Los Angeles','order' => 'timedesc'));?>">Los Angeles</a></small>
+                        <small class="pull-right">Hot Cities: 
+                            <a href="<?=$this->uri('/events/list/', array('city' => 'Paris','order' => 'timedesc'));?>">Paris</a>
+                            <a href="<?=$this->uri('/events/list/', array('city' => 'London','order' => 'timedesc'));?>">London</a>
+                            <a href="<?=$this->uri('/events/list/', array('city' => 'New York','order' => 'timedesc'));?>">New York</a>
+                            <a href="<?=$this->uri('/events/list/', array('city' => 'Shanghai','order' => 'timedesc'));?>">Shanghai</a>
+                        </small>
                         <div class="page-header border-header">
                             <h3>New Events </h3><a href="<?=$this->uri('/my/city/')?>" class="switch">[Switch City]</a>
                         </div>
                         <ul class="nav nav-pills">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">All Cities</a> |</li>
-                            <li><a href="#">My City</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'timedesc'));?>">Red Wine</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'timedesc'));?>">French cuisine</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Cocktail party</a></li>
+                            <li><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">My City</a> |</li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'timedesc'));?>">Cocktail Party</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'timedesc'));?>">Wine Tasting</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Exhibitions</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Cooking Classes</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Opinions sharing</a> </li>
                         </ul>
                         </header>
                         <script id="event-new" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('order' => 'timedesc','rows' => 6))?>">
@@ -113,10 +120,12 @@ $dayPath = $this->dayPath;
                         </div>
                         <ul class="nav nav-pills">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>">All Cities</a> |</li>
-                            <li><a href="#">My City</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'memberdesc'));?>">Red Wine</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'memberdesc'));?>">French cuisine</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Cocktail party</a></li>
+                            <li><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>">My City</a> |</li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'memberdesc'));?>">Cocktail Party</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'memberdesc'));?>">Wine Tasting</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Exhibitions</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Cooking Classes</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Opinions sharing</a> </li>
                         </ul>
                         </header>
                         
@@ -167,7 +176,7 @@ $dayPath = $this->dayPath;
                             <?foreach($calendar['days'] as $week):?>
                             <tr>
                                 <?foreach($week as $day):?>
-                                <th  title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "new" : ''?>">
+                                <th  title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "old" : ''?> <?=$day['datedb'] < $calendar['today']['datedb'] ? 'passed' : ''?>">
                                     <?if($day['datedb'] == $calendar['today']['datedb']):?>
                                     <span class="today"><?=$day['day']?></span>
                                     <?else:?>
@@ -179,10 +188,10 @@ $dayPath = $this->dayPath;
                             </tr>
                             <tr>
                                 <?foreach($week as $day):?>
-                                <td title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "new" : ''?>">
+                                <td title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "old" : ''?> <?=$day['datedb'] < $calendar['today']['datedb'] ? 'passed' : ''?>">
                                     <?if (isset($day['Events'])):?>
                                         <?foreach ($day['Events'] as $event):?>
-                                            <a href="<?=$this->uri('/events/' . $event['urlName'])?>"><?=$event['title']?></a>
+                                        <a href="<?=$this->uri('/events/' . $event['urlName'])?>" class="label label-event" title="<?=$event['title']?>"><?=$event['title']?></a>
                                         <?endforeach;?>
                                     <?endif;?>
                                 </td>
