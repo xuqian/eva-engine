@@ -11,6 +11,16 @@ $form->useSubFormGroup()
      ->setView($this)
      ->setAction($this->uri('/event/feed/'))
      ->prepare();
+
+$joinForm = new Event\Form\EventUserForm();
+$joinForm
+->setView($this)
+->setMethod('post')
+->setAction($this->uri('/event/join/'))
+->prepare();
+
+$unjoinForm = clone $joinForm;
+$unjoinForm->setMethod('delete');
 ?>
 
 <div class="container">
@@ -43,7 +53,26 @@ $form->useSubFormGroup()
                                     <dd></dd>
                                 </dl>
                                 <p><span class="highlight"><?=$item['Count']['memberCount']?></span> Members Joined</p>
-                                <p><a href="" class="btn btn-orange"><i class="icon-user"></i> Join Now</a></p>
+                                <p>
+                                <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
+                                <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
+                                <form <?=$this->formAttr($unjoinForm)?>>
+                                    <?=$unjoinForm->restful();?>
+                                    <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Unjoin')?></button>
+                                </form>
+                                <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
+                                <form <?=$this->formAttr($joinForm)?>>
+                                    <?=$joinForm->restful();?>
+                                    <?=$joinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
+                                    <?=$joinForm->helper('user_id', array('class' => ''))?>
+                                    <?=$this->callback()?>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Join Now')?></button>
+                                </form>
+                                <?endif?> 
+                                </p>
                             </div>
                         </div>
                     </div>

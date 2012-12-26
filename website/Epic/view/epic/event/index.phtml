@@ -56,7 +56,7 @@ $dayPath = $this->dayPath;
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                                 <li><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">
                                 {% if(item.File) { %}
-                                    <img src="" alt="{%=item.urlName%}" />
+                                    <img src="{%=item.File.Thumb%}" alt="{%=item.title%}" />
                                 {% }else{ %}
                                     <img src="https://lh4.googleusercontent.com/-24AS3_MK3m0/UKLldhEDMoI/AAAAAAAARCM/u_zXkKeb9vo/s144-p/DSC_0065.jpg" alt="">
                                 {% } %}
