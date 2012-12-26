@@ -140,20 +140,9 @@ $dayPath = $this->dayPath;
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="<?=$this->uri('/event/' . $item['urlName'])?>" class="item-user"><?=$item['title']?></a></h4>
                                 <div class="media">
-                                    <table class="table-condensed">
-                                        <tbody>
-                                            <tr>
-                                                <td><?=$this->_('Start Time')?>: 
-                                                    <?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?>
-                                                </td>
-                                                <td><?=$this->_('End Time')?>: 
-                                                    <?=$item['endDay']?> <?=$item['endTime'] ? $item['endTime'] : null?>
-                                                </td>
-                                                <td><?=$this->_('Members')?> : <a href=""><?=$item['Count']['memberCount']?></a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <p><?=$this->_('Location')?> : <?=$item['location']?></p>
+                                    <p class="lowlight"><?=$this->_('Event Time')?>: <?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?> - <?=$item['endDay']?> <?=$item['endTime'] ? $item['endTime'] : null?></p>
+                                    <p class="lowlight"><?=$this->_('Location')?>: <?=$item['city']?> <?=$item['location']?></p>
+                                    <p class="lowlight"><span class="highlight"><?=$item['Count']['memberCount']?></span> <?=$this->_('Members Joined')?> </p>
                                 </div>
                             </div>
                         </div>
