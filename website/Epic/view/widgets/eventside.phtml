@@ -1,47 +1,49 @@
-                <div class="event-side">
-                   <div class="usercard media">
-                        <a class="pull-left" href="#">
-                            <img alt="userface" src="<?=$this->gravatarLink($user['email'], 120)?>" width="120" height="120" class="media-object"/>
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><?=$user['userName']?></h4>
-                            <h5>Joined Events: <span class="highlight">1234</span></h5>
-                            <div class="media">
-                                <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
-                                <p class="lowlight">Share your life</p>
+<div class="event-side">
+    <?if($user):?>
+    <div class="usercard media">
+        <a class="pull-left" href="#">
+            <img alt="userface" src="<?=$this->gravatarLink($user['email'], 120)?>" width="120" height="120" class="media-object"/>
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><?=$user['userName']?></h4>
+            <h5>Joined Events: <span class="highlight">1234</span></h5>
+            <div class="media">
+                <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
+                <p class="lowlight">Share your life</p>
+            </div>
+        </div>
+    </div> 
+    <?endif?>
+
+    <div class="event-subscription">
+        <p>Receive free new event notifications:</p>
+        <form>
+            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
+        </form>
+    </div>
+
+
+    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+        <div class="page-header border-header">
+            <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+        </div>
+        <div class="side-blog-list">
+            {% if(o.items.length > 0) { %}
+                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                    <div class="item">
+                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <div class="item-inline item-text">
+                            <div class="text-content">
+                                <div class="item-title">
+                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                </div>
+                                <p>{%=item.Text.Preview%}</p>
                             </div>
                         </div>
-                    </div> 
-
-                    <div class="event-subscription">
-                        <p>Receive free new event notifications:</p>
-                        <form>
-                            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
-                        </form>
                     </div>
-
-
-                    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
-                        <div class="page-header border-header">
-                            <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
-                        </div>
-                        <div class="side-blog-list">
-                            {% if(o.items.length > 0) { %}
-                                {% for (var i=0, item; item=o.items[i]; i++) { %}
-                                    <div class="item">
-                                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
-                                        <div class="item-inline item-text">
-                                            <div class="text-content">
-                                                <div class="item-title">
-                                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
-                                                </div>
-                                                <p>{%=item.Text.Preview%}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% } %}
-                                {% } %}
-                        </div>
-                    </script>
-                    <?=$this->widget('Epic', 'components/ad_event')?>
-                </div>
+                    {% } %}
+                {% } %}
+        </div>
+    </script>
+    <?=$this->widget('Epic', 'components/ad_event')?>
+</div>

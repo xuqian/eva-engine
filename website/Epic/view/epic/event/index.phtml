@@ -87,7 +87,11 @@ $dayPath = $this->dayPath;
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
                                 <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
-                                    <img  src="{%=item.urlName%}" width="90" height="90" class="media-object img-rounded"/>
+                                    {% if(item.File) { %}
+                                    <img  src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" height="90" class="media-object img-rounded"/>
+                                    {% } else { %}
+                                    <img  src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" width="90" height="90" class="media-object img-rounded"/>
+                                    {% } %}
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
@@ -122,7 +126,11 @@ $dayPath = $this->dayPath;
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
                                 <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
-                                    <img  src="{%=item.urlName%}" width="90" height="90" class="media-object img-rounded"/>
+                                    {% if(item.File) { %}
+                                        <img  src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" height="90" class="media-object img-rounded"/>
+                                    {% } else { %}
+                                    <img  src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" width="90" height="90" class="media-object img-rounded"/>
+                                    {% } %}
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
