@@ -1,0 +1,159 @@
+<?
+$title = 'Groups';
+$this->headTitle($title, 'SET');
+$user = $this->user;
+$item = $this->item;
+$post = $this->post;
+
+if($this->form){
+	$form = $this->form;
+} else {
+    if($post['id']) {
+        $form = new Epic\Form\PostEditForm();
+        $form->setAction($this->uri('/blog/edit/'));
+
+    } else {
+        $form = new Epic\Form\PostCreateForm();
+        $form->setAction($this->uri('/data/group/post/'));
+    }
+}
+$form->useSubFormGroup()
+     ->setMethod($post['id'] ? 'put' : 'post')
+     ->setView($this)
+     ->bind($post)
+     ->prepare();
+?>
+
+<div class="container">
+    <header class="group-header">
+        <?=$this->widget('Epic', 'widgets/groupnav', $this->vars())?> 
+    </header>
+</div>
+
+<div class="container">
+    <div class="page-bg">
+        <div class="row">
+
+            <div class="span8">
+                <div class="group-main">
+
+                    <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
+
+                   <div class="blog-list vlist">
+                                    <form <?=$this->formAttr($form)?> class="form">
+                                        <?=$form->restful();?>
+                                        <?=$form->helper('id');?>
+                                        <input type="hidden" name="group_id" value="<?=$this->item['id']?>"> 
+                                        <?=$this->callback()?>
+
+                                        <fieldset class="">
+                                            <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
+                                                <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls docs-input-sizes">
+                                                    <?=$form->helper('title', array('class' => 'span6'))?>
+                                                    <div class="help-block"><?=$form->helper('title', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
+                                                <div id="editor-left" class="controls">
+                                                    <!--
+                                                    <div class="btn-toolbar markdown-toolbar">
+                                                        <div class="btn-group">
+                                                            <span class="btn"  data-original-title="Bold - Ctrl+B"><i class="icon-bold"></i></span>
+                                                            <span class="btn"  data-original-title="Italic - Ctrl+I"><i class="icon-italic"></i></span>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <span class="btn"  data-original-title="Link - Ctrl+L"><i class="icon-link"></i></span>
+                                                            <span class="btn"  data-original-title="Blockquote - Ctrl+Q"><i class="icon-blockquote"></i></span>
+                                                            <span class="btn"  data-original-title="Code Sample - Ctrl+K"><i class="icon-code"></i></span>
+                                                            <span class="btn"  data-original-title="Image - Ctrl+G"><i class="icon-picture"></i></span>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <span class="btn"  data-original-title="Numbered List - Ctrl+O"><i class="icon-list"></i></span>
+                                                            <span class="btn"  data-original-title="Bulleted List - Ctrl+U"><i class="icon-bullet-list"></i></span>
+                                                            <span class="btn"  data-original-title="Heading - Ctrl+H"><i class="icon-header"></i></span>
+                                                            <span class="btn"  data-original-title="Horizontal Rule - Ctrl+R"><i class="icon-hr-line"></i></span>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <span class="btn"  data-original-title="Undo - Ctrl+Z" disabled=""><i class="icon-undo"></i></span>
+                                                            <span class="btn"  data-original-title="Redo - Ctrl+Y" disabled=""><i class="icon-share-alt"></i></span>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <span class="btn fullscreen" data-original-title="Full Screen"><i class="icon-fullscreen"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    -->
+                                                    <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6', 'rows' => '15',))?>
+                                                </div>
+                                                <div id="editor-right" class="markdown-preview"></div>
+                                                <div class="help-block"><?=$form->helper(array('Text', 'content'), 'formElementErrors')?></div>
+
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset class="">
+
+                                            <div class="control-group <?=$form->isError('status') ? 'error' : '';?> hide">
+                                                <?=$form->helper('status', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('status', 'formSelect', array('class' => ''))?>
+                                                    <div class="help-block"><?=$form->helper('status', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group <?=$form->isError('codeType') ? 'error' : '';?>">
+                                                <?=$form->helper('codeType', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('codeType', 'formRadio', array('class' => 'checkbox inline'))?>
+                                                    <div class="help-block"><?=$form->helper('codeType', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group <?=$form->isError('visibility') ? 'error' : '';?> hide">
+                                                <?=$form->helper('visibility', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('visibility', 'formSelect', array('class' => ''))?>
+                                                    <div class="help-block"><?=$form->helper('visibility', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group <?=$form->isError('language') ? 'error' : '';?> hide">
+                                                <?=$form->helper('language', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('language', 'formSelect', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('language', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group <?=$form->isError('commentStatus') ? 'error' : '';?> hide">
+                                                <?=$form->helper('commentStatus', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('commentStatus', 'formSelect', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('commentStatus', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-group <?=$form->isError('commentType') ? 'error' : '';?> hide">
+                                                <?=$form->helper('commentType', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('commentType', 'formSelect', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('commentType', 'formElementErrors')?></div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-info btn-large"><?=$this->_('Publish');?></button>
+                                        </div>
+                                    </form>
+                                </div><!--main form end--> 
+
+
+                </div><!--group main end-->
+            </div><!--page main left end-->
+            <div class="span4">
+               <?=$this->widget('Epic', 'widgets/groupside', $this->vars())?>  
+            </div>
+
+        </div><!--page main right end-->
+    </div><!-- page-bg end-->
+</div><!--container end-->
