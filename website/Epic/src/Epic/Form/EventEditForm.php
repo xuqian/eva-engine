@@ -14,16 +14,12 @@ class EventEditForm extends EventCreateForm
             'validators' => array(
                 'db' => array(
                     'name' => 'Eva\Validator\Db\NoRecordExists',
-                    'injectdata' => true,
                     'options' => array(
                         'table' => 'event_events',
                         'field' => 'urlName',
                         'exclude' => array(
                             'field' => 'id',
                         ),
-                        'messages' => array(
-                            'recordFound' => 'Abc',
-                        ), 
                     ),
                 ),
             ),

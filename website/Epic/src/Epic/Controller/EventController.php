@@ -244,10 +244,6 @@ class EventController extends ActionController
             $callback = $callback ? $callback : '/events/edit/' . $eventId;
             $this->redirect()->toUrl($callback);
         } else {
-            p($postData);
-            p($form->getFieldsets());
-            p($form->getElements(), 1);
-            exit;
             $user = Auth::getLoginUser(); 
             //Public User Area
             $this->forward()->dispatch('UserController', array(

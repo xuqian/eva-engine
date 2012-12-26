@@ -1071,7 +1071,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .page-bg{padding:20px 0;background:#F0F0F0;}
 .event-side{margin-left:35px;}
 .event-main{margin-right:35px;}
-.event-header{height:100px;background:#333333;color:#e8b116;}.event-header h2{margin-left:40px;line-height:100px;font-size:50px;}
+.event-header{height:100px;background:#333333;color:#e8b116;}.event-header h2{margin-left:40px;line-height:100px;font-size:50px;}.event-header h2 a{color:#e8b116;}
 .event-header .nav-week{margin:15px 0;}.event-header .nav-week li{margin-left:20px;float:left;}
 .event-header .nav-week .first{margin-left:0;}
 .event-header .nav-week a{display:block;color:#CCC;font-size:12px;text-align:center;padding:10px 8px;width:54px;height:50px;border:1px solid #333;}.event-header .nav-week a:hover,.event-header .nav-week a.active{background:#4E4E4E;border:1px solid #CCC;color:#e8b116;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}

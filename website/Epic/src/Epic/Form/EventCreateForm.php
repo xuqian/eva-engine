@@ -96,6 +96,7 @@ class EventCreateForm extends EventForm
             $data['CategoryEvent'] = $categoryEvents;
         }
 
+        unset($data['recommend']);
         return $data;
     }
 }
