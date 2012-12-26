@@ -33,7 +33,7 @@ $unjoinForm->setMethod('delete');
                 <div class="event-main">
 
                     <div class="event-detail media">
-                        <a class="pull-left" href="#">
+                        <a class="pull-left" href="<?=$this->uri('/events/' . $item['urlName']);?>">
                             <?if($item['File']):?>
                                 <img class="media-object" src="<?=$this->thumb($item['File'][0]['Thumb'], array('c_fill', 'h_240', 'w_240'))?>" width="240" />
                              <?else:?>
@@ -41,10 +41,9 @@ $unjoinForm->setMethod('delete');
                             <?endif?>
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading"><a href=""><?=$item['title'];?></a></h4>
+                            <h4 class="media-heading"><a href="<?=$this->uri('/events/' . $item['urlName']);?>"><?=$item['title'];?></a></h4>
                             <div class="media typo">
                                 <dl class="dl-horizontal">
-                                   
                                     <dt>Start Time:</dt>
                                     <dd><?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?></dd>
                                     <dt>End Time:</dt>
@@ -66,7 +65,7 @@ $unjoinForm->setMethod('delete');
                                     <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Unjoin')?></button>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"> <?=$this->_('Quit')?></button>
                                 </form>
                                 <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
                                 <form <?=$this->formAttr($joinForm)?>>
@@ -74,7 +73,7 @@ $unjoinForm->setMethod('delete');
                                     <?=$joinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$joinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Join Now')?></button>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"> <?=$this->_('Join Now')?></button>
                                 </form>
                                 <?endif?> 
                                 </p>

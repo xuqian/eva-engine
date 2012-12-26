@@ -963,9 +963,12 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .calendar td,.calendar th{text-align:center;}
 .calendar thead .dow{color:#999;}
 .calendar tbody td{font-size:12px;font-weight:bold;}
-.calendar .day.new,.calendar .day.old{color:#999;font-weight:normal;}
+.calendar .day.old,.calendar .day.old{color:#999;font-weight:normal;}
 .calendar .switch{font-weight:bold;}
-.calendar .today{padding:1px 5px;background:#e1500d;color:#FFF;}
+.calendar td a{color:#FFF;padding:1px 5px;}
+.calendar span.today{padding:1px 5px;background:#e1500d;color:#FFF;}
+.calendar .has-event a{background:#7dbc49;}
+.calendar .passed.has-event a{background:#B9A87D;}
 .calendar .event{padding:1px 5px;background:#7dbc49;color:#FFF;}
 .calendar .calendar-caption{margin:10px 0;text-align:right;}
 .calendar .green{color:#7dbc49;}
