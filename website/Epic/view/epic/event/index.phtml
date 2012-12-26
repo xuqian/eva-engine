@@ -54,7 +54,7 @@ $dayPath = $this->dayPath;
                         <ul>
                             {% if(o.items.length > 0) { %}
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
-                                <li><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                <li><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">
                                 {% if(item.File) { %}
                                     <img src="{%=item.File.Thumb%}" alt="{%=item.title%}" />
                                 {% }else{ %}
@@ -101,7 +101,7 @@ $dayPath = $this->dayPath;
                                     {% } %}
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
+                                    <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
@@ -142,7 +142,7 @@ $dayPath = $this->dayPath;
                                     {% } %}
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
+                                    <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
@@ -191,7 +191,7 @@ $dayPath = $this->dayPath;
                                 <td title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "old" : ''?> <?=$day['datedb'] < $calendar['today']['datedb'] ? 'passed' : ''?>">
                                     <?if (isset($day['Events'])):?>
                                         <?foreach ($day['Events'] as $event):?>
-                                        <a href="<?=$this->uri('/events/' . $event['urlName'])?>" class="label label-event" title="<?=$event['title']?>"><?=$event['title']?></a>
+                                        <a href="<?=$this->uri('/event/' . $event['urlName'])?>" class="label label-event" title="<?=$event['title']?>"><?=$event['title']?></a>
                                         <?endforeach;?>
                                     <?endif;?>
                                 </td>

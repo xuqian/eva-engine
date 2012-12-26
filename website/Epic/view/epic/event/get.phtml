@@ -134,7 +134,7 @@ $unjoinForm->setMethod('delete');
                                 <fieldset class="form">
                                     <div class="activity-box-wrap">
                                         <div class="activity-box-content">
-                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5, 'value' => 'From Event :' . $this->serverUrl() . '/events/' . $this->item['urlName']))?>        
+                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5, 'value' => 'From Event :' . $this->serverUrl() . '/event/' . $this->item['urlName']))?>        
                                         </div>
                                         <div class="activity-box-buttons">
                                             <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
@@ -209,7 +209,7 @@ $unjoinForm->setMethod('delete');
                             <?endforeach?>
 
                             <?if($this->paginator):?>
-                            <?=$this->paginator->setPath('/events/' . $this->item['urlName'] . '/')->setBaseQuery($this->query);?>
+                            <?=$this->paginator->setPath('/event/' . $this->item['urlName'] . '/')->setBaseQuery($this->query);?>
                             <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                             <?endif;?>
                         </div><!--activity-list end-->

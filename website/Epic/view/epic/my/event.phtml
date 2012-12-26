@@ -29,7 +29,7 @@ $unjoinForm
                                     <?foreach($items as $item):?>
                                     <?if(isset($item['Event']['id'])) {$event = $item['Event'];}else{continue;}?> 
                                     <div class="item">
-                                        <div class="item-title"><h2><a href="<?=$this->uri('/events/' . $event['urlName'])?>"><?=$event['title']?></a></h2></div>
+                                        <div class="item-title"><h2><a href="<?=$this->uri('/event/' . $event['urlName'])?>"><?=$event['title']?></a></h2></div>
                                         <div class="item-meta">
                                             <?if($item['user_id'] == $event['user_id']):?>
                                             <!--
