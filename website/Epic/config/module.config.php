@@ -280,7 +280,7 @@ return array(
             'group' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/group[/:id]',
+                    'route' => '/group/[:id][/]',
                     'constraints' => array(
                         'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
                     ),
@@ -290,6 +290,113 @@ return array(
                     ),
                 ),
                 'priority' => 2,
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'blog' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'blog[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'blog'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'create' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'create[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'postCreate'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'edit' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'edit/[:post_id][/]',
+                                    'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'postEdit'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'get' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'info/[:post_id][/]',
+                                    'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'postGet'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
+                    ),
+                    'event' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'event[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'event'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'create' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'create[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'eventCreate'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'edit' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'edit/[:event_id][/]',
+                                    'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'eventEdit'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'get' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'info/[:event_id][/]',
+                                    'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'eventGet'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
+                    ),
+                ),
             ),
 
             'data' => array(
@@ -367,6 +474,34 @@ return array(
                             )
                         ),
                         'may_terminate' => true,
+                        'child_routes' => array(
+                            'post' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'post[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'controller' => 'Group\Controller\PostController',
+                                        'action' => 'index'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'event' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'event[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'controller' => 'Group\Controller\EventController',
+                                        'action' => 'index'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
                     ),
                 ), //my child_routes end
             ), //my end
@@ -587,6 +722,8 @@ return array(
             'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
             'Event\Controller\EventController' => 'Event\Controller\EventController',
             'Group\Controller\GroupController' => 'Group\Controller\GroupController',
+            'Group\Controller\PostController' => 'Group\Controller\PostController',
+            'Group\Controller\EventController' => 'Group\Controller\EventController',
             'User\Controller\FriendController' => 'User\Controller\FriendController',
             'User\Controller\UpgradeController' => 'User\Controller\UpgradeController',
 

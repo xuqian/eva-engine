@@ -9,6 +9,8 @@ use Group\Form;
 
 class GroupController extends ActionController
 {
+    protected $group;
+   
     public function indexAction()
     {
         return $this->listAction();
@@ -71,6 +73,27 @@ class GroupController extends ActionController
     public function getAction()
     {
         $id = $this->params('id');
+
+        $item = $this->groupAction();
+
+        $view = new ViewModel(array(
+            'item' => $item,
+        ));
+        return $view; 
+    }
+
+    public function groupAction()
+    {
+        if($this->group){
+            return $this->group;
+        }   
+    
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        if(!$id){
+            return array();
+        }
+
+        $id = $this->params('id');
         $itemModel = Api::_()->getModel('Group\Model\Group'); 
         $item = $itemModel->getGroup($id, array(
             'self' => array(
@@ -119,11 +142,8 @@ class GroupController extends ActionController
                 $item['Join'] = $joinList[0];
             }
         }
-
-        $view = new ViewModel(array(
-            'item' => $item,
-        ));
-        return $view; 
+    
+        return $this->group = $item;
     }
 
     public function removeAction()
@@ -273,5 +293,29 @@ class GroupController extends ActionController
         }
 
         return $viewModel;
+    }
+
+    public function postCreateAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        
+        $item = $this->groupAction();
+
+        return array(
+            'item' => $item,
+        );   
+    }
+
+    public function eventCreateAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        
+        $item = $this->groupAction();
+
+        return array(
+            'item' => $item,
+        );   
     }
 }

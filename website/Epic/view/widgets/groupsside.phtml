@@ -1,0 +1,88 @@
+<div class="group-side">
+    <?if($user):?>
+    <div class="group-usercard media">
+        <a class="pull-left" href="#">
+            <img alt="userface" src="<?=$this->gravatarLink($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><?=$user['userName']?></h4>
+            <div class="media">
+                <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-gray btn-small"><i class="icon-plus"></i> Start New Group</a>
+            </div>
+        </div>
+    </div>
+    <?endif?>
+
+    <div class="page-header">
+        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+        <h4 class="txt-bold">My Groups (20)</h4>
+    </div>
+    <div class="group-mine">
+        <ul>
+            <?for($i=0;$i<5;$i++):?>
+            <li><a href="#">
+                <img width="50" height="50" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
+                <p>Thumbnail caption...</p>
+            </a></li>
+            <?endfor?>
+        </ul>
+        <p><a href="#">My Topics (123)</a></p>
+        <p><a href="#">My Comments (2833)</a></p>
+    </div>
+
+
+    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+        <div class="page-header border-header">
+            <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>">View All</a></small>
+            <h4>Hot Topics  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+        </div>
+        <div class="side-blog-list">
+            {% if(o.items.length > 0) { %}
+                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                    <div class="item">
+                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <div class="item-inline item-text">
+                            <div class="text-content">
+                                <div class="item-title">
+                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                </div>
+                                <p>{%=item.Text.Preview%}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% } %}
+                {% } %}
+        </div>
+    </script>
+
+    <div class="page-header border-header">
+        <h4>Topics  Ranks</h4>
+    </div>
+
+    <div class="group-ranks">
+        <ul>
+            <?for($i=1;$i<11;$i++):?>
+            <li>
+            <em class="ranknum rank<?=$i?>"><?=$i?></em>
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img alt="userface" src="<?=$this->gravatarLink($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a class="pull-left" href="#">Sleek, intuitive, and powerful front-end framework</a></h4>
+                    <div class="media">
+                        <div class="row">
+                            <span class="span1"><span class="highlight txt-bold">123</span> Topics</span>
+                            <span class="highlight txt-bold">123</span> Members
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </li>
+            <?endfor?>
+        </ul>
+    </div>
+
+
+    <?=$this->widget('Epic', 'components/ad_group')?>
+</div><!--right side end-->
