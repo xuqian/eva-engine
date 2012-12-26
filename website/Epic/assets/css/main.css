@@ -963,13 +963,18 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .calendar td,.calendar th{text-align:center;}
 .calendar thead .dow{color:#999;}
 .calendar tbody td{font-size:12px;font-weight:bold;}
-.calendar .day.new,.calendar .day.old{color:#999;font-weight:normal;}
+.calendar .day.old,.calendar .day.old{color:#999;font-weight:normal;}
 .calendar .switch{font-weight:bold;}
-.calendar .today{padding:1px 5px;background:#e1500d;color:#FFF;}
+.calendar td a{color:#FFF;padding:1px 5px;}
+.calendar span.today{padding:1px 5px;background:#e1500d;color:#FFF;}
+.calendar .has-event a{background:#7dbc49;}
+.calendar .passed.has-event a{background:#B9A87D;}
+.calendar .today a{background:#e1500d !important;}
 .calendar .event{padding:1px 5px;background:#7dbc49;color:#FFF;}
 .calendar .calendar-caption{margin:10px 0;text-align:right;}
 .calendar .green{color:#7dbc49;}
 .calendar .orange{color:#e1500d;}
+.calendar .brown{color:#B9A87D;}
 .side-blog-list .item,.side-event-list .item{clear:both;position:relative;height:50px;padding:5px 0;text-align:left;overflow:hidden;}
 .side-blog-list .item-inline,.side-event-list .item-inline{display:inline-block;zoom:1;*display:inline;height:50px;}
 .side-blog-list .item-absolute,.side-event-list .item-absolute{height:50px;position:absolute;top:5px;}

@@ -727,7 +727,7 @@ body, .en body, .fr body {
 		font-weight:bold;
 	}
 
-	.day.new, .day.old {
+	.day.old, .day.old {
 		color:#999;
 		font-weight:normal;
 	}
@@ -736,12 +736,29 @@ body, .en body, .fr body {
 		font-weight:bold;
 	}
 
-	.today {
+	td a {
+		color:#FFF;
+		padding:1px 5px;
+	}
+
+	span.today {
 		padding:1px 5px;
 		background:@orange;
 		color:#FFF;
 	}
 
+	.has-event a {
+		background:@green;
+	}
+
+	.passed.has-event a{
+		background:#B9A87D;
+	}
+
+	.today a {
+		background:@orange !important;
+	}
+	
 	.event {
 		padding:1px 5px;
 		background:@green;
@@ -759,6 +776,10 @@ body, .en body, .fr body {
 
 	.orange {
 		color:@orange;
+	}
+
+	.brown {
+		color:#B9A87D;
 	}
 
 

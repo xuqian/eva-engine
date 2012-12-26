@@ -35,7 +35,7 @@ $form->useSubFormGroup()
                             <div class="span6">
                                 <div class="page-main-header">
                                     <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Create Group</a>
-                                    <h3><?=$this->_($title)?></h3>
+                                    <h3><?=$this->_($title)?>  <?if($item['id']):?><a href="<?=$this->uri('/groups/' . $item['groupKey'])?>" class="">[View]</a><?endif?></h3>
                                 </div>
                                 <div class="blog-list vlist">
                                     <form <?=$this->formAttr($form)?> class="form group-create-form">
@@ -51,7 +51,7 @@ $form->useSubFormGroup()
                                                 </div>
                                             </div>
                                             
-                                            <div class="control-group <?=$form->isError('summary') ? 'error' : '';?>">
+                                            <div class="control-group <?=$form->isError('summary') ? 'error' : '';?> hide">
                                                 <?=$form->helper('summary', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
                                                     <?=$form->helper('summary', array('class' => 'span3'))?>        
@@ -59,7 +59,7 @@ $form->useSubFormGroup()
                                                 </div>
                                             </div> 
                                         
-                                            <div class="control-group <?=$form->isError('memberEnable') ? 'error' : '';?>">
+                                            <div class="control-group <?=$form->isError('memberEnable') ? 'error' : '';?> hide">
                                                 <?=$form->helper('memberEnable', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">
                                                     <?=$form->helper('memberEnable', 'formSelect', array('class' => ''))?>        
@@ -72,6 +72,7 @@ $form->useSubFormGroup()
                                                 <div class="controls">
                                                     <?=$form->helper('memberLimit', array('class' => ''))?>        
                                                     <div class="help-block"><?=$form->helper('memberLimit', 'formElementErrors')?></div>
+                                                    <div class="help-block">Set to 0 will be no limit</div>
                                                 </div>
                                             </div>
                                         
@@ -79,8 +80,6 @@ $form->useSubFormGroup()
                                                 <label>Group Theme Photo</label>
                                                 <?if($item['File']):?>
                                                     <img id="post-image" src="<?=$this->thumb($item['File'][0]['Thumb'], array('h_250'))?>" alt="" />
-                                                <?else:?>
-                                                    <img id="post-image" src="http://placehold.it/260x180" alt="" />
                                                 <?endif?>
                                                 <div class="row">
                                                     <div class="span4">
@@ -105,7 +104,6 @@ $form->useSubFormGroup()
                                                     <?endforeach?>
                                                 </div>
                                             </div>
-``` 
                                             <div class="control-group <?=$form->isError(array('Text', 'content')) ? 'error' : '';?>">
                                                 <div id="editor-left" class="controls">
                                                     <?=$form->helper(array('Text', 'content'), 'formTextarea', array('class' => 'span6 editor-html simple', 'rows' => '15',))?>
