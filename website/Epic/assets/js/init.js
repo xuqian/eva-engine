@@ -283,7 +283,7 @@ eva.city = function(){
 			$(this).attr("href", $(this).attr("href") + '?city=' +  $.cookie('city'));
 			return true;
 		});
-		$("#my-city").html($.cookie('city'));
+		$(".my-city").html($.cookie('city'));
 	}
 }
 
