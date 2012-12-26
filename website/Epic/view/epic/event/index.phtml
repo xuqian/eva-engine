@@ -108,6 +108,7 @@ $dayPath = $this->dayPath;
                                 {% }else{ %}
                                     <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="">
                                 {% } %}
+                                <div class="mask">{%=item.title%}</div>
                                 </a></li>
                             {% } %}
                             {% } %}
@@ -128,14 +129,15 @@ $dayPath = $this->dayPath;
                         </div>
                         <ul class="event-new-nav nav nav-pills">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">All Cities</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>" class="my-city-url">My City</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'timedesc'));?>">Cocktail Party</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'timedesc'));?>">Wine Tasting</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Exhibitions</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Cooking Classes</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'timedesc'));?>">Opinions sharing</a> </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'timedesc'));?>" class="my-city-url">My City</a> |</li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cocktail-Party','order' => 'timedesc'));?>">Cocktail Party</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Wine-Tasting','order' => 'timedesc'));?>">Wine Tasting</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Exhibitions','order' => 'timedesc'));?>">Exhibitions</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cooking-Classes','order' => 'timedesc'));?>">Cooking Classes</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Opinions-sharing','order' => 'timedesc'));?>">Opinions Sharing</a> </li>
                         </ul>
                         </header>
+                        <div class="event-new-wrap loaded">
                         <script id="event-new" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('order' => 'timedesc','rows' => 6))?>">
                         <div class="event-new grid-3columns">
                             {% if(o.items.length > 0) { %}
@@ -151,6 +153,8 @@ $dayPath = $this->dayPath;
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
+                                        <p class="lowlight">City : {%=item.city%}.</p>
+                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>
@@ -159,6 +163,13 @@ $dayPath = $this->dayPath;
                             {% } %}
                         </div>
                         </script>
+                        </div>
+                        <div class="event-new-wrap"></div>
+                        <div class="event-new-wrap"></div>
+                        <div class="event-new-wrap"></div>
+                        <div class="event-new-wrap"></div>
+                        <div class="event-new-wrap"></div>
+                        <div class="event-new-wrap"></div>
                     </div>
 
                     <div class="event-grid">
@@ -168,15 +179,16 @@ $dayPath = $this->dayPath;
                         </div>
                         <ul class="event-feature-nav nav nav-pills">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>">All Cities</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>" class="my-city-url">My City</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Red Wine','order' => 'memberdesc'));?>">Cocktail Party</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'French cuisine','order' => 'memberdesc'));?>">Wine Tasting</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Exhibitions</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Cooking Classes</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'Cocktail party','order' => 'memberdesc'));?>">Opinions sharing</a> </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'memberdesc'));?>" class="my-city-url">My City</a> |</li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cocktail-Party','order' => 'memberdesc'));?>">Cocktail Party</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Wine-Tasting','order' => 'memberdesc'));?>">Wine Tasting</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Exhibitions','order' => 'memberdesc'));?>">Exhibitions</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cooking-Classes','order' => 'memberdesc'));?>">Cooking Classes</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Opinions-sharing','order' => 'memberdesc'));?>">Opinions Sharing</a> </li>
                         </ul>
                         </header>
                         
+                        <div class="event-feature-wrap">
                         <script id="event-feature" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('order' => 'memberdesc','rows' => 6))?>">
                             <div class="event-feature grid-2columns">
                             {% if(o.items.length > 0) { %}
@@ -192,7 +204,8 @@ $dayPath = $this->dayPath;
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
-                                        <a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>
+                                        <p class="lowlight">City : {%=item.city%}.</p>
+                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>
@@ -201,6 +214,13 @@ $dayPath = $this->dayPath;
                             {% } %}
                         </div>
                         </script>
+                        </div>
+                        <div class="event-feature-wrap"></div>
+                        <div class="event-feature-wrap"></div>
+                        <div class="event-feature-wrap"></div>
+                        <div class="event-feature-wrap"></div>
+                        <div class="event-feature-wrap"></div>
+                        <div class="event-feature-wrap"></div>
                     </div>
 
 
@@ -215,7 +235,13 @@ $dayPath = $this->dayPath;
 eva.ready(function(){
         $(".nav-week a").on('click', function(){
                 var calendar = $(".event-calendar");
-                calendar.is(":visible") ? calendar.fadeOut() : calendar.fadeIn();
+                if(calendar.is(":visible")) {
+                    calendar.fadeOut();
+                    $(".event-thumbnails").fadeIn();
+                } else {
+                    calendar.fadeIn();
+                    $(".event-thumbnails").fadeOut();
+                }
                 return false;
         });
 
@@ -227,6 +253,38 @@ eva.ready(function(){
         });
 
         $(".event-new-nav a").on('click', function(){
+                var link = $(this);
+                var index = link.parent().index();
+                var wraps = $(".event-new-wrap");
+                $(".event-new-nav li").removeClass('active');
+                link.parent().addClass('active');
+                if(wraps.eq(index).hasClass('loaded')) {
+                        wraps.hide();
+                        wraps.eq(index).show();
+                } else {
+                    wraps.eq(index).load($(this).attr('href') + ' .event-list', function(){
+                        wraps.hide();
+                        wraps.eq(index).addClass('loaded').show();
+                    });
+                }
+                return false;
+        });
+
+        $(".event-feature-nav a").on('click', function(){
+                var link = $(this);
+                var index = link.parent().index();
+                var wraps = $(".event-feature-wrap");
+                $(".event-feature-nav li").removeClass('active');
+                link.parent().addClass('active');
+                if(wraps.eq(index).hasClass('loaded')) {
+                        wraps.hide();
+                        wraps.eq(index).show();
+                } else {
+                    wraps.eq(index).load($(this).attr('href') + ' .event-list', function(){
+                        wraps.hide();
+                        wraps.eq(index).addClass('loaded').show();
+                    });
+                }
                 return false;
         });
 });

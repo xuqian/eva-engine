@@ -107,3 +107,22 @@ INSERT INTO `eva_user_roles` (`id`, `roleKey`, `roleName`, `description`) VALUES
 (11, 'CORPORATE_MEMBER', 'Corporate Member', ''),
 (12, 'CONNOISSEUR_MEMBER', 'Connoisseur Member', ''),
 (13, 'PROFESSIONAL_MEMBER', 'Professional Member', '');
+
+
+INSERT INTO `eva_event_categories` (`id`, `categoryName`, `urlName`, `description`, `parentId`, `rootId`, `orderNumber`, `createTime`, `count`, `left`, `right`) VALUES
+(1, 'Cocktail Party', 'Cocktail-Party', '', 0, 0, 0, '2012-12-26 08:28:46', 0, 0, 0),
+(2, 'Wine Tasting', 'Wine-Tasting', '', 0, 0, 0, '2012-12-26 08:28:59', 0, 0, 0),
+(3, 'Exhibitions', 'Exhibitions', '', 0, 0, 0, '2012-12-26 08:29:13', 0, 0, 0),
+(4, 'Cooking Classes', 'Cooking-Classes', '', 0, 0, 0, '2012-12-26 08:29:28', 0, 0, 0),
+(5, 'Opinions Sharing', 'Opinions-Sharing', '', 0, 0, 0, '2012-12-26 08:29:42', 0, 0, 0);
+
+
+
+INSERT INTO `eva_group_categories` (`id`, `categoryName`, `urlName`, `description`, `parentId`, `rootId`, `orderNumber`, `createTime`, `count`, `left`, `right`) VALUES
+(1, 'Gastronomy', 'gastronomy', '', 0, 0, 0, '2012-12-26 10:03:15', 0, 0, 0),
+(2, 'Wine', 'wine', '', 0, 0, 0, '2012-12-26 10:03:32', 0, 0, 0),
+(3, 'Spirit', 'spirit', '', 0, 0, 0, '2012-12-26 10:04:00', 0, 0, 0),
+(4, 'Cocktail', 'cocktail', '', 0, 0, 0, '2012-12-26 10:04:18', 0, 0, 0),
+(5, 'Hotel & Resort', 'hotel-resort', '', 0, 0, 0, '2012-12-26 10:04:43', 0, 0, 0),
+(6, 'Art & Design', 'art-design', '', 0, 0, 0, '2012-12-26 10:07:30', 0, 0, 0),
+(7, 'Culture', 'culture', '', 0, 0, 0, '2012-12-26 10:11:15', 0, 0, 0);

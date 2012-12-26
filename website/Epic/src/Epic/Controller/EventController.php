@@ -33,6 +33,9 @@ class EventController extends ActionController
         }
         $selectQuery['eventStatus'] = 'active';
         $selectQuery['visibility']  = 'public';
+        if($selectQuery['city'] == 'mycity'){
+            $selectQuery['city'] = $this->cookie()->crypt(false)->read('city');
+        }
         $items = $itemModel->setItemList($selectQuery)->getEventdataList();
         $items = $items->toArray(array(
             'self' => array(
@@ -254,10 +257,6 @@ class EventController extends ActionController
             $callback = $callback ? $callback : '/events/edit/' . $eventId;
             $this->redirect()->toUrl($callback);
         } else {
-            p($postData);
-            p($form->getFieldsets());
-            p($form->getElements(), 1);
-            exit;
             $user = Auth::getLoginUser(); 
             //Public User Area
             $this->forward()->dispatch('UserController', array(

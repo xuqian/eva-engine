@@ -96,6 +96,12 @@ class EventCreateForm extends EventForm
             $data['CategoryEvent'] = $categoryEvents;
         }
 
+        unset($data['recommend']);
+        unset($data['isRepeat']);
+        unset($data['frequency']);
+        unset($data['frequencyWeek']);
+        unset($data['frequencyMonth']);
+        unset($data['interval']);
         return $data;
     }
 }

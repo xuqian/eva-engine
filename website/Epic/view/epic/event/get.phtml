@@ -44,10 +44,15 @@ $unjoinForm->setMethod('delete');
                             <h4 class="media-heading"><a href=""><?=$item['title'];?></a></h4>
                             <div class="media typo">
                                 <dl class="dl-horizontal">
+                                   
                                     <dt>Start Time:</dt>
                                     <dd><?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?></dd>
                                     <dt>End Time:</dt>
                                     <dd><?=$item['endDay']?> <?=$item['endTime'] ? $item['endTime'] : null?></dd>
+                                    <dt>City:</dt>
+                                    <dd><?=$item['city']?></dd>
+                                    <dt>Location:</dt>
+                                    <dd><?=$item['location']?></dd>
                                     <dt>Event Owner</dt>
                                     <dd><?=$item['user_name']?></dd>
                                     <dd></dd>
