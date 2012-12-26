@@ -87,6 +87,15 @@ class EventSearchForm extends EventForm
             'attributes' => array(
             ),
         ),
+        'category' =>     array(
+            'name' => 'category',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Category',
+            ),
+            'attributes' => array(
+            ),
+        ),
     );
 
     public function prepareData($data)

@@ -42,6 +42,15 @@ class GroupSearchForm extends GroupForm
                 'value' => 10,
             ),
         ),
+        'category' =>     array(
+            'name' => 'category',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Category',
+            ),
+            'attributes' => array(
+            ),
+        ),
     );
 
     public function prepareData($data)
