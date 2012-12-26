@@ -1,4 +1,4 @@
-eva.activity = function(){
+eva.ready(function(){
     var modal = $("#fileupload-modal");
     var videoPopover = $("#video-popover");
     var uploader = $('#singlefileupload');
@@ -46,7 +46,7 @@ eva.activity = function(){
         return true === form.data('allowSubmit') ? true : false;
     });
 
-    eva.loader(eva.s('/static/eva/js/eva.jquery.evaTip.js'), function(){
+    eva.loader(eva.s('/assets/module/core/js/eva.jquery.evaTip.js'), function(){
             $('#activity-box-image-button').on('click', function() {
                     $(this).evaTip("show", {
                             'tip' : modal,
@@ -177,6 +177,4 @@ eva.activity = function(){
     textarea.live('keyup', function(){
         messageLetterCount();
     });
-}
-
-eva.activity();
+});
