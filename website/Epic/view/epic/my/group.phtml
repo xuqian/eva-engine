@@ -29,7 +29,7 @@ $unjoinForm
                                     <?foreach($items as $item):?>
                                     <?if(isset($item['Group']['id'])) {$group = $item['Group'];}else{continue;}?> 
                                     <div class="item">
-                                        <div class="item-title"><h2><a href="<?=$this->uri('/groups/' . $group['groupKey'])?>"><?=$group['groupName']?></a></h2></div>
+                                        <div class="item-title"><h2><a href="<?=$this->uri('/group/' . $group['groupKey'])?>"><?=$group['groupName']?></a></h2></div>
                                         <div class="item-meta">
                                             <?if($item['user_id'] == $group['user_id']):?>
                                             <p class="pull-right hide"><i class="icon-comment"></i> <?=$this->_('Members')?> (<span class="highlight">0</span>)</p>

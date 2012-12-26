@@ -111,7 +111,7 @@
     <div class="item-inline item-text">
         <div class="text-content">
             <div class="item-title">
-                <a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a>
+                <a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a>
             </div>
         </div>
     </div>
@@ -168,7 +168,7 @@
     {% if(o.items.length > 0) { %}
     {% for (var i=0, item; item=o.items[i]; i++) { %}
         <li>
-            <a class="thumbnail" href="<?=$this->uri('/groups/')?>{%=item.groupKey%}">
+            <a class="thumbnail" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">
                 <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
             </a>
         </li>

@@ -54,7 +54,7 @@ $dayPath = $this->dayPath;
                         <ul>
                             {% if(o.items.length > 0) { %}
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
-                                <li><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                <li><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">
                                 {% if(item.File) { %}
                                     <img src="{%=item.File.Thumb%}" alt="{%=item.title%}" />
                                 {% }else{ %}
@@ -86,7 +86,7 @@ $dayPath = $this->dayPath;
                             {% if(o.items.length > 0) { %}
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
-                                <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                <a class="pull-left" href="<?=$this->uri('/event/')?>{%=item.urlName%}">
                                 {% if(item.File) { %}
                                     <img src="{%=item.File.Thumb%}" width="90" height="90" class="media-object img-rounded"/>
                                 {% }else{ %}
@@ -94,7 +94,7 @@ $dayPath = $this->dayPath;
                                 {% } %}
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
+                                    <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
@@ -125,7 +125,7 @@ $dayPath = $this->dayPath;
                             {% if(o.items.length > 0) { %}
                             {% for (var i=0, item; item=o.items[i]; i++) { %}
                             <div class="event media">
-                                <a class="pull-left" href="<?=$this->uri('/events/')?>{%=item.urlName%}">
+                                <a class="pull-left" href="<?=$this->uri('/event/')?>{%=item.urlName%}">
                                 {% if(item.File) { %}
                                     <img src="{%=item.File.Thumb%}" alt="{%=item.title%}" />
                                 {% }else{ %}
@@ -133,7 +133,7 @@ $dayPath = $this->dayPath;
                                 {% } %}
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="<?=$this->uri('/events/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
+                                    <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
@@ -182,7 +182,7 @@ $dayPath = $this->dayPath;
                                 <td title="<?=$day['datedb']?>" class="day <?=$day['isAdd'] ? "new" : ''?>">
                                     <?if (isset($day['Events'])):?>
                                         <?foreach ($day['Events'] as $event):?>
-                                            <a href="<?=$this->uri('/events/' . $event['urlName'])?>"><?=$event['title']?></a>
+                                            <a href="<?=$this->uri('/event/' . $event['urlName'])?>"><?=$event['title']?></a>
                                         <?endforeach;?>
                                     <?endif;?>
                                 </td>

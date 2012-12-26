@@ -213,20 +213,6 @@ return array(
                 ),
                 'priority' => 2,
                 'child_routes' => array(
-                    'get' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '[:id][/]',
-                            'constraints' => array(
-                                'id'     => '[0-9a-zA-Z]+',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'EventController',
-                                'action' => 'get'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
                     'operate' => array(
                         'type' => 'Segment',
                         'options' => array(
@@ -244,6 +230,21 @@ return array(
                     ),
                 ),
             ),
+            
+            'event' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/event[/:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'EventController',
+                        'action' => 'get',
+                    ),
+                ),
+                'priority' => 2,
+            ),
 
             'groups' => array(
                 'type' => 'Segment',
@@ -258,20 +259,6 @@ return array(
                 ),
                 'priority' => 2,
                 'child_routes' => array(
-                    'get' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '[:id][/]',
-                            'constraints' => array(
-                                'id'     => '[0-9a-zA-Z]+',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'GroupController',
-                                'action' => 'get'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
                     'operate' => array(
                         'type' => 'Segment',
                         'options' => array(
@@ -288,6 +275,21 @@ return array(
                         'may_terminate' => true,
                     ),
                 ),
+            ),
+            
+            'group' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/group[/:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'GroupController',
+                        'action' => 'get',
+                    ),
+                ),
+                'priority' => 2,
             ),
 
             'data' => array(
