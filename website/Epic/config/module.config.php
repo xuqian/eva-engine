@@ -621,6 +621,13 @@ return array(
     ),
 
     'page_components' => array(
+        'banner_group' => array(
+            'module' => 'Epic',
+            'name' => 'banner_group',
+            'title' => 'Group Page Banner',
+            'path' => 'components/banner_group',
+            'description' => 'Group Page Top Banner'
+        ),
         'ad_home' => array(
             'module' => 'Epic',
             'name' => 'ad_home',

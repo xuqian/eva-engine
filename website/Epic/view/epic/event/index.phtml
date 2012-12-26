@@ -152,6 +152,8 @@ $dayPath = $this->dayPath;
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
+                                        <p class="lowlight">City : {%=item.city%}.</p>
+                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>
@@ -201,7 +203,8 @@ $dayPath = $this->dayPath;
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
-                                        <a href="<?=$this->uri('/events/create/')?>" class="btn"><i class="icon-plus"></i> Join Now</a>
+                                        <p class="lowlight">City : {%=item.city%}.</p>
+                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>

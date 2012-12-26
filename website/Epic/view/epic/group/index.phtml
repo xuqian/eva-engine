@@ -36,34 +36,7 @@ $groupSearchForm->setView($this)
 
             <div class="span8">
                 <div class="group-main">
-
-                    <div id="myCarousel" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="https://lh6.googleusercontent.com/-NXbW5HO17mA/UJEZG-4xLEI/AAAAAAAC-Lw/9Qxbhz2_3H0/s1152/Fabrizio_Musacchio_018_120804_1106_muenchen_200_HDR_pan_v01.jpg" alt="">
-                                <div class="carousel-caption">
-                                    <h4>First Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="https://lh5.googleusercontent.com/-FJpAsu3eJwM/UIsrsb_o16I/AAAAAAAAWe0/zfDy_7gREak/s1152/_KMC7744.jpg" alt="">
-                                <div class="carousel-caption">
-                                    <h4>Second Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="https://lh5.googleusercontent.com/-_A4lWEFZIRM/UEeptqGLA3I/AAAAAAAABro/x2rmlVafb-A/s1000/_MG_2471.jpg" alt="">
-                                <div class="carousel-caption">
-                                    <h4>Third Thumbnail label</h4>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-                    </div>
+                    <?=$this->widget('Epic', 'components/banner_group')?>  
 
                     <div class="page-header border-header">
                         <h3>New Groups</h3>
