@@ -51,7 +51,7 @@ $groupSearchForm->setView($this)
                                     {% if(item.File) { %}
                                     <img width="90" height="90" class="img-rounded" alt="" src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}">
                                     {% } else { %}
-                                    <img  src="{%=eva.s('/assets/module/epic/img/group-default.jpg')%}" width="90" height="90" class="img-rounded"/>
+                                    <img  src="<?=$this->assets('/module/epic/img/group-default.jpg')?>" width="90" height="90" class="img-rounded"/>
                                     {% } %}
                                     <p>{%=item.groupName%}</p>
                                 </a></li>
@@ -74,7 +74,7 @@ $groupSearchForm->setView($this)
                                     {% if(item.File) { %}
                                     <img width="90" height="90" class="img-rounded" alt="" src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}">
                                     {% } else { %}
-                                    <img  src="{%=eva.s('/assets/module/epic/img/group-default.jpg')%}" width="90" height="90" class="img-rounded"/>
+                                    <img  src="<?=$this->assets('/module/epic/img/group-default.jpg')?>" width="90" height="90" class="img-rounded"/>
                                     {% } %}
                                     <p>{%=item.groupName%}</p>
                                 </a></li>
