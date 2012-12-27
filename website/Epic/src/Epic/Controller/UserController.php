@@ -233,8 +233,31 @@ class UserController extends ActionController
             ->order('id ASC')->find('one');
         }
 
+        $comments = array();
+        if($item) {
+            $commentModel = Api::_()->getModel('Blog\Model\Comment');
+            $comments = $commentModel->setItemList(array(
+                'post_id' => $item['id'],
+                'noLimit' => true,
+            ))->getCommentList(array(
+                'self' => array(
+                    '*',
+                    'getContentHtml()',
+                ),
+                'proxy' => array(
+                    'Blog\Item\Comment::User' => array(
+                        'self' => array(
+                            '*',
+                            'getThumb()',
+                        )
+                    ),
+                ),
+            ));
+        }
+
         $view = new ViewModel(array(
             'item' => $item,
+            'comments' => $comments,
         ));
         return $view;
     }
@@ -246,7 +269,7 @@ class UserController extends ActionController
     public function albumAction()
     {
     }
-    
+
     public function groupAction()
     {
         $id = $this->params('group_id');
