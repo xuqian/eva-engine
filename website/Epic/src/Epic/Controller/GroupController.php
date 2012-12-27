@@ -564,4 +564,40 @@ class GroupController extends ActionController
 
         return $viewModel;
     }
+
+    public function postAction()
+    {
+        $itemModel = Api::_()->getModel('Group\Model\Post'); 
+        $items = $itemModel->setItemList(array(
+            'inGroup' => true,
+            'group_id' => 1,
+            'order' => 'commentdesc'
+        ))->getPostList(array(
+            'self' => array(
+               '*', 
+            )
+        ));
+        $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
+        if(Api::_()->isModuleLoaded('User')){
+            $userList = array();
+            $userList = $itemModel->getUserList(array(
+                'columns' => array(
+                    'id',
+                    'userName',
+                    'email',
+                ),
+            ))->toArray(array(
+                'self' => array(
+                    'getEmailHash()',
+                ),
+            ));
+            $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
+        }
+
+        return array(
+            'items' => $items
+        );
+    }
 }
