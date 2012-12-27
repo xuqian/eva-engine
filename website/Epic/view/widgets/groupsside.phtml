@@ -13,23 +13,30 @@
     </div>
     <?endif?>
 
+    <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id']))?>">
     <div class="page-header">
-        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
-        <h4 class="txt-bold">My Groups (20)</h4>
+        <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
+        <h4 class="txt-bold">My Groups ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
     </div>
     <div class="group-mine">
         <ul>
-            <?for($i=0;$i<5;$i++):?>
-            <li><a href="#">
-                <img width="50" height="50" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
-                <p>Thumbnail caption...</p>
+            {% if(o.items.length > 0) { %}
+            {% for (var i=0, item; item=o.items[i]; i++) { %}
+            <li><a href="<?=$this->uri('/group/')?>{%=item.groupKey%}">
+                            {% if(item.File) { %}
+                                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="" width="50" height="50" class="img-rounded" />
+                            {% }else{ %}
+                                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="img-rounded" />
+                            {% } %}
+                <p>{%=item.groupName%}</p>
             </a></li>
-            <?endfor?>
+            {% } %}
+            {% } %}
         </ul>
         <p><a href="#">My Topics (123)</a></p>
         <p><a href="#">My Comments (2833)</a></p>
     </div>
-
+    </script>
 
     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
         <div class="page-header border-header">

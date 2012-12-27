@@ -60,9 +60,9 @@
             {% if(o.items.length > 0) { %}
                 {% for (var i=0, item; item=o.items[i]; i++) { %}
                     <div class="item">
-                        <a href="<?=$this->uri('/event/')?>{%=item.urlName%}" title="" class="">
+                        <a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/event/info/{%=item.urlName%}" title="" class="">
                             {% if(item.File) { %}
-                                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="{%=item.title%}" width="50" height="50" class="item-absolute imgdelay figure userface" />
+                                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
                             {% }else{ %}
                                     <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
                             {% } %}
@@ -70,7 +70,7 @@
                         <div class="item-inline item-text">
                             <div class="text-content">
                                 <div class="item-title">
-                                    <a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a>
+                                    <a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/event/info/{%=item.urlName%}">{%=item.title%}</a>
                                 </div>
                             </div>
                         </div>

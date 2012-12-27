@@ -18,7 +18,7 @@ $unjoinForm->setMethod('delete');
                         <?endif?>
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading"><a href=""><?=$this->item['groupName']?></a></h4>
+                            <h4 class="media-heading"><a href="<?=$this->uri('/group/' . $this->item['groupKey']);?>"><?=$this->item['groupName']?></a></h4>
                             <div class="media typo">
                                 <div class="content"><?=$this->item['Text']['content']?></div>
                                 <div class="row ">

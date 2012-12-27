@@ -324,18 +324,41 @@ class GroupController extends ActionController
 
         $page = $this->params()->fromQuery('page', 1);
         $rows = $this->params()->fromQuery('rows', 10);
+        $order = $this->params()->fromQuery('order', 'commentdesc');
         
         $this->changeViewModel('json');
         
-        $itemModel = Api::_()->getModel('Group\Model\Post');
-        $items = $itemModel->getGroupPostList(array(
-                'group_id' => $groupId,
-                'page' => $page,
-                'rows' => $rows,
-        ))->getPostList();
-        $paginator = $itemModel->getGroupPostPaginator();
-        $paginator = $paginator ? $paginator->toArray() : null;
+        $itemModel = Api::_()->getModel('Group\Model\Post'); 
+        $items = $itemModel->setItemList(array(
+            'inGroup' => true,
+            'group_id' => $groupId,
+            'rows' => $rows,
+            'order' => $order
+        ))->getPostList(array(
+            'self' => array(
+                '*', 
+            ),
+            'join' => array(
+                'Group' => array(
+                    '*'
+                ),
+            ),
+        ));
+
+        if (count($items) > 0) {
+            foreach ($items as $key=>$item) {
+                if (count($item['Group']) > 0) {
+                    unset($items[$key]['File'][0]);
+                    $items[$key]['Group'] = $item['Group'][0];
+                } else {
+                    unset($items[$key]['Group']);
+                }
+            }
+        }
         
+        $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
         if(Api::_()->isModuleLoaded('User')){
             $userList = array();
             $userList = $itemModel->getUserList(array(
@@ -348,8 +371,9 @@ class GroupController extends ActionController
                 'self' => array(
                     'getEmailHash()',
                 ),
+
             ));
-            $items = $itemModel->combineList($items->toArray(), $userList, 'User', array('user_id' => 'id'));
+            $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
         }
 
         return new JsonModel(array(
@@ -425,6 +449,7 @@ class GroupController extends ActionController
 
         $page = $this->params()->fromQuery('page', 1);
         $rows = $this->params()->fromQuery('rows', 10);
+        $order = $this->params()->fromQuery('order', 'memberdesc');
         
         $this->changeViewModel('json');
         $query = $this->getRequest()->getQuery();
@@ -439,16 +464,13 @@ class GroupController extends ActionController
             );
         }
         
-        $itemModel = Api::_()->getModel('Group\Model\Event');
-        $items = $itemModel->getGroupEventList(array(
-                'group_id' => $groupId,
-                'page' => $page,
-                'rows' => $rows,
-        ))->getEventdataList();
-        $paginator = $itemModel->getGroupEventPaginator();
-        $paginator = $paginator ? $paginator->toArray() : null;
-
-        $items = $items->toArray(array(
+        $itemModel = Api::_()->getModel('Group\Model\Event'); 
+        $items = $itemModel->setItemList(array(
+            'inGroup' => true,
+            'group_id' => $groupId,
+            'rows' => $rows,
+            'order' => $order
+        ))->getEventdataList(array(
             'self' => array(
                 '*'
             ),
@@ -462,16 +484,29 @@ class GroupController extends ActionController
                         'getThumb()',
                     )
                 ),
+                'Group' => array(
+                    '*'
+                ),
             ), 
         ));
         
+        $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
         if (count($items) > 0) {
             foreach ($items as $key=>$item) {
-                if (count($item['File']) > 0) {
+                if (isset($item['File']) && count($item['File']) > 0) {
                     unset($items[$key]['File'][0]);
                     $items[$key]['File'] = $item['File'][0];
                 } else {
                     unset($items[$key]['File']);
+                }
+                
+                if (count($item['Group']) > 0) {
+                    unset($items[$key]['File'][0]);
+                    $items[$key]['Group'] = $item['Group'][0];
+                } else {
+                    unset($items[$key]['Group']);
                 }
             }
         }
@@ -502,7 +537,7 @@ class GroupController extends ActionController
     {
         $request = $this->getRequest();
         $viewModel = new ViewModel();
-        
+
         list($item, $members) = $this->groupAction();
 
         return array(
@@ -516,7 +551,7 @@ class GroupController extends ActionController
         $request = $this->getRequest();
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/group/event-create');
-        
+
         $eventId = $this->getEvent()->getRouteMatch()->getParam('event_id');
 
         $eventView = $this->forward()->dispatch('EventController', array(

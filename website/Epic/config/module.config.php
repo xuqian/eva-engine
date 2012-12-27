@@ -282,7 +282,7 @@ return array(
                 'options' => array(
                     'route' => '/group/[:id]',
                     'constraints' => array(
-                        'id'     => '[a-zA-Z0-9_-]+',
+                        'id'     => '(?!post\b|event\b)[a-zA-Z0-9_-]+',
                     ),
                     'defaults' => array(
                         'controller' => 'GroupController',
