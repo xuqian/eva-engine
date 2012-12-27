@@ -4,6 +4,7 @@ namespace Blog\DbTable;
 
 use Eva\Db\TableGateway\TableGateway;
 use Zend\Stdlib\Parameters;
+use Zend\Db\Sql\Expression;
 
 class Posts extends TableGateway
 {
@@ -16,6 +17,10 @@ class Posts extends TableGateway
         if($params->page){
             $this->enableCount();
             $this->page($params->page);
+        }
+
+        if($params->noResult) {
+            $this->setNoResult(true);
         }
 
         if($params->id){
@@ -77,6 +82,8 @@ class Posts extends TableGateway
             'timedesc' => 'updateTime DESC',
             'titleasc' => 'title ASC',
             'titledesc' => 'title DESC',
+            'commentasc' => 'commentCount ASC',
+            'commentdesc' => 'commentCount DESC',
             'idarray' => 'FIELD(id, %s)',
         );
         if($params->order){
