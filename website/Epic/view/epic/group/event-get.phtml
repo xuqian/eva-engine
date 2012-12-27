@@ -92,8 +92,8 @@ $unjoinForm->setMethod('delete');
 
                     <div class="side-user-list">
                         <ul class="thumbnails">
-                            <?if($this->members):?>
-                            <?foreach($this->members as $member):?>
+                            <?if($this->eventMembers):?>
+                            <?foreach($this->eventMembers as $member):?>
                             <li>
                             <a class="thumbnail" href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
                                 <img alt="userface" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>

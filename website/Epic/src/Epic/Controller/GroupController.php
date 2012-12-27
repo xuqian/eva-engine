@@ -78,10 +78,11 @@ class GroupController extends ActionController
     {
         $id = $this->params('id');
 
-        $item = $this->groupAction();
+        list($item,$members) = $this->groupAction();
 
         $view = new ViewModel(array(
             'item' => $item,
+            'members' => $members,
         ));
         return $view; 
     }
@@ -145,8 +146,25 @@ class GroupController extends ActionController
                 $item['Join'] = $joinList[0];
             }
         }
-    
-        return $this->group = $item;
+
+        $memberModel = Api::_()->getModel('Group\Model\GroupUser'); 
+        $members = $memberModel->setItemList(array('group_id' => $item['id'], 'noLimit' => true))->getGroupUserList();
+        $members = $members->toArray(
+            array(
+                'self' => array(
+                    '*',
+                ),
+                'join' => array(
+                    'User' => array(
+                        '*',
+                    ),
+                ),
+            )
+        );
+        
+        $this->group = $item;
+        
+        return array($item, $members);
     }
 
     public function removeAction()
@@ -303,10 +321,11 @@ class GroupController extends ActionController
         $request = $this->getRequest();
         $viewModel = new ViewModel();
         
-        $item = $this->groupAction();
+        list($item, $members) = $this->groupAction();
 
         return array(
             'item' => $item,
+            'members' => $members,
         );   
     }
     
@@ -323,11 +342,12 @@ class GroupController extends ActionController
             'id' => $postId,
         ));
         
-        $item = $this->groupAction();
+        list($item, $members) = $this->groupAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
             'post' => $postView->item,
+            'members' => $members,
         ));
     
         return $viewModel;
@@ -345,14 +365,86 @@ class GroupController extends ActionController
             'id' => $postId,
         ));
         
-        $item = $this->groupAction();
+        list($item, $members) = $this->groupAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
             'post' => $postView->item,
+            'members' => $members,
         ));
         
         return $viewModel;
+    }
+    
+    public function eventAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+        $form = new \Epic\Form\GroupSearchForm();
+        $form->bind($query);
+        if($form->isValid()){
+            $query = $form->getData();
+        } else {
+            return array(
+                'form' => $form,
+                'items' => array(),
+            );
+        }
+        
+        $itemModel = Api::_()->getModel('Group\Model\Group');
+        $items = $itemModel->setItemList($query)->getGroupList();
+     
+        $items = $items->toArray(array(
+            'self' => array(
+                '*'
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*',
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ), 
+        ));
+        
+        if (count($items) > 0) {
+            foreach ($items as $key=>$item) {
+                if (count($item['File']) > 0) {
+                    unset($items[$key]['File'][0]);
+                    $items[$key]['File'] = $item['File'][0];
+                } else {
+                    unset($items[$key]['File']);
+                }
+            }
+        }
+
+        $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
+        if(Api::_()->isModuleLoaded('User')){
+            $userList = array();
+            $userList = $itemModel->getUserList(array(
+                'columns' => array(
+                    'id',
+                    'userName',
+                    'email',
+                ),
+            ))->toArray(array(
+                'self' => array(
+                    'getEmailHash()',
+                ),
+            ));
+            $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
+        }
+
+        return new JsonModel(array(
+            'items' => $items,
+            'paginator' => $paginator,
+        )); 
     }
 
     public function eventCreateAction()
@@ -360,10 +452,11 @@ class GroupController extends ActionController
         $request = $this->getRequest();
         $viewModel = new ViewModel();
         
-        $item = $this->groupAction();
+        list($item, $members) = $this->groupAction();
 
         return array(
             'item' => $item,
+            'members' => $members,
         );   
     }
 
@@ -382,11 +475,12 @@ class GroupController extends ActionController
         /*
         $viewModel->addChild($eventView, 'event');
         */
-        $item = $this->groupAction();
+        list($item, $members) = $this->groupAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
             'event' => $eventView->item,
+            'members' => $members,
         ));
     
         return $viewModel;
@@ -405,13 +499,14 @@ class GroupController extends ActionController
         /*
         $viewModel->addChild($eventView, 'event');
         */
-        $item = $this->groupAction();
+        list($item, $members) = $this->groupAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
             'event' => $eventView->item,
             'items' => $eventView->items,
-            'members' => $eventView->members,
+            'eventMembers' => $eventView->members,
+            'members' => $members,
             'paginator' => $eventView->paginator,
         ));
     

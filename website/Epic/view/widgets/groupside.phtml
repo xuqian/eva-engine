@@ -18,27 +18,41 @@
         <div class="page-header">
             <h5 class="txt-bold">Group Admin</h5>
         </div>
+       <?if($this->members):?>
         <ul>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+        <?foreach($this->members as $member):?>
+        <?if($member['role'] != 'admin'){continue;}?>
+            <li>
+                <a href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
+                    <img alt="userface" class="img-rounded" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>
+                    <?=$member['User']['userName']?>
+                </a>
+            </li>
+        <?endforeach;?>
         </ul>
+        <?endif;?> 
     </div>
     <div class="group-member-list">
         <div class="page-header">
-            <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+            <small class="pull-right"><a href="<?=$this->uri('/user/', array('group' => $this->item['id']))?>">View All</a></small>
             <h5 class="txt-bold">Group Members</h5>
         </div>
+        <?if($this->members):?>
         <ul>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
-            <li><a href=""><img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="30" height="30" /> AlloVince</a></li>
+        <?foreach($this->members as $member):?>
+        <?if($member['role'] == 'admin'){continue;}?>
+            <li>
+                <a href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
+                    <img alt="userface" class="img-rounded" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>
+                    <?=$member['User']['userName']?>
+                </a>
+            </li>
+        <?endforeach;?>
         </ul>
+        <?endif;?> 
     </div>
 
-    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
+    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['urlName'] . '/event/', array('user_id' => $this->user['id']))?>">
         <div class="page-header border-header">
             <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>">View All</a></small>
             <h4>Group Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
