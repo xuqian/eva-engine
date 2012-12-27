@@ -1,11 +1,14 @@
+<?
+$user = $this->user;
+?>
 <div class="event-side">
     <?if($user):?>
     <div class="usercard media">
-        <a class="pull-left" href="#">
+        <a class="pull-left" href="<?=$this->uri('/user/' . $user['userName'])?>">
             <img alt="userface" src="<?=$this->gravatarLink($user['email'], 120)?>" width="120" height="120" class="media-object"/>
         </a>
         <div class="media-body">
-            <h4 class="media-heading"><?=$user['userName']?></h4>
+            <h4 class="media-heading"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$user['userName']?></a></h4>
             <h5>Joined Events: <span class="highlight">1234</span></h5>
             <div class="media">
                 <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
