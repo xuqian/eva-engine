@@ -37,7 +37,7 @@
     </div>
     </script>
 
-    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => 1,'rows' => 10, 'order' => 'commentdesc'))?>">
         <div class="page-header border-header">
             <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>">View All</a></small>
             <h4>Hot Topics  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -46,11 +46,11 @@
             {% if(o.items.length > 0) { %}
                 {% for (var i=0, item; item=o.items[i]; i++) { %}
                     <div class="item">
-                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
                         <div class="item-inline item-text">
                             <div class="text-content">
                                 <div class="item-title">
-                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                    <a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a>
                                 </div>
                                 <p>{%=item.Text.Preview%}</p>
                             </div>

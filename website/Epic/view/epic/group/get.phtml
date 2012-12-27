@@ -30,7 +30,7 @@ $items = $this->items;
                     </div>
 
                     <div class="tab-content">
-                        <script id="group-forum-script" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['groupKey'] . '/blog/', array('rows' => 10))?>">
+                        <script id="group-forum-script" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/' , array('rows' => 10,'group_id' => $this->item['id'],'order' => 'commentdesc'))?>">
                         <div class="tab-pane active group-forum group-forum-script" id="group-forum">
                             <table class="table table-striped">
                                 <thead>
@@ -57,7 +57,7 @@ $items = $this->items;
                         </div> 
                         </script>
 
-                        <script id="group-event-script" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['groupKey'] . '/event/', array(/*'rows' => 10*/))?>">
+                        <script id="group-event-script" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/' , array('rows' => 10,'group_id' => $this->item['id'],'order' => 'memberdesc'))?>">
                         <div class="tab-pane group-events group-event-script" id="group-events">
                         <div class="event-list vlist">
                         {% if(o.items.length > 0) { %}

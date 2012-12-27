@@ -280,9 +280,9 @@ return array(
             'group' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/group/[:id]',
+                    'route' => '/group/[:id][/]',
                     'constraints' => array(
-                        'id'     => '(?!post\b|event\b)[a-zA-Z0-9_-]+',
+                        'id'     => '(?!post\b|join\b|events\b)[a-zA-Z0-9_-]+',
                     ),
                     'defaults' => array(
                         'controller' => 'GroupController',
@@ -295,7 +295,7 @@ return array(
                     'blog' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '[/]blog[/]',
+                            'route' => 'blog[/]',
                             'constraints' => array(
                             ),
                             'defaults' => array(
@@ -347,7 +347,7 @@ return array(
                     'event' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '[/]event[/]',
+                            'route' => 'event[/]',
                             'constraints' => array(
                             ),
                             'defaults' => array(
@@ -402,108 +402,17 @@ return array(
             'data' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/data[/]',
+                    'route' => '/data/[:action][/]',
                     'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
                     ),
                     'defaults' => array(
-                    ),
+                        'controller' => 'DataController',
+                        'action' => 'index'
+                    )
                 ),
+                'may_terminate' => true,
                 'priority' => 2,
-                'child_routes' => array(
-                    'blog' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'blog[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Blog\Controller\BlogController',
-                                'action' => 'index'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'friend' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'friend[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'controller' => 'User\Controller\FriendController',
-                                'action' => 'index'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'isfriend' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'isfriend[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'controller' => 'User\Controller\FriendController',
-                                'action' => 'isfriend'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'event' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'event[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Event\Controller\EventController',
-                                'action' => 'index'
-                            )
-                        ),
-                        'may_terminate' => true,
-                    ),
-                    'group' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => 'group[/]',
-                            'constraints' => array(
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Group\Controller\GroupController',
-                                'action' => 'index'
-                            )
-                        ),
-                        'may_terminate' => true,
-                        'child_routes' => array(
-                            'post' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => 'post[/]',
-                                    'constraints' => array(
-                                    ),
-                                    'defaults' => array(
-                                        'controller' => 'Group\Controller\PostController',
-                                        'action' => 'index'
-                                    )
-                                ),
-                                'may_terminate' => true,
-                            ),
-                            'event' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => 'event[/]',
-                                    'constraints' => array(
-                                    ),
-                                    'defaults' => array(
-                                        'controller' => 'Group\Controller\EventController',
-                                        'action' => 'index'
-                                    )
-                                ),
-                                'may_terminate' => true,
-                            ),
-                        ),
-                    ),
-                ), //my child_routes end
             ), //my end
 
             'my' => array(
@@ -723,11 +632,12 @@ return array(
             'Event\Controller\EventController' => 'Event\Controller\EventController',
             'Group\Controller\GroupController' => 'Group\Controller\GroupController',
             'Group\Controller\PostController' => 'Group\Controller\PostController',
-            'Group\Controller\EventController' => 'Group\Controller\EventController',
+            'Group\Controller\EventsController' => 'Group\Controller\EventsController',
             'User\Controller\FriendController' => 'User\Controller\FriendController',
             'User\Controller\UpgradeController' => 'User\Controller\UpgradeController',
 
             'HomeController' => 'Epic\Controller\HomeController',
+            'DataController' => 'Epic\Controller\DataController',
             'PagesController' => 'Epic\Controller\PagesController',
             'LanguageController' => 'Epic\Controller\LanguageController',
             'LoginController' => 'Epic\Controller\LoginController',

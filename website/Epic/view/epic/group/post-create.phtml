@@ -21,7 +21,7 @@ $item = $this->item;
                         <?
                         $formAction = '';
                         if(!$this->form){
-                            $formAction = $this->post['id'] ? $this->uri('/blog/edit/') : $this->uri('/data/group/post/');
+                            $formAction = $this->post['id'] ? $this->uri('/blog/edit/') : $this->uri('/group/post/');
                         }
                         ?>
                         <?=$this->widget('Epic', 'epic/blog/form', array(

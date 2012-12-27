@@ -52,7 +52,7 @@
         <?endif;?> 
     </div>
 
-    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['groupKey'] . '/event/', array(/*'rows' => 10*/))?>">
+    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/' , array('rows' => 10,'group_id' => $this->item['id'],'order' => 'memberdesc'))?>">
         <div class="page-header border-header">
             <h4>Group Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
         </div>
