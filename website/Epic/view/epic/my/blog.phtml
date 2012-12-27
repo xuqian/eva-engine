@@ -14,7 +14,7 @@ $this->headTitle($title, 'SET');
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/blog/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Write New</a>
+                                    <a href="<?=$this->uri('/blogs/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Write New</a>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
                                 <div class="blog-list vlist">
@@ -23,7 +23,7 @@ $this->headTitle($title, 'SET');
                                         <div class="item-title"><h2><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/' . $item['urlName'])?>"><?=$item['title']?></a></h2></div>
                                         <div class="item-meta">
                                             <p class="pull-right hide"><i class="icon-comment"></i> Comments (<span class="highlight"><?=$item['commentCount']?></span>)</p>
-                                            <p class="pull-right"><a href="<?=$this->uri('/blog/edit/' . $item['id'])?>"><i class="icon-edit"></i> Edit</a> <a href="<?=$this->uri('/blog/remove/' . $item['id'])?>"><i class="icon-remove"></i> Delete</a></p>
+                                            <p class="pull-right"><a href="<?=$this->uri('/blogs/edit/' . $item['id'])?>"><i class="icon-edit"></i> Edit</a> <a href="<?=$this->uri('/blogs/remove/' . $item['id'])?>"><i class="icon-remove"></i> Delete</a></p>
                                             <p class="pull-left">
                                             <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['createTime'])?>" datetime="<?=$this->datetime()->isoTime($item['createTime'])?>"><?=$this->datetime($item['createTime'])?></time>
                                             </p>
