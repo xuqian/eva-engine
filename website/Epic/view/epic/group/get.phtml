@@ -21,7 +21,7 @@ $items = $this->items;
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
 
                     <div class="group-nav">
-                        <a href="<?=$this->uri('/groups/join/')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> Create New Topic</a>
+                        <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> Create New Topic</a>
                         <ul class="nav nav-tabs group-tab">
                             <li class="active"><a href="#group-forum">Forum</a></li>
                             <li><a href="#group-events">Events</a></li>

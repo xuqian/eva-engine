@@ -10,8 +10,6 @@ use Eva\Date\Calendar;
 
 class EventController extends ActionController
 {
-    protected $eventData;
-
     public function indexAction()
     {
         return $this->listAction();
@@ -112,49 +110,7 @@ class EventController extends ActionController
     public function getAction()
     {
         $id = $this->params('id');
-
-        $item = $this->eventAction(); 
         
-        list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
-            'action' => 'index',
-            'event_id' => $item['id'],
-        ));
-        
-        $memberModel = Api::_()->getModel('Event\Model\EventUser'); 
-        $members = $memberModel->setItemList(array('event_id' => $item['id'], 'noLimit' => true))->getEventUserList();
-        $members = $members->toArray(
-            array(
-                'self' => array(
-                    '*',
-                ),
-                'join' => array(
-                    'User' => array(
-                        '*',
-                    ),
-                ),
-            )
-        );
-
-        $view = new ViewModel(array(
-            'item' => $item,
-            'items' => $items,
-            'members' => $members,
-            'paginator' => $paginator,
-        ));
-        return $view; 
-    }
-    
-    public function eventAction()
-    {
-        if($this->eventData){
-            return $this->eventData;
-        }   
-    
-        $id = $this->getEvent()->getRouteMatch()->getParam('id');
-        if(!$id){
-            return array();
-        }
-
         $itemModel = Api::_()->getModel('Event\Model\Event'); 
         $item = $itemModel->getEventdata($id, array(
             'self' => array(
@@ -192,22 +148,48 @@ class EventController extends ActionController
             'action' => 'user',
             'id' => $user['id'],
         ));
-        
+
         if($user) {
             $joinModel = Api::_()->getModel('Event\Model\EventUser');
             $joinList = $joinModel->setItemList(array(
                 'user_id' => $user['id'],
                 'event_id' => $item['id'],
             ))->getEventUserList()->toArray();
-        
+
             if (count($joinList) > 0) {
                 $item['Join'] = $joinList[0];
             }
-        }
-        
-        return $this->eventData = $item;
-    }
+        } 
 
+        list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
+            'action' => 'index',
+            'event_id' => $item['id'],
+        ));
+
+        $memberModel = Api::_()->getModel('Event\Model\EventUser'); 
+        $members = $memberModel->setItemList(array('event_id' => $item['id'], 'noLimit' => true))->getEventUserList();
+        $members = $members->toArray(
+            array(
+                'self' => array(
+                    '*',
+                ),
+                'join' => array(
+                    'User' => array(
+                        '*',
+                    ),
+                ),
+            )
+        );
+
+        $view = new ViewModel(array(
+            'item' => $item,
+            'items' => $items,
+            'members' => $members,
+            'paginator' => $paginator,
+        ));
+        return $view; 
+    }
+    
     public function removeAction()
     {
         $request = $this->getRequest();

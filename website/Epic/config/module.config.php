@@ -280,7 +280,7 @@ return array(
             'group' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/group/[:id][/]',
+                    'route' => '/group/[:id]',
                     'constraints' => array(
                         'id'     => '[a-zA-Z0-9_-]+',
                     ),
@@ -295,7 +295,7 @@ return array(
                     'blog' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => 'blog[/]',
+                            'route' => '[/]blog[/]',
                             'constraints' => array(
                             ),
                             'defaults' => array(
@@ -347,7 +347,7 @@ return array(
                     'event' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => 'event[/]',
+                            'route' => '[/]event[/]',
                             'constraints' => array(
                             ),
                             'defaults' => array(
