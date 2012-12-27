@@ -16,7 +16,6 @@
     <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id']))?>">
     <div class="page-header">
         <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
-<<<<<<< HEAD
         <h4 class="txt-bold">My Groups ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
     </div>
     <div class="group-mine">
@@ -30,16 +29,6 @@
                                     <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="img-rounded" />
                             {% } %}
                 <p>{%=item.groupName%}</p>
-=======
-        <h4 class="txt-bold">My Groups (20)</h4>
-    </div>
-    <div class="group-mine">
-        <ul>
-            <?for($i=0;$i<5;$i++):?>
-            <li><a href="#">
-                <img width="50" height="50" class="img-rounded" alt="" src="<?=$this->assets('/module/epic/css/img/food.jpg')?>">
-                <p>Thumbnail caption...</p>
->>>>>>> f6d65f69652bb6490ea7db6732d329bd02345ccc
             </a></li>
             {% } %}
             {% } %}
