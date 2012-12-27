@@ -106,7 +106,7 @@ $dayPath = $this->dayPath;
                                 {% if(item.File) { %}
                                     <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" alt="{%=item.title%}" />
                                 {% }else{ %}
-                                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="">
+                                    <img src="<?=$this->assets('/module/epic/img/event-default.jpg')?>" alt="">
                                 {% } %}
                                 <div class="mask">{%=item.title%}</div>
                                 </a></li>
@@ -147,7 +147,7 @@ $dayPath = $this->dayPath;
                                     {% if(item.File) { %}
                                     <img  src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" height="90" class="media-object img-rounded"/>
                                     {% } else { %}
-                                    <img  src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" width="90" height="90" class="media-object img-rounded"/>
+                                    <img  src="<?=$this->assets('/module/epic/img/event-default.jpg')?>" width="90" height="90" class="media-object img-rounded"/>
                                     {% } %}
                                 </a>
                                 <div class="media-body">
@@ -198,7 +198,7 @@ $dayPath = $this->dayPath;
                                     {% if(item.File) { %}
                                         <img  src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" height="90" class="media-object img-rounded"/>
                                     {% } else { %}
-                                    <img  src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" width="90" height="90" class="media-object img-rounded"/>
+                                    <img  src="<?=$this->assets('/module/epic/img/event-default.jpg')?>" width="90" height="90" class="media-object img-rounded"/>
                                     {% } %}
                                 </a>
                                 <div class="media-body">
