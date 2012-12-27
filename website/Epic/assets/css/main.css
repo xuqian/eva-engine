@@ -1117,7 +1117,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-detail .media-heading{font-size:20px;font-weight:bold;}
 .event-detail .dl-horizontal dt{text-align:left;width:100px;}
 .event-detail .dl-horizontal dd{margin-left:100px;}
-.event-grid{min-height:400px;}
+.event-grid{min-height:300px;}
 .event-list .media-heading{font-size:14px;font-weight:bold;}
 .event-list .item{padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid #CCC;}
 .event-list .event-action{margin-top:30px;}

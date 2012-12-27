@@ -62,7 +62,7 @@ if($this->form){
                                             <div class="control-group <?=$form->isError('endDay') ? 'error' : '';?> controls-row span3">
                                                 <div class="controls">
                                                     <?=$form->helper('endDay', array('class' => 'input-small date end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Day'))?>        
-                                                    <?=$form->helper('endTime', array('class' => 'timepicker input-small time end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Day'))?>        
+                                                    <?=$form->helper('endTime', array('class' => 'timepicker input-small time end', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End Time'))?>        
                                                     <div class="help-block"><?=$form->helper('endDay', 'formElementErrors')?></div>
                                                     <div class="help-block"><?=$form->helper('endTime', 'formElementErrors')?></div>
                                                 </div>
