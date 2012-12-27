@@ -9,19 +9,14 @@ $method = $item['id'] ? 'put' : 'post';
 $formExt = $this->formExt;
 
 if(!$form) {
-    if($item['id']) {
-        $form = new Epic\Form\PostEditForm();
-        $form->setAction($formAction);
-    } else {
-        $form = new Epic\Form\PostCreateForm();
-        $form->setAction($formAction);
-    }
+    $form = $item['id'] ? new Epic\Form\PostEditForm() : new Epic\Form\PostCreateForm();
 }
-$form->useSubFormGroup()
-     ->setMethod($item['id'] ? 'put' : 'post')
-     ->setView($this)
-     ->bind($item)
-     ->prepare();
+$form->setAction($formAction)
+->useSubFormGroup()
+->setMethod($method)
+->setView($this)
+->bind($item)
+->prepare();
 ?>
 <form <?=$this->formAttr($form)?> class="form">
     <?=$form->restful();?>
