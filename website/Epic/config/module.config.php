@@ -184,10 +184,10 @@ return array(
                 'priority' => 2,
             ),
 
-            'blog' => array(
+            'blogs' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/blog[/:action][/:id][/]',
+                    'route' => '/blogs[/:action][/:id][/]',
                     'constraints' => array(
                         'action'     => '[a-zA-Z]+',
                         'id'     => '[0-9a-zA-Z]+',

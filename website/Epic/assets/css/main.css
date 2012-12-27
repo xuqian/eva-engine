@@ -1182,3 +1182,6 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .group-member-list li{display:inline-block;zoom:1;*display:inline;width:49%;margin-bottom:10px;}
 .group-member-list img{margin-right:10px;}
 .group-member-list a{color:#000;}
+.neighbors{clear:both;}
+.comments{margin-top:40px;clear:both;}.comments .thumbnail{background:#FFF;}
+.comments .well{background:#FFF;}
