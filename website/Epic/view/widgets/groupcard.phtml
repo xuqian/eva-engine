@@ -9,43 +9,43 @@ $joinForm
 $unjoinForm = clone $joinForm;
 $unjoinForm->setMethod('delete');
 ?>                    
-                    <div class="groupcard media">
-                        <a class="pull-left" href="<?=$this->uri('/group/' . $this->item['groupKey']);?>">
-                        <?if($this->item['File']):?>
-                                <img alt="group" class="media-object" src="<?=$this->thumb($this->item['File'][0]['Thumb'], array('c_fill', 'h_130', 'w_130'))?>" width="130" />
-                             <?else:?>
-                                 <img alt="group" class="media-object" src="<?=$this->assets('/module/epic/img/event-default-l.jpg')?>" width="130" />
-                        <?endif?>
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a href=""><?=$this->item['groupName']?></a></h4>
-                            <div class="media typo">
-                                <div class="content"><?=$this->item['Text']['content']?></div>
-                                <div class="row ">
-                                    <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members</span>
-                                    <span class="span2 summary"><span class="highlight">12345</span>Topics</span>
-                                    <span class="span1">
-                                 <?if(isset($this->item['Join']) && $this->item['Join']['user_id'] == $this->item['user_id']):?>
-                                <?elseif(isset($this->item['Join']) && $this->item['Join'] && $this->item['Join']['user_id'] != $this->item['user_id']):?>
-                                <form <?=$this->formAttr($unjoinForm)?>>
-                                    <?=$unjoinForm->restful();?>
-                                    <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
-                                    <?=$unjoinForm->helper('user_id', array('class' => ''))?>
-                                    <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Quit')?></button>
-                                </form>
-                                <?elseif($this->item['memberEnable'] && ($this->item['memberLimit'] > $this->item['Count']['memberCount'] || $this->item['memberLimit'] == 0)):?>
-                                <form <?=$this->formAttr($joinForm)?>>
-                                    <?=$joinForm->restful();?>
-                                    <?=$joinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
-                                    <?=$joinForm->helper('user_id', array('class' => ''))?>
-                                    <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Join')?></button>
-                                </form>
-                                <?endif?>  
-                                    </span>
-                                </div>
+<div class="groupcard media">
+    <a class="pull-left" href="<?=$this->uri('/group/' . $this->item['groupKey']);?>">
+        <?if($this->item['File']):?>
+        <img alt="group" class="media-object" src="<?=$this->thumb($this->item['File'][0]['Thumb'], array('c_fill', 'h_130', 'w_130'))?>" width="130" />
+        <?else:?>
+        <img alt="group" class="media-object" src="<?=$this->assets('/module/epic/img/event-default-l.jpg')?>" width="130" />
+        <?endif?>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading"><a href=""><?=$this->item['groupName']?></a></h4>
+        <div class="media typo">
+            <div class="content"><?=$this->item['Text']['content']?></div>
+            <div class="row ">
+                <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members</span>
+                <span class="span2 summary"><span class="highlight">12345</span>Topics</span>
+                <span class="span1">
+                    <?if(isset($this->item['Join']) && $this->item['Join']['user_id'] == $this->item['user_id']):?>
+                    <?elseif(isset($this->item['Join']) && $this->item['Join'] && $this->item['Join']['user_id'] != $this->item['user_id']):?>
+                    <form <?=$this->formAttr($unjoinForm)?>>
+                        <?=$unjoinForm->restful();?>
+                        <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
+                        <?=$unjoinForm->helper('user_id', array('class' => ''))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Quit')?></button>
+                    </form>
+                    <?elseif($this->item['memberEnable'] && ($this->item['memberLimit'] > $this->item['Count']['memberCount'] || $this->item['memberLimit'] == 0)):?>
+                    <form <?=$this->formAttr($joinForm)?>>
+                        <?=$joinForm->restful();?>
+                        <?=$joinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
+                        <?=$joinForm->helper('user_id', array('class' => ''))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Join')?></button>
+                    </form>
+                    <?endif?>  
+                </span>
+            </div>
 
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+</div>

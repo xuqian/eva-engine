@@ -14,20 +14,19 @@
     <?endif?>
 
     <div class="page-header">
-        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
+        <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
         <h4 class="txt-bold">My Groups (20)</h4>
     </div>
     <div class="group-mine">
         <ul>
             <?for($i=0;$i<5;$i++):?>
             <li><a href="#">
-                <img width="50" height="50" class="img-rounded" alt="" src="/static/src/epic/css/img/food.jpg?v=1.0.0">
+                <img width="50" height="50" class="img-rounded" alt="" src="<?=$this->assets('/module/epic/css/img/food.jpg')?>">
                 <p>Thumbnail caption...</p>
             </a></li>
             <?endfor?>
         </ul>
-        <p><a href="#">My Topics (123)</a></p>
-        <p><a href="#">My Comments (2833)</a></p>
+        <p><a href="<?=$this->uri('/my/blog/')?>">My Topics (123)</a></p>
     </div>
 
 
