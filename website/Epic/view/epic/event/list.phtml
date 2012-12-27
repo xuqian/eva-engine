@@ -120,7 +120,7 @@ $dayPath = $this->dayPath;
                                     <?=$this->callback()?>
                                     <button class="btn btn-small item-action-main">Quit</button>
                                 </form>
-                                <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
+                                <?elseif($item['memberEnable'] && ($item['memberLimit'] > $item['Count']['memberCount'] || $item['memberLimit'] == 0)):?>
                                 <form <?=$this->formAttr($form)?>>
                                     <?=$form->restful();?>
                                     <?=$form->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>

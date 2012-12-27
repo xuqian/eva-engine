@@ -17,6 +17,9 @@ $joinForm
 ->setMethod('post')
 ->setAction($this->uri('/event/join/'))
 ->prepare();
+
+$unjoinForm = clone $joinForm;
+$unjoinForm->setMethod('delete');
 ?>
 
 <div class="container">
@@ -34,8 +37,8 @@ $joinForm
 
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
 
-                  <div class="event-detail media">
-                        <a class="pull-left" href="#">
+                 <div class="event-detail media">
+                        <a class="pull-left" href="<?=$this->uri('/event/' . $item['urlName']);?>">
                             <?if($item['File']):?>
                                 <img class="media-object" src="<?=$this->thumb($item['File'][0]['Thumb'], array('c_fill', 'h_240', 'w_240'))?>" width="240" />
                              <?else:?>
@@ -43,10 +46,9 @@ $joinForm
                             <?endif?>
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading"><a href=""><?=$item['title'];?></a></h4>
+                            <h4 class="media-heading"><a href="<?=$this->uri('/event/' . $item['urlName']);?>"><?=$item['title'];?></a></h4>
                             <div class="media typo">
                                 <dl class="dl-horizontal">
-                                   
                                     <dt>Start Time:</dt>
                                     <dd><?=$item['startDay']?> <?=$item['startTime'] ? $item['startTime'] : null?></dd>
                                     <dt>End Time:</dt>
@@ -68,15 +70,15 @@ $joinForm
                                     <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Unjoin')?></button>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"> <?=$this->_('Quit')?></button>
                                 </form>
-                                <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
+                                <?elseif($item['memberEnable'] && ($item['memberLimit'] > $item['Count']['memberCount'] || $item['memberLimit'] == 0)):?>
                                 <form <?=$this->formAttr($joinForm)?>>
                                     <?=$joinForm->restful();?>
                                     <?=$joinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$joinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"><?=$this->_('Join Now')?></button>
+                                    <button class="btn btn-small item-action-main btn btn-orange icon-user"> <?=$this->_('Join Now')?></button>
                                 </form>
                                 <?endif?> 
                                 </p>
@@ -136,12 +138,12 @@ $joinForm
                                 <?=$form->helper('messageType', 'formHidden', array('class' => ''))?>        
                                 <?=$form->helper('reference_id', array('class' => ''))?>
                                 <?=$form->helper(array('MessageFile', 'file_id'), 'formHidden', array('class' => ''))?>
-                                <input type="hidden" name="event_id" value="<?=$this->item['id']?>"> 
+                                <input type="hidden" name="event_id" value="<?=$item['id']?>"> 
                                 <?=$this->callback()?>
                                 <fieldset class="form">
                                     <div class="activity-box-wrap">
                                         <div class="activity-box-content">
-                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5, 'value' => 'From Event :' . $this->serverUrl() . '/event/' . $this->item['urlName']))?>        
+                                            <?=$form->helper('content', 'formTextarea', array('class' => '', 'rows' => 5, 'value' => 'From Event :' . $this->serverUrl() . '/event/' . $item['urlName']))?>        
                                         </div>
                                         <div class="activity-box-buttons">
                                             <a id="activity-box-image-button" class="activity-box-func activity-box-text" href="javascript:;" data-activity-text="Share Photo."><i class="icon-mini icon-picture"></i> Photo</a>
@@ -216,10 +218,10 @@ $joinForm
                             <?endforeach?>
 
                             <?if($this->paginator):?>
-                            <?=$this->paginator->setPath('/event/' . $this->item['urlName'] . '/')->setBaseQuery($this->query);?>
+                            <?=$this->paginator->setPath('/event/' . $item['urlName'] . '/')->setBaseQuery($this->query);?>
                             <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                             <?endif;?>
-                        </div><!--activity-list end-->
+                        </div><!--activity-list end--> 
 
 
                 </div><!--group main end-->

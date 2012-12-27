@@ -297,113 +297,6 @@ class GroupController extends ActionController
 
         return $viewModel;
     }
-    
-    public function eventAction()
-    {
-        if($this->eventData){
-            return $this->eventData;
-        }   
-    
-        $id = $this->getEvent()->getRouteMatch()->getParam('event_id');
-        if(!$id){
-            return array();
-        }
-
-        $itemModel = Api::_()->getModel('Event\Model\Event'); 
-        $item = $itemModel->getEventdata($id, array(
-            'self' => array(
-                '*',
-            ),
-            'join' => array(
-                'Text' => array(
-                    'self' => array(
-                        '*',
-                    ),
-                ),
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
-                ),
-                'Category' => array(
-                    '*'
-                ),
-                'Count' => array(
-                    '*'
-                ),
-            ),
-        ));
-
-        if(!$item || $item['eventStatus'] != 'active'){
-            $item = array();
-            $this->getResponse()->setStatusCode(404);
-        }
-
-        $user = Auth::getLoginUser(); 
-        //Public User Area
-        $this->forward()->dispatch('UserController', array(
-            'action' => 'user',
-            'id' => $user['id'],
-        ));
-        
-        if($user) {
-            $joinModel = Api::_()->getModel('Event\Model\EventUser');
-            $joinList = $joinModel->setItemList(array(
-                'user_id' => $user['id'],
-                'event_id' => $item['id'],
-            ))->getEventUserList()->toArray();
-        
-            if (count($joinList) > 0) {
-                $item['Join'] = $joinList[0];
-            }
-        }
-        
-        return $this->eventData = $item;
-    }
-    
-    public function postAction()
-    {
-        if($this->post){
-            return $this->post;
-        }   
-    
-        $id = $this->getEvent()->getRouteMatch()->getParam('post_id');
-        if(!$id){
-            return array();
-        }
-        
-        $itemModel = Api::_()->getModel('Blog\Model\Post');
-        $item = $itemModel->getPost($id, array(
-            'self' => array(
-                '*',
-            ),
-            'join' => array(
-                'Text' => array(
-                    'self' => array(
-                        '*',
-                        'getContentHtml()',
-                    ),
-                ),
-                'Categories' => array(
-                ),
-            ),
-            'proxy' => array(
-                'File\Item\File::PostCover' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
-                )
-            ),
-        ));
-        if(!$item || $item['status'] != 'published'){
-            $item = array();
-            $this->getResponse()->setStatusCode(404);
-        }
-
-        return $this->post = $item;
-    }
 
     public function postCreateAction()
     {
@@ -423,13 +316,18 @@ class GroupController extends ActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/group/post-create');
         
-        $item = $this->groupAction();
+        $postId = $this->getEvent()->getRouteMatch()->getParam('post_id');
+
+        $postView = $this->forward()->dispatch('BlogController', array(
+            'action' => 'edit',
+            'id' => $postId,
+        ));
         
-        $post = $this->postAction();
+        $item = $this->groupAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
-            'post' => $post,
+            'post' => $postView->item,
         ));
     
         return $viewModel;
@@ -440,15 +338,20 @@ class GroupController extends ActionController
         $request = $this->getRequest();
         $viewModel = new ViewModel();
         
-        $item = $this->groupAction();
+        $postId = $this->getEvent()->getRouteMatch()->getParam('post_id');
+
+        $postView = $this->forward()->dispatch('BlogController', array(
+            'action' => 'edit',
+            'id' => $postId,
+        ));
         
-        $post = $this->postAction();
+        $item = $this->groupAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
-            'post' => $post,
+            'post' => $postView->item,
         ));
-    
+        
         return $viewModel;
     }
 
@@ -470,13 +373,20 @@ class GroupController extends ActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/group/event-create');
         
+        $eventId = $this->getEvent()->getRouteMatch()->getParam('event_id');
+
+        $eventView = $this->forward()->dispatch('EventController', array(
+            'action' => 'get',
+            'id' => $eventId,
+        ));
+        /*
+        $viewModel->addChild($eventView, 'event');
+        */
         $item = $this->groupAction();
-        
-        $event = $this->eventAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
-            'event' => $event,
+            'event' => $eventView->item,
         ));
     
         return $viewModel;
@@ -486,16 +396,26 @@ class GroupController extends ActionController
     {
         $request = $this->getRequest();
         $viewModel = new ViewModel();
-        
+        $eventId = $this->getEvent()->getRouteMatch()->getParam('event_id');
+
+        $eventView = $this->forward()->dispatch('EventController', array(
+            'action' => 'get',
+            'id' => $eventId,
+        ));
+        /*
+        $viewModel->addChild($eventView, 'event');
+        */
         $item = $this->groupAction();
-        
-        $event = $this->eventAction();
         
         $viewModel->setVariables(array(
             'item' => $item,
-            'event' => $event,
+            'event' => $eventView->item,
+            'items' => $eventView->items,
+            'members' => $eventView->members,
+            'paginator' => $eventView->paginator,
         ));
     
+
         return $viewModel;
     }
 }
