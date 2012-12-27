@@ -11,7 +11,7 @@
     </div><!--calendar end-->
 
     <div class="page-header  border-header">
-        <h4 class="txt-bold">Group Members (20)</h4>
+        <h4 class="txt-bold">Group Members (<?=count($this->members)?>)</h4>
     </div>
 
     <div class="group-member-list">
@@ -52,16 +52,21 @@
         <?endif;?> 
     </div>
 
-    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['urlName'] . '/event/', array('user_id' => $this->user['id']))?>">
+    <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['groupKey'] . '/event/', array(/*'rows' => 10*/))?>">
         <div class="page-header border-header">
-            <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>">View All</a></small>
             <h4>Group Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
         </div>
         <div class="side-event-list">
             {% if(o.items.length > 0) { %}
                 {% for (var i=0, item; item=o.items[i]; i++) { %}
                     <div class="item">
-                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <a href="<?=$this->uri('/event/')?>{%=item.urlName%}" title="" class="">
+                            {% if(item.File) { %}
+                                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="{%=item.title%}" width="50" height="50" class="item-absolute imgdelay figure userface" />
+                            {% }else{ %}
+                                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
+                            {% } %}
+                        </a>
                         <div class="item-inline item-text">
                             <div class="text-content">
                                 <div class="item-title">
@@ -91,37 +96,40 @@
         </ul>
     </div>
 
+    <script id="group-ranks" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/',array('rows' => 5, 'order' => 'memberdesc'))?>">
     <div class="page-header border-header">
         <h4>Group Ranks</h4>
     </div>
-
     <div class="group-ranks">
         <ul>
-            <?for($i=1;$i<11;$i++):?>
+        {% if(o.items.length > 0) { %}
+            {% for (var i=0, item; item=o.items[i]; i++) { %}
             <li>
-            <em class="ranknum rank<?=$i?>"><?=$i?></em>
+            <em class="ranknum rank{%=i+1%}">{%=i+1%}</em>
             <div class="media">
-                <a class="pull-left" href="#">
-                    <img alt="userface" src="<?=$this->gravatarLink($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+                <a class="pull-left" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">
+                            {% if(item.File) { %}
+                                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="{%=item.title%}" width="50" height="50" class="media-object img-rounded" />
+                            {% }else{ %}
+                                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="media-object img-rounded" />
+                            {% } %}
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading"><a class="pull-left" href="#">Sleek, intuitive, and powerful front-end framework</a></h4>
+                    <h4 class="media-heading"><a class="pull-left" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">{%=item.groupName%}</a></h4>
                     <div class="media">
                         <div class="row">
                             <span class="span1"><span class="highlight txt-bold">123</span> Topics</span>
-                            <span class="highlight txt-bold">123</span> Members
+                            <span class="highlight txt-bold">{%=item.Count.memberCount%}</span> Members
                         </div>
                     </div>
                 </div>
             </div>
             </li>
-            <?endfor?>
+            {% } %}
+        {% } %}
         </ul>
     </div>
+    </script>
 
-
-    <div class="side-ad-list">
-        <a href="#" class="pull-right"><img src="<?=$this->link('/src/epic/css/img/ad-2.jpg')?>" alt=""></a>
-        <a href="#" class="pull-left"><img src="<?=$this->link('/src/epic/css/img/ad-1.jpg')?>" alt=""></a>
-    </div>
+     <?=$this->widget('Epic', 'components/ad_group')?>
 </div><!--right side end-->

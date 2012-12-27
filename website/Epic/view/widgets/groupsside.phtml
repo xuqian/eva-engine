@@ -55,33 +55,40 @@
         </div>
     </script>
 
+    <script id="group-ranks" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/',array('rows' => 10, 'order' => 'memberdesc'))?>">
     <div class="page-header border-header">
-        <h4>Topics  Ranks</h4>
+        <h4>Group Ranks</h4>
     </div>
-
     <div class="group-ranks">
         <ul>
-            <?for($i=1;$i<11;$i++):?>
+        {% if(o.items.length > 0) { %}
+            {% for (var i=0, item; item=o.items[i]; i++) { %}
             <li>
-            <em class="ranknum rank<?=$i?>"><?=$i?></em>
+            <em class="ranknum rank{%=i+1%}">{%=i+1%}</em>
             <div class="media">
-                <a class="pull-left" href="#">
-                    <img alt="userface" src="<?=$this->gravatarLink($user['email'], 50)?>" width="50" height="50" class="media-object img-rounded"/>
+                <a class="pull-left" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">
+                            {% if(item.File) { %}
+                                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="{%=item.title%}" width="50" height="50" class="media-object img-rounded" />
+                            {% }else{ %}
+                                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="media-object img-rounded" />
+                            {% } %}
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading"><a class="pull-left" href="#">Sleek, intuitive, and powerful front-end framework</a></h4>
+                    <h4 class="media-heading"><a class="pull-left" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">{%=item.groupName%}</a></h4>
                     <div class="media">
                         <div class="row">
                             <span class="span1"><span class="highlight txt-bold">123</span> Topics</span>
-                            <span class="highlight txt-bold">123</span> Members
+                            <span class="highlight txt-bold">{%=item.Count.memberCount%}</span> Members
                         </div>
                     </div>
                 </div>
             </div>
             </li>
-            <?endfor?>
+            {% } %}
+        {% } %}
         </ul>
     </div>
+    </script>
 
 
     <?=$this->widget('Epic', 'components/ad_group')?>

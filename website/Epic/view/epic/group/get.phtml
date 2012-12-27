@@ -30,7 +30,8 @@ $items = $this->items;
                     </div>
 
                     <div class="tab-content">
-                        <div class="tab-pane active group-forum" id="group-forum">
+                        <script id="group-forum-script" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['groupKey'] . '/blog/', array(/*'rows' => 10*/))?>">
+                        <div class="tab-pane active group-forum group-forum-script" id="group-forum">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -41,19 +42,48 @@ $items = $this->items;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?for($i=0;$i<30;$i++):?>
+                                    {% if(o.items.length > 0) { %}
+                                    {% for (var i=0, item; item=o.items[i]; i++) { %}
                                     <tr>
-                                        <td class="title"><a href="">I grew up in Paris, France and moved to Oxford, UK when I was 5 years old. </a></td>
-                                        <td class="author"><a href="">AlloVince</a></td>
-                                        <td class="centeralign comment-count"><a href="">123</a></td>
-                                        <td class="comment-time  rightalign"><?=$this->Datetime()->isoTime()?></td>
+                                        <td class="title"><a href="<?=$this->uri('/user/')?>{%=item.user_id%}/blog/{%=item.urlName%}">{%=item.title%}</a></td>
+                                        <td class="author"><a href="<?=$this->uri('/user/')?>{%=item.user_id%}">{%=item.User.userName%}</a></td>
+                                        <td class="centeralign comment-count"><a href="">{%=item.commentCount%}</a></td>
+                                        <td class="comment-time  rightalign">{%=item.createTime%}</td>
                                     </tr>
-                                    <?endfor?>
+                                    {% } %}
+                                    {% } %}
                                 </tbody>
                             </table>
+                        </div> 
+                        </script>
 
+                        <script id="group-event-script" type="text/x-tmpl" data-url="<?=$this->uri('/group/' . $this->item['groupKey'] . '/event/', array(/*'rows' => 10*/))?>">
+                        <div class="tab-pane group-events group-event-script" id="group-events">
+                        <div class="event-list vlist">
+                        {% if(o.items.length > 0) { %}
+                        {% for (var i=0, item; item=o.items[i]; i++) { %}
+                        <div class="item media">
+                            <a class="pull-left" href="<?=$this->uri('/event/')?>{%=item.urlName%}">
+                                {% if(item.File) { %}
+                                <img class="media-object img-rounded" src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" />
+                                {% }else{ %}
+                                <img class="media-object img-rounded" src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" width="90" />
+                                {% } %}
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}" class="item-user">{%=item.title%}</a></h4>
+                                <div class="media">
+                                    <p class="lowlight"><?=$this->_('Event Time')?>: {%=item.startDay%} {%=item.startTime ? item.startTime : null%} - {%=item.endDay%} {%=item.endTime ? item.endTime : null%}</p>
+                                    <p class="lowlight"><?=$this->_('Location')?>: {%=item.city%} {%=item.location%}</p>
+                                    <p class="lowlight"><span class="highlight">{%=item.Count.memberCount%}</span> <?=$this->_('Members Joined')?> </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane" id="group-events">...</div>
+                        {% } %}
+                        {% } %}
+                        </div>
+                        </div> 
+                        </script> 
                         <div class="tab-pane" id="group-albums">...</div>
                     </div>
 

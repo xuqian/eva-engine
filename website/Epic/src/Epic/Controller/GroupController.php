@@ -3,7 +3,8 @@ namespace Epic\Controller;
 
 use Eva\Api,
     Eva\Mvc\Controller\ActionController,
-    Eva\View\Model\ViewModel;
+    Eva\View\Model\ViewModel,
+    Zend\View\Model\JsonModel;
 use Core\Auth;
 use Group\Form;
 
@@ -315,12 +316,53 @@ class GroupController extends ActionController
 
         return $viewModel;
     }
+    
+    public function blogAction()
+    {
+        list($item, $members) = $this->groupAction();
+        $groupId = $item['id'];
+
+        $page = $this->params()->fromQuery('page', 1);
+        $rows = $this->params()->fromQuery('rows', 10);
+        
+        $this->changeViewModel('json');
+        
+        $itemModel = Api::_()->getModel('Group\Model\Post');
+        $items = $itemModel->getGroupPostList(array(
+                'group_id' => $groupId,
+                'page' => $page,
+                'rows' => $rows,
+        ))->getPostList();
+        $paginator = $itemModel->getGroupPostPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+        
+        if(Api::_()->isModuleLoaded('User')){
+            $userList = array();
+            $userList = $itemModel->getUserList(array(
+                'columns' => array(
+                    'id',
+                    'userName',
+                    'email',
+                ),
+            ))->toArray(array(
+                'self' => array(
+                    'getEmailHash()',
+                ),
+            ));
+            $items = $itemModel->combineList($items->toArray(), $userList, 'User', array('user_id' => 'id'));
+        }
+
+        return new JsonModel(array(
+            'items' => $items,
+            'paginator' => $paginator,
+        )); 
+    }
 
     public function postCreateAction()
     {
         $request = $this->getRequest();
         $viewModel = new ViewModel();
-        
+
         list($item, $members) = $this->groupAction();
 
         return array(
@@ -328,28 +370,28 @@ class GroupController extends ActionController
             'members' => $members,
         );   
     }
-    
+
     public function postEditAction()
     {
         $request = $this->getRequest();
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/group/post-create');
-        
+
         $postId = $this->getEvent()->getRouteMatch()->getParam('post_id');
 
         $postView = $this->forward()->dispatch('BlogController', array(
             'action' => 'edit',
             'id' => $postId,
         ));
-        
+
         list($item, $members) = $this->groupAction();
-        
+
         $viewModel->setVariables(array(
             'item' => $item,
             'post' => $postView->item,
             'members' => $members,
         ));
-    
+
         return $viewModel;
     }
 
@@ -378,6 +420,12 @@ class GroupController extends ActionController
     
     public function eventAction()
     {
+        list($item, $members) = $this->groupAction();
+        $groupId = $item['id'];
+
+        $page = $this->params()->fromQuery('page', 1);
+        $rows = $this->params()->fromQuery('rows', 10);
+        
         $this->changeViewModel('json');
         $query = $this->getRequest()->getQuery();
         $form = new \Epic\Form\GroupSearchForm();
@@ -391,9 +439,15 @@ class GroupController extends ActionController
             );
         }
         
-        $itemModel = Api::_()->getModel('Group\Model\Group');
-        $items = $itemModel->setItemList($query)->getGroupList();
-     
+        $itemModel = Api::_()->getModel('Group\Model\Event');
+        $items = $itemModel->getGroupEventList(array(
+                'group_id' => $groupId,
+                'page' => $page,
+                'rows' => $rows,
+        ))->getEventdataList();
+        $paginator = $itemModel->getGroupEventPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
         $items = $items->toArray(array(
             'self' => array(
                 '*'
@@ -421,9 +475,6 @@ class GroupController extends ActionController
                 }
             }
         }
-
-        $paginator = $itemModel->getPaginator();
-        $paginator = $paginator ? $paginator->toArray() : null;
 
         if(Api::_()->isModuleLoaded('User')){
             $userList = array();
