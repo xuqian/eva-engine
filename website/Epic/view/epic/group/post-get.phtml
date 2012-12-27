@@ -1,27 +1,9 @@
 <?
-$title = 'Groups';
+$title = $this->post['title'] . ' - Topic of Group';
 $this->headTitle($title, 'SET');
 $user = $this->user;
 $item = $this->item;
 $post = $this->post;
-
-if($this->form){
-	$form = $this->form;
-} else {
-    if($post['id']) {
-        $form = new Epic\Form\PostEditForm();
-        $form->setAction($this->uri('/blog/edit/'));
-
-    } else {
-        $form = new Epic\Form\PostCreateForm();
-        $form->setAction($this->uri('/data/group/post/'));
-    }
-}
-$form->useSubFormGroup()
-     ->setMethod($post['id'] ? 'put' : 'post')
-     ->setView($this)
-     ->bind($post)
-     ->prepare();
 ?>
 
 <div class="container">
@@ -37,14 +19,10 @@ $form->useSubFormGroup()
             <div class="span8">
                 <div class="group-main">
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?> 
-                    <div id="singletitle" class="page-header typo">
-                        <h1><?=$this->_($post['title'])?></h1>
-                    </div> 
-             <div class="well">
-                <div class="hero-unit typo">
-                    <?=$post['Text']['content'];?>
-                </div>
-            </div>
+                    <?=$this->widget('Epic', 'epic/user/post-template', array(
+                        'item' => $post,
+                    ))?> 
+
                 </div><!--group main end-->
             </div><!--page main left end-->
             <div class="span4">

@@ -10,10 +10,10 @@ $item = $this->item;
 </article>
 
 <div class="neighbors">
-    <?if($item['Next']):?>
+    <?if(isset($item['Next']) && $item['Next']):?>
     <a href="<?=$this->uri('/user/' . $item['user_id'] . '/blog/' . $item['Next']['urlName'])?>" class="pull-right" title="<?=$this->escapeHtmlAttr($item['Next']['title'])?>"><?=$item['Next']['title']?>»</a>
     <?endif;?>
-    <?if($item['Prev']):?>
+    <?if(isset($item['Prev']) && $item['Prev']):?>
     <a href="<?=$this->uri('/user/' . $item['user_id'] . '/blog/' . $item['Prev']['urlName'])?>" class="pull-left" title="<?=$this->escapeHtmlAttr($item['Prev']['title'])?>">«<?=$item['Prev']['title']?></a>
     <?endif;?>
 </div>
