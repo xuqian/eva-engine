@@ -102,7 +102,7 @@
         </ul>
     </div>
 
-<script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id']))?>">
+<script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/groups/')?>">View All</a></small>
     <h4>My Groups  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
