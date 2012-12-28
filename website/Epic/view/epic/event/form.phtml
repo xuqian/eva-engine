@@ -87,6 +87,14 @@ $form->setAction($formAction)
                 <div class="help-block"><?=$form->helper('location', 'formElementErrors')?></div>
             </div>
         </div>  
+        
+        <div class="control-group <?=$form->isError('urlName') ? 'error' : '';?> hide">
+            <?=$form->helper('urlName', 'label', array('class' => 'control-label'))?>
+            <div class="controls">
+                <?=$form->helper('urlName', array('class' => ''))?>        
+                <div class="help-block"><?=$form->helper('urlName', 'formElementErrors')?></div>
+            </div>
+        </div>
 
         <div class="control-group">
             <label>Event Theme Photo</label>

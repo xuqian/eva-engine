@@ -28,4 +28,9 @@ return array(
         
         ),
     ),
+    'group' => array(
+        'status' => array(
+            'default' => 'active',
+        ),
+    ),
 );

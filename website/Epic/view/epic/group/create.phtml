@@ -66,7 +66,15 @@ $form->useSubFormGroup()
                                                     <div class="help-block"><?=$form->helper('memberEnable', 'formElementErrors')?></div>
                                                 </div>
                                             </div>                   
-                                       
+                                            
+                                            <div class="control-group <?=$form->isError('groupKey') ? 'error' : '';?> hide">
+                                                <?=$form->helper('groupKey', 'label', array('class' => 'control-label'))?>
+                                                <div class="controls">
+                                                    <?=$form->helper('groupKey', array('class' => ''))?>        
+                                                    <div class="help-block"><?=$form->helper('groupKey', 'formElementErrors')?></div>
+                                                </div>
+                                            </div> 
+
                                             <div class="control-group <?=$form->isError('memberLimit') ? 'error' : '';?>">
                                                 <?=$form->helper('memberLimit', 'label', array('class' => 'control-label'))?>
                                                 <div class="controls">

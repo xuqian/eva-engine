@@ -250,7 +250,7 @@ class GroupController extends ActionController
 
         $postData = $request->getPost();
         $callback = $this->params()->fromPost('callback');
-        $form = new Form\GroupCreateForm();
+        $form = new \Epic\Form\GroupCreateForm();
         $form->useSubFormGroup()
             ->bind($postData);
 
@@ -284,10 +284,10 @@ class GroupController extends ActionController
         if ($request->isPost()) {
             $postData = $request->getPost();
             $callback = $this->params()->fromPost('callback');
-            $form = new Form\GroupEditForm();
+            $form = new \Epic\Form\GroupEditForm();
             $form->useSubFormGroup()
                 ->bind($postData);
-
+            
             if ($form->isValid()) {
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Group\Model\Group');

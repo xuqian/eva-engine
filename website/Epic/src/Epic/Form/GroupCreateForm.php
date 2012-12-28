@@ -38,6 +38,10 @@ class GroupCreateForm extends GroupForm
 
     public function beforeBind($data)
     {
+        $config = \Eva\Api::_()->getModuleConfig('Epic');
+        $status = $config['group']['status']['default'];
+        $data['status'] = $status; 
+
         //Data is array is for display
         if(isset($data['CategoryGroup']) && is_array($data)){
             $categoryGroups = array();
@@ -67,6 +71,12 @@ class GroupCreateForm extends GroupForm
     {
         if(isset($data['GroupFile'])){
             $data['GroupFile']['group_id'] = $data['id'];
+        }
+
+        if(!$data['status']){
+            $config = \Eva\Api::_()->getModuleConfig('Epic');
+            $status = $config['group']['status']['default'];
+            $data['status'] = $status; 
         }
 
         $categoryGroups = array();
