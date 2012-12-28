@@ -40,10 +40,15 @@ class UserController extends ActionController
                 ),
                 'FriendsCount' => array(
                 ),
+                
             ),
             'proxy' => array(
                 'Oauth\Item\Accesstoken::Oauth' => array(
                     '*'
+                ),
+                'Blog\Item\Post::UserPostCount' => array(
+                ),
+                'Event\Item\EventUser::EventCount' => array(
                 ),
             ),
         ));

@@ -302,6 +302,8 @@ class DataController extends RestfulModuleController
                         'getThumb()',
                     )
                 ),
+                'PostCount' => array(
+                ),
             ), 
         ));
         

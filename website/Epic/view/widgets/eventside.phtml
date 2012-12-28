@@ -9,7 +9,7 @@ $user = $this->user;
         </a>
         <div class="media-body">
             <h4 class="media-heading"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$user['userName']?></a></h4>
-            <h5>Joined Events: <span class="highlight">1234</span></h5>
+            <h5>Joined Events: <span class="highlight"><?=$user['EventCount']['eventCount']?></span></h5>
             <div class="media">
                 <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
                 <p class="lowlight">Share your life</p>

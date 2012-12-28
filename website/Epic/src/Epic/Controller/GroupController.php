@@ -148,6 +148,8 @@ class GroupController extends ActionController
                 'Count' => array(
                     '*',
                 ),
+                'PostCount' => array(
+                ),
             ),
         ));
 
@@ -350,8 +352,8 @@ class GroupController extends ActionController
         }
         
         $page = $this->params()->fromQuery('page', 1);
-        $rows = $this->params()->fromQuery('rows', '5');
-        $order = $this->params()->fromQuery('order', 'commentdesc');
+        $rows = $this->params()->fromQuery('rows', 20);
+        $order = $this->params()->fromQuery('order', 'timedesc');
         
         $this->changeViewModel('json');
         
@@ -479,7 +481,7 @@ class GroupController extends ActionController
 
         $page = $this->params()->fromQuery('page', 1);
         $rows = $this->params()->fromQuery('rows', 10);
-        $order = $this->params()->fromQuery('order', 'memberdesc');
+        $order = $this->params()->fromQuery('order', 'timedesc');
         
         $eventView = $this->forward()->dispatch('EventController', array(
             'action' => 'list',

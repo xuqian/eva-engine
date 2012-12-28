@@ -23,7 +23,7 @@ $unjoinForm->setMethod('delete');
             <div class="content"><?=$this->item['Text']['content']?></div>
             <div class="row ">
                 <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members</span>
-                <span class="span2 summary"><span class="highlight">12345</span>Topics</span>
+                <span class="span2 summary"><span class="highlight"><?=$this->item['PostCount']['postCount']?></span>Topics</span>
                 <span class="span1">
                     <?if(isset($this->item['Join']) && $this->item['Join']['user_id'] == $this->item['user_id']):?>
                     <?elseif(isset($this->item['Join']) && $this->item['Join'] && $this->item['Join']['user_id'] != $this->item['user_id']):?>
