@@ -170,7 +170,11 @@
     {% for (var i=0, item; item=o.items[i]; i++) { %}
         <li>
             <a class="thumbnail" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">
-                <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
+                {% if(item.File) { %}
+                    <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
+                {% }else{ %}
+                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
+                {% } %}
             </a>
         </li>
     {% } %}

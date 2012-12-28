@@ -116,8 +116,8 @@ $categories = $this->categories;
                         </script>
                         <?elseif($categories && !$this->query['category']):?>
                         <?foreach($categories as $key=>$category):?>
-                        <script id="topic-wrap<?=$key+1;?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4, 'groupCategory' => $category['id']))?>">
-                        <div class="topic-wrap<?=$key+1;?> topic-wrap <?=($key+1)%2 == 0 ? 'odd' : 'even'?>">
+                        <script id="topic-wrap<?=$key;?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4, 'groupCategory' => $category['id']))?>">
+                        <div class="topic-wrap<?=$key;?> topic-wrap <?=($key)%2 == 0 ? 'odd' : 'even'?>">
                             <div class="topic">
                                 <div class="topic-heading">
                                     <small class="pull-right"><a href="<?=$this->uri('/groups/list/?category=' . $category['urlName'])?>">More</a></small>
