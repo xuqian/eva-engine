@@ -26,7 +26,7 @@ $user = $this->user;
     </div>
 
 
-    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id']))?>">
+    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/eventuser/', array())?>">
         <div class="page-header border-header">
             <h4>Best Event Promoters ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
         </div>
@@ -34,13 +34,13 @@ $user = $this->user;
             {% if(o.items.length > 0) { %}
                 {% for (var i=0, item; item=o.items[i]; i++) { %}
                     <div class="item">
-                        <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <a href="<?=$this->uri('/user/')?>{%=item.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
                         <div class="item-inline item-text">
                             <div class="text-content">
                                 <div class="item-title">
-                                    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}/blog/{%=item.urlName%}">{%=item.title%}</a>
+                                    <a href="<?=$this->uri('/user/')?>{%=item.userName%}">{%=item.userName%}</a>
                                 </div>
-                                <p>{%=item.Text.Preview%}</p>
+                                <p>Promoted <span class="highlight">{%=item.EventCount%}</span> Events</p>
                             </div>
                         </div>
                     </div>

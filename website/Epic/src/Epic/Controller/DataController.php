@@ -340,4 +340,28 @@ class DataController extends RestfulModuleController
             'paginator' => $paginator,
         ));
     }
+
+    public function eventuserAction()
+    {
+        $this->changeViewModel('json');
+        $itemModel = Api::_()->getModel('Event\Model\User');
+        $query = $this->getRequest()->getQuery();
+        $items = $itemModel->setItemList(array(
+            'inEvent' => 1,
+            'order' => 'eventcountdesc'
+        ))->getUserList();
+        $items = $items->toArray(array(
+            'self' => array(
+                'getEmailHash()',
+            ),
+        ));
+
+        $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
+        return new JsonModel(array(
+            'items' => $items,
+            'paginator' => $paginator,
+        ));
+    }
 }
