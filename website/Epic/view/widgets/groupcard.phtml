@@ -50,11 +50,16 @@ $unjoinForm->setMethod('delete');
 </div>
 
 <div class="group-nav">
-    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Topic')?></a>
+    <?$path = $this->getHelperPluginManager()->getServiceLocator()->get('request')->getUri()->getPath();?>
+    <?if(strpos($path, 'event')):?>
     <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Event')?></a>
+    <?elseif(strpos($path, 'album')):?>
+    <?else:?>
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Topic')?></a>
+    <?endif?>
     <ul class="nav nav-tabs group-tab">
-        <li data-highlight-url="^/group/[a-z0-9A-Z]+/$" class="active" class="active"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>
-        <li data-highlight-url="^/group/(.*)/event/" ><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/')?>">Events</a></li>
-        <li data-highlight-url="^/group/(.*)/album/"><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/album/')?>">Albums</a></li>
+        <li data-highlight-url="(^/group/[a-z0-9A-Z]+/?$)|^/group/[a-z0-9A-Z]+/blog/"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>
+        <li data-highlight-url="^/group/[a-z0-9A-Z]+/event/" ><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/')?>">Events</a></li>
+        <li data-highlight-url="^/group/[a-z0-9A-Z]+/album/"><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/album/')?>">Albums</a></li>
     </ul>
 </div>
