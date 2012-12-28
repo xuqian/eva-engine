@@ -69,6 +69,7 @@ class GroupController extends ActionController
         
         $categoryModel = Api::_()->getModel('Group\Model\Category');
         $categories = $categoryModel->setItemList(array('noLimit' => true))->getCategoryList();
+        $categories = $categories->toArray();
         
         if ($query['category']) {
             $category = $categoryModel->getCategory($query['category']);
@@ -78,6 +79,13 @@ class GroupController extends ActionController
                 'urlName' => '',
                 'categoryName' => 'Hot',
             );
+        
+            $categoryArray = array();
+            $categoryArray[] = $category;
+            foreach ($categories as $cate) {
+                $categoryArray[] = $cate;
+            }
+            $categories = $categoryArray; 
         }
 
         return array(

@@ -19,7 +19,7 @@ $unjoinForm->setMethod('delete');
 $groupSearchForm = $this->form ? $this->form : new Epic\Form\GroupSearchForm();
 $groupSearchForm->setView($this)
      ->setMethod('get')
-     ->setAction($this->uri('/groups/'))
+     ->setAction($this->uri('/groups/list/'))
      ->prepare();
 
 ?>
@@ -50,6 +50,15 @@ $groupSearchForm->setView($this)
                     <div class="search-filter">
                         <form <?=$this->formAttr($groupSearchForm)?> class="form form-inline">
                             <?=$groupSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                            <?if($this->categories):?>
+                            <select class="input-medium select2" name="category">
+                                <option value=""><?=$this->_('All')?></option>
+                            <?foreach($this->categories as $cate):?> 
+                                <?if(!$cate['urlName']){continue;}?>   
+                                <option <?=$cate['urlName'] == $this->query['category'] ? 'selected="selected"' : null?> value="<?=$cate['urlName']?>"><?=$cate['categoryName']?></option>
+                            <?endforeach;?>
+                            </select>
+                            <?endif;?>
                             <button class="btn" type="submit"><?=$this->_('Filter Groups')?></button>
                         </form>
                     </div>
@@ -76,7 +85,7 @@ $groupSearchForm->setView($this)
                                     <p><?=$this->_('Summary')?> : <?=$item['summary']?></p>
                                 </div>
                             </div>
-                            <a class="pull-left" href="<?=$url;?>">
+                            <a class="pull-left" href="<?=$this->uri('/group/' . $item['groupKey'])?>">
                             <?if(isset($item['File'])):?>
                                 <img class="media-object img-rounded" src="<?=$this->thumb($item['File'][0]['Thumb'], array('c_fill', 'w_90', 'h_90'))?>" width="90" />
                             <?else:?>

@@ -28,6 +28,7 @@ $item = $this->item;
                             'form' => $this->form,
                             'formAction' => $formAction,
                             'item' => $this->post,
+                            'callbackInput' => '<input type="hidden" name="callback" value="' . '/group/' . $item['groupKey'] . '">',
                             'formExt' => '<input type="hidden" name="group_id" value="' . $this->item['id'] . '">'
                         ))?>
                     </div>

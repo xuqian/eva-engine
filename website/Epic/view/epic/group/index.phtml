@@ -91,6 +91,7 @@ $categories = $this->categories;
                     </div>
 
                     <div class="group-topics">
+                        <?if($this->query['category']):?>
                         <script id="topic-wrap-hot" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 15,'groupCategory' =>$this->category['id']))?>">
                         <div class="topic-wrap-hot topic-wrap full">
                             <div class="topic">
@@ -113,7 +114,7 @@ $categories = $this->categories;
                             </div>
                         </div>
                         </script>
-                        <?if($categories && !$this->query['category']):?>
+                        <?elseif($categories && !$this->query['category']):?>
                         <?foreach($categories as $key=>$category):?>
                         <script id="topic-wrap<?=$key+1;?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4, 'groupCategory' => $category['id']))?>">
                         <div class="topic-wrap<?=$key+1;?> topic-wrap <?=($key+1)%2 == 0 ? 'odd' : 'even'?>">

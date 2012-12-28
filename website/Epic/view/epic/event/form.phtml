@@ -23,6 +23,9 @@ $form->setAction($formAction)
     <?=$form->restful();?>
     <?=$form->helper('id');?>
     <?=$formExt?>
+    <?if($this->callbackInput):?>
+        <?=$this->callbackInput;?>
+    <?endif;?>
     <fieldset class="">
         <div class="control-group <?=$form->isError('title') ? 'error' : '';?>">
             <?=$form->helper('title', 'label', array('class' => 'control-label'))?>
