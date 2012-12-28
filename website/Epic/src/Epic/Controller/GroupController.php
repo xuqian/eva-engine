@@ -71,7 +71,7 @@ class GroupController extends ActionController
         $categories = $categoryModel->setItemList(array('noLimit' => true))->getCategoryList();
         
         if ($query['category']) {
-            $category = $categoryModel->getCategoryList($query['category']);
+            $category = $categoryModel->getCategory($query['category']);
         } else {
             $category = array(
                 'id' => '',
