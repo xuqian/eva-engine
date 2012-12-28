@@ -79,11 +79,14 @@ class GroupController extends ActionController
     {
         $id = $this->params('id');
 
-        list($item,$members) = $this->groupAction();
+        list($item, $members) = $this->groupAction();
+        list($posts, $paginator) = $this->blogAction($item['id']);
 
         $view = new ViewModel(array(
             'item' => $item,
             'members' => $members,
+            'posts' => $posts,
+            'paginator' => $paginator,
         ));
         return $view; 
     }
@@ -317,13 +320,14 @@ class GroupController extends ActionController
         return $viewModel;
     }
     
-    public function blogAction()
+    public function blogAction($groupId)
     {
-        list($item, $members) = $this->groupAction();
-        $groupId = $item['id'];
-
+        if (!$groupId) {
+            return array();
+        }
+        
         $page = $this->params()->fromQuery('page', 1);
-        $rows = $this->params()->fromQuery('rows', 10);
+        $rows = $this->params()->fromQuery('rows', '5');
         $order = $this->params()->fromQuery('order', 'commentdesc');
         
         $this->changeViewModel('json');
@@ -332,6 +336,7 @@ class GroupController extends ActionController
         $items = $itemModel->setItemList(array(
             'inGroup' => true,
             'group_id' => $groupId,
+            'page' => $page,
             'rows' => $rows,
             'order' => $order
         ))->getPostList(array(
@@ -357,7 +362,7 @@ class GroupController extends ActionController
         }
         
         $paginator = $itemModel->getPaginator();
-        $paginator = $paginator ? $paginator->toArray() : null;
+        $paginator = $paginator ? $paginator : null;
 
         if(Api::_()->isModuleLoaded('User')){
             $userList = array();
@@ -376,10 +381,8 @@ class GroupController extends ActionController
             $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
         }
 
-        return new JsonModel(array(
-            'items' => $items,
-            'paginator' => $paginator,
-        )); 
+        return array($items, $paginator); 
+
     }
 
     public function postCreateAction()
@@ -447,90 +450,28 @@ class GroupController extends ActionController
         list($item, $members) = $this->groupAction();
         $groupId = $item['id'];
 
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/group/event-list');
+
         $page = $this->params()->fromQuery('page', 1);
         $rows = $this->params()->fromQuery('rows', 10);
         $order = $this->params()->fromQuery('order', 'memberdesc');
         
-        $this->changeViewModel('json');
-        $query = $this->getRequest()->getQuery();
-        $form = new \Epic\Form\GroupSearchForm();
-        $form->bind($query);
-        if($form->isValid()){
-            $query = $form->getData();
-        } else {
-            return array(
-                'form' => $form,
-                'items' => array(),
-            );
-        }
-        
-        $itemModel = Api::_()->getModel('Group\Model\Event'); 
-        $items = $itemModel->setItemList(array(
-            'inGroup' => true,
+        $eventView = $this->forward()->dispatch('EventController', array(
+            'action' => 'list',
             'group_id' => $groupId,
-            'rows' => $rows,
-            'order' => $order
-        ))->getEventdataList(array(
-            'self' => array(
-                '*'
-            ),
-            'join' => array(
-                'Count' => array(
-                    '*',
-                ),
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
-                ),
-                'Group' => array(
-                    '*'
-                ),
-            ), 
-        ));
-        
-        $paginator = $itemModel->getPaginator();
-        $paginator = $paginator ? $paginator->toArray() : null;
-
-        if (count($items) > 0) {
-            foreach ($items as $key=>$item) {
-                if (isset($item['File']) && count($item['File']) > 0) {
-                    unset($items[$key]['File'][0]);
-                    $items[$key]['File'] = $item['File'][0];
-                } else {
-                    unset($items[$key]['File']);
-                }
-                
-                if (count($item['Group']) > 0) {
-                    unset($items[$key]['File'][0]);
-                    $items[$key]['Group'] = $item['Group'][0];
-                } else {
-                    unset($items[$key]['Group']);
-                }
-            }
-        }
-
-        if(Api::_()->isModuleLoaded('User')){
-            $userList = array();
-            $userList = $itemModel->getUserList(array(
-                'columns' => array(
-                    'id',
-                    'userName',
-                    'email',
-                ),
-            ))->toArray(array(
-                'self' => array(
-                    'getEmailHash()',
-                ),
-            ));
-            $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
-        }
-
-        return new JsonModel(array(
-            'items' => $items,
-            'paginator' => $paginator,
+            'order' => $order,
         )); 
+
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'members' => $members,
+            'items' => $eventView->items,
+            'paginator' => $eventView->paginator,
+            'query' => $eventView->query,
+        ));
+
+        return $viewModel; 
     }
 
     public function eventCreateAction()
@@ -560,15 +501,15 @@ class GroupController extends ActionController
         ));
         /*
         $viewModel->addChild($eventView, 'event');
-        */
+         */
         list($item, $members) = $this->groupAction();
-        
+
         $viewModel->setVariables(array(
             'item' => $item,
             'event' => $eventView->item,
             'members' => $members,
         ));
-    
+
         return $viewModel;
     }
 

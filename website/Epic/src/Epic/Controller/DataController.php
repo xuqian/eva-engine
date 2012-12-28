@@ -29,10 +29,12 @@ class DataController extends RestfulModuleController
         }
         $groupId = $this->params()->fromQuery('group_id');
         $inGroup = $this->params()->fromQuery('inGroup');
+        $rows = $this->params()->fromQuery('rows');
 
         if ($groupId || $inGroup) { 
             $query['inGroup'] = true;
             $query['group_id'] = $groupId;
+            $query['rows'] = $rows;
             
             $itemModel = Api::_()->getModel('Group\Model\Post'); 
             $items = $itemModel->setItemList($query)->getPostList(array(
@@ -68,7 +70,7 @@ class DataController extends RestfulModuleController
         if (count($items) > 0) {
             foreach ($items as $key=>$item) {
                 if (isset($item['Group']) && count($item['Group']) > 0) {
-                    unset($items[$key]['File'][0]);
+                    unset($items[$key]['Group'][0]);
                     $items[$key]['Group'] = $item['Group'][0];
                 } else {
                     unset($items[$key]['Group']);
@@ -235,7 +237,7 @@ class DataController extends RestfulModuleController
                 }
 
                 if (isset($item['Group']) && count($item['Group']) > 0) {
-                    unset($items[$key]['File'][0]);
+                    unset($items[$key]['Group'][0]);
                     $items[$key]['Group'] = $item['Group'][0];
                 } else {
                     unset($items[$key]['Group']);

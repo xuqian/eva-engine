@@ -20,17 +20,7 @@ $items = $this->items;
 
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
 
-                    <div class="group-nav">
-                        <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> Create New Topic</a>
-                        <ul class="nav nav-tabs group-tab">
-                            <li class="active"><a href="#group-forum">Forum</a></li>
-                            <li><a href="#group-events">Events</a></li>
-                            <li><a href="#group-albums">Albums</a></li>
-                        </ul>
-                    </div>
-
                     <div class="tab-content">
-                        <script id="group-forum-script" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/' , array('rows' => 10,'group_id' => $this->item['id'],'order' => 'commentdesc'))?>">
                         <div class="tab-pane active group-forum group-forum-script" id="group-forum">
                             <table class="table table-striped">
                                 <thead>
@@ -42,49 +32,23 @@ $items = $this->items;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% if(o.items.length > 0) { %}
-                                    {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                    <?if($this->posts):?>
+                                    <?foreach($this->posts as $post):?>
                                     <tr>
-                                        <td class="title"><a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a></td>
-                                        <td class="author"><a href="<?=$this->uri('/user/')?>{%=item.user_id%}">{%=item.User.userName%}</a></td>
-                                        <td class="centeralign comment-count"><a href="">{%=item.commentCount%}</a></td>
-                                        <td class="comment-time  rightalign">{%=item.createTime%}</td>
+                                        <td class="title"><a href="<?=$this->uri('/group/' . $post['Group']['groupKey'] . '/blog/info/' . $post['urlName'])?>"><?=$post['title']?></a></td>
+                                        <td class="author"><a href="<?=$this->uri('/user/' . $post['User']['userName'])?>"><?=$post['User']['userName']?></a></td>
+                                        <td class="centeralign comment-count"><a href=""><?=$post['commentCount']?></a></td>
+                                        <td class="comment-time  rightalign"><?=$post['createTime']?></td>
                                     </tr>
-                                    {% } %}
-                                    {% } %}
+                                    <?endforeach;?>
+                                    <?endif;?>
                                 </tbody>
                             </table>
                         </div> 
-                        </script>
-
-                        <script id="group-event-script" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/' , array('rows' => 10,'group_id' => $this->item['id'],'order' => 'memberdesc'))?>">
-                        <div class="tab-pane group-events group-event-script" id="group-events">
-                        <div class="event-list vlist">
-                        {% if(o.items.length > 0) { %}
-                        {% for (var i=0, item; item=o.items[i]; i++) { %}
-                        <div class="item media">
-                            <a class="pull-left" href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/event/info/{%=item.urlName%}">
-                                {% if(item.File) { %}
-                                <img class="media-object img-rounded" src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_90,w_90')%}" width="90" />
-                                {% }else{ %}
-                                <img class="media-object img-rounded" src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" width="90" />
-                                {% } %}
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/event/info/{%=item.urlName%}" class="item-user">{%=item.title%}</a></h4>
-                                <div class="media">
-                                    <p class="lowlight"><?=$this->_('Event Time')?>: {%=item.startDay%} {%=item.startTime ? item.startTime : null%} - {%=item.endDay%} {%=item.endTime ? item.endTime : null%}</p>
-                                    <p class="lowlight"><?=$this->_('Location')?>: {%=item.city%} {%=item.location%}</p>
-                                    <p class="lowlight"><span class="highlight">{%=item.Count.memberCount%}</span> <?=$this->_('Members Joined')?> </p>
-                                </div>
-                            </div>
-                        </div>
-                        {% } %}
-                        {% } %}
-                        </div>
-                        </div> 
-                        </script> 
-                        <div class="tab-pane" id="group-albums">...</div>
+                        <?if($this->paginator):?>
+                            <?=$this->paginator->setPath('/group/' . $post['Group']['groupKey'])->setBaseQuery($this->query);?>
+                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                        <?endif;?>
                     </div>
 
 

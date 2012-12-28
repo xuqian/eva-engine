@@ -48,3 +48,13 @@ $unjoinForm->setMethod('delete');
         </div>
     </div>
 </div>
+
+<div class="group-nav">
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Topic')?></a>
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Event')?></a>
+    <ul class="nav nav-tabs group-tab">
+        <li data-highlight-url="^/group/[a-z0-9A-Z]+/$" class="active" class="active"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>
+        <li data-highlight-url="^/group/(.*)/event/" ><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/')?>">Events</a></li>
+        <li data-highlight-url="^/group/(.*)/album/"><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/album/')?>">Albums</a></li>
+    </ul>
+</div>

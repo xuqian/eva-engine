@@ -13,7 +13,7 @@
     </div>
     <?endif?>
 
-    <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id']))?>">
+    <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
     <div class="page-header">
         <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
         <h4 class="txt-bold">My Groups ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -37,9 +37,8 @@
     </div>
     </script>
 
-    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => 1,'rows' => 10, 'order' => 'commentdesc'))?>">
+    <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => 1,'rows' => 5, 'order' => 'commentdesc'))?>">
         <div class="page-header border-header">
-            <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>">View All</a></small>
             <h4>Hot Topics  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
         </div>
         <div class="side-blog-list">

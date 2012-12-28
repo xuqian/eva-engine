@@ -24,7 +24,6 @@ class EventController extends ActionController
         $form->bind($query)->isValid();
         $selectQuery = $form->getData();
 
-        $itemModel = Api::_()->getModel('Event\Model\Event');
         if(!$selectQuery){
             $selectQuery = array(
                 'page' => 1
@@ -35,8 +34,8 @@ class EventController extends ActionController
         if($selectQuery['city'] == 'mycity'){
             $selectQuery['city'] = $this->cookie()->crypt(false)->read('city');
         }
-        $items = $itemModel->setItemList($selectQuery)->getEventdataList();
-        $items = $items->toArray(array(
+        
+        $selectMap = array(
             'self' => array(
             ),
             'join' => array(
@@ -58,7 +57,24 @@ class EventController extends ActionController
                     '*'
                 ),
             ),
-        ));
+        );
+        
+        $groupId = $this->params('group_id');
+        $inGroup = $this->params('inGroup');
+        $order = $this->params('order');
+        
+        if ($groupId || $inGroup) { 
+            $itemModel = Api::_()->getModel('Group\Model\Event'); 
+            $selectQuery['inGroup'] = true;
+            $selectQuery['group_id'] = $groupId;
+            $selectQuery['order'] = $order;
+            $selectMap['join']['Group'] = array('*');
+        } else {
+            $itemModel = Api::_()->getModel('Event\Model\Event');
+        }    
+        
+        $items = $itemModel->setItemList($selectQuery)->getEventdataList();
+        $items = $items->toArray($selectMap);
         $paginator = $itemModel->getPaginator();
 
         $user = Auth::getLoginUser();

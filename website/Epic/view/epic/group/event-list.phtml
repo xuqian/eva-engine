@@ -20,10 +20,10 @@ $item = $this->event;
 
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
                     
-                        <?=$this->widget('Epic', 'epic/event/get-template', array(
-                            'item' => $this->event,
+                        <?=$this->widget('Epic', 'epic/event/list-template', array(
                             'items' => $this->items,
-                            'members' => $this->eventMembers,
+                            'paginator' => $this->paginator,
+                            'paginatorPath' => '/group/' . $this->item['groupKey'] . '/event/',
                         ))?>
 
                 </div><!--group main end-->
