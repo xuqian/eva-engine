@@ -43,7 +43,7 @@ $unjoinForm
                                                 <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $event['id']))?>
                                                 <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                                                 <?=$this->callback()?>
-                                                <button class="btn btn-small item-action-main">Unjoin</button>
+                                                <button class="btn btn-small item-action-main"><?=$this->_('Quit')?></button>
                                             </form>
                                             </p>
                                             <?endif;?>
