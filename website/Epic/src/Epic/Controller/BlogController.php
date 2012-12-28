@@ -64,7 +64,7 @@ class BlogController extends ActionController
             $postData = $form->getData();
             $itemModel = Api::_()->getModel('Blog\Model\Post');
             $postId = $itemModel->setItem($postData)->createPost();
-            $callback = $callback ? $callback : '/blog/edit/' . $postId;
+            $callback = $callback ? $callback : '/blogs/edit/' . $postId;
             $this->redirect()->toUrl($callback);
         } else {
 
@@ -92,7 +92,7 @@ class BlogController extends ActionController
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Blog\Model\Post');
                 $postId = $itemModel->setItem($postData)->savePost();
-                $callback = $callback ? $callback : '/blog/edit/' . $postId;
+                $callback = $callback ? $callback : '/blogs/edit/' . $postId;
                 $this->redirect()->toUrl($callback);
 
             } else {
