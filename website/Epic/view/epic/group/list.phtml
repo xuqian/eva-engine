@@ -101,7 +101,7 @@ $groupSearchForm->setView($this)
                                     <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
-                                    <button class="btn btn-small item-action-main">Unjoin</button>
+                                    <button class="btn btn-small item-action-main">Quit</button>
                                 </form>
                                 <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
                                 <form <?=$this->formAttr($form)?>>
