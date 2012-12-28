@@ -1,14 +1,22 @@
 eva.highlightmenu = function(){
 	var url = eva.parseUri();
 	var menuItems = $("li[data-highlight-url]");
-	var path = url.path;
-
 	menuItems.each(function(){
 		var item = $(this);
 		var pattern = item.attr("data-highlight-url");
 		pattern = pattern.replace(/\//g,"\\/");
 		var reg = new RegExp(pattern);
-		var res = reg.exec(path);
+		var mode = item.attr('data-highlight-mode');
+		mode = mode == '' ? 'path' : mode;
+		var execString = '';
+		switch(mode){
+			case 'full' : 
+				execString = url.relative;
+				break;
+			default :
+				execString = url.path;
+		}
+		var res = reg.exec(execString);
 		if(res) {
 			item.addClass("active");
 			item.parent().removeClass('collapse');
