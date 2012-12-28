@@ -52,7 +52,7 @@ $unjoinForm->setMethod('delete');
                 <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                 <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                 <?=$this->callback()?>
-                <button class="btn btn-small item-action-main btn btn-orange icon-user"> <?=$this->_('Quit')?></button>
+                <button class="btn btn-small item-action-main btn btn-orange icon-minus-sign"> <?=$this->_('Quit')?></button>
             </form>
             <?elseif($item['memberEnable'] && ($item['memberLimit'] > $item['Count']['memberCount'] || $item['memberLimit'] == 0)):?>
             <form <?=$this->formAttr($joinForm)?>>

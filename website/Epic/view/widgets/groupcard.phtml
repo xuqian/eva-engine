@@ -32,7 +32,7 @@ $unjoinForm->setMethod('delete');
                         <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
                         <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Quit')?></button>
+                        <button class="btn btn-small item-action-main btn btn-gray icon-minus-sign"> <?=$this->_('Quit')?></button>
                     </form>
                     <?elseif($this->item['memberEnable'] && ($this->item['memberLimit'] > $this->item['Count']['memberCount'] || $this->item['memberLimit'] == 0)):?>
                     <form <?=$this->formAttr($joinForm)?>>
@@ -52,10 +52,10 @@ $unjoinForm->setMethod('delete');
 <div class="group-nav">
     <?$path = $this->getHelperPluginManager()->getServiceLocator()->get('request')->getUri()->getPath();?>
     <?if(strpos($path, 'event')):?>
-    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Event')?></a>
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Create New Event')?></a>
     <?elseif(strpos($path, 'album')):?>
     <?else:?>
-    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i><?=$this->_('Create New Topic')?></a>
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Create New Topic')?></a>
     <?endif?>
     <ul class="nav nav-tabs group-tab">
         <li data-highlight-url="(^/group/[a-z0-9A-Z]+/?$)|^/group/[a-z0-9A-Z]+/blog/"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>
