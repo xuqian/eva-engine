@@ -85,14 +85,13 @@ class EventController extends ActionController
                 'user_id' => $user['id']
             ))->getEventUserList()->toArray();
         }
+        $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'event_id'));
 
         //Public User Area
         $this->forward()->dispatch('UserController', array(
             'action' => 'user',
             'id' => $user['id'],
         ));
-
-        $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'event_id'));
 
         $startDay = $this->params()->fromQuery('start');
         $calendarModel = Api::_()->getModel('Event\Model\Calendar');

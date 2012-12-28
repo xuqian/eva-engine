@@ -66,11 +66,26 @@ class GroupController extends ActionController
             'action' => 'user',
             'id' => $user['id'],
         ));
+        
+        $categoryModel = Api::_()->getModel('Group\Model\Category');
+        $categories = $categoryModel->setItemList(array('noLimit' => true))->getCategoryList();
+        
+        if ($query['category']) {
+            $category = $categoryModel->getCategoryList($query['category']);
+        } else {
+            $category = array(
+                'id' => '',
+                'urlName' => '',
+                'categoryName' => 'Hot',
+            );
+        }
 
         return array(
             'form' => $form,
             'items' => $items,
             'query' => $query,
+            'categories' => $categories,
+            'category' => $category,
             'paginator' => $paginator,
         );   
     }
@@ -429,9 +444,9 @@ class GroupController extends ActionController
         
         $postId = $this->getEvent()->getRouteMatch()->getParam('post_id');
 
-        $postView = $this->forward()->dispatch('BlogController', array(
-            'action' => 'edit',
-            'id' => $postId,
+        $postView = $this->forward()->dispatch('UserController', array(
+            'action' => 'post',
+            'post_id' => $postId,
         ));
         
         list($item, $members) = $this->groupAction();
@@ -439,6 +454,7 @@ class GroupController extends ActionController
         $viewModel->setVariables(array(
             'item' => $item,
             'post' => $postView->item,
+            'comments' => $postView->comments,
             'members' => $members,
         ));
         

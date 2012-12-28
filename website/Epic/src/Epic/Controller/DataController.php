@@ -29,11 +29,13 @@ class DataController extends RestfulModuleController
         }
         $groupId = $this->params()->fromQuery('group_id');
         $inGroup = $this->params()->fromQuery('inGroup');
+        $groupCategrory = $this->params()->fromQuery('groupCategory');
         $rows = $this->params()->fromQuery('rows');
 
         if ($groupId || $inGroup) { 
             $query['inGroup'] = true;
             $query['group_id'] = $groupId;
+            $query['groupCategory'] = $groupCategrory;
             $query['rows'] = $rows;
             
             $itemModel = Api::_()->getModel('Group\Model\Post'); 

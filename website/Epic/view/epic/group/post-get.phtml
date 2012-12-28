@@ -21,6 +21,7 @@ $post = $this->post;
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?> 
                     <?=$this->widget('Epic', 'epic/user/post-template', array(
                         'item' => $post,
+                        'comments' => $this->comments,
                     ))?> 
 
                 </div><!--group main end-->
