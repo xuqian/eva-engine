@@ -1829,8 +1829,14 @@ body, .en body, .fr body {
 		width:48%;
 		margin:0 20px 30px 0;
 		z-index: 1;
+		vertical-align:top;
 	}
 	.topic-wrap.even {
+		margin-right:0;
+	}
+
+	.topic-wrap.full {
+		width:100%;
 		margin-right:0;
 	}
 
@@ -1875,10 +1881,11 @@ body, .en body, .fr body {
 	}
 
 	.topic-body-wrap {
-				margin-bottom:1px;
+		margin-bottom:1px;
 		border-bottom: 1px solid #CCC;
 	}
 	.topic-body {
+		min-height:120px;
 		padding:0 15px 20px 15px;
 		margin-bottom:1px;
 		border-bottom: 1px solid #CCC;

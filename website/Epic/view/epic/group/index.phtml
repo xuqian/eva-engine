@@ -91,8 +91,8 @@ $categories = $this->categories;
                     </div>
 
                     <div class="group-topics">
-                        <script id="topic-wrap-hot" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4,'groupCategory' =>$this->category['id']))?>">
-                        <div class="topic-wrap-hot topic-wrap odd">
+                        <script id="topic-wrap-hot" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 15,'groupCategory' =>$this->category['id']))?>">
+                        <div class="topic-wrap-hot topic-wrap full">
                             <div class="topic">
                                 <div class="topic-heading">
                                     <small class="pull-right"><a href="<?=$this->uri('/groups/list/?category=' . $this->category['urlName'])?>">More</a></small>
@@ -103,7 +103,8 @@ $categories = $this->categories;
                                         <ul>
                                         {% if(o.items.length > 0) { %}
                                         {% for (var i=0, item; item=o.items[i]; i++) { %}
-                                            <li><a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a></li>
+                                            <li><a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/" class="pull-right">[ {%=item.Group.groupName%} ]</a>
+                                            <a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a></li>
                                         {% } %}
                                         {% } %}
                                         </ul>

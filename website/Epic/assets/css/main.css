@@ -1129,15 +1129,16 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .group-thumbnails a{display:block;text-align:center;}
 .group-thumbnails .thumbnails li{margin-right:6px;}
 .group-thumbnails p{margin-top:10px;font-weight:bold;width:90px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.group-topics .topic-wrap{position:relative;display:inline-block;zoom:1;*display:inline;width:48%;margin:0 20px 30px 0;z-index:1;}
+.group-topics .topic-wrap{position:relative;display:inline-block;zoom:1;*display:inline;width:48%;margin:0 20px 30px 0;z-index:1;vertical-align:top;}
 .group-topics .topic-wrap.even{margin-right:0;}
+.group-topics .topic-wrap.full{width:100%;margin-right:0;}
 .group-topics .topic{position:relative;background:#FFF;border:1px solid #CCC;z-index:2;}
 .group-topics .topic-wrap:before,.group-topics .topic-wrap:after{position:absolute;content:"";bottom:15px;left:10px;width:50%;top:80%;max-width:300px;background:#000000;-webkit-box-shadow:0 15px 10px #000000;-moz-box-shadow:0 15px 10px #000000;box-shadow:0 15px 10px #000000;-webkit-transform:rotate(-3deg);-moz-transform:rotate(-3deg);-ms-transform:rotate(-3deg);-o-transform:rotate(-3deg);transform:rotate(-3deg);}
 .group-topics .topic-wrap:after{-webkit-transform:rotate(3deg);-moz-transform:rotate(3deg);-ms-transform:rotate(3deg);-o-transform:rotate(3deg);transform:rotate(3deg);right:10px;left:auto;}
 .group-topics .topic-heading{margin:10px 15px;padding-bottom:10px;border-bottom:1px solid #CCC;}.group-topics .topic-heading h3,.group-topics .topic-heading h4,.group-topics .topic-heading h5{font-size:14px;font-weight:bold;}
 .group-topics .topic-heading small{font-size:12px;line-height:30px;}
 .group-topics .topic-body-wrap{margin-bottom:1px;border-bottom:1px solid #CCC;}
-.group-topics .topic-body{padding:0 15px 20px 15px;margin-bottom:1px;border-bottom:1px solid #CCC;}
+.group-topics .topic-body{min-height:120px;padding:0 15px 20px 15px;margin-bottom:1px;border-bottom:1px solid #CCC;}
 .group-topics li{margin-bottom:10px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .group-topics li a{color:#000;}.group-topics li a:hover{color:#e1500d;}
 .group-usercard .media-heading{color:#000;font-size:14px;font-weight:bold;}
