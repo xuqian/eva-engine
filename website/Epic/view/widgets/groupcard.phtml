@@ -23,7 +23,7 @@ $unjoinForm->setMethod('delete');
             <div class="content"><?=$this->item['Text']['content']?></div>
             <div class="row ">
                 <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members</span>
-                <span class="span2 summary"><span class="highlight"><?=$this->item['PostCount']['postCount']?></span>Topics</span>
+                <span class="span2 summary"><span class="highlight"><?=$this->item['PostCount']['postCount']?></span>Discussion</span>
                 <span class="span1">
                     <?if(isset($this->item['Join']) && $this->item['Join']['user_id'] == $this->item['user_id']):?>
                     <?elseif(isset($this->item['Join']) && $this->item['Join'] && $this->item['Join']['user_id'] != $this->item['user_id']):?>
@@ -52,10 +52,10 @@ $unjoinForm->setMethod('delete');
 <div class="group-nav">
     <?$path = $this->getHelperPluginManager()->getServiceLocator()->get('request')->getUri()->getPath();?>
     <?if(strpos($path, 'event')):?>
-    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Create New Event')?></a>
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Schedule an Event')?></a>
     <?elseif(strpos($path, 'album')):?>
     <?else:?>
-    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Create New Topic')?></a>
+    <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Create New Discussion')?></a>
     <?endif?>
     <ul class="nav nav-tabs group-tab">
         <li data-highlight-url="(^/group/[a-z0-9A-Z]+/?$)|^/group/[a-z0-9A-Z]+/blog/"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>

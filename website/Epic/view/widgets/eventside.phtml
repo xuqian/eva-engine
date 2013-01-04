@@ -11,7 +11,7 @@ $user = $this->user;
             <h4 class="media-heading"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$user['userName']?></a></h4>
             <h5>Joined Events: <span class="highlight"><?=$user['EventCount']['eventCount']?></span></h5>
             <div class="media">
-                <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Start New Event</a>
+                <a id="create-new-event" href="<?=$this->uri('/events/create/')?>" class="btn btn-gray"><i class="icon-plus"></i> Schedule an Event</a>
                 <p class="lowlight">Share your life</p>
             </div>
         </div>
@@ -28,7 +28,7 @@ $user = $this->user;
 
     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/eventuser/', array())?>">
         <div class="page-header border-header">
-            <h4>Best Event Promoters</h4>
+            <h4>Featured Events Host</h4>
         </div>
         <div class="side-blog-list">
             {% if(o.items.length > 0) { %}
@@ -40,7 +40,7 @@ $user = $this->user;
                                 <div class="item-title">
                                     <a href="<?=$this->uri('/user/')?>{%=item.userName%}">{%=item.userName%}</a>
                                 </div>
-                                <p>Promoted <span class="highlight">{%=item.EventCount%}</span> Events</p>
+                                <p>Host <span class="highlight">{%=item.EventCount%}</span> Events</p>
                             </div>
                         </div>
                     </div>

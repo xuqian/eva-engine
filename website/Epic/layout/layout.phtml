@@ -46,7 +46,7 @@
                 <a class="brand pull-left" href="/"><img src="<?=$this->assets('/module/epic/css/img/logo.png')?>" alt="logo"></a>	
                 <div class="nav-collapse">
                     <ul class="nav nav-main">
-                        <li data-highlight-url="^/home/?$"><a href="<?=$this->url('home')?>"><?=$this->_('Home')?></a></li>
+                        <li data-highlight-url="^/home/?$"><a href="<?=$this->url('home')?>"><?=$this->_('My Epicurissimo')?></a></li>
                         <li class="" data-highlight-url="^/pages/magazine/?$"><a href="<?=$this->uri('/pages/magazine/')?>"><?=$this->_('Magazine')?></a></li>
                         <li class="" data-highlight-url="^/event.*"><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
                         <li class="" data-highlight-url="^/group.*"><a href="<?=$this->uri('/groups/')?>"><?=$this->_('Groups')?></a></li>
@@ -98,7 +98,7 @@
                         </ul>
                         </li>
                         <?else:?>
-                        <li data-highlight-url="/register/*"><a href="/register/"><?=$this->_('Register')?></a></li>
+                        <li data-highlight-url="/register/*"><a href="/register/"><?=$this->_('Sign up')?></a></li>
                         <li data-highlight-url="/login/*"><a href="/login/"><?=$this->_('Login')?></a></li>
                         <?endif?>
                         <?endif?>
@@ -137,7 +137,7 @@
         </nav>
         <nav class="">
         <ul class="nav pull-left">
-            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('Home')?></a>|</li><li>
+            <li class="first"><a href="<?=$this->uri('/')?>"><?=$this->_('My Epicurissimo')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/terms')?>"><?=$this->_('Terms & Conditions')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
