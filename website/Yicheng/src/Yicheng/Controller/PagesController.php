@@ -85,7 +85,7 @@ class PagesController extends RestfulModuleController
                 )
             ),
         ));
-        if($item['status'] != 'published'){
+        if($item && $item['status'] != 'published'){
             $item = array();
             $this->getResponse()->setStatusCode(404);
         }
