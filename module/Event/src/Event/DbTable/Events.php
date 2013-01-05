@@ -4,6 +4,8 @@ namespace Event\DbTable;
 
 use Eva\Db\TableGateway\TableGateway;
 use Zend\Stdlib\Parameters;
+use Eva\Api;
+use Zend\Db\Sql\Expression;
 
 class Events extends TableGateway
 {
@@ -21,6 +23,18 @@ class Events extends TableGateway
             $this->enableCount();
             $this->page($params->page);
         }
+       
+        if($params->noResult) {
+            $this->setNoResult(true);
+        }
+
+        if($params->id){
+            if(is_array($params->id)){
+                $this->where(array('id' => array_unique($params->id)));
+            } else {
+                $this->where(array('id' => $params->id));
+            }
+        }
 
         if($params->user_id){
             $this->where(array('user_id' => $params->user_id));
@@ -33,7 +47,7 @@ class Events extends TableGateway
                 return $where;
             });
         }
-        
+
         if($params->beforeStartDay){
             $beforeStartDay = $params->beforeStartDay;
             $this->where(function($where) use ($beforeStartDay){
@@ -41,7 +55,7 @@ class Events extends TableGateway
                 return $where;
             });
         }
-        
+
         if($params->afterStartDay){
             $afterStartDay = $params->afterStartDay;
             $this->where(function($where) use ($afterStartDay){
@@ -49,7 +63,7 @@ class Events extends TableGateway
                 return $where;
             });
         }
-        
+
         if($params->beforeEndDay){
             $beforeEndDay = $params->beforeEndDay;
             $this->where(function($where) use ($beforeEndDay){
@@ -57,7 +71,7 @@ class Events extends TableGateway
                 return $where;
             });
         }
-        
+
         if($params->afterEndDay){
             $afterEndDay = $params->afterEndDay;
             $this->where(function($where) use ($afterEndDay){
@@ -69,13 +83,59 @@ class Events extends TableGateway
         if($params->eventStatus){
             $this->where(array('eventStatus' => $params->eventStatus));
         }
+        
+        if($params->recommend){
+            $this->where(array('recommend' => $params->recommend));
+        }
 
         if($params->visibility){
             $this->where(array('visibility' => $params->visibility));
         }
+        
+        if($params->city){
+            $this->where(array('city' => $params->city));
+        }
+        
+        if($params->memberEnable){
+            $this->where(array('memberEnable' => $params->memberEnable));
+        }
 
         if ($params->rows) {
             $this->limit((int) $params->rows);
+        }
+
+        if ($params->category) {
+            $categoryModel = Api::_()->getModel('Event\Model\Category');
+            $categoryItem = $categoryModel->getCategory($params->category);
+
+            if ($categoryItem->id) {
+                $categoryEventDb = Api::_()->getDbTable('Event\DbTable\CategoriesEvents');
+                $categoryEventTabName = $categoryEventDb->initTableName()->table;
+                $this->join(
+                    $categoryEventTabName,
+                    "{$this->table}.id = $categoryEventTabName.event_id",
+                    array('*'),
+                    'inner'
+                );
+                $this->where(array("$categoryEventTabName.category_id" => $categoryItem->id));
+            } else {
+                $this->where(array("id" => 0));
+            }    
+        }
+        
+        if ($params->order == 'memberdesc' || $params->order == 'memberasc') {
+            $eventCountDb = Api::_()->getDbTable('Event\DbTable\Counts');
+            $eventCountTabName = $eventCountDb->initTableName()->table;
+            $this->join(
+                $eventCountTabName,
+                "{$this->table}.id = $eventCountTabName.event_id",
+                array('*'),
+                'inner'
+            );
+        }
+        
+        if($params->noLimit) {
+            $this->disableLimit();
         }
 
         $orders = array(
@@ -85,11 +145,24 @@ class Events extends TableGateway
             'timedesc' => 'startDatetimeUtc DESC',
             'titleasc' => 'title ASC',
             'titledesc' => 'title DESC',
+            'memberdesc' => 'memberCount DESC',
+            'memberasc' => 'memberCount ASC',
+            'idarray' => 'FIELD(id, %s)',
         );
+
         if($params->order){
             $order = $orders[$params->order];
             if($order){
-                $this->order($order);
+                if($params->order == 'idarray') {
+                    if($params->id && is_array($params->id)){
+                        $idArray = array_unique($params->id);
+                        $order = sprintf($order, implode(',', array_fill(0, count($idArray), Expression::PLACEHOLDER)));
+                        $this->order(array(new Expression($order, $idArray)));
+
+                    }
+                } else {
+                    $this->order($order);
+                }
             }
         }
 

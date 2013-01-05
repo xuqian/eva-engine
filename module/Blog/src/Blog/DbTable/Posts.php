@@ -4,6 +4,7 @@ namespace Blog\DbTable;
 
 use Eva\Db\TableGateway\TableGateway;
 use Zend\Stdlib\Parameters;
+use Zend\Db\Sql\Expression;
 
 class Posts extends TableGateway
 {
@@ -16,6 +17,18 @@ class Posts extends TableGateway
         if($params->page){
             $this->enableCount();
             $this->page($params->page);
+        }
+
+        if($params->noResult) {
+            $this->setNoResult(true);
+        }
+
+        if($params->id){
+            if(is_array($params->id)){
+                $this->where(array('id' => array_unique($params->id)));
+            } else {
+                $this->where(array('id' => $params->id));
+            }
         }
 
         if($params->user_id){
@@ -44,8 +57,8 @@ class Posts extends TableGateway
 
         if ($params->category) {
             $cateModel = \Eva\Api::_()->getModel('Blog\Model\Category');
-            $categoryinfo = $cateModel->setItemParams($params->category)->getCategory();
-            
+            $categoryinfo = $cateModel->getCategory($params->category);
+
             $categoeyPostDb = \Eva\Api::_()->getDbTable('Blog\DbTable\CategoriesPosts'); 
             $categoeyPostTableName = $categoeyPostDb->initTableName()->getTable();
 
@@ -58,8 +71,8 @@ class Posts extends TableGateway
                 ); 
                 $this->where(array("$categoeyPostTableName.category_id" => $categoryinfo['id']));
             } else {
-				return false;
-			}
+                return false;
+            }
         }
 
         $orders = array(
@@ -69,14 +82,26 @@ class Posts extends TableGateway
             'timedesc' => 'updateTime DESC',
             'titleasc' => 'title ASC',
             'titledesc' => 'title DESC',
+            'commentasc' => 'commentCount ASC',
+            'commentdesc' => 'commentCount DESC',
+            'idarray' => 'FIELD(id, %s)',
         );
         if($params->order){
             $order = $orders[$params->order];
             if($order){
-                $this->order($order);
+                if($params->order == 'idarray') {
+                    if($params->id && is_array($params->id)){
+                        $idArray = array_unique($params->id);
+                        $order = sprintf($order, implode(',', array_fill(0, count($idArray), Expression::PLACEHOLDER)));
+                        $this->order(array(new Expression($order, $idArray)));
+
+                    }
+                } else {
+                    $this->order($order);
+                }
             }
         }
-        
+
         return $this;
     }
 }

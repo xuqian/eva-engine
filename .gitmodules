@@ -1,15 +1,6 @@
-[submodule "vendor/Sphinx"]
-	path = vendor/Sphinx
-	url = https://github.com/AlloVince/evaengine-libs-sphinx.git
-[submodule "vendor/Simplehtmldom"]
-	path = vendor/Simplehtmldom
-	url = https://github.com/AlloVince/evaengine-libs-simplehtmldom.git
 [submodule "public/static/lib"]
 	path = public/static/lib
 	url = https://github.com/AlloVince/evaengine-libs-front.git
-[submodule "vendor/Markdown"]
-	path = vendor/Markdown
-	url = https://github.com/AlloVince/evaengine-libs-markdown.git
 [submodule "depends/ZendDeveloperTools"]
 	path = depends/ZendDeveloperTools
 	url = git://github.com/zendframework/ZendDeveloperTools.git
@@ -25,12 +16,21 @@
 [submodule "vendor/Zend"]
 	path = vendor/Zend
 	url = git://github.com/AlloVince/zf2.git
-[submodule "public/static/eva/css"]
-	path = public/static/eva/css
-	url = git://github.com/AlloVince/EvaBootstrap.git
 [submodule "vendor/ZendGData"]
 	path = vendor/ZendGData
 	url = git://github.com/zendframework/ZendGData.git
 [submodule "vendor/ZendQueue"]
 	path = vendor/ZendQueue
 	url = git://github.com/zendframework/ZendQueue.git
+[submodule "vendor/Libs"]
+	path = vendor/Libs
+	url = git://github.com/AlloVince/evaengine-libs.git
+[submodule "vendor/Assetic"]
+	path = vendor/Assetic
+	url = git://github.com/kriswallsmith/assetic.git
+[submodule "vendor/Symfony/Component/Process"]
+	path = vendor/Symfony/Component/Process
+	url = git://github.com/symfony/Process.git
+[submodule "module/Core/assets/css"]
+	path = module/Core/assets/css
+	url = git://github.com/AlloVince/EvaBootstrap.git

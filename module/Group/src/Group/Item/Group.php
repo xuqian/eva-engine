@@ -15,6 +15,12 @@ class Group extends AbstractItem
             'joinColumn' => 'group_id',
             'referencedColumn' => 'id',
         ),
+        'Count' => array(
+            'targetEntity' => 'Group\Item\Count',
+            'relationship' => 'OneToOne',
+            'joinColumn' => 'group_id',
+            'referencedColumn' => 'id',
+        ),
         'File' => array(
             'targetEntity' => 'File\Item\File',
             'relationship' => 'ManyToMany',
@@ -59,6 +65,40 @@ class Group extends AbstractItem
             'joinColumn' => 'group_id',
             'referencedColumn' => 'id',
             'joinParameters' => array(
+            ),
+        ),
+        'Category' => array(
+            'targetEntity' => 'Group\Item\Category',
+            'relationship' => 'ManyToMany',
+            'mappedBy' => 'Category',
+            'joinColumns' => array(
+                'joinColumn' => 'group_id',
+                'referencedColumn' => 'id',
+            ),
+            'inversedBy' => 'Group\Item\CategoryGroup',
+            'inversedMappedBy' => 'CategoryGroup',
+            'inverseJoinColumns' => array(
+                'joinColumn' => 'category_id',
+                'referencedColumn' => 'id',
+            ),
+        ),
+        'CategoryGroup' => array(
+            'targetEntity' => 'Group\Item\CategoryGroup',
+            'relationship' => 'OneToMany',
+            'joinColumn' => 'group_id',
+            'referencedColumn' => 'id',
+            'joinParameters' => array(
+            ),
+        ),
+        'PostCount' => array(
+            'targetEntity' => 'Group\Item\GroupPost',
+            'relationship' => 'OneToMany',
+            'joinColumn' => 'group_id',
+            'referencedColumn' => 'id',
+            'asCount' => true,
+            'countKey' => 'postCount',
+            'joinParameters' => array(
+                'count' => true,
             ),
         ),
     );

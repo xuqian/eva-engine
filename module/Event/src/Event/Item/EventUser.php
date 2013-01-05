@@ -8,12 +8,32 @@ class EventUser extends AbstractItem
 {
     protected $dataSourceClass = 'Event\DbTable\EventsUsers';
     
+    protected $inverseRelationships = array(
+        'EventCount' => array(
+            'targetEntity' => 'Event\Item\EventUser',
+            'relationship' => 'OneToMany',
+            'joinColumn' => 'user_id',
+            'referencedColumn' => 'id',
+            'asCount' => true,
+            'countKey' => 'eventCount',
+            'joinParameters' => array(
+                'count' => true,
+            ),
+        ),
+    );
+
     protected $relationships = array(
         'Event' => array(
             'targetEntity' => 'Event\Item\Event',
             'relationship' => 'OneToOne',
             'joinColumn' => 'id',
             'referencedColumn' => 'event_id',
+        ),
+        'User' => array(
+            'targetEntity' => 'User\Item\User',
+            'relationship' => 'OneToOne',
+            'joinColumn' => 'id',
+            'referencedColumn' => 'user_id',
         ),
     );
     
