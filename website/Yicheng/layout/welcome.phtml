@@ -4,28 +4,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta charset="utf-8" />
         <?=$this->headTitle()?>
-        <?$this->link('/src/admin/css/bootstrap.css')?>
+        <?$this->assets('/module/admin/css/bootstrap.css')?>
         <!--[if lt IE 9]>
         <meta http-equiv="PRAGMA" content="NO-CACHE" />
         <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
         <![endif]-->
-        <?=$this->headMeta()?>
         <?=$this->googleAnalytics()?>
-        <link href="<?=$this->link('/lib/css/fontawesome/css/font-awesome.css')?>" media="all" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="<?=$this->link('/src/yicheng/style.css')?>" type="text/css" media="screen" />
-        <link rel="stylesheet" href="<?=$this->link('/src/yicheng/colors/blue.css')?>" type="text/css" media="screen" />
         <?=$this->evajs()?>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery-1.7.1.min.js')?>"></script>
-        <script src="<?=$this->link('/eva/js/core.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.easing.min.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/supersized.3.2.7.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/supersized.shutter.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.contact.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.core.min.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.widget.min.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.mouse.min.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.ui.draggable.min.js')?>"></script>
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/custom.js')?>"></script>
+        <?=$this->headMeta()?>
+        <?=$this->headStyle()?>
+        <?$this->cssAssets(array(
+            '/lib/css/fontawesome/css/font-awesome.css',
+            '/module/yicheng/style.css',
+            '/module/yicheng/colors/blue.css',
+        ));?>
+        <?$this->jsAssets(array(
+            '/lib/js/labjs/labjs.js',
+            '/lib/js/jquery/jquery.js',
+            '/lib/js/jquery/jquery.easing.1.3.js',
+            '/module/yicheng/js/supersized.3.2.7.js',
+            '/module/yicheng/js/supersized.shutter.js',
+            '/module/yicheng/js/jquery.contact.js',
+            '/module/yicheng/js/jquery.ui.core.min.js',
+            '/module/yicheng/js/jquery.ui.widget.min.js',
+            '/module/yicheng/js/jquery.ui.mouse.min.js',
+            '/module/yicheng/js/jquery.ui.draggable.min.js',
+            '/module/core/js/core.js',
+            '/module/core/js/ui.js',
+            '/module/yicheng/js/custom.js',
+        ));?>
+        <?=$this->headLink()?>
+        <?=$this->headScript()?>
+
         <style>
             body {
                     font-family:'微软雅黑';
@@ -89,7 +99,7 @@
                             <div class="one-half last cf">
                                 <div id="contactform">
                                     <div id="message"></div>
-                                    <form method="post" action="<?=$this->link('/src/yicheng/php/contact.php')?>" name="cform" id="cform">
+                                    <form method="post" action="<?=$this->assets('/module/yicheng/php/contact.php')?>" name="cform" id="cform">
                                         <input type="text" name="name" placeholder="姓名" id="name" />
                                         <input type="text" name="email" placeholder="Email" id="email" />
                                         <textarea name="comments" placeholder="留言" id="comments"></textarea>					
@@ -108,7 +118,7 @@
                     </div><!--end contactpage-->			
 
                     <div id="homepage">
-                        <a class="logo" href="/home/"><img src="<?=$this->link('/src/yicheng/images/logo.png')?>" alt="logo" /></a>
+                        <a class="logo" href="/home/"><img src="<?=$this->assets('/module/yicheng/images/logo.png')?>" alt="logo" /></a>
 
                         <h1><span>七彩梦圆澜沧江畔——告庄西双景景真寨之亿成阳光国际公寓</span></h1>
 
@@ -153,19 +163,19 @@
                     </div><!--end social-->
 
                     <div class="centered-controls">
-                        <a id="prevslide" class="load-item"><img src="<?=$this->link('/src/yicheng/images/back.png')?>" alt="" /></a>
-                        <a id="play-button"><img id="pauseplay" src="<?=$this->link('/src/yicheng/images/pause.png')?>" alt="" /></a>
-                        <a id="nextslide" class="load-item"><img src="<?=$this->link('/src/yicheng/images/forward.png')?>" alt="" /></a>
+                        <a id="prevslide" class="load-item"><img src="<?=$this->assets('/module/yicheng/images/back.png')?>" alt="" /></a>
+                        <a id="play-button"><img id="pauseplay" src="<?=$this->assets('/module/yicheng/images/pause.png')?>" alt="" /></a>
+                        <a id="nextslide" class="load-item"><img src="<?=$this->assets('/module/yicheng/images/forward.png')?>" alt="" /></a>
                     </div><!--end centered-controls-->			
 
                     <!--Thumb Tray button(the button from the bottom-right area)-->
-                    <a id="tray-button"><img id="tray-arrow" src="<?=$this->link('/src/yicheng/images/button-tray-up.png')?>" alt="" /></a>
+                    <a id="tray-button"><img id="tray-arrow" src="<?=$this->assets('/module/yicheng/images/button-tray-up.png')?>" alt="" /></a>
 
                 </div><!--end controls-->
             </div><!--end controls-wrapper-->
         </div><!--end wrapper-->
 
-        <script type="text/javascript" src="<?=$this->link('/src/yicheng/js/jquery.placeholder.js')?>"></script>	<!-- placeholder html5 tag support for IE and Old Browsers -->
+        <script type="text/javascript" src="<?=$this->assets('/module/yicheng/js/jquery.placeholder.js')?>"></script>	<!-- placeholder html5 tag support for IE and Old Browsers -->
 
         <script>
             eva.init(eva_config);

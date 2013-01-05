@@ -13,33 +13,37 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta charset="utf-8" />
         <?=$this->headTitle()?>
-        <?$this->link('/src/admin/css/bootstrap.css')?>
+        <?$this->assets('/module/admin/css/bootstrap.css')?>
         <!--[if lt IE 9]>
         <meta http-equiv="PRAGMA" content="NO-CACHE" />
         <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
         <![endif]-->
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-        <?=$this->headMeta()?>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/modernizr.foundation.js')?>"></script>
         <?=$this->googleAnalytics()?>
-        <!--<link href="<?=$this->link('/lib/css/fontawesome/css/font-awesome.css')?>" media="all" rel="stylesheet" type="text/css" />-->
-        <?//=$this->evajs()?>
-
-        <!-- Included CSS Files (Compressed) -->
-        <link href="<?=$this->link('/src/yicheng/stylesheets/foundation.css')?>" rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/extension.css')?>" rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/typography.css')?>" rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/foundation_icons_general_enclosed/stylesheets/general_enclosed_foundicons.css')?>" rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/myworks.css')?>" rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/jquery.tweet.css')?>" rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/jquery.fancybox-thumbs.css')?>?v=1.0.6"  rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/jquery.fancybox.css')?>?v=2.1.0" media="screen"  rel="stylesheet"/>
-
-        <!-- Add Button helper (this is optional) -->
-        <link href="<?=$this->link('/src/yicheng/stylesheets/jquery.fancybox-buttons.css')?>?v=1.0.3"  rel="stylesheet"/>
-        <link href="<?=$this->link('/src/yicheng/stylesheets/app.css')?>" rel="stylesheet"/>
-
-        <script src="<?=$this->link('/src/yicheng/javascripts/modernizr.foundation.js')?>"></script>
+        <?=$this->evajs()?>
+        <?=$this->headMeta()?>
+        <?=$this->headStyle()?>
+        <?$this->cssAssets(array(
+            '/lib/css/fontawesome/css/font-awesome.css',
+            '/module/yicheng/stylesheets/foundation.css',
+            '/module/yicheng/stylesheets/typography.css',
+            '/module/yicheng/stylesheets/foundation_icons_general_enclosed/stylesheets/general_enclosed_foundicons.css',
+            '/module/yicheng/stylesheets/myworks.css',
+            '/module/yicheng/stylesheets/jquery.fancybox-thumbs.css',
+            '/module/yicheng/stylesheets/jquery.fancybox.css',
+            '/module/yicheng/stylesheets/jquery.fancybox-buttons.css',
+            '/module/yicheng/stylesheets/app.css',
+        ));?>
+        <?$this->jsAssets(array(
+            '/lib/js/labjs/labjs.js',
+            '/lib/js/jquery/jquery.js',
+            '/module/core/js/core.js',
+            '/module/core/js/ui.js',
+        ));?>
+        <?=$this->headLink()?>
+        <?=$this->headScript()?>
     </head>
 
     <body>
@@ -47,14 +51,14 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 
         <!--HEADER AND NAVIGATION AREA : STARTS-->
         <div id="full-arrow" class="on-normalscreen">
-            <img id="full-to" src="<?=$this->link('/src/yicheng/images/full-icon.png')?>" title="persona by designova" alt="persona"/>
-            <img id="small-to" class="arrow-off" src="<?=$this->link('/src/yicheng/images/small-icon.png')?>" title="persona by designova" alt="persona"/>
+            <img id="full-to" src="<?=$this->assets('/module/yicheng/images/full-icon.png')?>" title="persona by designova" alt="persona"/>
+            <img id="small-to" class="arrow-off" src="<?=$this->assets('/module/yicheng/images/small-icon.png')?>" title="persona by designova" alt="persona"/>
         </div>
 
-        <img id="nav-arrow" src="<?=$this->link('/src/yicheng/images/nav-left.png')?>" title="persona by designova" alt="persona"/>
+        <img id="nav-arrow" src="<?=$this->assets('/module/yicheng/images/nav-left.png')?>" title="persona by designova" alt="persona"/>
 
         <ul id="nav" class="hide-for-small">
-            <li><a href="#intro" title="Next Section"><img id="logo" src="<?=$this->link('/src/yicheng/images/logo-side.png')?>" title="persona by designova" alt="persona"/></a></li>
+            <li><a href="#intro" title="Next Section"><img id="logo" src="<?=$this->assets('/module/yicheng/images/logo-side.png')?>" title="persona by designova" alt="persona"/></a></li>
             <li><a id="trigger-intro" class="nav-link" href="#intro" title="Next Section">首页</a></li>
             <li><a id="trigger-second" class="nav-link" href="#second" title="Next Section">项目概况</a></li>
             <li><a id="trigger-third" class="nav-link" href="#third" title="Next Section">投资价值</a></li>
@@ -64,7 +68,7 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
         </ul>
 
         <section id="small-device-header" class="box-shadow show-for-small z-high">
-        <a href="#intro" title="Next Section"><img id="mobile-logo" class="show-for-small" src="<?=$this->link('/src/yicheng/images/mob-logo.png')?>" title="persona by designova" alt="persona"/></a>
+        <a href="#intro" title="Next Section"><img id="mobile-logo" class="show-for-small" src="<?=$this->assets('/module/yicheng/images/mob-logo.png')?>" title="persona by designova" alt="persona"/></a>
         <nav id="mobile-nav">
         <a class="mob-nav-link" href="#intro" title="Next Section">首页</a>
         <a class="mob-nav-link" href="#second" title="Next Section">项目概况</a>
@@ -195,7 +199,7 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
                         <div class="row">
                             <article class="six columns">
                             <div class="three columns">
-                                <img alt="persona" title="persona by designova" src="<?=$this->link('/src/yicheng/images/compare/01.jpg')?>">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/01.jpg')?>">
                             </div>
                             <div class="nine columns">
                                 <h5>海南鹏欣白金湾</h5>
@@ -205,7 +209,7 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 
                             <article class="six columns">
                             <div class="three columns">
-                                <img alt="persona" title="persona by designova" src="<?=$this->link('/src/yicheng/images/compare/02.jpg')?>">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/02.jpg')?>">
                             </div>
                             <div class="nine columns">
                                 <h5>成都泰达上青城</h5>
@@ -216,10 +220,10 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
                         <div class="row">
                             <article class="twelve columns">
                             <div class="three columns">
-                                <img alt="persona" title="persona by designova" src="<?=$this->link('/src/yicheng/images/compare/03.jpg')?>">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/03.jpg')?>">
                             </div>
                             <div class="three columns">
-                                <img alt="persona" title="persona by designova" src="<?=$this->link('/src/yicheng/images/compare/04.jpg')?>">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/04.jpg')?>">
                             </div>
                             <div class="six columns">
                                 <h5>亿成阳光酒店式公寓</h5>
@@ -479,32 +483,32 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
         <!--Modal Window Content ends-->
 
         <!-- Included JS Files (Compressed) -->
-        <script src="<?=$this->link('/src/yicheng/javascripts/foundation.min.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/foundation.min.js')?>"></script>
 
         <!-- Initialize JS Plugins -->
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.easing.1.3.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.parallax-1.1.3.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.localscroll-1.2.7-min.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.scrollTo-1.4.2-min.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.easing.1.3.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.parallax-1.1.3.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.localscroll-1.2.7-min.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.scrollTo-1.4.2-min.js')?>"></script>
         <!-- Add mousewheel plugin (this is optional) -->
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.mousewheel-3.0.6.pack.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.mousewheel-3.0.6.pack.js')?>"></script>
 
         <!-- Add fancyBox main JS and CSS files -->
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.fancybox.js')?>?v=2.1.0"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.fancybox-buttons.js')?>?v=1.0.3"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox.js')?>?v=2.1.0"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox-buttons.js')?>?v=1.0.3"></script>
 
         <!-- Add Thumbnail helper (this is optional) -->
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.fancybox-thumbs.js')?>?v=1.0.6"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox-thumbs.js')?>?v=1.0.6"></script>
 
         <!-- Add Media helper (this is optional) -->
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.fancybox-media.js')?>?v=1.0.3"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.quicksand.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/filter.js')?>"></script>  
-        <script src="<?=$this->link('/src/yicheng/javascripts/form-validation.js')?>"></script>  
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.tweet.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.transit.min.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/app.js')?>"></script>
-        <script src="<?=$this->link('/src/yicheng/javascripts/jquery.fullscreen.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox-media.js')?>?v=1.0.3"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.quicksand.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/filter.js')?>"></script>  
+        <script src="<?=$this->assets('/module/yicheng/javascripts/form-validation.js')?>"></script>  
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.tweet.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.transit.min.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/app.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fullscreen.js')?>"></script>
         <script>
             $(".fancybox-effects-d").fancybox({
                     padding: 0,

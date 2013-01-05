@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var path = eva.s() + '/src/yicheng/';
+	var path = eva.s() + '/assets/index.php/module/yicheng/';
 
 	// initial fade effect for the entire screen
 	var $content = $('#wrapper');
@@ -122,7 +122,7 @@ $(document).ready(function() {
 // full screen slider	
 $(document).ready( function(){
 
-	var path = eva.s() + '/src/yicheng/';
+	var path = eva.s() + '/assets/index.php/module/yicheng/';
 	$.supersized({
 		// Functionality
 		slide_interval          :   8000,		// Length between transitions
