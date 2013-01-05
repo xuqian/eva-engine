@@ -1,0 +1,60 @@
+<?
+$title = $this->_('七彩梦圆澜沧江畔——告庄西双景景真寨之亿成阳光国际公寓');
+$this->headTitle($title, 'SET');
+$config = $this->getHelperPluginManager()->getServiceLocator()->get('config');
+$thumbUrl = $config['upload']['storage']['default']['thumburl'];
+?>
+<!--PORTFOLIO : STARTS-->
+<div class="row layout">
+    <section id="fifth" class="twelve columns outer-wrap">
+    <div class="story">
+        <div class="row">
+            <div class="twelve columns add-top">
+                <h2 class="main-heading-alt  color-high">亿成阳光公寓 <span class="main-heading white-txt ">图册欣赏</span></h2>
+            </div>
+        </div>
+
+        <section class="row">
+        <p id="work-intro" class="twelve columns medium-para white-txt pad-top pad-bottom">
+        亿成阳光酒店式公寓-高品质精装小户型江景公寓，东南亚风格、现代欧式风格顶级装修，奢华家具家电全套配备，24小时物业守护，真正实现提包即可入住，投资自住两相宜。从40平米到80平米。多达25种户型供您选择，是专为追求生活品位的精英阶层量身打造的旅游养生、休闲度假公寓。
+        </p>
+        </section>
+
+        <section class="row">
+        <ul class="filter group"> 
+            <li class="current all"><a href="#">全部</a></li> 
+            <li class="yuanlin"><a href="#">园林景观</a></li> 
+            <li class="shijing"><a href="#">房产实景</a></li> 
+            <li class="shinei"><a href="#">平面展示</a></li> 
+        </ul> 
+        </section>
+
+        <article class="twelve columns">
+        <div id="myworks-info" class="remove-top">
+            <!-- Portfolio Items -->
+            <ul class="myworks group clearfix"> 
+                <?for($i = 1; $i <=7; $i++):?>
+                <li class="item" data-id="id-shijing-<?=$i?>" data-type="shijing">
+                <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shijing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产实景</h4></div><img src="<?=$thumbUrl?>album/shijing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                </li>
+                <?endfor;?>
+                <?for($i = 1; $i <=9; $i++):?>
+                <li class="item" data-id="id-yuanlin-<?=$i?>" data-type="yuanlin">
+                <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/yuanlin/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓园林景观</h4></div><img src="<?=$thumbUrl?>album/yuanlin/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                </li>
+                <?endfor;?>
+                <?for($i = 1; $i <=14; $i++):?>
+                <li class="item" data-id="id-shinei-<?=$i?>" data-type="shinei">
+                <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shinei/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓室内精装效果</h4></div><img src="<?=$thumbUrl?>album/shinei/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                </li>
+                <?endfor;?>
+            </ul>
+        </div>
+
+        </article>
+
+    </div> 
+    <!--.story-->  
+    </section>
+</div>
+<!--PORTFOLIO : ENDS-->

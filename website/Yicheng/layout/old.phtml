@@ -1,0 +1,541 @@
+<?
+$config = $this->getHelperPluginManager()->getServiceLocator()->get('config');
+$thumbUrl = $config['upload']['storage']['default']['thumburl'];
+?><!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <?=$this->headTitle()?>
+        <?$this->assets('/module/admin/css/bootstrap.css')?>
+        <!--[if lt IE 9]>
+        <meta http-equiv="PRAGMA" content="NO-CACHE" />
+        <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
+        <![endif]-->
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+        <script src="<?=$this->assets('/module/yicheng/javascripts/modernizr.foundation.js')?>"></script>
+        <?=$this->googleAnalytics()?>
+        <?=$this->evajs()?>
+        <?=$this->headMeta()?>
+        <?=$this->headStyle()?>
+        <?$this->cssAssets(array(
+            '/lib/css/fontawesome/css/font-awesome.css',
+            '/module/yicheng/stylesheets/foundation.css',
+            '/module/yicheng/stylesheets/typography.css',
+            '/module/yicheng/stylesheets/foundation_icons_general_enclosed/stylesheets/general_enclosed_foundicons.css',
+            '/module/yicheng/stylesheets/myworks.css',
+            '/module/yicheng/stylesheets/jquery.fancybox-thumbs.css',
+            '/module/yicheng/stylesheets/jquery.fancybox.css',
+            '/module/yicheng/stylesheets/jquery.fancybox-buttons.css',
+            '/module/yicheng/stylesheets/app.css',
+        ));?>
+        <?$this->jsAssets(array(
+            '/lib/js/labjs/labjs.js',
+            '/lib/js/jquery/jquery.js',
+            '/module/core/js/core.js',
+            '/module/core/js/ui.js',
+        ));?>
+        <?=$this->headLink()?>
+        <?=$this->headScript()?>
+    </head>
+
+    <body>
+
+
+        <!--HEADER AND NAVIGATION AREA : STARTS-->
+        <div id="full-arrow" class="on-normalscreen">
+            <img id="full-to" src="<?=$this->assets('/module/yicheng/images/full-icon.png')?>" title="persona by designova" alt="persona"/>
+            <img id="small-to" class="arrow-off" src="<?=$this->assets('/module/yicheng/images/small-icon.png')?>" title="persona by designova" alt="persona"/>
+        </div>
+
+        <img id="nav-arrow" src="<?=$this->assets('/module/yicheng/images/nav-left.png')?>" title="persona by designova" alt="persona"/>
+
+        <ul id="nav" class="hide-for-small">
+            <li><a href="#intro" title="Next Section"><img id="logo" src="<?=$this->assets('/module/yicheng/images/logo-side.png')?>" title="persona by designova" alt="persona"/></a></li>
+            <li><a id="trigger-intro" class="nav-link" href="#intro" title="Next Section">首页</a></li>
+            <li><a id="trigger-second" class="nav-link" href="#second" title="Next Section">项目概况</a></li>
+            <li><a id="trigger-third" class="nav-link" href="#third" title="Next Section">投资价值</a></li>
+            <li><a id="trigger-fifth" class="nav-link" href="#fifth" title="Next Section">图册欣赏</a></li>
+            <li><a id="trigger-fourth" class="nav-link" href="#fourth" title="Next Section">了解更多</a></li>
+            <li><a id="trigger-seventh" class="nav-link" href="#seventh" title="Next Section">客户服务</a></li>
+        </ul>
+
+        <section id="small-device-header" class="box-shadow show-for-small z-high">
+        <a href="#intro" title="Next Section"><img id="mobile-logo" class="show-for-small" src="<?=$this->assets('/module/yicheng/images/mob-logo.png')?>" title="persona by designova" alt="persona"/></a>
+        <nav id="mobile-nav">
+        <a class="mob-nav-link" href="#intro" title="Next Section">首页</a>
+        <a class="mob-nav-link" href="#second" title="Next Section">项目概况</a>
+        <a class="mob-nav-link" href="#third" title="Next Section">投资价值</a>
+        <a class="mob-nav-link" href="#fifth" title="Next Section">图册欣赏</a>
+        <a class="mob-nav-link" href="#fourth" title="Next Section">了解更多</a>
+        <a class="mob-nav-link" href="#seventh" title="Next Section">客户服务</a>
+        </nav>
+        </section>
+
+        <!--HEADER AND NAVIGATION AREA : STARTS-->  
+
+
+
+        <!--HOME PAGE : STARTS--> 
+        <div class="row layout">
+            <section id="intro" class="twelve columns outer-wrap">
+            <div class="story add-top">
+                <div id="welcome" class="twelve columns">
+                    <h1 class="main-heading white-txt remove-bottom"><span class="welcome-highlight">亿成阳光公寓</span></h1>
+                    <h3 class="main-heading-alt white-txt remove-top text-left"><span class="welcome-highlight"><span class="color-high">全球休闲旅游投资</span>目的地，限购令下最火掘金项目</span></h3>
+
+                    <!--
+                    <div class="row">
+                        <article id="ticker" class="query six columns"></article>
+                    </div>
+                    -->
+
+                </div>
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+        <!--HOME PAGE : ENDS--> 
+
+
+        <!--ABOUT : STARTS--> 
+        <div class="row layout">
+            <section id="second" class="twelve columns outer-wrap">
+            <div class="story">
+                <!--<div class="bg hide-for-small"></div>-->
+                <div class="four columns offset-by-eight add-top">
+                    <h2 class="main-heading-alt white-txt">一本充满魅力的财富读本 <span class="main-heading dark-txt">西双版纳</span></h2>
+                    <p class="medium-para">亿成阳光国际公寓位于告庄西双景东部景真寨，北临孔雀大道，南邻澜沧江，项目聘请国内外顶尖的战略策划，建筑设计、景观规划、融汇他们的前沿理念和创新思想，严格依循西双版纳特有的傣族文化和大金三角的异域情调，打造独具东南亚异域格调的景观特色和傣泰建筑群，将一切设计融入园林景观之中，最大尺度的让人们去体会专属西双版纳的原生态风貌和雨林景观，以及属于大金三角的休闲文化体验。</p>
+                    <p class="medium-para">告庄西双景为傣语，汉意为“九塔十二寨”，通过“一江两门九塔十二寨”的总体规划，打造“六大国际中心、五大景观带、三大综合体、东南亚特色综合业态，实现文化、休闲、度假、体验、娱乐、旅游、商贸、居住等综合功能。园区占地1200亩，汲取东南亚建筑风情，融合浓郁的傣泰文化，原汁原味地打造热带雨林中的田园城市，缔造前所未有的大金三角傣泰文明中心，引擎西双版纳旅游地产，呈现文化体验之都、休闲度假之都、旅游商贸之都、国际商务之都、傣泰生活之都、时尚繁华之都。</p>
+                    <ul class="features add-top ">
+                        <li class="features-first white-txt"><i class="foundicon-settings"></i><span>总建筑面积</span>13万平方米</li>
+                        <li class="white-txt"><i class="foundicon-heart"></i><span>公寓</span>1000余套</li>
+                        <li class="white-txt"><i class="foundicon-star"></i><span>物业守护</span>24小时</li>
+                        <li class="white-txt"><i class="foundicon-checkmark"></i><span>户型</span>25种</li>
+                    </ul>
+                    <div class="twelve columns sidebarright alignright">
+                    </div>
+                </div>
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+        <!--ABOUT : ENDS-->  
+
+
+
+
+        <!--FEATURES : STARTS--> 
+        <div class="row layout">
+            <section id="third" class="twelve columns outer-wrap">
+            <div class="story">
+                <div class="bg"></div>
+                <div class="nine columns add-top">
+                    <h2 class="main-heading-alt color-high">保驾护航 <span class="main-heading color-dark">八大价值</span></h2>
+
+
+                    <div class="row">
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-star color-high"></i> 规划价值</h3>
+                        <p>西双版纳1200目首席商旅大盘，盛世规划六大国际中心、五大景观带、三大综合体、东南亚特色综合业态，创造巅峰价值版图。</p>
+                        </article>
+
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-settings color-high"></i> 门户价值</h3>
+                        <p>尊处“西南桥头堡战略“前沿，紧邻澜沧江，扼守城市要道，是百万游客到达西双版纳的第一站，门户优势无可比拟。</p>
+                        </article>
+                    </div>
+
+                    <div class="row">
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-tools color-high"></i> 地域价值</h3>
+                        <p>中国最大的热带雨林、古老而传播甚广的少数民族文化传承、中国五大长寿带之一。</p>
+                        </article>
+
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-tools color-high"></i> 枢纽价值</h3>
+                        <p>汇聚西双版纳规模最大配套最全的国际游客集散中心、国际旅游签证中心、国际班车客运中心，造就势不可挡的枢纽高地。</p>
+                        </article>
+
+                    </div>
+
+                    <div class="row">
+
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-flag color-high"></i> 文化价值</h3>
+                        <p>东盟自由贸易区与湄公河次区域经济合作区的旅游文化项目、傣泰文化重点展示区、云南省九大旅游重点项目之一。</p>
+                        </article>
+
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-heart color-high"></i> 推动力价值</h3>
+                        <p>大金三角旅游环线游客出发台与回归台，优越的区位优势，便利的水陆空立体交通，描绘不可估量的升值前景。</p>
+                        </article>
+
+                    </div>
+
+                    <div class="row">
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-idea color-high"></i> 消费力价值</h3>
+                        <p>每年近800万国际、国内游客接待量跨越式增长，带来国际购物、旅游观光、休闲度假、狂欢娱乐、风情体验、文化品位等一站式消费潜力。</p>
+                        </article>
+
+                        <article class="six columns skill-info">
+                        <h3 class="dark-txt"><i class="foundicon-heart color-high"></i>品牌共赢价值</h3>
+                        <p>国际百名实力商家强势入驻，比肩国际品牌，更坚实的投资保障，无限商机盛大呈现。</p>
+                        </article>
+
+                    </div>
+
+                    <div class="row">
+                        <article class="twelve columns services-testimonial">
+                        <h4 class="dark-txt">项目投资对比分析</h4>
+                        <div class="row">
+                            <article class="six columns">
+                            <div class="three columns">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/01.jpg')?>">
+                            </div>
+                            <div class="nine columns">
+                                <h5>海南鹏欣白金湾</h5>
+                                <blockquote>依托海南旅游资源、黎族等少数民族文化，在国家政策的扶植下2009年确立了“国际旅游岛“的战略地位。项目类型主要由精装公寓、度假酒店等构成。鹏欣白金湾依托海南旅游资源蓬勃发展，房产价值提升惊人。精装公寓在2012年1月1.5万元/㎡开盘以来，在房地产市场萎靡的环境下，一路飙升到目前的2.3万元，短短10个月价格上涨50%以上。</blockquote>
+                            </div>
+                            </article>
+
+                            <article class="six columns">
+                            <div class="three columns">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/02.jpg')?>">
+                            </div>
+                            <div class="nine columns">
+                                <h5>成都泰达上青城</h5>
+                                <blockquote>都江堰风景区青城山下以及众多的名胜古迹，中国道教的发源地之一。项目由精装公寓、办公楼和商业物业组成。泰达上青城依托都江堰风景区、青城山风景区以及众多的名胜古迹映衬下，酒店式精装公寓2011年开盘价5千元/㎡（折扣后），截止到目前市场报价已经攀升到了1万元，1年多上涨100%。</blockquote>
+                            </div>
+                            </article>
+                        </div>
+                        <div class="row">
+                            <article class="twelve columns">
+                            <div class="three columns">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/03.jpg')?>">
+                            </div>
+                            <div class="three columns">
+                                <img alt="persona" title="persona by designova" src="<?=$this->assets('/module/yicheng/images/compare/04.jpg')?>">
+                            </div>
+                            <div class="six columns">
+                                <h5>亿成阳光酒店式公寓</h5>
+                                <blockquote>依托西双版纳独特的区位优势以及大金三角国际旅游黄金环绕。悠久的“九塔十二寨“历史文化底蕴，汇集东南亚、傣泰文化精髓。“西南桥头堡”的战略地位。依托西双版纳每年800万中外游客，恢弘的区域规划，完善丰富、多元的业态组合以及项目独特的市场地位和发展前景，资本投资增值潜力与日俱增。</blockquote>
+                            </div>
+                            </article>
+
+                        </div>
+                        </article>
+
+
+                    </div>
+
+
+                    <!-- End Right Column -->
+                    <div class="clearfix">
+                    </div>
+
+
+                </div>
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+        <!--FEATURES : ENDS--> 
+
+
+
+
+        <!--PORTFOLIO : STARTS-->
+        <div class="row layout">
+            <section id="fifth" class="twelve columns outer-wrap">
+            <div class="story">
+                <div class="row">
+                    <div class="twelve columns add-top">
+                        <h2 class="main-heading-alt  color-high">亿成阳光公寓 <span class="main-heading white-txt ">图册欣赏</span></h2>
+                    </div>
+                </div>
+
+                <section class="row">
+                <p id="work-intro" class="twelve columns medium-para white-txt pad-top pad-bottom">
+                亿成阳光酒店式公寓-高品质精装小户型江景公寓，东南亚风格、现代欧式风格顶级装修，奢华家具家电全套配备，24小时物业守护，真正实现提包即可入住，投资自住两相宜。从40平米到80平米。多达25种户型供您选择，是专为追求生活品位的精英阶层量身打造的旅游养生、休闲度假公寓。
+                </p>
+                </section>
+
+                <section class="row">
+                <ul class="filter group"> 
+                    <li class="current all"><a href="#">全部</a></li> 
+                    <li class="yuanlin"><a href="#">园林景观</a></li> 
+                    <li class="shijing"><a href="#">房产实景</a></li> 
+                    <li class="shinei"><a href="#">平面展示</a></li> 
+                </ul> 
+                </section>
+
+                <article class="twelve columns">
+                <div id="myworks-info" class="remove-top">
+                    <!-- Portfolio Items -->
+                    <ul class="myworks group clearfix"> 
+                        <?for($i = 1; $i <=7; $i++):?>
+                        <li class="item" data-id="id-shijing-<?=$i?>" data-type="shijing">
+                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shijing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产实景</h4></div><img src="<?=$thumbUrl?>album/shijing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                        </li>
+                        <?endfor;?>
+                        <?for($i = 1; $i <=9; $i++):?>
+                        <li class="item" data-id="id-yuanlin-<?=$i?>" data-type="yuanlin">
+                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/yuanlin/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓园林景观</h4></div><img src="<?=$thumbUrl?>album/yuanlin/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                        </li>
+                        <?endfor;?>
+                        <?for($i = 1; $i <=14; $i++):?>
+                        <li class="item" data-id="id-shinei-<?=$i?>" data-type="shinei">
+                        <a data-fancybox-group="gallery" class="fancybox-effects-d" href="<?=$this->link('/upload/album/shinei/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓室内精装效果</h4></div><img src="<?=$thumbUrl?>album/shinei/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                        </li>
+                        <?endfor;?>
+
+                    </ul>
+
+
+
+                </div>
+
+                </article>
+
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+        <!--PORTFOLIO : ENDS-->
+
+
+
+        <!--SERVICES : STARTS-->  
+        <div class="row layout">
+            <section id="fourth" class="twelve columns outer-wrap">
+            <div class="story">
+                <div class="twelve columns add-top">
+                    <h2 class="main-heading-alt color-high"><span class="main-heading color-dark">了解更多</span></h2>
+
+                    <div class="row">
+                        <article class="four columns services-info">
+                        <div class="icon-thumb-big comp"><i class="foundicon-idea color-high"></i></div>
+                        <h3 class="dark-txt">整体规划</h3>
+                        <p>高品质精装小户型江景公寓，东南亚风格、现代欧式风格顶级装修，奢华家具家电全套配备，24小时物业守护，真正实现提包即可入住，投资自住两相宜。从40平米到80平米多达25种户型供您选择，是专为追求生活品位的精英阶层量身打造的度假公寓；背山面水，一户一景，尽享舒适与奢华。度假休闲，观江赏月，独享世外桃园悠然空间。</p>
+                        <ul class="six columns">
+                            <li><a href="">自然环境</a></li>
+                            <li><a href="">产业布局</a></li>
+                            <li><a href="">查看更多</a></li>
+                        </ul>
+                        <ul class="six columns">
+                            <li><a href="">休闲度假</a></li>
+                            <li><a href="">养老养生</a></li>
+                            <li><a href="">投资增值</a></li>
+                        </ul>
+                        </article>
+
+                        <article class="four columns services-info">
+                        <div class="icon-thumb-big"><i class="foundicon-edit color-high"></i></div>
+                        <h3 class="dark-txt">新闻动态</h3>
+                        <ul>
+                            <li><a href="">“桥头堡”战略盛世，西双版纳发展再腾跃</a></li>
+                            <li><a href="">新政下，继三亚后新兴投资热地</a></li>
+                            <li><a href="">中国先锋旅游城市，世界级旅游门户</a></li>
+                            <li><a href="">全球休闲度假商贸目的地，桥头堡战略引擎项目！</a></li>
+                            <li><a href="">二期升级力作绽放，史无前例圆您一生财富梦想！</a></li>
+                            <li><a href="">八大价值保驾护航，版纳投资创富新天堂！</a></li>
+                            <li><a href="">“桥头堡”战略盛世，西双版纳发展再腾跃</a></li>
+                            <li><a href="">新政下，继三亚后新兴投资热地</a></li>
+                            <li><a href="">中国先锋旅游城市，世界级旅游门户</a></li>
+                            <li><a href="">全球休闲度假商贸目的地，桥头堡战略引擎项目！</a></li>
+                        </ul>
+                        </article>
+
+                        <article class="four columns services-info">
+                        <div class="icon-thumb-big"><i class="foundicon-checkmark color-high"></i> </div>
+                        <h3 class="dark-txt">VIP优惠信息</h3>
+                        <p>西双版纳目前大力推进“国际旅游圈”“边境贸易圈”建设，着力发展国际生态游、边境休闲度假游等具有边境特色的高端旅游项目。与此同时，随着“限购令”政策在北京、上海、成都、昆明等全国一二线城市的持续加码，西双版纳凭借其独特的地理位置、气候条件、历史机遇、及发展潜力，已然成为继三亚后的另一个新兴投资热点，商机与财富的汇集力无以伦比。 <a href="">查看更多</a></p>
+                        </article>
+                    </div>
+
+
+
+                    <div class="row">
+                        <article class="twelve columns services-testimonial">
+                        <h4 class="dark-txt">户型一览</h4>
+                        <div class="row">
+                            <?for($i = 1; $i <=24; $i++):?>
+                            <article class="two columns">
+                            <a data-fancybox-group="gallery2" class="fancybox-effects-d" href="<?=$this->link('/upload/album/huxing/' . sprintf('%02s', $i) . '.jpg')?>" title="可以使用鼠标滚轮切换图片"><div class="overlay-block"><h4 class="work-item-name">亿成阳光公寓房产户型</h4></div><img src="<?=$thumbUrl?>album/huxing/<?=sprintf('%02s', $i)?>,c_fill,h_280,w_280.jpg"  title="persona by designova" alt="persona" /></a>
+                            </article>
+                            <?endfor;?>
+                        </div>
+                        </article>
+                    </div>
+                </div>
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+        <!--SERVICES : STARTS-->
+
+
+
+
+        <!--CONTACT : ENDS-->
+        <div class="row layout">
+            <section id="seventh" class="twelve columns outer-wrap">
+            <div class="story">
+                <div class="bg"></div>
+                <div class="six columns offset-by-six add-top">
+                    <h2 class="main-heading-alt  color-high">客户服务 <span class="main-heading color-dark">网上登记</span></h2>
+                    <div class="add-top">
+                        <form name="myform" id="contactForm" action="sendcontact.php" enctype="multipart/form-data" method="post">	
+
+                            <article>
+                            <label class="contact-form-label">
+                                姓名
+                                <span id="fname" class="error">请输入姓名</span>
+                            </label> 
+                            <input type="text" name="name" id="name" class="text-field" required />
+                            </article>
+
+                            <article>
+                            <label class="contact-form-label">
+                                联系方式
+                                <span id="fmail" class="error">请输入邮箱或手机号码</span>
+                            </label> 
+                            <input type="email" name="email" id="email" class="text-field" required  />
+                            </article>
+
+
+                            <article>
+                            <label class="contact-form-label">
+                                您所要登记的户型及其他留言
+                                <span id="fmsg" class="error">请输入信息</span>
+                            </label> 
+                            <textarea name="message" required  id="msg" class="text-field" ></textarea>
+                            </article>
+
+                            <article>
+                            <button class="button nice secondary contact-btn" type="submit" name="submit" id="submit">登记</button>
+                            </article>
+
+
+
+                        </form>	                
+                    </div>
+                    <article class="row">
+                    <ul class="contact twelve columns">
+                        <li class="contact-first color-high"><i class="foundation-social">@</i><span>您也可以通过下面的方式联系我们:
+                        </span></li>
+                    </ul>
+ 
+                    </article>
+
+                    <article id="address-block" class="row">
+                    <p class="six columns">
+                    销售地址：北京市朝阳区万达广场A座21层
+                    </p>
+                    <ul class="contact-icons six columns">
+                        <li><span class="foundicon-mail"></span>yichengguoji007@163.com</li>
+                        <li><span class="foundicon-phone"></span>0086-010-58205909 / 58205910</li>
+                    </ul>
+                    </article>
+
+
+
+                </div>
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+
+
+
+        <div class="row layout box-shadow">
+            <section id="eighth" class="twelve columns outer-wrap">
+            <div class="story">
+                <p class="credit-txt"><a target="_blank" href="http://yichengguoji.cn/">亿成国际投资集团</a><br/>Copyright &copy; 2012 亿成国际投资集团
+                <br />销售地址：北京市朝阳区万达广场A座21层 <br />销售热线：0086-010-58205909 / 58205910</p>
+            </div> 
+            <!--.story-->  
+            </section>
+        </div>
+
+        <!--CONTACT : ENDS-->
+
+
+        <!--Modal Window Content should be always placed here at the end-->
+        <div id="exampleModal" class="reveal-modal">
+            <h2>This is a modal.</h2>
+            <p>
+            Reveal makes these very easy to summon and dismiss. The close button is simple an anchor with a unicode 
+            character icon and a class of <code>close-reveal-modal</code>. Clicking anywhere outside the modal will 
+            also dismiss it.
+            </p>
+            <a class="close-reveal-modal">×</a>
+        </div>
+        <!--Modal Window Content ends-->
+
+        <!-- Included JS Files (Compressed) -->
+        <script src="<?=$this->assets('/module/yicheng/javascripts/foundation.min.js')?>"></script>
+
+        <!-- Initialize JS Plugins -->
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.easing.1.3.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.parallax-1.1.3.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.localscroll-1.2.7-min.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.scrollTo-1.4.2-min.js')?>"></script>
+        <!-- Add mousewheel plugin (this is optional) -->
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.mousewheel-3.0.6.pack.js')?>"></script>
+
+        <!-- Add fancyBox main JS and CSS files -->
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox.js')?>?v=2.1.0"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox-buttons.js')?>?v=1.0.3"></script>
+
+        <!-- Add Thumbnail helper (this is optional) -->
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox-thumbs.js')?>?v=1.0.6"></script>
+
+        <!-- Add Media helper (this is optional) -->
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fancybox-media.js')?>?v=1.0.3"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.quicksand.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/filter.js')?>"></script>  
+        <script src="<?=$this->assets('/module/yicheng/javascripts/form-validation.js')?>"></script>  
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.tweet.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.transit.min.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/app.js')?>"></script>
+        <script src="<?=$this->assets('/module/yicheng/javascripts/jquery.fullscreen.js')?>"></script>
+        <script>
+            $(".fancybox-effects-d").fancybox({
+                    padding: 0,
+                    openEffect : 'elastic',
+                    openSpeed  : 150,
+                    closeEffect : 'elastic',
+                    closeSpeed  : 150,
+                    closeClick : true,
+                    helpers : {
+                            overlay : null
+                    }
+            });
+            $('.fancybox-media')
+            .attr('rel', 'media-gallery')
+            .fancybox({
+                    openEffect : 'none',
+                    closeEffect : 'none',
+                    prevEffect : 'none',
+                    nextEffect : 'none',
+
+                    arrows : false,
+                    helpers : {
+                            media : {},
+                            buttons : {}
+                    }
+            });
+        </script>
+
+    </body>
+</html>

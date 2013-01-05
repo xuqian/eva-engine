@@ -10,6 +10,7 @@ class PagesController extends RestfulModuleController
 
     public function indexAction()
     {
+        $this->layout('layout/index');
         $query = $this->getRequest()->getQuery();
         $form = new \Blog\Form\PostSearchForm();
         $form->bind($query);
@@ -58,6 +59,7 @@ class PagesController extends RestfulModuleController
 
     public function getAction()
     {
+        $this->layout('layout/index');
         $id = $this->params('id');
         $itemModel = Api::_()->getModel('Blog\Model\Post');
         $item = $itemModel->getPost($id, array(

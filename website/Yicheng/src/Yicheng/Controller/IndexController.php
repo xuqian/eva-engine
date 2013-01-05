@@ -20,4 +20,12 @@ class IndexController extends ActionController
         $view = new ViewModel();
         return $view;
     }
+
+    public function getAction()
+    {
+        $this->layout('layout/index');
+        $view = new ViewModel();
+        $view->setTemplate('yicheng/index/' . $this->params('id'));
+        return $view;
+    }
 }

@@ -1,4 +1,98 @@
 <?
 $title = $this->_('七彩梦圆澜沧江畔——告庄西双景景真寨之亿成阳光国际公寓');
 $this->headTitle($title, 'SET');
+$config = $this->getHelperPluginManager()->getServiceLocator()->get('config');
+$thumbUrl = $config['upload']['storage']['default']['thumburl'];
 ?>
+<div id="featured">
+    <img src="<?=$this->assets('/module/yicheng/images/slider/banner1.jpg')?>" width="100%" alt=""/>
+    <img src="<?=$this->assets('/module/yicheng/images/slider/banner2.jpg')?>" width="100%" alt=""/>
+    <img src="<?=$this->assets('/module/yicheng/images/slider/banner3.jpg')?>" width="100%" alt=""/>
+</div>
+<!--HOME PAGE : STARTS--> 
+<div class="row layout">
+    <section id="second" class="twelve columns outer-wrap">
+    <div class="box" style="top:3%;right:10%;">
+        <a href="<?=$this->uri('/index/overview/')?>">
+        <h2 class="white-txt">亿成阳光公寓</h2>
+        <h4 class="white-txt text-left"><span class="color-high">全球休闲旅游投资</span>目的地，限购令下最火掘金项目</h4>
+        </a>
+    </div>
+    </section>
+</div>
+<!--HOME PAGE : ENDS--> 
+
+
+
+<!--CONTACT : ENDS-->
+<div class="row layout">
+    <section id="seventh" class="twelve columns outer-wrap">
+    <div class="story">
+        <div class="bg"></div>
+        <div class="six columns offset-by-six add-top">
+            <h2 class="main-heading-alt  color-high">客户服务 <span class="main-heading color-dark">网上登记</span></h2>
+            <div class="add-top">
+                <form name="myform" id="contactForm" action="sendcontact.php" enctype="multipart/form-data" method="post">	
+
+                    <article>
+                    <label class="contact-form-label">
+                        姓名
+                        <span id="fname" class="error">请输入姓名</span>
+                    </label> 
+                    <input type="text" name="name" id="name" class="text-field" required />
+                    </article>
+
+                    <article>
+                    <label class="contact-form-label">
+                        联系方式
+                        <span id="fmail" class="error">请输入邮箱或手机号码</span>
+                    </label> 
+                    <input type="email" name="email" id="email" class="text-field" required  />
+                    </article>
+
+
+                    <article>
+                    <label class="contact-form-label">
+                        您所要登记的户型及其他留言
+                        <span id="fmsg" class="error">请输入信息</span>
+                    </label> 
+                    <textarea name="message" required  id="msg" class="text-field" ></textarea>
+                    </article>
+
+                    <article>
+                    <button class="button nice secondary contact-btn" type="submit" name="submit" id="submit">登记</button>
+                    </article>
+
+
+
+                </form>	                
+            </div>
+            <article class="row">
+            <ul class="contact twelve columns">
+                <li class="contact-first color-high"><i class="foundation-social">@</i><span>您也可以通过下面的方式联系我们:
+                </span></li>
+            </ul>
+
+            </article>
+
+            <article id="address-block" class="row">
+            <p class="six columns">
+            销售地址：北京市朝阳区万达广场A座21层
+            </p>
+            <ul class="contact-icons six columns">
+                <li><span class="foundicon-mail"></span>yichengguoji007@163.com</li>
+                <li><span class="foundicon-phone"></span>0086-010-58205909 / 58205910</li>
+            </ul>
+            </article>
+
+
+
+        </div>
+    </div> 
+    <!--.story-->  
+    </section>
+</div>
+
+
+
+
