@@ -113,13 +113,58 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
     <?=$this->content;?>
 
     <div class="row layout box-shadow">
-        <section id="eighth" class="twelve columns outer-wrap">
-        <div class="story">
-            <p class="credit-txt"><a target="_blank" href="http://yichengguoji.cn/">亿成国际投资集团</a><br/>Copyright &copy; 2012 亿成国际投资集团
-            <br />销售地址：北京市朝阳区万达广场A座21层 <br />销售热线：0086-010-58205909 / 58205910</p>
-        </div> 
-        <!--.story-->  
-        </section>
+        <section id="footer" class="twelve columns outer-wrap">
+        <div id="footer-inner">
+        <div class="main-nav">
+            <div class="row">
+                <div class="four columns">
+                    <div class="">
+                        <ul class="square">
+                            <li><a href="<?=$this->uri('/home')?>" title="Next Section">首页</a></li>
+                            <li><a href="<?=$this->uri('/index/overview/')?>" title="Next Section">项目概况</a></li>
+                            <li class="has-dropdown">
+                            <a class="active" href="#">整体规划</a>
+                            <ul class="dropdown">
+                                <li><a href="<?=$this->uri('/pages/ziranhuanjing')?>">自然环境</a></li>
+                                <li><a href="<?=$this->uri('/pages/chanpinbuju')?>">产品布局</a></li>
+                            </ul>
+                            </li>
+                            <li><a href="<?=$this->uri('/pages/ziranhuanjing')?>" title="Next Section">VIP优惠信息</a></li>
+                            <li><a href="<?=$this->uri('/pages/')?>" title="Next Section">新闻动态</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="four columns">
+                    <div class="">
+                        <ul class="square">
+                            <li class="has-dropdown">
+                            <a class="active" href="#">图册欣赏</a>
+                            <ul class="dropdown">
+                                <li><a href="<?=$this->uri('/album/yuanlinjinguan')?>">园林景观</a></li>
+                                <li><a href="<?=$this->uri('/album/fangchanshijing')?>">房产实景</a></li>
+                                <li><a href="<?=$this->uri('/album/pingmianzhanshi')?>">平面展示</a></li>
+                            </ul>
+                            </li>
+                            <li><a href="<?=$this->uri('/index/huxing')?>" title="Next Section">户型鉴赏</a></li>
+                            <li><a href="<?=$this->uri('/index/jiazhi')?>" title="Next Section">投资价值</a></li>
+                            <li >
+                            <a href="<?=$this->uri('/home/')?>#seventh">客户服务</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="four columns">
+                    <div class="">
+                        <p><a target="_blank" href="http://yichengguoji.cn/">亿成国际投资集团</a><br/>Copyright &copy; 2012 亿成国际投资集团
+                        <br />销售地址：北京市朝阳区万达广场A座21层 <br />销售热线：0086-010-58205909 / 58205910</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--.story-->  
+    </section>
     </div>
 
     <!--CONTACT : ENDS-->

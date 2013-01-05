@@ -4,18 +4,28 @@ $this->headTitle($title, 'SET');
 $config = $this->getHelperPluginManager()->getServiceLocator()->get('config');
 $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 ?>
+
 <div id="featured">
     <img src="<?=$this->assets('/module/yicheng/images/slider/banner1.jpg')?>" width="100%" alt=""/>
     <img src="<?=$this->assets('/module/yicheng/images/slider/banner2.jpg')?>" width="100%" alt=""/>
     <img src="<?=$this->assets('/module/yicheng/images/slider/banner3.jpg')?>" width="100%" alt=""/>
 </div>
+
+<div class="row">
+    <div class="tagline">
+        <div class="main-nav">
+            <p>七彩梦圆澜沧江畔——告庄西双景景真寨之亿成阳光国际公寓</p>
+        </div>
+    </div>
+</div>
+
 <!--HOME PAGE : STARTS--> 
 <div class="row layout">
     <section id="second" class="twelve columns outer-wrap">
-    <div class="box" style="top:3%;right:10%;">
+    <div class="box" style="top:20%;right:10%;">
         <a href="<?=$this->uri('/index/overview/')?>">
-        <h2 class="white-txt">亿成阳光公寓</h2>
-        <h4 class="white-txt text-left"><span class="color-high">全球休闲旅游投资</span>目的地，限购令下最火掘金项目</h4>
+            <h2 class="white-txt">亿成阳光公寓</h2>
+            <h4 class="white-txt text-left"><span class="color-high">全球休闲旅游投资</span>目的地，限购令下最火掘金项目</h4>
         </a>
     </div>
     </section>
