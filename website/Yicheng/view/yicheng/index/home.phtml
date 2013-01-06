@@ -6,9 +6,10 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 ?>
 
 <div id="featured">
+    <img src="<?=$this->assets('/module/yicheng/images/slider/banner3.jpg')?>" width="100%" alt=""/>
     <img src="<?=$this->assets('/module/yicheng/images/slider/banner1.jpg')?>" width="100%" alt=""/>
     <img src="<?=$this->assets('/module/yicheng/images/slider/banner2.jpg')?>" width="100%" alt=""/>
-    <img src="<?=$this->assets('/module/yicheng/images/slider/banner3.jpg')?>" width="100%" alt=""/>
+    <img src="<?=$this->assets('/module/yicheng/images/slider/banner4.jpg')?>" width="100%" alt=""/>
 </div>
 
 <div class="row">
@@ -22,6 +23,13 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 <!--HOME PAGE : STARTS--> 
 <div class="row layout">
     <section id="second" class="twelve columns outer-wrap">
+    </section>
+</div>
+<!--HOME PAGE : ENDS--> 
+
+<!--HOME PAGE : STARTS--> 
+<div class="row layout">
+    <section id="third" class="twelve columns outer-wrap">
     <div class="box" style="top:20%;right:10%;">
         <a href="<?=$this->uri('/index/overview/')?>">
             <h2 class="white-txt">亿成阳光公寓</h2>
@@ -32,77 +40,43 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 </div>
 <!--HOME PAGE : ENDS--> 
 
-
-
-<!--CONTACT : ENDS-->
+<!--HOME PAGE : STARTS--> 
 <div class="row layout">
-    <section id="seventh" class="twelve columns outer-wrap">
-    <div class="story">
-        <div class="bg"></div>
-        <div class="six columns offset-by-six add-top">
-            <h2 class="main-heading-alt  color-high">客户服务 <span class="main-heading color-dark">网上登记</span></h2>
-            <div class="add-top">
-                <form name="myform" id="contactForm" action="sendcontact.php" enctype="multipart/form-data" method="post">	
-
-                    <article>
-                    <label class="contact-form-label">
-                        姓名
-                        <span id="fname" class="error">请输入姓名</span>
-                    </label> 
-                    <input type="text" name="name" id="name" class="text-field" required />
-                    </article>
-
-                    <article>
-                    <label class="contact-form-label">
-                        联系方式
-                        <span id="fmail" class="error">请输入邮箱或手机号码</span>
-                    </label> 
-                    <input type="email" name="email" id="email" class="text-field" required  />
-                    </article>
-
-
-                    <article>
-                    <label class="contact-form-label">
-                        您所要登记的户型及其他留言
-                        <span id="fmsg" class="error">请输入信息</span>
-                    </label> 
-                    <textarea name="message" required  id="msg" class="text-field" ></textarea>
-                    </article>
-
-                    <article>
-                    <button class="button nice secondary contact-btn" type="submit" name="submit" id="submit">登记</button>
-                    </article>
-
-
-
-                </form>	                
-            </div>
-            <article class="row">
-            <ul class="contact twelve columns">
-                <li class="contact-first color-high"><i class="foundation-social">@</i><span>您也可以通过下面的方式联系我们:
-                </span></li>
-            </ul>
-
-            </article>
-
-            <article id="address-block" class="row">
-            <p class="six columns">
-            销售地址：北京市朝阳区万达广场A座21层
-            </p>
-            <ul class="contact-icons six columns">
-                <li><span class="foundicon-mail"></span>yichengguoji007@163.com</li>
-                <li><span class="foundicon-phone"></span>0086-010-58205909 / 58205910</li>
-            </ul>
-            </article>
-
-
-
-        </div>
-    </div> 
-    <!--.story-->  
+    <section id="fourth" class="twelve columns outer-wrap">
+    <div class="box" style="top:30%;left:7%;">
+        <a href="<?=$this->uri('/index/jiazhi/')?>">
+            <h4 class="white-txt text-left">天时地利人和<br>扼守商脉成就财富</h4>
+            <h4 class="white-txt text-left"><span class="color-high">时代巅峰之作</span><br>傣泰文化倾献！</h4>
+        </a>
+    </div>
     </section>
 </div>
+<!--HOME PAGE : ENDS--> 
 
+<!--HOME PAGE : STARTS--> 
+<div class="row layout">
+    <section id="fifth" class="twelve columns outer-wrap">
+    <div class="main-nav">
+        <div class="placeholder"></div>
+        <div class="row">
+            <article class="four columns skill-info">
+            <h3 class="dark-txt">世界级旅游门户</h3>
+            <p><a href="<?=$this->uri('/index/jiazhi/')?>"><img src="<?=$this->assets('/module/yicheng/images/compare/05.jpg')?>" alt=""></a></p>
+            <p>西双版纳，北回归线上唯一一片绿洲，依托特色民族风情及气候优势，是中国知名旅游城市。随着全球旅游经济的发展，以西双版纳、清迈、琅勃拉邦为节点的旅游目的地和集散中心的“大金三角旅游区”正在逐渐形成。西双版纳凭借其独特的区位优势、水陆空立体交通网、丰富的旅游资源，逐渐成为进入金三角、中南半岛、新马泰的一线国际旅游门户。<a href="<?=$this->uri('/index/jiazhi/')?>">更多</a></p>
+            </article>
+            <article class="four columns skill-info">
+            <h3 class="dark-txt">九塔十二寨</h3>
+            <p><a href="<?=$this->uri('/index/jiazhi/')?>"><img src="<?=$this->assets('/module/yicheng/images/compare/07.jpg')?>" alt=""></a></p>
+            <p>告庄西双景为傣语，汉意为“九塔十二寨”，通过“一江两门九塔十二寨”的总体规划，打造“六大国际中心、五大景观带、三大综合体、东南亚特色综合业态，实现文化、休闲、度假、体验、娱乐、旅游、商贸、居住等综合功能。<a href="<?=$this->uri('/index/jiazhi/')?>">更多</a></p>
+            </article>
+            <article class="four columns skill-info">
+            <h3 class="dark-txt">二期升级力作绽放</h3>
+            <p><a href="<?=$this->uri('/index/jiazhi/')?>"><img src="<?=$this->assets('/module/yicheng/images/compare/06.jpg')?>" alt=""></a></p>
+            <p>高品质精装小户型江景公寓，东南亚风格、现代欧式风格顶级装修，奢华家具家电全套配备，24小时物业守护，真正实现提包即可入住，投资自住两相宜。从40平米到80平米多达25种户型供您选择，是专为追求生活品位的精英阶层量身打造的度假公寓；背山面水，一户一景，尽享舒适与奢华。度假休闲，观江赏月，独享世外桃园悠然空间。<a href="<?=$this->uri('/index/jiazhi/')?>">更多</a></p>
+            </article>
+        </div>
 
-
-
+    </div>
+    </section>
+</div>
+<!--HOME PAGE : ENDS--> 

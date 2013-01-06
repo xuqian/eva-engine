@@ -61,6 +61,15 @@ a:hover{
 	background:rgba(0, 0, 0, 0.8);
 }
 
+.box-static {
+	padding:20px 30px;
+	background:rgba(0, 0, 0, 0.8);
+	color:#FFF;
+}
+.box-static p {
+	color:#FFF;
+}
+
 .placeholder {
 	height:80px;
 }
@@ -146,9 +155,9 @@ a:hover{
 }
 
 #second{
-	background: url(../images/bg/02.jpg) 50% 0 no-repeat fixed;
+	background: url(../images/bg/08.jpg) 50% 0 no-repeat fixed;
 	color: white;
-	min-height: 936px;
+	min-height: 600px;
 	margin: 0 auto;
 	overflow: hidden;
 	/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/
@@ -167,32 +176,28 @@ a:hover{
 	z-index: 200;
 }
 #third{
-	background: url(../images/bg/03.jpg) 50% 0 no-repeat fixed;
+	background: url(../images/bg/02.jpg) 50% 0 no-repeat fixed;
 	color: white;
-	min-height: 1300px;
+	min-height: 600px;
 	margin: 0 auto;
 	overflow: hidden;
-	/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/}
-
-	#fourth{
-		background: url(../images/bg/07.jpg) 50% 0 no-repeat fixed;
-		color: white;
-		min-height: 1400px;
-		margin: 0 auto;
-		overflow: hidden;
-		/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/}
-		#fourth .bg{
-			min-height: 1300px;
-			margin: 0 auto;
-			position: absolute;
-			width: 900px;
-			z-index: 200;
+	box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);
 }
-#fifth{
-	background: url(../images/bg/05.jpg) 50% 0 no-repeat fixed;
+
+#fourth{
+	background: url(../images/bg/09.jpg) 50% 0 no-repeat fixed;
 	color: white;
-	min-height: 1900px;
-	/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/
+	min-height: 600px;
+	margin: 0 auto;
+	overflow: hidden;
+	box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);
+}
+
+#fifth{
+	color: white;
+	min-height: 650px;
+	background:#E7E7E5;
+	box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);
 }
 
 #sixth{
@@ -209,6 +214,28 @@ a:hover{
 	color: white;
 	min-height: 950px;
 	/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/
+}
+
+#overview{
+	background: url(../images/bg/02.jpg) 50% 0 no-repeat fixed;
+	color: white;
+	min-height: 950px;
+	/*box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);*/
+}
+
+#article{
+	background: url(../images/bg/03.jpg) 50% 0 no-repeat fixed;
+	color: white;
+	min-height: 950px;
+	box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);
+}
+
+
+#album{
+	background: url(../images/bg/05.jpg) 50% 0 no-repeat fixed;
+	color: white;
+	min-height: 1000px;
+	box-shadow:0 0 16px 0 rgba(0, 0, 0, 0.9);
 }
 
 #footer{
@@ -270,7 +297,7 @@ width: 80%;
 
 .main-heading{
 	text-transform:uppercase;
-	font-size:100px;
+	font-size:60px;
 	line-height:100px;
 	font-weight:normal;
 }
@@ -332,7 +359,6 @@ Page Name 1
 	border-bottom:solid 1px #ccc;
 }
 .features li span{
-	color:#000;
 	font-size:24px !important;
 	line-height:25px;
 	width:230px;
