@@ -49,12 +49,31 @@ class GroupSearchForm extends GroupForm
                 'value' => '',
             ),
         ),
+        'category' =>     array(
+            'name' => 'category',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Category',
+            ),
+            'attributes' => array(
+            ),
+        ),
         'visibility' => array(
             'options' => array(
                 'empty_option' => 'Select Visibility',
             ),
             'attributes' => array(
                 'value' => '',
+            ),
+        ),
+        'rows' =>     array(
+            'name' => 'rows',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Rows',
+            ),
+            'attributes' => array(
+                'value' => 10,
             ),
         ),
     );

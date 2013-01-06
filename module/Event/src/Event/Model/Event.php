@@ -8,6 +8,8 @@ use Eva\Api,
 class Event extends AbstractModel
 {
     protected $itemTableName = 'Event\DbTable\Events';
+    
+    protected $itemClass = 'Event\Item\Event';
 
     protected $userList;
 
@@ -67,11 +69,11 @@ class Event extends AbstractModel
         } else {
             $item = $item->self(array('*'));
         }
-
+        
         $this->trigger('get');
 
-        $this->trigger('get.event');
-        $this->trigger('get.eventcache');
+        $this->trigger('get.post');
+        $this->trigger('get.postcache');
 
         return $item;
     }
@@ -89,8 +91,8 @@ class Event extends AbstractModel
 
         $this->trigger('get');
 
-        $this->trigger('list.event');
-        $this->trigger('list.eventcache');
+        $this->trigger('list.post');
+        $this->trigger('list.postcache');
 
         return $item;
     }
@@ -117,10 +119,15 @@ class Event extends AbstractModel
         $eventUserItem->event_id = $itemId;
         $eventUserItem->user_id  = $item->user_id;
         $eventUserItem->create('createAdmin');
+        
+        $eventCountItem = $this->getItem('Event\Item\Count');
+        $eventCountItem->event_id = $itemId;
+        $eventCountItem->memberCount  = 1;
+        $eventCountItem->create();
 
         $this->trigger('create');
 
-        $this->trigger('create.event');
+        $this->trigger('create.post');
 
         return $itemId;
     }
@@ -134,7 +141,12 @@ class Event extends AbstractModel
         $item = $this->getItem();
         
         $this->trigger('save.pre');
-
+        
+        //Admin save item will remove all categories
+        $categoryEventItem = $this->getItem('Event\Item\CategoryEvent');
+        $categoryEventItem->event_id = $item->id;
+        $categoryEventItem->remove();
+        
         $item->save();
 
         if($item->hasLoadedRelationships()){
@@ -144,7 +156,7 @@ class Event extends AbstractModel
         }
         $this->trigger('save');
 
-        $this->trigger('save.event');
+        $this->trigger('save.post');
 
         return $item->id;
     }
@@ -170,7 +182,7 @@ class Event extends AbstractModel
 
         $this->trigger('remove');
     
-        $this->trigger('remove.event');
+        $this->trigger('remove.post');
 
         return true;
     
