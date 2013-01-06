@@ -22,10 +22,10 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
 
         <section class="row">
         <ul class="filter group"> 
-            <li class="current all"><a href="#">全部</a></li> 
-            <li class="yuanlin"><a href="#">园林景观</a></li> 
-            <li class="shijing"><a href="#">房产实景</a></li> 
-            <li class="shinei"><a href="#">平面展示</a></li> 
+            <!--<li class="current all"><a href="#">全部</a></li>-->
+            <li class="yuanlin"><a href="<?=$this->uri('/album/yuanlin')?>">园林景观</a></li> 
+            <li class="shijing"><a href="<?=$this->uri('/album/shijing')?>">房产实景</a></li> 
+            <li class="shinei"><a href="<?=$this->uri('/album/pingmianzhanshi')?>">平面展示</a></li> 
         </ul> 
         </section>
 

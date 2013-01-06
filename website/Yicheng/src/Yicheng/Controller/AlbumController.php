@@ -9,7 +9,9 @@ class AlbumController extends ActionController
     public function getAction()
     {
         $this->layout('layout/index');
-        $view = new ViewModel();
+        $view = new ViewModel(array(
+            'id' => $this->params('id')
+        ));
         return $view;
     }
 }
