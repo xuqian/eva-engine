@@ -234,5 +234,77 @@ class ProfileForm extends \User\Form\ProfileForm
                  'value' => '',
              ),
          ),
+
+         'industry' => array(
+             'name' => 'industry',
+             'type' => 'select',
+             'options' => array (
+                 'label' => 'Industry',
+                 'empty_option' => 'Select Industry',
+                 'value_options' => array(
+                     array(
+                         'label' => 'Food Production',
+                         'value' => 'Food Production',
+                     ),
+                     array(
+                         'label' => 'Wine Production',
+                         'value' => 'Wine Production',
+                     ),
+                     array(
+                         'label' => 'Hospitality',
+                         'value' => 'Hospitality',
+                     ),
+                     array(
+                         'label' => 'Restaurant',
+                         'value' => 'Restaurant',
+                     ),
+                     array(
+                         'label' => 'Bar and Club',
+                         'value' => 'Bar and Club',
+                     ),
+                     array(
+                         'label' => 'Distribution',
+                         'value' => 'Distribution',
+                     ),
+                     array(
+                         'label' => 'Trade',
+                         'value' => 'Trade',
+                     ),
+                     array(
+                         'label' => 'Hotel & Resort',
+                         'value' => 'Hotel & Resort',
+                     ),
+                     array(
+                         'label' => 'Media & Press',
+                         'value' => 'Media & Press',
+                     ),
+                     array(
+                         'label' => 'Marketing',
+                         'value' => 'Marketing',
+                     ),
+                     array(
+                         'label' => 'Communication',
+                         'value' => 'Communication',
+                     ),
+                     array(
+                         'label' => 'Consultancy',
+                         'value' => 'Consultancy',
+                     ),
+                     array(
+                         'label' => 'Educational Institution',
+                         'value' => 'Educational Institution',
+                     ),
+                     array(
+                         'label' => 'Research & Development',
+                         'value' => 'Research & Development',
+                     ),
+                     array(
+                         'label' => 'Other',
+                         'value' => 'Other',
+                     ),
+                 ),
+             ),
+         ),
+
      );
  }
