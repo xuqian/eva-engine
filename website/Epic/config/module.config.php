@@ -73,7 +73,7 @@ return array(
                 'options' => array(
                     'route' => '/register[/]',
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\UserController',
+                        'controller' => 'UserController',
                         'action' => 'register',
                     ),
                 ),
@@ -437,19 +437,29 @@ return array(
                     'constraints' => array(
                     ),
                     'defaults' => array(
-                        'controller' => 'Epic\Controller\UserController',
+                        'controller' => 'UserController',
                         'action' => 'index',
                     ),
                 ),
                 'priority' => 2,
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'list' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'list[/]',
+                            'defaults' => array(
+                                'action' => 'list'
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
                     'profile' => array(
                         'type' => 'Segment',
                         'options' => array(
                             'route' => '[:id][/]',
                             'constraints' => array(
-                                'id' => '[a-zA-Z0-9_-]+'
+                                'id' => '[a-zA-Z0-9_-]{5,}'
                             ),
                             'defaults' => array(
                                 'action' => 'get'
@@ -644,7 +654,6 @@ return array(
             'ResetController' => 'Epic\Controller\ResetController',
             'RegisterController' => 'Epic\Controller\RegisterController',
             'UserController' => 'Epic\Controller\UserController',
-            'Epic\Controller\UserController' => 'Epic\Controller\UserController',
             'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
             'MessagesController' => 'Epic\Controller\MessagesController',

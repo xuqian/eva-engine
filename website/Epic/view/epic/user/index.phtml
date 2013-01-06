@@ -2,143 +2,250 @@
 $title = 'Members';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
-$items = $this->items;
 
-$form = new Activity\Form\FollowForm();
-$form
-->setView($this)
-->useSubFormGroup()
-->setMethod('post')
-->setAction($this->uri('/activity/follow/'))
-->prepare();
-
-$unfollowForm = clone $form;
-$unfollowForm->setMethod('delete');
-
-
-$userSearchForm = $this->form ? $this->form : new User\Form\UserSearchForm();
+$userSearchForm = $this->form ? $this->form : new Epic\Form\UserSearchForm();
 $userSearchForm->setView($this)
      ->setMethod('get')
-     ->setAction($this->uri('/user/'))
+     ->setAction($this->uri('/user/list/'))
      ->prepare();
 
-?>
-
-<div class="container">
-    <div class="normal-page">
-        <div class="page-main"><div class="row"><div class="span12">
-                    <div class="row">
-                        <div class="span8">
-                            <div class="page-main-header">
-                                <a href="<?=$this->uri('/account/import/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-search"></i> Find Friends</a>
-                                <h3>
-                                    <?=$this->_('Members')?>
-                                    <?if($this->query['keyword']):?>
-                                    | Now Searching "<span class="highlight"><?=$this->query['keyword']?></span>"
-                                    <?endif?>
-                                </h3>
-                            </div>
-                            <div class="search-filter">
-                                <form <?=$this->formAttr($userSearchForm)?> class="form form-inline">
-                                    <?=$userSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
-                                    <?//=$userSearchForm->helper('gender', 'formSelect', array('class' => 'span2'))?>
-                                    <?//=$userSearchForm->helper('onlineStatus', 'formSelect', array('class' => 'span2'))?>
-                                    <?//=$userSearchForm->helper('country', 'formSelect', array('class' => 'span2'))?>  
-                                    <?=$userSearchForm->helper('city', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'City'))?>        
-                                    <?=$userSearchForm->helper('industry', 'formSelect', array('class' => 'input-large select2', 'placeholder' => 'Industry'))?>  
-                                    <button class="btn" type="submit"><?=$this->_('Filter Users')?></button>
-                                </form>
-                            </div>
-                            <div class="user-list vlist">
-                                <?foreach($items as $item):?>
-                                <div class="item">
-                                    <div class="item-absolute item-userface">
-                                        <a href="<?=$this->uri('/user/' . $item['userName'])?>" title="" class="userface"><img src="<?=$this->gravatarLink($item['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
-                                        <a href="<?=$this->uri('/messages/send/' . $item['userName'])?>" title="" class="item-quick-action btn btn-small btn-tiny-white">Message</a>
-                                    </div>
-                                    <div class="item-inline item-text">
-                                        <div class="item-title">
-                                            <h2><a href="<?=$this->uri('/user/' . $item['userName'])?>" class="item-user"><?=$item['userName']?></a></h2>
-                                            <?if($item['Profile']['city']):?>
-                                            <?=$item['Profile']['city']?>
-                                            <?endif?>
-                                            <?if($item['Profile']['city']):?>
-                                            <?=$item['Profile']['province']?>
-                                            <?endif?>
-                                            <?if($item['Profile']['country']):?>
-                                            <?=$this->locale('territory', $item['Profile']['country'])?>
-                                            <?endif?>
-                                        </div>
-                                        <div class="item-meta">
-                                            <table class="table-condensed">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Title: 
-                                                            <?if($item['gender'] =='male'):?>
-                                                            Mr.
-                                                            <?elseif($item['gender'] == 'femail'):?>
-                                                            Miss.
-                                                            <?endif?>
-
-                                                            <?if($item['firstName'] && $item['lastName']):?>
-                                                            <?=$item['lastName']?> <?=$item['firstName']?>
-                                                            <?endif?>
-                                                        </td>
-                                                        <td>Birthday : 
-                                                            <?if($item['Profile']['birthday'] && $item['Profile']['birthday'] != '0000-00-00'):?>
-                                                            <?=$item['Profile']['birthday']?>
-                                                            <?else:?>
-                                                            Secret
-                                                            <?endif?>
-                                                        </td>
-                                                        <td>Events : <a href="">0</a> Times</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="item-content">
-                                            <p><?=$item['Profile']['bio']?></p>
-                                        </div>
-                                    </div>
-                                    <div class="item-absolute item-action">
-
-                                        <?if(isset($item['Follow']) && $item['Follow']):?>
-                                        <form <?=$this->formAttr($unfollowForm)?>>
-                                            <?=$unfollowForm->restful();?>
-                                            <?=$unfollowForm->helper('user_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                            <?=$unfollowForm->helper('follower_id', array('class' => ''))?>
-                                            <?=$this->callback()?>
-                                            <button class="btn btn-small item-action-main">Unfollow</button>
-                                        </form>
-                                        <?else:?>
-                                        <form <?=$this->formAttr($form)?>>
-                                            <?=$form->restful();?>
-                                            <?=$form->helper('user_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
-                                            <?=$form->helper('follower_id', array('class' => ''))?>
-                                            <?=$this->callback()?>
-                                            <button class="btn btn-small item-action-main">Follow</button>
-                                        </form>
-                                        <?endif?>
+ ?>
+ <div class="container">
+     <header class="member-header">
+     <div class="row">
+         <div class="span3">
+             <h2><a href="/user/">Members</a></h2>
+         </div><!--page main right end-->
+         <div class="span9">
+             <nav class="nav-member">
+             <ul>
+                 <li><a class="active" href="">Connoisseur</a></li>
+                 <li><a href="">Professional</a></li>
+                 <li><a href="">VIP</a></li>
+                 <li><a href="">Corporate</a></li>
+             </ul>
+             </nav>
+         </div><!--page main left end-->
+     </div>
+     </header>
+ </div>
 
 
-                                    </div>
-                                </div>
-                                <?endforeach?>
-                            </div><!--activity-list end-->
 
-                            <?if($this->paginator):?>
-                            <?=$this->paginator->setPath('/user/')->setBaseQuery($this->query);?>
-                            <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                            <?endif;?>
+ <div class="container">
+     <div class="member-bg">
+         <div class="row">
+             <div class="span2">
+                 <div class="member-side">
+                     <div class="form-wrap">
+                         <form <?=$this->formAttr($userSearchForm)?> class="form form-inline">
+                             <div class="input-append">
+                                 <?=$userSearchForm->helper('keyword', array('class' => 'input-small', 'placeholder' => 'Keyword...'))?>
+                                 <span class="add-on"><button class="btn-search" type="submit"><i class="icon-search"></i></button></span>
+                             </div>
+                         </form>
+                     </div>
 
-                        </div><!--page main left end-->
-                        <div class="span3">
-                            <div class="page-extra">
-                                <?=$this->widget('Epic', 'widgets/userextra')?>
-                            </div>
-                        </div><!--page main right end-->
-                    </div>
-        </div></div></div><!--page-main end-->
-    </div><!-- normal end-->
-</div><!--container end-->
+                     <ul id="member-tab" class="nav nav-tabs">
+                         <li class="active">
+                         <a href="#by-industry">By Industry</a>
+                         </li>
+                         <li><a href="#by-city">By City</a></li>
+                     </ul>
+                     <div class="tab-content">
+                         <div id="by-industry" class="tab-pane fade in active">
+                             <?$industries = $userSearchForm->get('industry')->getValueOptions();?>
+                             <?if($industries):?>
+                             <ul class="member-section">
+                                 <?foreach($industries as $key => $industry):?>
+                                 <li><a href=""><?=$industry['label']?></a></li>
+                                 <?endforeach?>
+                             </ul>
+                             <?endif?>
+                         </div>
+                         <div id="by-city" class="tab-pane fade">
+                             <?$cities = $userSearchForm->get('city')->getValueOptions();?>
+                             <?if($cities):?>
+                             <ul class="member-section">
+                                 <?foreach($cities as $key => $citiarea):?>
+                                 <li><?=$citiarea['label']?></li>
+                                 <?foreach($citiarea['options'] as $city):?>
+                                 <li><a href=""><?=$city['label']?></a></li>
+                                 <?endforeach?>
+                                 <?endforeach?>
+                             </ul>
+                             <?endif?>
+                         </div>
+                     </div>
+                 </div>
+             </div><!--page main left end-->
+             <div class="span10 box-shadow-left">
+                 <div class="member-main">
+                     <div class="member-wall">
+                         <ul>
+                             <?for($i=0; $i<37;$i++):?>
+                             <li><a href="/user/list">
+                                 <img alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_70,w_70.jpg">
+                                 <div class="mask">User Name</div>
+                             </a></li>
+                             <?endfor?>
+                         </ul>
+                     </div>
 
+
+                     <div class="row-fluid">
+                         <ul class="thumbnails member-thumbnails">
+                             <?for($i=0; $i<4;$i++):?>
+                             <li class="span3">
+                             <div class="thumbnail">
+                                 <div class="thumbnail-title thumbnail-title-alt">
+                                     Hot Members
+                                 </div>
+                                 <div class="thumbnail-list">
+                                     <a href="">
+                                         <img class="medium" alt="" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_200,w_200.jpg" />
+                                     </a>
+                                     <div class="thumbnail-line row-fluid">
+                                         <?for($j=0; $j<4;$j++):?>
+                                         <a href="/user/list" class="span3"><img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg"></a>
+                                         <?endfor?>
+                                     </div>
+                                     <div class="row-fluid">
+                                         <?for($j=0; $j<4;$j++):?>
+                                         <a href="/user/list" class="span3"><img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg"></a>
+                                         <?endfor?>
+                                     </div>
+                                 </div>
+                                 <div class="caption">
+                                     <p><a href="">5231 Members</a></p>
+                                 </div>
+                             </div>
+                             </li>
+                             <?endfor?>
+                         </ul>
+                     </div>
+
+                     <div class="page-header border-header">
+                         <h3>Hot Industries</h3>
+                     </div>
+
+
+                     <div class="member-category-wrap">
+                         <div class="row-fluid">
+                             <ul class="member-category">
+                                 <?for($i=0; $i<3;$i++):?>
+                                 <li class="span4">
+                                 <div class="thumbnail">
+                                     <div class="thumbnail-title">
+                                         <small class="pull-right"><a href="">More</a></small>
+                                         <a href="">Food Production</a>
+                                     </div>
+                                     <div class="thumbnail-list">
+                                         <div class="thumbnail-line row-fluid">
+                                             <?for($j=0; $j<4;$j++):?>
+                                             <a href="/user/list" class="span3">
+                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
+                                                 <span class="name">User Name</span>
+                                             </a>
+                                             <?endfor?>
+                                         </div>
+                                         <div class="thumbnail-line row-fluid">
+                                             <?for($j=0; $j<4;$j++):?>
+                                             <a href="/user/list" class="span3">
+                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
+                                                 <span class="name">User Name</span>
+                                             </a>
+                                             <?endfor?>
+                                         </div>
+                                         <div class="thumbnail-line row-fluid">
+                                             <?for($j=0; $j<4;$j++):?>
+                                             <a href="/user/list" class="span3">
+                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
+                                                 <span class="name">User Name</span>
+                                             </a>
+                                             <?endfor?>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 </li>
+                                 <?endfor?>
+                             </ul>
+                         </div>
+                     </div>
+
+
+                     <div class="member-category-wrap">
+                         <div class="row-fluid">
+                             <ul class="member-category">
+                                 <?for($i=0; $i<3;$i++):?>
+                                 <li class="span4">
+                                 <div class="thumbnail">
+                                     <div class="thumbnail-title">
+                                         <small class="pull-right"><a href="">More</a></small>
+                                         <a href="">Food Production</a>
+                                     </div>
+                                     <div class="thumbnail-list">
+                                         <div class="thumbnail-line row-fluid">
+                                             <?for($j=0; $j<4;$j++):?>
+                                             <a href="/user/list" class="span3">
+                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
+                                                 <span class="name">User Name</span>
+                                             </a>
+                                             <?endfor?>
+                                         </div>
+                                         <div class="thumbnail-line row-fluid">
+                                             <?for($j=0; $j<4;$j++):?>
+                                             <a href="/user/list" class="span3">
+                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
+                                                 <span class="name">User Name</span>
+                                             </a>
+                                             <?endfor?>
+                                         </div>
+                                         <div class="thumbnail-line row-fluid">
+                                             <?for($j=0; $j<4;$j++):?>
+                                             <a href="/user/list" class="span3">
+                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
+                                                 <span class="name">User Name</span>
+                                             </a>
+                                             <?endfor?>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 </li>
+                                 <?endfor?>
+                             </ul>
+                         </div>
+                     </div>
+
+
+                 </div><!--member main end-->
+             </div><!--page main right end-->
+         </div><!-- row end-->
+     </div><!-- page-bg end-->
+ </div><!-- container end-->
+
+
+ <script>
+     eva.ready(function(){
+             $('#member-tab a').click(function (e) {
+                     e.preventDefault();
+                     $(this).tab('show');
+             });
+
+             $(".member-wall li").eq(13).addClass('medium');
+             $(".member-wall li").eq(19).addClass('large');
+
+             var container = $(".member-wall");
+             var userWall = function(){
+                     container.masonry({
+                             itemSelector : 'li',
+                             //columnWidth : $(window).width() > 800 ? 320 : 260,
+                             isAnimated: true
+                     });
+             }
+
+             eva.loader(eva.s([
+             '/lib/js/jquery/jquery.masonry.js'
+             ]), userWall);
+     });
+ </script>
