@@ -2,7 +2,11 @@
 $user = $this->user;
 $viewAsGuest = $this->viewAsGuest;
 ?>
-
+<div class="profile-cover"
+    <?if($user['Header']):?>
+    style="background-image:url(<?=$this->thumb($user['Header'][0]['Thumb'], array('h_250', 'w_1200', 'c_fill'))?>);"
+    <?endif?>
+>
 <?if($viewAsGuest):?>
 <ul class="nav profile-nav">
     <li class="" data-highlight-url="^/user/\w+/?$"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$this->_('Profile')?></a></li>
@@ -21,3 +25,4 @@ $viewAsGuest = $this->viewAsGuest;
 </ul>
 <?endif?>
 <p class="profile-url"><a href="<?=$this->serverUrl() . '/user/' . $user['userName']?>"><?=$this->serverUrl() . '/user/' . $user['userName']?></a></p>
+</div>

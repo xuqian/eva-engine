@@ -56,13 +56,8 @@ function isPaidRole($roles)
 }
 ?>
 <div class="thumbnail profile-face">
-    <?if($viewAsGuest):?>
-    <a href="<?=$this->uri('/user/' . $user['userName'])?>">
-    <?else:?>
-    <a href="<?=$this->uri('/account/profile/')?>">
-    <?endif?>
-    
-    <img src="<?=$user['Avatar'] ? $this->thumb($user['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="175" height="175" />
+    <a href="<?=$viewAsGuest ? $this->uri('/user/' . $user['userName']) : $this->uri('/account/profile/')?>">
+        <img src="<?=$user['Avatar'] ? $this->thumb($user['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="175" height="175" />
     </a>
     <div class="caption">
         <a class="highlight highlight-large" href="<?=$this->uri('/my/friend/')?>"><?=$user['FriendsCount']['friendsCount']?></a> Friends
@@ -88,11 +83,11 @@ function isPaidRole($roles)
             <tr>
                 <td>Title: 
                     <?if($user['gender'] =='male'):?>
-                        Mr.
+                    Mr.
                     <?elseif($user['gender'] == 'femail'):?>
-                        Miss.
+                    Miss.
                     <?endif?>
-                    
+
                     <?if($user['firstName'] && $user['lastName']):?>
                     <?=$user['lastName']?> <?=$user['firstName']?>
                     <?endif?>
@@ -157,7 +152,7 @@ function isPaidRole($roles)
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/user/' . $this->user['userName'])?>"><i class="icon-mini icon-eye-open"></i> View As Guest</a>
                 </td>
                 <td colspan="2" class="social">
-                <?endif?>
+                    <?endif?>
                     Social Networking : 
                     <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol facebook <?=checkOauth('facebook', $user) ? 'highlight' : ''?>">facebook</span></a>
                     <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>">twitter</span></a>

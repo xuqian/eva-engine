@@ -80,11 +80,60 @@ class AccountController extends ActionController
         );
     }
 
+    public function headerAction()
+    {
+        $request = $this->getRequest();
+        $user = Auth::getLoginUser();
+        $itemModel = Api::_()->getModel('User\Model\User');
+        $item = $itemModel->getUser($user['id']);
+
+        $item = $item->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'User\Item\User::Header' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            )
+        ));
+        return array(
+            'item' => $item,
+        );
+    }
+
+    public function changeheaderAction()
+    {
+        $request = $this->getRequest();
+        $postData = $request->getPost();
+
+        $form = new \User\Form\ImageUserForm();
+        $form->bind($postData);
+
+        if ($form->isValid()) {
+            $postData = $form->getData();
+            $itemModel = Api::_()->getModel('User\Model\ImageUser');
+
+            $itemId = $itemModel->setItem($postData)->changeImage();
+            $this->redirect()->toUrl('/account/header/');
+        } else {
+            //p($form->getMessages());
+        }
+
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/account/header');
+        $viewModel->setVariables(array(
+            'form' => $form
+        ));
+        return $viewModel;
+    }
+
+
     public function settingAction()
     {
         $request = $this->getRequest();
-        $form = array();
-
         $user = Auth::getLoginUser();
         $itemModel = Api::_()->getModel('User\Model\User');
         $item = $itemModel->getUser($user['id']);
@@ -104,7 +153,6 @@ class AccountController extends ActionController
         ));
         return array(
             'item' => $item,
-            'form' => $form,
         );
     }
 

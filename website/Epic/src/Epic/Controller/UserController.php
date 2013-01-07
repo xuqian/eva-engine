@@ -40,10 +40,13 @@ class UserController extends ActionController
                 ),
                 'FriendsCount' => array(
                 ),
-                
             ),
             'proxy' => array(
                 'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
+                'User\Item\User::Header' => array(
                     '*',
                     'getThumb()'
                 ),
