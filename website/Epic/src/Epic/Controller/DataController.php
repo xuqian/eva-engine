@@ -12,6 +12,23 @@ class DataController extends RestfulModuleController
     protected $renders = array(
         'restIndexGroup' => 'blank',    
     );
+    
+    public function newsletterAction()
+    {
+        $this->changeViewModel('json');
+
+        $user = \Core\Auth::getLoginUser();
+        if(!$user) {
+            return new JsonModel(array(
+                'item' => null
+            ));
+        }
+        $itemModel = Api::_()->getModel('Core\Model\Newsletter');
+        $item = $itemModel->getNewsletter($user['id'])->toArray();
+        return new JsonModel(array(
+            'item' => $item,
+        ));
+    }
 
     public function blogAction()
     {
@@ -37,7 +54,7 @@ class DataController extends RestfulModuleController
             $query['group_id'] = $groupId;
             $query['groupCategory'] = $groupCategrory;
             $query['rows'] = $rows;
-            
+
             $itemModel = Api::_()->getModel('Group\Model\Post'); 
             $items = $itemModel->setItemList($query)->getPostList(array(
                 'self' => array(
