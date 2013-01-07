@@ -100,7 +100,7 @@ class RegisterForm extends \User\Form\UserForm
                 'stringLength' => array (
                     'name' => 'StringLength',
                     'options' => array (
-                        'min' => '2',
+                        'min' => '5',
                         'max' => '20',
                     ),
                 ),
