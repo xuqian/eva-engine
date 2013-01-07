@@ -32,8 +32,8 @@ $jsEvents = array();
 foreach($this->eventList as $eventDay){
     $jsEvents[] = array(
         'title' => $eventDay['title'],
-        'start' => $this->DateTime()->jsTime($eventDay['startDay']),
-        'end' => $this->DateTime()->jsTime($eventDay['endDay']),
+        'start' => $this->DateTime()->jsTime($eventDay['startDay'] . ' ' . $eventDay['startTime']),
+        'end' => $this->DateTime()->jsTime($eventDay['endDay'] . ' ' . $eventDay['endTime']),
         //'allDay' => $eventDay['isFullDayEvent'] ? true : false,
         'allDay' => false,
         'url' => $this->uri('/event/' . $eventDay['urlName']),
