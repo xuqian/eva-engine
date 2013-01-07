@@ -885,6 +885,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .page-header.border-header{border-bottom:2px solid #D8D8D8;margin:20px 0;}.page-header.border-header h3{font-size:16px;line-height:30px;}
 .page-header.border-header h4{font-size:14px;line-height:25px;color:#000;font-weight:bold;}
 .page-header.border-header small{font-size:12px;line-height:30px;}
+#to-top{display:none;text-decoration:none;position:fixed;bottom:10px;right:10px;overflow:hidden;width:51px;height:51px;line-height:51px;border:none;background:#666;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;text-align:center;font-size:40px;color:#FFF;}
 #header{background:#000;height:50px;width:100%;}#header .navbar{width:1200px;margin:0 auto;}
 #header .navbar-inner{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;background:#000;border:0;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);}
 #header .nav>li>a{margin-right:0px;padding:0 10px;padding-top:14px;border-bottom:4px solid #000;height:32px;font-size:15px;text-align:center;background:#000;-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;transition:all 0.5s ease-in-out;font-family:Helvetica,FreeSans,"Liberation Sans",Helmet,Arial,sans-serif;}
