@@ -27,6 +27,18 @@ $week = $this->week;
 $prevPath = $this->prevPath;
 $nextPath = $this->nextPath;
 $dayPath = $this->dayPath;
+
+$jsEvents = array();
+foreach($this->eventList as $eventDay){
+    $jsEvents[] = array(
+        'title' => $eventDay['title'],
+        'start' => $this->DateTime()->jsTime($eventDay['startDay']),
+        'end' => $this->DateTime()->jsTime($eventDay['endDay']),
+        //'allDay' => $eventDay['isFullDayEvent'] ? true : false,
+        'allDay' => false,
+        'url' => $this->uri('/event/' . $eventDay['urlName']),
+    );
+}
 ?>
 
 <div class="container">
@@ -49,6 +61,7 @@ $dayPath = $this->dayPath;
             </div><!--page main right end-->
             <div class="span8">
                 <div class="event-main">
+                    <div id="calendar-day"></div>
                     <div id="event-calendar-wrap">
                     <table class="event-calendar table table-bordered table-condensed table-striped hide">
                         <thead>
@@ -233,25 +246,6 @@ $dayPath = $this->dayPath;
 
 <script>
 eva.ready(function(){
-        $(".nav-week a").on('click', function(){
-                var calendar = $(".event-calendar");
-                if(calendar.is(":visible")) {
-                    calendar.fadeOut();
-                    $(".event-thumbnails").fadeIn();
-                } else {
-                    calendar.fadeIn();
-                    $(".event-thumbnails").fadeOut();
-                }
-                return false;
-        });
-
-        $("#event-calendar-wrap").on('click', '.prev a, .next a', function(){
-                $("#event-calendar-wrap").load($(this).attr('href') + ' .event-calendar', function(){
-                    $(".event-calendar").fadeIn();
-                });
-                return false;
-        });
-
         $(".event-new-nav a").on('click', function(){
                 var link = $(this);
                 var index = link.parent().index();
@@ -287,5 +281,76 @@ eva.ready(function(){
                 }
                 return false;
         });
+
+        /*
+        $(".nav-week li:last a").on('click', function(){
+                var calendar = $(".event-calendar");
+                if(calendar.is(":visible")) {
+                    calendar.fadeOut();
+                    $(".event-thumbnails").fadeIn();
+                } else {
+                    calendar.fadeIn();
+                    $(".event-thumbnails").fadeOut();
+                }
+                return false;
+        });
+
+        $("#event-calendar-wrap").on('click', '.prev a, .next a', function(){
+                $("#event-calendar-wrap").load($(this).attr('href') + ' .event-calendar', function(){
+                    $(".event-calendar").fadeIn();
+                });
+                return false;
+        });
+        */
+
+
+
+        var viewByDay = function(){
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+                var calendar = $('#calendar-day');
+                var events = [ { title: 'All Day Event', start: new Date(y, m, 1) }, { title: 'Long Event', start: new Date(y, m, d-5), end: new Date(y, m, d-2) }, { id: 999, title: 'Repeating Event', start: new Date(y, m, d-3, 16, 0), allDay: false }, { id: 999, title: 'Repeating Event', start: new Date(y, m, d+4, 16, 0), allDay: false }, { title: 'Meeting', start: new Date(y, m, d, 10, 30), allDay: false }, { title: 'Lunch', start: new Date(y, m, d, 12, 0), end: new Date(y, m, d, 14, 0), allDay: false }, { title: 'Birthday Party', start: new Date(y, m, d+1, 19, 0), end: new Date(y, m, d+1, 22, 30), allDay: false }, { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/' } ];
+                var events = <?=\Zend\Json\Json::encode($jsEvents)?>;
+                var options = {
+                        header: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'month,agendaWeek,agendaDay',
+                                left: '',
+                                center: '',
+                                right: ''
+                        },
+                        editable: false,
+                        defaultView : 'agendaDay',
+                        events: events
+                };
+
+                calendar.fullCalendar(options);
+                calendar.hide();
+                $(".nav-week li a").on('click', function(){
+                                calendar.show();
+                                if($(this).parent().index() == 7){
+                                    calendar.fullCalendar( 'changeView', 'month' );
+                                        //options.defaultView = 'month';
+                                } else {
+                                    calendar.fullCalendar( 'changeView', 'agendaDay' );
+                                    var gotoDate = new Date(Date.parse($(this).attr('data-date')));
+                                    calendar.fullCalendar( 'gotoDate', gotoDate.getFullYear(), gotoDate.getMonth(), gotoDate.getDate() );
+                                    //options.defaultView = 'agendaDay';
+                                    //calendar.html('').fullCalendar(options);
+                                }
+                                calendar.hide();
+                                calendar.fadeIn();
+                                $(".event-thumbnails").fadeOut();
+                        return false;
+                });
+        };
+        eva.loadcss(eva.s('/lib/js/jquery/fullcalendar/fullcalendar.css'));
+        eva.loader(eva.s([
+        '/lib/js/jquery/fullcalendar/fullcalendar.js'
+        ]), viewByDay);
+
 });
 </script>

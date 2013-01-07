@@ -98,6 +98,8 @@ class EventController extends ActionController
         $calendarArray = $calendarModel->getEventCalendar(array(
             'startDay' => $startDay,
         ));
+        $eventList = $calendarModel->getEventList();
+        $eventList = $eventList ? $eventList->toArray() : array();
         $today = $calendarArray['today']['datedb'];
         $week = array();
         foreach($calendarArray['days'] as $weekArray){
@@ -117,6 +119,7 @@ class EventController extends ActionController
             'week' => $week,
             'form' => $form,
             'items' => $items,
+            'eventList' => $eventList,
             'query' => $query,
             'paginator' => $paginator,
         );      
