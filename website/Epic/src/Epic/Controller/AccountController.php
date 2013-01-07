@@ -65,8 +65,15 @@ class AccountController extends ActionController
                         '*'
                     ),
                 ),
+                'proxy' => array(
+                    'User\Item\User::Avatar' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                )
             ));
         }
+
         return array(
             'item' => $item,
             'form' => $form,

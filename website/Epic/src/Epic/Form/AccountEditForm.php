@@ -34,6 +34,7 @@ class AccountEditForm extends UserCreateForm
         'firstName',
         'lastName',
         'gender',
+        'avatar_id',
         'language',
         'role',
         'Profile' => array(

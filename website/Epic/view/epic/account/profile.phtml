@@ -26,13 +26,14 @@ $form->setView($this)
                         <div class="page-main-header">
                             <h3><?=$this->_('Edit Profile')?></h3>
                         </div>
-                        <form <?=$this->formAttr($form)?> class="form">
+                        <form id="profile-edit-form" <?=$this->formAttr($form)?> class="form">
                             <?=$form->restful();?>
                             <?=$form->helper('id');?>
                             <input type="hidden" name="callback" value="<?=$this->uri('/account/profile/')?>" />
 
                             <fieldset class="form-horizontal">
 
+                                <!--
                                 <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                                     <div class="controls">
                                         <a class="" href="http://gravatar.com">
@@ -43,15 +44,26 @@ $form->setView($this)
                                         </p>
                                     </div>
                                 </div>
-                                <!--
-                                <div class="control-group <?=$form->isError('screenName') ? 'error' : '';?>">
-                                    <?=$form->helper('screenName', 'label', array('class' => 'control-label'))?>
+                                -->
+
+                                <div class="control-group">
+                                    <?=$form->helper('avatar_id', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <?=$form->helper('screenName', array('class' => ''))?>        
-                                        <div class="help-block"><?=$form->helper('screenName', 'formElementErrors')?></div>
+                                        <div id="avatar-uploader" class="row <?=$item['Avatar'] ? 'hide' : ''?>">
+                                            <div class="span4">
+                                                <?=$form->helper('avatar_id');?>
+                                                <?=$this->widget('File', 'file/upload')?>
+                                            </div>
+                                        </div>
+                                        <?if($item['Avatar']):?>
+                                        <img id="avatar-view" src="<?=$this->thumb($item['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill'))?>" alt="" class="img-polaroid" data-default="<?=$this->assets('/module/epic/img/default_avatar.png')?>" />
+                                        <br /><a href="#" id="show-avatar-uploader">Change</a> or <a id="delete-avatar" href="#" >Delete</a>
+                                        <?else:?>
+                                        <img  id="avatar-view" src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-polaroid" />
+                                        <?endif?>
                                     </div>
                                 </div>
-                                -->
+
                                 <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
                                     <?=$form->helper('firstName', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -197,3 +209,27 @@ $form->setView($this)
         </div><!-- #body end-->
     </div><!-- normal end-->
 </div><!--container end-->
+
+<script>
+eva.ready(function(){
+    var form = $("#profile-edit-form");
+    var uploader = $('#singlefileupload');
+    uploader.bind('fileuploaddone', function (e, data) {
+            var file = data.result[0];
+            form.find('input[name="avatar_id"]').val(file.id);
+            $("#avatar-view").hide();
+    });
+
+    $("#show-avatar-uploader").click(function(){
+        $("#avatar-uploader").show();
+        return false;
+    });
+
+    $("#delete-avatar").click(function(){
+        form.find('input[name="avatar_id"]').val('0');
+        $("#avatar-view").attr("src", $("#avatar-view").attr("data-default"));
+        $("#avatar-uploader").show();
+        return false;
+    });
+});
+</script>

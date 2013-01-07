@@ -90,10 +90,14 @@ class DataController extends RestfulModuleController
                     'id',
                     'userName',
                     'email',
+                    'avatar_id',
                 ),
             ))->toArray(array(
-                'self' => array(
-                    'getEmailHash()',
+                'proxy' => array(
+                    'User\Item\User::Avatar' => array(
+                        '*',
+                        'getThumb()'
+                    ),
                 ),
             ));
             $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));

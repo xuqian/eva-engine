@@ -62,7 +62,13 @@
 {% if(o.items.length > 0) { %}
 {% for (var i=0, item; item=o.items[i]; i++) { %}
 <div class="item">
-    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface">
+        {% if(item.User.Avatar) { %}
+        <img src="{%=eva.thumb(item.User.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="img-rounded" width="50" height="50" />
+        {% } else { %}
+        <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="50" height="50" />
+        {% } %}
+    </a>
     <div class="item-inline item-text">
         <div class="text-content">
             <div class="item-title">

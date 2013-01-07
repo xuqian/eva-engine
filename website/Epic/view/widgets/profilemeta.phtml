@@ -61,7 +61,8 @@ function isPaidRole($roles)
     <?else:?>
     <a href="<?=$this->uri('/account/profile/')?>">
     <?endif?>
-        <img alt="userface" src="<?=$this->gravatarLink($user['email'], 175)?>" width="175" height="175">
+    
+    <img src="<?=$user['Avatar'] ? $this->thumb($user['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="175" height="175" />
     </a>
     <div class="caption">
         <a class="highlight highlight-large" href="<?=$this->uri('/my/friend/')?>"><?=$user['FriendsCount']['friendsCount']?></a> Friends

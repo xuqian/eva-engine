@@ -43,6 +43,10 @@ class UserController extends ActionController
                 
             ),
             'proxy' => array(
+                'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
                 'Oauth\Item\Accesstoken::Oauth' => array(
                     '*'
                 ),
