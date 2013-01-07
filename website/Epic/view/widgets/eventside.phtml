@@ -18,13 +18,21 @@ $user = $this->user;
     </div> 
     <?endif?>
 
+<script id="event-subscription" type="text/x-tmpl" data-url="<?=$this->uri('/data/newsletter/', array('user_id' => $this->user['id']))?>">
     <div class="event-subscription">
         <p>Receive free new event notifications:</p>
-        <form>
+        <form method="post" action="/core/newsletter/">
+            <?=$this->callback()?>
+            {% if(o.item.user_id) { %} 
+            <input type="hidden" value="delete" name="_method"> 
+            <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Unsubscription Newsletters</button>
+            {% }else{ %}
+            <input type="hidden" value="post" name="_method"> 
             <button class="btn btn-orange"><i class="icon-mini icon-envelope-alt"></i> Subscription Newsletters</button>
+            {% } %}
         </form>
     </div>
-
+</script>
 
     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/eventuser/', array())?>">
         <div class="page-header border-header">
