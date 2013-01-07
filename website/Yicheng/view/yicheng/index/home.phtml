@@ -95,3 +95,25 @@ $thumbUrl = $config['upload']['storage']['default']['thumburl'];
     <a href="<?=$this->uri('/index/overview/')?>"><img src="<?=$this->assets('/module/yicheng/images/bg/13.jpg')?>" width="100%" /></a>
 </div>
 <!--HOME PAGE : ENDS--> 
+
+<div id="fixed-footer" class="row ">
+    <div class="tagline">
+        <div class="main-nav">
+            <p class="pull-right">销售热线：0086-010-58205909 / 58205910</p>
+            <p>北京市朝阳区万达广场A座21层 </p>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#fixed-footer").css({
+            position : 'fixed',
+            bottom : 0
+    });
+
+    $("#fixed-footer p").css({
+            margin : 0
+    });
+});
+</script>
