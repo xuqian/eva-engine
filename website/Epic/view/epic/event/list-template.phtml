@@ -43,7 +43,7 @@ $unjoinForm->setMethod('delete');
             <?endif?>
         </div>
         <a class="pull-left" href="<?=$url;?>">
-            <?if(isset($item['File'])):?>
+            <?if(isset($item['File']) && $item['File']):?>
             <img class="media-object img-rounded" src="<?=$this->thumb($item['File'][0]['Thumb'], array('c_fill', 'w_90', 'h_90'))?>" width="90" />
             <?else:?>
             <img class="media-object img-rounded" src="<?=$this->assets('/module/epic/img/event-default.jpg')?>" width="90" />

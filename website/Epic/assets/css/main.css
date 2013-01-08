@@ -1114,6 +1114,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-calendar td.today{background:#FFFFCC;}
 .event-calendar .label-event{width:86px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#e1500d;}
 .event-calendar .passed .label-event{background:#CCC;}
+.fc-event-title{overflow:hidden;font-size:12px;height:15px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .event-detail .pull-left{margin-right:30px;}
 .event-detail .media-heading{font-size:20px;font-weight:bold;}
 .event-detail .dl-horizontal dt{text-align:left;width:100px;}
