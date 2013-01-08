@@ -63,6 +63,7 @@ foreach($this->eventList as $eventDay){
             <div class="span8">
                 <div class="event-main">
                     <div id="calendar-day"></div>
+                    <?if(0):?>
                     <div id="event-calendar-wrap">
                     <table class="event-calendar table table-bordered table-condensed table-striped hide">
                         <thead>
@@ -109,7 +110,8 @@ foreach($this->eventList as $eventDay){
                             <?endforeach;?>
                         </tbody>
                     </table>
-                    </div>
+                </div>
+                <?endif?>
 
                     <script id="event-thumbnails" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('recommend' => 1,'rows' => 28))?>">
                     <div class="event-thumbnails">
