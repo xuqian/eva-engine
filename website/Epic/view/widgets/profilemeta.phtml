@@ -168,41 +168,41 @@ function isPaidRole($roles)
                         <?=$this->callback()?>
                         <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-minus"></i> Unfollow</button>
                     </form>
-                    <form <?=$this->formAttr($friendForm)?> class="friend-form pull-left relationship-form">
+                    <form <?=$this->formAttr($friendForm)?> class="friend-form pull-left relationship-form hide showon-removed showon-refused">
                         <?=$friendForm->restful();?>
                         <?=$friendForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Add Friend</button>
+                        <button class="btn btn-orange btn-mini"><i class="icon-mini icon-plus"></i> Add Friend</button>
                     </form>
-                    <form <?=$this->formAttr($approveForm)?> class="approve-form pull-left relationship-form">
+                    <form <?=$this->formAttr($approveForm)?> class="approve-form pull-left relationship-form hide showon-pending">
                         <?=$approveForm->restful();?>
                         <?=$approveForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Approve Request</button>
+                        <button class="btn btn-orange btn-mini"><i class="icon-mini icon-ok"></i> Approve Request</button>
                     </form>
-                    <form <?=$this->formAttr($refuseForm)?> class="refuse-form pull-left relationship-form">
+                    <form <?=$this->formAttr($refuseForm)?> class="refuse-form pull-left relationship-form hide showon-pending">
                         <?=$refuseForm->restful();?>
                         <?=$refuseForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Refuse</button>
+                        <button class="btn btn-orange btn-mini"><i class="icon-mini icon-remove"></i> Refuse</button>
                     </form>
-                    <form <?=$this->formAttr($unfriendForm)?> class="unfriend-form pull-left relationship-form">
+                    <form <?=$this->formAttr($unfriendForm)?> class="unfriend-form pull-left relationship-form hide showon-approved">
                         <?=$unfriendForm->restful();?>
                         <?=$unfriendForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Unfriend</button>
+                        <button class="btn btn-orange btn-mini"><i class="icon-mini icon-remove"></i> Unfriend</button>
                     </form>
-                    <form <?=$this->formAttr($blockForm)?> class="block-form pull-left relationship-form">
+                    <form <?=$this->formAttr($blockForm)?> class="block-form pull-left relationship-form showon-removed hide showon-refused">
                         <?=$blockForm->restful();?>
                         <?=$blockForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Block</button>
+                        <button class="btn btn-gray btn-mini"><i class="icon-mini icon-remove"></i> Block</button>
                     </form>
-                    <form <?=$this->formAttr($unblockForm)?> class="unblock-form pull-left relationship-form">
+                    <form <?=$this->formAttr($unblockForm)?> class="unblock-form pull-left relationship-form hide  showon-blocked">
                         <?=$unblockForm->restful();?>
                         <?=$unblockForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Unblock</button>
+                        <button class="btn btn-gray btn-mini"><i class="icon-mini icon-undo"></i> Unblock</button>
                     </form>
 
 

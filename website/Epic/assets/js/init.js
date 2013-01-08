@@ -165,11 +165,18 @@ eva.checkFollow = function(){
 		type : 'get',
 		data : {"user_id" : userid},
 		success : function(response){
+			var forms = $(".relationship-form");
 			if(!response.item || response.item.length < 1) {
+				forms.eq(0).show();
 				return false;
 			}
 			$(".follow-form").toggleClass('hide');
 			$(".unfollow-form").toggleClass('hide');
+
+			
+			var relationship = response.item[0].relationshipStatus;
+			forms.filter('.showon-' + relationship).show();
+
 		}
 	});
 }
