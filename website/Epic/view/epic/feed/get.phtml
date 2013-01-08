@@ -18,7 +18,6 @@ $deleteForm->setView($this)
 ->setAction($this->uri('/feed/' . $item['messageHash']))
 ->bind($item)
 ->prepare();
-
 ?>
 
 <div class="page-inner">
@@ -42,7 +41,9 @@ $deleteForm->setView($this)
 
                         <div class="activity-list vlist">
                             <div class="item">
-                                <a href="<?=$this->uri('/user/' . $item['user_id'])?>" title="" class="item-absolute item-userface"><img src="<?=$this->gravatarLink($item['User']['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                <a href="<?=$this->uri('/user/' . $item['user_id'])?>" title="" class="item-absolute item-userface">
+                                    <img src="<?=$item['User']['Avatar'] ? $this->thumb($item['User']['Avatar']['Thumb'], array('h_60', 'w_60', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="60" height="60" class="img-rounded"/>
+                                </a>
                                 <div class="item-inline item-text span6">
                                     <div class="item-content">
                                         <div class="item-title"><a href="<?=$this->uri('/user/' . $item['user_id'])?>" class="item-user"><?=$item['User']['userName']?></a> Said:</div>
@@ -132,7 +133,9 @@ $deleteForm->setView($this)
 
                                         <?foreach($items as $item):?>
                                         <div class="item-sub">
-                                            <a href="<?=$this->uri('/user/' . $item['user_id'])?>" title="" class="item-absolute item-sub-userface"><img src="<?=$this->gravatarLink($item['User']['email'], 30)?>" alt="" class="img-rounded" width="30" height="30" /></a>
+                                            <a href="<?=$this->uri('/user/' . $item['user_id'])?>" title="" class="item-absolute item-sub-userface">
+                                                <img src="<?=$item['User']['Avatar'] ? $this->thumb($item['User']['Avatar']['Thumb'], array('h_30', 'w_30', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="30" height="30" class="img-rounded"/>
+                                            </a>
                                             <div class="item-sub-content">
                                                 <div class="item-sub-title">
                                                     <a href="<?=$this->uri('/user/' . $item['user_id'])?>" class="item-sub-user"><?=$item['User']['userName']?></a>

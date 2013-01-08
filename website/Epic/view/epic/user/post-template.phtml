@@ -29,7 +29,7 @@ $item = $this->item;
         <div id="comment<?=$comment['id']?>" class="media">
             <?if($comment['User']):?>
             <a class="pull-left" href="<?=$this->uri('/user/' . $comment['User']['userName'])?>">
-                <img class="thumbnail media-object" alt="<?=$comment['user_name']?>" src="<?=$this->gravatarLink($comment['User']['email'], 50)?>" />
+                <img src="<?=$comment['User']['Avatar'] ? $this->thumb($comment['User']['Avatar']['Thumb'], array('h_50', 'w_50', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="50" height="50" class="thumbnail media-object" />
             </a>
             <?else:?>
             <span class="pull-left">

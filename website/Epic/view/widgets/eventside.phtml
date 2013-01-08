@@ -5,7 +5,7 @@ $user = $this->user;
     <?if($user):?>
     <div class="usercard media">
         <a class="pull-left" href="<?=$this->uri('/user/' . $user['userName'])?>">
-            <img alt="userface" src="<?=$this->gravatarLink($user['email'], 120)?>" width="120" height="120" class="media-object"/>
+            <img src="<?=$user['Avatar'] ? $this->thumb($user['Avatar']['Thumb'], array('h_120', 'w_120', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="120" height="120" class="media-object"/>
         </a>
         <div class="media-body">
             <h4 class="media-heading"><a href="<?=$this->uri('/user/' . $user['userName'])?>"><?=$user['userName']?></a></h4>
@@ -42,7 +42,13 @@ $user = $this->user;
             {% if(o.items.length > 0) { %}
                 {% for (var i=0, item; item=o.items[i]; i++) { %}
                     <div class="item">
-                        <a href="<?=$this->uri('/user/')?>{%=item.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+                        <a href="<?=$this->uri('/user/')?>{%=item.userName%}" title="" class="item-absolute imgdelay figure userface">
+                        {% if(item.Avatar.Thumb) { %}
+                            <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="img-rounded" width="50" height="50" />
+                        {% } else { %}
+                            <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="50" height="50" />
+                        {% } %}
+                        </a>
                         <div class="item-inline item-text">
                             <div class="text-content">
                                 <div class="item-title">

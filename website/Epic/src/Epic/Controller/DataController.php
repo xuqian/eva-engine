@@ -173,6 +173,12 @@ class DataController extends RestfulModuleController
                             '*'
                         ),
                     ),
+                    'proxy' => array(
+                        'User\Item\User::Avatar' => array(
+                            '*',
+                            'getThumb()'
+                        ),
+                    ),
                 ),
             ),
         ));
@@ -200,7 +206,7 @@ class DataController extends RestfulModuleController
                 'items' => array(),
             );
         }
-        
+
         $groupId = $this->params()->fromQuery('group_id');
         $inGroup = $this->params()->fromQuery('inGroup');
 
@@ -208,7 +214,7 @@ class DataController extends RestfulModuleController
             $itemModel = Api::_()->getModel('Group\Model\Event'); 
             $query['inGroup'] = true;
             $query['group_id'] = $groupId;
-            
+
             $items = $itemModel->setItemList($query)->getEventdataList(array(
                 'self' => array(
                     '*'
@@ -283,6 +289,12 @@ class DataController extends RestfulModuleController
                 'self' => array(
                     'getEmailHash()',
                 ),
+                'proxy' => array(
+                    'User\Item\User::Avatar' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                ),
             ));
             $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
         }
@@ -327,7 +339,7 @@ class DataController extends RestfulModuleController
                 ),
             ), 
         ));
-        
+
         if (count($items) > 0) {
             foreach ($items as $key=>$item) {
                 if (count($item['File']) > 0) {
@@ -354,6 +366,12 @@ class DataController extends RestfulModuleController
                 'self' => array(
                     'getEmailHash()',
                 ),
+                'proxy' => array(
+                    'User\Item\User::Avatar' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                ),
             ));
             $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
         }
@@ -377,10 +395,57 @@ class DataController extends RestfulModuleController
             'self' => array(
                 'getEmailHash()',
             ),
+            'proxy' => array(
+                'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
         ));
 
         $paginator = $itemModel->getPaginator();
         $paginator = $paginator ? $paginator->toArray() : null;
+
+        return new JsonModel(array(
+            'items' => $items,
+            'paginator' => $paginator,
+        ));
+    }
+
+    public function userAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+
+        $form = new \Epic\Form\UserSearchForm();
+        $form->bind($query)->isValid();
+        $selectQuery = $form->getData();
+
+        $itemModel = Api::_()->getModel('User\Model\User');
+        if(!$selectQuery){
+            $selectQuery = array(
+                'page' => 1
+            );
+        }
+        $items = $itemModel->setItemList($selectQuery)->getUserList();
+        $items = $items->toArray(array(
+            'self' => array(
+            ),
+            'join' => array(
+                'Profile' => array(
+                    'self' => array(
+                        '*'
+                    ),
+                ),
+            ),
+            'proxy' => array(
+                'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        ));
+        $paginator = $itemModel->getPaginator();
 
         return new JsonModel(array(
             'items' => $items,

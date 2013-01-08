@@ -54,9 +54,18 @@ class MessagesController extends ActionController
             ),
             'join' => array(
                 'User' => array(
-                    'id',
-                    'userName',
-                    'email',
+                    'self' => array(
+                        'id',
+                        'userName',
+                        'email',
+                        'avatar_id',
+                    ),
+                    'proxy' => array(
+                        'User\Item\User::Avatar' => array(
+                            '*',
+                            'getThumb()'
+                        ),
+                    ),
                 ),
                 'Conversation' => array(
                     'self' => array(
@@ -72,9 +81,9 @@ class MessagesController extends ActionController
             ),
         ));
         unset($query['author_id']);
-        
+
         $paginator = $itemModel->getPaginator();
-        
+
         return array(
             'items' => $items,
             'query' => $query,
@@ -102,7 +111,7 @@ class MessagesController extends ActionController
         }
 
         if (!$user) {
-           return $this->getResponse()->setStatusCode(401);  
+            return $this->getResponse()->setStatusCode(401);  
         }
 
         if (!isset($query['author_id'])) {
@@ -126,9 +135,18 @@ class MessagesController extends ActionController
             ),
             'join' => array(
                 'Sender' => array(
-                    'id',
-                    'userName',
-                    'email',
+                   'self' => array(
+                        'id',
+                        'userName',
+                        'email',
+                        'avatar_id',
+                    ),
+                    'proxy' => array(
+                        'User\Item\User::Avatar' => array(
+                            '*',
+                            'getThumb()'
+                        ),
+                    ),
                 ),
                 'Recipient' => array(
                     'id',

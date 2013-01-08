@@ -37,7 +37,11 @@
     {% for (var i=0, item; item=o.items[i]; i++) { %}
         <li>
         <a class="thumbnail" href="<?=$this->uri('/user/')?>{%=item.User.userName%}">
-            <img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="{%=item.User.userName%}" class="img-rounded" width="30" height="30" />
+        {% if(item.User.Avatar.Thumb) { %}
+            <img src="{%=eva.thumb(item.User.Avatar.Thumb, 'c_fill,h_30,w_30')%}" alt="" class="img-rounded" width="30" height="30" />
+        {% } else { %}
+            <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="30" height="30" />
+        {% } %}
         </a>
         </li>
     {% } %}
@@ -74,7 +78,7 @@
 {% for (var i=0, item; item=o.items[i]; i++) { %}
 <div class="item">
     <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface">
-        {% if(item.User.Avatar) { %}
+        {% if(item.User.Avatar.Thumb) { %}
         <img src="{%=eva.thumb(item.User.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="img-rounded" width="50" height="50" />
         {% } else { %}
         <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="50" height="50" />
@@ -125,7 +129,13 @@
 {% if(o.items.length > 0) { %}
 {% for (var i=0, item; item=o.items[i]; i++) { %}
 <div class="item">
-    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface"><img src="http://www.gravatar.com/avatar/{%=item.User.EmailHash%}?size=50" alt="" class="img-rounded" width="50" height="50" /></a>
+    <a href="<?=$this->uri('/user/')?>{%=item.User.userName%}" title="" class="item-absolute imgdelay figure userface">
+        {% if(item.User.Avatar.Thumb) { %}
+        <img src="{%=eva.thumb(item.User.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="img-rounded" width="50" height="50" />
+        {% } else { %}
+        <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="50" height="50" />
+        {% } %}    
+    </a>
     <div class="item-inline item-text">
         <div class="text-content">
             <div class="item-title">
