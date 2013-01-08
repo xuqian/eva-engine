@@ -12,6 +12,20 @@ class DataController extends RestfulModuleController
     protected $renders = array(
         'restIndexGroup' => 'blank',    
     );
+
+    public function myAction()
+    {
+        $this->changeViewModel('json');
+        $item = \Core\Auth::getLoginUser();
+        if(!$item) {
+            return new JsonModel(array(
+                'item' => null
+            ));
+        }
+        return new JsonModel(array(
+            'item' => $item,
+        ));
+    }
     
     public function newsletterAction()
     {
@@ -152,7 +166,7 @@ class DataController extends RestfulModuleController
         $this->changeViewModel('json');
         $selectQuery = array(
             'user_id' => $this->params()->fromQuery('user_id'),
-            'relationshiopStatus' => 'approved',
+            'relationshipStatus' => 'approved',
             'page' => $this->params()->fromQuery('page', 1),
             'rows' => $this->params()->fromQuery('rows', 16),
         );

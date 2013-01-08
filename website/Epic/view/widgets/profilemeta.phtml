@@ -190,7 +190,7 @@ function isPaidRole($roles)
                         <?=$unfriendForm->restful();?>
                         <?=$unfriendForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-orange btn-mini"><i class="icon-mini icon-remove"></i> Unfriend</button>
+                        <button class="btn btn-orange btn-mini" data-text="Cancel Request"><i class="icon-mini icon-remove"></i> Unfriend</button>
                     </form>
                     <form <?=$this->formAttr($blockForm)?> class="block-form pull-left relationship-form showon-removed hide showon-refused">
                         <?=$blockForm->restful();?>

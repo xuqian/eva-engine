@@ -28,8 +28,8 @@ class MyController extends ActionController
     {
         $user = Auth::getLoginUser();
         $selectQuery = array(
-            'from_user_id' => $user['id'],
-            'relationshiopStatus' => 'approved',
+            'user_id' => $user['id'],
+            'relationshipStatus' => 'approved',
             'page' => $this->params()->fromQuery('page', 1),
         );
 

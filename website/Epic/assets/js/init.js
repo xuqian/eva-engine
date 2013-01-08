@@ -135,7 +135,7 @@ eva.templates = function(){
 				var t = tmpl(template.html(), response);
 				template.after(t);
 			}
-		})
+		});
 	});
 }
 
@@ -155,30 +155,42 @@ eva.checkFollow = function(){
 		return false;
 	}
 
-	var followCheck = $(".follow-check");
-	var userid = followCheck.find('input[name=user_id]').val();
-	var url = followCheck.attr('data-url');
-
-	$.ajax({
-		url : url,
-		dataType : 'json',
-		type : 'get',
-		data : {"user_id" : userid},
-		success : function(response){
-			var forms = $(".relationship-form");
-			if(!response.item || response.item.length < 1) {
-				forms.eq(0).show();
-				return false;
-			}
-			$(".follow-form").toggleClass('hide');
-			$(".unfollow-form").toggleClass('hide');
-
-			
-			var relationship = response.item[0].relationshipStatus;
-			forms.filter('.showon-' + relationship).show();
-
+	eva.userReady(function(){
+		var followCheck = $(".follow-check");
+		var userid = followCheck.find('input[name=user_id]').val();
+		var url = followCheck.attr('data-url');
+		var user = eva.getUser();
+		if(userid == user.id){
+			return;
 		}
+
+		$.ajax({
+			url : url,
+			dataType : 'json',
+			type : 'get',
+			data : {"user_id" : userid},
+			success : function(response){
+				var forms = $(".relationship-form");
+				if(!response.item || response.item.length < 1) {
+					forms.eq(0).show();
+					return false;
+				}
+				$(".follow-form").toggleClass('hide');
+				$(".unfollow-form").toggleClass('hide');
+				var relationship = response.item[0].relationshipStatus;
+				var requestUserId = response.item[0].request_user_id;
+				forms.filter('.showon-' + relationship).show();
+				if(relationship == 'pending' && user.id == requestUserId){
+					$(".approve-form, .refuse-form").hide();
+					$(".unfriend-form").show();
+					$unfriendBtn = $(".unfriend-form button");
+					$unfriendBtn.text($unfriendBtn.attr("data-text"));
+
+				}
+			}
+		});	
 	});
+
 }
 
 eva.preview = function(){
@@ -391,6 +403,15 @@ eva.ready(function(){
 	eva.loader(eva.s('/lib/js/jstemplates/tmpl.js'), function(){
 		eva.templates();
 	});	
+
+	$.ajax({
+		url : eva.d('/data/my/'),
+		dataType : 'json',
+		success : function(response){
+			eva.setUser(response.item);
+			eva.callUserFuncs();
+		}
+	});
 
 	return false;
 });
