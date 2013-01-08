@@ -61,7 +61,7 @@ $form->useSubFormGroup()
                             <?foreach($items as $item):?>
                             <div class="item">
                                 <a href="<?=$this->uri('/user/' . $item['User']['userName'])?>" title="" class="item-absolute item-userface">
-                                    <img src="<?=$item['User']['Avatar'] ? $this->thumb($item['User']['Avatar']['Thumb'], array('h_60', 'w_60', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="60" height="60" />
+                                    <img src="<?=$item['User']['Avatar'] ? $this->thumb($item['User']['Avatar']['Thumb'], array('h_60', 'w_60', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="60" height="60" class="img-rounded" />
                                 </a>
                                 <div class="item-inline item-text span6">
                                     <div class="item-content">

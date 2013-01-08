@@ -180,7 +180,7 @@ class DataController extends RestfulModuleController
                         'id',
                         'userName',
                         'email',
-                        'getEmailHash()',
+                        'avatar_id',
                     ), 
                     'join' => array(
                         'Profile' => array(
@@ -298,6 +298,7 @@ class DataController extends RestfulModuleController
                     'id',
                     'userName',
                     'email',
+                    'avatar_id',
                 ),
             ))->toArray(array(
                 'self' => array(
