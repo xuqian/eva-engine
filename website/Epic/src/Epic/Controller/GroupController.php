@@ -185,7 +185,15 @@ class GroupController extends ActionController
                 ),
                 'join' => array(
                     'User' => array(
-                        '*',
+                        'self' => array(
+                            '*'
+                        ),
+                        'proxy' => array(
+                            'User\Item\User::Avatar' => array(
+                                '*',
+                                'getThumb()'
+                            ),
+                        ),
                     ),
                 ),
             )

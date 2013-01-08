@@ -31,6 +31,7 @@ $dayPath = $this->dayPath;
 $jsEvents = array();
 foreach($this->eventList as $eventDay){
     $jsEvents[] = array(
+        'id' => $eventDay['id'],
         'title' => $eventDay['title'],
         'start' => $this->DateTime()->jsTime($eventDay['startDay'] . ' ' . $eventDay['startTime']),
         'end' => $this->DateTime()->jsTime($eventDay['endDay'] . ' ' . $eventDay['endTime']),
@@ -282,75 +283,94 @@ eva.ready(function(){
                 return false;
         });
 
-        /*
-        $(".nav-week li:last a").on('click', function(){
-                var calendar = $(".event-calendar");
-                if(calendar.is(":visible")) {
-                    calendar.fadeOut();
-                    $(".event-thumbnails").fadeIn();
-                } else {
-                    calendar.fadeIn();
-                    $(".event-thumbnails").fadeOut();
-                }
-                return false;
-        });
 
-        $("#event-calendar-wrap").on('click', '.prev a, .next a', function(){
-                $("#event-calendar-wrap").load($(this).attr('href') + ' .event-calendar', function(){
-                    $(".event-calendar").fadeIn();
-                });
-                return false;
-        });
-        */
-
-
-
-        var viewByDay = function(){
-                var date = new Date();
-                var d = date.getDate();
-                var m = date.getMonth();
-                var y = date.getFullYear();
+        var viewCalendar = function(){
                 var calendar = $('#calendar-day');
-                var events = [ { title: 'All Day Event', start: new Date(y, m, 1) }, { title: 'Long Event', start: new Date(y, m, d-5), end: new Date(y, m, d-2) }, { id: 999, title: 'Repeating Event', start: new Date(y, m, d-3, 16, 0), allDay: false }, { id: 999, title: 'Repeating Event', start: new Date(y, m, d+4, 16, 0), allDay: false }, { title: 'Meeting', start: new Date(y, m, d, 10, 30), allDay: false }, { title: 'Lunch', start: new Date(y, m, d, 12, 0), end: new Date(y, m, d, 14, 0), allDay: false }, { title: 'Birthday Party', start: new Date(y, m, d+1, 19, 0), end: new Date(y, m, d+1, 22, 30), allDay: false }, { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/' } ];
-                var events = <?=\Zend\Json\Json::encode($jsEvents)?>;
+                var formatDate = function(input) {
+                        function padZeroLeft(s, l) {
+                                s = String(s);
+                                for (var i = 0; i < l - s.length; i++){
+                                        s = '0' + s;
+                                }
+                                return s;
+                        }
+                        return input.getFullYear() + '-' + (padZeroLeft(input.getMonth() + 1, 2)) + '-' + padZeroLeft(input.getDate(), 2);
+                };
+                var initEvents = <?=\Zend\Json\Json::encode($jsEvents)?>;
+                var inited = false;
                 var options = {
                         header: {
-                                left: 'prev,next today',
+                                left: 'prev',
                                 center: 'title',
-                                right: 'month,agendaWeek,agendaDay',
-                                left: '',
-                                center: '',
-                                right: ''
+                                right: 'next'
                         },
                         editable: false,
-                        defaultView : 'agendaDay',
-                        events: events
-                };
+                        defaultView : 'month',
+                        events: function(start, end, callback) {
+                                if(!inited){
+                                    inited = true;
+                                    return callback(initEvents);
+                                }
+                                $.ajax({
+                                        url: '/data/event',
+                                        dataType: 'json',
+                                        data: {
+                                                afterStartDay: formatDate(start),
+                                                beforeStartDay: formatDate(end)
+                                        },
+                                        success: function(data) {
+                                                var items = data.items;
+                                                var events = [];
+                                                for(var i in items){
+                                                    var item = items[i];
+                                                    events.push({
+                                                            id : item.id,
+                                                            title : item.title,
+                                                            start : item.startDay + ' ' + item.startTime,
+                                                            end : item.endDay + ' ' + item.endTime,
+                                                            //allDay : item.isFullDayEvent == '1' ? true : false,
+                                                            allDay : false,
+                                                            url : eva.d('/event/' + item.urlName)
+                                                    });
+                                                }
+                                                callback(events);
+                                        }
+                                });
+                        }
+                    };
 
                 calendar.fullCalendar(options);
                 calendar.hide();
                 $(".nav-week li a").on('click', function(){
+                        var handler = $(this);
+                        var index = handler.parent().index();
+                        if(handler.hasClass('onShow')) {
+                                calendar.fadeOut();
+                                $(".event-thumbnails").fadeIn();
+                        } else {
                                 calendar.show();
-                                if($(this).parent().index() == 7){
-                                    calendar.fullCalendar( 'changeView', 'month' );
-                                        //options.defaultView = 'month';
+                                if(index == 7){
+                                        calendar.fullCalendar( 'changeView', 'month' );
                                 } else {
-                                    calendar.fullCalendar( 'changeView', 'agendaDay' );
-                                    var gotoDate = new Date(Date.parse($(this).attr('data-date')));
-                                    calendar.fullCalendar( 'gotoDate', gotoDate.getFullYear(), gotoDate.getMonth(), gotoDate.getDate() );
-                                    //options.defaultView = 'agendaDay';
-                                    //calendar.html('').fullCalendar(options);
+                                        calendar.fullCalendar( 'changeView', 'agendaDay' );
+                                        var gotoDate = new Date(Date.parse(handler.attr('data-date')));
+                                        calendar.fullCalendar( 'gotoDate', gotoDate.getFullYear(), gotoDate.getMonth(), gotoDate.getDate() );
                                 }
                                 calendar.hide();
                                 calendar.fadeIn();
                                 $(".event-thumbnails").fadeOut();
+                        }
+                        $(".nav-week li:not(:eq(" + index + ")) a").removeClass('onShow');
+                        handler.toggleClass('onShow');
+
                         return false;
                 });
         };
         eva.loadcss(eva.s('/lib/js/jquery/fullcalendar/fullcalendar.css'));
         eva.loader(eva.s([
-        '/lib/js/jquery/fullcalendar/fullcalendar.js'
-        ]), viewByDay);
+        '/lib/js/jquery/fullcalendar/fullcalendar.js',
+        '/lib/js/moment/moment.js'
+        ]), viewCalendar);
 
 });
 </script>
