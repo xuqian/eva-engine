@@ -9,7 +9,30 @@ $userSearchForm->setView($this)
      ->setAction($this->uri('/user/list/'))
      ->prepare();
 
- ?>
+$categories = array(
+    'hot' => array(
+        'label' => 'Hot Members ',
+        'key'   => 'order',
+        'value' => 'followdesc',
+    ),
+    'new' => array(
+        'label' => 'New Members',
+        'key'   => 'order',
+        'value' => 'timedesc',
+    ),
+    'flag' => array(
+        'label' => 'Feature Members',
+        'key'   => 'flag',
+        'value' => 1,
+    ),
+    'vip' => array(
+        'label' => 'VIP Members',
+        'key'   => 'role',
+        'value' => 'PAID_MEMBER',
+    ),
+);
+
+?>
  <div class="container">
      <header class="member-header">
      <div class="row">
@@ -19,10 +42,10 @@ $userSearchForm->setView($this)
          <div class="span9">
              <nav class="nav-member">
              <ul>
-                 <li><a class="active" href="">Connoisseur</a></li>
-                 <li><a href="">Professional</a></li>
-                 <li><a href="">VIP</a></li>
-                 <li><a href="">Corporate</a></li>
+                 <li><a class="active" href="<?=$this->uri('/user/list/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
+                 <li><a href="<?=$this->uri('/user/list/?role=PROFESSIONAL_MEMBER')?>">Professional</a></li>
+                 <li><a href="<?=$this->uri('/user/list/?role=PAID_MEMBER')?>">VIP</a></li>
+                 <li><a href="<?=$this->uri('/user/list/?role=CORPORATE_MEMBER')?>">Corporate</a></li>
              </ul>
              </nav>
          </div><!--page main left end-->
@@ -58,7 +81,7 @@ $userSearchForm->setView($this)
                              <?if($industries):?>
                              <ul class="member-section">
                                  <?foreach($industries as $key => $industry):?>
-                                 <li><a href=""><?=$industry['label']?></a></li>
+                                 <li><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>"><?=$industry['label']?></a></li>
                                  <?endforeach?>
                              </ul>
                              <?endif?>
@@ -70,7 +93,7 @@ $userSearchForm->setView($this)
                                  <?foreach($cities as $key => $citiarea):?>
                                  <li><?=$citiarea['label']?></li>
                                  <?foreach($citiarea['options'] as $city):?>
-                                 <li><a href=""><?=$city['label']?></a></li>
+                                 <li><a href="<?=$this->uri('/user/list/?city=' . $city['value'])?>"><?=$city['label']?></a></li>
                                  <?endforeach?>
                                  <?endforeach?>
                              </ul>
@@ -81,47 +104,76 @@ $userSearchForm->setView($this)
              </div><!--page main left end-->
              <div class="span10 box-shadow-left">
                  <div class="member-main">
-                     <div class="member-wall">
+                    <script id="member-wall" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('flag' => 1,'rows' => 37))?>">
+                    <div class="member-wall">
                          <ul>
-                             <?for($i=0; $i<37;$i++):?>
-                             <li><a href="/user/list">
-                                 <img alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_70,w_70.jpg">
-                                 <div class="mask">User Name</div>
+                         {% if(o.items.length > 0) { %}
+                         {% for (var i=0, item; item=o.items[i]; i++) { %}
+                             <li><a href="<?=$this->uri('/user/')?>{%=item.userName%}">
+                                 {% if(item.Avatar.Thumb) { %}
+                                    <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_70,w_70')%}" alt="" class="img-rounded" width="70" height="70" />
+                                 {% } else { %}
+                                    <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="70" height="70" />
+                                 {% } %}
+                                 <div class="mask">{%=item.userName%}</div>
                              </a></li>
-                             <?endfor?>
+                         {% } %}
+                         {% } %}
                          </ul>
                      </div>
-
-
+                    </script> 
+                    
                      <div class="row-fluid">
                          <ul class="thumbnails member-thumbnails">
-                             <?for($i=0; $i<4;$i++):?>
+                             <?foreach($categories as $key=>$cate):?>
                              <li class="span3">
-                             <div class="thumbnail">
+                             <script id="<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array($cate['key'] => $cate['value'],'rows' => 9))?>">
+                             <div class="thumbnail <?=$key?>">
                                  <div class="thumbnail-title thumbnail-title-alt">
-                                     Hot Members
+                                     <?=$cate['label']?>
                                  </div>
+                                 {% if(o.items.length > 0) { %}      
                                  <div class="thumbnail-list">
-                                     <a href="">
-                                         <img class="medium" alt="" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_200,w_200.jpg" />
+                                     {%item=o.items[0]; %}
+                                     <a href="<?=$this->uri('/user/')?>{%=item.userName%}">
+                                        {% if(item.Avatar.Thumb) { %}
+                                            <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_200,w_200')%}" alt="" class="medium" width="200" height="200" />
+                                        {% } else { %}
+                                            <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="medium" width="200" height="200" />
+                                        {% } %}    
                                      </a>
                                      <div class="thumbnail-line row-fluid">
-                                         <?for($j=0; $j<4;$j++):?>
-                                         <a href="/user/list" class="span3"><img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg"></a>
-                                         <?endfor?>
+                                         {% for (var i=1, item; item=o.items[i]; i++) { %}
+                                         {% if(i>4) {continue;}%}   
+                                         <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                         {% if(item.Avatar.Thumb) { %}
+                                            <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                         {% } else { %}
+                                            <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                         {% } %}   
+                                         </a>
+                                         {% } %}
                                      </div>
                                      <div class="row-fluid">
-                                         <?for($j=0; $j<4;$j++):?>
-                                         <a href="/user/list" class="span3"><img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg"></a>
-                                         <?endfor?>
+                                         {% for (var i=5, item; item=o.items[i]; i++) { %}
+                                         <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                         {% if(item.Avatar.Thumb) { %}
+                                            <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                         {% } else { %}
+                                            <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                         {% } %}   
+                                         </a>
+                                         {% } %}
                                      </div>
+                                 {% } %}
                                  </div>
                                  <div class="caption">
-                                     <p><a href="">5231 Members</a></p>
+                                     <p><a href="">{% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %} Members</a></p>
                                  </div>
                              </div>
+                             </script>  
                              </li>
-                             <?endfor?>
+                             <?endforeach;?>
                          </ul>
                      </div>
 
@@ -129,93 +181,144 @@ $userSearchForm->setView($this)
                          <h3>Hot Industries</h3>
                      </div>
 
-
+                     <?if(count($industries) > 0):?>
                      <div class="member-category-wrap">
                          <div class="row-fluid">
                              <ul class="member-category">
-                                 <?for($i=0; $i<3;$i++):?>
+                                 <?foreach($industries as $key => $industry):?>
+                                 <?if($key > 2){break;}?>
                                  <li class="span4">
+                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'],'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="">More</a></small>
-                                         <a href="">Food Production</a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
+                                         <a href=""><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
+                                     {% if(o.items.length > 0) { %}
                                          <div class="thumbnail-line row-fluid">
-                                             <?for($j=0; $j<4;$j++):?>
-                                             <a href="/user/list" class="span3">
-                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
-                                                 <span class="name">User Name</span>
+                                             {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                             {% if(i>3) {continue;}%}   
+                                             <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                             {% if(item.Avatar.Thumb) { %}
+                                                <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } else { %}
+                                                <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } %}   
+                                                 <span class="name">{%=item.userName%}</span>
                                              </a>
-                                             <?endfor?>
+                                             {% } %}
                                          </div>
+                                      {% } %}
+                                      {% if(o.items.length > 3) { %}   
                                          <div class="thumbnail-line row-fluid">
-                                             <?for($j=0; $j<4;$j++):?>
-                                             <a href="/user/list" class="span3">
-                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
-                                                 <span class="name">User Name</span>
+                                             {% for (var i=4, item; item=o.items[i]; i++) { %}
+                                             {% if(i>7) {continue;}%}   
+                                             <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                             {% if(item.Avatar.Thumb) { %}
+                                                <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } else { %}
+                                                <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } %}   
+                                                 <span class="name">{%=item.userName%}</span>
                                              </a>
-                                             <?endfor?>
+                                             {% } %}
                                          </div>
+                                      {% } %}
+                                      {% if(o.items.length > 7) { %}
                                          <div class="thumbnail-line row-fluid">
-                                             <?for($j=0; $j<4;$j++):?>
-                                             <a href="/user/list" class="span3">
-                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
-                                                 <span class="name">User Name</span>
+                                             {% for (var i=8, item; item=o.items[i]; i++) { %}
+                                             {% if(i>11) {continue;}%}   
+                                             <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                             {% if(item.Avatar.Thumb) { %}
+                                                <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } else { %}
+                                                <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } %}   
+                                                 <span class="name">{%=item.userName%}</span>
                                              </a>
-                                             <?endfor?>
+                                             {% } %}
                                          </div>
+                                      {% } %}
                                      </div>
                                  </div>
+                                 </script>  
                                  </li>
-                                 <?endfor?>
+                                 <?endforeach?>
                              </ul>
                          </div>
                      </div>
+                     <?endif?>
 
 
+                     <?if(count($industries) > 3):?>
                      <div class="member-category-wrap">
                          <div class="row-fluid">
                              <ul class="member-category">
-                                 <?for($i=0; $i<3;$i++):?>
+                                 <?foreach($industries as $key => $industry):?>
+                                 <?if($key < 3 || $key > 5){continue;}?>
                                  <li class="span4">
+                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'],'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="">More</a></small>
-                                         <a href="">Food Production</a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
+                                         <a href=""><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
+                                     {% if(o.items.length > 0) { %}
                                          <div class="thumbnail-line row-fluid">
-                                             <?for($j=0; $j<4;$j++):?>
-                                             <a href="/user/list" class="span3">
-                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
-                                                 <span class="name">User Name</span>
+                                             {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                             {% if(i>3) {continue;}%}   
+                                             <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                             {% if(item.Avatar.Thumb) { %}
+                                                <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } else { %}
+                                                <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } %}   
+                                                 <span class="name">{%=item.userName%}</span>
                                              </a>
-                                             <?endfor?>
+                                             {% } %}
                                          </div>
+                                      {% } %}
+                                      {% if(o.items.length > 3) { %}   
                                          <div class="thumbnail-line row-fluid">
-                                             <?for($j=0; $j<4;$j++):?>
-                                             <a href="/user/list" class="span3">
-                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
-                                                 <span class="name">User Name</span>
+                                             {% for (var i=4, item; item=o.items[i]; i++) { %}
+                                             {% if(i>7) {continue;}%}   
+                                             <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                             {% if(item.Avatar.Thumb) { %}
+                                                <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } else { %}
+                                                <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } %}   
+                                                 <span class="name">{%=item.userName%}</span>
                                              </a>
-                                             <?endfor?>
+                                             {% } %}
                                          </div>
+                                      {% } %}
+                                      {% if(o.items.length > 7) { %}
                                          <div class="thumbnail-line row-fluid">
-                                             <?for($j=0; $j<4;$j++):?>
-                                             <a href="/user/list" class="span3">
-                                                 <img class="small img-rounded" alt="闹" src="http://test-img.epicurissimo.net/thumb/c8/b0/a2/jiYvQn,c_fill,h_50,w_50.jpg">
-                                                 <span class="name">User Name</span>
+                                             {% for (var i=8, item; item=o.items[i]; i++) { %}
+                                             {% if(i>11) {continue;}%}   
+                                             <a href="<?=$this->uri('/user/')?>{%=item.userName%}" class="span3">
+                                             {% if(item.Avatar.Thumb) { %}
+                                                <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } else { %}
+                                                <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="small img-rounded" width="50" height="50" />
+                                             {% } %}   
+                                                 <span class="name">{%=item.userName%}</span>
                                              </a>
-                                             <?endfor?>
+                                             {% } %}
                                          </div>
+                                      {% } %}
                                      </div>
                                  </div>
+                                 </script>  
                                  </li>
-                                 <?endfor?>
+                                 <?endforeach?>
                              </ul>
                          </div>
                      </div>
+                     <?endif?>
 
 
                  </div><!--member main end-->

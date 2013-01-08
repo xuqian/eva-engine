@@ -117,6 +117,14 @@ class UserController extends ActionController
                     ),
                 ),
             ),
+            'proxy' => array(
+                'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
+                'Event\Item\EventUser::EventCount' => array(
+                ),
+            ),
         ));
         $paginator = $itemModel->getPaginator();
 
@@ -128,7 +136,7 @@ class UserController extends ActionController
                 'follower_id' => $user['id']
             ))->getFollowList()->toArray();
         }
-        
+
         $items = $itemModel->combineList($items, $followList, 'Follow', array('id' => 'user_id'));
 
         return array(
@@ -265,7 +273,13 @@ class UserController extends ActionController
                         'self' => array(
                             '*',
                             'getThumb()',
-                        )
+                        ),
+                        'proxy' => array(
+                            'User\Item\User::Avatar' => array(
+                                '*',
+                                'getThumb()'
+                            ),
+                        ),
                     ),
                 ),
             ));

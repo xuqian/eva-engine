@@ -49,6 +49,12 @@ class MyController extends ActionController
                             '*'
                         ),
                     ),
+                    'proxy' => array(
+                        'User\Item\User::Avatar' => array(
+                            '*',
+                            'getThumb()'
+                        ),
+                    ),
                 ),
             ),
         ));

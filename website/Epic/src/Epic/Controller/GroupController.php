@@ -157,6 +157,7 @@ class GroupController extends ActionController
             $item = array();
             $this->getResponse()->setStatusCode(404);
         }
+      
         $user = Auth::getLoginUser(); 
         //Public User Area
         $this->forward()->dispatch('UserController', array(
@@ -185,14 +186,23 @@ class GroupController extends ActionController
                 ),
                 'join' => array(
                     'User' => array(
-                        '*',
+                        'self' => array(
+                            '*'
+                        ),
+                        'proxy' => array(
+                            'User\Item\User::Avatar' => array(
+                                '*',
+                                'getThumb()'
+                            ),
+                        ),
                     ),
                 ),
+
             )
         );
-        
+
         $this->group = $item;
-        
+
         return array($item, $members);
     }
 

@@ -35,7 +35,9 @@ if($contacts['onSiteContacts']){
                             <?foreach($items as $item):?>
                             <div class="item">
                                 <div class="item-absolute item-userface">
-                                    <a href="<?=$this->uri('/user/' . $item['userName'])?>" title="" class="userface"><img src="<?=$this->gravatarLink($item['email'])?>" alt="" class="img-rounded" width="60" height="60" /></a>
+                                    <a href="<?=$this->uri('/user/' . $item['userName'])?>" title="" class="userface">
+                                        <img src="<?=$item['Avatar'] ? $this->thumb($item['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt=""  width="175" height="175" />
+                                    </a>
                                 </div>
                                 <div class="item-inline item-text">
                                     <div class="item-title">

@@ -30,6 +30,24 @@ class UserSearchForm extends \User\Form\UserForm
             'attributes' => array(
             ),
         ),
+        'order' =>     array(
+            'name' => 'order',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Order',
+            ),
+            'attributes' => array(
+            ),
+        ),
+        'rows' =>     array(
+            'name' => 'rows',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Rows',
+            ),
+            'attributes' => array(
+            ),
+        ),
         'status' => array(
             'options' => array(
                 'empty_option' => 'User Status'
@@ -339,6 +357,32 @@ class UserSearchForm extends \User\Form\UserForm
                     array(
                         'label' => 'Other',
                         'value' => 'Other',
+                    ),
+                ),
+            ),
+        ),
+        'role' => array(
+            'name' => 'role',
+            'type' => 'select',
+            'options' => array (
+                'label' => 'Role',
+                'empty_option' => 'Select Role',
+                'value_options' => array(
+                    array(
+                        'label' => 'Connoisseur',
+                        'value' => 'CONNOISSEUR_MEMBER',
+                    ),
+                    array(
+                        'label' => 'Professional',
+                        'value' => 'PROFESSIONAL_MEMBER',
+                    ),
+                    array(
+                        'label' => 'VIP',
+                        'value' => 'PAID_MEMBER',
+                    ),
+                    array(
+                        'label' => 'Corporate',
+                        'value' => 'CORPORATE_MEMBER',
                     ),
                 ),
             ),

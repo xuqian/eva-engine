@@ -24,7 +24,7 @@
         <?if($member['role'] != 'admin'){continue;}?>
             <li>
                 <a href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
-                    <img alt="userface" class="img-rounded" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>
+                    <img src="<?=$member['User']['Avatar'] ? $this->thumb($member['User']['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt="userface"  width="30" height="30" />
                     <?=$member['User']['userName']?>
                 </a>
             </li>
@@ -43,7 +43,7 @@
         <?if($member['role'] == 'admin'){continue;}?>
             <li>
                 <a href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
-                    <img alt="userface" class="img-rounded" src="<?=$this->gravatarLink($member['User']['email'], 30)?>" width="30" height="30"/>
+                    <img src="<?=$member['User']['Avatar'] ? $this->thumb($member['User']['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill')) :  $this->assets('/module/epic/img/default_avatar.png')?>" alt="userface"  width="30" height="30" />
                     <?=$member['User']['userName']?>
                 </a>
             </li>

@@ -193,7 +193,15 @@ class EventController extends ActionController
                 ),
                 'join' => array(
                     'User' => array(
-                        '*',
+                        'self' => array(
+                            '*'
+                        ),
+                        'proxy' => array(
+                            'User\Item\User::Avatar' => array(
+                                '*',
+                                'getThumb()'
+                            ),
+                        ),
                     ),
                 ),
             )
@@ -207,7 +215,7 @@ class EventController extends ActionController
         ));
         return $view; 
     }
-    
+
     public function removeAction()
     {
         $request = $this->getRequest();

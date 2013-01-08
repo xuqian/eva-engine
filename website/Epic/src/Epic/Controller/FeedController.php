@@ -48,7 +48,14 @@ class FeedController extends ActionController
         }
 
         $userList = array();
-        $userList = $itemModel->getUserList()->toArray();
+        $userList = $itemModel->getUserList()->toArray(array(
+            'proxy' => array(
+                'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        ));
 
         $forwardActivityList = $itemModel->getForwardActivityList()->getActivityList($feedMap);
 
@@ -89,7 +96,7 @@ class FeedController extends ActionController
                 'post' => $postData,
             );
         }
-    
+
     }
 
     public function feedAction()
@@ -112,7 +119,13 @@ class FeedController extends ActionController
                 'User' => array(
                     'self' => array(
                         '*',
-                    )
+                    ),
+                    'proxy' => array(
+                        'User\Item\User::Avatar' => array(
+                            '*',
+                            'getThumb()'
+                        ),
+                    ),
                 ),
                 'ForwardActivity' => array(
                     'self' => array(
@@ -150,10 +163,22 @@ class FeedController extends ActionController
                         'getThumb()',
                     )
                 ),
+                'User' => array(
+                    'self' => array(
+                        '*',
+                    ),
+                ),
             ),
         );
         $commentActivityList = $itemModel->getCommentActivityList()->getActivityList($feedMap);
-        $userList = $itemModel->getUserList()->toArray();
+        $userList = $itemModel->getUserList()->toArray(array(
+            'proxy' => array(
+                'User\Item\User::Avatar' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        ));
         $items = $itemModel->combineList($commentActivityList, $userList, 'User', array('user_id' => 'id'));
 
         return array(
