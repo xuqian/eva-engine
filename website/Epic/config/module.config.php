@@ -169,6 +169,20 @@ return array(
                 'priority' => 2,
             ),
 
+            'relationship' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/relationship[/][:action][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'RelationshipController',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'feed' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -654,6 +668,7 @@ return array(
             'ResetController' => 'Epic\Controller\ResetController',
             'RegisterController' => 'Epic\Controller\RegisterController',
             'UserController' => 'Epic\Controller\UserController',
+            'RelationshipController' => 'Epic\Controller\RelationshipController',
             'AccountController' => 'Epic\Controller\AccountController',
             'FeedController' => 'Epic\Controller\FeedController',
             'MessagesController' => 'Epic\Controller\MessagesController',

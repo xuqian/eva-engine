@@ -137,8 +137,8 @@ class DataController extends RestfulModuleController
             ));
         }
         $selectQuery = array(
-            'from_user_id' => $this->params()->fromQuery('user_id'),
-            'to_user_id' => $user['id'],
+            'user_id' => $this->params()->fromQuery('user_id'),
+            'friend_id' => $user['id'],
         );
         $itemModel = Api::_()->getModel('User\Model\Friend');
         $item = $itemModel->setItemList($selectQuery)->getFriendList()->toArray();
@@ -151,7 +151,7 @@ class DataController extends RestfulModuleController
     {
         $this->changeViewModel('json');
         $selectQuery = array(
-            'from_user_id' => $this->params()->fromQuery('user_id'),
+            'user_id' => $this->params()->fromQuery('user_id'),
             'relationshiopStatus' => 'approved',
             'page' => $this->params()->fromQuery('page', 1),
             'rows' => $this->params()->fromQuery('rows', 16),

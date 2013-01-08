@@ -12,6 +12,29 @@ $form
 $unfollowForm = clone $form;
 $unfollowForm->setMethod('delete');
 
+$friendForm = new User\Form\FriendForm();
+$friendForm
+->setView($this)
+->useSubFormGroup()
+->setMethod('post')
+->setAction($this->uri('/relationship/request/'))
+->prepare();
+
+$approveForm = clone $friendForm;
+$approveForm->setAction($this->uri('/relationship/approve/'));
+
+$refuseForm = clone $friendForm;
+$refuseForm->setAction($this->uri('/relationship/refuse/'));
+
+$unfriendForm = clone $friendForm;
+$unfriendForm->setAction($this->uri('/relationship/unfriend/'));
+
+$blockForm = clone $friendForm;
+$blockForm->setAction($this->uri('/relationship/block/'));
+
+$unblockForm = clone $friendForm;
+$unblockForm->setAction($this->uri('/relationship/unblock/'));
+
 function checkOauth($key, $user)
 {
     if(!isset($user['Oauth'])) {
@@ -64,6 +87,7 @@ function isPaidRole($roles)
         <a class="highlight highlight-large" href="<?=$this->uri('/my/friend/')?>"><?=$user['FriendsCount']['friendsCount']?></a> Friends
     </div>
 </div>
+
 <div class="profile-intro">
     <div class="profile-title">
         <h2><?=$user['userName']?></h2>
@@ -120,48 +144,81 @@ function isPaidRole($roles)
                 </td>
                 <td>Events : <a href=""><?=$user['EventCount']['eventCount']?></a> Times</td>
             </tr>
+            <?if($user['Profile']['bio']):?>
             <tr>
                 <td colspan="3">Bio : 
-                    <?if($user['Profile']['bio']):?>
                     <?=$user['Profile']['bio']?>
-                    <?endif?>
                 </td>
             </tr>
+            <?endif?>
             <tr>
-                <?if($viewAsGuest):?>
-                <td colspan="2">
-                    <form <?=$this->formAttr($form)?> class="follow-form">
+                <td colspan="3">
+                    <?if($viewAsGuest):?>
+                    <form <?=$this->formAttr($form)?> class="follow-form pull-left">
                         <?=$form->restful();?>
                         <?=$form->helper('user_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$form->helper('follower_id', array('class' => ''))?>
                         <?=$this->callback()?>
-                        <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-plus"></i> Follow</button>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Follow</button>
                     </form>
-                    <form <?=$this->formAttr($unfollowForm)?> class="unfollow-form hide follow-check" data-url="<?=$this->uri('/data/isfriend/')?>">
+                    <form <?=$this->formAttr($unfollowForm)?> class="unfollow-form hide follow-check pull-left" data-url="<?=$this->uri('/data/isfriend/')?>">
                         <?=$unfollowForm->restful();?>
                         <?=$unfollowForm->helper('user_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$unfollowForm->helper('follower_id', array('class' => ''))?>
                         <?=$this->callback()?>
                         <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-minus"></i> Unfollow</button>
                     </form>
+                    <form <?=$this->formAttr($friendForm)?> class="friend-form pull-left relationship-form">
+                        <?=$friendForm->restful();?>
+                        <?=$friendForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Add Friend</button>
+                    </form>
+                    <form <?=$this->formAttr($approveForm)?> class="approve-form pull-left relationship-form">
+                        <?=$approveForm->restful();?>
+                        <?=$approveForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Approve Request</button>
+                    </form>
+                    <form <?=$this->formAttr($refuseForm)?> class="refuse-form pull-left relationship-form">
+                        <?=$refuseForm->restful();?>
+                        <?=$refuseForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Refuse</button>
+                    </form>
+                    <form <?=$this->formAttr($unfriendForm)?> class="unfriend-form pull-left relationship-form">
+                        <?=$unfriendForm->restful();?>
+                        <?=$unfriendForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Unfriend</button>
+                    </form>
+                    <form <?=$this->formAttr($blockForm)?> class="block-form pull-left relationship-form">
+                        <?=$blockForm->restful();?>
+                        <?=$blockForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Block</button>
+                    </form>
+                    <form <?=$this->formAttr($unblockForm)?> class="unblock-form pull-left relationship-form">
+                        <?=$unblockForm->restful();?>
+                        <?=$unblockForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
+                        <?=$this->callback()?>
+                        <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Unblock</button>
+                    </form>
+
+
 
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/send/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
-                </td>
-                <td class="social">
-                <?else:?>
-                <td>
+                    <?else:?>
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/user/' . $this->user['userName'])?>"><i class="icon-mini icon-eye-open"></i> View As Guest</a>
-                </td>
-                <td colspan="2" class="social">
                     <?endif?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="social">
                     Social Networking : 
                     <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol facebook <?=checkOauth('facebook', $user) ? 'highlight' : ''?>">facebook</span></a>
                     <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>">twitter</span></a>
                     <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="lsf symbol flickr <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
-                    <!--
-                    <a href="#"><i class="icon-pinterest"></i></a>
-                    <a href="#"><i class="icon-google-plus"></i></a>
-                    -->
                 </td>
             </tr>
         </tbody>
