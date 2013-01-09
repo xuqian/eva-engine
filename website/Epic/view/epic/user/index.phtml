@@ -165,11 +165,11 @@ $categories = array(
                                          </a>
                                          {% } %}
                                      </div>
-                                 {% } %}
                                  </div>
                                  <div class="caption">
-                                     <p><a href="">{% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %} Members</a></p>
+                                     <p><a href="">{% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} {%=o.items.length%} {% } %} Members</a></p>
                                  </div>
+                                 {% } %}
                              </div>
                              </script>  
                              </li>
@@ -192,7 +192,7 @@ $categories = array(
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
                                          <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
-                                         <a href=""><?=$industry['label']?></a>
+                                         <a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>"><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}
@@ -262,7 +262,7 @@ $categories = array(
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
                                          <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
-                                         <a href=""><?=$industry['label']?></a>
+                                         <a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>"><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}
