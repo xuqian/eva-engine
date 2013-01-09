@@ -86,43 +86,8 @@ eva.miniCalendar = function(){
             $('.calendar-wrap').load($(this).attr('href'));
             return false;
     });
-}
+};
 
-eva.notice = function(){
-	if(!$(".message-notice-count")[0]) {
-		return false;
-	}
-
-	var checkNewUnread = function(){
-		$.ajax({
-			'url' : eva.d('/message/messages/unreadcount'),
-			'type' : 'get',
-			'dataType' : 'json',
-			'success' : function(response){
-				if(response.count > 0) {
-					$(".message-notice-count .count-number").html(response.count).show();
-					var title = $('title').text();
-					if(title.match(/^\(\d+\)/)){
-						title = title.replace(/^\(\d+\)/, '(' + response.count + ') ');
-						$('title').html(title);
-					} else {
-						$('title').prepend('(' + response.count + ') ');
-					}				
-				} else {
-					$(".message-notice-count .count-number").hide();
-					var title = $('title').text();
-					if(title.match(/^\(\d+\)/)){
-						title = title.replace(/^\(\d+\)/, '');
-						$('title').html(title);
-					}		
-				}
-			}
-		});
-	}
-
-	checkNewUnread();
-	setInterval(function(){ checkNewUnread() }, 50000);
-}
 
 eva.templates = function(){
 	$('script[data-url]').each(function(){
@@ -150,38 +115,107 @@ eva.select2 = function(){
 	});
 }
 
+eva.checkMessage = function(){
+	var counter = $(".notice-count-message");
+	if(!counter[0]) {
+		return false;
+	}
+
+	var counterNumber = counter.find('.count-number');
+	var updateNumber = function(response){
+		if(response.count > 0) {
+			counterNumber.html(response.count).show();
+			var title = $('title').text();
+			if(title.match(/^\(\d+\)/)){
+				title = title.replace(/^\(\d+\)/, '(' + response.count + ') ');
+				$('title').html(title);
+			} else {
+				$('title').prepend('(' + response.count + ') ');
+			}				
+		} else {
+			counterNumber.hide();
+			var title = $('title').text();
+			if(title.match(/^\(\d+\)/)){
+				title = title.replace(/^\(\d+\)/, '');
+				$('title').html(title);
+			}		
+		}	
+	};
+
+	var checkNewUnread = function(){
+		$.ajax({
+			'url' : eva.d('/message/messages/unreadcount'),
+			'type' : 'get',
+			'dataType' : 'json',
+			'success' : updateNumber
+		});
+	};
+	checkNewUnread();
+	setInterval(function(){ checkNewUnread() }, 50000);
+};
+
+eva.checkRequest = function(){
+	var counter = $(".notice-count-request");
+	if(!counter[0]) {
+		return false;
+	}
+
+	var counterNumber = counter.find('.count-number');
+	var user = eva.getUser();
+	var updateNumber = function(response){
+		if(response.items.length > 0) {
+			counterNumber.html(response.items.length).show();
+			counter.after(tmpl($("#notice-count-request").html(), response));
+		} else {
+			counterNumber.hide();
+		}	
+	};
+
+	var checkNewUnread = function(){
+		$.ajax({
+			'url' : eva.d('/data/friend/'),
+			'type' : 'get',
+			'data' : {
+				user_id : user.id,
+				status : 'pending'
+			},
+			'dataType' : 'json',
+			'success' : updateNumber
+		});
+	};
+	checkNewUnread();
+};
+
+
+
 eva.checkFollow = function(){
 	var checker = $(".follow-check");
 	if(!checker[0]){
 		return false;
 	}
-	
+
 	var userid = checker.find('input[name=user_id]').val();
+	var url = checker.attr('data-url');
+	var user = eva.getUser();
+	if(userid == user.id){
+		$(".follow-form").addClass('hide');
+		return;
+	}
 
-	eva.userReady(function(){
-		var url = checker.attr('data-url');
-		var user = eva.getUser();
-		if(userid == user.id){
-			$(".follow-form").addClass('hide');
-			return;
-		}
-
-		$.ajax({
-			url : url,
-			dataType : 'json',
-			type : 'get',
-			data : {"user_id" : userid},
-			success : function(response){
-				if(!response.item || response.item.length < 1) {
-					return false;
-				}
-				$(".follow-form").toggleClass('hide');
-				$(".unfollow-form").toggleClass('hide');
+	$.ajax({
+		url : url,
+		dataType : 'json',
+		type : 'get',
+		data : {"user_id" : userid},
+		success : function(response){
+			if(!response.item || response.item.length < 1) {
+				return false;
 			}
-		});	
-	});
-
-}
+			$(".follow-form").toggleClass('hide');
+			$(".unfollow-form").toggleClass('hide');
+		}
+	});	
+};
 
 eva.checkFriend = function(){
 	var checker = $(".friend-check");
@@ -189,40 +223,38 @@ eva.checkFriend = function(){
 		return false;
 	}
 
-	eva.userReady(function(){
-		var userid = checker.find('input[name=friend_id]').val();
-		var url = checker.attr('data-url');
-		var forms = $(".relationship-form");
-		var user = eva.getUser();
-		if(userid == user.id){
-			return;
+	var userid = checker.find('input[name=friend_id]').val();
+	var url = checker.attr('data-url');
+	var forms = $(".relationship-form");
+	var user = eva.getUser();
+	if(userid == user.id){
+		return;
+	}
+
+	var switchForms = function(response){
+		if(!response.item || response.item.length < 1) {
+			forms.eq(0).show();
+			return false;
 		}
+		var relationship = response.item[0].relationshipStatus;
+		var requestUserId = response.item[0].request_user_id;
+		forms.filter('.showon-' + relationship).show();
+		if(relationship == 'pending' && user.id == requestUserId){
+			$(".approve-form, .refuse-form").hide();
+			$(".unfriend-form").show();
+			$unfriendBtn = $(".unfriend-form button");
+			$unfriendBtn.text($unfriendBtn.attr("data-text"));
+		}
+	};
 
-		var switchForms = function(response){
-			if(!response.item || response.item.length < 1) {
-				forms.eq(0).show();
-				return false;
-			}
-			var relationship = response.item[0].relationshipStatus;
-			var requestUserId = response.item[0].request_user_id;
-			forms.filter('.showon-' + relationship).show();
-			if(relationship == 'pending' && user.id == requestUserId){
-				$(".approve-form, .refuse-form").hide();
-				$(".unfriend-form").show();
-				$unfriendBtn = $(".unfriend-form button");
-				$unfriendBtn.text($unfriendBtn.attr("data-text"));
-			}
-		};
-
-		$.ajax({
-			url : url,
-			dataType : 'json',
-			type : 'get',
-			data : {"user_id" : userid},
-			success : switchForms
-		});	
-	});
-}
+	$.ajax({
+		url : url,
+		dataType : 'json',
+		type : 'get',
+		data : {"user_id" : userid},
+		success : switchForms
+	});	
+};
 
 eva.preview = function(){
 	$(document).on('click', '.item-preview', function(){
@@ -405,13 +437,21 @@ eva.ready(function(){
 
 	eva.highlightmenu();
 	eva.miniCalendar();
-	eva.notice();
 	eva.select2();
-	eva.checkFollow();
-	eva.checkFriend();
-	eva.preview();
 
-	eva.refreshOnline();
+	eva.userReady(function(){
+		var user = eva.getUser();
+		if(!user){
+			return false;
+		}
+		eva.checkFollow();
+		eva.checkFriend();
+		eva.checkMessage();	
+		eva.checkRequest();
+		eva.refreshOnline();
+	});
+
+	eva.preview();
 
 	eva.city();
 

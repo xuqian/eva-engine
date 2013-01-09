@@ -190,7 +190,7 @@ class DataController extends RestfulModuleController
         $this->changeViewModel('json');
         $selectQuery = array(
             'user_id' => $this->params()->fromQuery('user_id'),
-            'relationshipStatus' => 'approved',
+            'relationshipStatus' => $this->params()->fromQuery('status', 'approved'),
             'page' => $this->params()->fromQuery('page', 1),
             'rows' => $this->params()->fromQuery('rows', 16),
         );

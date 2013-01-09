@@ -1189,7 +1189,8 @@ body, .en body, .fr body {
 	}
 }
 
-.message-notice-count {
+.notice-count {
+	display:block;
 	position:relative;
 
 	.count-number {
@@ -1198,14 +1199,36 @@ body, .en body, .fr body {
 		right:0;
 		width:12px;
 		height:12px;
-		font-size:14px;
-		line-height:7px;
+		font-size:12px;
+		line-height:12px;
 		padding:2px;
 		.border-radius(20px);
+		display:none;
+		.opacity(80);
 	}
 
+	&:hover {
+		background:#333 !important;
+	}
 }
 
+.dropdown-menu-text {
+	padding:15px;
+}
+.dropdown-menu-text li{
+	width:280px;
+	line-height:20px;
+	color:#666;
+	p {
+		border-bottom:1px solid #CCC;
+		padding:10px 0;
+	}
+	a {
+		display:inline !important;
+		margin:0;
+		padding:0 !important;
+	}
+}
 
 
 /*******************************
