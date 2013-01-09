@@ -154,6 +154,7 @@ class UserController extends ActionController
         list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
             'action' => 'index',
             'user_id' => $user['id'],
+            'author_id' => $user['id'],
         ));
 
         $viewModel = new ViewModel(array(

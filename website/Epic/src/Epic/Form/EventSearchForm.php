@@ -101,6 +101,15 @@ class EventSearchForm extends EventForm
             'attributes' => array(
             ),
         ),
+        'user_id' =>     array(
+            'name' => 'user_id',
+            'type' => 'hidden',
+            'options' => array(
+                'label' => 'User Id',
+            ),
+            'attributes' => array(
+            ),
+        ),
     );
 
     public function prepareData($data)
