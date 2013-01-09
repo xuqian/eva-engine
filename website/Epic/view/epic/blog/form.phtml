@@ -3,7 +3,7 @@ $item = $this->item;
 $formAction = $this->formAction;
 $form = $this->form;
 if(!$formAction){
-    $formAction = $item['id'] ? $this->uri('/blogs/edit/') : $this->uri('/blog/create/');
+    $formAction = $item['id'] ? $this->uri('/blogs/edit/') : $this->uri('/blogs/create/');
 }
 $method = $item['id'] ? 'put' : 'post';
 $formExt = $this->formExt;
