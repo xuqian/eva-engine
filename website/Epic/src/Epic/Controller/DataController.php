@@ -155,7 +155,31 @@ class DataController extends RestfulModuleController
             'friend_id' => $user['id'],
         );
         $itemModel = Api::_()->getModel('User\Model\Friend');
-        $item = $itemModel->setItemList($selectQuery)->getFriendList()->toArray();
+        $item = $itemModel->setItemList($selectQuery)->getFriendList();
+        $item = $item ? $item->toArray() : array();
+        return new JsonModel(array(
+            'item' => $item,
+        ));
+    }
+
+    public function isfollowerAction()
+    {
+        $this->changeViewModel('json');
+
+        $user = \Core\Auth::getLoginUser();
+        if(!$user) {
+            return new JsonModel(array(
+                'item' => null
+            ));
+        }
+        $selectQuery = array(
+            'user_id' => $this->params()->fromQuery('user_id'),
+            'follower_id' => $user['id'],
+        );
+        $itemModel = Api::_()->getModel('Activity\Model\Follow');
+        $item = $itemModel->setItemList($selectQuery)->getFollowList();
+        $item = $item ? $item->toArray() : array();
+
         return new JsonModel(array(
             'item' => $item,
         ));

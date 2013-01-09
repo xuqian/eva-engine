@@ -40,13 +40,13 @@ $userSearchForm->setView($this)
                             </div>
                             <div class="search-filter">
                                 <form <?=$this->formAttr($userSearchForm)?> class="form form-inline">
-                                    <?=$userSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                                    <?=$userSearchForm->helper('keyword', array('class' => 'input-small', 'placeholder' => 'Name'))?>
                                     <?//=$userSearchForm->helper('gender', 'formSelect', array('class' => 'span2'))?>
                                     <?//=$userSearchForm->helper('onlineStatus', 'formSelect', array('class' => 'span2'))?>
                                     <?//=$userSearchForm->helper('country', 'formSelect', array('class' => 'span2'))?>  
                                     <?=$userSearchForm->helper('city', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'City'))?>        
                                     <?=$userSearchForm->helper('industry', 'formSelect', array('class' => 'input-large select2', 'placeholder' => 'Industry'))?>  
-                                    <?=$userSearchForm->helper('role', 'formSelect', array('class' => 'input-small select2', 'placeholder' => 'Role'))?>  
+                                    <?=$userSearchForm->helper('role', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'Member Type'))?>  
                                     <button class="btn" type="submit"><?=$this->_('Filter Users')?></button>
                                 </form>
                             </div>

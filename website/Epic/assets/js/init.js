@@ -151,16 +151,18 @@ eva.select2 = function(){
 }
 
 eva.checkFollow = function(){
-	if(!$(".follow-check")[0]){
+	var checker = $(".follow-check");
+	if(!checker[0]){
 		return false;
 	}
+	
+	var userid = checker.find('input[name=user_id]').val();
 
 	eva.userReady(function(){
-		var followCheck = $(".follow-check");
-		var userid = followCheck.find('input[name=user_id]').val();
-		var url = followCheck.attr('data-url');
+		var url = checker.attr('data-url');
 		var user = eva.getUser();
 		if(userid == user.id){
+			$(".follow-form").addClass('hide');
 			return;
 		}
 
@@ -170,27 +172,56 @@ eva.checkFollow = function(){
 			type : 'get',
 			data : {"user_id" : userid},
 			success : function(response){
-				var forms = $(".relationship-form");
 				if(!response.item || response.item.length < 1) {
-					forms.eq(0).show();
 					return false;
 				}
 				$(".follow-form").toggleClass('hide');
 				$(".unfollow-form").toggleClass('hide');
-				var relationship = response.item[0].relationshipStatus;
-				var requestUserId = response.item[0].request_user_id;
-				forms.filter('.showon-' + relationship).show();
-				if(relationship == 'pending' && user.id == requestUserId){
-					$(".approve-form, .refuse-form").hide();
-					$(".unfriend-form").show();
-					$unfriendBtn = $(".unfriend-form button");
-					$unfriendBtn.text($unfriendBtn.attr("data-text"));
-
-				}
 			}
 		});	
 	});
 
+}
+
+eva.checkFriend = function(){
+	var checker = $(".friend-check");
+	if(!checker[0]){
+		return false;
+	}
+
+	eva.userReady(function(){
+		var userid = checker.find('input[name=friend_id]').val();
+		var url = checker.attr('data-url');
+		var forms = $(".relationship-form");
+		var user = eva.getUser();
+		if(userid == user.id){
+			return;
+		}
+
+		var switchForms = function(response){
+			if(!response.item || response.item.length < 1) {
+				forms.eq(0).show();
+				return false;
+			}
+			var relationship = response.item[0].relationshipStatus;
+			var requestUserId = response.item[0].request_user_id;
+			forms.filter('.showon-' + relationship).show();
+			if(relationship == 'pending' && user.id == requestUserId){
+				$(".approve-form, .refuse-form").hide();
+				$(".unfriend-form").show();
+				$unfriendBtn = $(".unfriend-form button");
+				$unfriendBtn.text($unfriendBtn.attr("data-text"));
+			}
+		};
+
+		$.ajax({
+			url : url,
+			dataType : 'json',
+			type : 'get',
+			data : {"user_id" : userid},
+			success : switchForms
+		});	
+	});
 }
 
 eva.preview = function(){
@@ -377,6 +408,7 @@ eva.ready(function(){
 	eva.notice();
 	eva.select2();
 	eva.checkFollow();
+	eva.checkFriend();
 	eva.preview();
 
 	eva.refreshOnline();

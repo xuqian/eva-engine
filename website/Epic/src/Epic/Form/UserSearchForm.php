@@ -366,7 +366,7 @@ class UserSearchForm extends \User\Form\UserForm
             'type' => 'select',
             'options' => array (
                 'label' => 'Role',
-                'empty_option' => 'Select Role',
+                'empty_option' => 'Member Type',
                 'value_options' => array(
                     array(
                         'label' => 'Connoisseur',

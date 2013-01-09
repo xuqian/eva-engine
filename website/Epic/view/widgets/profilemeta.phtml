@@ -152,7 +152,7 @@ function isPaidRole($roles)
             </tr>
             <?endif?>
             <tr>
-                <td colspan="3">
+                <td colspan="3" class="form-buttons">
                     <?if($viewAsGuest):?>
                     <form <?=$this->formAttr($form)?> class="follow-form pull-left">
                         <?=$form->restful();?>
@@ -161,14 +161,14 @@ function isPaidRole($roles)
                         <?=$this->callback()?>
                         <button class="btn btn-brown btn-mini"><i class="icon-mini icon-plus"></i> Follow</button>
                     </form>
-                    <form <?=$this->formAttr($unfollowForm)?> class="unfollow-form hide follow-check pull-left" data-url="<?=$this->uri('/data/isfriend/')?>">
+                    <form <?=$this->formAttr($unfollowForm)?> class="unfollow-form hide follow-check pull-left" data-url="<?=$this->uri('/data/isfollower/')?>">
                         <?=$unfollowForm->restful();?>
                         <?=$unfollowForm->helper('user_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$unfollowForm->helper('follower_id', array('class' => ''))?>
                         <?=$this->callback()?>
                         <button class="btn btn-brown btn-mini" href="<?=$this->uri('/activity/follow/')?>"><i class="icon-mini icon-minus"></i> Unfollow</button>
                     </form>
-                    <form <?=$this->formAttr($friendForm)?> class="friend-form pull-left relationship-form hide showon-removed showon-refused">
+                    <form <?=$this->formAttr($friendForm)?> class="friend-form pull-left friend-check relationship-form hide showon-removed showon-refused"  data-url="<?=$this->uri('/data/isfriend/')?>">
                         <?=$friendForm->restful();?>
                         <?=$friendForm->helper('friend_id', array('class' => '', 'value' => $this->user['id']))?>
                         <?=$this->callback()?>
