@@ -13,6 +13,7 @@ class FeedController extends ActionController
     {
         $userId = $this->params('user_id');
         $eventId = $this->params('event_id');
+        $authorId = $this->params('author_id');
         $page = $this->params()->fromQuery('page', 1);
 
         $feedMap = array(
@@ -42,6 +43,7 @@ class FeedController extends ActionController
             $itemModel = Api::_()->getModel('Activity\Model\Activity');
             $activityList = $itemModel->getUserActivityList(array(
                 'user_id' => $userId,
+                'author_id' => $authorId,
                 'page' => $page,
             ))->getActivityList($feedMap);
             $paginator = $itemModel->getUserActivityPaginator();
