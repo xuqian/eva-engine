@@ -164,6 +164,15 @@ eva.checkRequest = function(){
 	var user = eva.getUser();
 	var updateNumber = function(response){
 		if(response.items.length > 0) {
+			var newItems = [];
+			for(var i in response.items){
+				if(user.id != response.items[i].request_user_id){
+					newItems.push(response.items[i]);
+				}
+			}
+			response.items = newItems;
+		}
+		if(response.items.length > 0) {
 			counterNumber.html(response.items.length).show();
 			counter.after(tmpl($("#notice-count-request").html(), response));
 		} else {

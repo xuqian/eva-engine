@@ -152,6 +152,14 @@ function isPaidRole($roles)
             </tr>
             <?endif?>
             <tr>
+                <td colspan="3" class="social">
+                    Social Networking : 
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol facebook <?=checkOauth('facebook', $user) ? 'highlight' : ''?>">facebook</span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>">twitter</span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="lsf symbol flickr <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="3" class="form-buttons">
                     <?if($viewAsGuest):?>
                     <form <?=$this->formAttr($form)?> class="follow-form pull-left">
@@ -204,23 +212,13 @@ function isPaidRole($roles)
                         <?=$this->callback()?>
                         <button class="btn btn-gray btn-mini"><i class="icon-mini icon-undo"></i> Unblock</button>
                     </form>
-
-
-
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/messages/send/' . $this->user['userName'])?>"><i class="icon-mini icon-envelope-alt"></i> Send Message</a>
                     <?else:?>
                     <a class="btn btn-gray btn-mini" href="<?=$this->uri('/user/' . $this->user['userName'])?>"><i class="icon-mini icon-eye-open"></i> View As Guest</a>
                     <?endif?>
                 </td>
             </tr>
-            <tr>
-                <td colspan="3" class="social">
-                    Social Networking : 
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol facebook <?=checkOauth('facebook', $user) ? 'highlight' : ''?>">facebook</span></a>
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>">twitter</span></a>
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="lsf symbol flickr <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
-                </td>
-            </tr>
+
         </tbody>
     </table>
 </div><!--profile-intro end-->
