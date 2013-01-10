@@ -480,7 +480,78 @@ class GroupController extends ActionController
         
         return $viewModel;
     }
-    
+
+    public function sendmailAction()
+    {
+        list($item, $members) = $this->groupAction();
+        
+        $viewModel = new ViewModel();
+
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'members' => $members,
+        ));
+
+        $user = Auth::getLoginUser(); //Could not get user info after form valid
+
+        if ($user['id'] != $item['user_id']) {
+            exit;
+        }
+
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $postData = $request->getPost();
+            
+            $userIds = $postData['user_id'];
+
+            if (!$postData['user_id']) {
+                exit;
+            }
+
+            
+
+            $form = new \Core\Form\SendEmailForm();
+            $form->bind($postData);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $file = array();
+                if($form->getFileTransfer()->isUploaded()) {
+                    $form->getFileTransfer()->receive();
+                    $files = $form->getFileTransfer()->getFileInfo();
+                    $file = $files['attachment'];
+                }
+
+                $userModel = Api::_()->getModel('User\Model\User');
+                $users = $userModel->setItemList(array(
+                    'noLimit' => true,
+                    'id' => $userIds,
+                ))->getUserList()->toArray();
+                
+                $mail = new \Core\Mail();
+                $message = $mail->getMessage();
+                
+                foreach ($users as $user) {
+                    $message->addBcc($user['email']);
+                }
+
+                $message->setSubject($data['subject'])
+                    ->setBody($data['content']);
+                
+                if($file['tmp_name']){
+                    $message->addAttachment($file['tmp_name']);
+                }
+                $mail->send();
+
+                return $this->redirect()->toUrl('/group/' . $item['groupKey']);
+
+            } else {
+            }
+        } 
+
+        return $viewModel; 
+    }
+
     public function eventAction()
     {
         list($item, $members) = $this->groupAction();
@@ -492,7 +563,7 @@ class GroupController extends ActionController
         $page = $this->params()->fromQuery('page', 1);
         $rows = $this->params()->fromQuery('rows', 10);
         $order = $this->params()->fromQuery('order', 'timedesc');
-        
+
         $eventView = $this->forward()->dispatch('EventController', array(
             'action' => 'list',
             'group_id' => $groupId,

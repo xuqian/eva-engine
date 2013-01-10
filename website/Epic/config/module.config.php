@@ -358,6 +358,18 @@ return array(
                             ),
                         ),
                     ),
+                    'sendmail' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'sendmail[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'sendmail'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
                     'event' => array(
                         'type' => 'Segment',
                         'options' => array(

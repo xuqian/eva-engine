@@ -88,7 +88,12 @@ class UserController extends ActionController
 
     public function indexAction()
     {
-    
+        $request = $this->getRequest();
+        $query = $request->getQuery();
+
+        return array(
+            'query' => $query,
+        ); 
     }
 
     public function listAction()

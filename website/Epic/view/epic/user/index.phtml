@@ -42,10 +42,11 @@ $categories = array(
          <div class="span9">
              <nav class="nav-member">
              <ul>
-                 <li><a class="active" href="<?=$this->uri('/user/list/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
-                 <li><a href="<?=$this->uri('/user/list/?role=PROFESSIONAL_MEMBER')?>">Professional</a></li>
-                 <li><a href="<?=$this->uri('/user/list/?role=PAID_MEMBER')?>">VIP</a></li>
-                 <li><a href="<?=$this->uri('/user/list/?role=CORPORATE_MEMBER')?>">Corporate</a></li>
+                 <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/user/')?>">All</a></li>
+                 <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
+                 <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=PROFESSIONAL_MEMBER')?>">Professional</a></li>
+                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=PAID_MEMBER')?>">VIP</a></li>
+                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=CORPORATE_MEMBER')?>">Corporate</a></li>
              </ul>
              </nav>
          </div><!--page main left end-->
@@ -104,7 +105,7 @@ $categories = array(
              </div><!--page main left end-->
              <div class="span10 box-shadow-left">
                  <div class="member-main">
-                    <script id="member-wall" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('flag' => 1,'rows' => 37))?>">
+                    <script id="member-wall" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('flag' => 1,'role' => $this->query['role'],'rows' => 37))?>">
                     <div class="member-wall">
                          <ul>
                          {% if(o.items.length > 0) { %}
@@ -127,7 +128,7 @@ $categories = array(
                          <ul class="thumbnails member-thumbnails">
                              <?foreach($categories as $key=>$cate):?>
                              <li class="span3">
-                             <script id="<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array($cate['key'] => $cate['value'],'rows' => 9))?>">
+                             <script id="<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array($cate['key'] => $cate['value'], 'role' => $this->query['role'], 'rows' => 9))?>">
                              <div class="thumbnail <?=$key?>">
                                  <div class="thumbnail-title thumbnail-title-alt">
                                      <?=$cate['label']?>
@@ -188,7 +189,7 @@ $categories = array(
                                  <?foreach($industries as $key => $industry):?>
                                  <?if($key > 2){break;}?>
                                  <li class="span4">
-                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'],'rows' => 12))?>">
+                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
                                          <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
@@ -258,7 +259,7 @@ $categories = array(
                                  <?foreach($industries as $key => $industry):?>
                                  <?if($key < 3 || $key > 5){continue;}?>
                                  <li class="span4">
-                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'],'rows' => 12))?>">
+                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
                                          <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>

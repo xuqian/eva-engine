@@ -44,6 +44,11 @@ $unjoinForm->setMethod('delete');
                     </form>
                     <?endif?>  
                 </span>
+                <?if(count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
+                <span class="span2">
+                    <a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/sendmail/')?>" class="btn btn-small btn-gray"><i class="icon-plus"></i> Send Mail</a>
+                </span> 
+                <?endif;?>
             </div>
         </div>
     </div>
@@ -61,5 +66,8 @@ $unjoinForm->setMethod('delete');
         <li data-highlight-url="(^/group/[a-z0-9A-Z]+/?$)|^/group/[a-z0-9A-Z]+/blog/"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>
         <li data-highlight-url="^/group/[a-z0-9A-Z]+/event/" ><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/')?>">Events</a></li>
         <li data-highlight-url="^/group/[a-z0-9A-Z]+/album/"><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/album/')?>">Albums</a></li>
+        <?if(count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
+        <li data-highlight-url="^/group/[a-z0-9A-Z]+/sendmail/"><a href="<?=$this->uri('/group/' . $item['groupKey'] . '/sendmail/')?>">Send Mail</a></li>
+        <?endif;?>
     </ul>
 </div>
