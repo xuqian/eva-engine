@@ -106,6 +106,12 @@ function isPaidRole($roles)
     <table class="table-condensed">
         <tbody>
             <tr>
+                <td>City : 
+                    <?if($user['Profile']['city']):?>
+                    <?=$user['Profile']['city']?>
+                    <?endif?>
+                </td>
+                <!--
                 <td>Title: 
                     <?if($user['gender'] =='male'):?>
                     Mr.
@@ -117,6 +123,7 @@ function isPaidRole($roles)
                     <?=$user['lastName']?> <?=$user['firstName']?>
                     <?endif?>
                 </td>
+                -->
                 <td colspan="2">Website : 
                     <?if($user['Profile']['site']):?>
                     <a href="<?=$user['Profile']['site']?>"><?=$user['Profile']['site']?></a>
@@ -124,13 +131,7 @@ function isPaidRole($roles)
                 </td>
             </tr>
             <tr>
-                <td>Location : 
-                    <?if($user['Profile']['city']):?>
-                    <?=$user['Profile']['city']?>
-                    <?endif?>
-                    <?if($user['Profile']['city']):?>
-                    <?=$user['Profile']['province']?>
-                    <?endif?>
+                <td>Country : 
                     <?if($user['Profile']['country']):?>
                     <?=$this->locale('territory', $user['Profile']['country'])?>
                     <?endif?>
@@ -144,7 +145,7 @@ function isPaidRole($roles)
                 </td>
                 <td>Events : <a href=""><?=$user['EventCount']['eventCount']?></a> Times</td>
             </tr>
-            <?if($user['Profile']['bio']):?>
+            <?if(0 && $user['Profile']['bio']):?>
             <tr>
                 <td colspan="3">Bio : 
                     <?=$user['Profile']['bio']?>
