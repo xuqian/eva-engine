@@ -181,7 +181,7 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                     <label class="control-label">Tags</label>
                                     <div class="controls">
                                         <?$tagForm = $form->get('Tags')->get('0');?>
-                                        <?=$tagForm->helper('tagName', array('id' => 'tagging', 'class' => '', 'value' => $this->tagging($tags)->toNameString()))?> 
+                                        <?=$tagForm->helper('tagName', array('id' => 'tagging', 'class' => 'input-large', 'value' => $this->tagging($tags)->toNameString()))?> 
                                     </div>
                                 </div>
 
