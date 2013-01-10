@@ -37,11 +37,20 @@ $unjoinForm->setMethod('delete');
                 <dd><?=$item['endDay']?> <?=$item['endTime'] ? $item['endTime'] : null?></dd>
                 <dt>City:</dt>
                 <dd><?=$item['city']?></dd>
+                <?if($item['location']):?>
                 <dt>Location:</dt>
                 <dd><?=$item['location']?></dd>
+                <?endif?>
+                <?if($item['Tags']):?>
+                <dt>Tags:</dt>
+                <dd>
+                <?foreach($item['Tags'] as $tag):?>
+                <a href="<?=$this->uri('/events/list/?tag=' . $tag['tagName']);?>" class="label"><?=$tag['tagName']?></a>
+                <?endforeach?>
+                </dd>
+                <?endif?>
                 <dt>Event Owner</dt>
                 <dd><?=$item['user_name']?></dd>
-                <dd></dd>
             </dl>
             <p><span class="highlight"><?=$item['Count']['memberCount']?></span> Members Joined</p>
             <p>

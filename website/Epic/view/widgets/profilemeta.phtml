@@ -145,6 +145,15 @@ function isPaidRole($roles)
                 </td>
                 <td>Events : <a href=""><?=$user['EventCount']['eventCount']?></a> Times</td>
             </tr>
+            <?if($user['Tags']):?>
+            <tr>
+                <td colspan="3">Tags : 
+                    <?foreach($user['Tags'] as $tag):?>
+                    <a href="<?=$this->uri('/user/list/?tag=' . $tag['tagName']);?>" class="label"><?=$tag['tagName']?></a>
+                    <?endforeach?>
+                </td>
+            </tr>
+            <?endif?>
             <?if(0 && $user['Profile']['bio']):?>
             <tr>
                 <td colspan="3">Bio : 

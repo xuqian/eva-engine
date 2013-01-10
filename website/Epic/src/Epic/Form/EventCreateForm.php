@@ -12,6 +12,10 @@ class EventCreateForm extends EventForm
                 'collection' => true,
                 'optionsCallback' => 'initCategories',
             ),
+            'Tags' => array(
+                'formClass' => 'Event\Form\TagsForm',
+                'collection' => true,
+            ),
         ),
     );
 
@@ -47,6 +51,24 @@ class EventCreateForm extends EventForm
         $data['visibility'] = $visibility; 
         $data['isFullDayEvent'] = 1; 
         $data['timezone'] = $timezone ? $timezone : 0;
+
+        if(isset($data['Tags'][0]['tagName'])){
+            $tagString = $data['Tags'][0]['tagName'];
+            $tags = array();
+            if(false === strpos($tagString, ',')) {
+                $tags[] = array(
+                    'tagName' => $tagString
+                );
+            } else {
+                $tagNames = explode(',', $tagString);
+                foreach($tagNames as $tag){
+                    $tags[] = array(
+                        'tagName' => $tag
+                    );
+                }
+            }
+            $data['Tags'] = $tags;
+        }
 
         //Data is array is for display
         if(isset($data['CategoryEvent']) && is_array($data)){

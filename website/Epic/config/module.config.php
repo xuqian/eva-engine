@@ -7,12 +7,25 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'PreregController',
+                        'controller' => 'LoginController',
                         'action'     => 'index',
                     ),
                 ),
                 'priority' => 2,
             ),
+
+            'oldindex' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/reg[/]',
+                    'defaults' => array(
+                        'controller' => 'PreregController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'prereg' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(

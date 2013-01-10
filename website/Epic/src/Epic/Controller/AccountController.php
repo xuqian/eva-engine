@@ -64,6 +64,9 @@ class AccountController extends ActionController
                     'Roles' => array(
                         '*'
                     ),
+                    'Tags' => array(
+                        '*'
+                    ),
                 ),
                 'proxy' => array(
                     'User\Item\User::Avatar' => array(

@@ -40,6 +40,9 @@ class UserController extends ActionController
                 ),
                 'FriendsCount' => array(
                 ),
+                'Tags' => array(
+                    '*'
+                ),
             ),
             'proxy' => array(
                 'User\Item\User::Avatar' => array(

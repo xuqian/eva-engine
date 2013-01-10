@@ -45,9 +45,10 @@ $userSearchForm->setView($this)
                                     <?//=$userSearchForm->helper('onlineStatus', 'formSelect', array('class' => 'span2'))?>
                                     <?//=$userSearchForm->helper('country', 'formSelect', array('class' => 'span2'))?>  
                                     <?=$userSearchForm->helper('city', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'City'))?>        
-                                    <?=$userSearchForm->helper('industry', 'formSelect', array('class' => 'input-large select2', 'placeholder' => 'Industry'))?>  
+                                    <?=$userSearchForm->helper('industry', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'Industry'))?>  
                                     <?=$userSearchForm->helper('role', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'Member Type'))?>  
-                                    <button class="btn" type="submit"><?=$this->_('Filter Users')?></button>
+                                    <?=$userSearchForm->helper('tag', 'formText', array('class' => 'input-small', 'placeholder' => 'Tag'))?>  
+                                    <button class="btn" type="submit"><?=$this->_('Filter')?></button>
                                 </form>
                             </div>
                             <div class="user-list vlist">

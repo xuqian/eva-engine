@@ -152,6 +152,9 @@ class EventController extends ActionController
                 'Count' => array(
                     '*'
                 ),
+                'Tags' => array(
+                    '*'
+                ),
             ),
         ));
 
@@ -343,6 +346,9 @@ class EventController extends ActionController
                         )
                     ),
                     'Category' => array(
+                        '*'
+                    ),
+                    'Tags' => array(
                         '*'
                     ),
                 ),

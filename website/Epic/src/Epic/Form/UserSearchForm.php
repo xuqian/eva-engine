@@ -387,6 +387,16 @@ class UserSearchForm extends \User\Form\UserForm
                 ),
             ),
         ),
+        'tag' => array(
+            'name' => 'tag',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Text',
+            ),
+            'attributes' => array(
+                'value' => '',
+            ),
+        ),
     );
 
 

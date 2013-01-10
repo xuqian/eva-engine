@@ -15,6 +15,7 @@ $form->setView($this)
      ->bind($item)
      ->prepare();
 
+$tags = isset($item['Tags']) ? $item['Tags'] : array();
 ?>
 
 <div class="container">
@@ -176,6 +177,14 @@ $form->setView($this)
                                 </div>
 
 
+                                <div class="control-group">
+                                    <label class="control-label">Tags</label>
+                                    <div class="controls">
+                                        <?$tagForm = $form->get('Tags')->get('0');?>
+                                        <?=$tagForm->helper('tagName', array('id' => 'tagging', 'class' => '', 'value' => $this->tagging($tags)->toNameString()))?> 
+                                    </div>
+                                </div>
+
                                 <div class="control-group <?=$form->isError(array('Profile', 'bio')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'bio'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
@@ -212,24 +221,31 @@ $form->setView($this)
 
 <script>
 eva.ready(function(){
-    var form = $("#profile-edit-form");
-    var uploader = $('#singlefileupload');
-    uploader.bind('fileuploaddone', function (e, data) {
-            var file = data.result[0];
-            form.find('input[name="avatar_id"]').val(file.id);
-            $("#avatar-view").hide();
-    });
+        eva.loadcss(eva.s('/lib/js/jquery/jquery.select2/select2.css'));
+        eva.loader(eva.s('/lib/js/jquery/jquery.select2/select2.js'), function(){
+                $('#tagging').select2({
+                        tags : <?=$this->json($this->tagging($tags)->toNameArray())?>
+                });
+        });
 
-    $("#show-avatar-uploader").click(function(){
-        $("#avatar-uploader").show();
-        return false;
-    });
+        var form = $("#profile-edit-form");
+        var uploader = $('#singlefileupload');
+        uploader.bind('fileuploaddone', function (e, data) {
+                var file = data.result[0];
+                form.find('input[name="avatar_id"]').val(file.id);
+                $("#avatar-view").hide();
+        });
 
-    $("#delete-avatar").click(function(){
-        form.find('input[name="avatar_id"]').val('0');
-        $("#avatar-view").attr("src", $("#avatar-view").attr("data-default"));
-        $("#avatar-uploader").show();
-        return false;
-    });
+        $("#show-avatar-uploader").click(function(){
+                $("#avatar-uploader").show();
+                return false;
+        });
+
+        $("#delete-avatar").click(function(){
+                form.find('input[name="avatar_id"]').val('0');
+                $("#avatar-view").attr("src", $("#avatar-view").attr("data-default"));
+                $("#avatar-uploader").show();
+                return false;
+        });
 });
 </script>

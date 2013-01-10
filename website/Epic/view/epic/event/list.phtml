@@ -55,10 +55,11 @@ foreach($this->eventList as $eventDay){
 
                     <div class="search-filter">
                         <form <?=$this->formAttr($eventSearchForm)?> class="form form-inline">
-                            <?=$eventSearchForm->helper('keyword', array('class' => 'span2', 'placeholder' => 'Keyword...'))?>
+                            <?=$eventSearchForm->helper('keyword', array('class' => 'input-small', 'placeholder' => 'Keyword...'))?>
                             <?=$eventSearchForm->helper('city', 'formSelect', array('class' => 'input-medium select2', 'placeholder' => 'City'))?>
                             <?=$eventSearchForm->helper('afterStartDay', array('class' =>'input-small datepicker', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'Start day'))?>
                             <?=$eventSearchForm->helper('beforeStartDay', array('class' => 'input-small datepicker', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'End day'))?>
+                            <?=$eventSearchForm->helper('tag', array('class' => 'input-small','placeholder' => 'Tag'))?>
                             <button class="btn" type="submit"><?=$this->_('Filter Events')?></button>
                         </form>
                     </div>

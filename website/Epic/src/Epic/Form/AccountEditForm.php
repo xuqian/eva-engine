@@ -26,6 +26,10 @@ class AccountEditForm extends UserCreateForm
     protected $subFormGroups = array(
         'default' => array(
             'Profile' => 'Epic\Form\ProfileForm',
+            'Tags' => array(
+                'formClass' => 'User\Form\TagsForm',
+                'collection' => true,
+            ),
         ),
     );
 
@@ -48,6 +52,7 @@ class AccountEditForm extends UserCreateForm
             'industry',
             'bio'
         ),
+        'Tags',
     );
 
     protected $mergeElements = array(
@@ -109,6 +114,24 @@ class AccountEditForm extends UserCreateForm
                     break;
                 }
             }
+        }
+
+        if(isset($data['Tags'][0]['tagName'])){
+            $tagString = $data['Tags'][0]['tagName'];
+            $tags = array();
+            if(false === strpos($tagString, ',')) {
+                $tags[] = array(
+                    'tagName' => $tagString
+                );
+            } else {
+                $tagNames = explode(',', $tagString);
+                foreach($tagNames as $tag){
+                    $tags[] = array(
+                        'tagName' => $tag
+                    );
+                }
+            }
+            $data['Tags'] = $tags;
         }
 
         return $data;
