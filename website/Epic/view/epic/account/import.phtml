@@ -33,6 +33,18 @@ $inviteCode = $this->inviteCode;
                                     <input type="text" id="invite-url" class="span8" value="<?=$this->serverUrl() . '/register/?code=' . $inviteCode?>" readonly="readonly" >
                                 </div>
                             </div>
+                            
+                            <form action="<?=$this->uri('/contacts/invite/', array('r' => '/account/import/'))?>" method="post" class="">
+                            <div class="control-group">
+                                <label class="control-label" for="invite-url">Invite By Email</label>
+                                <div class="controls">
+                                    <input name="email[]" type="email" class="validate[required]" value="" />
+                                </div>
+                            </div>
+                            <div class="listing-buttons">
+                                <button class="btn btn-block btn-large"><?=$this->_('Send Invite')?></button>
+                            </div>
+                            </form>
                         </div>
 
 
