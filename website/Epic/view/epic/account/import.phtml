@@ -23,7 +23,7 @@ $inviteCode = $this->inviteCode;
                         </div>
 
                         <div class="page-main-header">
-                            <h3><?=$this->_('Invite Friends')?></h3>
+                            <h3><?=$this->_('Invite Friends By Link')?></h3>
                         </div>
 
                         <div class="well form">
@@ -34,15 +34,23 @@ $inviteCode = $this->inviteCode;
                                 </div>
                             </div>
                             
-                            <form action="<?=$this->uri('/contacts/invite/', array('r' => '/account/import/'))?>" method="post" class="">
+
+                        </div>
+
+                        <div class="page-main-header">
+                            <h3><?=$this->_('Invite Friends By Email')?></h3>
+                        </div>
+
+                        <div class="well">
+                            <form action="<?=$this->uri('/contacts/invite/', array('r' => '/account/import/'))?>" method="post" class="form form-horizontal">
                             <div class="control-group">
-                                <label class="control-label" for="invite-url">Invite By Email</label>
+                                <label class="control-label" for="invite-url">Friend Email Address</label>
                                 <div class="controls">
                                     <input name="email[]" type="email" class="validate[required]" value="" />
                                 </div>
                             </div>
-                            <div class="listing-buttons">
-                                <button class="btn btn-large"><?=$this->_('Send Invite')?></button>
+                            <div class="controls">
+                                <button class="btn"><?=$this->_('Send Invite')?></button>
                             </div>
                             </form>
                         </div>

@@ -50,13 +50,13 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                 <div class="control-group">
                                     <?=$form->helper('avatar_id', 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <div id="avatar-uploader" class="row <?=$item['Avatar'] ? 'hide' : ''?>">
+                                        <div id="avatar-uploader" class="row <?=isset($item['Avatar']) && $item['Avatar'] ? 'hide' : ''?>">
                                             <div class="span4">
                                                 <?=$form->helper('avatar_id');?>
                                                 <?=$this->widget('File', 'file/upload')?>
                                             </div>
                                         </div>
-                                        <?if($item['Avatar']):?>
+                                        <?if(isset($item['Avatar']) && $item['Avatar']):?>
                                         <img id="avatar-view" src="<?=$this->thumb($item['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill'))?>" alt="" class="img-polaroid" data-default="<?=$this->assets('/module/epic/img/default_avatar.png')?>" />
                                         <br /><a href="#" id="show-avatar-uploader">Change</a> or <a id="delete-avatar" href="#" >Delete</a>
                                         <?else:?>
@@ -109,6 +109,7 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                     <div class="controls">
                                         <?=$form->helper(array('Profile', 'site'), array('class' => ''))?>        
                                         <div class="help-block"><?=$form->helper(array('Profile', 'site'), 'formElementErrors')?></div>
+                                        <div class="help-block">Full url start by http://</div>
                                     </div>
                                 </div>
 

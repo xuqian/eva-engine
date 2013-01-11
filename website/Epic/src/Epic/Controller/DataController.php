@@ -13,6 +13,38 @@ class DataController extends RestfulModuleController
         'restIndexGroup' => 'blank',    
     );
 
+    public function geoAction()
+    {
+        $this->changeViewModel('json');
+
+        $city = 'unkown';
+        $geoData = EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/GeoLiteCity.dat';
+
+        if($this->cookie()->crypt(false)->read('city')){
+            $city = $this->cookie()->crypt(false)->read('city');
+        } elseif(file_exists($geoData)) {
+            include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipcity.inc');
+            include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipregionvars.php');
+            $ip = $_SERVER['REMOTE_ADDR'];
+
+            if ($this->params()->fromQuery('city') == 1) {
+                $gi = geoip_open($geoData, GEOIP_STANDARD);
+                $record = geoip_record_by_addr($gi, $ip);
+                $city = $record->city;
+                geoip_close($gi);
+
+            } else {
+                include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoip.inc');
+                $gi = geoip_open($geoData, GEOIP_STANDARD);
+                $city = geoip_country_name_by_addr($gi, $ip);
+                geoip_close($gi);
+            } 
+        }
+        return new JsonModel(array(
+            'item' => $city
+        ));
+    }
+
     public function myAction()
     {
         $this->changeViewModel('json');

@@ -307,4 +307,17 @@ class ProfileForm extends \User\Form\ProfileForm
          ),
 
      );
+
+    protected $mergeFilters = array (
+        'site' => array (
+            'validators' => array (
+                'uri' => array (
+                    'name' => 'uri',
+                    'options' => array (
+                        'allowRelative' => false,
+                    ),
+                ),
+            ),
+        ),
+    );
  }

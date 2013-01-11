@@ -158,7 +158,7 @@
             <a href="<?=$this->uri('/pages/privacy')?>"><?=$this->_('Privacy Policy')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/contact')?>" class="last"><?=$this->_('Contact')?></a>|</li><li>
             <a href="<?=$this->uri('/pages/help')?>" class="last"><?=$this->_('Help')?></a>|</li><li>
-            　<?=$this->_('Your City')?> : <span id="my-city"><?=$this->action('Epic\Controller\LocalController', 'indexAction',array('city' => 1));?></span> </li>
+            　<?=$this->_('Your Current Location')?> : <span id="current-location"></span> </li>
         </ul>
         </nav>
         <div class="clearfix"></div>

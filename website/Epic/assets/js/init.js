@@ -422,6 +422,21 @@ eva.topSearch = function(){
 };
 
 eva.city = function(){
+
+	if($("#current-location")[0]){
+		if($.cookie('city') != null){
+			$("#current-location").html($.cookie('city'));
+		} else {
+			$.ajax({
+				url : eva.d('/data/geo/'),
+				dataType : 'json',
+				success : function(response){
+					$("#current-location").html(response.item);
+				}
+			});
+		}
+	}
+
 	$(".switch-city a").on('click', function(){
 		$.cookie('city', $(this).text(), { expires: 365, path: '/'});
 		window.location.href = eva.d('/events/');

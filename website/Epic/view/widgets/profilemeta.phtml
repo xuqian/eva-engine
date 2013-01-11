@@ -111,19 +111,6 @@ function isPaidRole($roles)
                     <?=$user['Profile']['city']?>
                     <?endif?>
                 </td>
-                <!--
-                <td>Title: 
-                    <?if($user['gender'] =='male'):?>
-                    Mr.
-                    <?elseif($user['gender'] == 'femail'):?>
-                    Miss.
-                    <?endif?>
-
-                    <?if($user['firstName'] && $user['lastName']):?>
-                    <?=$user['lastName']?> <?=$user['firstName']?>
-                    <?endif?>
-                </td>
-                -->
                 <td colspan="2">Website : 
                     <?if($user['Profile']['site']):?>
                     <a href="<?=$user['Profile']['site']?>"><?=$user['Profile']['site']?></a>
@@ -143,7 +130,7 @@ function isPaidRole($roles)
                     Secret
                     <?endif?>
                 </td>
-                <td>Events : <a href=""><?=$user['EventCount']['eventCount']?></a> Times</td>
+                <td>Events : <a href="<?=$viewAsGuest ? $this->uri('/user/' . $user['userName'] . '/events/') : $this->uri('/my/event/')?>"><?=$user['EventCount']['eventCount']?></a> Times</td>
             </tr>
             <?if($user['Tags']):?>
             <tr>
