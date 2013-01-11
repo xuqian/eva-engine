@@ -115,6 +115,46 @@ $categories = $this->categories;
                         </div>
                         </script>
                         <?elseif($categories && !$this->query['category']):?>
+                        <script id="topic-wrap-feature" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4, 'flag' => 1))?>">
+                        <div class="topic-wrap-feature topic-wrap odd">
+                            <div class="topic">
+                                <div class="topic-heading">
+                                    <h4><a href="">Feature</a></h4>
+                                </div>
+                                <div class="topic-body-wrap">
+                                    <div class="topic-body">
+                                        <ul>
+                                        {% if(o.items.length > 0) { %}
+                                        {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                            <li><a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a></li>
+                                        {% } %}
+                                        {% } %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </script>
+                        <script id="topic-wrap-new" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4))?>">
+                        <div class="topic-wrap-new topic-wrap even">
+                            <div class="topic">
+                                <div class="topic-heading">
+                                    <h4><a href="">New</a></h4>
+                                </div>
+                                <div class="topic-body-wrap">
+                                    <div class="topic-body">
+                                        <ul>
+                                        {% if(o.items.length > 0) { %}
+                                        {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                            <li><a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a></li>
+                                        {% } %}
+                                        {% } %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </script>
                         <?foreach($categories as $key=>$category):?>
                         <script id="topic-wrap<?=$key;?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4, 'groupCategory' => $category['id']))?>">
                         <div class="topic-wrap<?=$key;?> topic-wrap <?=($key)%2 == 0 ? 'odd' : 'even'?>">

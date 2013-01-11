@@ -79,13 +79,6 @@ class GroupController extends ActionController
                 'urlName' => '',
                 'categoryName' => 'Hot',
             );
-        
-            $categoryArray = array();
-            $categoryArray[] = $category;
-            foreach ($categories as $cate) {
-                $categoryArray[] = $cate;
-            }
-            $categories = $categoryArray; 
         }
 
         return array(
