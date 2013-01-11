@@ -1,5 +1,5 @@
 <?
-$title = 'Send Mail';
+$title = 'Mail to Group Members';
 $this->headTitle($title, 'SET');
 $user = $this->user;
 $item = $this->event;
@@ -35,11 +35,16 @@ $form
                     <?=$this->widget('Epic', 'widgets/groupcard', $this->vars())?>  
 
                         <?if(count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
+
                         <form <?=$this->formAttr($form)?> class="form">
+                            <div class="page-header border-header">
+                                <h3>Select Members</h3>
+                            </div>
+
                             <?=$form->restful();?>
                             <div class="control-group <?=$form->isError('sender') ? 'error' : '';?>">
                                 <?foreach($this->members as $member):?>
-                                 <?if($member['role'] == 'admin'){continue;}?>
+                                <?if($member['role'] == 'admin'){continue;}?>
                                 <span>
                                     <input type="checkbox" value="<?=$member['user_id']?>" name="user_id[]" checked="checked">
                                     <a href="<?=$this->uri('/user/' . $member['User']['userName'])?>">
@@ -49,17 +54,22 @@ $form
                                 </span>
                                 <?endforeach;?>
                             </div>
+
+                            <div class="page-header border-header">
+                                <h3>Email Content</h3>
+                            </div>
+
                             <div class="control-group <?=$form->isError('recipient') ? 'error' : '';?> hide">
                                 <?=$form->helper('recipient', 'label', array('class' => 'control-label'))?>
                                 <div class="controls">
-                                    <?=$form->helper('recipient', array('class' => 'span6'))?>        
+                                    <?=$form->helper('recipient', array('class' => 'input-block-level'))?>        
                                     <div class="help-block"><?=$form->helper('recipient', 'formElementErrors')?></div>
                                 </div>
                             </div>
                             <div class="control-group <?=$form->isError('subject') ? 'error' : '';?>">
                                 <?=$form->helper('subject', 'label', array('class' => 'control-label'))?>
                                 <div class="controls">
-                                    <?=$form->helper('subject', array('class' => 'span6', 'value' => ''))?>        
+                                    <?=$form->helper('subject', array('class' => 'input-block-level', 'value' => ''))?>        
 
                                     <div class="help-block"><?=$form->helper('subject', 'formElementErrors')?></div>
                                 </div>
@@ -67,7 +77,7 @@ $form
                             <div class="control-group <?=$form->isError('content') ? 'error' : '';?>">
                                 <?=$form->helper('content', 'label', array('class' => 'control-label'), array('args' => array(null, 'abc')))?>
                                 <div class="controls">
-                                    <?=$form->helper('content', 'formTextarea', array('class' => 'span6', 'rows' => 10))?>        
+                                    <?=$form->helper('content', 'formTextarea', array('class' => 'input-block-level', 'rows' => 10))?>        
                                     <div class="help-block"><?=$form->helper('content', 'formElementErrors')?></div>
                                 </div>
                             </div>
@@ -80,7 +90,7 @@ $form
                             </div>
 
                             <div class="form-action">
-                                <button class="btn  btn-large">Send</button> A email will send to group member.
+                                <button class="btn  btn-large">Send Email</button>
                             </div>
                         </form> 
                         <?endif;?> 

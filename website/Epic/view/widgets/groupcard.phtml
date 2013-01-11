@@ -45,9 +45,7 @@ $unjoinForm->setMethod('delete');
                     <?endif?>  
                 </span>
                 <?if(count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
-                <span class="span2">
-                    <a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/sendmail/')?>" class="btn btn-small btn-gray"><i class="icon-plus"></i> Send Mail</a>
-                </span> 
+                <a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/sendmail/')?>" class="btn btn-small btn-gray"><i class="icon-plus"></i> Mail To Group Members</a>
                 <?endif;?>
             </div>
         </div>
