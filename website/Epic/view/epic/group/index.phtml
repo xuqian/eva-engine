@@ -156,6 +156,7 @@ $categories = $this->categories;
                         </div>
                         </script>
                         <?foreach($categories as $key=>$category):?>
+                        <?if($category['urlName'] == 'culture'){continue;}?>
                         <script id="topic-wrap<?=$key;?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => true,'order' => 'timedesc','rows' => 4, 'groupCategory' => $category['id']))?>">
                         <div class="topic-wrap<?=$key;?> topic-wrap <?=($key)%2 == 0 ? 'odd' : 'even'?>">
                             <div class="topic">
