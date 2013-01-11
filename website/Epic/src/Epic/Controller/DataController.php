@@ -18,27 +18,19 @@ class DataController extends RestfulModuleController
         $this->changeViewModel('json');
 
         $city = 'unkown';
-        $geoData = EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/GeoLiteCity.dat';
+        $geoData = EVA_ROOT_PATH . '/data/databases/GeoLiteCity.dat';
 
         if($this->cookie()->crypt(false)->read('city')){
             $city = $this->cookie()->crypt(false)->read('city');
         } elseif(file_exists($geoData)) {
-            include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipcity.inc');
-            include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoipregionvars.php');
+            new \GeoIP();
             $ip = $_SERVER['REMOTE_ADDR'];
-
-            if ($this->params()->fromQuery('city') == 1) {
-                $gi = geoip_open($geoData, GEOIP_STANDARD);
-                $record = geoip_record_by_addr($gi, $ip);
+            $gi = geoip_open($geoData, GEOIP_STANDARD);
+            $record = geoip_record_by_addr($gi, $ip);
+            if(isset($record->city)){
                 $city = $record->city;
-                geoip_close($gi);
-
-            } else {
-                include (EVA_ROOT_PATH . '/website/Epic/src/Epic/GeoIP/geoip.inc');
-                $gi = geoip_open($geoData, GEOIP_STANDARD);
-                $city = geoip_country_name_by_addr($gi, $ip);
-                geoip_close($gi);
-            } 
+            }
+            geoip_close($gi);
         }
         return new JsonModel(array(
             'item' => $city
@@ -58,7 +50,7 @@ class DataController extends RestfulModuleController
             'item' => $item,
         ));
     }
-    
+
     public function newsletterAction()
     {
         $this->changeViewModel('json');

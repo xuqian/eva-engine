@@ -40,20 +40,7 @@ return array(
                 ),
                 'priority' => 2,
             ),
-            'pay' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route' => '/pay/[:id]',
-                    'constraints' => array(
-                        'id'     => 'example|paypal|alipay|paypalsearch|alipaysearch',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'PayController',
-                        'action' => 'get',
-                    ),
-                ),
-                'priority' => 2,
-            ),
+
             'frontposts' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -675,7 +662,6 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'PreregController' => 'Epic\Controller\PreregController',
-            'PayController' => 'Epic\Controller\PayController',
 
             'Blog\Controller\BlogController' => 'Blog\Controller\BlogController',
             'Event\Controller\EventController' => 'Event\Controller\EventController',
