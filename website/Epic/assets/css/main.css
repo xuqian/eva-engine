@@ -914,7 +914,7 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .profile-face{position:absolute;width:175px;background:#FFF;top:-80px;left:50px;text-align:center;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-webkit-box-shadow:0 3px 3px rgba(0, 0, 0, 0.095);-moz-box-shadow:0 3px 3px rgba(0, 0, 0, 0.095);box-shadow:0 3px 3px rgba(0, 0, 0, 0.095);}.profile-face .caption{height:30px;line-height:40px;}
 .profile-intro{margin-left:270px;}.profile-intro .profile-title h2,.profile-intro .profile-title h3{display:inline;font-size:30px;}
 .profile-intro .profile-level{margin-left:10px;font-size:14px;}
-.profile-intro .social a{color:#999;font-size:18px;}.profile-intro .social a:hover{color:#e1500d;}
+.profile-intro .social a{color:#999;font-size:14px;}.profile-intro .social a:hover{color:#e1500d;}
 .profile-intro .form-buttons form{margin-right:10px;}
 .follow-form,.unfollow-form{display:inline;}.follow-form.show,.unfollow-form.show{display:inline;}
 .follow-form.hide,.unfollow-form.hide{display:none;}

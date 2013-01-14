@@ -151,9 +151,9 @@ function isPaidRole($roles)
             <tr>
                 <td colspan="3" class="social">
                     Social Networking : 
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="lsf symbol facebook <?=checkOauth('facebook', $user) ? 'highlight' : ''?>">facebook</span></a>
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="lsf symbol twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>">twitter</span></a>
-                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="lsf symbol flickr <?=checkOauth('flickr', $user) ? 'highlight' : ''?>">flickr</span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'facebook',))?>"><span class="icon-social-facebook-rect <?=checkOauth('facebook', $user) ? 'highlight' : ''?>"></span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'twitter', 'version' => 1))?>"><span class="icon-social-twitter <?=checkOauth('twitter', $user) ? 'highlight' : ''?>"></span></a>
+                    <a href="<?=$this->uri('/oauth/', array('r' => $this->serverUrl() . '/login/oauth/', 'service' => 'flickr', 'version' => 1))?>"><span class="icon-social-flickr <?=checkOauth('flickr', $user) ? 'highlight' : ''?>"></span></a>
                 </td>
             </tr>
             <tr>

@@ -7,7 +7,7 @@ eva.ready(function(){
     var submit = form.find('button[type=submit]');
     var syncTwitter = form.find('#activity-box-sync-twitter input');
 
-    if(!$(".lsf.symbol.twitter").hasClass('highlight')){
+    if(!$(".icon-social-twitter").hasClass('highlight')){
         syncTwitter.parent().hide();
     }
 
