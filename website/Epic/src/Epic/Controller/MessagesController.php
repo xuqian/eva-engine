@@ -5,6 +5,8 @@ use Eva\Api,
     Eva\Mvc\Controller\ActionController,
     Eva\View\Model\ViewModel,
     Message\Form;
+use Epic\Exception;
+
 
 class MessagesController extends ActionController
 {
@@ -16,7 +18,7 @@ class MessagesController extends ActionController
         
         $user = \Core\Auth::getLoginUser(); 
         if ($user['id'] != $item['author_id']) {
-            exit; 
+            throw new Exception\InvalidArgumentException('User id not match');
         }
 
         return array(
@@ -43,7 +45,7 @@ class MessagesController extends ActionController
         $user = \Core\Auth::getLoginUser(); 
 
         if ($user['id'] != $query['author_id']) {
-            exit; 
+            throw new Exception\InvalidArgumentException('User id not match');
         }
 
         $itemModel = Api::_()->getModel('Message\Model\Index');

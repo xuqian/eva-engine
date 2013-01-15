@@ -4,6 +4,7 @@ namespace Epic\Controller;
 use Eva\Api,
     Eva\Mvc\Controller\ActionController,
     Eva\View\Model\ViewModel;
+use Epic\Exception;
 
 class PagesController extends ActionController
 {
@@ -40,7 +41,7 @@ class PagesController extends ActionController
         ));
         if(!$item || $item['status'] != 'published'){
             $item = array();
-            $this->getResponse()->setStatusCode(404);
+            throw new Exception\PageNotFoundException('Post not found');
         }
         $view = new ViewModel(array(
             'post' => $item,

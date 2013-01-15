@@ -30,7 +30,9 @@ class LoginController extends ActionController
         $this->layout('layout/login');
         $request = $this->getRequest();
         if (!$request->isPost()) {
-            return;
+            return array(
+                'query' => $this->params()->fromQuery()
+            );
         }
             
         $item = $request->getPost();
@@ -63,6 +65,7 @@ class LoginController extends ActionController
         return array(
             'form' => $form,
             'item' => $item,
+            'query' => $this->params()->fromQuery(),
         );
     }
 

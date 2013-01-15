@@ -7,6 +7,7 @@ use Eva\Api,
     Zend\View\Model\JsonModel;
 use Core\Auth;
 use Group\Form;
+use Epic\Exception;
 
 class GroupController extends ActionController
 {
@@ -148,7 +149,7 @@ class GroupController extends ActionController
 
         if(!$item || $item['status'] != 'active'){
             $item = array();
-            $this->getResponse()->setStatusCode(404);
+            throw new Exception\PageNotFoundException('Page not found');
         }
       
         $user = Auth::getLoginUser(); 
@@ -488,7 +489,7 @@ class GroupController extends ActionController
         $user = Auth::getLoginUser(); //Could not get user info after form valid
 
         if ($user['id'] != $item['user_id']) {
-            exit;
+            throw new Exception\InvalidArgumentException('User id not match');
         }
 
         $request = $this->getRequest();
@@ -499,7 +500,7 @@ class GroupController extends ActionController
             $userIds = $postData['user_id'];
 
             if (!$postData['user_id']) {
-                exit;
+                throw new Exception\InvalidArgumentException('No user id');
             }
 
             

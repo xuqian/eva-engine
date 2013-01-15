@@ -6,6 +6,7 @@ use Eva\Mvc\Controller\ActionController;
 use Activity\Form;
 use Zend\Mvc\MvcEvent;
 use Eva\Api;
+use Epic\Exception;
 
 class HomeController extends ActionController
 {
@@ -18,7 +19,7 @@ class HomeController extends ActionController
 
         $user = \Core\Auth::getLoginUser();
         if(!$user){
-            return $this->getResponse()->setStatusCode(401);
+            throw new Exception\UnauthorizedException('Unauthorized');
         }
 
         //Public User Area
