@@ -545,6 +545,8 @@ class DataController extends RestfulModuleController
                 'user_id',
                 'memberEnable',
                 'memberLimit',
+                'endDay',
+                'endTime',
             ),
             'join' => array(
                 'Count' => array(
@@ -564,6 +566,7 @@ class DataController extends RestfulModuleController
 
         if (count($items) > 0) {
             $res = array();
+            $nowTime = \Eva\Date\Date::getNow();
             foreach ($items as $key=>$item) {
                 $res[$key] = array(
                     'id' => $item['id'],
@@ -571,8 +574,11 @@ class DataController extends RestfulModuleController
                     'memberEnable' => $item['memberEnable'],
                     'memberLimit' => $item['memberLimit'],
                     'memberCount' => $item['Count']['memberCount'],
+                    'endDay' => $item['endDay'],
+                    'endTime' => $item['endTime'],
+                    'nowTime' => $nowTime,
                 );
-                
+
                 if (isset($item['Join']['user_id'])) {
                     $res[$key]['role'] = $item['Join']['role'];
                     $res[$key]['requestStatus'] = $item['Join']['requestStatus'];
@@ -590,7 +596,7 @@ class DataController extends RestfulModuleController
         $this->changeViewModel('json');
         $query = $this->getRequest()->getQuery();
         $id = $query['id'];
-        
+
         $user = \Core\Auth::getLoginUser(); 
 
         if(!$id || !$user){
@@ -598,14 +604,14 @@ class DataController extends RestfulModuleController
                 'items' => array(),
             ));
         }
-        
+
         $idArray = explode('-',$id);
 
         $query = array(
             'id' => $idArray,
             'noLimit' => true,
         );
-        
+
         $itemModel = Api::_()->getModel('Group\Model\Group');
         $items = $itemModel->setItemList($query)->getGroupList();
         $items = $items->toArray(array(
@@ -621,7 +627,7 @@ class DataController extends RestfulModuleController
                 ),
             ), 
         ));
-        
+
         $joinList = array();
         if($user) {
             $joinModel = Api::_()->getModel('Group\Model\GroupUser');
@@ -652,5 +658,95 @@ class DataController extends RestfulModuleController
         return new JsonModel(array(
             'items' => $res,
         ));
+    }
+
+    public function relationshipAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+        $id = $query['id'];
+
+        $user = \Core\Auth::getLoginUser(); 
+
+        if(!$id || !$user){
+            return new JsonModel(array(
+                'items' => array(),
+            ));
+        }
+
+        $idArray = explode('-',$id);
+
+        $query = array(
+            'id' => $idArray,
+            'noLimit' => true,
+        );
+
+        $itemModel = Api::_()->getModel('User\Model\User');
+        $items = $itemModel->setItemList($query)->getUserList();
+        $items = $items->toArray(array(
+            'self' => array(
+            ),
+        ));
+
+        $joinList = array();
+        if($user) {
+            $selectQuery = array(
+                'user_id' => $idArray,
+                'friend_id' => $user['id'],
+            );
+            $joinModel = Api::_()->getModel('User\Model\Friend');
+            $joinList = $joinModel->setItemList($selectQuery)->getFriendList();
+            $joinList = $joinList ? $joinList->toArray() : array();
+        }
+        $items = $itemModel->combineList($items, $joinList, 'Friend', array('id' => 'user_id'));
+
+        return new JsonModel(array(
+            'items' => $items,
+        ));   
+    }
+
+    public function followAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+        $id = $query['id'];
+
+        $user = \Core\Auth::getLoginUser(); 
+
+        if(!$id || !$user){
+            return new JsonModel(array(
+                'items' => array(),
+            ));
+        }
+
+        $idArray = explode('-',$id);
+
+        $query = array(
+            'id' => $idArray,
+            'noLimit' => true,
+        );
+
+        $itemModel = Api::_()->getModel('User\Model\User');
+        $items = $itemModel->setItemList($query)->getUserList();
+        $items = $items->toArray(array(
+            'self' => array(
+            ),
+        ));
+
+        $joinList = array();
+        if($user) {
+            $selectQuery = array(
+                'user_id' => $idArray,
+                'follower_id' => $user['id'],
+            );
+            $joinModel = Api::_()->getModel('Activity\Model\Follow');
+            $joinList = $joinModel->setItemList($selectQuery)->getFollowList();
+            $joinList = $joinList ? $joinList->toArray() : array();
+        }
+        $items = $itemModel->combineList($items, $joinList, 'Follow', array('id' => 'user_id'));
+
+        return new JsonModel(array(
+            'items' => $items,
+        ));   
     }
 }
