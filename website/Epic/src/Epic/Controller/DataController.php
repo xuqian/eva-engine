@@ -515,4 +515,142 @@ class DataController extends RestfulModuleController
             'paginator' => $paginator,
         ));
     }
+
+    public function eventjoinAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+        $id = $query['id'];
+        
+        $user = \Core\Auth::getLoginUser(); 
+
+        if(!$id || !$user){
+            return new JsonModel(array(
+                'items' => array(),
+            ));
+        }
+        
+        $idArray = explode('-',$id);
+
+        $query = array(
+            'id' => $idArray,
+            'noLimit' => true,
+        );
+        
+        $itemModel = Api::_()->getModel('Event\Model\Event');
+        $items = $itemModel->setItemList($query)->getEventdataList();
+        $items = $items->toArray(array(
+            'self' => array(
+                'id',
+                'user_id',
+                'memberEnable',
+                'memberLimit',
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*',
+                ),
+            ), 
+        ));
+        
+        $joinList = array();
+        if($user) {
+            $joinModel = Api::_()->getModel('Event\Model\EventUser');
+            $joinList = $joinModel->setItemList(array(
+                'user_id' => $user['id']
+            ))->getEventUserList()->toArray();
+        }
+        $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'event_id'));
+
+        if (count($items) > 0) {
+            $res = array();
+            foreach ($items as $key=>$item) {
+                $res[$key] = array(
+                    'id' => $item['id'],
+                    'user_id' => $item['user_id'],
+                    'memberEnable' => $item['memberEnable'],
+                    'memberLimit' => $item['memberLimit'],
+                    'memberCount' => $item['Count']['memberCount'],
+                );
+                
+                if (isset($item['Join']['user_id'])) {
+                    $res[$key]['role'] = $item['Join']['role'];
+                    $res[$key]['requestStatus'] = $item['Join']['requestStatus'];
+                    $res[$key]['isCreator'] = $item['Join']['user_id'] == $item['user_id'] ? 1 : 0;
+                }
+            }
+        }
+        return new JsonModel(array(
+            'items' => $res,
+        ));
+    }
+
+    public function groupjoinAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+        $id = $query['id'];
+        
+        $user = \Core\Auth::getLoginUser(); 
+
+        if(!$id || !$user){
+            return new JsonModel(array(
+                'items' => array(),
+            ));
+        }
+        
+        $idArray = explode('-',$id);
+
+        $query = array(
+            'id' => $idArray,
+            'noLimit' => true,
+        );
+        
+        $itemModel = Api::_()->getModel('Group\Model\Group');
+        $items = $itemModel->setItemList($query)->getGroupList();
+        $items = $items->toArray(array(
+            'self' => array(
+                'id',
+                'user_id',
+                'memberEnable',
+                'memberLimit',
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*',
+                ),
+            ), 
+        ));
+        
+        $joinList = array();
+        if($user) {
+            $joinModel = Api::_()->getModel('Group\Model\GroupUser');
+            $joinList = $joinModel->setItemList(array(
+                'user_id' => $user['id']
+            ))->getGroupUserList()->toArray();
+        }
+        $items = $itemModel->combineList($items, $joinList, 'Join', array('id' => 'group_id'));
+
+        if (count($items) > 0) {
+            $res = array();
+            foreach ($items as $key=>$item) {
+                $res[$key] = array(
+                    'id' => $item['id'],
+                    'user_id' => $item['user_id'],
+                    'memberEnable' => $item['memberEnable'],
+                    'memberLimit' => $item['memberLimit'],
+                    'memberCount' => $item['Count']['memberCount'],
+                );
+                
+                if (isset($item['Join']['user_id'])) {
+                    $res[$key]['role'] = $item['Join']['role'];
+                    $res[$key]['requestStatus'] = $item['Join']['requestStatus'];
+                    $res[$key]['isCreator'] = $item['Join']['user_id'] == $item['user_id'] ? 1 : 0;
+                }
+            }
+        }
+        return new JsonModel(array(
+            'items' => $res,
+        ));
+    }
 }
