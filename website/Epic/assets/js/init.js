@@ -451,7 +451,28 @@ eva.city = function(){
 	}
 }
 
+eva.autoLogin = function(){
+	if(!$(".auto-login")[0]){
+		return false;
+	}
+
+	var realm = eva.cookie('realm');
+	if(!realm || realm == ''){
+		return false;
+	}
+
+	var url = eva.parseUri();
+	var callback = '';
+	if(typeof url.queryKey.callback !== 'undefined'){
+		callback = '?callback=' + url.queryKey.callback;
+	}
+	window.location.href = eva.d('/login/auto/') + callback;
+}
+
 eva.ready(function(){
+
+	eva.autoLogin();
+
 	$("#lang").on("change", function(){
 		window.location.href = $(this).val();
 	});

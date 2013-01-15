@@ -71,7 +71,7 @@ class LoginController extends ActionController
 
     public function autoAction()
     {
-        $callback = $this->params()->fromQuery('callback', '/home');
+        $callback = $this->params()->fromQuery('callback', '/home/');
         $realm = $this->cookie()->crypt(false)->read('realm');
 
         if(!$realm){

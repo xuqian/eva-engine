@@ -16,7 +16,7 @@ $loginResult = $loginResult ? $loginResult[0] : array();
 <div class="bg bg-0">
     <div class="container">
         <div id="bg-0" class="guide"></div>
-       <div class="loginblock loginformblock">
+       <div class="loginblock loginformblock auto-login">
            <form <?=$this->formAttr($form)?> class="form">
                 <?=$form->restful();?>
                 <?if(isset($this->query['callback'])):?>

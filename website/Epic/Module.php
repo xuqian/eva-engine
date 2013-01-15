@@ -32,7 +32,7 @@ class Module
             return;
         }
 
-        if($controller == 'LoginController' && $action == 'index'
+        if($controller == 'LoginController'
         || $controller == 'Oauth\Controller\OauthController' && $action == 'index'
         || $controller == 'Oauth\Controller\AccessController' && $action == 'index'
         || $controller == 'UserController' && $action == 'register'
