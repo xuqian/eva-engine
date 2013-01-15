@@ -19,6 +19,9 @@ $loginResult = $loginResult ? $loginResult[0] : array();
        <div class="loginblock loginformblock">
            <form <?=$this->formAttr($form)?> class="form">
                 <?=$form->restful();?>
+                <?if(isset($this->query['callback'])):?>
+                <input name="callback" type="hidden" value="<?=$this->query['callback']?>" />
+                <?endif?>
                 <?if($loginResult):?>
                     <div class="alert alert-error">
                         <?if($loginResult->getCode() == -1):?>
