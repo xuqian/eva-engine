@@ -167,7 +167,7 @@ $deleteForm->setView($this)
 eva.ready(function(){
     var modal = $("#fileupload-modal");
     modal.hide();
-    eva.loader(eva.s('/eva/js/eva.jquery.evaTip.js'), function(){
+    eva.loader(eva.assets('/module/code/js/eva.jquery.evaTip.js'), function(){
             modal.hide();
             $('#activity-box-image-button').on('click', function() {
                     $(this).evaTip("show", {
@@ -186,7 +186,7 @@ eva.ready(function(){
 
     var modal = $("#fileupload-modal");
     modal.hide();
-    eva.loader(eva.s('/eva/js/eva.jquery.evaTip.js'), function(){
+    eva.loader(eva.assets('/module/code/js/eva.jquery.evaTip.js'), function(){
             modal.hide();
             $('#activity-box-image-button').on('click', function() {
                     $(this).evaTip("show", {

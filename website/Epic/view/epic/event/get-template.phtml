@@ -101,7 +101,7 @@ $unjoinForm->setMethod('delete');
 
 
 <article class="typo typocn">
-<?=$item['Text']['content']?>
+<?=isset($item['Text']['content']) ? $item['Text']['content'] : ''?>
 </article>
 
 <div class="page-header border-header">

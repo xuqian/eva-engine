@@ -46,7 +46,7 @@ eva.ready(function(){
         return true === form.data('allowSubmit') ? true : false;
     });
 
-    eva.loader(eva.s('/assets/module/core/js/eva.jquery.evaTip.js'), function(){
+    eva.loader(eva.assets('/module/core/js/eva.jquery.evaTip.js'), function(){
             $('#activity-box-image-button').on('click', function() {
                     $(this).evaTip("show", {
                             'tip' : modal,
