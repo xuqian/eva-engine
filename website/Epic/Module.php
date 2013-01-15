@@ -3,6 +3,7 @@ namespace Epic;
 
 use Zend\Mvc\MvcEvent;
 use Epic\Exception;
+use Core\Auth;
 
 
 class Module
@@ -10,8 +11,44 @@ class Module
     public function onBootstrap($e)
     {
         $event = $e->getApplication()->getEventManager();
+        $event->attach(MvcEvent::EVENT_DISPATCH, array($this, 'epicAuthority'), 99);
         $event->attach(MvcEvent::EVENT_DISPATCH, array($this, 'autolanguage'), 1);
         $event->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'errorHandler'), 1);
+    }
+
+    public function epicAuthority($e)
+    {
+        $router = $e->getRouteMatch();
+        $moduleNamespace = $router->getParam('moduleNamespace');
+        if($moduleNamespace == 'admin'){
+            return;
+        }
+
+        $controller = $router->getParam('controller');
+        $action = $router->getParam('action');
+
+        $user = Auth::getLoginUser();
+        if($user){
+            return;
+        }
+
+        if($controller == 'LoginController' && $action == 'index'
+        || $controller == 'Oauth\Controller\OauthController' && $action == 'index'
+        || $controller == 'Oauth\Controller\AccessController' && $action == 'index'
+        || $controller == 'UserController' && $action == 'register'
+        || $controller == 'ResetController' && $action == 'index'){
+            return;
+        }
+
+        $redirecter = $e->getApplication()->getServiceManager()->get('ControllerPluginManager')->get('redirect');
+
+        $response = $e->getResponse();
+        $response->setStatusCode(401);
+        $response->getHeaders()->addHeaderLine('Location', '/login/?callback=' . $this->getCurrentUrl());
+        $response->send();
+
+        //finish mvc immediately
+        $e->getApplication()->getEventManager()->trigger(MvcEvent::EVENT_FINISH, $e);
     }
 
     public function autolanguage($e)
