@@ -500,6 +500,7 @@ eva.ready(function(){
 		eva.templates();
 	});	
 
+	if($(".epicsns")[0]){
 	$.ajax({
 		url : eva.d('/data/my/'),
 		dataType : 'json',
@@ -508,6 +509,7 @@ eva.ready(function(){
 			eva.callUserFuncs();
 		}
 	});
+	}
 
 	return false;
 });

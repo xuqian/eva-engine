@@ -922,7 +922,7 @@ body{color:#333;font-size:12px;font-family:Arial,Helvetica,"Nimbus Sans L",sans-
 .block-4{right:400px;top:100px;background:url(../img/example4.jpg) 50% 0 no-repeat;}
 .block-5{height:230px;width:350px;right:100px;top:100px;background:url(../img/example5.jpg) 50% 0 no-repeat;}
 .block-6{height:180px;width:180px;left:100px;top:100px;background:url(../img/example6.jpg) 50% 0 no-repeat;}
-.block-7{width:280px;height:200px;bottom:100px;right:100px;background:url(../img/example7.jpg) 50% 0 no-repeat;}
+.block-7{width:280px;height:200px;bottom:100px;right:100px;}
 #loginfooter{background:#000;height:45px;line-height:45px;color:#ac9217;}#loginfooter a{display:inline-block;zoom:1;*display:inline;padding:0 10px;color:#ac9217;text-shadow:none;}
 #loginheader{background:#000;height:80px;border-bottom:1px solid #ac9217;overflow:hidden;}#loginheader .navbar-inner{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;background:#000;border:0;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);}
 #loginheader .nav-main{margin-top:25px;}
