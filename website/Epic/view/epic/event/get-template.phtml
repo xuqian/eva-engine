@@ -54,24 +54,22 @@ $unjoinForm->setMethod('delete');
             </dl>
             <p><span class="highlight"><?=$item['Count']['memberCount']?></span> Members Joined</p>
             <p>
-            <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
-            <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
-            <form <?=$this->formAttr($unjoinForm)?>>
+            <form <?=$this->formAttr($unjoinForm)?> class="event-checker event-quit-form hide" data-checker="<?=$item['id']?>">
                 <?=$unjoinForm->restful();?>
                 <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                 <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                 <?=$this->callback()?>
                 <button class="btn btn-small item-action-main btn btn-orange icon-minus-sign"> <?=$this->_('Quit')?></button>
             </form>
-            <?elseif($item['memberEnable'] && ($item['memberLimit'] > $item['Count']['memberCount'] || $item['memberLimit'] == 0)):?>
-            <form <?=$this->formAttr($joinForm)?>>
+            <form <?=$this->formAttr($joinForm)?> class="event-checker event-join-form hide" data-checker="<?=$item['id']?>">
                 <?=$joinForm->restful();?>
                 <?=$joinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                 <?=$joinForm->helper('user_id', array('class' => ''))?>
                 <?=$this->callback()?>
                 <button class="btn btn-small item-action-main btn btn-orange icon-user"> <?=$this->_('RVSP')?></button>
             </form>
-            <?endif?> 
+            <span class="event-edit-btn event-checker hide" data-checker="<?=$item['id']?>"><a href="<?=$this->uri('/events/edit/' . $item['id'])?>" class="btn btn-small ">Edit</a></span>
+            <span class="event-remove-btn event-checker hide" data-checker="<?=$item['id']?>"><a href="<?=$this->uri('/events/remove/' . $item['id'])?>" class="btn btn-small ">Delete</a></span>
             </p>
         </div>
     </div>

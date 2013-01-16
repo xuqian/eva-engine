@@ -66,14 +66,14 @@ eva.highlightmenu = function(){
 		var item = $(this);
 		var pattern = item.attr("data-highlight-url");
 		pattern = pattern.replace(/\//g,"\\/");
-		var reg = new RegExp(pattern);
+			var reg = new RegExp(pattern);
 		var mode = item.attr('data-highlight-mode');
 		mode = mode == '' ? 'path' : mode;
 		var execString = '';
 		switch(mode){
 			case 'full' : 
 				execString = url.relative;
-				break;
+			break;
 			default :
 				execString = url.path;
 		}
@@ -91,12 +91,12 @@ eva.miniCalendar = function(){
 	if(!$('.calendar-wrap')[0]){
 		return false;
 	}
-    var calendarUrl = eva.d('/event/calendar/');
-    $('.calendar-wrap').load(calendarUrl);
-    $('.calendar-wrap thead a').live("click", function(){
-            $('.calendar-wrap').load($(this).attr('href'));
-            return false;
-    });
+	var calendarUrl = eva.d('/event/calendar/');
+	$('.calendar-wrap').load(calendarUrl);
+	$('.calendar-wrap thead a').live("click", function(){
+		$('.calendar-wrap').load($(this).attr('href'));
+		return false;
+	});
 };
 
 
@@ -276,6 +276,77 @@ eva.checkFriend = function(){
 	});	
 };
 
+
+eva.checkEvent = function(){
+	var checkers = $(".event-checker");
+	if(!checkers[0]){
+		return false;
+	}
+
+	var checkIds = [];
+	var url = eva.d('/data/eventjoin/');
+
+	checkers.each(function(){
+		var checker = $(this);
+		checkIds.push(checker.attr('data-checker'));
+	});
+	$.unique(checkIds);
+
+	var user = eva.getUser();
+	var now = moment();
+
+	var checkerDisplay = function(checker, relationship){
+		if(checker.hasClass('event-join-form')){
+			//eva.p(now.diff(moment(relationship.startDay + ' ' + relationship.startTime)) / 1000 / 60);
+			if(!relationship.role &&
+			   relationship.memberEnable > 0 &&
+			   //allow join time is after event start time 1 hour (3600000 milliseconds)
+			   now.diff(moment(relationship.startDay + ' ' + relationship.startTime)) < 3600000  &&
+			   (relationship.memberLimit == '0' || relationship.memberLimit < relationship.memberCount)
+			  ){
+				checker.show();
+			}
+		} else if(checker.hasClass('event-quit-form')) {
+			if(relationship.role && !relationship.isCreator){
+				checker.show();
+			}
+		} else if(checker.hasClass('event-edit-btn')) {
+			if(relationship.isCreator){
+				checker.show();
+			}
+		} else if(checker.hasClass('event-remove-btn')) {
+			if(relationship.isCreator){
+				checker.show();
+			}
+		}
+	}
+	var switchForms = function(response){
+		if(!response.items || response.items.length <= 0){
+			return false;
+		}
+
+		var relationships = response.items;
+		var i = 0;
+		checkers.each(function(){
+			var checker = $(this);
+			for(i in relationships){
+				if(relationships[i].id == checker.attr('data-checker')){
+					checkerDisplay(checker, relationships[i]);
+				}
+			}
+		});
+	};
+
+	$.ajax({
+		url : url,
+		dataType : 'json',
+		type : 'get',
+		data : {"id" : checkIds.join('-')},
+		success : switchForms
+	});	
+};
+
+
 eva.preview = function(){
 	$(document).on('click', '.item-preview', function(){
 		var btn = $(this);
@@ -352,7 +423,7 @@ eva.story = function(){
 			}
 			return false;
 		}
-		
+
 		var loadNewStory = function(loader){
 
 			if(loadTimes > maxLoaded) {
@@ -395,9 +466,9 @@ eva.story = function(){
 	}
 
 	eva.loader(eva.s([
-		'/lib/js/jquery/jquery.masonry.js',
-		'/lib/js/jquery/jquery.mousewheel.js',
-		'/lib/js/jquery/jquery.jscrollpane.js'
+					 '/lib/js/jquery/jquery.masonry.js',
+					 '/lib/js/jquery/jquery.mousewheel.js',
+					 '/lib/js/jquery/jquery.jscrollpane.js'
 	]), startStory);
 };
 
@@ -415,7 +486,7 @@ eva.refreshOnline = function(){
 
 	refreshOnline();
 	setInterval(function(){ refreshOnline() }, 50000);
-	
+
 };
 
 
@@ -507,6 +578,7 @@ eva.ready(function(){
 		eva.checkMessage();	
 		eva.checkRequest();
 		eva.refreshOnline();
+		eva.checkEvent();
 	});
 
 	eva.preview();
@@ -535,14 +607,14 @@ eva.ready(function(){
 	});	
 
 	if($(".epicsns")[0]){
-	$.ajax({
-		url : eva.d('/data/my/'),
-		dataType : 'json',
-		success : function(response){
-			eva.setUser(response.item);
-			eva.callUserFuncs();
-		}
-	});
+		$.ajax({
+			url : eva.d('/data/my/'),
+			dataType : 'json',
+			success : function(response){
+				eva.setUser(response.item);
+				eva.callUserFuncs();
+			}
+		});
 	}
 
 	return false;

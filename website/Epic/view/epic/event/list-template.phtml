@@ -23,24 +23,21 @@ $unjoinForm->setMethod('delete');
     ?>
     <div class="item media">
         <div class="pull-right event-action">
-            <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
-            <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
-            <form <?=$this->formAttr($unjoinForm)?>>
+            <form <?=$this->formAttr($unjoinForm)?> class="event-checker event-quit-form hide" data-checker="<?=$item['id']?>">
                 <?=$unjoinForm->restful();?>
                 <?=$unjoinForm->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                 <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                 <?=$this->callback()?>
                 <button class="btn btn-small item-action-main">Quit</button>
             </form>
-            <?elseif($item['memberEnable'] && ($item['memberLimit'] > $item['Count']['memberCount'] || $item['memberLimit'] == 0)):?>
-            <form <?=$this->formAttr($form)?>>
+            <form <?=$this->formAttr($form)?> class="event-checker event-join-form hide" data-checker="<?=$item['id']?>">
                 <?=$form->restful();?>
                 <?=$form->helper('event_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                 <?=$form->helper('user_id', array('class' => ''))?>
                 <?=$this->callback()?>
                 <button class="btn btn-small item-action-main">RVSP</button>
             </form>
-            <?endif?>
+            <span class="event-edit-btn event-checker hide" data-checker="<?=$item['id']?>"><a href="<?=$this->uri('/events/edit/' . $item['id'])?>" class="btn btn-small ">Edit</a></span>
         </div>
         <a class="pull-left" href="<?=$url;?>">
             <?if(isset($item['File']) && $item['File']):?>
