@@ -166,7 +166,6 @@ class AlbumController extends ActionController
 
         if ($form->isValid()) {
             $postData = $form->getData();
-            $postData['status'] = 'active';
             $itemModel = Api::_()->getModel('Album\Model\Album');
             $albumId = $itemModel->setItem($postData)->createAlbum();
             $callback = $callback ? $callback : '/albums/edit/' . $albumId;

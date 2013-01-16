@@ -5,7 +5,6 @@ class AlbumCreateForm extends \Album\Form\AlbumForm
 {
     protected $subFormGroups = array(
         'default' => array(
-            'AlbumFile' => 'Album\Form\AlbumFileForm',
         ),
     );
 
