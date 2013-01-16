@@ -82,7 +82,6 @@ $groupSearchForm->setView($this)
                                     </table>
                                 </div>
                                 <div class="item-content">
-                                    <p><?=$this->_('Summary')?> : <?=$item['summary']?></p>
                                 </div>
                             </div>
                             <a class="pull-left" href="<?=$this->uri('/group/' . $item['groupKey'])?>">
@@ -93,27 +92,21 @@ $groupSearchForm->setView($this)
                             <?endif?>
                             </a>
                             <div class="item-absolute item-action">
-
-                                <?if(isset($item['Join']) && $item['Join']['user_id'] == $item['user_id']):?>
-                                <?elseif(isset($item['Join']) && $item['Join'] && $item['Join']['user_id'] != $item['user_id']):?>
-                                <form <?=$this->formAttr($unjoinForm)?>>
+                                <form <?=$this->formAttr($unjoinForm)?> class="group-checker group-quit-form hide" data-checker="<?=$item['id']?>">
                                     <?=$unjoinForm->restful();?>
                                     <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
                                     <button class="btn btn-small item-action-main">Quit</button>
                                 </form>
-                                <?elseif($item['memberEnable'] && $item['memberLimit'] > $item['Count']['memberCount']):?>
-                                <form <?=$this->formAttr($form)?>>
+                                <form <?=$this->formAttr($form)?> class="group-checker group-join-form hide" data-checker="<?=$item['id']?>">
                                     <?=$form->restful();?>
                                     <?=$form->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                                     <?=$form->helper('user_id', array('class' => ''))?>
                                     <?=$this->callback()?>
                                     <button class="btn btn-small item-action-main">Join</button>
                                 </form>
-                                <?endif?>
-
-
+                                <span class="group-edit-btn group-checker hide" data-checker="<?=$item['id']?>"><a href="<?=$this->uri('/groups/edit/' . $item['id'])?>" class="btn btn-small ">Edit</a></span>
                             </div>
                         </div>
                         <?endforeach?>

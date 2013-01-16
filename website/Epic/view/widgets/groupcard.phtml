@@ -1,4 +1,5 @@
 <?
+$item = $this->item;
 $joinForm = new Group\Form\GroupUserForm();
 $joinForm
 ->setView($this)
@@ -25,24 +26,21 @@ $unjoinForm->setMethod('delete');
                 <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members</span>
                 <span class="span2 summary"><span class="highlight"><?=$this->item['PostCount']['postCount']?></span>Discussion</span>
                 <span class="span1">
-                    <?if(isset($this->item['Join']) && $this->item['Join']['user_id'] == $this->item['user_id']):?>
-                    <?elseif(isset($this->item['Join']) && $this->item['Join'] && $this->item['Join']['user_id'] != $this->item['user_id']):?>
-                    <form <?=$this->formAttr($unjoinForm)?>>
+                    <form <?=$this->formAttr($unjoinForm)?> class="group-checker group-quit-form hide" data-checker="<?=$item['id']?>">
                         <?=$unjoinForm->restful();?>
                         <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
                         <?=$unjoinForm->helper('user_id', array('class' => ''))?>
                         <?=$this->callback()?>
                         <button class="btn btn-small item-action-main btn btn-gray icon-minus-sign"> <?=$this->_('Quit')?></button>
                     </form>
-                    <?elseif($this->item['memberEnable'] && ($this->item['memberLimit'] > $this->item['Count']['memberCount'] || $this->item['memberLimit'] == 0)):?>
-                    <form <?=$this->formAttr($joinForm)?>>
+                    <form <?=$this->formAttr($joinForm)?> class="group-checker group-join-form hide" data-checker="<?=$item['id']?>">
                         <?=$joinForm->restful();?>
-                        <?=$joinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
+                        <?=$joinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $item['id']))?>
                         <?=$joinForm->helper('user_id', array('class' => ''))?>
                         <?=$this->callback()?>
                         <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Join')?></button>
                     </form>
-                    <?endif?>  
+                    <span class="group-edit-btn group-checker hide" data-checker="<?=$item['id']?>"><a href="<?=$this->uri('/groups/edit/' . $item['id'])?>" class="btn btn-small ">Edit</a></span>
                 </span>
                 <?if(count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
                 <a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/sendmail/')?>" class="btn btn-small btn-gray"><i class="icon-plus"></i> Mail To Group Members</a>
@@ -55,10 +53,14 @@ $unjoinForm->setMethod('delete');
 <div class="group-nav">
     <?$path = $this->getHelperPluginManager()->getServiceLocator()->get('request')->getUri()->getPath();?>
     <?if(strpos($path, 'event')):?>
+    <span class="group-create-event-btn group-checker hide" data-checker="<?=$item['id']?>">
     <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/event/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Schedule an Event')?></a>
+    </span>
     <?elseif(strpos($path, 'album')):?>
     <?else:?>
+    <span class="group-create-post-btn group-checker hide" data-checker="<?=$item['id']?>">
     <a href="<?=$this->uri('/group/' . $item['groupKey'] . '/blog/create')?>" class="btn btn-gray pull-right"><i class="icon-plus"></i> <?=$this->_('Create New Discussion')?></a>
+    </span>
     <?endif?>
     <ul class="nav nav-tabs group-tab">
         <li data-highlight-url="(^/group/[a-z0-9A-Z]+/?$)|^/group/[a-z0-9A-Z]+/blog/"><a href="<?=$this->uri('/group/' . $item['groupKey'])?>">Forum</a></li>

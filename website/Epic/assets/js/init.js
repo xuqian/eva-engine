@@ -347,6 +347,82 @@ eva.checkEvent = function(){
 };
 
 
+eva.checkGroup = function(){
+	var checkers = $(".group-checker");
+	if(!checkers[0]){
+		return false;
+	}
+
+	var checkIds = [];
+	var url = eva.d('/data/groupjoin/');
+
+	checkers.each(function(){
+		var checker = $(this);
+		checkIds.push(checker.attr('data-checker'));
+	});
+	$.unique(checkIds);
+
+	var user = eva.getUser();
+	var now = moment();
+
+	var checkerDisplay = function(checker, relationship){
+		if(checker.hasClass('group-join-form')){
+			//eva.p(now.diff(moment(relationship.startDay + ' ' + relationship.startTime)) / 1000 / 60);
+			if(!relationship.role &&
+			   (relationship.memberLimit == '0' || relationship.memberLimit < relationship.memberCount)
+			  ){
+				checker.show();
+			}
+		} else if(checker.hasClass('group-quit-form')) {
+			if(relationship.role && !relationship.isCreator){
+				checker.show();
+			}
+		} else if(checker.hasClass('group-edit-btn')) {
+			if(relationship.isCreator){
+				checker.show();
+			}
+		} else if(checker.hasClass('group-remove-btn')) {
+			if(relationship.isCreator){
+				checker.show();
+			}
+		} else if(checker.hasClass('group-create-event-btn')) {
+			if(relationship.isCreator){
+				checker.show();
+			}
+		} else if(checker.hasClass('group-create-post-btn')) {
+			if(relationship.isCreator || relationship.role){
+				checker.show();
+			}
+		}
+	}
+	var switchForms = function(response){
+		if(!response.items || response.items.length <= 0){
+			return false;
+		}
+
+		var relationships = response.items;
+		var i = 0;
+		checkers.each(function(){
+			var checker = $(this);
+			for(i in relationships){
+				if(relationships[i].id == checker.attr('data-checker')){
+					checkerDisplay(checker, relationships[i]);
+				}
+			}
+		});
+	};
+
+	$.ajax({
+		url : url,
+		dataType : 'json',
+		type : 'get',
+		data : {"id" : checkIds.join('-')},
+		success : switchForms
+	});	
+};
+
+
+
 eva.preview = function(){
 	$(document).on('click', '.item-preview', function(){
 		var btn = $(this);
@@ -579,6 +655,7 @@ eva.ready(function(){
 		eva.checkRequest();
 		eva.refreshOnline();
 		eva.checkEvent();
+		eva.checkGroup();
 	});
 
 	eva.preview();
