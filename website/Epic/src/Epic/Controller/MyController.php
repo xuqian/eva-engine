@@ -70,6 +70,13 @@ class MyController extends ActionController
 
     public function albumAction()
     {
+        $user = Auth::getLoginUser();
+        $viewModel = $this->forward()->dispatch('UserController', array(
+            'action' => 'albums',
+            'id' => $user['userName'],
+        )); 
+        $viewModel->setTemplate('epic/my/album');
+        return $viewModel;
     }
 
     public function groupAction()

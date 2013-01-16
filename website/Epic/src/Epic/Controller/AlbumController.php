@@ -1,0 +1,252 @@
+<?php
+namespace Epic\Controller;
+
+use Eva\Api,
+    Eva\Mvc\Controller\ActionController,
+    Eva\View\Model\ViewModel,
+    Zend\View\Model\JsonModel;
+use Core\Auth;
+use Album\Form;
+
+class AlbumController extends ActionController
+{
+    protected $album;
+    
+    protected $post;
+    
+    protected $eventData;
+   
+    public function indexAction()
+    {
+        return $this->listAction();
+    }
+
+    public function listAction()
+    {
+        $request = $this->getRequest();
+        $query = $request->getQuery();
+
+        $form = new \Epic\Form\AlbumSearchForm();
+        $form->bind($query)->isValid();
+        $selectQuery = $form->getData();
+
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        if(!$selectQuery){
+            $selectQuery = array(
+                'page' => 1
+            );
+        }
+        $selectQuery['visibility'] = 'public';
+        $items = $itemModel->setItemList($selectQuery)->getAlbumList();
+        $items = $items->toArray(array(
+            'self' => array(
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*',
+                ),
+                'User' => array(
+                    '*',
+                ),
+            ),
+        ));
+        $paginator = $itemModel->getPaginator();
+
+
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+        
+        return array(
+            'form' => $form,
+            'items' => $items,
+            'query' => $query,
+            'paginator' => $paginator,
+        );   
+    }
+
+    public function getAction()
+    {
+        $id = $this->params('id');
+
+        $itemModel = Api::_()->getModel('Album\Model\Album'); 
+        $item = $itemModel->getEventdata($id, array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+                'Category' => array(
+                    '*'
+                ),
+                'Count' => array(
+                    '*'
+                ),
+            ),
+        ));
+
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+
+        $view = new ViewModel(array(
+            'item' => $item,
+            'paginator' => $paginator,
+        ));
+        return $view;  
+    }
+
+    public function removeAction()
+    {
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+            $postData = $this->params()->fromPost();
+            $callback = $this->params()->fromPost('callback');
+
+            $form = new \Album\Form\AlbumDeleteForm();
+            $form->bind($postData);
+            if ($form->isValid()) {
+
+                $postData = $form->getData();
+                $itemModel = Api::_()->getModel('Album\Model\Album');
+                $itemModel->setItem($postData)->removeAlbum();
+                $callback = $callback ? $callback : '/my/album/';
+                $this->redirect()->toUrl($callback);
+
+            } else {
+                return array(
+                    'post' => $postData,
+                );
+            }
+
+        } else {
+            $id = $this->params('id');
+            $itemModel = Api::_()->getModel('Album\Model\Album');
+            $item = $itemModel->getAlbum($id)->toArray();
+
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+
+            return array(
+                'callback' => $this->params()->fromQuery('callback'),
+                'item' => $item,
+            );
+
+        }
+
+    }
+
+    public function createAction()
+    {
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return;
+        }
+
+        $postData = $request->getPost();
+        $callback = $this->params()->fromPost('callback');
+        $form = new \Epic\Form\AlbumCreateForm();
+        $form->useSubFormGroup()
+            ->bind($postData);
+
+        if ($form->isValid()) {
+            $postData = $form->getData();
+            $postData['status'] = 'active';
+            $itemModel = Api::_()->getModel('Album\Model\Album');
+            $albumId = $itemModel->setItem($postData)->createAlbum();
+            $callback = $callback ? $callback : '/albums/edit/' . $albumId;
+            $this->redirect()->toUrl($callback);
+        } else {
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+        }
+
+        return array(
+            'form' => $form,
+            'post' => $postData,
+        );
+    }
+
+    public function editAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/album/create');
+        if ($request->isPost()) {
+            $postData = $request->getPost();
+            $callback = $this->params()->fromPost('callback');
+            $form = new \Epic\Form\AlbumEditForm();
+            $form->useSubFormGroup()
+                ->bind($postData);
+            
+            if ($form->isValid()) {
+                $postData = $form->getData();
+                $itemModel = Api::_()->getModel('Album\Model\Album');
+                $albumId = $itemModel->setItem($postData)->saveAlbum();
+                $callback = $callback ? $callback : '/albums/edit/' . $albumId;
+                $this->redirect()->toUrl($callback);
+
+            } else {
+            }
+
+            $viewModel->setVariables(array(
+                'form' => $form,
+                'item' => $postData,
+            ));
+        } else {
+            $id = $this->params('id');
+            $itemModel = Api::_()->getModel('Album\Model\Album');
+            $item = $itemModel->getAlbum($id, array(
+                'self' => array(
+                    '*',
+                ),
+                'join' => array(
+                        'File' => array(
+                        'self' => array(
+                            '*',
+                            'getThumb()',
+                        )
+                    ),
+                    'Category' => array(
+                        '*'
+                    ),
+                ),
+            ));
+            if(isset($item['AlbumFile'][0])){
+                $item['AlbumFile'] = $item['AlbumFile'][0];
+            }
+
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+
+            $viewModel->setVariables(array(
+                'item' => $item,
+            ));
+        }
+
+        return $viewModel;
+    }
+}

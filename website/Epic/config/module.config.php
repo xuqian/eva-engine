@@ -214,6 +214,52 @@ return array(
                 'priority' => 2,
             ),
             
+            'albums' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/albums[/]',
+                    'constraints' => array(
+                    ),
+                    'defaults' => array(
+                        'controller' => 'AlbumController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+                'child_routes' => array(
+                    'operate' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '[:action][/:id][/]',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z]+',
+                                'id'     => '[0-9a-zA-Z]+',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'AlbumController',
+                                'action' => 'index'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
+            
+            'album' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/album[/:id]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z0-9_-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'AlbumController',
+                        'action' => 'get',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'events' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -686,6 +732,7 @@ return array(
             'MyController' => 'Epic\Controller\MyController',
             'BlogController' => 'Epic\Controller\BlogController',
             'EventController' => 'Epic\Controller\EventController',
+            'AlbumController' => 'Epic\Controller\AlbumController',
             'GroupController' => 'Epic\Controller\GroupController',
             'ShareController' => 'Epic\Controller\ShareController',
         ),
