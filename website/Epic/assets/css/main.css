@@ -1232,6 +1232,10 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .member-category .small{width:90%;}
 .member-category .thumbnail-line{margin-bottom:10px;}
 .member-category .name{display:block;color:#333;font-size:10px;}
+.album-list .caption{margin-top:20px;text-align:center;color:#000;}
+.album-list .caption-title{display:block;}
+.album-list a{color:#000;}
+.event-photos .thumbnail{background:#FFF;}
 .stack-row{margin-bottom:30px;}
 .stack{position:relative;z-index:10;}.stack:last-of-type{margin-right:0;}
 .stack img{max-width:100%;height:auto;vertical-align:bottom;border:7px solid #fff;border-radius:3px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);}
