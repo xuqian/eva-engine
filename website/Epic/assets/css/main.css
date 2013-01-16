@@ -1232,3 +1232,17 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .member-category .small{width:90%;}
 .member-category .thumbnail-line{margin-bottom:10px;}
 .member-category .name{display:block;color:#333;font-size:10px;}
+.stack-row{margin-bottom:30px;}
+.stack{position:relative;z-index:10;}.stack:last-of-type{margin-right:0;}
+.stack img{max-width:100%;height:auto;vertical-align:bottom;border:7px solid #fff;border-radius:3px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);}
+.stack:before,.stack:after{content:"";border-radius:3px;width:100%;height:100%;position:absolute;border:10px solid #fff;left:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);box-shadow:0 1px 4px rgba(0, 0, 0, 0.4);-webkit-transition:0.3s all ease-out;-moz-transition:0.3s all ease-out;-o-transition:0.3s all ease-out;transition:0.3s all ease-out;}
+.stack:before{top:4px;z-index:-10;}
+.stack:after{top:8px;z-index:-20;}
+.stack:hover:before{-webkit-transform:rotate(4deg);-moz-transform:rotate(4deg);-ms-transform:rotate(4deg);-o-transform:rotate(4deg);transform:rotate(4deg);}
+.stack:hover:after{-webkit-transform:rotate(-4deg);-moz-transform:rotate(-4deg);-ms-transform:rotate(-4deg);-o-transform:rotate(-4deg);transform:rotate(-4deg);}
+.stack.rotated:before{-webkit-transform-origin:bottom left;-moz-transform-origin:bottom left;transform-origin:bottom left;-webkit-transform:rotate(2deg);-moz-transform:rotate(2deg);-ms-transform:rotate(2deg);-o-transform:rotate(2deg);transform:rotate(2deg);}
+.stack.rotated:after{-webkit-transform-origin:bottom left;-moz-transform-origin:bottom left;transform-origin:bottom left;-webkit-transform:rotate(4deg);-moz-transform:rotate(4deg);-ms-transform:rotate(4deg);-o-transform:rotate(4deg);transform:rotate(4deg);}
+.stack.twisted:before{-webkit-transform:rotate(4deg);-moz-transform:rotate(4deg);-ms-transform:rotate(4deg);-o-transform:rotate(4deg);transform:rotate(4deg);}
+.stack.twisted:after{-webkit-transform:rotate(-4deg);-moz-transform:rotate(-4deg);-ms-transform:rotate(-4deg);-o-transform:rotate(-4deg);transform:rotate(-4deg);}
+.stack.rotated-left:before{-webkit-transform-origin:bottom left;-moz-transform-origin:bottom left;transform-origin:bottom left;-webkit-transform:rotate(-3deg);-moz-transform:rotate(-3deg);-ms-transform:rotate(-3deg);-o-transform:rotate(-3deg);transform:rotate(-3deg);}
+.stack.rotated-left:after{-webkit-transform-origin:bottom left;-moz-transform-origin:bottom left;transform-origin:bottom left;-webkit-transform:rotate(-6deg);-moz-transform:rotate(-6deg);-ms-transform:rotate(-6deg);-o-transform:rotate(-6deg);transform:rotate(-6deg);}
