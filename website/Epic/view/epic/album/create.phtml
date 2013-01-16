@@ -1,6 +1,6 @@
 <?
 $item = $this->item;
-$title = 'My Albums';
+$title = $item['id'] ? 'Edit Album' : 'Create Album';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
 ?>
@@ -8,22 +8,15 @@ $this->headTitle($title, 'SET');
 <div class="container">
     <div class="normal-page">
         <div class="body grid-s5m0">
-
             <div class="main-wrap"><div id="main" class="main">
                     <div class="page-main">
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/albums/create/')?>" class="btn btn-small btn-orange pull-right">Create New</a>
-                                    <h3><?=$this->_($title)?></h3>
+                                    <a href="<?=$this->uri('/albums/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Create New</a>
+                                    <h3><?=$this->_($title)?> <?if($item['id']):?><a href="<?=$this->uri('/album/' . $item['urlName'])?>" class="">[View]</a><?endif?></h3>
                                 </div>
-                                <div class="event-list vlist">
-                                    Under Building
-                                </div><!--activity-list end-->
-                                <?if($this->paginator):?>
-                                <?=$this->paginator->setPath('/my/event/')->setBaseQuery($this->query);?>
-                                <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
-                                <?endif;?>
+                                <?=$this->widget('Epic', 'epic/album/form', $this->vars())?>
 
                             </div><!--page main left end-->
                             <div class="span3">
@@ -38,11 +31,10 @@ $this->headTitle($title, 'SET');
 
             <div class="sidebar">
                 <div class="page-side">
-                    <?=$this->widget('Epic', 'widgets/userside')?>
+                    <?=$this->widget('Epic', 'widgets/userside', $this->vars())?>
                 </div>
             </div><!--sider end-->
 
         </div><!-- #body end-->
     </div><!-- normal end-->
 </div><!--container end-->
-

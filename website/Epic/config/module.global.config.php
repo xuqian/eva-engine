@@ -28,6 +28,12 @@ return array(
         
         ),
     ),
+    'album' => array(
+        'visibility' => array(
+            'default' => 'public',
+        
+        ),
+    ),
     'group' => array(
         'status' => array(
             'default' => 'active',

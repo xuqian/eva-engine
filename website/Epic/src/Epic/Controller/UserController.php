@@ -305,8 +305,40 @@ class UserController extends ActionController
     {
     }
 
-    public function albumAction()
+    public function albumsAction()
     {
+        $page = $this->params()->fromQuery('page', 1);
+        $query = array(
+            'page' => $page,
+        );
+
+        $user = $this->userAction();
+        $itemListQuery = array_merge(array(
+            'user_id' => $user['id'],
+            'order' => 'timedesc',
+        ), $query);
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $items = $itemModel->setItemList($itemListQuery)->getAlbumList();
+        $items = $items->toArray(array(
+            'self' => array(
+                '*',
+            ),  
+            'join' => array(
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+            ),
+        ));
+
+        $paginator = $itemModel->getPaginator();
+        return array(
+            'items' => $items,
+            'query' => $query,
+            'paginator' => $paginator,
+        );
     }
 
     public function groupAction()
