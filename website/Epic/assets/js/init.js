@@ -48,6 +48,17 @@
 };
 })(jQuery);
 
+eva.gallery = function(){
+	if(!$('.gallery')[0]){
+		return false;
+	}
+
+	eva.loadcss(eva.s('/lib/js/jquery/colorbox/colorbox.css'));
+	eva.loader(eva.s('/lib/js/jquery/colorbox/jquery.colorbox.js'), function(){
+		$('.gallery').colorbox();
+	});
+};
+
 eva.highlightmenu = function(){
 	var url = eva.parseUri();
 	var menuItems = $("li[data-highlight-url]");
@@ -483,6 +494,8 @@ eva.ready(function(){
 	eva.highlightmenu();
 	eva.miniCalendar();
 	eva.select2();
+
+	eva.gallery();
 
 	eva.userReady(function(){
 		var user = eva.getUser();

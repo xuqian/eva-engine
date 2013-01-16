@@ -348,7 +348,49 @@ class GroupController extends ActionController
 
         return $viewModel;
     }
-    
+
+    public function albumAction()
+    {
+        list($item, $members) = $this->groupAction();
+        $groupId = $item['id'];
+
+        $viewModel = new ViewModel();
+
+        $page = $this->params()->fromQuery('page', 1);
+        $rows = $this->params()->fromQuery('rows', 10);
+        $order = $this->params()->fromQuery('order', 'timedesc');
+
+        $albums = array();
+        $paginator = array();
+
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'members' => $members,
+            'items' => $albums,
+            'paginator' => $paginator,
+            'query' => $this->params()->fromQuery(),
+        ));
+
+        return $viewModel; 
+    }
+
+
+    public function albumGetAction()
+    {
+        $request = $this->getRequest();
+        $albumId = $this->params('album_id');
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/group/album-get');
+        list($item, $members) = $this->groupAction();
+        
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'album' => '',
+        ));
+        
+        return $viewModel;
+    }
+
     public function blogAction($groupId)
     {
         if (!$groupId) {

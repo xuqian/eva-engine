@@ -31,7 +31,7 @@ $this->headTitle($title, 'SET');
                                         <?endfor;?>
                                     </div>
                                     <?endfor;?>
-                                </div><!--activity-list end-->
+                                </div><!--album-list end-->
                                 <?if($this->paginator):?>
                                 <?=$this->paginator->setPath('/my/event/')->setBaseQuery($this->query);?>
                                 <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>

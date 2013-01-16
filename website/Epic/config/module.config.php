@@ -352,6 +352,33 @@ return array(
                 'priority' => 2,
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'album' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'album[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'album'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'get' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '[:album_id][/]',
+                                    'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'albumGet'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
+                    ),
                     'blog' => array(
                         'type' => 'Segment',
                         'options' => array(
