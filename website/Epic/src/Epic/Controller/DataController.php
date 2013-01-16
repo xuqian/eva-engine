@@ -559,6 +559,7 @@ class DataController extends RestfulModuleController
         if($user) {
             $joinModel = Api::_()->getModel('Event\Model\EventUser');
             $joinList = $joinModel->setItemList(array(
+                'event_id' => $idArray,
                 'user_id' => $user['id']
             ))->getEventUserList()->toArray();
         }
@@ -632,6 +633,7 @@ class DataController extends RestfulModuleController
         if($user) {
             $joinModel = Api::_()->getModel('Group\Model\GroupUser');
             $joinList = $joinModel->setItemList(array(
+                'group_id' => $idArray,
                 'user_id' => $user['id']
             ))->getGroupUserList()->toArray();
         }
