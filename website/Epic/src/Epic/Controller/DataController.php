@@ -545,6 +545,8 @@ class DataController extends RestfulModuleController
                 'user_id',
                 'memberEnable',
                 'memberLimit',
+                'startDay',
+                'startTime',
                 'endDay',
                 'endTime',
             ),
@@ -577,6 +579,8 @@ class DataController extends RestfulModuleController
                     'memberCount' => $item['Count']['memberCount'],
                     'endDay' => $item['endDay'],
                     'endTime' => $item['endTime'],
+                    'startDay' => $item['startDay'],
+                    'startTime' => $item['startTime'],
                     'nowTime' => $nowTime,
                 );
 
