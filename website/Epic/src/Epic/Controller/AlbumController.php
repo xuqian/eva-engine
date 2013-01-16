@@ -248,4 +248,63 @@ class AlbumController extends ActionController
 
         return $viewModel;
     }
+
+
+    public function uploadAction()
+    {
+
+        $this->changeViewModel('json');
+        $this->getServiceLocator()->get('Application')->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER, function($event){
+            $event->getResponse()->getHeaders()->addHeaderLine('Content-Type', 'text/plain');
+        }, -10000);
+
+        $postData = $this->params()->fromPost();
+        $form = new Form\UploadForm();
+        $form->useSubFormGroup()
+            ->bind($postData);
+
+        $itemModel = Api::_()->getModel('Album\Model\Upload');
+
+        $response = array();
+        if ($form->isValid() && $form->getFileTransfer()->isUploaded()) {
+            $item = $form->getData();
+            if($form->getFileTransfer()->receive()){
+                $itemModel->setAlbum(array(
+                    'id' => $item['AlbumFile']['album_id']
+                ));
+
+                $files = $form->getFileTransfer()->getFileInfo();
+                $itemModel->setUploadFiles($files);
+                $itemModel->setConfigKey('default')->createFiles();
+                $lastFileId = $itemModel->getLastFileId();
+
+                if($lastFileId) {
+                    $item = $itemModel->getFile($lastFileId, array(
+                        'self' => array(
+                            '*',
+                            'getUrl()',
+                            'getThumb()',
+                        ),
+                    ));
+                    $file = array(
+                        'id' => $item['id'],
+                        'name' => $item['originalName'],
+                        'size' => (int)$item['fileSize'],
+                        'url' => $item['Url'],
+                        'thumbnail_url' => $item['Thumb'],
+                        'delete_type' => 'DELETE',
+                        'delete_url' => '/admin/album/upload/remove/' . $item['id']
+                    );
+                    $response = array(
+                        $file
+                    );
+                }
+            }
+        } else {
+            //p($form->getMessages());
+        }
+
+        return new JsonModel($response);
+    
+    }
 }
