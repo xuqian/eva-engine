@@ -7,14 +7,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <?=$this->headTitle()?>
-    <?$this->assets('/module/admin/css/bootstrap.css')?>
     <!--[if lt IE 9]>
     <meta http-equiv="PRAGMA" content="NO-CACHE" />
     <script src="<?=$this->link('/lib/js/html5shiv/html5shiv.min.js')?>"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-    <script src="<?=$this->assets('/module/yicheng/javascripts/modernizr.foundation.js')?>"></script>
     <?=$this->googleAnalytics()?>
     <?=$this->evajs()?>
     <?=$this->headMeta()?>
@@ -25,368 +23,240 @@
     <?$this->jsAssets(array(
         '/lib/js/labjs/labjs.js',
         '/lib/js/jquery/jquery.js',
-        '/module/yicheng/js/index/js/flexslider.js',
-        '/module/yicheng/js/index/js/jquery.isotope.min.js',
-        '/module/yicheng/js/index/js/custom.js',
-        '/module/yicheng/js/index/js/ender.min.js',
-        '/module/yicheng/js/index/js/selectnav.js',
-        '/module/yicheng/js/index/js/imagebox.min.js',
-        '/module/yicheng/js/index/js/carousel.js',
-        '/module/yicheng/js/index/js/tooltip.js',
-        '/module/yicheng/js/index/js/popover.js',
-        '/module/yicheng/js/index/js/effects.js',
+        '/module/yicheng/index/js/flexslider.js',
+        '/module/yicheng/index/js/jquery.isotope.min.js',
+        '/module/yicheng/index/js/custom.js',
+        '/module/yicheng/index/js/ender.min.js',
+        '/module/yicheng/index/js/selectnav.js',
+        '/module/yicheng/index/js/imagebox.min.js',
+        '/module/yicheng/index/js/carousel.js',
+        '/module/yicheng/index/js/tooltip.js',
+        '/module/yicheng/index/js/popover.js',
+        '/module/yicheng/index/js/effects.js',
     ));?>
     <?=$this->headLink()?>
     <?=$this->headScript()?>
+    <style>
+        body {
+                font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
+        }
+        h1,h2,h3,h4,h5,h6,p {
+                font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
+        }
+        #navigation ul li a{
+                font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
+                font-size:18px;
+        }
+        #index-title {
+                font-size:20px;
+        }
+        .flexslider, .custom-slide {
+                height:540px;
+        }
+        #footer a {
+            color:#A4A4A4;
+        }
+        #footer a:hover {
+            color:#FFFFFF;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- Header -->
-<div id="header">
+    <!-- Header -->
+    <div id="header">
 
-	<!-- 960 Container Start -->
-	<div class="container ie-dropdown-fix">
-	
-		<!-- Logo -->
-		<div class="four columns">
-			<a href="#"><img src="<?=$this->assets("/module/yicheng/index/images/logo.png")?>" alt=""/></a>
-		</div>
-		
-		<!-- Main Navigation Start -->
-		<div class="twelve columns">
-			<div id="navigation">
-				<ul id="nav">
-				
-					<li><a id="current" href="index.html">Home</a>
-						<ul>
-							<li><a href="index.html">Home 1</a></li>
-							<li><a href="index_2.html">Home 2</a></li>
-							<li><a href="index_3.html">Home 3</a></li>
-							<li><a href="index_4.html">Home 4</a></li>
-						</ul>
-					</li>
-					
-					<li><a href="#">Features</a>
-						<ul>
-							<li><a href="shortcodes.html">Shortcodes</a></li>
-							<li><a href="full_width.html">Full Width</a></li>
-							<li><a href="#">Layouts</a>
-								<ul>
-									<li><a href="about.html">About Us</a></li>
-									<li><a href="services.html">Services</a></li>
-									<li><a href="pricing_tables.html">Pricing Tables</a></li>
-									<li><a href="sidebar_right.html">Page - Sidebar Right</a></li>
-									<li><a href="sidebar_left.html">Page - Sidebar Left</a></li>
-									<li><a href="blog_post.html">Single Post</a></li>
-									<li><a href="single_project.html">Single Project</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					
-					<li><a href="#">Portfolio</a>
-						<ul>
-							<li><a href="portfolio_2.html">2 Columns</a></li>
-							<li><a href="portfolio_3.html">3 Columns</a></li>
-							<li><a href="portfolio_4.html">4 Columns</a></li>
-							<li><a href="single_project.html">Single Project</a></li>
-						</ul>
-					</li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- Main Navigation End -->
-		
-	</div>
-	<!-- 960 Container End -->
+        <!-- 960 Container Start -->
+        <div class="container ie-dropdown-fix">
 
-</div>
-<!-- End Header -->
+            <!-- Logo -->
+            <div class="five columns">
+                <a href="#"><img src="<?=$this->assets("/module/yicheng/index/images/logo.png")?>" alt=""/></a>
+            </div>
+
+            <!-- Main Navigation Start -->
+            <div class="eleven columns">
+                <div id="navigation">
+                    <ul id="nav">
+                        <li><a id="current" href="/">关于亿成</a>
+                        </li>
+                        <li><a href="#">项目介绍</a>
+                        </li>
+                        <li><a href="#">投资人关系</a>
+                        </li>
+                        <li><a href="#">集团新闻</a></li>
+                        <li><a href="#">在线客服</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Main Navigation End -->
+
+        </div>
+        <!-- 960 Container End -->
+
+    </div>
+    <!-- End Header -->
 
 
-<!-- Slider -->
-<div id="slider">
+    <!-- Slider -->
+    <div id="slider">
 
-	<!-- Flexslider Start-->
-	<div class="flexslider" style="background: #fafafa;">
-		<ul class="slides">
-		
-			<!-- Slide -->
-			<li class="custom-slide" style="background: url(images/slider_bg_01.jpg)">
-				<div class="container">
-					<div class="sixteen columns">
-						<img src="<?=$this->assets("/module/yicheng/index/images/slider_img_02.png")?>" alt="" style="float: right;" />
-						<div class="slider_description">
-							<h2>Powerful &amp; Flexible Premium <b><br/></b> Theme You’ve Been Waiting For</h2>
-							<p>Phasellus - ut augue at sapien bibendum bibendum amet magna. Aenean condimentum, lacus sit amet luctus lobortis, enim tellus ultrices elit, amet consequat enim elit noneas.</p>
-							<a href="shortcodes.html" class="button medium yellow">Read More</a>
-						</div>
-					</div>
-				</div>
-			</li>
-			
-			<!-- Slide -->
-			<li style="background: #fafafa;">
-				<div class="container">
-					<div class="sixteen columns">
-						<img src="<?=$this->assets("/module/yicheng/index/images/slider_img_01.png")?>" alt="" style="float: right;" />
-						<div class="slider_description">
-							<h2>Unique Theme for Business, <b><br/></b> Agency or Creative Portfolios</h2>
-							<p>Curabitur bibendum ultricies nisi id vestibulum. Duis ac lacus enim, et rutrum libero. In fringilla aliquet leo faucibus lobortis. Sed leo id quam ornare venenatis non a urna. </p>
-							<a href="#" class="button medium yellow">Purchase Now</a>
-						</div>
-					</div>
-				</div>
-			</li>
-					
-			<!-- Slide -->
-			<li style="background: #fafafa;">
-				<div class="container">
-					<div class="sixteen columns">
-						<img src="<?=$this->assets("/module/yicheng/index/images/slider_img_03.png")?>" alt="" style="float: right;" />
-						<div class="slider_description">
-							<h2>Incredible: Responsive Theme <b><br/></b> Perfect for Showing Your Products</h2>
-							<p>Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque dolor.</p>
-							<a href="single_project.html" class="button medium yellow">View Project</a>
-						</div>
-					</div>
-				</div>
-			</li>
-				
-		</ul>
-	</div>
-	<!-- Flexslider End-->
-			
-</div>
-<!-- End Slider -->
+        <!-- Flexslider Start-->
+        <div class="flexslider" style="background: #fafafa;">
+            <ul class="slides">
+                <?for($i=1;$i<=10;$i++):?>
+                <!-- Slide -->
+                <li class="custom-slide" style="background: url(<?=$this->assets("/module/yicheng/index/images/bg$i.jpg")?>)">
+                <div class="container">
+                    <div class="sixteen columns">
+                    </div>
+                </div>
+                </li>
+                <?endfor?>
+            </ul>
+        </div>
+        <!-- Flexslider End-->
 
-<!-- 960 Container Start -->
-<div class="container">
-	
-	<!-- Icon Box Start -->
-	<div class="features">
-	
-		<!-- Icon Box Start -->
-		<div class="one-third column">		
-			<div class="feature">
-				<div class="feature-circle blue"><img src="<?=$this->assets("/module/yicheng/index/images/features_ico_01.png")?>" alt="" /></div>
-				<div class="feature-description">
-					<h4>Modern & Clean Design</h4>
-					<p>Proin iaculis purus consequat sem cursus digni ssim. Donec porttitor entume suscipit. Aenean rhoncus posuere odio in tincidunt.</p>
-				</div>
-			</div>
-		</div>
-		<!-- Icon Box End -->	
-		
-		<!-- Icon Box Start -->
-		<div class="one-third column">		
-			<div class="feature">
-				<div class="feature-circle gray"><img src="<?=$this->assets("/module/yicheng/index/images/features_ico_02.png")?>" alt="" /></div>
-				<div class="feature-description">
-					<h4>Easy to Customize</h4>
-					<p>Nam aliquam volutpat leo vel lorem bibendum. Nuncea elit purusa, tempus pulvinar rhoncus egesta vel nibh volutpat leo.</p>
-				</div>
-			</div>
-		</div>
-		<!-- Icon Box End -->
-		
-		<!-- Icon Box Start -->
-		<div class="one-third column">		
-			<div class="feature">
-				<div class="feature-circle gray"><img src="<?=$this->assets("/module/yicheng/index/images/features_ico_03.png")?>" alt="" /></div>
-				<div class="feature-description">
-					<h4>Responsive Template</h4>
-					<p>Fusce porttitor turpis quis urna molestie cons equat. Nam felis purus, tincidunt sed dapibus ugravida fusce et magna libero.</p>
-				</div>
-			</div>
-		</div>
-		<!-- Icon Box End -->
-		
-	</div>
-	<!-- Icon Box End -->
-	
-	<div class="clearfix"></div>
-	
-	<!--Recent Work -->
-	<div class="sixteen columns">
-		<h4 class="headline">Recent Work</h4>
-	</div>
-	
-		<!-- 1/4 Column -->
-		<div class="four columns">
-				<div class="item-img"><a href="images/portfolio_images/portfolio_3_01_large.jpg" rel="imagebox" title="SockMonkee"><img src="<?=$this->assets("/module/yicheng/index/images/portfolio_images/portfolio_3_01.jpg")?>" alt=""/><div class="overlay zoom"></div></a></div>
-				<div class="portfolio-item-meta">
-					<h5><a href="single_project.html">SockMonkee</a></h5>
-					<p>Aenean sit amet ligula est, conseact etur lectus. Maecenas hendrerit, lorem.</p>
-				</div>
-		</div>
-	
-		<!-- 1/4 Column -->
-		<div class="four columns">
-				<div class="item-img"><a href="single_project.html"><img src="<?=$this->assets("/module/yicheng/index/images/portfolio_images/portfolio_3_06.jpg")?>" alt=""/><div class="overlay zoom"></div></a></div>
-				<div class="portfolio-item-meta">
-					<h5><a href="single_project.html">Franky Fisticuffs</a></h5>
-					<p>Aenean sit amet ligula est, conseact etur lectus. Maecenas hendrerit, lorem.</p>
-				</div>
-		</div>
+    </div>
+    <!-- End Slider -->
 
-		<!-- 1/4 Column -->
-		<div class="four columns">
-				<div class="item-img"><a href="single_project.html"><img src="<?=$this->assets("/module/yicheng/index/images/portfolio_images/portfolio_3_04.jpg")?>" alt=""/><div class="overlay zoom"></div></a></div>
-				<div class="portfolio-item-meta">
-					<h5><a href="single_project.html">Package Project</a></h5>
-					<p>Gravida sit amet ligula eget conseact etur lectu aecenas hendrerit bibenea.</p>
-				</div>
-		</div>
-			
-		<!-- 1/4 Column -->
-		<div class="four columns">
-			<div class="item-img"><a href="images/portfolio_img_04_large.jpg" rel="imagebox" title="Ampertastic Mr. Fox"><img src="<?=$this->assets("/module/yicheng/index/images/portfolio_img_04.jpg")?>" alt=""/><div class="overlay zoom"></div></a></div>
-			<div class="portfolio-item-meta">
-				<h5><a href="single_project.html">Ampertastic Mr. Fox</a></h5>
-				<p>Fermentum sit amet ligula estabe, eget conseact lectus maecenas hendrerit.</p>
-			</div>
-		</div>
-	
-	<div class="clearfix"></div>
-	
-	<!--Info Box Start -->
-	<div class="sixteen columns">
-		<div class="info-box">
-			<div class="info-content">
-				<h4>Perfect Premium Template for Showing Your Products</h4>
-				<p>Incredible is a responsive HTML template created for corporate and portfolio websites. </p>
-			</div>
-			<a href="#" class="button medium yellow" style="float: right;">Get a Free Quote Now</a>
-			<div class="clearfix"></div>
-		</div>
-	</div>
-	<!-- Recent Work End -->
+    <!-- 960 Container Start -->
+    <div class="container">
 
-	<!-- Our Clients -->
-	<div class="sixteen columns">
-		<h4 class="headline">Our Clients</h4>
-	</div>
-	
-	<div class="sixteen columns">
-		<ul class="client-logo">
-			<li><img src="<?=$this->assets("/module/yicheng/index/images/logo_01.png")?>" alt=""/></li>
-			<li><img src="<?=$this->assets("/module/yicheng/index/images/logo_02.png")?>" alt=""/></li>
-			<li><img src="<?=$this->assets("/module/yicheng/index/images/logo_03.png")?>" alt=""/></li>
-			<li><img src="<?=$this->assets("/module/yicheng/index/images/logo_04.png")?>" alt=""/></li>
-			<li><img src="<?=$this->assets("/module/yicheng/index/images/logo_05.png")?>" alt=""/></li>
-		</ul>
-	</div>
-	<!-- Our Clients End -->
+        <!--Recent Work -->
+        <div class="sixteen columns">
+            <h4 id="index-title" class="headline">集团业务</h4>
+        </div>
 
-</div>
-<!-- 960 Container End -->
+        <!-- 1/3 Column -->
+        <div class="one-third column">
+            <div class="item-img"><a href="images/portfolio_images/portfolio_3_01_large.jpg" rel="imagebox" title="SockMonkee"><img src="images/portfolio_images/portfolio_3_01.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+            <div class="portfolio-item-meta">
+                <h5><a href="single_project.html">SockMonkee</a></h5>
+                <p>Aenean sit amet ligula est, conseact etur lectus. Maecenas hendrerit, lorem.</p>
+            </div>
+        </div>
 
-<!-- Footer Start -->
-<div id="footer">
+        <!-- 1/3 Column -->
+        <div class="one-third column">
+            <div class="item-img"><a href="single_project.html"><img src="images/portfolio_images/portfolio_3_06.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+            <div class="portfolio-item-meta">
+                <h5><a href="single_project.html">Franky Fisticuffs</a></h5>
+                <p>Aenean sit amet ligula est, conseact etur lectus. Maecenas hendrerit, lorem.</p>
+            </div>
+        </div>
 
-	<!-- 960 Container -->
-	<div class="container">
-		
-		<!-- About -->
-		<div class="four columns">
-			<h5>About Us</h5>
-			<p>Consectetur adipiscing elit aeneane lorem lipsum, condimentum ultrices consequat eu, vehicula mauris lipsum adipiscing lipsum aenean orci lorem.</p>
-			<p>Asequat lorem ipsum dolor lorem sit amet, consectetur adipiscing dolor elit. Aenean nisl orci, condimentum.</p>
-		</div>
-		
-		<!-- Useful Links -->
-		<div class="four columns">
-			<h5>Useful Links</h5>
-			<ul class="links-list">
-				<li><a href="#">Frequently Asked Questions</a></li>
-				<li><a href="#">Service Updates</a></li>
-				<li><a href="#">Community Forum</a></li>
-				<li><a href="#">Help Desk</a></li>
-				<li><a href="#">Terms of Use</a></li>
-				<li><a href="#">Validate License</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-			</ul>
-		</div>
-		
-		<!-- Latest From Blog -->
-		<div class="four columns">
-			<h5>Latest From The Blog</h5>
-			
-			<div class="latest-post">
-				<a href="#"><img src="<?=$this->assets("/module/yicheng/index/images/latest_widget_img_01.png")?>" alt="" /></a>
-				<p><a href="#">Maecenas metus lore nulla, facili, pretium lipsum sit.</a></p>
-				<span>28 June 2012</span>
-			</div>
-			
-			<div class="latest-post">
-				<a href="#"><img src="<?=$this->assets("/module/yicheng/index/images/latest_widget_img_02.png")?>" alt="" /></a>
-				<p><a href="#">Aean metus lore nulla, facili, pretium lipsum dolor.</a></p>
-				<span>26 June 2012</span>
-			</div>
-			
-			<div class="latest-post">
-				<a href="#"><img src="<?=$this->assets("/module/yicheng/index/images/latest_widget_img_03.png")?>" alt="" /></a>
-				<p><a href="#">Metus lore lipsum nullam, facili, pretiumea lipsum.</a></p>
-				<span>22 June 2012</span>
-			</div>
-			
-		</div>
-		
-		<!-- Twitter -->
-		<div class="four columns">
-			<h5>Latest Tweets</h5>
-			<ul id="twitter"></ul>
-				<script type="text/javascript">
-					jQuery(document).ready(function($){
-					$.getJSON('http://api.twitter.com/1/statuses/user_timeline/envato.json?count=2&callback=?', function(tweets){
-					$("#twitter").html(tz_format_twitter(tweets));
-					}); });
-				</script>
-			<div class="clearfix"></div>
-		</div>
+        <!-- 1/3 Column -->
+        <div class="one-third column">
+            <div class="item-img"><a href="single_project.html"><img src="images/portfolio_images/portfolio_3_04.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+            <div class="portfolio-item-meta">
+                <h5><a href="single_project.html">Package Project</a></h5>
+                <p>Gravida sit amet ligula eget conseact etur lectu aecenas hendrerit bibenea.</p>
+            </div>
+        </div>
 
-	</div>
-	<!-- 960 Container End -->
-	
-</div>
-<!-- Footer End -->
+        <div class="clearfix"></div>
 
-<!--  Footer Copyright-->
-<div id="footer-bottom">
+        <!--Latest From Blog -->
+        <div class="sixteen columns">
+            <!--<h4 class="headline">Latest From Blog</h4>-->
 
-	<!-- 960 Container -->
-	<div class="container">
-				
-		<div class="eight columns">
-			<div id="copyright">© Copyright 2012 by <span>Incredible</span>. All Rights Reserved.</div>
-		</div>
-				
-		<div class="eight columns">
-			<ul class="social-links">
-				<li class="twitter"><a href="#">Twitter</a></li>
-				<li class="facebook"><a href="#">Facebook</a></li>
-				<li class="digg"><a href="#">Digg</a></li>
-				<li class="vimeo"><a href="#">Vimeo</a></li>
-				<li class="youtube"><a href="#">YouTube</a></li>
-				<li class="skype"><a href="#">Skype</a></li>
-			</ul>
-		</div>
 
-	</div>
-	<!-- End 960 Container -->
-	
-</div>
-<!--  Footer Copyright End -->
+            <!-- 1/4 Column -->
+            <div class="four columns alpha">
+                <div class="item-img"><a href="blog_post.html"><img src="images/portfolio_images/portfolio_3_07.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+                <div class="portfolio-item-meta">
+                    <h5><a href="single_project.html">Spaghetti Western</a> <span>June 25, 2012 / 12 Comments</span></h5>
+                    <p>Aenean sit amet ligula est, conseact etur lectus. Maecenas hendrerit, lorem.</p>
+                </div>
+            </div>
 
-<!-- Back To Top Button -->
-<div id="backtotop"><a href="#"></a></div>
+            <!-- 1/4 Column -->
+            <div class="four columns">
+                <div class="item-img"><a href="blog_post.html"><img src="images/portfolio_images/portfolio_3_03.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+                <div class="portfolio-item-meta">
+                    <h5><a href="single_project.html">Monster Calendar</a> <span>June 22, 2012 / 24 Comments</span></h5>
+                    <p>Aenean sit amet ligula est, conseact etur lectus. Maecenas hendrerit, lorem.</p>
+                </div>
+            </div>
 
-<!-- Imagebox Build -->
-<script src="js/imagebox.build.js"></script>
+            <!-- 1/4 Column -->
+            <div class="four columns omega">
+                <div class="item-img"><a href="blog_post.html"><img src="images/portfolio_images/portfolio_3_05.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+                <div class="portfolio-item-meta">
+                    <h5><a href="single_project.html">Prime Art League</a> <span>June 21, 2012 / 8 Comments</span></h5>
+                    <p>Gravida sit amet ligula eget conseact etur lectu aecenas hendrerit bibenea.</p>
+                </div>
+            </div>
 
-</body>
+            <!-- 1/4 Column -->
+            <div class="four columns omega">
+                <div class="item-img"><a href="blog_post.html"><img src="images/portfolio_images/portfolio_3_05.jpg" alt=""/><div class="overlay zoom"></div></a></div>
+                <div class="portfolio-item-meta">
+                    <h5><a href="single_project.html">Prime Art League</a> <span>June 21, 2012 / 8 Comments</span></h5>
+                    <p>Gravida sit amet ligula eget conseact etur lectu aecenas hendrerit bibenea.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- 960 Container End -->
+
+    <!-- Footer Start -->
+    <div id="footer">
+
+        <!-- 960 Container -->
+        <div class="container">
+
+            <div class="four columns">
+                <h5>关于亿成</h5>
+                <div class="links-list">
+                    <p><a href="#">集团简介</a></p>
+                    <p><a href="#">组织架构</a></p>
+                    <p><a href="#">组织架构</a></p>
+                    <p><a href="#">组织架构</a></p>
+                    <p><a href="#">组织架构</a></p>
+                </div>
+
+            </div>
+
+
+
+            <!-- Useful Links -->
+            <div class="eight columns">
+                <h5>集团成员</h5>
+                <ul class="links-list">
+                    <li><a href="#">亿成国际投资集团</a></li>
+                    <li><a href="#">河北亿成投资有限公司</a></li>
+                    <li><a href="#">亿成张家口壹善北虫草生产基地</a></li>
+                    <li><a href="#">亿成阳光房地产开发有限公司</a></li>
+                    <li><a href="#">亿成国际天正文化传媒有限公司</a></li>
+                    <li><a href="#">天津合而壹股份投资基金管理有限公司</a></li>
+                </ul>
+            </div>
+            <!-- About -->
+            <div class="four columns">
+                <h5>关于亿成</h5>
+                <p>电话：010-58207072</p>
+                <p>传真：010-58207760</p>
+                <p>地址：北京市朝阳区建国路93号万达广场A座21层</p>
+                <p>邮编：100026</p>
+            </div>
+
+
+        </div>
+        <!-- Footer End -->
+
+
+
+        <!-- Back To Top Button -->
+        <div id="backtotop"><a href="#"></a></div>
+
+        <!-- Imagebox Build -->
+        <script src="<?=$this->assets("/module/yicheng/index/js/imagebox.build.js")?>"></script>
+
+    </body>
 </html>
