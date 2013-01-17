@@ -122,6 +122,27 @@ class Events extends TableGateway
                 $this->where(array("id" => 0));
             }    
         }
+
+
+        if($params->tag) {
+            $tagModel = \Eva\Api::_()->getModel('Event\Model\Tag');
+            $tag = $tagModel->getTag($params->tag);
+
+            if($tag) {
+                $tagId = $tag['id'];
+                $tagPostTable = \Eva\Api::_()->getDbTable('Event\DbTable\TagsEvents'); 
+                $tagPostTableName = $tagPostTable->initTableName()->getTable();
+
+                $this->join(
+                    $tagPostTableName,
+                    "id = $tagPostTableName.event_id",
+                    array('tag_id')
+                ); 
+                $this->where(array("$tagPostTableName.tag_id" => $tagId));
+            } else {
+                return false;
+            }
+        }
         
         if ($params->order == 'memberdesc' || $params->order == 'memberasc') {
             $eventCountDb = Api::_()->getDbTable('Event\DbTable\Counts');
@@ -141,8 +162,8 @@ class Events extends TableGateway
         $orders = array(
             'idasc' => 'id ASC',
             'iddesc' => 'id DESC',
-            'timeasc' => 'startDatetimeUtc ASC',
-            'timedesc' => 'startDatetimeUtc DESC',
+            'timeasc' => 'createTime ASC',
+            'timedesc' => 'createTime DESC',
             'titleasc' => 'title ASC',
             'titledesc' => 'title DESC',
             'memberdesc' => 'memberCount DESC',

@@ -25,6 +25,7 @@ config = {
 	dir : "",
 	f : "",
 	s : '',
+	assets : '',
 	ie : false
 },
 
@@ -43,6 +44,10 @@ dirHandler = function(dir, configDir){
 },
 
 readyFuncs = [],
+
+userReadyFuncs = [],
+
+evaUser,
 
 methods = window.eva = {
 	module : {},
@@ -80,6 +85,10 @@ methods = window.eva = {
 		return methods.s(dir) + '?v=' + eva.config.version;
 	},
 
+	assets : function(dir){
+		return dirHandler(dir, config.assets);
+	},
+
 	p : function (m){
 		if(typeof console === 'undefined')
 			return alert(m);
@@ -106,6 +115,14 @@ methods = window.eva = {
 			return methods.module[moduleActionName] === undefined ? 
 				( eva[actionName] === undefined ? function(){} : eva[actionName] ): eva.module[moduleActionName];
 		}
+	},
+
+	setUser : function(user){
+		evaUser = user;
+	},
+
+	getUser : function(){
+		return evaUser;
 	},
 
 	loader : function(path, callback) {
@@ -262,6 +279,20 @@ methods = window.eva = {
 		readyFuncs.push(func);
 	},
 
+	userReady : function(func){
+		if (typeof func !== 'function') {
+			return false;
+		} 
+		userReadyFuncs.push(func);
+	},
+
+	callUserFuncs : function(){
+		var i = 0;
+		for(i in userReadyFuncs){
+			userReadyFuncs[i]();
+		}
+	},
+
 	init : function(setting){
 		config = methods.getConfig(setting);
 		methods.config = config;
@@ -279,7 +310,8 @@ methods = window.eva = {
 				eva.runtime();
 			}
 
-			for(var i in readyFuncs){
+			var i = 0;
+			for(i in readyFuncs){
 				readyFuncs[i]();
 			}
 

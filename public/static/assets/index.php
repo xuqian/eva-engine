@@ -69,6 +69,8 @@ class EvaAssets
 
     protected $modulePath;
 
+    protected $headers;
+
     protected $defines = array(
         //JS
         'jquery' =>  '/js/jquery/jquery.js',
@@ -155,7 +157,7 @@ class EvaAssets
         $fileSourceType = array_shift($urlPathArray);
         if($fileSourceType == 'lib'){
             $sourcePath = $this->libRootPath . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
-            $targetPath = $this->urlRootPath . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
+            $targetPath = $this->urlRootPath . DIRECTORY_SEPARATOR . 'lib'  .  DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
 
             $fileAsset = new FileAsset($sourcePath);
             if(true === $this->cache){
@@ -165,6 +167,11 @@ class EvaAssets
 
             $mimeType = $this->getMimeType($sourcePath);
             header("Content-Type: $mimeType");
+            if($this->headers){
+                foreach($this->headers as $header){
+                    header($header);
+                }
+            }
             echo $fileAsset->dump();
         } elseif($fileSourceType == 'module') {
             $module = array_shift($urlPathArray);
@@ -185,6 +192,11 @@ class EvaAssets
                 }
                 $mimeType = $this->getMimeType($sourcePath);
                 header("Content-Type: $mimeType");
+                if($this->headers){
+                    foreach($this->headers as $header){
+                        header($header);
+                    }
+                }
                 echo $fileAsset->dump();
             }
         }
@@ -195,11 +207,11 @@ class EvaAssets
         $this->copy();
     }
 
-    public function __construct()
+    public function __construct($config)
     {
-        $config = include __DIR__ . '/config.inc.php';
         $this->libRootPath = $config['libRootPath'];
         $this->urlRootPath  = $config['urlRootPath'];
+        $this->headers = $config['headers'];
         $this->cache = $config['cache'];
     }
 
@@ -517,5 +529,9 @@ class EvaAssets
 
 }
 
-$asset = new EvaAssets();
+$config = include __DIR__ . '/config.inc.php';
+$configLocalFile = EVA_CONFIG_PATH . '/local.front.assets.config.php';
+$configLocal = is_file($configLocalFile) ? include $configLocalFile : array();
+$config = $configLocal ? array_merge($config, $configLocal) : $config;
+$asset = new EvaAssets($config);
 $asset->run();

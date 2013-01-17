@@ -142,11 +142,6 @@ class Event extends AbstractModel
         
         $this->trigger('save.pre');
         
-        //Admin save item will remove all categories
-        $categoryEventItem = $this->getItem('Event\Item\CategoryEvent');
-        $categoryEventItem->event_id = $item->id;
-        $categoryEventItem->remove();
-        
         $item->save();
 
         if($item->hasLoadedRelationships()){
@@ -169,14 +164,19 @@ class Event extends AbstractModel
 
         $subItem = $item->join('Text');
         $subItem->remove();
-
-        $subItem = $item->join('EventUser');
-        foreach ($subItem as $eventUser) {
-            $eventUser->remove();
-        }
-
-        $subItem = $item->join('EventFile');
+        
+        $subItem = $item->join('Count');
         $subItem->remove();
+
+        $subDb =  Api::_()->getDbTable('Event\DbTable\EventsUsers');
+        $subDb->where(array(
+            'event_id' => $item->id,
+        ))->remove();
+        
+        $subDb =  Api::_()->getDbTable('Event\DbTable\EventsFiles');
+        $subDb->where(array(
+            'event_id' => $item->id,
+        ))->remove();
 
         $item->remove();
 
