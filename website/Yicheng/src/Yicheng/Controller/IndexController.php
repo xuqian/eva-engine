@@ -8,7 +8,8 @@ class IndexController extends ActionController
 {
     public function indexAction()
     {
-        $this->layout('layout/welcome');
+        //$this->layout('layout/welcome');
+        $this->layout('layout/newindex');
         $view = new ViewModel();
         return $view;
     }

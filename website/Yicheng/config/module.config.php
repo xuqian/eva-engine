@@ -7,6 +7,7 @@ return array(
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../layout/layout.phtml',
             'layout/welcome' => __DIR__ . '/../layout/welcome.phtml',
+            'layout/newindex' => __DIR__ . '/../layout/newindex.phtml',
             'layout/index' => __DIR__ . '/../layout/index.phtml',
         ),
     ),
