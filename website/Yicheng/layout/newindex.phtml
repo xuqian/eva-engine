@@ -46,11 +46,13 @@
         }
         #navigation ul li a{
                 font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
-                font-size:20px;
+                font-size:21px;
                 font-weight:bold;
+                color:#000;
         }
         #index-title {
                 font-size:20px;
+                color:#000;
         }
         .flexslider, .custom-slide {
                 height:540px;
@@ -64,6 +66,9 @@
         .portfolio-item-meta h5 {
             font-family:Microsoft YaHei,Trebuchet MS, Verdana, Helvetica, Arial, sans-serif;
             font-size:15px;
+        }
+        .portfolio-item-meta h5 a{
+            color:#000;
         }
         #slider {
                 border-top:10px solid #666;
@@ -115,7 +120,7 @@
         <!-- Flexslider Start-->
         <div class="flexslider" style="background: #fafafa;">
             <ul class="slides">
-                <?for($i=1;$i<=10;$i++):?>
+                <?for($i=1;$i<=8;$i++):?>
                 <!-- Slide -->
                 <li class="custom-slide" style="background: url(<?=$this->assets("/module/yicheng/index/images/bg$i.jpg")?>)">
                 <div class="container">
@@ -168,8 +173,12 @@
 
         <div class="clearfix"></div>
 
-        <!--Latest From Blog -->
         <div class="sixteen columns">
+            <h4 id="index-title" class="headline">特色产业</h4>
+        </div>
+
+        <!--Latest From Blog -->
+        <div id="index-below" class="sixteen columns">
             <!--<h4 class="headline">Latest From Blog</h4>-->
 
 
