@@ -33,6 +33,7 @@
         '/module/yicheng/index/js/tooltip.js',
         '/module/yicheng/index/js/popover.js',
         '/module/yicheng/index/js/effects.js',
+        '/module/yicheng/index/js/cufon-yui.js',
     ));?>
     <?=$this->headLink()?>
     <?=$this->headScript()?>
@@ -266,6 +267,9 @@
 
         <!-- Imagebox Build -->
         <script src="<?=$this->assets("/module/yicheng/index/js/imagebox.build.js")?>"></script>
+        <script>
+            Cufon.replace ('#nav a', {fontFamily: 'Microsoft YaHei'});
+        </script>
 
     </body>
 </html>
