@@ -35,6 +35,10 @@ class Posts extends TableGateway
             $this->where(array('user_id' => $params->user_id));
         }
 
+        if($params->flag){
+            $this->where(array('flag' => $params->flag));
+        }
+
         if($params->keyword){
             $keyword = $params->keyword;
             $this->where(function($where) use ($keyword){
@@ -70,6 +74,26 @@ class Posts extends TableGateway
                     'inner'
                 ); 
                 $this->where(array("$categoeyPostTableName.category_id" => $categoryinfo['id']));
+            } else {
+                return false;
+            }
+        }
+
+        if($params->tag) {
+            $tagModel = \Eva\Api::_()->getModel('Blog\Model\Tag');
+            $tag = $tagModel->getTag($params->tag);
+
+            if($tag) {
+                $tagId = $tag['id'];
+                $tagPostTable = \Eva\Api::_()->getDbTable('Blog\DbTable\TagsPosts'); 
+                $tagPostTableName = $tagPostTable->initTableName()->getTable();
+
+                $this->join(
+                    $tagPostTableName,
+                    "id = $tagPostTableName.post_id",
+                    array('tag_id')
+                ); 
+                $this->where(array("$tagPostTableName.tag_id" => $tagId));
             } else {
                 return false;
             }
