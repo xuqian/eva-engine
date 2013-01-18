@@ -310,6 +310,7 @@ class UserController extends ActionController
         $page = $this->params()->fromQuery('page', 1);
         $query = array(
             'page' => $page,
+            'rows' => 12,
         );
 
         $user = $this->userAction();
@@ -323,12 +324,15 @@ class UserController extends ActionController
             'self' => array(
                 '*',
             ),  
+            'proxy' => array(
+                'Album\Item\Album::Cover' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
             'join' => array(
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
+                'Count' => array(
+                    '*'
                 ),
             ),
         ));
@@ -338,6 +342,54 @@ class UserController extends ActionController
             'items' => $items,
             'query' => $query,
             'paginator' => $paginator,
+        );
+    }
+    
+    public function albumAction()
+    {
+        $id = $this->params('album_id');
+        
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $item = $itemModel->getAlbum($id, array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\Album::Cover' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*'
+                ),
+            ),
+        ));
+        
+        $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
+
+        $query = array(
+            'album_id' => $item['id'],
+            'noLimit' => true,
+        );
+        
+        $items = $itemModel->setItemList($query)->getAlbumFileList();
+        $items->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\AlbumFile::Image' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        ));
+
+        return array(
+            'item' => $item,
+            'items' => $items,
         );
     }
 

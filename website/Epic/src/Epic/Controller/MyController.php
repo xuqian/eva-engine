@@ -74,6 +74,7 @@ class MyController extends ActionController
         $viewModel = $this->forward()->dispatch('UserController', array(
             'action' => 'albums',
             'id' => $user['userName'],
+            'rows' => 12,
         )); 
         $viewModel->setTemplate('epic/my/album');
         return $viewModel;

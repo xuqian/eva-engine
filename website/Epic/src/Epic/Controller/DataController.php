@@ -445,6 +445,49 @@ class DataController extends RestfulModuleController
         ));
     }
 
+    public function albumAction()
+    {
+        $this->changeViewModel('json');
+        $query = $this->getRequest()->getQuery();
+        $form = new \Epic\Form\AlbumSearchForm();
+        $form->bind($query);
+        if($form->isValid()){
+            $query = $form->getData();
+        } else {
+            return array(
+                'form' => $form,
+                'items' => array(),
+            );
+        }
+
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $items = $itemModel->setItemList($query)->getAlbumList();
+        $items = $items->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\Album::Cover' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*'
+                ),
+            ),
+        ));
+
+        $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
+
+        return new JsonModel(array(
+            'items' => $items,
+            'paginator' => $paginator,
+        ));
+    }
+
     public function eventuserAction()
     {
         $this->changeViewModel('json');

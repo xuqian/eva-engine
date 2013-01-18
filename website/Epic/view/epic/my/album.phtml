@@ -18,18 +18,28 @@ $this->headTitle($title, 'SET');
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
                                 <div class="album-list">
-                                    <?for($i=0;$i<4;$i++):?>
+                                    <?if(count($items) > 0 )?>
+                                    <?for($i=0;$i< ceil(count($items) / 3);$i++):?>
                                     <div class="row-fluid stack-row">
-                                        <?for($j=0;$j<3;$j++):?>
+                                        <?for($j= ($i * 3);$j< (3 * ($i+1));$j++):?>
+                                        <?if(isset($items[$j])){$item = $items[$j];}else{continue;}?>
                                         <div class="span4">
                                             <div class="stack">	
-                                                <a href="">
-                                                    <img src="<?=$this->assets('/module/epic/img/album-default.png')?>" width="180" alt="" />
+                                                <a href="<?=$this->uri('/user/' . $item['user_name'] . '/albums/' . $item['urlName']);?>">
+                                                    <?if(isset($item['Cover']) && $item['Cover']):?>
+                                                        <img src="<?=$this->thumb($item['Cover']['Thumb'], array('c_fill', 'w_180', 'h_180'))?>" width="180" />
+                                                    <?else:?>
+                                                        <img src="<?=$this->assets('/module/epic/img/album-default.png')?>" width="180" alt="" />
+                                                    <?endif?>
                                                 </a>
                                             </div>
                                             <p class="caption">
-                                                <a href="#" class="caption-title">Album Title</a>
-                                                <span class="lowlight">(123 Photos Total)</span>
+                                                <a href="<?=$this->uri('/user/' . $item['user_name'] . '/albums/' . $item['urlName']);?>" class="caption-title"><?=$item['title']?></a>
+                                                <span class="lowlight">(<?=$item['Count']['fileCount']?> Photos Total)</span>
+                                            </p>
+                                            <p class="caption">
+                                                <a href="<?=$this->uri('/albums/edit/' . $item['id'])?>"><i class="icon-edit"></i> Edit</a> 
+                                                <a href="<?=$this->uri('/albums/remove/' . $item['id'])?>"><i class="icon-remove"></i> Delete</a>
                                             </p>
                                         </div>
                                         <?endfor;?>
@@ -37,7 +47,7 @@ $this->headTitle($title, 'SET');
                                     <?endfor;?>
                                 </div><!--album-list end-->
                                 <?if($this->paginator):?>
-                                <?=$this->paginator->setPath('/my/event/')->setBaseQuery($this->query);?>
+                                <?=$this->paginator->setPath('/my/album/')->setBaseQuery($this->query);?>
                                 <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                                 <?endif;?>
 

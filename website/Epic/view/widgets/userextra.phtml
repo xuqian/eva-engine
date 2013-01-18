@@ -102,6 +102,31 @@
     </div><!--activity-list end-->
     <?endif?>
 
+<script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('user_id' => $this->user['id'], 'rows' => 8))?>">
+<div class="page-header border-header">
+    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/albums/')?>">View All</a></small>
+    <h4>My Albums  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+</div>
+<div class="side-group-list">
+    <ul class="thumbnails">
+    {% if(o.items.length > 0) { %}
+    {% for (var i=0, item; item=o.items[i]; i++) { %}
+        <li>
+            <a class="thumbnail" href="<?=$this->uri('/user/')?>{%=item.user_name%}/albums/{%=item.urlName%}">
+                {% if(item.Cover.Thumb) { %}
+                    <img src="{%=eva.thumb(item.Cover.Thumb, 'c_fill,h_65,w_65')%}" alt="" width="65" height="65" class="img-rounded"/>
+                {% }else{ %}
+                    <img src="{%=eva.s('/assets/module/epic/css/img/food.jpg')%}" alt="" width="65" height="65" class="img-rounded" />
+                {% } %}
+            </a>
+        </li>
+    {% } %}
+    {% } %}
+        </ul>
+    </div>
+</div>
+</script>
+    <?if(0):?>
     <div class="page-header border-header">
         <small class="pull-right"><a href="#">View All</a></small>
         <h4>Albums</h4>
@@ -117,6 +142,7 @@
             <?endfor;?>
         </ul>
     </div>
+    <?endif;?>
 
 <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
 <div class="page-header border-header">

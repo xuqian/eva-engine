@@ -593,6 +593,33 @@ return array(
                                     ),
                                 ),
                             ),
+                            'albums' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'albums[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'albums'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'post' => array(
+                                        'type' => 'Segment',
+                                        'options' => array(
+                                            'route' => '[:album_id][/]',
+                                            'constraints' => array(
+                                                'album_id' => '[a-zA-Z0-9_-]+'
+                                            ),
+                                            'defaults' => array(
+                                                'action' => 'album'
+                                            )
+                                        ),
+                                        'may_terminate' => true,
+                                    ),
+                                ),
+                            ),
                             'events' => array(
                                 'type' => 'Segment',
                                 'options' => array(

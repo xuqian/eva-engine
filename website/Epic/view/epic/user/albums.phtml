@@ -1,9 +1,8 @@
 <?
-$title = 'Album ' . $item['title'];
-$album = $item['title'];
+$title = 'Albums';
 $this->headTitle($title, 'SET');
 $user = $this->user;
-$items = $this->items->toArray();
+$items = $this->items;
 $viewAsGuest = $this->viewAsGuest;
 ?>
 
@@ -28,22 +27,30 @@ $viewAsGuest = $this->viewAsGuest;
                                     <?for($i=0;$i< ceil(count($items) / 3);$i++):?>
                                     <div class="row-fluid stack-row">
                                         <?for($j= ($i * 3);$j< (3 * ($i+1));$j++):?>
-                                        <?if(isset($items[$j])){$item = $items[$j]['Image'];}else{continue;}?>
+                                        <?if(isset($items[$j])){$item = $items[$j];}else{continue;}?>
                                         <div class="span4">
                                             <div class="stack">	
-                                                <a href="">
-                                                    <?if(isset($item['Thumb']) && $item['Thumb']):?>
-                                                        <img src="<?=$this->thumb($item['Thumb'], array('c_fill', 'w_180', 'h_180'))?>" width="180" />
+                                                <a href="<?=$this->uri('/user/' . $item['user_name'] . '/albums/' . $item['urlName']);?>">
+                                                    <?if(isset($item['Cover']) && $item['Cover']):?>
+                                                        <img src="<?=$this->thumb($item['Cover']['Thumb'], array('c_fill', 'w_180', 'h_180'))?>" width="180" />
                                                     <?else:?>
                                                         <img src="<?=$this->assets('/module/epic/img/album-default.png')?>" width="180" alt="" />
                                                     <?endif?>
                                                 </a>
                                             </div>
+                                            <p class="caption">
+                                                <a href="<?=$this->uri('/user/' . $item['user_name'] . '/albums/' . $item['urlName']);?>" class="caption-title"><?=$item['title']?></a>
+                                                <span class="lowlight">(<?=$item['Count']['fileCount']?> Photos Total)</span>
+                                            </p>
                                         </div>
                                         <?endfor;?>
                                     </div>
                                     <?endfor;?>
                                 </div><!--album-list end-->
+                        <?if($this->paginator):?>
+                        <?=$this->paginator->setPath('/user/' . $user['userName'] . '/albums/')->setBaseQuery($this->query);?>
+                        <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
+                        <?endif;?>
 
 
                     </div><!--profile-activities end-->

@@ -219,7 +219,7 @@ class AlbumController extends ActionController
                     '*',
                 ),
                 'join' => array(
-                        'File' => array(
+                    'File' => array(
                         'self' => array(
                             '*',
                             'getThumb()',
@@ -269,9 +269,14 @@ class AlbumController extends ActionController
         if ($form->isValid() && $form->getFileTransfer()->isUploaded()) {
             $item = $form->getData();
             if($form->getFileTransfer()->receive()){
-                $itemModel->setAlbum(array(
-                    'id' => $item['AlbumFile']['album_id']
-                ));
+                if ($this->album) {
+                    $itemModel->setAlbum($this->album);
+                } else {
+                    $albumModel = Api::_()->getModel('Album\Model\Album');
+                    $album = $albumModel->getAlbum($item['AlbumFile']['album_id']);
+                    $itemModel->setAlbum($album);
+                    $this->album = $album;
+                }
 
                 $files = $form->getFileTransfer()->getFileInfo();
                 $itemModel->setUploadFiles($files);
@@ -306,5 +311,128 @@ class AlbumController extends ActionController
 
         return new JsonModel($response);
     
+    }
+
+    public function photoAction()
+    {
+        $id = $this->params('id');
+        
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $item = $itemModel->getAlbum($id, array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\Album::Cover' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+            'join' => array(
+                'Count' => array(
+                    '*'
+                ),
+            ),
+        ));
+        
+        $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
+
+        $query = array(
+            'album_id' => $id,
+            'noLimit' => true,
+        );
+        
+        $items = $itemModel->setItemList($query)->getAlbumFileList();
+        $items->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\AlbumFile::Image' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        ));
+
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+        
+        $viewModel = new ViewModel();
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'items' => $items,
+        ));   
+        
+        return $viewModel;
+    }
+
+    public function coverAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate('epic/album/photo');
+        
+        $id = $this->params('id');
+        $fileId = $this->params()->fromQuery('file_id');
+        $callback = $this->params()->fromQuery('callback');
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $itemModel->setAlbumCover($id, $fileId);
+
+        if($callback){
+            return $this->redirect()->toUrl($callback);
+        } 
+    }
+
+    public function imageremoveAction()
+    {
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+            $postData = $this->params()->fromPost();
+            $callback = $this->params()->fromPost('callback');
+
+            $form = new \Album\Form\AlbumFileDeleteForm();
+            $form->bind($postData);
+            if ($form->isValid()) {
+
+                $postData = $form->getData();
+                $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
+                $itemModel->setItem($postData)->removeAlbumFile();
+
+                if($callback){
+                    $this->redirect()->toUrl($callback);
+                }
+
+            } else {
+                return array(
+                    'post' => $postData,
+                );
+            }
+
+        } else {
+            $albumId = $this->params('id');
+            $fileId = $this->params()->fromQuery('file_id');
+
+            $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
+            $item = $itemModel->getAlbumFile($albumId,$fileId)->toArray();
+
+            $user = Auth::getLoginUser(); 
+            //Public User Area
+            $this->forward()->dispatch('UserController', array(
+                'action' => 'user',
+                'id' => $user['id'],
+            ));
+
+            return array(
+                'callback' => $this->params()->fromQuery('callback'),
+                'item' => $item,
+                'album' => array('id' => $albumId),
+            );
+        }
+
     }
 }
