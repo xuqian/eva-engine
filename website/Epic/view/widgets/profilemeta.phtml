@@ -136,7 +136,7 @@ function isPaidRole($roles)
             <tr>
                 <td colspan="3">Tags : 
                     <?foreach($user['Tags'] as $tag):?>
-                    <a href="<?=$this->uri('/user/list/?tag=' . $tag['tagName']);?>" class="label"><?=$tag['tagName']?></a>
+                    <a href="<?=$this->uri('/user/list/?tag=' . $tag['tagName']);?>" class="tag"><?=$tag['tagName']?></a>
                     <?endforeach?>
                 </td>
             </tr>
