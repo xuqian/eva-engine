@@ -185,7 +185,7 @@
                 {% if(item.Cover.Thumb) { %}
                     <img src="{%=eva.thumb(item.Cover.Thumb, 'c_fill,h_65,w_65')%}" alt="" width="65" height="65" class="img-rounded"/>
                 {% }else{ %}
-                    <img src="{%=eva.s('/assets/module/epic/css/img/food.jpg')%}" alt="" width="65" height="65" class="img-rounded" />
+                    <img src="<?=$this->assets('/module/epic/img/album-default.png')?>" alt="" width="65" height="65" class="img-rounded" />
                 {% } %}
             </a>
         </li>

@@ -25,11 +25,11 @@ $viewAsGuest = $this->viewAsGuest;
 
                                 <div class="album-photos">
                                     <?if(count($items) > 0 )?>
-                                    <?for($i=0;$i< ceil(count($items) / 3);$i++):?>
+                                    <?for($i=0;$i< ceil(count($items) / 4);$i++):?>
                                     <div class="row-fluid stack-row">
-                                        <?for($j= ($i * 3);$j< (3 * ($i+1));$j++):?>
+                                        <?for($j= ($i * 4);$j< (4 * ($i+1));$j++):?>
                                         <?if(isset($items[$j])){$item = $items[$j]['Image'];}else{continue;}?>
-                                        <div class="thumbnail span4">
+                                        <div class="thumbnail span3">
                                             <a href="<?=$this->thumb($item['Thumb'])?>"  class="gallery"  rel="event-album">
                                                 <?if(isset($item['Thumb']) && $item['Thumb']):?>
                                                 <img src="<?=$this->thumb($item['Thumb'], array('c_fill', 'w_180', 'h_180'))?>" width="100%" class="" />

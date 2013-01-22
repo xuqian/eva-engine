@@ -24,11 +24,11 @@ $viewAsGuest = $this->viewAsGuest;
 
                                 <div class="album-list">
                                     <?if(count($items) > 0 )?>
-                                    <?for($i=0;$i< ceil(count($items) / 3);$i++):?>
+                                    <?for($i=0;$i< ceil(count($items) / 4);$i++):?>
                                     <div class="row-fluid stack-row">
-                                        <?for($j= ($i * 3);$j< (3 * ($i+1));$j++):?>
+                                        <?for($j= ($i * 4);$j< (4 * ($i+1));$j++):?>
                                         <?if(isset($items[$j])){$item = $items[$j];}else{continue;}?>
-                                        <div class="span4">
+                                        <div class="span3">
                                             <div class="stack">	
                                                 <a href="<?=$this->uri('/user/' . $item['user_name'] . '/albums/' . $item['urlName']);?>">
                                                     <?if(isset($item['Cover']) && $item['Cover']):?>

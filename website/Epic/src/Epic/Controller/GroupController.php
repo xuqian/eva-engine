@@ -357,11 +357,65 @@ class GroupController extends ActionController
         $viewModel = new ViewModel();
 
         $page = $this->params()->fromQuery('page', 1);
-        $rows = $this->params()->fromQuery('rows', 10);
-        $order = $this->params()->fromQuery('order', 'timedesc');
+        $rows = $this->params()->fromQuery('rows', 16);
+        $order = $this->params()->fromQuery('order', 'iddesc');
+
+        $eventModel = Api::_()->getModel('Group\Model\GroupEvent');
+        $events = $eventModel->setItemList(array('group_id' => $groupId, 'noLimit' => true))->getGroupEventList(array(
+            'self' => array(
+            ),
+        ));
 
         $albums = array();
         $paginator = array();
+
+        if ($events) {
+            $eventIdArray = array();
+            foreach ($events as $event) {
+                $eventIdArray[] = $event['event_id'];
+            }
+        }
+        
+        if (!$eventIdArray) {
+            $viewModel->setVariables(array(
+                'item' => $item,
+                'members' => $members,
+                'items' => $albums,
+                'paginator' => $paginator,
+                'query' => $this->params()->fromQuery(),
+            ));
+
+            return $viewModel;  
+        }
+
+        $itemModel = Api::_()->getModel('Event\Model\Album'); 
+        $albums = $itemModel->setItemList(array(
+            'inEvent' => true,
+            'event_id' => $eventIdArray,
+            'page' => $page,
+            'rows' => $rows,
+            'order' => $order
+        ))->getAlbumList(array(
+             'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'Count' => array(
+                    'self' => array(
+                        '*',
+                    )
+                ),
+            ),
+            'proxy' => array(
+                'Album\Item\Album::Cover' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        )); 
+
+        $paginator = $itemModel->getPaginator();
+
 
         $viewModel->setVariables(array(
             'item' => $item,
@@ -383,11 +437,38 @@ class GroupController extends ActionController
         $viewModel->setTemplate('epic/group/album-get');
         list($item, $members) = $this->groupAction();
         
-        $viewModel->setVariables(array(
-            'item' => $item,
-            'album' => '',
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $album = $itemModel->getAlbum($albumId);
+
+        $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
+
+        $query = array(
+            'album_id' => $album['id'],
+            'noLimit' => true
+        );
+        
+        $items = $itemModel->setItemList($query)->getAlbumFileList();
+        $paginator = $itemModel->getPaginator();
+        $items->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\AlbumFile::Image' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
         ));
         
+        $items = $items->toArray();
+
+        $viewModel->setVariables(array(
+            'item' => $item,
+            'items' => $items,
+            'members' => $members,
+        ));
+
         return $viewModel;
     }
 
@@ -396,11 +477,11 @@ class GroupController extends ActionController
         if (!$groupId) {
             return array();
         }
-        
+
         $page = $this->params()->fromQuery('page', 1);
         $rows = $this->params()->fromQuery('rows', 20);
         $order = $this->params()->fromQuery('order', 'timedesc');
-        
+
         $this->changeViewModel('json');
         
         $itemModel = Api::_()->getModel('Group\Model\Post'); 
@@ -670,11 +751,11 @@ class GroupController extends ActionController
         $viewModel->addChild($eventView, 'event');
         */
         list($item, $members) = $this->groupAction();
-        
         $viewModel->setVariables(array(
             'item' => $item,
             'event' => $eventView->item,
             'items' => $eventView->items,
+            'images' => $eventView->images,
             'eventMembers' => $eventView->members,
             'members' => $members,
             'paginator' => $eventView->paginator,

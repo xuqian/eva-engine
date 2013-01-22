@@ -402,6 +402,14 @@ class AlbumController extends ActionController
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
                 $itemModel->setItem($postData)->removeAlbumFile();
+            
+                $albumModel = Api::_()->getModel('Album\Model\Album');
+                $album = $albumModel->getAlbum($postData['album_id']);
+
+                if ($album['cover_id'] == $postData['file_id']) {
+                    $album->cover_id = null;
+                    $album->save();
+                }
 
                 if($callback){
                     $this->redirect()->toUrl($callback);

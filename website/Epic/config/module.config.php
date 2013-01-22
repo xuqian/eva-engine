@@ -294,9 +294,9 @@ return array(
             'event' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/event[/:id]',
+                    'route' => '/event[/:id][/]',
                     'constraints' => array(
-                        'id'     => '[a-zA-Z0-9_-]+',
+                        'id'     => '(?!album\b|calendar\b|albums\b)[a-zA-Z0-9_-]+',
                     ),
                     'defaults' => array(
                         'controller' => 'EventController',
@@ -304,6 +304,61 @@ return array(
                     ),
                 ),
                 'priority' => 2,
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'album' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'album[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'album'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'upload' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'upload[/]',
+                                    'constraints' => array(
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'albumUpload'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'edit' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'edit/[:album_id][/]',
+                                    'constraints' => array(
+                                        'album_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'albumEdit'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                            'get' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'image/[:album_id][/]',
+                                    'constraints' => array(
+                                        'album_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'albumGet'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
+                    ),  
+                ),
             ),
 
             'groups' => array(
@@ -336,7 +391,7 @@ return array(
                     ),
                 ),
             ),
-            
+
             'group' => array(
                 'type' => 'Segment',
                 'options' => array(

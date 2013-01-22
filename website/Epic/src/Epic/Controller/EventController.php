@@ -10,6 +10,10 @@ use Eva\Date\Calendar;
 
 class EventController extends ActionController
 {
+    protected $eventItem;
+    
+    protected $members;
+    
     public function indexAction()
     {
         return $this->listAction();
@@ -127,8 +131,59 @@ class EventController extends ActionController
 
     public function getAction()
     {
-        $id = $this->params('id');
+        list($item, $members) = $this->eventAction();
         
+        list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
+            'action' => 'index',
+            'event_id' => $item['id'],
+        ));
+        
+        $albumModel = Api::_()->getModel('Event\Model\Album');
+        $album = $albumModel->getEventAlbum($item['id']);
+
+        if ($album->id) {
+            $imageModel = Api::_()->getModel('Album\Model\AlbumFile');
+
+            $query = array(
+                'album_id' => $album['id'],
+                'rows' => 8,
+            );
+
+            $images = $imageModel->setItemList($query)->getAlbumFileList();
+            $images->toArray(array(
+                'self' => array(
+                    '*',
+                ),
+                'proxy' => array(
+                    'Album\Item\AlbumFile::Image' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                ),
+            ));
+        }
+
+        $view = new ViewModel(array(
+            'item' => $item,
+            'items' => $items,
+            'images' => isset($images) ? $images : null,
+            'members' => $members,
+            'paginator' => $paginator,
+        ));
+        return $view; 
+    }
+
+    public function eventAction()
+    {
+        if($this->eventItem && $this->members){
+            return array($this->eventItem, $this->members);
+        }   
+
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        if(!$id){
+            return array();
+        }
+
         $itemModel = Api::_()->getModel('Event\Model\Event'); 
         $item = $itemModel->getEventdata($id, array(
             'self' => array(
@@ -182,11 +237,6 @@ class EventController extends ActionController
             }
         } 
 
-        list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
-            'action' => 'index',
-            'event_id' => $item['id'],
-        ));
-
         $memberModel = Api::_()->getModel('Event\Model\EventUser'); 
         $members = $memberModel->setItemList(array('event_id' => $item['id'], 'noLimit' => true))->getEventUserList();
         $members = $members->toArray(
@@ -210,13 +260,10 @@ class EventController extends ActionController
             )
         );
 
-        $view = new ViewModel(array(
-            'item' => $item,
-            'items' => $items,
-            'members' => $members,
-            'paginator' => $paginator,
-        ));
-        return $view; 
+        $this->eventItem = $item;
+        $this->members = $members;
+
+        return array($item, $members); 
     }
 
     public function removeAction()
@@ -370,5 +417,38 @@ class EventController extends ActionController
         }
 
         return $viewModel;
+    }
+
+    public function albumUploadAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        
+        $albumModel = Api::_()->getModel('Event\Model\Album');
+
+        list($item, $members) = $this->eventAction();
+
+        $album = $albumModel->getEventAlbum($item['id'],array(
+            'self' => array(
+                '*',
+            ),
+            'join' => array(
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
+                ),
+                'Category' => array(
+                    '*'
+                ),
+            ),
+        ));
+        
+        return array(
+            'item' => $item,
+            'album' => $album,
+            'members' => $members,
+        );   
     }
 }
