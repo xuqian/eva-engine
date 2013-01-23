@@ -346,9 +346,8 @@ return array(
                             'get' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'image/[:album_id][/]',
+                                    'route' => 'image[/]',
                                     'constraints' => array(
-                                        'album_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
                                         'action' => 'albumGet'

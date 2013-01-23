@@ -146,7 +146,7 @@ class EventController extends ActionController
 
             $query = array(
                 'album_id' => $album['id'],
-                'rows' => 8,
+                'noLimit' => true,
             );
 
             $images = $imageModel->setItemList($query)->getAlbumFileList();
@@ -447,6 +447,49 @@ class EventController extends ActionController
         
         return array(
             'item' => $item,
+            'album' => $album,
+            'members' => $members,
+        );   
+    }
+
+    public function albumGetAction()
+    {
+        $request = $this->getRequest();
+        $viewModel = new ViewModel();
+        
+        $albumModel = Api::_()->getModel('Event\Model\Album');
+
+        list($item, $members) = $this->eventAction();
+
+        $itemModel = Api::_()->getModel('Album\Model\Album');
+        $album = $itemModel->getAlbum($albumId);
+
+        $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
+
+        $query = array(
+            'album_id' => $album['id'],
+            'noLimit' => true
+        );
+        
+        $items = $itemModel->setItemList($query)->getAlbumFileList();
+        $paginator = $itemModel->getPaginator();
+        $items->toArray(array(
+            'self' => array(
+                '*',
+            ),
+            'proxy' => array(
+                'Album\Item\AlbumFile::Image' => array(
+                    '*',
+                    'getThumb()'
+                ),
+            ),
+        ));
+        
+        $items = $items->toArray();
+        
+        return array(
+            'item' => $item,
+            'items' => $items,
             'album' => $album,
             'members' => $members,
         );   

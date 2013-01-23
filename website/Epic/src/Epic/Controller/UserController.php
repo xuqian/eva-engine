@@ -331,8 +331,7 @@ class UserController extends ActionController
                 ),
             ),
             'join' => array(
-                'Count' => array(
-                    '*'
+                'ImageCount' => array(
                 ),
             ),
         ));

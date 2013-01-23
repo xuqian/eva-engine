@@ -400,10 +400,7 @@ class GroupController extends ActionController
                 '*',
             ),
             'join' => array(
-                'Count' => array(
-                    'self' => array(
-                        '*',
-                    )
+                'ImageCount' => array(
                 ),
             ),
             'proxy' => array(

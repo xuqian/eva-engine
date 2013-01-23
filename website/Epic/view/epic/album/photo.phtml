@@ -16,7 +16,7 @@ $items = $items->toArray();
                             <div class="span6">
                                 <div class="page-main-header">
                                     <a href="<?=$this->uri('/albums/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Create New</a>
-                                    <h3><?=$this->_($title)?> <?if($item['id']):?><a href="<?=$this->uri('/album/' . $item['urlName'])?>" class="">[View]</a><?endif?></h3>
+                                    <h3><?=$this->_($title)?> <?if($item['id']):?><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/albums/' . $item['urlName'])?>" class="">[View]</a><?endif?></h3>
                                 </div>
                                 <div class="row-fluid">
                                     <?if($item['id']):?>
