@@ -35,7 +35,7 @@ $form->useSubFormGroup()
         <?foreach($images as $image):?>
         <?$image = $image['Image'];?>
         <li class="thumbnail">
-            <a href="<?=$this->thumb($image['Thumb'])?>"  class="gallery"  rel="event-album">
+            <a href="<?=$this->thumb($image['Thumb'], array('w_1024'))?>"  class="gallery"  rel="event-album">
                 <?if(isset($image['Thumb']) && $image['Thumb']):?>
                     <img src="<?=$this->thumb($image['Thumb'], array('c_fill', 'w_144', 'h_144'))?>" width="100%" class="" />
                 <?else:?>
