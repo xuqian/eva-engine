@@ -53,7 +53,7 @@
 
 <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>">View All</a></small>
+    <small class="pull-right"><a href="<?=$this->uri('/my/event/')?>">View All</a></small>
     <h4>My Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-event-list">
@@ -104,10 +104,10 @@
 
 <script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('user_id' => $this->user['id'], 'rows' => 8))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/albums/')?>">View All</a></small>
+    <small class="pull-right"><a href="<?=$this->uri('/my/album/')?>">View All</a></small>
     <h4>My Albums  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
-<div class="side-group-list">
+<div class="side-album-list">
     <ul class="thumbnails">
     {% if(o.items.length > 0) { %}
     {% for (var i=0, item; item=o.items[i]; i++) { %}
@@ -146,7 +146,7 @@
 
 <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/groups/')?>">View All</a></small>
+    <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
     <h4>My Groups  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-group-list">

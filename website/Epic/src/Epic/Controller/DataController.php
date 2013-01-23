@@ -459,29 +459,76 @@ class DataController extends RestfulModuleController
                 'items' => array(),
             );
         }
+        $groupId = $this->params()->fromQuery('group_id');
 
-        $itemModel = Api::_()->getModel('Album\Model\Album');
-        $items = $itemModel->setItemList($query)->getAlbumList();
-        $items = $items->toArray(array(
-            'self' => array(
-                '*',
-            ),
-            'proxy' => array(
-                'Album\Item\Album::Cover' => array(
+        if ($groupId) { 
+            $eventModel = Api::_()->getModel('Group\Model\GroupEvent');
+            $events = $eventModel->setItemList(array('group_id' => $groupId, 'noLimit' => true))->getGroupEventList(array(
+                'self' => array(
+                ),
+            ));
+
+            $albums = array();
+            $paginator = array();
+
+            if ($events) {
+                $eventIdArray = array();
+                foreach ($events as $event) {
+                    $eventIdArray[] = $event['event_id'];
+                }
+            }
+
+            if (!$eventIdArray) {
+                return new JsonModel(array(
+                    'items' => $albums,
+                    'paginator' => $paginator,
+                ));
+            }
+
+            $itemModel = Api::_()->getModel('Event\Model\Album'); 
+            $query['inEvent'] = true;
+            $query['event_id'] = $eventIdArray;
+            $items = $itemModel->setItemList($query)->getAlbumList(array(
+                'self' => array(
                     '*',
-                    'getThumb()'
                 ),
-            ),
-            'join' => array(
-                'Count' => array(
-                    '*'
+                'join' => array(
+                    'ImageCount' => array(
+                    ),
                 ),
-            ),
-        ));
+                'proxy' => array(
+                    'Album\Item\Album::Cover' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                ),
+            )); 
 
-        $paginator = $itemModel->getPaginator();
-        $paginator = $paginator ? $paginator->toArray() : null;
+            $paginator = $itemModel->getPaginator();
+            $paginator = $paginator ? $paginator->toArray() : null;
+        } else {
+            $itemModel = Api::_()->getModel('Album\Model\Album');
+            $items = $itemModel->setItemList($query)->getAlbumList();
+            $items = $items->toArray(array(
+                'self' => array(
+                    '*',
+                ),
+                'proxy' => array(
+                    'Album\Item\Album::Cover' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                ),
+                'join' => array(
+                    'Count' => array(
+                        '*'
+                    ),
+                ),
+            ));
 
+            $paginator = $itemModel->getPaginator();
+            $paginator = $paginator ? $paginator->toArray() : null;
+        }
         return new JsonModel(array(
             'items' => $items,
             'paginator' => $paginator,
