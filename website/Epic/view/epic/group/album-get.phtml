@@ -27,7 +27,7 @@ $item = $this->event;
                                         <?for($j= ($i * 4);$j< (4 * ($i+1));$j++):?>
                                         <?if(isset($items[$j])){$item = $items[$j]['Image'];}else{continue;}?>
                                         <div class="thumbnail span3">
-                                            <a href="<?=$this->thumb($item['Thumb'])?>"  class="gallery"  rel="event-album">
+                                            <a href="<?=$this->thumb($item['Thumb'], array('w_1024'))?>"  class="gallery"  rel="event-album">
                                                 <?if(isset($item['Thumb']) && $item['Thumb']):?>
                                                 <img src="<?=$this->thumb($item['Thumb'], array('c_fill', 'w_180', 'h_180'))?>" width="100%" class="" />
                                                 <?endif?>
