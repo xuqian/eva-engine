@@ -7,9 +7,22 @@ use Activity\Form;
 use Zend\Mvc\MvcEvent;
 use Eva\Api;
 use Epic\Exception;
+use Core\Auth;
 
 class HomeController extends ActionController
 {
+
+    public function dashboardAction()
+    {
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+    
+    }
+
 
     public function indexAction()
     {

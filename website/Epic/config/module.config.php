@@ -14,6 +14,18 @@ return array(
                 'priority' => 2,
             ),
 
+            'dashboard' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/dashboard[/]',
+                    'defaults' => array(
+                        'controller' => 'HomeController',
+                        'action' => 'dashboard',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'oldindex' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
