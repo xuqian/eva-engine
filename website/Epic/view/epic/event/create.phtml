@@ -1,6 +1,6 @@
 <?
 $item = $this->item;
-$title = $item['id'] ? 'Edit Event' : 'Create Event';
+$title = $item['id'] ? 'Edit Event' : 'Schedule an Event';
 $title = $this->_($title);
 $this->headTitle($title, 'SET');
 ?>
@@ -13,7 +13,10 @@ $this->headTitle($title, 'SET');
                         <div class="row">
                             <div class="span6">
                                 <div class="page-main-header">
-                                    <a href="<?=$this->uri('/events/create/')?>" class="btn btn-small btn-orange pull-right"><i class="icon-pencil"></i> Create Event</a>
+                                    <span class="pull-right">
+                                        <a href="<?=$this->uri('/events/list/')?>" class="btn btn-small btn-gray"><i class="icon-search"></i> Find an Event</a>
+                                        <a href="<?=$this->uri('/events/create/')?>" class="btn btn-small btn-orange"><i class="icon-plus"></i> Schedule an Event</a>
+                                    </span>
                                     <h3><?=$this->_($title)?> <?if($item['id']):?><a href="<?=$this->uri('/user/' . $item['user_name'] . '/albums/' . $item['urlName']);?>" class="">[View]</a><?endif?></h3>
                                 </div>
                                 <?=$this->widget('Epic', 'epic/event/form', $this->vars())?>

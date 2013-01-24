@@ -149,7 +149,7 @@ if($tags) {
     <?foreach($tags as $key => $tag):
     $fontsize = $minFontsize + ($maxFontsize - $minFontsize) * (1- ($maxTagCount - $tag['PostCount'])/($maxTagCount - $minTagCount));
     ?>
-    <a href='<?=$this->serverUrl() . $this->uri('/groups/list/?tag=' . $tag['tagName'])?>' title='' style='font-size: <?=$fontsize?>pt;'><?=$tag['tagName']?></a>
+    <a href='<?=$this->serverUrl() . $this->uri('/groups/list/?tag=' . $tag['tagName'])?>' title='<?=$tag['PostCount']?>' style='font-size: <?=$fontsize?>pt;'><?=$tag['tagName']?></a>
     <?endforeach?>
     <?endif?>
     </tags>
@@ -173,8 +173,8 @@ eva.ready(function(){
                 var flashvars = {
                 	"wmode": "transparent",
                 	"allowScriptAccess": "always",
-                	"tcolor": "0x84403D",
-                	"tcolor2": "0xE1500D",
+                	"tcolor": "0x7F5F46",
+                	"tcolor2": "0x7F5F46",
                 	"hicolor": "0xF0F0F0",
                 	"tspeed": "100",
                 	"distr": "true",
