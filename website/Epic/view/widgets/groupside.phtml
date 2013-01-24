@@ -79,22 +79,30 @@
                 {% } %}
         </div>
     </script>
-
+    
+    <script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/' , array('rows' => 8,'group_id' => $this->item['id'],'order' => 'iddesc'))?>">
     <div class="page-header">
-        <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
-        <h4 class="txt-bold">Group Albums (20)</h4>
+        <small class="pull-right"><a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/album/')?>">View All</a></small>
+        <h4 class="txt-bold">Group Albums ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
     </div>
     <div class="side-album-list">
         <ul class="thumbnails">
-            <?for($i = 0; $i < 8; $i++):?>
-            <li>
-            <a class="thumbnail" href="#">
-                <img src="<?=$this->link('/src/epic/css/img/food.jpg')?>" alt="" class="img-rounded" width="70" height="70" />
+        {% if(o.items.length > 0) { %}
+        {% for (var i=0, item; item=o.items[i]; i++) { %}
+        <li>
+            <a class="thumbnail" href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/album/')?>{%=item.urlName%}">
+                {% if(item.Cover.Thumb) { %}
+                    <img src="{%=eva.thumb(item.Cover.Thumb, 'c_fill,h_65,w_65')%}" alt="" width="65" height="65" class="img-rounded"/>
+                {% }else{ %}
+                    <img src="<?=$this->assets('/module/epic/img/album-default.png')?>" alt="" width="65" height="65" class="img-rounded" />
+                {% } %}
             </a>
-            </li>
-            <?endfor;?>
+        </li>
+        {% } %}
+        {% } %}
         </ul>
     </div>
+    </script>
 
     <script id="group-ranks" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/',array('rows' => 5, 'order' => 'memberdesc'))?>">
     <div class="page-header border-header">

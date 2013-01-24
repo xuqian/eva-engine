@@ -176,7 +176,7 @@
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/albums/')?>">View All</a></small>
     <h4>My Albums  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
-<div class="side-group-list">
+<div class="side-album-list">
     <ul class="thumbnails">
     {% if(o.items.length > 0) { %}
     {% for (var i=0, item; item=o.items[i]; i++) { %}

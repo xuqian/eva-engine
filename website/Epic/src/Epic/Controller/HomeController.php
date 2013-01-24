@@ -23,11 +23,14 @@ class HomeController extends ActionController
 
         $tagModel = Api::_()->getModel('Blog\Model\Tag');
         $tags = $tagModel->setItemList(array(
-            'rows' => 30
+            'rows' => 30,
+            'order' => 'postcountdesc',
         ))->getTagList();
         $tags = $tags ? $tags->toArray() : array();
-        p($tags);
-    
+
+        return array(
+            'tags' => $tags
+        );
     }
 
 

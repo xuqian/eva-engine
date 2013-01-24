@@ -445,6 +445,17 @@ class EventController extends ActionController
             ),
         ));
         
+        if (!isset($album['id'])) {
+            $makeAlbumUrl = '/event/albums/' . '?' . http_build_query(array(
+                'r' => '/event/' . $item['urlName'] . '/album/upload/',
+                'title' => $item['title'],
+                'urlName' => '',
+                'description' => '',
+                'event_id' => $item['id'],
+            ));
+            return $this->redirect()->toUrl($makeAlbumUrl);
+        }
+
         return array(
             'item' => $item,
             'album' => $album,
@@ -456,7 +467,7 @@ class EventController extends ActionController
     {
         $request = $this->getRequest();
         $viewModel = new ViewModel();
-        
+
         $albumModel = Api::_()->getModel('Event\Model\Album');
 
         list($item, $members) = $this->eventAction();
@@ -470,7 +481,7 @@ class EventController extends ActionController
             'album_id' => $album['id'],
             'noLimit' => true
         );
-        
+
         $items = $itemModel->setItemList($query)->getAlbumFileList();
         $paginator = $itemModel->getPaginator();
         $items->toArray(array(
@@ -484,9 +495,9 @@ class EventController extends ActionController
                 ),
             ),
         ));
-        
+
         $items = $items->toArray();
-        
+
         return array(
             'item' => $item,
             'items' => $items,
