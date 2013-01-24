@@ -1,4 +1,4 @@
-<script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/')?>">
+<script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('rows' => 5))?>">
 <div class="page-header border-header">
     <h4>New Blogs</h4>
 </div>
@@ -51,7 +51,7 @@
 </div>
 </script>
 
-<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
+<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id'], 'rows' => 5))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/event/')?>">View All</a></small>
     <h4>My Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -144,10 +144,10 @@
     </div>
     <?endif;?>
 
-    <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('order' => 'memberdesc', 'rows' => 12))?>">
+    <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/groups/')?>">View All</a></small>
-    <h4>Groups  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
+    <h4>My Groups  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-group-list">
     <ul class="thumbnails">
