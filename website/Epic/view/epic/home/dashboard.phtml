@@ -27,7 +27,9 @@ if($tags) {
             <div class="row">
                 <div class="span8">
                     <div class="dashboard-main">
+
                     <?=$this->widget('Epic', 'components/banner_group')?>  
+
                     <div class="event-grid">
                         <header class="event-grid-header">
                         <small class="pull-right">Feature Cities: 
@@ -83,6 +85,43 @@ if($tags) {
                         <div class="event-new-wrap"></div>
                         <div class="event-new-wrap"></div>
                         <div class="event-new-wrap"></div>
+                    </div><!--event grid end-->
+
+
+                    <div class="event-grid">
+                        <header class="event-grid-header">
+                        <small class="pull-right"> 
+                            <a href="<?=$this->uri('/user/');?>">More</a>
+                        </small>
+                        <div class="page-header border-header">
+                            <h3>Members </h3>
+                        </div>
+                        </header>
+                        <div class="event-new-wrap loaded">
+                        <script type="text/x-tmpl" data-url="<?=$this->uri('/data/eventuser/', array('rows' => 6))?>">
+                        <div class="event-new grid-3columns">
+                            {% if(o.items.length > 0) { %}
+                            {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                <div class="event media">
+                                    <a href="<?=$this->uri('/user/')?>{%=item.userName%}" title="" class="pull-left">
+                                        {% if(item.Avatar.Thumb) { %}
+                                            <img src="{%=eva.thumb(item.Avatar.Thumb, 'c_fill,h_50,w_50')%}" alt="" class="img-rounded" width="50" height="50" />
+                                            {% } else { %}
+                                            <img src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-rounded" width="50" height="50" />
+                                            {% } %}
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="<?=$this->uri('/user/')?>{%=item.userName%}">{%=item.userName%}</a></h4>
+                                    <div class="media">
+                                        <p class="lowlight">Host <span class="highlight">{%=item.EventCount%}</span> Events</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% } %}
+                            {% } %}
+                        </div>
+                        </script>
+                        </div>
                     </div><!--event grid end-->
 
                 </div><!--dashboard main-->
@@ -212,15 +251,15 @@ eva.ready(function(){
                 swfobject.embedSWF(eva.assets('/module/epic/swf/tagcloud.swf'), "swfobj", "330", "330", "9.0.0", eva.assets('/module/epic/swf/expressInstall.swf'), flashvars, params, attributes);
 
             });
-            $(".event-new-nav a").on('click', function(){
+        $(".event-new-nav li:not(:last) a").on('click', function(){
                 var link = $(this);
                 var index = link.parent().index();
                 var wraps = $(".event-new-wrap");
                 $(".event-new-nav li").removeClass('active');
                 link.parent().addClass('active');
                 if(wraps.eq(index).hasClass('loaded')) {
-                    wraps.hide();
-                    wraps.eq(index).show();
+                        wraps.hide();
+                        wraps.eq(index).show();
                 } else {
                     wraps.eq(index).load($(this).attr('href') + ' .event-list', function(){
                         wraps.hide();
@@ -228,7 +267,7 @@ eva.ready(function(){
                     });
                 }
                 return false;
-            });
+        });
 
 });
 </script>
