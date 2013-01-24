@@ -149,7 +149,7 @@ if($tags) {
     <?foreach($tags as $key => $tag):
     $fontsize = $minFontsize + ($maxFontsize - $minFontsize) * (1- ($maxTagCount - $tag['PostCount'])/($maxTagCount - $minTagCount));
     ?>
-    <a href='<?=$this->uri('/groups/list/?tag=' . $tag['tagName'])?>' style='font-size: <?=$fontsize?>pt;'><?=$tag['tagName']?></a>
+    <a href='<?=$this->serverUrl() . $this->uri('/groups/list/?tag=' . $tag['tagName'])?>' title='' style='font-size: <?=$fontsize?>pt;'><?=$tag['tagName']?></a>
     <?endforeach?>
     <?endif?>
     </tags>
