@@ -143,7 +143,7 @@ foreach($this->eventList as $eventDay){
                         <div class="page-header border-header">
                             <h3>New Events </h3><a href="<?=$this->uri('/my/city/')?>" class="switch">[<span class="my-city">Switch City</span>]</a>
                         </div>
-                        <ul class="event-new-nav nav nav-pills">
+                        <ul class="event-new-nav nav nav-pills collapsed">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">All Cities</a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'timedesc'));?>" class="my-city-url">My City</a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cocktail-Party','order' => 'timedesc'));?>">Cocktail Party</a> | </li>
@@ -151,6 +151,7 @@ foreach($this->eventList as $eventDay){
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Exhibitions','order' => 'timedesc'));?>">Exhibitions</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cooking-Classes','order' => 'timedesc'));?>">Cooking Classes</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Opinions-sharing','order' => 'timedesc'));?>">Opinions Sharing</a> </li>
+                            <li class="more"><a href="#">More</a> </li>
                         </ul>
                         </header>
                         <div class="event-new-wrap loaded">
@@ -193,7 +194,7 @@ foreach($this->eventList as $eventDay){
                         <div class="page-header border-header">
                             <h3>Feature Events</h3>
                         </div>
-                        <ul class="event-feature-nav nav nav-pills">
+                        <ul class="event-feature-nav nav nav-pills  collapsed">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>">All Cities</a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'memberdesc'));?>" class="my-city-url">My City</a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cocktail-Party','order' => 'memberdesc'));?>">Cocktail Party</a> | </li>
@@ -201,6 +202,7 @@ foreach($this->eventList as $eventDay){
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Exhibitions','order' => 'memberdesc'));?>">Exhibitions</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cooking-Classes','order' => 'memberdesc'));?>">Cooking Classes</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'Opinions-sharing','order' => 'memberdesc'));?>">Opinions Sharing</a> </li>
+                            <li class="more"><a href="#">More</a> </li>
                         </ul>
                         </header>
                         
@@ -249,7 +251,7 @@ foreach($this->eventList as $eventDay){
 
 <script>
 eva.ready(function(){
-        $(".event-new-nav a").on('click', function(){
+        $(".event-new-nav li:not(:last) a").on('click', function(){
                 var link = $(this);
                 var index = link.parent().index();
                 var wraps = $(".event-new-wrap");
@@ -267,7 +269,12 @@ eva.ready(function(){
                 return false;
         });
 
-        $(".event-feature-nav a").on('click', function(){
+        $(".more a").on('click', function(){
+                $(this).parentsUntil('.nav').parent().removeClass('collapsed');
+                return false;
+        });
+
+        $(".event-feature-nav li:not(:last) a").on('click', function(){
                 var link = $(this);
                 var index = link.parent().index();
                 var wraps = $(".event-feature-wrap");

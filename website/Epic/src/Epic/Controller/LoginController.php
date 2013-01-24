@@ -40,7 +40,7 @@ class LoginController extends ActionController
         $form->bind($item);
         if ($form->isValid()) {
             $callback = $this->params()->fromPost('callback');
-            $callback = $callback ? $callback : '/home';
+            $callback = $callback ? $callback : '/dashboard/';
 
             $item = $form->getData();
             $itemModel = Api::_()->getModel('User\Model\Login');

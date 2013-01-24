@@ -1590,6 +1590,18 @@ body, .en body, .fr body {
 
 
 	.nav-pills {
+		position:relative;
+
+		&.collapsed {
+			height:25px;
+			overflow:hidden;
+			padding-right:40px;
+
+			.more {
+				display:block;
+			}
+		}
+
 		li {
 			margin-right:10px;
 		}
@@ -1603,6 +1615,17 @@ body, .en body, .fr body {
 		.active a, a:hover {
 			color:#FFF;
 			background:@orange;
+		}
+
+		.more {
+			position:absolute;
+			margin-right:0;
+			right:0;
+			display:none;
+		}
+
+		.more a{
+			margin-right:0;
 		}
 
 	}

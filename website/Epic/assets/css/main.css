@@ -1102,9 +1102,12 @@ body,.en body,.fr body{font-family:Arial,Helvetica,"Nimbus Sans L",sans-serif;}
 .event-grid-header h3{display:inline-block;zoom:1;*display:inline;margin-right:20px;font-weight:bold;}
 .event-grid-header .switch{font-weight:bold;line-height:25px;}
 .event-grid-header small{font-size:12px;line-height:25px;}.event-grid-header small a{color:#000;margin-left:10px;}.event-grid-header small a:hover{color:#e1500d;}
+.event-grid-header .nav-pills{position:relative;}.event-grid-header .nav-pills.collapsed{height:25px;overflow:hidden;padding-right:40px;}.event-grid-header .nav-pills.collapsed .more{display:block;}
 .event-grid-header .nav-pills li{margin-right:10px;}
 .event-grid-header .nav-pills a{margin-right:10px;display:inline-block;zoom:1;*display:inline;color:#000;padding:3px 5px;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
 .event-grid-header .nav-pills .active a,.event-grid-header .nav-pills a:hover{color:#FFF;background:#e1500d;}
+.event-grid-header .nav-pills .more{position:absolute;margin-right:0;right:0;display:none;}
+.event-grid-header .nav-pills .more a{margin-right:0;}
 .event-grid{margin-bottom:20px;}.event-grid .event{display:inline-block;zoom:1;*display:inline;margin-bottom:20px;}
 .event-grid .grid-3columns .event{width:32%;margin-right:1%;}
 .event-grid .grid-2columns .event{width:49%;}

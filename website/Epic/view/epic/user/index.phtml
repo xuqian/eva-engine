@@ -41,7 +41,7 @@ $categories = array(
          </div><!--page main right end-->
          <div class="span9">
              <nav class="nav-member">
-             <a class="pull-right margin10h" href="<?=$this->uri('/account/import/')?>">Find Friend On Epicurissimo</a>
+             <a class="pull-right margin10h" href="<?=$this->uri('/user/list/')?>">Find Friend On Epicurissimo</a>
              <ul>
                  <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/user/')?>">All</a></li>
                  <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
