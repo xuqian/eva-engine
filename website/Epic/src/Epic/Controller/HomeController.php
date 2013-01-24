@@ -20,6 +20,13 @@ class HomeController extends ActionController
             'action' => 'user',
             'id' => $user['id'],
         ));
+
+        $tagModel = Api::_()->getModel('Blog\Model\Tag');
+        $tags = $tagModel->setItemList(array(
+            'rows' => 30
+        ))->getTagList();
+        $tags = $tags ? $tags->toArray() : array();
+        p($tags);
     
     }
 

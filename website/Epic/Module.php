@@ -33,6 +33,8 @@ class Module
         }
 
         if($controller == 'LoginController'
+        || $controller == 'PreregController'
+        || $controller == 'PagesController'
         || $controller == 'Oauth\Controller\OauthController' && $action == 'index'
         || $controller == 'Oauth\Controller\AccessController' && $action == 'index'
         || $controller == 'UserController' && $action == 'register'
