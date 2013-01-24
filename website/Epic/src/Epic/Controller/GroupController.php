@@ -144,6 +144,9 @@ class GroupController extends ActionController
                 ),
                 'PostCount' => array(
                 ),
+                'Tags' => array(
+                    '*'
+                ),
             ),
         ));
 
@@ -151,7 +154,7 @@ class GroupController extends ActionController
             $item = array();
             throw new Exception\PageNotFoundException('Page not found');
         }
-      
+
         $user = Auth::getLoginUser(); 
         //Public User Area
         $this->forward()->dispatch('UserController', array(
@@ -165,7 +168,7 @@ class GroupController extends ActionController
                 'group_id' => $item['id'],
                 'user_id' => $user['id']
             ))->getGroupUserList()->toArray();
-        
+
             if (count($joinList) > 0) {
                 $item['Join'] = $joinList[0];
             }
@@ -328,6 +331,9 @@ class GroupController extends ActionController
                     'Category' => array(
                         '*'
                     ),
+                    'Tags' => array(
+                        '*'
+                    ),
                 ),
             ));
             if(isset($item['GroupFile'][0])){
@@ -375,7 +381,7 @@ class GroupController extends ActionController
                 $eventIdArray[] = $event['event_id'];
             }
         }
-        
+
         if (!$eventIdArray) {
             $viewModel->setVariables(array(
                 'item' => $item,

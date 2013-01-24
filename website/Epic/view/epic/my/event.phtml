@@ -27,11 +27,11 @@ $unjoinForm
                                 </div>
                                 <div class="blog-list vlist">
                                     <?foreach($items as $item):?>
-                                    <?if(isset($item['Event']['id'])) {$event = $item['Event'];}else{continue;}?> 
+                                    <?$event = $item;?> 
                                     <div class="item">
                                         <div class="item-title"><h2><a href="<?=$this->uri('/event/' . $event['urlName'])?>"><?=$event['title']?></a></h2></div>
                                         <div class="item-meta">
-                                            <?if($item['user_id'] == $event['user_id']):?>
+                                            <?if($item['user_id'] == $user['id']):?>
                                             <!--
                                             <p class="pull-right hide"><i class="icon-comment"></i> <?=$this->_('Members')?> (<span class="highlight">0</span>)</p>
                                             -->
@@ -48,7 +48,7 @@ $unjoinForm
                                             </p>
                                             <?endif;?>
                                             <p class="pull-left">
-                                            <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['requestTime'])?>" datetime="<?=$this->datetime()->isoTime($item['requestTime'])?>"><?=$this->datetime($item['requestTime'])?></time>
+                                            <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($event['requestTime'])?>" datetime="<?=$this->datetime()->isoTime($event['requestTime'])?>"><?=$this->datetime($event['requestTime'])?></time>
                                             </p>
                                         </div>
                                         <div class="item-inline item-text">

@@ -24,7 +24,6 @@ $viewAsGuest = $this->viewAsGuest;
 
                         <div class="blog-list vlist">
                             <?foreach($items as $item):?>
-                            <?$item = $item['Event'];?>
                             <div class="item">
                                 <div class="item-title"><h2><a href="<?=$this->uri('/event/' . $item['urlName'])?>"><?=$item['title']?></a></h2></div>
                                 <div class="item-meta">

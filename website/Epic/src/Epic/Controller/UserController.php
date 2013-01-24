@@ -511,39 +511,34 @@ class UserController extends ActionController
     public function eventsAction()
     {
         $page = $this->params()->fromQuery('page', 1);
+        $timenode = $this->params()->fromQuery('timenode', '');
         $query = array(
             'page' => $page,
+            'timenode' => $timenode,
         );
-
+        $query = $this->eventTimeNodeQuery($query);
         $user = $this->userAction();
         $itemListQuery = array_merge(array(
-            'user_id' => $user['id'],
+            'member_id' => $user['id'],
             'order' => 'timedesc',
         ), $query);
-        $itemModel = Api::_()->getModel('Event\Model\EventUser');
-        $items = $itemModel->setItemList($itemListQuery)->getEventUserList();
+        $itemModel = Api::_()->getModel('Event\Model\Event');
+        $items = $itemModel->setItemList($itemListQuery)->getEventdataList();
         $items = $items->toArray(array(
             'self' => array(
                 '*',
             ),
             'join' => array(
-                'Event' => array(
+                'Text' => array(
                     'self' => array(
                         '*',
-                    ),  
-                    'join' => array(
-                        'Text' => array(
-                            'self' => array(
-                                '*',
-                            ),
-                        ),
-                        'File' => array(
-                            'self' => array(
-                                '*',
-                                'getThumb()',
-                            )
-                        ),
                     ),
+                ),
+                'File' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    )
                 ),
             ),
         ));
@@ -554,6 +549,36 @@ class UserController extends ActionController
             'query' => $query,
             'paginator' => $paginator,
         );
+    }
+    
+    protected function eventTimeNodeQuery($query)
+    {
+        if (!isset($query['timenode'])) {
+            return $query;
+        }
+            
+        $nowTime = \Eva\Date\Date::getNow();
+
+        switch ($query['timenode']) {
+        case 'upcoming':
+            $startTime = \Eva\Date\Date::getFuture(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
+            $query['afterStartDay'] = $startTime;
+            break;  
+        case 'running':
+            $endTime = \Eva\Date\Date::getFuture(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
+            $startTime = \Eva\Date\Date::getBefore(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
+            $query['afterStartDay'] = $startTime;
+            $query['beforeStartDay'] = $endTime;
+            break;  
+        case 'finished':
+            $endTime = \Eva\Date\Date::getBefore(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
+            $query['beforeStartDay'] = $endTime;
+            break;  
+        default:
+            return $query;
+        }
+        
+        return $query;
     }
 
     public function registerAction()
