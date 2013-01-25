@@ -94,6 +94,11 @@ class MyController extends ActionController
     public function eventAction()
     {
         $user = Auth::getLoginUser();
+        $timenode = $this->params('id');
+        $timenode = $timenode ? $timenode : 'ongoing';
+        $this->getRequest()->setQuery(new \Zend\Stdlib\Parameters(array(
+            'timenode' => $timenode
+        )));
         $viewModel = $this->forward()->dispatch('UserController', array(
             'action' => 'events',
             'id' => $user['userName'],

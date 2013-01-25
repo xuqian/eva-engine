@@ -564,7 +564,7 @@ class UserController extends ActionController
             $startTime = \Eva\Date\Date::getFuture(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
             $query['afterStartDay'] = $startTime;
             break;  
-        case 'running':
+        case 'ongoing':
             $endTime = \Eva\Date\Date::getFuture(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
             $startTime = \Eva\Date\Date::getBefore(3600 * 24 * 1, $nowTime, 'Y-m-d H:i:s');
             $query['afterStartDay'] = $startTime;

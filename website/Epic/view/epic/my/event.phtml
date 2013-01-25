@@ -28,6 +28,12 @@ $unjoinForm
                                     </span>
                                     <h3><?=$this->_($title)?></h3>
                                 </div>
+                                <ul class="nav nav-pills">
+                                    <li data-highlight-url="^/my/event/$"><a href="<?=$this->uri('/my/event/')?>"><?=$this->_('Ongoing')?></a></li>
+                                    <li data-highlight-url="^/my/event/upcoming/$"><a href="<?=$this->uri('/my/event/upcoming/')?>"><?=$this->_('Upcoming')?></a></li>
+                                    <li data-highlight-url="^/my/event/finished/$"><a href="<?=$this->uri('/my/event/finished/')?>"><?=$this->_('Finished')?></a></li>
+                                </ul>
+
                                 <div class="blog-list vlist">
                                     <?foreach($items as $item):?>
                                     <?$event = $item;?> 

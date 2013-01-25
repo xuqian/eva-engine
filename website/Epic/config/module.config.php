@@ -583,9 +583,10 @@ return array(
             'my' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/my/[:action][/]',
+                    'route' => '/my/[:action][/][:id][/]',
                     'constraints' => array(
-                        'action' => '[a-zA-Z0-9]+'
+                        'action' => '[a-zA-Z0-9]+',
+                        'id' => '[a-zA-Z0-9]+',
                     ),
                     'defaults' => array(
                         'controller' => 'MyController',
@@ -871,12 +872,26 @@ return array(
     ),
 
     'page_components' => array(
+        'dashboard_group' => array(
+            'module' => 'Epic',
+            'name' => 'dashboard_group',
+            'title' => 'Dashboard Page Banner',
+            'path' => 'components/banner_dashboard',
+            'description' => 'Dashboard Page Top Banner'
+        ),
         'banner_group' => array(
             'module' => 'Epic',
             'name' => 'banner_group',
             'title' => 'Group Page Banner',
             'path' => 'components/banner_group',
             'description' => 'Group Page Top Banner'
+        ),
+        'ad_dashboard' => array(
+            'module' => 'Epic',
+            'name' => 'ad_dashboard',
+            'title' => 'Dashboard Page Advertisement',
+            'path' => 'components/ad_dashboard',
+            'description' => 'Dashboard Page Advertisement'
         ),
         'ad_home' => array(
             'module' => 'Epic',
