@@ -60,6 +60,16 @@ class GroupSearchForm extends GroupForm
             'attributes' => array(
             ),
         ),
+        'tag' => array(
+            'name' => 'tag',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Text',
+            ),
+            'attributes' => array(
+                'value' => '',
+            ),
+        ),
     );
 
     public function prepareData($data)

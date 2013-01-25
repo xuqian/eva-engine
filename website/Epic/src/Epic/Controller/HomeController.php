@@ -21,10 +21,10 @@ class HomeController extends ActionController
             'id' => $user['id'],
         ));
 
-        $tagModel = Api::_()->getModel('Blog\Model\Tag');
+        $tagModel = Api::_()->getModel('Group\Model\Tag');
         $tags = $tagModel->setItemList(array(
             'rows' => 30,
-            'order' => 'postcountdesc',
+            'order' => 'groupcountdesc',
         ))->getTagList();
         $tags = $tags ? $tags->toArray() : array();
 

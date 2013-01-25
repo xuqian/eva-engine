@@ -107,13 +107,112 @@ class GroupController extends ActionController
         ));
         return $view; 
     }
+    
+    public function categoryAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        $categoryModel = Api::_()->getModel('Group\Model\Category');
+        $category = $categoryModel->getCategory($id);
+        
+        $query = $this->getRequest()->getQuery();
+        $form = new \Blog\Form\PostSearchForm();
+        $form->bind($query);
+        if($form->isValid()){
+            $query = $form->getData();
+        } else {
+            return new JsonModel(array(
+                'form' => $form,
+                'items' => array(),
+            ));
+        }
+        
+        $inGroup = $this->params()->fromQuery('inGroup');
+        $groupCategrory = $category['id'];
+        $rows = $this->params()->fromQuery('rows',25);
+
+        $query['inGroup'] = true;
+        $query['groupCategory'] = $groupCategrory;
+        $query['rows'] = $rows;
+
+        $itemModel = Api::_()->getModel('Group\Model\Post'); 
+        $items = $itemModel->setItemList($query)->getPostList(array(
+            'self' => array(
+                '*', 
+            ),
+            'join' => array(
+                'Group' => array(
+                    '*'
+                ),
+                'Text' => array(
+                    'self' => array(
+                        '*',
+                        'getPreview()',
+                        'getContentHtml()',
+                    )
+                ),
+            ),
+            'proxy' => array(
+                'File\Item\File::PostCover' => array(
+                    'self' => array(
+                        '*',
+                        'getThumb()',
+                    ),
+                )
+            ),
+        ));
+
+        if (count($items) > 0) {
+            foreach ($items as $key=>$item) {
+                if (isset($item['Group']) && count($item['Group']) > 0) {
+                    unset($items[$key]['Group'][0]);
+                    $items[$key]['Group'] = $item['Group'][0];
+                } else {
+                    unset($items[$key]['Group']);
+                }
+            }
+        }
+
+        if(Api::_()->isModuleLoaded('User')){
+            $userList = array();
+            $userList = $itemModel->getUserList(array(
+                'columns' => array(
+                    'id',
+                    'userName',
+                    'email',
+                    'avatar_id',
+                ),
+            ))->toArray(array(
+                'proxy' => array(
+                    'User\Item\User::Avatar' => array(
+                        '*',
+                        'getThumb()'
+                    ),
+                ),
+            ));
+            $items = $itemModel->combineList($items, $userList, 'User', array('user_id' => 'id'));
+        }
+        
+        $user = Auth::getLoginUser(); 
+        //Public User Area
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        ));
+
+        return array(
+            'form' => $form,
+            'items' => $items,
+            'query' => $query,
+            'category' => $category,
+        );   
+    }
 
     public function groupAction()
     {
         if($this->group){
             return $this->group;
         }   
-    
+
         $id = $this->getEvent()->getRouteMatch()->getParam('id');
         if(!$id){
             return array();
@@ -294,7 +393,7 @@ class GroupController extends ActionController
             $form = new \Epic\Form\GroupEditForm();
             $form->useSubFormGroup()
                 ->bind($postData);
-            
+
             if ($form->isValid()) {
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Group\Model\Group');
@@ -402,7 +501,7 @@ class GroupController extends ActionController
             'rows' => $rows,
             'order' => $order
         ))->getAlbumList(array(
-             'self' => array(
+            'self' => array(
                 '*',
             ),
             'join' => array(
@@ -439,7 +538,7 @@ class GroupController extends ActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate('epic/group/album-get');
         list($item, $members) = $this->groupAction();
-        
+
         $itemModel = Api::_()->getModel('Album\Model\Album');
         $album = $itemModel->getAlbum($albumId);
 
@@ -449,7 +548,7 @@ class GroupController extends ActionController
             'album_id' => $album['id'],
             'noLimit' => true
         );
-        
+
         $items = $itemModel->setItemList($query)->getAlbumFileList();
         $paginator = $itemModel->getPaginator();
         $items->toArray(array(
@@ -463,7 +562,7 @@ class GroupController extends ActionController
                 ),
             ),
         ));
-        
+
         $items = $items->toArray();
 
         $viewModel->setVariables(array(
@@ -486,7 +585,7 @@ class GroupController extends ActionController
         $order = $this->params()->fromQuery('order', 'timedesc');
 
         $this->changeViewModel('json');
-        
+
         $itemModel = Api::_()->getModel('Group\Model\Post'); 
         $items = $itemModel->setItemList(array(
             'inGroup' => true,
@@ -515,7 +614,7 @@ class GroupController extends ActionController
                 }
             }
         }
-        
+
         $paginator = $itemModel->getPaginator();
         $paginator = $paginator ? $paginator : null;
 
@@ -581,30 +680,30 @@ class GroupController extends ActionController
     {
         $request = $this->getRequest();
         $viewModel = new ViewModel();
-        
+
         $postId = $this->getEvent()->getRouteMatch()->getParam('post_id');
 
         $postView = $this->forward()->dispatch('UserController', array(
             'action' => 'post',
             'post_id' => $postId,
         ));
-        
+
         list($item, $members) = $this->groupAction();
-        
+
         $viewModel->setVariables(array(
             'item' => $item,
             'post' => $postView->item,
             'comments' => $postView->comments,
             'members' => $members,
         ));
-        
+
         return $viewModel;
     }
 
     public function sendmailAction()
     {
         list($item, $members) = $this->groupAction();
-        
+
         $viewModel = new ViewModel();
 
         $viewModel->setVariables(array(
@@ -619,17 +718,17 @@ class GroupController extends ActionController
         }
 
         $request = $this->getRequest();
-        
+
         if ($request->isPost()) {
             $postData = $request->getPost();
-            
+
             $userIds = $postData['user_id'];
 
             if (!$postData['user_id']) {
                 throw new Exception\InvalidArgumentException('No user id');
             }
 
-            
+
 
             $form = new \Core\Form\SendEmailForm();
             $form->bind($postData);
@@ -647,17 +746,17 @@ class GroupController extends ActionController
                     'noLimit' => true,
                     'id' => $userIds,
                 ))->getUserList()->toArray();
-                
+
                 $mail = new \Core\Mail();
                 $message = $mail->getMessage();
-                
+
                 foreach ($users as $user) {
                     $message->addBcc($user['email']);
                 }
 
                 $message->setSubject($data['subject'])
                     ->setBody($data['content']);
-                
+
                 if($file['tmp_name']){
                     $message->addAttachment($file['tmp_name']);
                 }
@@ -752,7 +851,7 @@ class GroupController extends ActionController
         ));
         /*
         $viewModel->addChild($eventView, 'event');
-        */
+         */
         list($item, $members) = $this->groupAction();
         $viewModel->setVariables(array(
             'item' => $item,
@@ -763,7 +862,7 @@ class GroupController extends ActionController
             'members' => $members,
             'paginator' => $eventView->paginator,
         ));
-    
+
 
         return $viewModel;
     }
@@ -777,7 +876,7 @@ class GroupController extends ActionController
             'order' => 'commentdesc'
         ))->getPostList(array(
             'self' => array(
-               '*', 
+                '*', 
             )
         ));
         $paginator = $itemModel->getPaginator();

@@ -13,8 +13,8 @@ $tags = $this->tags;
 $maxFontsize = 16;
 $minFontsize = 9;
 if($tags) {
-    $maxTagCount = $tags[0]['PostCount'];
-    $minTagCount = $tags[count($tags) - 1]['PostCount'];
+    $maxTagCount = $tags[0]['GroupCount'];
+    $minTagCount = $tags[count($tags) - 1]['GroupCount'];
 } else {
     $maxTagCount = 1;
     $minTagCount = 1;
@@ -203,9 +203,9 @@ if($tags) {
     <tags>
     <?if($tags):?>
     <?foreach($tags as $key => $tag):
-    $fontsize = $minFontsize + ($maxFontsize - $minFontsize) * (1- ($maxTagCount - $tag['PostCount'])/($maxTagCount - $minTagCount));
+    $fontsize = $minFontsize + ($maxFontsize - $minFontsize) * (1- ($maxTagCount - $tag['GroupCount'])/($maxTagCount - $minTagCount));
     ?>
-    <a href='<?=$this->serverUrl() . $this->uri('/groups/list/?tag=' . $tag['tagName'])?>' title='<?=$tag['PostCount']?>' style='font-size: <?=$fontsize?>pt;'><?=$tag['tagName']?></a>
+    <a href='<?=$this->serverUrl() . $this->uri('/groups/list/?tag=' . $tag['tagName'])?>' title='<?=$tag['GroupCount']?>' style='font-size: <?=$fontsize?>pt;'><?=$tag['tagName']?></a>
     <?endforeach?>
     <?endif?>
     </tags>

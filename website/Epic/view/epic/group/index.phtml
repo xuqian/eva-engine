@@ -96,8 +96,8 @@ $categories = $this->categories;
                         <div class="topic-wrap-hot topic-wrap full">
                             <div class="topic">
                                 <div class="topic-heading">
-                                    <small class="pull-right"><a href="<?=$this->uri('/groups/list/?category=' . $this->category['urlName'])?>">More</a></small>
-                                    <h4><a href="<?=$this->uri('/groups/list/?category=' . $this->category['urlName'])?>"><?=$this->category['categoryName']?></a></h4>
+                                    <small class="pull-right"><a href="<?=$this->uri('/groups/category/' . $this->category['urlName'])?>">More</a></small>
+                                    <h4><a href="<?=$this->uri('/groups/category/' . $this->category['urlName'])?>"><?=$this->category['categoryName']?></a></h4>
                                 </div>
                                 <div class="topic-body-wrap">
                                     <div class="topic-body">
@@ -161,8 +161,8 @@ $categories = $this->categories;
                         <div class="topic-wrap<?=$key;?> topic-wrap <?=($key)%2 == 0 ? 'odd' : 'even'?>">
                             <div class="topic">
                                 <div class="topic-heading">
-                                    <small class="pull-right"><a href="<?=$this->uri('/groups/list/?category=' . $category['urlName'])?>">More</a></small>
-                                    <h4><a href="<?=$this->uri('/groups/list/?category=' . $category['urlName'])?>"><?=$category['categoryName']?></a></h4>
+                                    <small class="pull-right"><a href="<?=$this->uri('/groups/category/' . $category['urlName'])?>">More</a></small>
+                                    <h4><a href="<?=$this->uri('/groups/category/' . $category['urlName'])?>"><?=$category['categoryName']?></a></h4>
                                 </div>
                                 <div class="topic-body-wrap">
                                     <div class="topic-body">

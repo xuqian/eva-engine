@@ -50,6 +50,7 @@ class AccountEditForm extends UserCreateForm
             'province',
             'phoneMobile',
             'industry',
+            'interest',
             'bio'
         ),
         'Tags',

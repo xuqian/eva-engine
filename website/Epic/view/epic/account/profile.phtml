@@ -169,14 +169,21 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                     </div>
                                 </div>
 
+                                <div class="control-group <?=$form->isError(array('Profile', 'interest')) ? 'error' : '';?>">
+                                    <?=$form->helper(array('Profile', 'interest'), 'label', array('class' => 'control-label'))?>
+                                    <div class="controls">
+                                        <?=$form->helper(array('Profile', 'interest'), 'formSelect', array('class' => 'input-large select2'))?>        
+                                        <div class="help-block"><?=$form->helper(array('Profile', 'interest'), 'formElementErrors')?></div>
+                                    </div>
+                                </div>
+                                
                                 <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <?=$form->helper(array('Profile', 'industry'), 'formSelect', array('class' => 'input-large select2'))?>        
+                                        <?=$form->helper(array('Profile', 'industry'), array('class' => ''))?>        
                                         <div class="help-block"><?=$form->helper(array('Profile', 'industry'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
-
 
                                 <div class="control-group">
                                     <label class="control-label">Tags</label>

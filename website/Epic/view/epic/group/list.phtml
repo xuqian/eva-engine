@@ -59,6 +59,7 @@ $groupSearchForm->setView($this)
                             <?endforeach;?>
                             </select>
                             <?endif;?>
+                            <?=$groupSearchForm->helper('tag', array('class' => 'input-small','placeholder' => 'Tag'))?>
                             <button class="btn" type="submit"><?=$this->_('Find a Group')?></button>
                         </form>
                     </div>

@@ -73,17 +73,17 @@ $categories = array(
 
                      <ul id="member-tab" class="nav nav-tabs">
                          <li class="active">
-                         <a href="#by-industry">By Industry</a>
+                         <a href="#by-industry">By Interest</a>
                          </li>
                          <li><a href="#by-city">By City</a></li>
                      </ul>
                      <div class="tab-content">
                          <div id="by-industry" class="tab-pane fade in active">
-                             <?$industries = $userSearchForm->get('industry')->getValueOptions();?>
+                             <?$industries = $userSearchForm->get('interest')->getValueOptions();?>
                              <?if($industries):?>
                              <ul class="member-section">
                                  <?foreach($industries as $key => $industry):?>
-                                 <li><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>"><?=$industry['label']?></a></li>
+                                 <li><a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a></li>
                                  <?endforeach?>
                              </ul>
                              <?endif?>
@@ -190,11 +190,11 @@ $categories = array(
                                  <?foreach($industries as $key => $industry):?>
                                  <?if($key > 2){break;}?>
                                  <li class="span4">
-                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
+                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('interest' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
-                                         <a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>"><?=$industry['label']?></a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>">More</a></small>
+                                         <a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}
@@ -260,11 +260,11 @@ $categories = array(
                                  <?foreach($industries as $key => $industry):?>
                                  <?if($key < 3 || $key > 5){continue;}?>
                                  <li class="span4">
-                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('industry' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
+                                 <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('interest' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>">More</a></small>
-                                         <a href="<?=$this->uri('/user/list/?industry=' . $industry['value'])?>"><?=$industry['label']?></a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>">More</a></small>
+                                         <a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}

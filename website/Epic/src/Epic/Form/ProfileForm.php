@@ -234,13 +234,24 @@ class ProfileForm extends \User\Form\ProfileForm
                  'value' => '',
              ),
          ),
+        
+         'industry' => array (
+            'name' => 'industry',
+            'type' => 'text',
+            'options' => array (
+                'label' => 'Industry',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
 
-         'industry' => array(
-             'name' => 'industry',
+         'interest' => array(
+             'name' => 'interest',
              'type' => 'select',
              'options' => array (
-                 'label' => 'Industry',
-                 'empty_option' => 'Select Industry',
+                 'label' => 'Interest',
+                 'empty_option' => 'Select Interest',
                  'value_options' => array(
                      array(
                          'label' => 'Food Production',
