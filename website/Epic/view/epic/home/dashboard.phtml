@@ -28,7 +28,7 @@ if($tags) {
                 <div class="span8">
                     <div class="dashboard-main">
 
-                    <?=$this->widget('Epic', 'components/banner_group')?>  
+                    <?=$this->widget('Epic', 'components/banner_dashboard')?>  
 
                     <div class="event-grid">
                         <header class="event-grid-header">
@@ -97,7 +97,7 @@ if($tags) {
                             <h3>Members </h3>
                         </div>
                         </header>
-                        <div class="event-new-wrap loaded">
+                        <div class="">
                         <script type="text/x-tmpl" data-url="<?=$this->uri('/data/eventuser/', array('rows' => 6))?>">
                         <div class="event-new grid-3columns">
                             {% if(o.items.length > 0) { %}
@@ -211,7 +211,7 @@ if($tags) {
     </tags>
 </script>
 
- <?=$this->widget('Epic', 'components/ad_setting')?>
+ <?=$this->widget('Epic', 'components/ad_dashboard')?>
 
 
                 </div><!--dashboard side-->
