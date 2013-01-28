@@ -19,7 +19,7 @@ $unfollowForm->setMethod('delete');
 $userSearchForm = $this->form ? $this->form : new User\Form\UserSearchForm();
 $userSearchForm->setView($this)
      ->setMethod('get')
-     ->setAction($this->uri('/user/list/'))
+     ->setAction($this->uri('/users/list/'))
      ->prepare();
 
 ?>
@@ -131,7 +131,7 @@ $userSearchForm->setView($this)
                             </div><!--activity-list end-->
 
                             <?if($this->paginator):?>
-                            <?=$this->paginator->setPath('/user/list/')->setBaseQuery($this->query);?>
+                            <?=$this->paginator->setPath('/users/list/')->setBaseQuery($this->query);?>
                             <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                             <?endif;?>
 

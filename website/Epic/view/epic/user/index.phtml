@@ -6,7 +6,7 @@ $this->headTitle($title, 'SET');
 $userSearchForm = $this->form ? $this->form : new Epic\Form\UserSearchForm();
 $userSearchForm->setView($this)
      ->setMethod('get')
-     ->setAction($this->uri('/user/list/'))
+     ->setAction($this->uri('/users/list/'))
      ->prepare();
 
 $categories = array(
@@ -37,17 +37,17 @@ $categories = array(
      <header class="member-header">
      <div class="row">
          <div class="span3">
-             <h2><a href="/user/">Members</a></h2>
+             <h2><a href="/users/">Members</a></h2>
          </div><!--page main right end-->
          <div class="span9">
              <nav class="nav-member">
-             <a class="pull-right margin10h" href="<?=$this->uri('/user/list/')?>">Find Friend On Epicurissimo</a>
+             <a class="pull-right margin10h" href="<?=$this->uri('/users/list/')?>">Find Friend On Epicurissimo</a>
              <ul>
                  <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/user/')?>">All</a></li>
-                 <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
-                 <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=PROFESSIONAL_MEMBER')?>">Professional</a></li>
-                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=PAID_MEMBER')?>">VIP</a></li>
-                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/user/?role=CORPORATE_MEMBER')?>">Corporate</a></li>
+                 <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
+                 <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PROFESSIONAL_MEMBER')?>">Professional</a></li>
+                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PAID_MEMBER')?>">VIP</a></li>
+                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CORPORATE_MEMBER')?>">Corporate</a></li>
              </ul>
              </nav>
          </div><!--page main left end-->
@@ -83,7 +83,7 @@ $categories = array(
                              <?if($industries):?>
                              <ul class="member-section">
                                  <?foreach($industries as $key => $industry):?>
-                                 <li><a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a></li>
+                                 <li><a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a></li>
                                  <?endforeach?>
                              </ul>
                              <?endif?>
@@ -95,7 +95,7 @@ $categories = array(
                                  <?foreach($cities as $key => $citiarea):?>
                                  <li><?=$citiarea['label']?></li>
                                  <?foreach($citiarea['options'] as $city):?>
-                                 <li><a href="<?=$this->uri('/user/list/?city=' . $city['value'])?>"><?=$city['label']?></a></li>
+                                 <li><a href="<?=$this->uri('/users/list/?city=' . $city['value'])?>"><?=$city['label']?></a></li>
                                  <?endforeach?>
                                  <?endforeach?>
                              </ul>
@@ -193,8 +193,8 @@ $categories = array(
                                  <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('interest' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>">More</a></small>
-                                         <a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>">More</a></small>
+                                         <a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}
@@ -263,8 +263,8 @@ $categories = array(
                                  <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('interest' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>">More</a></small>
-                                         <a href="<?=$this->uri('/user/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>">More</a></small>
+                                         <a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}

@@ -51,12 +51,12 @@
                         <li class="" data-highlight-url="^/pages/magazine/?$"><a href="http://www.wngobserver.com/"><?=$this->_('Magazine')?></a></li>
                         <li class="" data-highlight-url="^/event.*"><a href="<?=$this->uri('/events/')?>"><?=$this->_('Events')?></a></li>
                         <li class="" data-highlight-url="^/group.*"><a href="<?=$this->uri('/groups/')?>"><?=$this->_('Groups')?></a></li>
-                        <li class="" data-highlight-url="^/user.*"><a href="<?=$this->uri('/user/')?>"><?=$this->_('Members')?></a></li>
+                        <li class="" data-highlight-url="^/user.*"><a href="<?=$this->uri('/users/')?>"><?=$this->_('Members')?></a></li>
                         <li class="" data-highlight-url="^/share.*$"><a href="<?=$this->uri('/share/')?>"><?=$this->_('Share')?></a></li>
                     </ul>
                     <ul class="nav pull-right">
                         <li>
-                        <form action="<?=$this->uri('/user/')?>" class="form top-search">
+                        <form action="<?=$this->uri('/users/list/')?>" class="form top-search">
                             <div class="top-search-wrap">
                                 <button type="submit" class="btn submit"><i class="icon-search"></i></button>
                                 <div class="input-append">
@@ -69,7 +69,7 @@
                                     <span class="current">Users</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" data-url="/user/">Users</a></li>
+                                    <li><a href="#" data-url="/users/list/">Users</a></li>
                                     <li><a href="#" data-url="/events/list/">Events</a></li>
                                     <li><a href="#" data-url="/groups/list/">Groups</a></li>
                                 </ul>

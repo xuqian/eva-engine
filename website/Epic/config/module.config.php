@@ -595,11 +595,11 @@ return array(
                 ),
                 'priority' => 2,
             ), //my end
-
-            'user' => array(
+            
+            'users' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/user[/]',
+                    'route' => '/users[/]',
                     'constraints' => array(
                     ),
                     'defaults' => array(
@@ -608,156 +608,84 @@ return array(
                     ),
                 ),
                 'priority' => 2,
-                'may_terminate' => true,
                 'child_routes' => array(
-                    'list' => array(
+                    'operate' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => 'list[/]',
-                            'defaults' => array(
-                                'action' => 'list'
+                            'route' => '[:action][/:id][/]',
+                            'constraints' => array(
+                                'action'     => '[a-zA-Z]+',
+                                'id'     => '[0-9a-zA-Z]+',
                             ),
+                            'defaults' => array(
+                                'controller' => 'UserController',
+                                'action' => 'index'
+                            )
                         ),
                         'may_terminate' => true,
                     ),
-                    'profile' => array(
+                ),
+            ),
+            'user' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/user/[:id][/]',
+                    'constraints' => array(
+                        'id'     => '[a-zA-Z0-9_-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'UserController',
+                        'action' => 'get',
+                    ),
+                ),
+                'priority' => 2,
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'blog' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '[:id][/]',
+                            'route' => 'blog[/]',
                             'constraints' => array(
-                                'id' => '[a-zA-Z0-9_-]{5,}'
                             ),
                             'defaults' => array(
-                                'action' => 'get'
-                            ),
+                                'action' => 'blog'
+                            )
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
-                            'blog' => array(
+                            'post' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'blog[/]',
+                                    'route' => '[:post_id][/]',
                                     'constraints' => array(
+                                        'post_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
-                                        'action' => 'blog'
-                                    )
-                                ),
-                                'may_terminate' => true,
-                                'child_routes' => array(
-                                    'post' => array(
-                                        'type' => 'Segment',
-                                        'options' => array(
-                                            'route' => '[:post_id][/]',
-                                            'constraints' => array(
-                                                'post_id' => '[a-zA-Z0-9_-]+'
-                                            ),
-                                            'defaults' => array(
-                                                'action' => 'post'
-                                            )
-                                        ),
-                                        'may_terminate' => true,
-                                    ),
-                                ),
-                            ),
-                            'albums' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => 'albums[/]',
-                                    'constraints' => array(
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'albums'
-                                    )
-                                ),
-                                'may_terminate' => true,
-                                'child_routes' => array(
-                                    'post' => array(
-                                        'type' => 'Segment',
-                                        'options' => array(
-                                            'route' => '[:album_id][/]',
-                                            'constraints' => array(
-                                                'album_id' => '[a-zA-Z0-9_-]+'
-                                            ),
-                                            'defaults' => array(
-                                                'action' => 'album'
-                                            )
-                                        ),
-                                        'may_terminate' => true,
-                                    ),
-                                ),
-                            ),
-                            'events' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => 'events[/]',
-                                    'constraints' => array(
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'events'
-                                    )
-                                ),
-                                'may_terminate' => true,
-                                'child_routes' => array(
-                                    'event' => array(
-                                        'type' => 'Segment',
-                                        'options' => array(
-                                            'route' => '[:event_id][/]',
-                                            'constraints' => array(
-                                                'event_id' => '[a-zA-Z0-9_-]+'
-                                            ),
-                                            'defaults' => array(
-                                                'action' => 'event'
-                                            )
-                                        ),
-                                        'may_terminate' => true,
-                                    ),
-                                ),
-                            ),
-                            'groups' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => 'groups[/]',
-                                    'constraints' => array(
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'groups'
-                                    )
-                                ),
-                                'may_terminate' => true,
-                                'child_routes' => array(
-                                    'group' => array(
-                                        'type' => 'Segment',
-                                        'options' => array(
-                                            'route' => '[:group_id][/]',
-                                            'constraints' => array(
-                                                'group_id' => '[a-zA-Z0-9_-]+'
-                                            ),
-                                            'defaults' => array(
-                                                'action' => 'group'
-                                            )
-                                        ),
-                                        'may_terminate' => true,
-                                    ),
-                                ),
-                            ),
-                            'friend' => array(
-                                'type' => 'Segment',
-                                'options' => array(
-                                    'route' => 'friend[/]',
-                                    'constraints' => array(
-                                    ),
-                                    'defaults' => array(
-                                        'action' => 'friend'
+                                        'action' => 'post'
                                     )
                                 ),
                                 'may_terminate' => true,
                             ),
-                            'album' => array(
+                        ),
+                    ),
+                    'albums' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'albums[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'albums'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'post' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'album[/]',
+                                    'route' => '[:album_id][/]',
                                     'constraints' => array(
+                                        'album_id' => '[a-zA-Z0-9_-]+'
                                     ),
                                     'defaults' => array(
                                         'action' => 'album'
@@ -765,9 +693,87 @@ return array(
                                 ),
                                 'may_terminate' => true,
                             ),
-                        ), //profile child_routes end
-                    ), //profile end
-                ), //user child_routes end
+                        ),
+                    ),
+                    'events' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'events[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'events'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'event' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '[:event_id][/]',
+                                    'constraints' => array(
+                                        'event_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'event'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
+                    ),
+                    'groups' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'groups[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'groups'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'group' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => '[:group_id][/]',
+                                    'constraints' => array(
+                                        'group_id' => '[a-zA-Z0-9_-]+'
+                                    ),
+                                    'defaults' => array(
+                                        'action' => 'group'
+                                    )
+                                ),
+                                'may_terminate' => true,
+                            ),
+                        ),
+                    ),
+                    'friend' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'friend[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'friend'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'album' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'album[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'album'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ), //profile child_routes end
             ), //user end
             'messages' => array(
                 'type' => 'Segment',
