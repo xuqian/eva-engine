@@ -126,3 +126,31 @@ INSERT INTO `eva_group_categories` (`id`, `categoryName`, `urlName`, `descriptio
 (5, 'Hotel & Resort', 'hotel-resort', '', 0, 0, 0, '2012-12-26 10:04:43', 0, 0, 0),
 (6, 'Art & Design', 'art-design', '', 0, 0, 0, '2012-12-26 10:07:30', 0, 0, 0),
 (7, 'Culture', 'culture', '', 0, 0, 0, '2012-12-26 10:11:15', 0, 0, 0);
+
+
+
+
+---- Notifications
+INSERT INTO `eva`.`eva_notification_notifications` (
+`id` ,
+`notificationKey` ,
+`title` ,
+`sendNotice` ,
+`sendEmail` ,
+`sendSms` ,
+`sendAppleOsPush` ,
+`sendAndroidPush` ,
+`sendWindowsPush` ,
+`sendCustomNotice` ,
+`allowDisableNotice` ,
+`allowDisableEmail` ,
+`allowDisableSms` ,
+`allowDisableAppleOsPush` ,
+`allowDisableAndroidPush` ,
+`allowDisableWindowsPush` ,
+`allowDisableCustomNotice`
+)
+VALUES (
+NULL , 'ActivityAt', 'Notification user who is in activities @', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'
+);
+

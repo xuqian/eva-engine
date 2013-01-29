@@ -14,6 +14,10 @@ class Module
         $event->attach(MvcEvent::EVENT_DISPATCH, array($this, 'epicAuthority'), 99);
         $event->attach(MvcEvent::EVENT_DISPATCH, array($this, 'autolanguage'), 1);
         $event->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'errorHandler'), 1);
+
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $serviceManager->setInvokableClass('Epic\Event\Listener', 'Epic\Event\Listener');
+        $event->attach($serviceManager->get('Epic\Event\Listener'));
     }
 
     public function epicAuthority($e)
