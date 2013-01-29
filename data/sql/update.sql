@@ -196,5 +196,7 @@ ALTER TABLE `eva_file_files` CHANGE `fileServerKey` `fileServerKey` VARCHAR( 32 
 ALTER TABLE `eva_file_files` ADD `isEmbed` BOOLEAN NOT NULL DEFAULT FALSE AFTER `isImage` ,
 ADD `archive_id` INT( 10 ) NOT NULL DEFAULT '0' AFTER `isEmbed` ;
 
------------------2013-01-25
-ALTER TABLE `eva_user_profiles` ADD `interest` VARCHAR( 255 ) NULL DEFAULT NULL AFTER `industry` ;
+
+----2013-01-28
+ALTER TABLE `eva_user_profiles` ADD `interest` VARCHAR( 255 ) NULL AFTER `industry`;
+ALTER TABLE `eva_activity_messages` ADD `sourceUrl` VARCHAR( 255 ) NULL AFTER `sourceName`; 
