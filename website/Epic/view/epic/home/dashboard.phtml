@@ -44,11 +44,20 @@ if($tags) {
                         <ul class="event-new-nav nav nav-pills collapsed">
                             <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">All Cities</a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'timedesc'));?>" class="my-city-url">My City</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cocktail-Party','order' => 'timedesc'));?>">Cocktail Party</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Wine-Tasting','order' => 'timedesc'));?>">Wine Tasting</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Exhibitions','order' => 'timedesc'));?>">Exhibitions</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Cooking-Classes','order' => 'timedesc'));?>">Cooking Classes</a> | </li>
-                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'Opinions-sharing','order' => 'timedesc'));?>">Opinions Sharing</a> </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'dining','order' => 'timedesc'));?>">Dining</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'wine','order' => 'timedesc'));?>">Wine</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'food','order' => 'timedesc'));?>">Food</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'nightlife','order' => 'timedesc'));?>">Nightlife</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'culture','order' => 'timedesc'));?>">Culture</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'cocktail','order' => 'timedesc'));?>">Cocktail</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'tasting','order' => 'timedesc'));?>">Tasting</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'cooking','order' => 'timedesc'));?>">Cooking</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'education','order' => 'timedesc'));?>">Education</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'organic-biologic-food','order' => 'timedesc'));?>"><?=$this->_('Organic & Biologic food');?></a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'spirit','order' => 'timedesc'));?>">Spirit</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'travel','order' => 'timedesc'));?>">Travel</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'exhibition','order' => 'timedesc'));?>">Exhibition</a> | </li>
+                            <li><a href="<?=$this->uri('/events/list/', array('category' => 'other','order' => 'timedesc'));?>">Other</a> | </li>
                             <li class="more"><a href="#">More</a> </li>
                         </ul>
                         </header>

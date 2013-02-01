@@ -106,15 +106,25 @@ INSERT INTO `eva_user_roles` (`id`, `roleKey`, `roleName`, `description`) VALUES
 (3, 'GUEST', 'Guest', ''),
 (11, 'CORPORATE_MEMBER', 'Corporate Member', ''),
 (12, 'CONNOISSEUR_MEMBER', 'Connoisseur Member', ''),
-(13, 'PROFESSIONAL_MEMBER', 'Professional Member', '');
-
+(13, 'PROFESSIONAL_MEMBER', 'Professional Member', ''),
+(13, 'PAID_MEMBER', 'VIP Member', '');
+;
 
 INSERT INTO `eva_event_categories` (`id`, `categoryName`, `urlName`, `description`, `parentId`, `rootId`, `orderNumber`, `createTime`, `count`, `left`, `right`) VALUES
-(1, 'Cocktail Party', 'Cocktail-Party', '', 0, 0, 0, '2012-12-26 08:28:46', 0, 0, 0),
-(2, 'Wine Tasting', 'Wine-Tasting', '', 0, 0, 0, '2012-12-26 08:28:59', 0, 0, 0),
-(3, 'Exhibitions', 'Exhibitions', '', 0, 0, 0, '2012-12-26 08:29:13', 0, 0, 0),
-(4, 'Cooking Classes', 'Cooking-Classes', '', 0, 0, 0, '2012-12-26 08:29:28', 0, 0, 0),
-(5, 'Opinions Sharing', 'Opinions-Sharing', '', 0, 0, 0, '2012-12-26 08:29:42', 0, 0, 0);
+(1, 'Dining', 'dining', '', 0, 0, 0, '2013-02-01 06:46:51', 0, 0, 0),
+(2, 'Wine', 'wine', '', 0, 0, 0, '2013-02-01 06:46:59', 0, 0, 0),
+(3, 'Food', 'food', '', 0, 0, 0, '2013-02-01 06:47:09', 0, 0, 0),
+(4, 'Nightlife', 'nightlife', '', 0, 0, 0, '2013-02-01 06:47:26', 0, 0, 0),
+(5, 'Culture', 'culture', '', 0, 0, 0, '2013-02-01 06:47:38', 0, 0, 0),
+(6, 'Cocktail', 'cocktail', '', 0, 0, 0, '2013-02-01 06:48:33', 0, 0, 0),
+(7, 'Tasting', 'tasting', '', 0, 0, 0, '2013-02-01 06:48:47', 0, 0, 0),
+(8, 'Cooking', 'cooking', '', 0, 0, 0, '2013-02-01 06:48:59', 0, 0, 0),
+(9, 'Education', 'education', '', 0, 0, 0, '2013-02-01 06:49:23', 0, 0, 0),
+(10, 'Organic & Biologic food', 'organic-biologic-food', '', 0, 0, 0, '2013-02-01 06:50:17', 0, 0, 0),
+(11, 'Spirit', 'spirit', '', 0, 0, 0, '2013-02-01 06:50:45', 0, 0, 0),
+(12, 'Travel', 'travel', '', 0, 0, 0, '2013-02-01 06:51:01', 0, 0, 0),
+(13, 'Exhibition', 'exhibition', '', 0, 0, 0, '2013-02-01 06:51:14', 0, 0, 0),
+(14, 'Other', 'other', '', 0, 0, 0, '2013-02-01 06:51:27', 0, 0, 0);
 
 
 
@@ -129,8 +139,6 @@ INSERT INTO `eva_group_categories` (`id`, `categoryName`, `urlName`, `descriptio
 
 
 
-
----- Notifications
 INSERT INTO `eva`.`eva_notification_notifications` (
 `id` ,
 `notificationKey` ,
