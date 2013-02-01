@@ -1,17 +1,8 @@
 <?php
-namespace Engine;
+namespace Commission;
 
 class Module
 {
-    public function getDependencyModules()
-    {
-        return array(
-            'Blog',
-            'Oauth',
-        );
-    }
-
-
     public function getAutoloaderConfig()
     {
         return array(
