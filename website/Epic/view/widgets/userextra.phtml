@@ -1,6 +1,6 @@
 <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('rows' => 5))?>">
 <div class="page-header border-header">
-    <h4>New Blogs</h4>
+    <h4><?=$this->_('New Blogs');?></h4>
 </div>
 <div class="side-blog-list">
 {% if(o.items.length > 0) { %}
@@ -29,8 +29,8 @@
 
 <script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/', array('user_id' => $this->user['id']))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>">View All</a></small>
-    <h4>Friends ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>"><?=$this->_('View All');?></a></small>
+    <h4><?=$this->_('Friends');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-user-list">
     {% if(o.items.length > 0) { %}
@@ -53,8 +53,8 @@
 
 <script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id'], 'rows' => 5))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/my/event/')?>">View All</a></small>
-    <h4>My Events  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <small class="pull-right"><a href="<?=$this->uri('/my/event/')?>"><?=$this->_('View All');?></a></small>
+    <h4><?=$this->_('My Events');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-event-list">
 {% if(o.items.length > 0) { %}
@@ -79,33 +79,12 @@
 {% } %}
 </div>
 </script>
-    <?if(0):?>
-    <div class="page-header border-header">
-        <small class="pull-right"><a href="#">View All</a></small>
-        <h4>My Events (123)</h4>
-    </div>
-    <div class="side-blog-list">
-        <?for($i = 0; $i < 10; $i++):?>
-        <div class="item ">
-            <a href="" title="" class="item-absolute imgdelay figure userface"><img src="<?=$this->link('/src/epic/css/img/face-01.jpg')?>" alt="" class="img-rounded" width="50" height="50" /></a>
-            <div class="item-inline item-text">
-                <div class="text-content">
-                    <div class="item-title">
-                        <a href="#">Event title test</a>
-                    </div>
-                    <p>Event Members: 50</p>
-                    <p>Event Time: <?=$this->datetime(time())?></p>
-                </div>
-            </div>
-        </div>
-        <?endfor?>
-    </div><!--activity-list end-->
-    <?endif?>
+
 
 <script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('user_id' => $this->user['id'], 'rows' => 8))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/my/album/')?>">View All</a></small>
-    <h4>My Albums  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <small class="pull-right"><a href="<?=$this->uri('/my/album/')?>"><?=$this->_('View All');?></a></small>
+    <h4><?=$this->_('My Albums');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-album-list">
     <ul class="thumbnails">
@@ -128,8 +107,8 @@
 </script>
     <?if(0):?>
     <div class="page-header border-header">
-        <small class="pull-right"><a href="#">View All</a></small>
-        <h4>Albums</h4>
+        <small class="pull-right"><a href="#"><?=$this->_('View All');?></a></small>
+        <h4><?=$this->_('Albums');?></h4>
     </div>
     <div class="side-album-list">
         <ul class="thumbnails">
@@ -146,8 +125,8 @@
 
     <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
 <div class="page-header border-header">
-    <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
-    <h4>My Groups  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>"><?=$this->_('View All');?></a></small>
+    <h4><?=$this->_('My Groups');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-group-list">
     <ul class="thumbnails">
@@ -168,22 +147,6 @@
     </div>
 </div>
 </script>
-    <?if(0):?>
-    <div class="page-header border-header">
-        <small class="pull-right"><a href="#">View All</a></small>
-        <h4>My Groups</h4>
-    </div>
-    <div class="side-group-list">
-        <ul class="thumbnails">
-            <?for($i = 0; $i < 5; $i++):?>
-            <li>
-            <a class="thumbnail" href="#">
-                <img src="<?=$this->link('/src/epic/css/img/group.jpg')?>" alt="" class="img-rounded" width="50" height="50" />
-            </a>
-            </li>
-            <?endfor;?>
-        </ul>
-    </div>
-    <?endif;?>
+
 
     <?=$this->widget('Epic', 'components/ad_setting')?>

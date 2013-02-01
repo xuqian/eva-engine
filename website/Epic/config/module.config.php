@@ -965,4 +965,14 @@ return array(
             'template' => 'mail/invite',
         ),
     ),
+
+    'translator' => array(
+        'translation_file_patterns' => array(
+            'epic' => array(
+                'type' => 'csv',
+                'base_dir' => __DIR__ . '/../languages/',
+                'pattern' => '%s/epic.csv'
+            ),
+        ),
+    ),
 );
