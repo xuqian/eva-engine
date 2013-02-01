@@ -7,7 +7,7 @@
         <div class="media-body">
             <h4 class="media-heading"><?=$user['userName']?></h4>
             <div class="media">
-                <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-gray btn-small"><i class="icon-plus"></i> Start a Epicurissimo Group</a>
+                <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-gray btn-small"><i class="icon-plus"></i> <?=$this->_('Start a Epicurissimo Group');?></a>
             </div>
         </div>
     </div>
@@ -15,8 +15,8 @@
 
     <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
     <div class="page-header">
-        <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>">View All</a></small>
-        <h4 class="txt-bold">My Groups ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+        <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>"><?=$this->_('View All');?></a></small>
+        <h4 class="txt-bold"><?=$this->_('My Groups');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
     </div>
     <div class="group-mine">
         <ul>
@@ -39,7 +39,7 @@
 
     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => 1,'rows' => 5, 'order' => 'commentdesc'))?>">
         <div class="page-header border-header">
-            <h4>Hot Discussion  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+            <h4><?=$this->_('Hot Discussion');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
         </div>
         <div class="side-blog-list">
             {% if(o.items.length > 0) { %}
@@ -68,7 +68,7 @@
 
     <script id="group-ranks" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/',array('rows' => 10, 'order' => 'memberdesc', 'flag' => 1))?>">
     <div class="page-header border-header">
-        <h4>Group Ranks</h4>
+        <h4><?=$this->_('Group Ranks');?></h4>
     </div>
     <div class="group-ranks">
         <ul>

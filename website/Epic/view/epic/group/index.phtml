@@ -41,7 +41,7 @@ $categories = $this->categories;
                     <?=$this->widget('Epic', 'components/banner_group')?>  
 
                     <div class="page-header border-header">
-                        <h3>New Groups</h3>
+                        <h3><?=$this->_('New Groups');?></h3>
                     </div>
 
                     <script id="group-new" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('order' => 'timedesc','rows' => 6, 'category' => $this->query['category']))?>">
@@ -64,7 +64,7 @@ $categories = $this->categories;
                     </script>
 
                     <div class="page-header border-header">
-                        <h3>Feature Groups</h3>
+                        <h3><?=$this->_('Feature Groups');?></h3>
                     </div>
 
                     <script id="group-hot" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('order' => 'timedesc','rows' => 12, 'category' => $this->query['category']))?>">
@@ -87,7 +87,7 @@ $categories = $this->categories;
                     </script>
 
                     <div class="page-header border-header">
-                        <h3>Discussion of Groups</h3>
+                        <h3><?=$this->_('Discussion of Groups');?></h3>
                     </div>
 
                     <div class="group-topics">

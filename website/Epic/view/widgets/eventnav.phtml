@@ -3,7 +3,7 @@
     <?foreach($week as $day):?>
     <li>
     <a href="<?=$this->uri('/events/list/', array('beforeStartDay' => $day['datedb'],'afterStartDay' => $day['datedb']))?>" class="<?if($day['datedb'] == $calendar['today']['datedb']):?>active<?endif?>" data-date="<?=$this->Datetime()->jsTime($day['datedb'])?>">
-        <span class="day"><?=$this->Datetime($day['datedb'], null, 'D')?></span><span class="date"><?=$this->Datetime($day['datedb'], null, 'jS M')?></span>
+        <span class="day"><?=$this->_($this->Datetime($day['datedb'], null, 'D'))?></span><span class="date"><?=$this->Datetime($day['datedb'], null, 'jS M')?></span>
     </a>
     </li>
     <?endforeach?>

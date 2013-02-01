@@ -46,7 +46,7 @@ foreach($this->eventList as $eventDay){
     <header class="event-header">
     <div class="row">
         <div class="span4">
-            <h2><a href="<?=$this->uri('/events/')?>">Event</a></h2>
+            <h2><a href="<?=$this->uri('/events/')?>"><?=$this->_('Event');?></a></h2>
         </div><!--page main right end-->
         <div class="span8">
             <?=$this->widget('Epic', 'widgets/eventnav', $this->vars())?>
@@ -134,18 +134,18 @@ foreach($this->eventList as $eventDay){
 
                     <div class="event-grid">
                         <header class="event-grid-header">
-                        <small class="pull-right">Feature Cities: 
+                        <small class="pull-right"><?=$this->_('Feature Cities');?>: 
                             <a href="<?=$this->uri('/events/list/', array('city' => 'Paris','order' => 'timedesc'));?>">Paris</a>
                             <a href="<?=$this->uri('/events/list/', array('city' => 'London','order' => 'timedesc'));?>">London</a>
                             <a href="<?=$this->uri('/events/list/', array('city' => 'New York','order' => 'timedesc'));?>">New York</a>
                             <a href="<?=$this->uri('/events/list/', array('city' => 'Shanghai','order' => 'timedesc'));?>">Shanghai</a>
                         </small>
                         <div class="page-header border-header">
-                            <h3>New Events </h3><a href="<?=$this->uri('/my/city/')?>" class="switch">[<span class="my-city">Switch City</span>]</a>
+                            <h3><?=$this->_('New Events');?> </h3><a href="<?=$this->uri('/my/city/')?>" class="switch">[<span class="my-city"><?=$this->_('Switch City');?></span>]</a>
                         </div>
                         <ul class="event-new-nav nav nav-pills collapsed">
-                            <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>">All Cities</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'timedesc'));?>" class="my-city-url">My City</a> |</li>
+                            <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'timedesc'));?>"><?=$this->_('All Cities');?></a> |</li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'timedesc'));?>" class="my-city-url"><?=$this->_('My City');?></a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'dining','order' => 'timedesc'));?>">Dining</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'wine','order' => 'timedesc'));?>">Wine</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'food','order' => 'timedesc'));?>">Food</a> | </li>
@@ -160,7 +160,7 @@ foreach($this->eventList as $eventDay){
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'travel','order' => 'timedesc'));?>">Travel</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'exhibition','order' => 'timedesc'));?>">Exhibition</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'other','order' => 'timedesc'));?>">Other</a> | </li>
-                            <li class="more"><a href="#">More</a> </li>
+                            <li class="more"><a href="#"><?=$this->_('More');?></a> </li>
                         </ul>
                         </header>
                         <div class="event-new-wrap loaded">
@@ -179,9 +179,9 @@ foreach($this->eventList as $eventDay){
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
-                                        <p class="lowlight">City : {%=item.city%}.</p>
-                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
-                                        <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
+                                        <p class="lowlight"><?=$this->_('City');?> : {%=item.city%}.</p>
+                                        <p class="lowlight"><?=$this->_('Start at');?> : {%=item.startDay%}.</p>
+                                        <p class="lowlight">{%=item.Count.memberCount%} <?=$this->_('members joined');?>.</p>
                                     </div>
                                 </div>
                             </div>
@@ -201,11 +201,11 @@ foreach($this->eventList as $eventDay){
                     <div class="event-grid">
                         <header class="event-grid-header">
                         <div class="page-header border-header">
-                            <h3>Feature Events</h3>
+                            <h3><?=$this->_('Feature Events');?></h3>
                         </div>
                         <ul class="event-feature-nav nav nav-pills  collapsed">
-                            <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>">All Cities</a> |</li>
-                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'memberdesc'));?>" class="my-city-url">My City</a> |</li>
+                            <li class="active"><a href="<?=$this->uri('/events/list/', array('order' => 'memberdesc'));?>"><?=$this->_('All Cities');?></a> |</li>
+                            <li><a href="<?=$this->uri('/events/list/', array('city' => 'mycity', 'order' => 'memberdesc'));?>" class="my-city-url"><?=$this->_('My City');?></a> |</li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'dining','order' => 'timedesc'));?>">Dining</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'wine','order' => 'timedesc'));?>">Wine</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'food','order' => 'timedesc'));?>">Food</a> | </li>
@@ -220,7 +220,7 @@ foreach($this->eventList as $eventDay){
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'travel','order' => 'timedesc'));?>">Travel</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'exhibition','order' => 'timedesc'));?>">Exhibition</a> | </li>
                             <li><a href="<?=$this->uri('/events/list/', array('category' => 'other','order' => 'timedesc'));?>">Other</a> | </li>
-                            <li class="more"><a href="#">More</a> </li>
+                            <li class="more"><a href="#"><?=$this->_('More');?></a> </li>
                         </ul>
                         </header>
                         

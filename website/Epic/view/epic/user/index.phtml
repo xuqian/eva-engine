@@ -37,17 +37,17 @@ $categories = array(
      <header class="member-header">
      <div class="row">
          <div class="span3">
-             <h2><a href="/users/">Members</a></h2>
+             <h2><a href="/users/"><?=$this->_('Members');?></a></h2>
          </div><!--page main right end-->
          <div class="span9">
              <nav class="nav-member">
-             <a class="pull-right margin10h" href="<?=$this->uri('/users/list/')?>">Find Friend On Epicurissimo</a>
+             <a class="pull-right margin10h" href="<?=$this->uri('/users/list/')?>"><?=$this->_('Find Friend On Epicurissimo');?></a>
              <ul>
                  <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/user/')?>">All</a></li>
-                 <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CONNOISSEUR_MEMBER')?>">Connoisseur</a></li>
-                 <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PROFESSIONAL_MEMBER')?>">Professional</a></li>
-                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PAID_MEMBER')?>">VIP</a></li>
-                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CORPORATE_MEMBER')?>">Corporate</a></li>
+                 <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CONNOISSEUR_MEMBER')?>"><?=$this->_('Connoisseur');?></a></li>
+                 <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PROFESSIONAL_MEMBER')?>"><?=$this->_('Professional');?></a></li>
+                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PAID_MEMBER')?>"><?=$this->_('VIP');?></a></li>
+                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CORPORATE_MEMBER')?>"><?=$this->_('Corporate');?></a></li>
              </ul>
              </nav>
          </div><!--page main left end-->
@@ -73,9 +73,9 @@ $categories = array(
 
                      <ul id="member-tab" class="nav nav-tabs">
                          <li class="active">
-                         <a href="#by-industry">By Interest</a>
+                         <a href="#by-industry"><?=$this->_('By Interest');?></a>
                          </li>
-                         <li><a href="#by-city">By City</a></li>
+                         <li><a href="#by-city"><?=$this->_('By City');?></a></li>
                      </ul>
                      <div class="tab-content">
                          <div id="by-industry" class="tab-pane fade in active">
@@ -132,7 +132,7 @@ $categories = array(
                              <script id="<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array($cate['key'] => $cate['value'], 'role' => $this->query['role'], 'rows' => 9))?>">
                              <div class="thumbnail <?=$key?>">
                                  <div class="thumbnail-title thumbnail-title-alt">
-                                     <?=$cate['label']?>
+                                     <?=$this->_($cate['label'])?>
                                  </div>
                                  {% if(o.items.length > 0) { %}      
                                  <div class="thumbnail-list">
@@ -169,7 +169,7 @@ $categories = array(
                                      </div>
                                  </div>
                                  <div class="caption">
-                                     <p><a href="">{% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} {%=o.items.length%} {% } %} Members</a></p>
+                                     <p><a href="">{% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} {%=o.items.length%} {% } %} <?=$this->_('Members');?></a></p>
                                  </div>
                                  {% } %}
                              </div>
@@ -180,7 +180,7 @@ $categories = array(
                      </div>
 
                      <div class="page-header border-header">
-                         <h3>By Interests</h3>
+                         <h3><?=$this->_('By Interests');?></h3>
                      </div>
 
                      <?if(count($industries) > 0):?>
@@ -193,8 +193,8 @@ $categories = array(
                                  <script id="member-category-<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array('interest' => $industry['value'], 'role' => $this->query['role'], 'rows' => 12))?>">
                                  <div class="thumbnail">
                                      <div class="thumbnail-title">
-                                         <small class="pull-right"><a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>">More</a></small>
-                                         <a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>"><?=$industry['label']?></a>
+                                         <small class="pull-right"><a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>"><?=$this->_('More');?></a></small>
+                                         <a href="<?=$this->uri('/users/list/?interest=' . $industry['value'])?>"><?=$this->_($industry['label'])?></a>
                                      </div>
                                      <div class="thumbnail-list">
                                      {% if(o.items.length > 0) { %}
