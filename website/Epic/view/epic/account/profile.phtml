@@ -58,7 +58,7 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                         </div>
                                         <?if(isset($item['Avatar']) && $item['Avatar']):?>
                                         <img id="avatar-view" src="<?=$this->thumb($item['Avatar']['Thumb'], array('h_175', 'w_175', 'c_fill'))?>" alt="" class="img-polaroid" data-default="<?=$this->assets('/module/epic/img/default_avatar.png')?>" />
-                                        <br /><a href="#" id="show-avatar-uploader">Change</a> or <a id="delete-avatar" href="#" >Delete</a>
+                                        <br /><a href="#" id="show-avatar-uploader"><?=$this->_('Change Avatar');?></a> <?=$this->_('or');?> <a id="delete-avatar" href="#" ><?=$this->_('Delete');?></a>
                                         <?else:?>
                                         <img  id="avatar-view" src="<?=$this->assets('/module/epic/img/default_avatar.png')?>" alt="" class="img-polaroid" />
                                         <?endif?>
