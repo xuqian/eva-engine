@@ -16,6 +16,7 @@ $messages = $this->messages;
         <?if($this->code > 0):?>
         <div class="alert alert-success">
             <strong>Email Confirmed</strong>
+            <p><a href="<?=$this->uri('/login/')?>">Click to login</a></p>
         </div>
         <?else:?>
        <div class="alert">

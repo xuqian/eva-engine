@@ -616,7 +616,7 @@ class UserController extends ActionController
                         'code' => $codeItem,
                     ))
                     ->setTo($userItem->email, $userItem->userName)
-                    ->setTemplatePath(Api::_()->getModulePath('User') . '/view/')
+                    ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
                     ->setTemplate('mail/active');
                 $mail->send();
 

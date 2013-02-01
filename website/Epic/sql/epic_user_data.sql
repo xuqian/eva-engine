@@ -107,7 +107,7 @@ INSERT INTO `eva_user_roles` (`id`, `roleKey`, `roleName`, `description`) VALUES
 (11, 'CORPORATE_MEMBER', 'Corporate Member', ''),
 (12, 'CONNOISSEUR_MEMBER', 'Connoisseur Member', ''),
 (13, 'PROFESSIONAL_MEMBER', 'Professional Member', ''),
-(13, 'PAID_MEMBER', 'VIP Member', '');
+(14, 'PAID_MEMBER', 'VIP Member', '');
 ;
 
 INSERT INTO `eva_event_categories` (`id`, `categoryName`, `urlName`, `description`, `parentId`, `rootId`, `orderNumber`, `createTime`, `count`, `left`, `right`) VALUES
@@ -139,7 +139,7 @@ INSERT INTO `eva_group_categories` (`id`, `categoryName`, `urlName`, `descriptio
 
 
 
-INSERT INTO `eva`.`eva_notification_notifications` (
+INSERT INTO `eva_notification_notifications` (
 `id` ,
 `notificationKey` ,
 `title` ,
