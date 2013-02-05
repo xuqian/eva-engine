@@ -36,7 +36,8 @@ MY EPICURISSIMO,个人主页
 City,城市
 Website,网站
 Country,国家
-Birthday,城市
+Birthday,生日
+Industry,行业
 Social Networking,社交网络
 View As Guest,预览我的主页
 Say something,有什么新鲜事要告诉大家
@@ -78,6 +79,7 @@ Resort,度假
 Art,艺术
 Design,设计
 Culture,文化
+Getways,旅途
 Start a Epicurissimo Group,成立一个飨小组
 My Discussion,我的话题
 Hot Discussion,热门话题
@@ -92,7 +94,7 @@ Connoisseur,行家会员
 Professional,专业会员
 VIP,付费会员
 Corporate,企业会员
-Find Friend On Epicurissimo,好友查询
+Find Friend Here,好友查询
 By Interest,按兴趣
 By City,按地区
 Find an Event,查找活动
@@ -100,7 +102,7 @@ New Blogs,新博客
 Edit Profile,编辑资料
 Avatar,头像
 Site,网站
-Full url start by,全部网址包括
+"Full url start by",全部网址包括
 Phone Mobile,电话
 Interest,兴趣
 Select Interest,选择
@@ -118,3 +120,22 @@ New Password,新密码
 Change,更改密码
 Change Email,更改电子邮件
 Find Friends,查找好友
+Feature Cities,热门城市
+Topics,话题
+News,公告
+Your Current Location,您目前的城市
+Contact,联系我们
+Privacy Policy,隐私政策
+"Terms & Conditions",用户条款
+First Name,名
+Last Name,姓
+Gender,性别
+Language,语言
+Change Avatar,更换头像
+Hotel & Resort,酒店 & 度假
+Art & Design,艺术 & 设计
+Event Host,活动组织者
+More to Discover,探寻更多
+All,全部
+New Members,新会员
+Feature Members,推荐会员
