@@ -20,222 +20,337 @@ namespace Epic\Form;
  */
 class ProfileForm extends \User\Form\ProfileForm
 {
+
+    public static $interest = array(
+        array(
+            'label' => 'Dining',
+            'value' => 'Dining',
+        ),
+        array(
+            'label' => 'Gastronomy',
+            'value' => 'Gastronomy',
+        ),
+        array(
+            'label' => 'Wine',
+            'value' => 'Wine',
+        ),
+        array(
+            'label' => 'Spirits',
+            'value' => 'Spirits',
+        ),
+        array(
+            'label' => 'Cocktail',
+            'value' => 'Cocktail',
+        ),
+        array(
+            'label' => 'Bar & Nightlife',
+            'value' => 'Bar & Nightlife',
+        ),
+        array(
+            'label' => 'Cooking',
+            'value' => 'Cooking',
+        ),
+        array(
+            'label' => 'Education',
+            'value' => 'Education',
+        ),
+        array(
+            'label' => 'Coffee & Tea',
+            'value' => 'Coffee & Tea',
+        ),
+        array(
+            'label' => 'Biologic & Organic',
+            'value' => 'Biologic & Organic',
+        ),
+        array(
+            'label' => 'Food',
+            'value' => 'Food',
+        ),
+        array(
+            'label' => 'Opinion Sharing',
+            'value' => 'Opinion Sharing',
+        ),
+        array(
+            'label' => 'Traveling',
+            'value' => 'Traveling',
+        ),
+        array(
+            'label' => 'Exhibition',
+            'value' => 'Exhibition',
+        ),
+        array(
+            'label' => 'Other',
+            'value' => 'Other',
+        ),
+    );
+
+    public static $city = array(
+        array(
+            'label' => 'EUROPE',
+            'options' => array(
+                array(
+                    'label' => 'Amsterdam',
+                    'value' => 'Amsterdam',
+                ),
+                array(
+                    'label' => 'Athens',
+                    'value' => 'Athens',
+                ),
+                array(
+                    'label' => 'Barcelona',
+                    'value' => 'Barcelona',
+                ),
+                array(
+                    'label' => 'Berlin',
+                    'value' => 'Berlin',
+                ),
+                array(
+                    'label' => 'Brussels',
+                    'value' => 'Brussels',
+                ),
+                array(
+                    'label' => 'Budapest',
+                    'value' => 'Budapest',
+                ),
+                array(
+                    'label' => 'Copenhagen',
+                    'value' => 'Copenhagen',
+                ),
+                array(
+                    'label' => 'Dublin',
+                    'value' => 'Dublin',
+                ),
+                array(
+                    'label' => 'Florence',
+                    'value' => 'Florence',
+                ),
+                array(
+                    'label' => 'Lisbon',
+                    'value' => 'Lisbon',
+                ),
+                array(
+                    'label' => 'London',
+                    'value' => 'London',
+                ),
+                array(
+                    'label' => 'Madrid',
+                    'value' => 'Madrid',
+                ),
+                array(
+                    'label' => 'Milan',
+                    'value' => 'Milan',
+                ),
+                array(
+                    'label' => 'Paris',
+                    'value' => 'Paris',
+                ),
+                array(
+                    'label' => 'Prague',
+                    'value' => 'Prague',
+                ),
+                array(
+                    'label' => 'Rome',
+                    'value' => 'Rome',
+                ),
+                array(
+                    'label' => 'Stockholm',
+                    'value' => 'Stockholm',
+                ),
+                array(
+                    'label' => 'Venice',
+                    'value' => 'Venice',
+                ),
+                array(
+                    'label' => 'Vienna',
+                    'value' => 'Vienna',
+                ),
+                array(
+                    'label' => 'Zurich',
+                    'value' => 'Zurich',
+                ),
+            ),
+        ),
+
+        array(
+            'label' => 'Asia',
+            'options' => array(
+                array(
+                    'label' => 'Beijing',
+                    'value' => 'Beijing',
+                ),
+                array(
+                    'label' => 'Chengdu',
+                    'value' => 'Chengdu',
+                ),
+                array(
+                    'label' => 'Chongqing',
+                    'value' => 'Chongqing',
+                ),
+                array(
+                    'label' => 'Guangzhou',
+                    'value' => 'Guangzhou',
+                ),
+                array(
+                    'label' => 'Hong Kong',
+                    'value' => 'Hong Kong',
+                ),
+                array(
+                    'label' => 'Shanghai',
+                    'value' => 'Shanghai',
+                ),
+                array(
+                    'label' => 'Shenzhen',
+                    'value' => 'Shenzhen',
+                ),
+                array(
+                    'label' => 'Tianjin',
+                    'value' => 'Tianjin',
+                ),
+                array(
+                    'label' => 'Xiamen',
+                    'value' => 'Xiamen',
+                ),
+                array(
+                    'label' => 'Xi an',
+                    'value' => 'Xi an',
+                ), 
+                array(
+                    'label' => 'Urumqi',
+                    'value' => 'Urumqi',
+                ),
+
+            ),
+        ),
+
+        array(
+            'label' => 'North American',
+            'options' => array(
+                array(
+                    'label' => 'Boston',
+                    'value' => 'Boston',
+                ),
+                array(
+                    'label' => 'Chicago',
+                    'value' => 'Chicago',
+                ),
+                array(
+                    'label' => 'Las Vegas',
+                    'value' => 'Las Vegas',
+                ),
+                array(
+                    'label' => 'Los Angeles',
+                    'value' => 'Los Angeles',
+                ),
+                array(
+                    'label' => 'Miami',
+                    'value' => 'Miami',
+                ),
+                array(
+                    'label' => 'Montreal',
+                    'value' => 'Montreal',
+                ),
+                array(
+                    'label' => 'New York',
+                    'value' => 'New York',
+                ),
+                array(
+                    'label' => 'San Francisco',
+                    'value' => 'San Francisco',
+                ),
+                array(
+                    'label' => 'Seattle',
+                    'value' => 'Seattle',
+                ),
+                array(
+                    'label' => 'Washington D.C.',
+                    'value' => 'Washington D.C.',
+                ),
+
+            ),
+        ),
+
+        array(
+            'label' => 'Australia & Pacific',
+            'options' => array(
+                array(
+                    'label' => 'Melbourne',
+                    'value' => 'Melbourne',
+                ),
+                array(
+                    'label' => 'Sydney',
+                    'value' => 'Sydney',
+                ),
+            ),
+        ),
+
+        array(
+            'label' => 'Central & South America',
+            'options' => array(
+                array(
+                    'label' => 'Buenos Aires',
+                    'value' => 'Buenos Aires',
+                ),
+                array(
+                    'label' => 'Rio',
+                    'value' => 'Rio',
+                ),
+                array(
+                    'label' => 'San Paulo',
+                    'value' => 'San Paulo',
+                ),
+            ),
+        ),
+
+        array(
+            'label' => 'Mid East & Africa',
+            'options' => array(
+                array(
+                    'label' => 'Capetown',
+                    'value' => 'Capetown',
+                ),
+                array(
+                    'label' => 'Jerusalem',
+                    'value' => 'Jerusalem',
+                ),
+                array(
+                    'label' => 'Tel Aviv',
+                    'value' => 'Tel Aviv',
+                ),
+            ),
+        ),
+
+        array(
+            'label' => 'Other',
+            'options' => array(
+                array(
+                    'label' => 'Other',
+                    'value' => 'Other',
+                ),
+
+            ),
+        ),
+    );
+
+
     /**
-     * Form basic elements
-     *
-     * @var array
-     */
-     protected $mergeElements = array (
-         'city' => array (
-             'name' => 'city',
-             'type' => 'select',
-             'options' => array (
-                 'label' => 'City',
-                 'value_options' => array (
-                     array(
-                         'label' => 'EUROPE',
-                         'options' => array(
-                             array(
-                                 'label' => 'Amsterdam',
-                                 'value' => 'Amsterdam',
-                             ),
-                             array(
-                                 'label' => 'Florence',
-                                 'value' => 'Florence',
-                             ),
-                             array(
-                                 'label' => 'Prague',
-                                 'value' => 'Prague',
-                             ),
-                             array(
-                                 'label' => 'Athens',
-                                 'value' => 'Athens',
-                             ),
-                             array(
-                                 'label' => 'Istanbul',
-                                 'value' => 'Istanbul',
-                             ),
-                             array(
-                                 'label' => 'Rome',
-                                 'value' => 'Rome',
-                             ),
-                             array(
-                                 'label' => 'Barcelona',
-                                 'value' => 'Barcelona',
-                             ),
-                             array(
-                                 'label' => 'Lisbon',
-                                 'value' => 'Lisbon',
-                             ),
-                             array(
-                                 'label' => 'Seville',
-                                 'value' => 'Seville',
-                             ),
-                             array(
-                                 'label' => 'Berlin',
-                                 'value' => 'Berlin',
-                             ),
-                             array(
-                                 'label' => 'London',
-                                 'value' => 'London',
-                             ),
-                             array(
-                                 'label' => 'Venice',
-                                 'value' => 'Venice',
-                             ),
-                             array(
-                                 'label' => 'Brussels',
-                                 'value' => 'Brussels',
-                             ),
-                             array(
-                                 'label' => 'Madrid',
-                                 'value' => 'Madrid',
-                             ),
-                             array(
-                                 'label' => 'Vienna',
-                                 'value' => 'Vienna',
-                             ),
-                             array(
-                                 'label' => 'Budapest',
-                                 'value' => 'Budapest',
-                             ),
-                             array(
-                                 'label' => 'Milan',
-                                 'value' => 'Milan',
-                             ),
-                             array(
-                                 'label' => 'Zurich',
-                                 'value' => 'Zurich',
-                             ),
-                             array(
-                                 'label' => 'Copenhagen',
-                                 'value' => 'Copenhagen',
-                             ),
-                             array(
-                                 'label' => 'Naples',
-                                 'value' => 'Naples',
-                             ),
-                             array(
-                                 'label' => 'Dublin',
-                                 'value' => 'Dublin',
-                             ),
-                             array(
-                                 'label' => 'Paris',
-                                 'value' => 'Paris',
-                             ),
-                         ),
+    * Form basic elements
+    *
+    * @var array
+    */
+    protected $mergeElements = array (
+        'city' => array (
+            'name' => 'city',
+            'type' => 'select',
+            'callback' => 'getCity',
+            'options' => array (
+                'label' => 'City',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
 
-                     ),
-
-                     array(
-                         'label' => 'Africa & Middle EAST',
-                         'options' => array(
-                             array(
-                                 'label' => 'Cairo',
-                                 'value' => 'Cairo',
-                             ),
-                             array(
-                                 'label' => 'Marrakech',
-                                 'value' => 'Marrakech',
-                             ),
-                             array(
-                                 'label' => 'Tel Aviv',
-                                 'value' => 'Tel Aviv',
-                             ),
-                         ),
-                     ),
-
-                     array(
-                         'label' => 'Amercia',
-                         'options' => array(
-                             array(
-                                 'label' => 'Las Vegas',
-                                 'value' => 'Las Vegas',
-                             ),
-                             array(
-                                 'label' => 'Los Angeles',
-                                 'value' => 'Los Angeles',
-                             ),
-                             array(
-                                 'label' => 'Miami',
-                                 'value' => 'Miami',
-                             ),
-                             array(
-                                 'label' => 'New York',
-                                 'value' => 'New York',
-                             ),
-                             array(
-                                 'label' => 'San Francisco',
-                                 'value' => 'San Francisco',
-                             ),
-                             array(
-                                 'label' => 'Washington D.C.',
-                                 'value' => 'Washington D.C.',
-                             ),
-                             array(
-                                 'label' => 'Buenos Aires',
-                                 'value' => 'Buenos Aires',
-                             ),
-                             array(
-                                 'label' => 'Rio De Janeiro',
-                                 'value' => 'Rio De Janeiro',
-                             ),
-                             array(
-                                 'label' => 'San Paulo',
-                                 'value' => 'San Paulo',
-                             ),
-                         ),
-                     ),
-
-                     array(
-                         'label' => 'Asia',
-                         'options' => array(
-                             array(
-                                 'label' => 'Shanghai',
-                                 'value' => 'Shanghai',
-                             ),
-                             array(
-                                 'label' => 'Beijing',
-                                 'value' => 'Beijing',
-                             ),
-                             array(
-                                 'label' => 'Guangzhou',
-                                 'value' => 'Guangzhou',
-                             ),
-                             array(
-                                 'label' => 'Nanjing',
-                                 'value' => 'Nanjing',
-                             ),
-                             array(
-                                 'label' => 'Hong Kong',
-                                 'value' => 'Hong Kong',
-                             ),
-                             array(
-                                 'label' => 'Singapore',
-                                 'value' => 'Singapore',
-                             ),
-                         ),
-                     ),
-
-                     array(
-                         'label' => 'Other',
-                         'options' => array(
-                             array(
-                                 'label' => 'Other',
-                                 'value' => 'Other',
-                             ),
-
-                         ),
-                     ),
-
-                 ),
-             ),
-             'attributes' => array (
-                 'value' => '',
-             ),
-         ),
-        
-         'industry' => array (
+        'industry' => array (
             'name' => 'industry',
             'type' => 'text',
             'options' => array (
@@ -246,78 +361,18 @@ class ProfileForm extends \User\Form\ProfileForm
             ),
         ),
 
-         'interest' => array(
-             'name' => 'interest',
-             'type' => 'select',
-             'options' => array (
-                 'label' => 'Interest',
-                 'empty_option' => 'Select Interest',
-                 'value_options' => array(
-                     array(
-                         'label' => 'Food Production',
-                         'value' => 'Food Production',
-                     ),
-                     array(
-                         'label' => 'Wine Production',
-                         'value' => 'Wine Production',
-                     ),
-                     array(
-                         'label' => 'Hospitality',
-                         'value' => 'Hospitality',
-                     ),
-                     array(
-                         'label' => 'Restaurant',
-                         'value' => 'Restaurant',
-                     ),
-                     array(
-                         'label' => 'Bar and Club',
-                         'value' => 'Bar and Club',
-                     ),
-                     array(
-                         'label' => 'Distribution',
-                         'value' => 'Distribution',
-                     ),
-                     array(
-                         'label' => 'Trade',
-                         'value' => 'Trade',
-                     ),
-                     array(
-                         'label' => 'Hotel & Resort',
-                         'value' => 'Hotel & Resort',
-                     ),
-                     array(
-                         'label' => 'Media & Press',
-                         'value' => 'Media & Press',
-                     ),
-                     array(
-                         'label' => 'Marketing',
-                         'value' => 'Marketing',
-                     ),
-                     array(
-                         'label' => 'Communication',
-                         'value' => 'Communication',
-                     ),
-                     array(
-                         'label' => 'Consultancy',
-                         'value' => 'Consultancy',
-                     ),
-                     array(
-                         'label' => 'Educational Institution',
-                         'value' => 'Educational Institution',
-                     ),
-                     array(
-                         'label' => 'Research & Development',
-                         'value' => 'Research & Development',
-                     ),
-                     array(
-                         'label' => 'Other',
-                         'value' => 'Other',
-                     ),
-                 ),
-             ),
-         ),
+        'interest' => array(
+            'name' => 'interest',
+            'type' => 'select',
+            'callback' => 'getInterest',
+            'options' => array (
+                'label' => 'Interest',
+                'empty_option' => 'Select Interest',
+                //'value_options' => self::$interest,
+            ),
+        ),
 
-     );
+    );
 
     protected $mergeFilters = array (
         'site' => array (
@@ -331,4 +386,16 @@ class ProfileForm extends \User\Form\ProfileForm
             ),
         ),
     );
- }
+
+    public function getCity($element)
+    {
+        $element['options']['value_options'] = self::$city;
+        return $element;
+    }
+
+    public function getInterest($element)
+    {
+        $element['options']['value_options'] = self::$interest;
+        return $element;
+    }
+}

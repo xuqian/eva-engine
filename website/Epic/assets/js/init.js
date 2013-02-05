@@ -165,6 +165,22 @@ eva.checkMessage = function(){
 	setInterval(function(){ checkNewUnread() }, 50000);
 };
 
+
+eva.checkPermission = function(){
+	var user = eva.getUser();
+	var roles = user.Roles;
+	$(".role-checker").each(function(){
+		var roleString = $(this).attr("data-role");
+		var roleArray = roleString.split('|');
+		for(var i in roleArray){
+			if($.inArray(roleArray[i], roles) > -1){
+				$(this).removeClass('role-checker');
+				break;
+			}
+		}
+	});
+};
+
 eva.checkRequest = function(){
 	var counter = $(".notice-count-request");
 	if(!counter[0]) {
@@ -301,7 +317,7 @@ eva.checkEvent = function(){
 			if(!relationship.role &&
 			   relationship.memberEnable > 0 &&
 			   //allow join time is after event start time 1 hour (3600000 milliseconds)
-			   now.diff(moment(relationship.startDay + ' ' + relationship.startTime)) < 3600000  &&
+			   now.diff(moment(relationship.startDay + ' ' + relationship.startTime, "YYYY-MM-DD HH:mm:ss")) < 3600000  &&
 			   (relationship.memberLimit == '0' || relationship.memberLimit < relationship.memberCount)
 			  ){
 				checker.show();
@@ -649,6 +665,7 @@ eva.ready(function(){
 		if(!user){
 			return false;
 		}
+		eva.checkPermission();
 		eva.checkFollow();
 		eva.checkFriend();
 		eva.checkMessage();	

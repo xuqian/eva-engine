@@ -11,7 +11,7 @@ $userSearchForm->setView($this)
 
 $categories = array(
     'hot' => array(
-        'label' => 'To Follow ',
+        'label' => 'Event Host',
         'key'   => 'order',
         'value' => 'followdesc',
     ),
@@ -26,7 +26,7 @@ $categories = array(
         'value' => 1,
     ),
     'vip' => array(
-        'label' => 'VIP Members',
+        'label' => 'Event Host',
         'key'   => 'role',
         'value' => 'PAID_MEMBER',
     ),
@@ -41,13 +41,13 @@ $categories = array(
          </div><!--page main right end-->
          <div class="span9">
              <nav class="nav-member">
-             <a class="pull-right margin10h" href="<?=$this->uri('/users/list/')?>"><?=$this->_('Find Friend On Epicurissimo');?></a>
+             <a class="pull-right margin10h" href="<?=$this->uri('/users/list/')?>"><?=$this->_('Find Friend Here');?></a>
              <ul>
                  <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/user/')?>">All</a></li>
                  <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CONNOISSEUR_MEMBER')?>"><?=$this->_('Connoisseur');?></a></li>
                  <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PROFESSIONAL_MEMBER')?>"><?=$this->_('Professional');?></a></li>
-                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PAID_MEMBER')?>"><?=$this->_('VIP');?></a></li>
-                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CORPORATE_MEMBER')?>"><?=$this->_('Corporate');?></a></li>
+                 <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PAID_MEMBER')?>"><?=$this->_('Event Host');?></a></li>
+                 <li><a class="<?=$this->query['role'] == 'CORPORATE_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CORPORATE_MEMBER')?>"><?=$this->_('More to Discover');?></a></li>
              </ul>
              </nav>
          </div><!--page main left end-->

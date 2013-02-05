@@ -115,6 +115,12 @@ $form
             </div>
         </div>
 
+        <div class="control-group">
+            <div class="controls">
+                <div class="help-block"><label><input type="checkbox" name="agree" class="validate[required]" value="1"> I have read this <a href="<?=$this->uri('/pages/terms')?>" target="_blank">Agreement and agree to the terms and conditions</a></label></div>
+            </div>
+        </div>
+
         <div class="control-group hide <?=$form->isError('code') ? 'error' : '';?>">
             <?=$form->helper('code', 'label', array('class' => 'control-label'))?>
             <div class="controls">

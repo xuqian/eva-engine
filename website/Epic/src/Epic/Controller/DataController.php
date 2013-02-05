@@ -41,6 +41,26 @@ class DataController extends RestfulModuleController
     {
         $this->changeViewModel('json');
         $item = \Core\Auth::getLoginUser();
+        $itemModel = Api::_()->getModel('User\Model\User');
+        $itemRoles = $itemModel->getUser($item['id'], array(
+            'self' => array(
+            ),
+            'join' => array(
+                'Roles' => array(
+                    'self' => array(
+                        '*'
+                    ),
+                ),
+            ),
+        ));
+        if(isset($itemRoles['Roles'])){
+            foreach($itemRoles['Roles'] as $role){
+                if($role['RoleUser']['status'] == 'active'){
+                    $item['Roles'][] = $role['roleKey'];
+                }
+            }
+            //$item['Roles'] = $itemRoles['Roles'];
+        }
         if(!$item) {
             return new JsonModel(array(
                 'item' => null

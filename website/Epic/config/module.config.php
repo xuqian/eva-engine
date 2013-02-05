@@ -994,6 +994,11 @@ return array(
                 'base_dir' => EVA_ROOT_PATH . '/website/Epic/data/languages/',
                 'pattern' => '%s/epic.csv'
             ),
+            'epic' => array(
+                'type' => 'csv',
+                'base_dir' => __DIR__ . '/../languages/',
+                'pattern' => '%s/epic.csv'
+            ),
         ),
     ),
 
@@ -1009,13 +1014,4 @@ return array(
         ),
     ),
 
-    'translator' => array(
-        'translation_file_patterns' => array(
-            'epic' => array(
-                'type' => 'csv',
-                'base_dir' => __DIR__ . '/../languages/',
-                'pattern' => '%s/epic.csv'
-            ),
-        ),
-    ),
 );

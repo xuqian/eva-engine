@@ -36,7 +36,7 @@ $form->useSubFormGroup()
                                         <?=$form->restful();?>
                                         <input name="callback" type="hidden" value="<?=$this->uri('/messages/')?>" />
                                         <div class="control-group">
-                                            <?=$form->helper(array('Conversation', 'recipient_id'), 'label', array('class' => 'control-label'))?>
+                                            <?=$form->helper(array('Conversation', 'recipient_id'), 'label', array('class' => 'control-label', 'readonly' => 'readonly'))?>
                                             <div class="controls">
                                                 <?=$form->helper(array('Conversation', 'recipient_id'), array('class' => 'span3', 'placeholder' => 'User Name', 'value' => isset($this->to) ? $this->to : null))?>
                                             </div>

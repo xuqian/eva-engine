@@ -12,7 +12,7 @@ class LanguageController extends ActionController
     {
         $config = Api::_()->getConfig();
         $defaultLanguage = isset($config['translator']['locale']) ? $config['translator']['locale'] : 'en';
-        $language = $this->params()->fromRoute('id', $defaultLanguage);
+        $language = $this->params('id', $defaultLanguage);
         $language = str_replace('-', '_', $language);
         $languages = $config['translator']['languages'];
         if(false === in_array($language, $languages)){
