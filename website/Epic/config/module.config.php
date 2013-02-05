@@ -308,7 +308,7 @@ return array(
                 'options' => array(
                     'route' => '/event[/:id][/]',
                     'constraints' => array(
-                        'id'     => '(?!album\b|calendar\b|albums\b)[a-zA-Z0-9_-]+',
+                        'id'     => '(?!album\b|calendar\b|albums\b|join\b)[a-zA-Z0-9_-]+',
                     ),
                     'defaults' => array(
                         'controller' => 'EventController',

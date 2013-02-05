@@ -10,6 +10,8 @@ if($this->form){
     $form = new Core\Form\SendEmailForm();
 }
 
+$subject = $this->event ? "Group {$this->item['groupName']} Schedule an New Event {$this->event['title']}" : null;
+
 $form
 ->setView($this)
 ->useSubFormGroup()
@@ -69,13 +71,13 @@ $form
                             <div class="control-group <?=$form->isError('subject') ? 'error' : '';?>">
                                 <?=$form->helper('subject', 'label', array('class' => 'control-label'))?>
                                 <div class="controls">
-                                    <?=$form->helper('subject', array('class' => 'input-block-level', 'value' => ''))?>        
+                                    <?=$form->helper('subject', array('class' => 'input-block-level', 'value' => $subject))?>        
 
                                     <div class="help-block"><?=$form->helper('subject', 'formElementErrors')?></div>
                                 </div>
                             </div>
                             <div class="control-group <?=$form->isError('content') ? 'error' : '';?>">
-                                <?=$form->helper('content', 'label', array('class' => 'control-label'), array('args' => array(null, 'abc')))?>
+                                <?=$form->helper('content', 'label', array('class' => 'control-label','value' => $this->widget('Epic', 'mail/groupevent', $this->vars())),array('args' => array(null, 'abc')))?>
                                 <div class="controls">
                                     <?=$form->helper('content', 'formTextarea', array('class' => 'input-block-level', 'rows' => 10))?>        
                                     <div class="help-block"><?=$form->helper('content', 'formElementErrors')?></div>

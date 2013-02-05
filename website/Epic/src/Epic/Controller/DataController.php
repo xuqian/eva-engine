@@ -845,4 +845,28 @@ class DataController extends RestfulModuleController
             'items' => $items,
         ));   
     }
+
+    public function noticecountAction()
+    {
+        $mine = \Core\Auth::getLoginUser(); 
+
+        $count = 0;
+
+        if ($mine) {
+            $query = array(
+                'user_id' => $mine['id'],
+                'readFlag' => 0,
+                'noLimit' => true,
+            );
+
+            $itemModel = Api::_()->getModel('Notification\Model\Notice');
+            $items = $itemModel->setItemList($query)->getNoticeList();
+            $count = count($items->toArray());
+        }
+
+        $this->changeviewmodel('Json');
+        return new JsonModel(array(
+            'count' => $count,
+        )); 
+    }
 }

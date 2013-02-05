@@ -4,6 +4,7 @@ namespace Epic\Jobs;
 use Eva\Api;
 use Eva\Job\RelatedJobInterface;
 use Core\JobManager;
+use Eva\View\Model\ViewModel;
 
 
 class SendNoticeByActivityAt implements RelatedJobInterface
@@ -30,10 +31,25 @@ class SendNoticeByActivityAt implements RelatedJobInterface
             'notification_id' => $notificationId,
             'notificationKey' => $notificationKey,
             'createTime' => \Eva\Date\Date::getNow(),
-            'content' => "User $userId @ you in activity $activityId",
+            'content' => $this->getContent($args),
         ));
 
 
         //TODO:Insert into messages_users table
+    }
+
+    public function getContent($data)
+    {
+        $view = new \Zend\View\Renderer\PhpRenderer();
+        $resolver = new \Zend\View\Resolver\TemplateMapResolver();
+        $resolver->setMap(array(
+            'mailTemplate' => __DIR__ . '/../../../view/notification/' . strtolower($data['notificationKey']) . '/notice.phtml'
+        ));
+        $view->setResolver($resolver);
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTemplate('mailTemplate')
+            ->setVariables($data);
+        
+        return $view->render($viewModel);
     }
 }

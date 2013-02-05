@@ -705,9 +705,19 @@ class GroupController extends ActionController
         list($item, $members) = $this->groupAction();
 
         $viewModel = new ViewModel();
+        
+        $eventId = $this->params()->fromQuery('event');
+
+        if ($eventId) {
+            $eventView = $this->forward()->dispatch('EventController', array(
+                'action' => 'get',
+                'id' => $eventId,
+            ));
+        }
 
         $viewModel->setVariables(array(
             'item' => $item,
+            'event' => isset($eventView) ? $eventView->item : null,
             'members' => $members,
         ));
 

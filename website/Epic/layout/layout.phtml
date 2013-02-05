@@ -80,10 +80,10 @@
                         <?if($this->hasModule('User')):?>
                         <?if($this->loginUser):?>
                         <li>
-                        <a href="<?=$this->uri('/messages/')?>" class="nav-icon notice-count notice-count-all"><i class="icon-envelope-alt"></i><span class="count-number badge badge-important hide"></span></a>
+                        <a href="<?=$this->uri('/messages/')?>" class="nav-icon notice-count notice-count-message"><i class="icon-envelope-alt"></i><span class="count-number badge badge-important hide"></span></a>
                         </li>
                         <li>
-                        <a href="<?=$this->uri('/notifications/')?>" class="nav-icon notice-count notice-count-message"><i class="icon-bell-alt"></i><span class="count-number badge badge-important hide"></span></a>
+                        <a href="<?=$this->uri('/notifications/')?>" class="nav-icon notice-count notice-count-all"><i class="icon-bell-alt"></i><span class="count-number badge badge-important hide"></span></a>
                         </li>
                         <li class="dropdown">
                         <a href="<?=$this->uri('/notification/request/')?>" class="nav-icon notice-count notice-count-request dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><span class="count-number badge badge-important hide"></span></a>

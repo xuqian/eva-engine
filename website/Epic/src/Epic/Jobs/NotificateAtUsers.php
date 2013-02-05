@@ -17,6 +17,7 @@ class NotificateAtUsers implements RelatedJobInterface
         $activityId = $args['id'];
         $userId = $args['user_id'];
         $userNames = $args['userNames'];
+        $authorName = $args['authorName'];
         $userModel = Api::_()->getModel('User\Model\User');
         $userIdArray = array();
         $users = array();
@@ -63,6 +64,7 @@ class NotificateAtUsers implements RelatedJobInterface
                     'notificationKey' => $notificationKey,
                     'id' => $activityId,
                     'user_id' => $userId,
+                    'authorName' => $authorName,
                     'at_user_id' => $user->id,
                     'activity_id' => $activityId,
                     'message_id' => $messageItem->id,
@@ -76,6 +78,7 @@ class NotificateAtUsers implements RelatedJobInterface
                     'notificationKey' => $notificationKey,
                     'id' => $activityId,
                     'user_id' => $userId,
+                    'authorName' => $authorName,
                     'at_user_id' => $user->id,
                     'activity_id' => $activityId,
                     'message_id' => $messageItem->id,

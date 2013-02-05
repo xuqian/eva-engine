@@ -62,10 +62,14 @@ class Listener implements ListenerAggregateInterface
             return false;
         }
 
+        $userModel = \Eva\Api::_()->getModel('User\Model\User');
+        $author = $userModel->getUser($userId);
+
         JobManager::setQueue('notificate');
         JobManager::jobHandler('Epic\Jobs\NotificateAtUsers', array(
             'id' => $activityId,
             'user_id' => $userId,
+            'authorName' => $author['userName'],
             'userNames' => $userNames,
         ));
     }
