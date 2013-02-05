@@ -30,7 +30,7 @@ $paginator = $paginator ? $paginator->toArray() : array();
                         <?endforeach;?>
                         <?endif?>
                     </div>
-                    <?if($paginator['nextPage']):?>
+                    <?if(isset($paginator['nextPage']) && $paginator['nextPage']):?>
                     <div class="pager">
                         <a href="<?=$this->uri('/share/?page=' . $paginator['nextPage'])?>" class="btn load-more span11">More</a>
                     </div>

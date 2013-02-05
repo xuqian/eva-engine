@@ -7,7 +7,7 @@
         <div class="media-body">
             <h4 class="media-heading"><?=$user['userName']?></h4>
             <div class="media">
-                <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-gray btn-small"><i class="icon-plus"></i> <?=$this->_('Start a Epicurissimo Group');?></a>
+                <a href="<?=$this->uri('/groups/create/')?>" class="btn btn-gray btn-small role-checker" data-role="PAID_MEMBER|CORPORATE_MEMBER"><i class="icon-plus"></i> <?=$this->_('Start a Epicurissimo Group');?></a>
             </div>
         </div>
     </div>
