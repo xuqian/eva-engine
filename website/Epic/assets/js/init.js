@@ -301,7 +301,7 @@ eva.checkEvent = function(){
 			if(!relationship.role &&
 			   relationship.memberEnable > 0 &&
 			   //allow join time is after event start time 1 hour (3600000 milliseconds)
-			   now.diff(moment(relationship.startDay + ' ' + relationship.startTime)) < 3600000  &&
+			   now.diff(moment(relationship.startDay + ' ' + relationship.startTime, "YYYY-MM-DD HH:mm:ss")) < 3600000  &&
 			   (relationship.memberLimit == '0' || relationship.memberLimit < relationship.memberCount)
 			  ){
 				checker.show();
