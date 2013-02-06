@@ -85,6 +85,7 @@ class Listener implements ListenerAggregateInterface
         $userModel = $e->getTarget();
         $item = $userModel->getItem();
         $userId = $item->id;
+        $userName = $item->userName;
         $inviteUserId = $item->inviteUserId;
         
         if(!$inviteUserId){
@@ -97,7 +98,7 @@ class Listener implements ListenerAggregateInterface
         JobManager::setQueue('notificate');
         JobManager::jobHandler('Epic\Jobs\NotificateFriendRegistered', array(
             'user_id' => $userId,
-            'user_name' => $item->userName,
+            'user_name' => $userName,
             'inviteUserId' => $inviteUserId,
             'inviteUserName' => $author->userName,
         ));
