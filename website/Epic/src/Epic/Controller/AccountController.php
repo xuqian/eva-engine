@@ -27,6 +27,82 @@ class AccountController extends ActionController
         );
     }
 
+    public function privacyAction()
+    {
+        $itemModel = Api::_()->getModel('User\Model\Privacy');
+        $user = Auth::getLoginUser();
+        $privacy = $itemModel->getPrivacy($user['id']);
+
+        $roles = \User\Model\Privacy::$privacyRoles;
+
+        $permissions = array(
+            'profile' => array(
+                'permissionKey' => 'profile',
+                'permissionName' => 'View Timeline',
+                'permissionDiscription' => 'View My Basic Info',
+            ),
+            'blog' => array(
+                'permissionKey' => 'blog',
+                'permissionName' => 'View My Blog',
+                'permissionDiscription' => 'View My Blog',
+            ),
+            'album' => array(
+                'permissionKey' => 'album',
+                'permissionName' => 'View My Album',
+                'permissionDiscription' => 'View My Album',
+            ),
+            'event' => array(
+                'permissionKey' => 'event',
+                'permissionName' => 'View My Joined Events',
+                'permissionDiscription' => 'View My Joined Events',
+            ),
+            'group' => array(
+                'permissionKey' => 'group',
+                'permissionName' => 'View My Joined Groups',
+                'permissionDiscription' => 'View My Joined Groups',
+            ),
+        );
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData = $this->params()->fromPost();
+            $item = array(
+                'user_id' => $user['id'],
+                'setting' => \Zend\Json\Json::encode($postData['permission'])
+            );
+            $itemModel->setItem($item)->savePrivacy();
+            $callback = $this->params()->fromPost('callback');
+            $callback = $callback ? $callback : '/account/privacy/';
+            $this->redirect()->toUrl($callback);
+        }
+
+        $permissionForm = new \Eva\Form\Form();
+        $options = array();
+        foreach($roles as $role){
+            $options[] = array(
+                'label' => $role['roleName'],
+                'value' => $role['roleKey'],
+            );
+        }
+        foreach($permissions as $permission){
+            $permissionForm->add(array(
+                'name' => $permission['permissionKey'],
+                'type' => 'Zend\Form\Element\Select',
+                'options' => array(
+                    'label' => $permission['permissionName'],
+                    'value_options' => $options,
+                ),
+            ));
+        }
+
+        return array(
+            'form' => $permissionForm,
+            'roles' => $roles,
+            'permissions' => $permissions,
+            'item' => $privacy,
+        );
+    }
+
     public function profileAction()
     {
         $request = $this->getRequest();

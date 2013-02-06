@@ -773,6 +773,18 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'anonymous' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'anonymous[/]',
+                            'constraints' => array(
+                            ),
+                            'defaults' => array(
+                                'action' => 'anonymous'
+                            )
+                        ),
+                        'may_terminate' => true,
+                    ),
                 ), //profile child_routes end
             ), //user end
             'messages' => array(

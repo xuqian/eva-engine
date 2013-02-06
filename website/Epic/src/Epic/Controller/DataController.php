@@ -195,8 +195,8 @@ class DataController extends RestfulModuleController
             ));
         }
         $selectQuery = array(
-            'user_id' => $this->params()->fromQuery('user_id'),
-            'friend_id' => $user['id'],
+            'friend_id' => $this->params()->fromQuery('user_id'),
+            'user_id' => $user['id'],
         );
         $itemModel = Api::_()->getModel('User\Model\Friend');
         $item = $itemModel->setItemList($selectQuery)->getFriendList();

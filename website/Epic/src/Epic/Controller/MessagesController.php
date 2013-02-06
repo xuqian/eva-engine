@@ -6,6 +6,7 @@ use Eva\Api,
     Eva\View\Model\ViewModel,
     Message\Form;
 use Epic\Exception;
+use Core\Auth;
 
 
 class MessagesController extends ActionController
@@ -29,6 +30,12 @@ class MessagesController extends ActionController
 
     public function indexAction()
     {
+        $user = Auth::getLoginUser();
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        )); 
+
         $query = $this->getRequest()->getQuery();
         $to = $query['to'];
         $form = new Form\IndexForm();
@@ -96,6 +103,12 @@ class MessagesController extends ActionController
 
     public function getAction()
     {
+        $user = Auth::getLoginUser();
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        )); 
+
         $id = $this->params('id');
         $userModel = Api::_()->getModel('User\Model\User');
         $user = $userModel->getUser($id); 

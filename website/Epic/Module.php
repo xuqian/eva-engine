@@ -8,6 +8,26 @@ use Core\Auth;
 
 class Module
 {
+    public function getModuleDependencies()
+    {
+        return array(
+            'Blog',
+            'File',
+            'User',
+            'Album',
+            'Event',
+            'Activity',
+            'Message',
+            'Oauth',
+            'Contacts',
+            'Payment',
+            'Video',
+            'Group',
+            'Webservice',
+            'Notification',
+        );
+    }
+
     public function onBootstrap($e)
     {
         $event = $e->getApplication()->getEventManager();
