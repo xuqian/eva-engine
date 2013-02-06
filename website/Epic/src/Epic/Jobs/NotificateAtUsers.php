@@ -80,6 +80,7 @@ class NotificateAtUsers implements RelatedJobInterface
                     'user_id' => $userId,
                     'authorName' => $authorName,
                     'at_user_id' => $user->id,
+                    'at_user_email' => $user->email,
                     'activity_id' => $activityId,
                     'message_id' => $messageItem->id,
                 ));

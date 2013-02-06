@@ -6,7 +6,7 @@ use Eva\Job\RelatedJobInterface;
 use Core\JobManager;
 
 
-class SendEmailByActivityAt implements RelatedJobInterface
+class SendEmailByFriendApprove implements RelatedJobInterface
 {
     public $args;
 
@@ -14,23 +14,20 @@ class SendEmailByActivityAt implements RelatedJobInterface
     {
         $args = $this->args;
 
-        $activityId = $args['id'];
         $userId = $args['user_id'];
-        $atUserId = $args['at_user_id'];
-        $atUserEmail = $args['at_user_email'];
+        $userEmail = $args['user_email'];
         $notificationId = $args['notification_id'];
         $notificationKey = $args['notificationKey'];
-        $activityId = $args['activity_id'];
         $messageId = $args['message_id'];
-
+        
         $config = Api::_()->getConfig();
-        $args['domain'] = $config['queue']['domain'];
+        $args['domain'] = $config['queue']['domain']; 
 
         $mail = new \Core\Mail();
         $message = $mail->getMessage();
-        $message->addTo($atUserEmail);
+        $message->addTo($userEmail);
         
-        $message->setSubject('Epicurissimo Notification')
+        $message->setSubject('Epicurissimo Friend Approve')
             ->setData($args)
             ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
             ->setTemplate('notification/' . strtolower($notificationKey) . '/email.phtml');
