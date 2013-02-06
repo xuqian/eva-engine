@@ -27,6 +27,88 @@ class AccountController extends ActionController
         );
     }
 
+    public function privacyAction()
+    {
+        $roles = array(
+            'guest' => array(
+                'roleKey' => 'guest',
+                'roleName' => 'Public',
+            ),
+            'friend' => array(
+                'roleKey' => 'friend',
+                'roleName' => 'My Friend',
+            ),
+            /*
+            'friendOfFriend' => array(
+                'roleKey' => 'friendOfFriend',
+                'roleName' => 'Friend Of My Friend',
+            ),
+            'blocked' => array(
+                'roleKey' => 'Blocked',
+                'roleName' => 'Blocked User',
+            ),
+            */
+        );
+
+        $permissions = array(
+            'profile' => array(
+                'permissionKey' => 'profile',
+                'permissionName' => 'View Profile',
+                'permissionDiscription' => 'View My Basic Info',
+            ),
+            'blog' => array(
+                'permissionKey' => 'blog',
+                'permissionName' => 'View My Blog',
+                'permissionDiscription' => 'View My Blog',
+            ),
+            'album' => array(
+                'permissionKey' => 'album',
+                'permissionName' => 'View My Album',
+                'permissionDiscription' => 'View My Album',
+            ),
+            'event' => array(
+                'permissionKey' => 'event',
+                'permissionName' => 'View My Joined Events',
+                'permissionDiscription' => 'View My Joined Events',
+            ),
+            'group' => array(
+                'permissionKey' => 'group',
+                'permissionName' => 'View My Joined Groups',
+                'permissionDiscription' => 'View My Joined Groups',
+            ),
+        );
+
+        $permissionForm = new \Eva\Form\Form();
+        foreach($permissions as $permission){
+            $permissionForm->add(array(
+                'name' => $permission['permissionKey'],
+                'type' => 'Zend\Form\Element\Checkbox',
+                'options' => array(
+                    'label' => $permission['permissionName'],
+                ),
+            ));
+        }
+
+        $form = new \User\Form\BinarySettingForm();
+        $form->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'permission',
+            'options' => array(
+                'label' => 'Please choose categories for this product',
+                'count' => 2,
+                'should_create_template' => true,
+                'allow_add' => true,
+                'target_element' => $permissionForm
+            )
+        ));
+
+        return array(
+            'form' => $form,
+            'roles' => $roles,
+            'permissions' => $permissions,
+        );
+    }
+
     public function profileAction()
     {
         $request = $this->getRequest();

@@ -8,9 +8,20 @@ use Zend\Mvc\MvcEvent;
 use Core\Auth;
 use Oauth\OauthService;
 
+use Zend\Permissions\Rbac\Rbac;
+use Zend\Permissions\Rbac\Role;
+
+
 class UserController extends ActionController
 {
     protected $user;
+
+    protected function checkViewPermission()
+    {
+        $rbac = new Rbac();
+        $visitor = new Role('friends');
+
+    }
 
     public function userAction()
     {
