@@ -16,11 +16,62 @@ class UserController extends ActionController
 {
     protected $user;
 
-    protected function checkViewPermission()
+    protected function checkViewPermission($permission)
     {
-        $rbac = new Rbac();
-        $visitor = new Role('friends');
+        $user = $this->userAction();
+        $itemModel = Api::_()->getModel('User\Model\Privacy');
+        $privacy = $itemModel->getPrivacy($user['id']);
 
+
+        $visitor = Auth::getLoginUser();
+        $itemModel->setUser($user);
+        $itemModel->setVisitor($visitor);
+
+        $rbac = new Rbac();
+        $roles = \User\Model\Privacy::$privacyRoles;
+        foreach($roles as $role){
+            $roleKey = $role['roleKey'];
+            $rbacRole = new Role($roleKey);
+            $permissionKey = array_keys($privacy, $roleKey);
+            if(true === is_array($permissionKey)){
+                foreach($permissionKey as $key){
+                    $rbacRole->addPermission($key);
+                }
+            } else {
+                $rbacRole->addPermission($permissionKey);
+            }
+            $rbac->addRole($rbacRole);
+        }
+
+        $res = false;
+        foreach($roles as $role){
+            $roleKey = $role['roleKey'];
+            $assertionName = 'User\PrivacyAssert\Assert' . ucfirst($roleKey);
+            $assertion = new $assertionName;
+            $assertion->setUser($user);
+            $assertion->setVisitor($visitor);
+            $res = $rbac->isGranted($roleKey, $permission, $assertion);
+
+            /*
+            p($roleKey);
+            p(sprintf("User : %s", $user['id']));
+            p(sprintf("Visitor : %s", $visitor['id']));
+            p($res);
+            */
+
+            if(true === $res){
+                break;
+            }
+        }
+        //p($rbac);
+        //p(sprintf("Final : %s", $res));
+
+        return $res;
+    }
+
+    public function anonymousAction()
+    {
+    
     }
 
     public function userAction()
@@ -29,7 +80,7 @@ class UserController extends ActionController
             return $this->user;
         }
 
-        $userId = $this->getEvent()->getRouteMatch()->getParam('id');
+        $userId = $this->params('id');
         if(!$userId){
             return array();
         }
@@ -188,6 +239,11 @@ class UserController extends ActionController
 
     public function blogAction()
     {
+        if(true !== $this->checkViewPermission('blog')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $page = $this->params()->fromQuery('page', 1);
         $query = array(
             'page' => $page,
@@ -233,6 +289,11 @@ class UserController extends ActionController
 
     public function postAction()
     {
+        if(true !== $this->checkViewPermission('blog')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $id = $this->params('post_id');
         $itemModel = Api::_()->getModel('Blog\Model\Post');
         $item = $itemModel->getPost($id, array(
@@ -312,12 +373,14 @@ class UserController extends ActionController
         return $view;
     }
 
-    public function friendAction()
-    {
-    }
 
     public function albumsAction()
     {
+        if(true !== $this->checkViewPermission('album')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $page = $this->params()->fromQuery('page', 1);
         $query = array(
             'page' => $page,
@@ -357,6 +420,11 @@ class UserController extends ActionController
     
     public function albumAction()
     {
+        if(true !== $this->checkViewPermission('album')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $id = $this->params('album_id');
         
         $itemModel = Api::_()->getModel('Album\Model\Album');
@@ -405,6 +473,11 @@ class UserController extends ActionController
 
     public function groupAction()
     {
+        if(true !== $this->checkViewPermission('group')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $id = $this->params('group_id');
         $itemModel = Api::_()->getModel('Group\Model\Group'); 
         $item = $itemModel->getGroup($id, array(
@@ -439,6 +512,11 @@ class UserController extends ActionController
 
     public function groupsAction()
     {
+        if(true !== $this->checkViewPermission('group')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $page = $this->params()->fromQuery('page', 1);
         $query = array(
             'page' => $page,
@@ -487,6 +565,11 @@ class UserController extends ActionController
 
     public function eventAction()
     {
+        if(true !== $this->checkViewPermission('event')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $id = $this->params('event_id');
         $itemModel = Api::_()->getModel('Event\Model\Event'); 
         $item = $itemModel->getEventdata($id, array(
@@ -521,6 +604,11 @@ class UserController extends ActionController
 
     public function eventsAction()
     {
+        if(true !== $this->checkViewPermission('event')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $page = $this->params()->fromQuery('page', 1);
         $timenode = $this->params()->fromQuery('timenode', '');
         $query = array(

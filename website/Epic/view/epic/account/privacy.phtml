@@ -26,15 +26,12 @@ $permissions = $this->permissions;
 
                         <form <?=$this->formAttr($form)?> class="form form-horizontal">
                             <?=$form->restful();?>
-                            <?foreach($permissions as $permission):?>
-                            <div class="control-group">
-                                <label class="control-label"><?=$permission['permissionName']?></label>
+                            <?foreach($permissions as $key => $permission):?>
+                            <div class="control-group <?=$form->isError($key) ? 'error' : '';?>">
+                                <?=$form->helper($key, 'label', array('class' => 'control-label'))?>
                                 <div class="controls">
-                                    <select name="permission[<?=$permission['permissionKey']?>]">
-                                        <?foreach($roles as $role):?>
-                                        <option value="<?=$role['roleKey']?>"><?=$role['roleName']?></option>
-                                        <?endforeach?>
-                                    </select>
+                                    <?=$form->helper($key, 'formSelect', array('name' => "permission[$key]", 'class' => ''))?>        
+                                    <div class="help-block"><?=$form->helper($key, 'formElementErrors')?></div>
                                 </div>
                             </div>
                             <?endforeach?>

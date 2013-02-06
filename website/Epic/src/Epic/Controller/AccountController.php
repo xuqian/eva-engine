@@ -29,26 +29,11 @@ class AccountController extends ActionController
 
     public function privacyAction()
     {
-        $roles = array(
-            'guest' => array(
-                'roleKey' => 'guest',
-                'roleName' => 'Public',
-            ),
-            'friend' => array(
-                'roleKey' => 'friend',
-                'roleName' => 'My Friend',
-            ),
-            /*
-            'friendOfFriend' => array(
-                'roleKey' => 'friendOfFriend',
-                'roleName' => 'Friend Of My Friend',
-            ),
-            'blocked' => array(
-                'roleKey' => 'Blocked',
-                'roleName' => 'Blocked User',
-            ),
-            */
-        );
+        $itemModel = Api::_()->getModel('User\Model\Privacy');
+        $user = Auth::getLoginUser();
+        $privacy = $itemModel->getPrivacy($user['id']);
+
+        $roles = \User\Model\Privacy::$privacyRoles;
 
         $permissions = array(
             'profile' => array(
@@ -78,34 +63,43 @@ class AccountController extends ActionController
             ),
         );
 
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData = $this->params()->fromPost();
+            $item = array(
+                'user_id' => $user['id'],
+                'setting' => \Zend\Json\Json::encode($postData['permission'])
+            );
+            $itemModel->setItem($item)->savePrivacy();
+            $callback = $this->params()->fromPost('callback');
+            $callback = $callback ? $callback : '/account/privacy/';
+            $this->redirect()->toUrl($callback);
+        }
+
         $permissionForm = new \Eva\Form\Form();
+        $options = array();
+        foreach($roles as $role){
+            $options[] = array(
+                'label' => $role['roleName'],
+                'value' => $role['roleKey'],
+            );
+        }
         foreach($permissions as $permission){
             $permissionForm->add(array(
                 'name' => $permission['permissionKey'],
-                'type' => 'Zend\Form\Element\Checkbox',
+                'type' => 'Zend\Form\Element\Select',
                 'options' => array(
                     'label' => $permission['permissionName'],
+                    'value_options' => $options,
                 ),
             ));
         }
 
-        $form = new \User\Form\BinarySettingForm();
-        $form->add(array(
-            'type' => 'Zend\Form\Element\Collection',
-            'name' => 'permission',
-            'options' => array(
-                'label' => 'Please choose categories for this product',
-                'count' => 2,
-                'should_create_template' => true,
-                'allow_add' => true,
-                'target_element' => $permissionForm
-            )
-        ));
-
         return array(
-            'form' => $form,
+            'form' => $permissionForm,
             'roles' => $roles,
             'permissions' => $permissions,
+            'item' => $privacy,
         );
     }
 
