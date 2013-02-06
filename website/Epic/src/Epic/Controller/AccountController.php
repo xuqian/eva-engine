@@ -38,7 +38,7 @@ class AccountController extends ActionController
         $permissions = array(
             'profile' => array(
                 'permissionKey' => 'profile',
-                'permissionName' => 'View Profile',
+                'permissionName' => 'View Timeline',
                 'permissionDiscription' => 'View My Basic Info',
             ),
             'blog' => array(
