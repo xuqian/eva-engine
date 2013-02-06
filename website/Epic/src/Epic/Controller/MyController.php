@@ -27,6 +27,11 @@ class MyController extends ActionController
     public function friendAction()
     {
         $user = Auth::getLoginUser();
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $user['id'],
+        )); 
+
         $selectQuery = array(
             'user_id' => $user['id'],
             'relationshipStatus' => 'approved',
