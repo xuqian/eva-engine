@@ -228,7 +228,7 @@ class UserController extends ActionController
 
     public function getAction()
     {
-        if(true !== $this->checkViewPermission('blog')){
+        if(true !== $this->checkViewPermission('profile')){
             $userId = $this->params('id');
             $this->redirect()->toUrl("/user/$userId/anonymous");
         }
