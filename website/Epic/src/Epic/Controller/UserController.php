@@ -21,6 +21,15 @@ class UserController extends ActionController
         $user = $this->userAction();
         $itemModel = Api::_()->getModel('User\Model\Privacy');
         $privacy = $itemModel->getPrivacy($user['id']);
+        if(!$privacy){
+            $privacy = array(
+                'profile' => 'myGuest',
+                'blog' => 'myGuest',
+                'album' => 'myGuest',
+                'group' => 'myGuest',
+                'event' => 'myGuest',
+            );
+        }
 
 
         $visitor = Auth::getLoginUser();
@@ -56,7 +65,7 @@ class UserController extends ActionController
             p($roleKey);
             p(sprintf("User : %s", $user['id']));
             p(sprintf("Visitor : %s", $visitor['id']));
-            p($res);
+            p(sprintf("Allow : %s", $res));
             */
 
             if(true === $res){
@@ -219,6 +228,11 @@ class UserController extends ActionController
 
     public function getAction()
     {
+        if(true !== $this->checkViewPermission('blog')){
+            $userId = $this->params('id');
+            $this->redirect()->toUrl("/user/$userId/anonymous");
+        }
+
         $user = $this->userAction();
 
         list($items, $paginator) = $this->forward()->dispatch('FeedController', array(
