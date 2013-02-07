@@ -92,7 +92,7 @@ class Listener implements ListenerAggregateInterface
             return false;
         }
 
-        $userModel = \Eva\Api::_()->getModel('User\Model\User');
+        $userModel = clone \Eva\Api::_()->getModel('User\Model\User');
         $author = $userModel->getUser($inviteUserId);
 
         JobManager::setQueue('notificate');

@@ -18,8 +18,14 @@ class NotificateFriendApprove implements RelatedJobInterface
         $friendId = $args['friend_id'];
         
         $userModel = Api::_()->getModel('User\Model\User');
-        $user = clone $userModel->getUser($userId);
-        $friend = clone $userModel->getUser($friendId);
+        $user = clone $userModel->getItem();
+        $friend = clone $userModel->getItem();
+
+        $user->user_id = $userId;
+        $user->self(array('*'));
+        
+        $friend->user_id = $friendId;
+        $friend->self(array('*'));
         
         if(!$user) {
             return;
@@ -39,7 +45,8 @@ class NotificateFriendApprove implements RelatedJobInterface
         ));
         $messageItem = $messageModel->getItem();
 
-        $notificationModel->setUser($user);
+        $notificationModel->setUser($user)
+                ->setNotification($notificationItem);
         $notificationSetting = $notificationModel->getUserSetting();
 
         if($notificationSetting['sendNotice']){

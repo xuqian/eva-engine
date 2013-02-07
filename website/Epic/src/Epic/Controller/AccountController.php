@@ -386,4 +386,57 @@ class AccountController extends ActionController
         } else {
         }
     }
+
+    public function notificationAction()
+    {
+        $user = Auth::getLoginUser();
+
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $postData = $request->getPost();
+            $itemModel = Api::_()->getModel('Notification\Model\Usersetting');
+            
+            foreach ($postData['notification_id'] as $key=>$notification_id) {
+                $item = array(
+                    'user_id' => $user['id'],
+                    'notification_id' => $notification_id,
+                    'disableNotice' => $postData['disableNotice'][$key],
+                    'disableEmail' => $postData['disableEmail'][$key],
+                );   
+                $itemModel->setItem($item)->removeUsersetting(); 
+                $itemModel->setItem($item)->createUsersetting();
+            }
+
+            return $this->redirect()->toUrl('/account/notification/');
+
+        } else {
+            $userModel = Api::_()->getModel('User\Model\User');
+            $user = $userModel->getUser($user['id']);
+
+            $itemModel = Api::_()->getModel('Notification\Model\Notification');
+            $items = $itemModel->setItemList(array('noLimit' => true))->getNotificationList();
+
+            $userSettings = array();
+
+            foreach ($items as $key=>$item) {
+                $itemModel->setUser($user)
+                    ->setNotification($item);
+
+                $setting = $itemModel->getUserSetting();
+
+                $userSettings[$key]['user_id'] = $user['id'];
+                $userSettings[$key]['notification_id'] = $item->id;
+                foreach ($setting as $columnName=>$column) {
+                    $name = str_replace('send', 'disable',$columnName);
+                    $userSettings[$key][$name] = $column === 0 ? 1 : 0;
+                }
+                $userSettings[$key]['Notification'] = $item->toArray();
+            } 
+
+            return array(
+                'settings' => $userSettings,
+            );
+        }
+    }
 }
