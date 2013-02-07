@@ -21,10 +21,10 @@ class NotificateFriendApprove implements RelatedJobInterface
         $user = clone $userModel->getItem();
         $friend = clone $userModel->getItem();
 
-        $user->user_id = $userId;
+        $user->id = $userId;
         $user->self(array('*'));
         
-        $friend->user_id = $friendId;
+        $friend->id = $friendId;
         $friend->self(array('*'));
         
         if(!$user) {
