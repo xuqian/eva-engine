@@ -82,7 +82,8 @@ INSERT INTO `eva_user_fields` (`id`, `fieldName`, `fieldKey`, `fieldType`, `labe
 (10, 'Industry(Professional)', 'IndustryIndustrie', 'select', 'Industry', '', 0, 0, 1, 0, '', NULL, NULL, NULL, NULL, NULL),
 (11, 'How could we help you?(Professional)', 'HowCouldWehelpYou', 'multiCheckbox', 'How could we help you?', '', 0, 0, 1, 0, '', NULL, NULL, NULL, NULL, NULL),
 (12, 'Your Expertise(Professional)', 'YourExpertise', 'multiCheckbox', 'Your Expertise', '', 0, 0, 1, 0, '', NULL, NULL, NULL, NULL, NULL),
-(13, 'Title', 'aQR7Jv', 'select', 'Title', '', 1, 0, 0, 0, '', NULL, NULL, NULL, NULL, NULL);
+(13, 'Title', 'aQR7Jv', 'radio', 'Title', '', 1, 0, 0, 0, '', NULL, NULL, NULL, NULL, NULL);
+
 
 
 INSERT INTO `eva_user_fields_roles` (`field_id`, `role_id`) VALUES
