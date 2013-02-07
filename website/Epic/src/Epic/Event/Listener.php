@@ -93,7 +93,7 @@ class Listener implements ListenerAggregateInterface
         }
 
         $userModel = \Eva\Api::_()->getModel('User\Model\User');
-        $author = $userModel->getUser($inviteUserId);
+        $author = clone $userModel->getUser($inviteUserId);
 
         JobManager::setQueue('notificate');
         JobManager::jobHandler('Epic\Jobs\NotificateFriendRegistered', array(

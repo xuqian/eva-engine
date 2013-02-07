@@ -39,7 +39,8 @@ class NotificateFriendRegistered implements RelatedJobInterface
         ));
         $messageItem = $messageModel->getItem();
 
-        $notificationModel->setUser($user);
+        $notificationModel->setUser($user)
+                ->setNotification($notificationItem);
         $notificationSetting = $notificationModel->getUserSetting();
 
         if($notificationSetting['sendNotice']){

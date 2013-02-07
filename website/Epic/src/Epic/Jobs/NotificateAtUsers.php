@@ -54,7 +54,9 @@ class NotificateAtUsers implements RelatedJobInterface
                 continue;
             }
 
-            $notificationModel->setUser($user);
+            $notificationModel->setUser($user)
+                ->setNotification($notificationItem);
+
             $notificationSetting = $notificationModel->getUserSetting();
 
             if($notificationSetting['sendNotice']){
