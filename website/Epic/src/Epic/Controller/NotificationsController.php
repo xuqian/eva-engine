@@ -84,6 +84,7 @@ class NotificationsController extends ActionController
         $query = array(
             'user_id' => $user['id'],
             'order' => 'read',
+            'rows' => 50,
             'page' => 'page',
         );
 
