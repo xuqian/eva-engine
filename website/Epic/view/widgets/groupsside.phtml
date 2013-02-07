@@ -39,7 +39,7 @@
 
     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => 1,'rows' => 5, 'order' => 'commentdesc'))?>">
         <div class="page-header border-header">
-            <h4><?=$this->_('Hot Discussion');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+            <h4><?=$this->_('Feature Discussion');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
         </div>
         <div class="side-blog-list">
             {% if(o.items.length > 0) { %}
