@@ -6,6 +6,7 @@ use Eva\Api,
     Eva\View\Model\ViewModel,
     Notification\Form;
 use Epic\Exception;
+use Core\Auth;
 
 
 class NotificationsController extends ActionController
