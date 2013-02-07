@@ -166,6 +166,32 @@ eva.checkMessage = function(){
 };
 
 
+eva.checkNotification = function(){
+	var counter = $(".notice-count-notification");
+	if(!counter[0]) {
+		return false;
+	}
+
+	var counterNumber = counter.find('.count-number');
+	var updateNumber = function(response){
+		if(response.count > 0) {
+			counterNumber.html(response.count).show();
+		} else {
+			counterNumber.hide();
+		}	
+	};
+
+	var checkNewUnread = function(){
+		$.ajax({
+			'url' : eva.d('/data/noticecount'),
+			'type' : 'get',
+			'dataType' : 'json',
+			'success' : updateNumber
+		});
+	};
+	checkNewUnread();
+};
+
 eva.checkPermission = function(){
 	var user = eva.getUser();
 	var roles = user.Roles;
@@ -670,6 +696,7 @@ eva.ready(function(){
 		eva.checkFriend();
 		eva.checkMessage();	
 		eva.checkRequest();
+		eva.checkNotification();
 		eva.refreshOnline();
 		eva.checkEvent();
 		eva.checkGroup();

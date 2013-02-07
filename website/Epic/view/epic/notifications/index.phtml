@@ -17,23 +17,21 @@ $paginator = $this->paginator ? $this->paginator->toArray() : null;
                             <div class="span6">
                                 
                                 <div class="page-main-header">
-                                    <h3><?=$this->_($title)?> (<?=$paginator ? $paginator['rowCount'] : count($items)?>)</h3>
+                                    <h3><?=$this->_($title)?></h3>
                                 </div>
 
                                 <div class="user-list vlist">
                                     <?foreach($items as $item):?>
-                                    <div class="item">
-                                        <div class="item-inline item-text span4">
-                                            <div class="item-content">
-                                                <?=$item['content']?>
-                                            </div>
-                                            <div class="item-action">
-                                                <p class="pull-right"><a href="<?=$this->uri('/notifications/remove/' . $item['message_id'], 'c', array('c' => $this->uri('/notifications/')))?>" title="" class="highlight">Remove</a></p>
-                                                <p class="pull-left">
-                                                <time class="agotime" data-jstime="<?=$this->datetime()->jsTime($item['createTime'])?>" datetime="<?=$this->datetime()->isoTime($item['createTime'])?>"><?=$this->datetime($item['createTime'])?></time>
-                                                </p>
-                                            </div>
-                                        </div>
+                                    <div class="page-header border-header clearfix">
+
+
+                                       <div class="pull-left">
+                                          <?=$item['content']?>
+                                       </div>
+                                       <div class="pull-right">
+                                          <time class="agotime lowlight" data-jstime="<?=$this->datetime()->jsTime($item['createTime'])?>" datetime="<?=$this->datetime()->isoTime($item['createTime'])?>"><?=$this->datetime($item['createTime'])?></time>
+                                          <a href="<?=$this->uri('/notifications/remove/' . $item['message_id'], 'c', array('c' => $this->uri('/notifications/')))?>" title="" class="lowlight"><i class="icon-trash icon-large"></i></a>
+                                       </div>
                                     </div>
                                     <?endforeach?>
 
@@ -41,9 +39,9 @@ $paginator = $this->paginator ? $this->paginator->toArray() : null;
                                     <?=$this->paginator->setPath('/notifications/')->setBaseQuery($this->query);?>
                                     <?=$this->widget('Core', 'widgets/paginator', $this->vars())?>
                                     <?endif;?>
-                                </div><!--activity-list end-->
-                            </div><!--page main left end-->
-                            <div class="span3">
+                                 </div><!--activity-list end-->
+                              </div><!--page main left end-->
+                              <div class="span3">
                                 <div class="page-extra">
                                     <?=$this->widget('Epic', 'widgets/userextra', $this->vars())?>
                                 </div>
