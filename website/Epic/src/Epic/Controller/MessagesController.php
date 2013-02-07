@@ -103,11 +103,7 @@ class MessagesController extends ActionController
 
     public function getAction()
     {
-        $user = Auth::getLoginUser();
-        $this->forward()->dispatch('UserController', array(
-            'action' => 'user',
-            'id' => $user['id'],
-        )); 
+
 
         $id = $this->params('id');
         $userModel = Api::_()->getModel('User\Model\User');
@@ -177,6 +173,11 @@ class MessagesController extends ActionController
         unset($query['author_id']);
         unset($query['user_id']);
 
+        $loginUser = Auth::getLoginUser();
+        $this->forward()->dispatch('UserController', array(
+            'action' => 'user',
+            'id' => $loginUser['id'],
+        )); 
         return array(
             'user' => $user,
             'items' => $items,
