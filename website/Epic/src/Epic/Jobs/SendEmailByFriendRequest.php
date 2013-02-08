@@ -25,7 +25,7 @@ class SendEmailByFriendRequest implements RelatedJobInterface
 
         $mail = new \Core\Mail();
         $message = $mail->getMessage();
-        $message->addTo($userEmail);
+        $message->setTo($userEmail);
         
         $message->setSubject('Epicurissimo Friend Request')
             ->setData($args)

@@ -25,7 +25,7 @@ class SendEmailByFriendApprove implements RelatedJobInterface
 
         $mail = new \Core\Mail();
         $message = $mail->getMessage();
-        $message->addTo($userEmail);
+        $message->setTo($userEmail);
         
         $message->setSubject('Epicurissimo Friend Approve')
             ->setData($args)

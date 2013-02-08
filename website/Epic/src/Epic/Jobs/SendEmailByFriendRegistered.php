@@ -25,7 +25,7 @@ class SendEmailByFriendRegistered implements RelatedJobInterface
 
         $mail = new \Core\Mail();
         $message = $mail->getMessage();
-        $message->addTo($inviteUserEmail);
+        $message->setTo($inviteUserEmail);
         
         $message->setSubject('Epicurissimo Notification')
             ->setData($args)

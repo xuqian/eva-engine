@@ -28,7 +28,7 @@ class SendEmailByActivityAt implements RelatedJobInterface
 
         $mail = new \Core\Mail();
         $message = $mail->getMessage();
-        $message->addTo($atUserEmail);
+        $message->setTo($atUserEmail);
         
         $message->setSubject('Epicurissimo Notification')
             ->setData($args)
