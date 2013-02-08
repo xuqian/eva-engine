@@ -173,11 +173,12 @@ class MessagesController extends ActionController
         unset($query['author_id']);
         unset($query['user_id']);
 
+/*
         $loginUser = Auth::getLoginUser();
         $this->forward()->dispatch('UserController', array(
             'action' => 'user',
             'id' => $loginUser['id'],
-        )); 
+        )); */
         return array(
             'user' => $user,
             'items' => $items,
