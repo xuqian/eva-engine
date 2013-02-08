@@ -69,7 +69,7 @@ class NotificateFriendRequest implements RelatedJobInterface
                 'notificationKey' => $notificationKey,
                 'user_id' => $userId,
                 'user_name' => $user->userName,
-                'user_email' => $friend->email,
+                'user_email' => $user->email,
                 'friend_id' => $friendId,
                 'friend_name' => $friend->userName,
                 'message_id' => $messageItem->id,
