@@ -21,10 +21,10 @@ class NotificateFriendRequest implements RelatedJobInterface
         $user = clone $userModel->getItem();
         $friend = clone $userModel->getItem();
 
-        $user->user_id = $userId;
+        $user->id = $userId;
         $user->self(array('*'));
         
-        $friend->user_id = $friendId;
+        $friend->id = $friendId;
         $friend->self(array('*'));
 
         if(!$user) {
@@ -69,7 +69,7 @@ class NotificateFriendRequest implements RelatedJobInterface
                 'notificationKey' => $notificationKey,
                 'user_id' => $userId,
                 'user_name' => $user->userName,
-                'user_email' => $friend->email,
+                'user_email' => $user->email,
                 'friend_id' => $friendId,
                 'friend_name' => $friend->userName,
                 'message_id' => $messageItem->id,
