@@ -295,13 +295,6 @@ class EventController extends ActionController
             $itemModel = Api::_()->getModel('Event\Model\Event');
             $item = $itemModel->getEventdata($id)->toArray();
 
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
-
             return array(
                 'callback' => $this->params()->fromQuery('callback'),
                 'item' => $item,
@@ -333,12 +326,7 @@ class EventController extends ActionController
             $callback = $callback ? $callback : '/events/edit/' . $eventId;
             $this->redirect()->toUrl($callback);
         } else {
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
+            
         }
 
         return array(
@@ -403,13 +391,6 @@ class EventController extends ActionController
             if(isset($item['EventFile'][0])){
                 $item['EventFile'] = $item['EventFile'][0];
             }
-
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
 
             $viewModel->setVariables(array(
                 'item' => $item,

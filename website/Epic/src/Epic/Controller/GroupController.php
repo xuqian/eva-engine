@@ -331,13 +331,6 @@ class GroupController extends ActionController
             $itemModel = Api::_()->getModel('Group\Model\Group');
             $item = $itemModel->getGroup($id)->toArray();
 
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
-
             return array(
                 'callback' => $this->params()->fromQuery('callback'),
                 'item' => $item,
@@ -368,12 +361,7 @@ class GroupController extends ActionController
             $callback = $callback ? $callback : '/groups/edit/' . $groupId;
             $this->redirect()->toUrl($callback);
         } else {
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
+           
         }
 
         return array(
@@ -438,13 +426,6 @@ class GroupController extends ActionController
             if(isset($item['GroupFile'][0])){
                 $item['GroupFile'] = $item['GroupFile'][0];
             }
-
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
 
             $viewModel->setVariables(array(
                 'item' => $item,

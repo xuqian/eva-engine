@@ -57,12 +57,6 @@ class NotificationsController extends ActionController
 
     public function indexAction()
     {
-        $user = Auth::getLoginUser();
-        $this->forward()->dispatch('UserController', array(
-            'action' => 'user',
-            'id' => $user['id'],
-        )); 
-
         $query = $this->getRequest()->getQuery();
         $form = new Form\NoticeForm();
         $form->bind($query);

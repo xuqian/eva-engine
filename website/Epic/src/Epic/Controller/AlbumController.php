@@ -21,91 +21,6 @@ class AlbumController extends ActionController
         return $this->listAction();
     }
 
-    public function listAction()
-    {
-        $request = $this->getRequest();
-        $query = $request->getQuery();
-
-        $form = new \Epic\Form\AlbumSearchForm();
-        $form->bind($query)->isValid();
-        $selectQuery = $form->getData();
-
-        $itemModel = Api::_()->getModel('Album\Model\Album');
-        if(!$selectQuery){
-            $selectQuery = array(
-                'page' => 1
-            );
-        }
-        $selectQuery['visibility'] = 'public';
-        $items = $itemModel->setItemList($selectQuery)->getAlbumList();
-        $items = $items->toArray(array(
-            'self' => array(
-            ),
-            'join' => array(
-                'Count' => array(
-                    '*',
-                ),
-                'User' => array(
-                    '*',
-                ),
-            ),
-        ));
-        $paginator = $itemModel->getPaginator();
-
-
-        //Public User Area
-        $this->forward()->dispatch('UserController', array(
-            'action' => 'user',
-            'id' => $user['id'],
-        ));
-        
-        return array(
-            'form' => $form,
-            'items' => $items,
-            'query' => $query,
-            'paginator' => $paginator,
-        );   
-    }
-
-    public function getAction()
-    {
-        $id = $this->params('id');
-
-        $itemModel = Api::_()->getModel('Album\Model\Album'); 
-        $item = $itemModel->getEventdata($id, array(
-            'self' => array(
-                '*',
-            ),
-            'join' => array(
-                'File' => array(
-                    'self' => array(
-                        '*',
-                        'getThumb()',
-                    )
-                ),
-                'Category' => array(
-                    '*'
-                ),
-                'Count' => array(
-                    '*'
-                ),
-            ),
-        ));
-
-        $user = Auth::getLoginUser(); 
-        //Public User Area
-        $this->forward()->dispatch('UserController', array(
-            'action' => 'user',
-            'id' => $user['id'],
-        ));
-
-        $view = new ViewModel(array(
-            'item' => $item,
-            'paginator' => $paginator,
-        ));
-        return $view;  
-    }
-
     public function removeAction()
     {
         $request = $this->getRequest();
@@ -134,13 +49,6 @@ class AlbumController extends ActionController
             $id = $this->params('id');
             $itemModel = Api::_()->getModel('Album\Model\Album');
             $item = $itemModel->getAlbum($id)->toArray();
-
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
 
             return array(
                 'callback' => $this->params()->fromQuery('callback'),
@@ -171,12 +79,7 @@ class AlbumController extends ActionController
             $callback = $callback ? $callback : '/albums/edit/' . $albumId;
             $this->redirect()->toUrl($callback);
         } else {
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
+           
         }
 
         return array(
@@ -233,13 +136,6 @@ class AlbumController extends ActionController
             if(isset($item['AlbumFile'][0])){
                 $item['AlbumFile'] = $item['AlbumFile'][0];
             }
-
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
 
             $viewModel->setVariables(array(
                 'item' => $item,
@@ -355,13 +251,6 @@ class AlbumController extends ActionController
             ),
         ));
 
-        $user = Auth::getLoginUser(); 
-        //Public User Area
-        $this->forward()->dispatch('UserController', array(
-            'action' => 'user',
-            'id' => $user['id'],
-        ));
-        
         $viewModel = new ViewModel();
         $viewModel->setVariables(array(
             'item' => $item,
@@ -427,13 +316,6 @@ class AlbumController extends ActionController
 
             $itemModel = Api::_()->getModel('Album\Model\AlbumFile');
             $item = $itemModel->getAlbumFile($albumId,$fileId)->toArray();
-
-            $user = Auth::getLoginUser(); 
-            //Public User Area
-            $this->forward()->dispatch('UserController', array(
-                'action' => 'user',
-                'id' => $user['id'],
-            ));
 
             return array(
                 'callback' => $this->params()->fromQuery('callback'),

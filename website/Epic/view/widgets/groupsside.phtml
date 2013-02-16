@@ -13,7 +13,7 @@
     </div>
     <?endif?>
 
-    <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
+    <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('rows' => 12))?>" data-url-forlogin="1">
     <div class="page-header">
         <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>"><?=$this->_('View All');?></a></small>
         <h4 class="txt-bold"><?=$this->_('My Groups');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
