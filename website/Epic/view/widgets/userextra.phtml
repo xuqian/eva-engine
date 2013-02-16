@@ -27,7 +27,7 @@
 </div>
 </script>
 
-<script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/', array('user_id' => $this->user['id']))?>">
+<script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/')?>" data-url-forlogin="1">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('My Friends');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -51,7 +51,7 @@
 </div>
 </script>
 
-<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id'], 'rows' => 5))?>">
+<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('rows' => 5))?>"  data-url-forlogin="1">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/event/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('My Events');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -81,7 +81,7 @@
 </script>
 
 
-<script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('user_id' => $this->user['id'], 'rows' => 8))?>">
+<script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('rows' => 8))?>" data-url-forlogin="1">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/album/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('My Albums');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -123,7 +123,7 @@
     </div>
     <?endif;?>
 
-    <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
+    <script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('rows' => 12))?>"  data-url-forlogin="1">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('My Groups');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>

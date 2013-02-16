@@ -104,14 +104,32 @@ eva.templates = function(){
 	$('script[data-url]').each(function(){
 		var template = $(this);
 		var url = template.attr('data-url');
-		$.ajax({
-			url : url,
-			dataType : 'json',
-			success : function(response){
-				var t = tmpl(template.html(), response);
-				template.after(t);
-			}
-		});
+		var dataQuery = template.attr('data-url-forlogin');
+		if(dataQuery){
+			eva.userReady(function(){
+				var user = eva.getUser();
+				$.ajax({
+					url : url,
+					data : {
+						user_id : user.id
+					},
+					dataType : 'json',
+					success : function(response){
+						var t = tmpl(template.html(), response);
+						template.after(t);
+					}
+				});
+			});
+		} else {
+			$.ajax({
+				url : url,
+				dataType : 'json',
+				success : function(response){
+					var t = tmpl(template.html(), response);
+					template.after(t);
+				}
+			});		
+		}
 	});
 }
 
