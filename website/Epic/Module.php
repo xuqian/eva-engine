@@ -63,7 +63,7 @@ class Module
         || $controller == 'Oauth\Controller\OauthController' && $action == 'index'
         || $controller == 'Oauth\Controller\AccessController' && $action == 'index'
         || $controller == 'UserController' && $action == 'register'
-        || $controller == 'ResetController' && $action == 'index'){
+        || $controller == 'ResetController'){
             return;
         }
 

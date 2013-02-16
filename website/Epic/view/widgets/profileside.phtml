@@ -150,7 +150,7 @@
                 {% if(item.File) { %}
                     <img src="{%=eva.thumb(item.File.Thumb, 'c_fill,h_50,w_50')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
                 {% }else{ %}
-                    <img src="{%=eva.s('/assets/module/epic/img/event-default.jpg')%}" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
+                    <img src="<?=$this->assets('/module/epic/img/group-default.png')?>" alt="" width="50" height="50" class="item-absolute imgdelay figure userface" />
                 {% } %}
             </a>
         </li>
