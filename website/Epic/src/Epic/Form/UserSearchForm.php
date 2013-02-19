@@ -181,4 +181,17 @@ class UserSearchForm extends \User\Form\UserForm
         $element['options']['value_options'] = $countries;
         return $element;
     }
+
+    public function prepareData($data)
+    {
+        if(!$data['page']){
+            $data['page'] = 1;
+        }
+
+        if(!$data['order']) {
+            $data['order'] = 'iddesc';
+        }
+
+        return $data;
+    }
 }
