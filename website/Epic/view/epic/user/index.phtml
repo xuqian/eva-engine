@@ -43,7 +43,7 @@ $categories = array(
              <nav class="nav-member">
              <a class="pull-right margin10h" href="<?=$this->uri('/users/list/')?>"><?=$this->_('Find Friend Here');?></a>
              <ul>
-                 <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/user/')?>">All</a></li>
+                 <li><a class="<?=!$this->query['role'] ? 'active' : null?>" href="<?=$this->uri('/users/')?>">All</a></li>
                  <li><a class="<?=$this->query['role'] == 'CONNOISSEUR_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=CONNOISSEUR_MEMBER')?>"><?=$this->_('Connoisseur');?></a></li>
                  <li><a class="<?=$this->query['role'] == 'PROFESSIONAL_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PROFESSIONAL_MEMBER')?>"><?=$this->_('Professional');?></a></li>
                  <li><a class="<?=$this->query['role'] == 'PAID_MEMBER' ? 'active' : null?>" href="<?=$this->uri('/users/?role=PAID_MEMBER')?>"><?=$this->_('Event Host');?></a></li>
