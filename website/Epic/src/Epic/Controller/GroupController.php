@@ -663,10 +663,13 @@ class GroupController extends ActionController
         $viewModel = new ViewModel();
 
         $postId = $this->getEvent()->getRouteMatch()->getParam('post_id');
-
+        
+        $user = Auth::getLoginUser(); 
+        
         $postView = $this->forward()->dispatch('UserController', array(
             'action' => 'post',
             'post_id' => $postId,
+            'id' => $user['id']
         ));
 
         list($item, $members) = $this->groupAction();
