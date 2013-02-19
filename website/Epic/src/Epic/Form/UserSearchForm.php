@@ -149,6 +149,16 @@ class UserSearchForm extends \User\Form\UserForm
                 'value' => '',
             ),
         ),
+        'page' =>     array(
+            'name' => 'page',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Page',
+            ),
+            'attributes' => array(
+                'value' => 1,
+            ),
+        ),
     );
 
     public function getCity($element)
