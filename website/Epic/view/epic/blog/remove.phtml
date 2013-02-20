@@ -6,7 +6,7 @@ $form = new Blog\Form\PostDeleteForm();
 
 $form->setView($this)
 ->setMethod('delete')
-->setAction($this->uri('/blog/remove/'))
+->setAction($this->uri('/blogs/remove/'))
 ->bind($item)
 ->prepare();
 ?>
