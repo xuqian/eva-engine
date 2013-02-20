@@ -619,6 +619,7 @@ class DataController extends RestfulModuleController
             ),
         ));
         $paginator = $itemModel->getPaginator();
+        $paginator = $paginator ? $paginator->toArray() : null;
 
         return new JsonModel(array(
             'items' => $items,
