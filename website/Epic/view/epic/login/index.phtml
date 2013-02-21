@@ -151,6 +151,23 @@ $loginResult = $loginResult ? $loginResult[0] : array();
         </div>
 </div>
 
+<!-- Modal -->
+<div id="welcome-modal" class="modal hide fade typo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="welcome-modal">Congratulations</h3>
+    </div>
+    <div class="modal-body">
+        <p>Congratulations! You have successfully registered as a member of Epicurissimo. Conformation letter bas been sent to your E-mail address, Please check your mail box and confirm your E-mail address.</p>
+        <p>Once you confirm your E-mail address, please use the email address and password to login Epicurissimo.</p>
+        <p>* If you can not find the conformation letter, please chech the junk mailbox.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
+
 <script>
 eva.ready(function(){
     var widthStep = [1024, 1280, 1366, 1440, 1920];
@@ -173,6 +190,13 @@ eva.ready(function(){
     }
 
     setBg();
+
+    var url = eva.parseUri();
+    if(url.queryKey.reg){
+            $('#welcome-modal').modal({
+                    show : true
+            });
+    }
 
     $(window).resize(function(){
         setBg();

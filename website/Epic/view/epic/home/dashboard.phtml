@@ -231,6 +231,20 @@ if($tags) {
     </div><!--container end-->
 </div><!--page inner end-->
 
+<!-- Modal -->
+<div id="welcome-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header typo">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="welcome-modal">Complete Your Profile</h3>
+    </div>
+    <div class="modal-body typo">
+        <p>In order to meet people with same interest and access to 10,000+ decision makers, please upload your Icon and complete your proifile, so as to let people find you quickly.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a class="btn btn-danger" href="<?=$this->uri('/account/profile/')?>">Go to your profile page</a>
+    </div>
+</div>
 
 
 <script>
@@ -277,6 +291,15 @@ eva.ready(function(){
                 }
                 return false;
         });
+
+        if($(".usercard img[src$='default_avatar.png']")[0]){
+                eva.userReady(function(){
+                        $('#welcome-modal').modal({
+                                backdrop : false,
+                                show : true
+                        });
+                });
+        }
 
 });
 </script>

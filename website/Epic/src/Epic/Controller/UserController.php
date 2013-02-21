@@ -713,7 +713,7 @@ class UserController extends ActionController
             $form->bind($item);
             if ($form->isValid()) {
                 $callback = $this->params()->fromPost('callback');
-                $callback = $callback ? $callback : '/';
+                $callback = $callback ? $callback : '/?reg=1';
 
                 $item = $form->getData();
                 $itemModel = Api::_()->getModel('User\Model\Register');
