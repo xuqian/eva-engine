@@ -59,7 +59,7 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
         <div class="control-group <?=$form->isError('city') ? 'error' : '';?>">
             <?=$form->helper('city', 'label', array('class' => 'control-label'))?>
             <div class="controls">
-                <?=$form->helper('city', 'formSelect', array('class' => 'select2 input-large', 'value' => $this->params['city']))?>        
+                <?=$form->helper('city', 'formSelect', array('class' => 'select2 input-large', 'value' => isset($this->params['city']) ? $this->params['city'] : $item['city']))?>        
                 <div class="help-block"><?=$form->helper('city', 'formElementErrors')?></div>
             </div>
         </div>
