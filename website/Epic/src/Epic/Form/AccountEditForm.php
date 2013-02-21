@@ -144,6 +144,7 @@ class AccountEditForm extends UserCreateForm
         $roleKey = $data['role'] ? $data['role'] : 'CONNOISSEUR_MEMBER';
         $itemModel = Api::_()->getModel('User\Model\Role');
         $role = $itemModel->getRole($roleKey);
+        
         $data['RoleUser'] = array(
             array(
                 'user_id' => null,
@@ -151,6 +152,28 @@ class AccountEditForm extends UserCreateForm
                 'status' => 'active',
             )
         );
+
+        if ($data['id']) {
+            $roleUserModel = Api::_()->getModel('User\Model\RoleUser');
+            $userRoles = $roleUserModel->setItemList(array('user_id' => $data['id'],'noLimit' => true))->getRoleUserList();
+            $excludeRoleKey = $roleKey == 'CONNOISSEUR_MEMBER' ? 'PROFESSIONAL_MEMBER' : 'CONNOISSEUR_MEMBER';
+            $excludeRole = $itemModel->getRole($excludeRoleKey);
+        
+            foreach ($userRoles as $userRole) {
+                if ($userRole['role_id'] == $role->id || $userRole['id'] == $excludeRole->id) {
+                    continue;
+                }
+            
+                $data['RoleUser'][] =array(
+                    'user_id' => null,
+                    'role_id' => $userRole['role_id'],
+                    'status' => $userRole['status'],
+                    'pendingTime' => $userRole['pendingTime'],
+                    'activeTime' => $userRole['activeTime'],
+                    'expiredTime' => $userRole['expiredTime'],
+                ); 
+            }
+        }
         unset($data['role']);
         return $data;
     }
