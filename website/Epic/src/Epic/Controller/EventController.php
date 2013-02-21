@@ -428,7 +428,7 @@ class EventController extends ActionController
         
         if (!isset($album['id'])) {
             $makeAlbumUrl = '/event/albums/' . '?' . http_build_query(array(
-                'r' => '/event/' . $item['urlName'] . '/album/upload/',
+                'callback' => '/event/' . $item['urlName'] . '/album/upload/',
                 'title' => $item['title'],
                 'urlName' => '',
                 'description' => '',
