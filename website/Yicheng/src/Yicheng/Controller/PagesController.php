@@ -60,6 +60,7 @@ class PagesController extends RestfulModuleController
     public function getAction()
     {
         $this->layout('layout/index');
+        $this->layout('layout/newindex');
         $id = $this->params('id');
         $itemModel = Api::_()->getModel('Blog\Model\Post');
         $item = $itemModel->getPost($id, array(

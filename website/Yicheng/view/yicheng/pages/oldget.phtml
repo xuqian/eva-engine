@@ -1,0 +1,33 @@
+<?
+$item = $this->item;
+$title = $item ? $item['title'] : 'Page Not Found';
+$this->headTitle($title, 'SET');
+?>
+<!--FEATURES : STARTS--> 
+<div class="row layout">
+    <section id="article" class="twelve columns outer-wrap">
+    <div class="story">
+        <div class="bg"></div>
+        <div class="nine columns add-top">
+            <div class="placeholder"></div>
+            <h2 class="main-heading-alt color-high"><?=$this->escapeHtml($title); ?></h2>
+
+            <div class="placeholder"></div>
+            <div class="row">
+                <article class="twelve columns services-testimonial">
+                <?=$item['Text']['ContentHtml']?>
+                </article>
+            </div>
+
+
+            <!-- End Right Column -->
+            <div class="clearfix">
+            </div>
+
+
+        </div>
+    </div> 
+    <!--.story-->  
+    </section>
+</div>
+<!--FEATURES : ENDS--> 

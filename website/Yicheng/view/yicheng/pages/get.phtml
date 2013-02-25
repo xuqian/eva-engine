@@ -3,31 +3,74 @@ $item = $this->item;
 $title = $item ? $item['title'] : 'Page Not Found';
 $this->headTitle($title, 'SET');
 ?>
-<!--FEATURES : STARTS--> 
-<div class="row layout">
-    <section id="article" class="twelve columns outer-wrap">
-    <div class="story">
-        <div class="bg"></div>
-        <div class="nine columns add-top">
-            <div class="placeholder"></div>
-            <h2 class="main-heading-alt color-high"><?=$this->escapeHtml($title); ?></h2>
+<style>
+.typocn{color:#555;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font:500 14px/1.8 'Hiragino Sans GB',Microsoft YaHei,sans-serif;}.typocn article,.typocn aside,.typocn details,.typocn figcaption,.typocn figure,.typocn footer,.typocn header,.typocn hgroup,.typocn menu,.typocn nav,.typocn section{display:block;}
+.typocn audio,.typocn canvas,.typocn video{display:inline-block;*display:inline;*zoom:1;}
+.typocn button,.typocn input,.typocn select,.typocn textarea{font:500 14px/1.8 'Hiragino Sans GB',Microsoft YaHei,sans-serif;}
+.typocn table{border-collapse:collapse;border-spacing:0;}
+.typocn th{text-align:inherit;}
+.typocn fieldset,.typocn img{border:0;}
+.typocn img{-ms-interpolation-mode:bicubic;}
+.typocn iframe{display:block;}
+.typocn blockquote{margin:1em 4em 1em 2em;padding:0.6em 1em;background:#f1f1f1;}
+.typocn blockquote blockquote{padding:0 0 0 1em;margin-left:2em;border-left:0.4em solid #ddd;}
+.typocn acronym,.typocn abbr{border-bottom:1px dotted;font-variant:normal;}
+.typocn abbr{cursor:help;}
+.typocn del{text-decoration:line-through;}
+.typocn address,.typocn caption,.typocn cite,.typocn code,.typocn den,.typocn em,.typocn th,.typocn var{font-style:normal;font-weight:500;}
+.typocn caption,.typocn th{text-align:left;}
+.typocn q:before,.typocn q:after{content:'';}
+.typocn sub,.typocn sup{font-size:75%;line-height:0;position:relative;vertical-align:text-top;}
+.typocn :root sub,.typocn :root sup{vertical-align:baseline;}
+.typocn sup{top:-0.5em;}
+.typocn sub{bottom:-0.25em;}
+.typocn a:hover{text-decoration:underline;}
+.typocn ins,.typocn a{text-decoration:none;}
+.typocn u,.typocn .typo-u{text-decoration:underline;}
+.typocn mark{background:#fffdd1;}
+.typocn pre,.typocn code{font-family:"Courier New",Courier,monospace;}
+.typocn pre{border:1px solid #ddd;border-left-width:0.4em;background:#fbfbfb;padding:10px;}
+.typocn small{font-size:12px;color:#888;}
+.typocn .clearfix:before,.typocn .clearfix:after{content:"";display:table;}
+.typocn .clearfix:after{clear:both;}
+.typocn .clearfix{zoom:1;}
+.typocn h1,.typocn h2,.typocn h3,.typocn h4,.typocn h5,.typocn h6{font-weight:500;font-weight:800\9;color:#333;}
+.typocn code,.typocn pre{padding:0 3px 2px;font-family:Monaco,Menlo,Consolas,"Courier New",monospace;font-size:12px;color:#333333;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.typocn code{padding:2px 4px;color:#d14;background-color:#f7f7f9;border:1px solid #e1e1e8;}
+.typocn pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:20px;word-break:break-all;word-wrap:break-word;white-space:pre;white-space:pre-wrap;background-color:#f5f5f5;border:1px solid #ccc;border:1px solid rgba(0, 0, 0, 0.15);-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}.typocn pre.prettyprint{margin-bottom:20px;}
+.typocn pre code{padding:0;color:inherit;background-color:transparent;border:0;}
+.typocn .pre-scrollable{max-height:340px;overflow-y:scroll;}
 
-            <div class="placeholder"></div>
-            <div class="row">
-                <article class="twelve columns services-testimonial">
-                <?=$item['Text']['ContentHtml']?>
-                </article>
-            </div>
+.post-desc{
+    border:0;
+}
+</style>
+<div id="page-title">
 
-
-            <!-- End Right Column -->
-            <div class="clearfix">
-            </div>
-
-
-        </div>
-    </div> 
-    <!--.story-->  
-    </section>
+	<!-- 960 Container Start -->
+	<div class="container">
+		<div class="sixteen columns">
+            <h2><?=$title?></h2>
+		</div>
+	</div>
+	<!-- 960 Container End -->
+	
 </div>
-<!--FEATURES : ENDS--> 
+
+<div class="container">
+
+    <!-- 16 Columns -->
+    <div class="sixteen columns">
+        <div class="typo typocn post-desc">
+            <?if($item):?>
+            <?=$item['Text']['ContentHtml']?>
+            <?else:?>
+            <p>Page not found</p>
+            <?endif?>
+        </div>
+    </div>
+    <!-- 16 Columns End -->
+
+</div>
+
+
