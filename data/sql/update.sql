@@ -72,8 +72,6 @@ ADD `frequencyWeek` VARCHAR( 7 ) NOT NULL DEFAULT '0' AFTER `frequency` ,
 ADD `frequencyMonth` ENUM( 'dayofmonth', 'dayofweek' ) NOT NULL DEFAULT 'dayofweek' AFTER `frequencyWeek` ,
 ADD `interval` INT( 2 ) NOT NULL DEFAULT '0' AFTER `frequencyMonth`;
 ALTER TABLE `eva_event_events` DROP `recurrence_id`;
-<<<<<<< HEAD:data/database/update20120927.sql
-=======
 
 
 
@@ -111,9 +109,6 @@ CREATE TABLE IF NOT EXISTS `eva_core_newsletters` (
 ALTER TABLE `eva_user_friends` CHANGE `from_user_id` `user_id` INT( 10 ) NOT NULL;
 ALTER TABLE `eva_user_friends` CHANGE `to_user_id` `friend_id` INT( 10 ) NOT NULL;
 ALTER TABLE `eva_user_friends` ADD `request_user_id` INT NOT NULL DEFAULT '0' AFTER `friend_id`;
-
-INSERT INTO `eva`.`eva_user_roles` (`id`, `roleKey`, `roleName`, `description`) VALUES (NULL, 'PAID_MEMBER', 'Paid Member', NULL);
-
 
 
 
@@ -191,4 +186,26 @@ CREATE TABLE IF NOT EXISTS `eva_user_tags_users` (
 
 
 
->>>>>>> 3018db9c03216b316a90f3132d9503c0a8bd993a:data/sql/update20120927.sql
+
+
+-----------------2013-01-15
+ALTER TABLE `eva_file_files` CHANGE `fileServerKey` `fileServerKey` VARCHAR( 32 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default';
+ALTER TABLE `eva_file_files` ADD `isEmbed` BOOLEAN NOT NULL DEFAULT FALSE AFTER `isImage` ,
+ADD `archive_id` INT( 10 ) NOT NULL DEFAULT '0' AFTER `isEmbed` ;
+
+
+----2013-01-28
+ALTER TABLE `eva_user_profiles` ADD `interest` VARCHAR( 255 ) NULL AFTER `industry`;
+ALTER TABLE `eva_activity_messages` ADD `sourceUrl` VARCHAR( 255 ) NULL AFTER `sourceName`; 
+
+ALTER TABLE `eva_user_profiles` ADD `interest` VARCHAR( 255 ) NULL AFTER `industry` ;
+
+
+
+----2013-02-06
+DROP TABLE IF EXISTS `eva_user_privacysettings`;
+CREATE TABLE IF NOT EXISTS `eva_user_privacysettings` (
+  `user_id` int(10) NOT NULL,
+  `setting` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

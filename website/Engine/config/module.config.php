@@ -75,6 +75,50 @@ return array(
                 ),
                 'priority' => 2,
             ),
+
+            'logout' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/logout[/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'LoginController',
+                        'action' => 'logout',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'reset' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/reset[/][:action][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'ResetController',
+                        'action' => 'index',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
+            'account' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/account/[:action][/]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z-]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'AccountController',
+                    ),
+                ),
+                'priority' => 2,
+            ),
         ),
     ),
     'controllers' => array(
@@ -83,6 +127,8 @@ return array(
             'IndexController' => 'Engine\Controller\IndexController',
             'LoginController' => 'Engine\Controller\LoginController',
             'UserController' => 'Engine\Controller\UserController',
+            'ResetController' => 'Engine\Controller\ResetController',
+            'AccountController' => 'Engine\Controller\AccountController',
         ),
     ),
 

@@ -28,8 +28,19 @@ return array(
     ),
 
     'queue' => array(
+        'enable' => 1,
+        'adapter' => 'Resque', //Maybe support gearman later
         'driver' => 'Mongodb',
         'dsn'    => 'mongodb://localhost:27017',
+        'domain'    => 'http://avnpc.com/pages/eva-engine',
+        'default_queues' => array(
+            'default',
+            'sendmail',
+            'sync',
+            'notificate',
+            'sendnotice',
+            'failed',
+        ),
     ),
 
     'db' => array(
@@ -51,7 +62,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'ErrorController' => 'Core\Controller\ErrorController',
-            'QueueController' => 'Core\Controller\QueueController',
+
         ),
     ),
 

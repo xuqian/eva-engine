@@ -1,9 +1,6 @@
 [submodule "public/static/lib"]
 	path = public/static/lib
 	url = https://github.com/AlloVince/evaengine-libs-front.git
-[submodule "depends/ZendDeveloperTools"]
-	path = depends/ZendDeveloperTools
-	url = git://github.com/zendframework/ZendDeveloperTools.git
 [submodule "depends/BjyProfiler"]
 	path = depends/BjyProfiler
 	url = git://github.com/bjyoungblood/BjyProfiler.git
@@ -34,3 +31,12 @@
 [submodule "vendor/Libs"]
 	path = vendor/Libs
 	url = git://github.com/AlloVince/evaengine-libs.git
+[submodule "vendor/Resque"]
+	path = vendor/Resque
+	url = git://github.com/chrisboulton/php-resque.git
+[submodule "vendor/Credis"]
+	path = vendor/Credis
+	url = git://github.com/colinmollenhour/credis.git
+[submodule "depends/ZendDeveloperTools"]
+	path = depends/ZendDeveloperTools
+	url = git://github.com/AlloVince/ZendDeveloperTools.git

@@ -27,7 +27,7 @@ class EventsActivities extends TableGateway
             $this->where(array('event_id' => $params->event_id));
         }
 
-        if($params->file_id){
+        if($params->message_id){
             $this->where(array('message_id' => $params->message_id));
         }
 

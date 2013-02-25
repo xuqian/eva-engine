@@ -52,6 +52,8 @@ use Assetic\Asset\AssetCollection;
 use Assetic\Asset\AssetReference;
 use Assetic\FilterManager;
 use Assetic\Filter\Sass\SassFilter;
+use Assetic\Filter\LessphpFilter;
+use Assetic\Filter\LessFilter;
 use Assetic\Filter\Yui;
 use Assetic\Factory\AssetFactory;
 use Assetic\Filter\GoogleClosure\CompilerApiFilter;
@@ -72,12 +74,25 @@ class EvaAssets
     protected $headers;
 
     protected $defines = array(
-        //JS
-        'jquery' =>  '/js/jquery/jquery.js',
-        'bootstrap_js' => '/js/bootstrap/bootstrap.js',
-        //CSS
-        'bootstrap' => '/css/bootstrap/bootstrap.css',
+        /*
+        'jquery' =>  array(
+            'alias' => 'lib/js/jquery/jquery.js',
+            'footer' => 'return $.noConflict(true);'
+        ),
+        'jquery.cookie' =>  array(
+            'alias' => 'lib/js/jquery/jquery.cookie.js',
+            'depends' => array('jquery'),
+            'end' => "seajs.modify('cookie', function(require, exports, module) { module.exports = $.cookie })",
+        ),
+        'bootstrap' => array(
+            'alias' => 'lib/js/bootstrap/bootstrap.js',
+            'depends' => array('jquery'),
+            'header' => "var $ = require('jquery');\n",
+        ),
+        */
     );
+
+    protected $loaderJs = '';
 
     protected $assetManager;
 
@@ -91,11 +106,6 @@ class EvaAssets
         'cache' => false,
         'useSeaJs' => false,
     );
-
-    public function getDefaultFilter()
-    {
-    
-    }
 
     public function getDefaultWriter()
     {
@@ -153,53 +163,52 @@ class EvaAssets
     public function copy()
     {
         $urlPathArray = $this->getUrlPathArray();
-
         $fileSourceType = array_shift($urlPathArray);
+        
+        $fileAsset = array();
+        $sourcePath = '';
+        $targetPath = '';
+
+        //get source path and target path
         if($fileSourceType == 'lib'){
             $sourcePath = $this->libRootPath . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
             $targetPath = $this->urlRootPath . DIRECTORY_SEPARATOR . 'lib'  .  DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
-
-            $fileAsset = new FileAsset($sourcePath);
-            if(true === $this->cache){
-                $this->prepareDirectoryStructure($targetPath, count($urlPathArray));
-                copy($sourcePath, $targetPath);
-            }
-
-            $mimeType = $this->getMimeType($sourcePath);
-            header("Content-Type: $mimeType");
-            if($this->headers){
-                foreach($this->headers as $header){
-                    header($header);
-                }
-            }
-            echo $fileAsset->dump();
         } elseif($fileSourceType == 'module') {
             $module = array_shift($urlPathArray);
-            $moduleClass = ucfirst($module) . '\\' . 'Module';
+            $moduleMap = $this->moduleMap;
+            $moduleClass = true === isset($moduleMap[$module]) ? $moduleMap[$module] : ucfirst($module) . '\\' . 'Module';
+
+            //Module assets path must under Module/assets
             if(true === class_exists($moduleClass)){
                 $object = new \ReflectionObject(new $moduleClass);
                 $modulePath = dirname($object->getFileName());
                 $moduleAssetPath = $modulePath . DIRECTORY_SEPARATOR . 'assets';
-
                 $sourcePath = $moduleAssetPath . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
                 $targetPath = $this->urlRootPath . DIRECTORY_SEPARATOR . 'module' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $urlPathArray);
-
-                $fileAsset = new FileAsset($sourcePath);
-
-                if(true === $this->cache){
-                    $this->prepareDirectoryStructure($targetPath, count($urlPathArray));
-                    copy($sourcePath, $targetPath);
-                }
-                $mimeType = $this->getMimeType($sourcePath);
-                header("Content-Type: $mimeType");
-                if($this->headers){
-                    foreach($this->headers as $header){
-                        header($header);
-                    }
-                }
-                echo $fileAsset->dump();
             }
         }
+
+        if(!$sourcePath || !$targetPath || false === file_exists($sourcePath)){
+            return '';
+        }
+
+        $fileFilter = $this->getFilterByFilename($sourcePath);
+        $fileAsset = $fileFilter ? new FileAsset($sourcePath, $fileFilter) : new FileAsset($sourcePath);
+        if(true === $this->cache){
+            $this->prepareDirectoryStructure($targetPath, count($urlPathArray));
+            copy($sourcePath, $targetPath);
+        }
+        $mimeType = $this->getMimeType($sourcePath);
+        header("Content-Type: $mimeType");
+        if($this->headers){
+            foreach($this->headers as $header){
+                header($header);
+            }
+        }
+
+        $seajs = $this->seajs($sourcePath);
+
+        echo $seajs[0] . $fileAsset->dump() . $seajs[1];
     }
 
     public function run()
@@ -213,6 +222,54 @@ class EvaAssets
         $this->urlRootPath  = $config['urlRootPath'];
         $this->headers = $config['headers'];
         $this->cache = $config['cache'];
+        $this->moduleMap = $config['moduleMap'];
+    }
+
+    protected function seajs($sourcePath)
+    {
+        $fileExt = $this->getFileExtension($sourcePath);
+        if(!$fileExt || $fileExt != 'js'){
+            return array('', '');
+        }
+
+        $url = $this->getCurrentUrl();
+        $url = parse_url($url);
+        $urlPath = ltrim($url['path'], '/');
+        //$prefix = '/static/assets/';
+        //$urlPath = str_replace($prefix, '', $urlPath);
+
+        $defines = $this->defines;
+        $defined = false;
+        foreach($defines as $jsName => $define){
+            if($define['alias'] === $urlPath){
+                $defined = true;
+                break;
+            }
+        }
+
+        $header = isset($define['header']) ? $define['header'] : '';
+        $footer = isset($define['footer']) ? $define['footer'] : '';
+        $depends = isset($define['depends']) ? "'" . implode("', '", $define['depends']) . "'" : '';
+
+        return true === $defined ? array(
+            "define('$urlPath', [$depends], function(require, exports, module) {\n $header",
+            "$footer \n});\n",
+        ) : array('', '');
+    }
+
+    protected function getFilterByFilename($sourcePath)
+    {
+        $fileExt = $this->getFileExtension($sourcePath);
+        $filter = null;
+        switch($fileExt){
+            case 'less' :
+            //$filter = array(new LessphpFilter());
+            $filter = array(new LessFilter('C:\Program Files\nodejs\node.exe', array('C:\Users\AlloVince\AppData\Roaming\npm\node_modules')));
+            //$filter = array(new LessFilter('C:\Program Files\nodejs\node.exe'));
+            break;
+            default:
+        }
+        return $filter;
     }
 
     protected function getFileExtension($filePath)
@@ -386,6 +443,10 @@ class EvaAssets
 
         $mimeTypes = array(
             "ez" => "application/andrew-inset",
+            "ttf" => "font/ttf",
+            "otf" => "font/otf",
+            "woff" => "application/x-font-woff",
+            "eot" => "application/vnd.ms-fontobject",
             "hqx" => "application/mac-binhex40",
             "cpt" => "application/mac-compactpro",
             "doc" => "application/msword",
@@ -498,6 +559,7 @@ class EvaAssets
             "wrl" => "model/vrml",
             "vrml" => "model/vrml",
             "css" => "text/css",
+            "less" => "text/css",
             "html" => "text/html",
             "htm" => "text/html",
             "asc" => "text/plain",

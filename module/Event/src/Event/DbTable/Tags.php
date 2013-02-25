@@ -25,6 +25,21 @@ class Tags extends TableGateway
             $this->disableLimit();
         }
 
+        if ($params->order == 'eventcountdesc' || $params->order == 'eventcountasc') {
+            $eventTagTable = Api::_()->getDbTable('Event\DbTable\TagsEvents');
+            $eventTagTableName = $eventTagTable->initTableName()->getTable();
+
+            $this->join(
+                $eventTagTableName,
+                "id = $eventTagTableName.tag_id"
+            );
+            $this->columns(array(
+                '*',
+                'EventCount' => new Expression("count(event_id)"),
+            ));
+            $this->group('tag_id');
+        }
+
         $orders = array(
             'idasc' => 'id ASC',
             'iddesc' => 'id DESC',

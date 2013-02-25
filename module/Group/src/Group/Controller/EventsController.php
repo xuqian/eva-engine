@@ -13,7 +13,8 @@
 
         public function indexAction()
         {
-            $postData = $this->params()->fromPost();
+            $request = $this->getRequest();
+            $postData = $request->getPost();
             $form = new \Epic\Form\EventCreateForm();
             $form->useSubFormGroup()
             ->bind($postData);
@@ -36,7 +37,7 @@
                     });
                 }
                 $postId = $itemModel->setItem($item)->createEventdata();
-                $this->redirect()->toUrl($callback);
+                $this->redirect()->toUrl($callback . $postId);
 
             } else {
 
