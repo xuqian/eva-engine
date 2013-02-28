@@ -59,6 +59,7 @@ class Module
         if($controller == 'LoginController'
         || $controller == 'PreregController'
         || $controller == 'PagesController'
+        || $controller == 'LanguageController'
         || $controller == 'AccountController' && $action == 'active'
         || $controller == 'Oauth\Controller\OauthController' && $action == 'index'
         || $controller == 'Oauth\Controller\AccessController' && $action == 'index'

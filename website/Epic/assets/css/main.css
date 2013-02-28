@@ -6730,7 +6730,7 @@ body,
 #header .nav > li.active > a,
 #header .nav-main > li:hover > a {
   color: #FFF;
-  border-color: #e8b116;
+  border-color: #ffedc7;
 }
 
 #header .nav > li.active > a small,
@@ -6756,7 +6756,7 @@ body,
 }
 
 #header a {
-  color: #e8b116;
+  color: #ffedc7;
 }
 
 .top-search {
@@ -8228,7 +8228,7 @@ body,
 
 .event-header {
   height: 100px;
-  color: #e8b116;
+  color: #ffedc7;
   background: #333333;
 }
 
@@ -8239,7 +8239,7 @@ body,
 }
 
 .event-header h2 a {
-  color: #e8b116;
+  color: #ffedc7;
 }
 
 .event-header .nav-week {
@@ -8268,7 +8268,7 @@ body,
 
 .event-header .nav-week a:hover,
 .event-header .nav-week a.active {
-  color: #e8b116;
+  color: #ffedc7;
   background: #4E4E4E;
   border: 1px solid #CCC;
   -webkit-border-radius: 3px;
@@ -9122,7 +9122,7 @@ body,
 .member-header {
   height: 80px;
   margin-top: 40px;
-  color: #e8b116;
+  color: #ffedc7;
   background: #000;
 }
 
@@ -9133,7 +9133,7 @@ body,
 }
 
 .member-header h2 a {
-  color: #e8b116;
+  color: #ffedc7;
 }
 
 .member-header .nav-member {
