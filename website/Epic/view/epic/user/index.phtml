@@ -12,23 +12,19 @@ $userSearchForm->setView($this)
 $categories = array(
     'hot' => array(
         'label' => 'Event Host',
-        'key'   => 'order',
-        'value' => 'followdesc',
+        'url'   => $this->uri('/data/eventuser/', array('role' => $this->query['role'], 'rows' => 9)),
     ),
     'new' => array(
         'label' => 'New Members',
-        'key'   => 'order',
-        'value' => 'timedesc',
+        'url'   => $this->uri('/data/user/', array('order' => 'timedesc', 'role' => $this->query['role'], 'rows' => 9))
     ),
     'flag' => array(
         'label' => 'Feature Members',
-        'key'   => 'flag',
-        'value' => 1,
+        'url'   => $this->uri('/data/user/', array('order' => 'followdesc', 'role' => $this->query['role'], 'rows' => 9))
     ),
     'vip' => array(
         'label' => 'Event Host',
-        'key'   => 'role',
-        'value' => 'PAID_MEMBER',
+        'url'   => $this->uri('/data/user/', array('order' => 'followdesc', 'role' => 'PAID_MEMBER', 'rows' => 9))
     ),
 );
 
@@ -129,7 +125,7 @@ $categories = array(
                          <ul class="thumbnails member-thumbnails">
                              <?foreach($categories as $key=>$cate):?>
                              <li class="span3">
-                             <script id="<?=$key?>" type="text/x-tmpl" data-url="<?=$this->uri('/data/user/', array($cate['key'] => $cate['value'], 'role' => $this->query['role'], 'rows' => 9))?>">
+                             <script id="<?=$key?>" type="text/x-tmpl" data-url="<?=$cate['url']?>">
                              <div class="thumbnail <?=$key?>">
                                  <div class="thumbnail-title thumbnail-title-alt">
                                      <?=$this->_($cate['label'])?>

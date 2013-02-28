@@ -26,9 +26,11 @@
     </div>
 </script>
 
-<script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/')?>"  data-url-forlogin="1">
+<script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/', array('user_id' => $this->user['id']))?>" >
 <div class="page-header border-header">
+    <!--
     <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>"><?=$this->_('View All');?></a></small>
+    -->
     <h4><?=$this->_('Friends');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-user-list">
@@ -50,7 +52,7 @@
 </div>
 </script>
 
-<script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('rows' => 4))?>"  data-url-forlogin="1">
+<script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => $this->user['id'], 'rows' => 4))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/blog/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('Blogs');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -81,7 +83,7 @@
 </script>
 
 
-<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/')?>" data-url-forlogin="1">
+<script id="side-event-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/event/', array('user_id' => $this->user['id']))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/events/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('Events');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
@@ -110,10 +112,10 @@
 </div>
 </script>
 
-<script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('rows' => 8))?>"  data-url-forlogin="1">
+<script id="side-album-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/album/', array('user_id' => $this->user['id'], 'rows' => 8))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/albums/')?>"><?=$this->_('View All');?></a></small>
-    <h4><?=$this->_('My Albums');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <h4><?=$this->_('Albums');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
 </div>
 <div class="side-album-list">
     <ul class="thumbnails">
@@ -136,7 +138,7 @@
 </script>
 
 
-<script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('rows' => 12))?>"  data-url-forlogin="1">
+<script id="side-group-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('user_id' => $this->user['id'], 'rows' => 12))?>">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/user/' . $this->user['userName'] . '/groups/')?>"><?=$this->_('View All');?></a></small>
     <h4><?=$this->_('Groups');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>

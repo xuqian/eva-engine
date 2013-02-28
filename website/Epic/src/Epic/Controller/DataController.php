@@ -562,6 +562,8 @@ class DataController extends RestfulModuleController
         $query = $this->getRequest()->getQuery();
         $items = $itemModel->setItemList(array(
             'inEvent' => 1,
+            'eventRole' => 'admin',
+            'role' => $query['role'],
             'order' => 'eventcountdesc'
         ))->getUserList();
         $items = $items->toArray(array(
