@@ -74,7 +74,7 @@ $unfollowForm->setMethod('delete');
                                                             Secret
                                                             <?endif?>
                                                         </td>
-                                                        <td>Events : <a href="">0</a> Times</td>
+                                                        <td>Interest : <a href="<?=$this->uri('/users/list/?interest=' . $item['Profile']['interest'])?>"><?=$item['Profile']['interest']?></a></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
