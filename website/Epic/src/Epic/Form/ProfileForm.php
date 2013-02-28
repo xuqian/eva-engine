@@ -361,12 +361,18 @@ class ProfileForm extends \User\Form\ProfileForm
             ),
         ),
 
+        'address' => array (
+            'options' => array (
+                'label' => 'Company Name',
+            ),
+        ),
+
         'interest' => array(
             'name' => 'interest',
             'type' => 'select',
             'callback' => 'getInterest',
             'options' => array (
-                'label' => 'Interest',
+                'label' => 'Center Interest',
                 'empty_option' => 'Select Interest',
                 //'value_options' => self::$interest,
             ),
