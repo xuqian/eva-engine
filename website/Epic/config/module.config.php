@@ -801,6 +801,19 @@ return array(
                 'priority' => 2,
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'get' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '[:id][/]',
+                            'constraints' => array(
+                                'id' => '[a-zA-Z0-9_-]+'
+                            ),
+                            'defaults' => array(
+                                'action' => 'index'
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ), //conversation end
                     'send' => array(
                         'type' => 'Segment',
                         'options' => array(
