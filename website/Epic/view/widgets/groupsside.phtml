@@ -68,14 +68,14 @@
 
     <script id="group-ranks" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/',array('rows' => 10, 'order' => 'memberdesc', 'flag' => 1))?>">
     <div class="page-header border-header">
-        <h4><?=$this->_('Group Ranks');?></h4>
+        <h4><?=$this->_('Feature Groups');?></h4>
     </div>
     <div class="group-ranks">
         <ul>
         {% if(o.items.length > 0) { %}
             {% for (var i=0, item; item=o.items[i]; i++) { %}
-            <li>
-            <em class="ranknum rank{%=i+1%}">{%=i+1%}</em>
+            <li style="padding-left:0;">
+            <!--<em class="ranknum rank{%=i+1%}">{%=i+1%}</em>-->
             <div class="media">
                 <a class="pull-left" href="<?=$this->uri('/group/')?>{%=item.groupKey%}">
                             {% if(item.File) { %}
