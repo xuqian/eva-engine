@@ -40,6 +40,7 @@ class Listener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach('user.model.friend.approve.post', array($this, 'notificateFriendApprove'));
         $this->listeners[] = $events->attach('event.model.event.create.post', array($this, 'activityCreateEvent'));
         $this->listeners[] = $events->attach('event.model.eventuser.create.post', array($this, 'activityJoinEvent'));
+        $this->listeners[] = $events->attach('message.model.message.create.post', array($this, 'notificateMessageReceive'));
     }
 
     /**
@@ -55,6 +56,32 @@ class Listener implements ListenerAggregateInterface
                 unset($this->listeners[$index]);
             }
         }
+    }
+
+    public function notificateMessageReceive($e)
+    {
+        $messageModel = $e->getTarget();
+        $item = $messageModel->getItem();
+        
+        $conversationItem = $item->getLoadedRelationships();
+        $conversation = $conversationItem['Conversation']->toArray();
+
+        $messageId = $item->id;
+        $messageBody = $item->body;
+
+        $recipientId = $conversation['recipient_id'];
+        $sender = \Core\Auth::getLoginUser();
+        
+        if(!$recipientId || !$sender['id']){
+            return false;
+        }
+
+        JobManager::setQueue('notificate');
+        JobManager::jobHandler('Epic\Jobs\NotificateMessageReceive', array(
+            'sender' => $sender,
+            'recipientId' => $recipientId,
+            'body' => $messageBody,
+        ));
     }
 
     public function notificateAtUsers($e)
@@ -87,7 +114,7 @@ class Listener implements ListenerAggregateInterface
         $userId = $item->id;
         $userName = $item->userName;
         $inviteUserId = $item->inviteUserId;
-        
+
         if(!$inviteUserId){
             return false;
         }
