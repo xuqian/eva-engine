@@ -27,7 +27,7 @@ class SendEmailByMessageReceive implements RelatedJobInterface
         $message = $mail->getMessage();
         $message->setTo($userEmail);
         
-        $message->setSubject('You Have a Message In Epicurissimo')
+        $message->setSubject('You Received a Message in Epicurissimo')
             ->setData($args)
             ->setTemplatePath(Api::_()->getModulePath('Epic') . '/view/')
             ->setTemplate('notification/' . strtolower($notificationKey) . '/email.phtml');
