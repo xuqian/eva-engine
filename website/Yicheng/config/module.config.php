@@ -24,6 +24,19 @@ return array(
                 ),
                 'priority' => 2,
             ),
+
+            'news' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/news[/]',
+                    'defaults' => array(
+                        'controller' => 'PagesController',
+                        'action'     => 'news',
+                    ),
+                ),
+                'priority' => 2,
+            ),
+
             'home' => array(
                 'type' => 'Segment',
                 'options' => array(

@@ -1,0 +1,68 @@
+<?
+$title = $this->_('新闻动态');
+$this->headTitle($title, 'SET');
+?>
+
+<div class="container">
+
+    <div class="sixteen columns">
+
+        <?if($this->items):?>
+        <?foreach($this->items as $key=>$item):?>
+        <!-- Post -->
+        <div class="post">
+            <div class="post-img"><a rel="imagebox" href="images/blog_image_01_large.jpg"><img alt="" src="images/blog_image_01.jpg"><div class="overlay zoom"></div></a></div>
+
+            <div class="alpha sixteen columns">
+                <div class="post-title"><h2><a href="<?=$this->Uri('/pages/' . $item['urlName'])?>"><?=$item['title'] ?></a></h2></div>
+            </div>
+
+            <div class="alpha omega three columns">
+                <div class="post-date"><?=$this->datetime($item['createTime'])?></div>
+            </div>
+
+            <div class="alpha thirteen columns post-content">
+                <div class="post-desc">
+                    <p><?=$this->subText($item['Text']['content'], 300);?></p>
+                    <a href="<?=$this->Uri('/pages/' . $item['urlName'])?>" class="post-entry">阅读全文</a>
+                </div>
+                <div class="post-meta">
+                    <!--
+                    <span><a href="#">0 Comments</a></span>
+                    <span><a href="#">0 Likes</a></span>
+                    <span><a href="#">0 Tweets</a></span>
+                    <span>in <a href="#">Health</a>, <a href="#">News</a>, <a href="#">Sport</a></span>
+                    -->
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <?endforeach;?>
+        <?endif?>
+            <?if($this->paginator):?>
+            <?=$this->paginator->setPath('/news/')->setBaseQuery($this->query);?>
+            <?=$this->widget('Yicheng', 'widgets/paginatornews', $this->vars())?>
+            <?endif;?>
+
+        <!--
+        <div class="pagination">
+            <a class="prev off" href="#"></a>
+            <a class="next" href="#"></a>
+            <div class="pages">
+                <ul>
+                    <li><a href="#" class="current-page">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                </ul>
+            </div>
+        </div>
+        -->
+
+
+    </div>
+
+</div>
+

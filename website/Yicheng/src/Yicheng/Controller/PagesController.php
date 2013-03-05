@@ -92,8 +92,19 @@ class PagesController extends RestfulModuleController
         }
         //$this->pagecapture();
         return array(
+            'id' => $id,
             'item' => $item,
         );
+    }
+
+    public function newsAction()
+    {
+        $vars = $this->indexAction();
+        $viewModel = new ViewModel($vars);
+        $viewModel->setTemplate('yicheng/pages/news');
+        $this->layout('layout/newindex');
+
+        return $viewModel;
     }
 
 }
