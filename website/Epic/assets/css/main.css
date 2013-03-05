@@ -8783,8 +8783,8 @@ body,
 }
 
 .groupcard .content {
-  height: 60px;
-  overflow: hidden;
+  height: 70px;
+  overflow: auto;
   color: #999;
 }
 

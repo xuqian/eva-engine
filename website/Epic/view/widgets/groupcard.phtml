@@ -23,9 +23,8 @@ $unjoinForm->setMethod('delete');
         <div class="media typo">
             <div class="content"><?=$this->item['Text']['content']?></div>
             <div class="row ">
-                <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members</span>
-                <span class="span2 summary"><span class="highlight"><?=$this->item['PostCount']['postCount']?></span>Discussion</span>
-                <span class="span1">
+                <span class="span2 summary"><span class="highlight"><?=$this->item['Count']['memberCount']?></span>Members <span class="highlight"><?=$this->item['PostCount']['postCount']?></span>Discussion</span>
+                <span class="span3">
                     <form <?=$this->formAttr($unjoinForm)?> class="group-checker group-quit-form hide" data-checker="<?=$item['id']?>">
                         <?=$unjoinForm->restful();?>
                         <?=$unjoinForm->helper('group_id', 'formHidden', array('class' => '', 'value' => $this->item['id']))?>
@@ -41,12 +40,13 @@ $unjoinForm->setMethod('delete');
                         <button class="btn btn-small item-action-main btn btn-gray icon-plus"> <?=$this->_('Join')?></button>
                     </form>
                     <span class="group-edit-btn group-checker hide" data-checker="<?=$item['id']?>"><a href="<?=$this->uri('/groups/edit/' . $item['id'])?>" class="btn btn-small ">Edit</a></span>
-                </span>
                 <?if(count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
                 <a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/sendmail/')?>" class="btn btn-small btn-gray"><i class="icon-plus"></i> Mail To Group Members</a>
                 <?endif;?>
                 <?if($this->event && count($this->members) > 1 && $this->user['id'] == $this->item['user_id']):?>
                 <a href="<?=$this->uri('/group/' . $this->item['groupKey'] . '/sendmail/', array('type' => 'reminder', 'event' => $this->event['urlName']))?>" class="btn btn-small btn-gray"><i class="icon-plus"></i>Reminder</a>
+                </span>
+
                 <?endif;?>
             </div>
         </div>
