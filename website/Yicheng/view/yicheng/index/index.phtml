@@ -8,7 +8,7 @@ $this->headTitle($title, 'SET');
     <!-- Flexslider Start-->
     <div class="flexslider" style="background: #fafafa;">
         <ul class="slides">
-            <?for($i=1;$i<=8;$i++):?>
+            <?for($i=1;$i<=7;$i++):?>
             <!-- Slide -->
             <li class="custom-slide" style="background: url(<?=$this->assets("/module/yicheng/index/images/bg$i.jpg")?>)">
             <div class="container">
@@ -111,3 +111,32 @@ $this->headTitle($title, 'SET');
 
 </div>
 <!-- 960 Container End -->
+
+<script>
+jQuery(document).ready(function() {
+
+    var leftside = $('<a href="/home"><img src="<?=$this->assets('/module/yicheng/images/sideleft.png')?>"></a>').css({
+        position : 'fixed',
+        top : '10px'
+    }).appendTo('body').hide();
+    var rightside = $('<a href="/home"><img src="<?=$this->assets('/module/yicheng/images/sideright.png')?>"></a>').css({
+        position : 'fixed',
+        bottom : '30%'
+    }).appendTo('body').hide();
+    var sideWidth = 200;
+    var showSide = function(){
+        if($(window).scrollTop() < 640 || $(document).width() < 1000){
+            leftside.hide();
+            rightside.hide();
+        } else {
+            var left = ($(document).width() - 960) / 2 - sideWidth - 50 ;
+            leftside.css('left', left).show();
+            rightside.css('right', left).show();
+        }
+    }
+
+    $(window).on('scroll', function(){
+        showSide();
+    });
+});
+</script>
