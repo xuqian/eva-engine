@@ -11,7 +11,6 @@ $this->headTitle($title, 'SET');
         <?foreach($this->items as $key=>$item):?>
         <!-- Post -->
         <div class="post">
-            <div class="post-img"><a rel="imagebox" href="images/blog_image_01_large.jpg"><img alt="" src="images/blog_image_01.jpg"><div class="overlay zoom"></div></a></div>
 
             <div class="alpha sixteen columns">
                 <div class="post-title"><h2><a href="<?=$this->Uri('/pages/' . $item['urlName'])?>"><?=$item['title'] ?></a></h2></div>
