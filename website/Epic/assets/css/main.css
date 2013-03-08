@@ -8337,9 +8337,10 @@ body,
   top: 0;
   left: 0;
   width: 91px;
-  height: 91px;
+  height: 71px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   overflow: hidden;
-  line-height: 91px;
   color: #FFF;
   text-align: center;
   vertical-align: middle;
