@@ -349,6 +349,18 @@ class ProfileForm extends \User\Form\ProfileForm
                 'value' => '',
             ),
         ),
+        
+        'country' => array (
+            'name' => 'country',
+            'type' => 'select',
+            'callback' => 'getCountries',
+            'options' => array (
+                'label' => 'Nationality',
+            ),
+            'attributes' => array (
+                'value' => '',
+            ),
+        ),
 
         'industry' => array (
             'name' => 'industry',
@@ -402,6 +414,23 @@ class ProfileForm extends \User\Form\ProfileForm
     public function getInterest($element)
     {
         $element['options']['value_options'] = self::$interest;
+        return $element;
+    }
+
+    public function getCountries($element)
+    {
+        $translator = \Eva\Api::_()->getServiceManager()->get('translator');
+        $locale = $translator->getLocale();
+        $countries = \Eva\Locale\Data::getList($locale, 'territory');
+
+        if ($countries) {
+            foreach ($countries as $key=>$country) {
+                if (is_numeric($key)) {
+                    unset($countries[$key]);
+                } 
+            }
+        }
+        $element['options']['value_options'] = $countries;
         return $element;
     }
 }
