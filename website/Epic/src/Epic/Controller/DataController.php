@@ -53,9 +53,16 @@ class DataController extends RestfulModuleController
                 ),
             ),
         ));
+
+        $now = \Eva\Date\Date::getNow();
+
         if(isset($itemRoles['Roles'])){
             foreach($itemRoles['Roles'] as $role){
                 if($role['RoleUser']['status'] == 'active'){
+                    if ($role['roleKey'] == 'PAID_MEMBER' && $role['RoleUser']['expiredTime'] && $role['RoleUser']['expiredTime'] < $now){
+                        continue;
+                    }
+                    
                     $item['Roles'][] = $role['roleKey'];
                 }
             }
