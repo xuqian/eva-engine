@@ -358,7 +358,7 @@ class GroupController extends ActionController
             $postData['status'] = 'active';
             $itemModel = Api::_()->getModel('Group\Model\Group');
             $groupId = $itemModel->setItem($postData)->createGroup();
-            $callback = $callback ? $callback : '/groups/edit/' . $groupId;
+            $callback = $callback ? $callback : '/my/group/';
             $this->redirect()->toUrl($callback);
         } else {
            
@@ -386,7 +386,7 @@ class GroupController extends ActionController
                 $postData = $form->getData();
                 $itemModel = Api::_()->getModel('Group\Model\Group');
                 $groupId = $itemModel->setItem($postData)->saveGroup();
-                $callback = $callback ? $callback : '/groups/edit/' . $groupId;
+                $callback = $callback ? $callback : '/my/group/';
                 $this->redirect()->toUrl($callback);
 
             } else {

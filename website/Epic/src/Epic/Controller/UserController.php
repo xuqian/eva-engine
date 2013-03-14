@@ -539,7 +539,7 @@ class UserController extends ActionController
         $user = $this->userAction();
         $itemListQuery = array_merge(array(
             'user_id' => $user['id'],
-            'order' => 'timedesc',
+            'order' => 'iddesc',
         ), $query);
         $itemModel = Api::_()->getModel('Group\Model\GroupUser');
         $items = $itemModel->setItemList($itemListQuery)->getGroupUserList();

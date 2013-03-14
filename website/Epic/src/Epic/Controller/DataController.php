@@ -571,6 +571,7 @@ class DataController extends RestfulModuleController
             'inEvent' => 1,
             'eventRole' => 'admin',
             'role' => $query['role'],
+            'excludeId' => 1,
             'order' => 'eventcountdesc'
         ))->getUserList();
         $items = $items->toArray(array(
