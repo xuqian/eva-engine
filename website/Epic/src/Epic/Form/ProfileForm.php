@@ -366,7 +366,7 @@ class ProfileForm extends \User\Form\ProfileForm
             'name' => 'industry',
             'type' => 'text',
             'options' => array (
-                'label' => 'Industry',
+                'label' => 'Positions',
             ),
             'attributes' => array (
                 'value' => '',

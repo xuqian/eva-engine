@@ -118,19 +118,21 @@ function isPaidRole($roles)
                 </td>
             </tr>
             <tr>
-                <td><?=$this->_('Country');?> : 
-                    <?if($user['Profile']['country']):?>
-                    <?=$this->locale('territory', $user['Profile']['country'])?>
+                <td><?=$this->_('Position');?> : 
+                    <?if($user['Profile']['industry']):?>
+                    <?=$user['Profile']['industry']?>
                     <?endif?>
                 </td>
-                <td><?=$this->_('Birthday');?> : 
-                    <?if($user['Profile']['birthday'] && $user['Profile']['birthday'] != '0000-00-00'):?>
-                    <?=$user['Profile']['birthday']?>
-                    <?else:?>
-                    <?=$this->_('Secret');?> 
+                <td><?=$this->_('Interest');?> : 
+                    <?if($user['Profile']['interest']):?>
+                    <?=$user['Profile']['interest']?>
                     <?endif?>
                 </td>
-                <td><?=$this->_('Events');?> : <a href="<?=$viewAsGuest ? $this->uri('/user/' . $user['userName'] . '/events/') : $this->uri('/my/event/')?>"><?=$user['EventCount']['eventCount']?></a> <?=$this->_('Times');?></td>
+                <td><?=$this->_('Company');?> : 
+                    <?if($user['Profile']['address']):?>
+                    <?=$user['Profile']['address']?>
+                    <?endif?>
+                </td>
             </tr>
             <?if($user['Tags']):?>
             <tr>

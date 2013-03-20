@@ -30,7 +30,7 @@
 <script id="side-friend-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/friend/')?>" data-url-forlogin="1">
 <div class="page-header border-header">
     <small class="pull-right"><a href="<?=$this->uri('/my/friend/')?>"><?=$this->_('View All');?></a></small>
-    <h4><?=$this->_('My Friends');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+    <h4><?=$this->_('My Friends');?></h4>
 </div>
 <div class="side-user-list">
     {% if(o.items.length > 0) { %}

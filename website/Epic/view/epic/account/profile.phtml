@@ -55,7 +55,7 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                 </div>
 
                                 <div class="page-header border-header">
-                                    <h4><?=$this->_('Profile General')?></h4>
+                                    <h4><?=$this->_('Basic Information')?></h4>
                                 </div>
 
                                 <div class="control-group <?=$form->isError('firstName') ? 'error' : '';?>">
@@ -114,7 +114,7 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                 </div>
 
                                 <div class="page-header border-header">
-                                    <h4><?=$this->_('Index information')?></h4>
+                                    <h4><?=$this->_('Customized Information')?></h4>
                                 </div>
 
                                 <div class="control-group <?=$form->isError('role') ? 'error' : '';?>">
@@ -152,14 +152,14 @@ $tags = isset($item['Tags']) ? $item['Tags'] : array();
                                 </div>
 
                                 <div class="page-header border-header">
-                                    <h4><?=$this->_('Business Essentials')?></h4>
+                                    <h4><?=$this->_('Other Information')?></h4>
                                 </div>
 
 
                                 <div class="control-group <?=$form->isError(array('Profile', 'industry')) ? 'error' : '';?>">
                                     <?=$form->helper(array('Profile', 'industry'), 'label', array('class' => 'control-label'))?>
                                     <div class="controls">
-                                        <?=$form->helper(array('Profile', 'industry'), array('class' => ''))?>        
+                                        <?=$form->helper(array('Profile', 'industry'), array('id' => 'positioning', 'class' => 'input-large'))?>  
                                         <div class="help-block"><?=$form->helper(array('Profile', 'industry'), 'formElementErrors')?></div>
                                     </div>
                                 </div>
@@ -243,6 +243,9 @@ eva.ready(function(){
         eva.loader(eva.s('/lib/js/jquery/jquery.select2/select2.js'), function(){
                 $('#tagging').select2({
                         tags : <?=$this->json(array('Gastronome', 'Oenophile', 'Foodie', 'Bon Vivant', 'Cocktail Lovers', 'Wine Lovers', 'Gourmet', 'Glamorous', 'Imbibers', 'Enlightened Tipplers'))?>
+                });
+                $('#positioning').select2({
+                        tags : <?=$this->json(array('Business Owner', 'Partner', 'Managing Director', 'Executives', 'Managers'))?>
                 });
         });
 

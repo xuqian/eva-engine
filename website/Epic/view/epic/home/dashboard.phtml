@@ -176,10 +176,12 @@ if($tags) {
                         </div>
                     </div> 
                     <?endif?>
+                    
+                    <?=$this->widget('Epic', 'widgets/toolbox')?>
 
                     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('user_id' => 1, 'rows' => 3))?>">
                         <div class="page-header border-header">
-                            <h4><?=$this->_('News');?></h4>
+                            <h4><?=$this->_('Announcement');?></h4>
                         </div>
                         <div class="side-blog-list">
                             {% if(o.items.length > 0) { %}
@@ -189,6 +191,28 @@ if($tags) {
                                             <div class="text-content">
                                                 <div class="item-title">
                                                     <a href="<?=$this->uri('/pages/')?>{%=item.urlName%}">{%=item.title%}</a>
+                                                </div>
+                                                <p>{%=item.Text.Preview%}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% } %}
+                                {% } %}
+                        </div>
+                    </script>
+                    
+                    <script id="side-group-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('group_id' => 10, 'rows' => 3))?>">
+                        <div class="page-header border-header">
+                            <h4><?=$this->_('News');?></h4>
+                        </div>
+                        <div class="side-group-blog-list">
+                            {% if(o.items.length > 0) { %}
+                                {% for (var i=0, item; item=o.items[i]; i++) { %}
+                                    <div class="item">
+                                        <div class="item-inline item-text">
+                                            <div class="text-content">
+                                                <div class="item-title">
+                                                    <a href="<?=$this->uri('/group/')?>{%=item.Group.groupKey%}/blog/info/{%=item.urlName%}">{%=item.title%}</a>
                                                 </div>
                                                 <p>{%=item.Text.Preview%}</p>
                                             </div>

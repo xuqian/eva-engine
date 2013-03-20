@@ -16,7 +16,10 @@
     <script id="group-mine" type="text/x-tmpl" data-url="<?=$this->uri('/data/group/', array('rows' => 12))?>" data-url-forlogin="1">
     <div class="page-header">
         <small class="pull-right"><a href="<?=$this->uri('/my/group/')?>"><?=$this->_('View All');?></a></small>
+        <!--
         <h4 class="txt-bold"><?=$this->_('My Groups');?> ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+        -->
+        <h4 class="txt-bold"><?=$this->_('My Groups');?></h4>
     </div>
     <div class="group-mine">
         <ul>
@@ -42,7 +45,10 @@
 
     <script id="side-blog-list" type="text/x-tmpl" data-url="<?=$this->uri('/data/blog/', array('inGroup' => 1,'rows' => 5, 'order' => 'commentdesc'))?>">
         <div class="page-header border-header">
+            <!--
             <h4><?=$this->_('Feature Discussion');?>  ({% if(o.paginator) { %}{%=o.paginator.rowCount%}{% } else { %} 0 {% } %})</h4>
+            -->
+            <h4><?=$this->_('Feature Discussion');?> </h4>
         </div>
         <div class="side-blog-list">
             {% if(o.items.length > 0) { %}
