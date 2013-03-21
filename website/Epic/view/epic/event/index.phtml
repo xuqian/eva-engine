@@ -180,7 +180,7 @@ foreach($this->eventList as $eventDay){
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <p class="lowlight"><?=$this->_('City');?> : {%=item.city%}.</p>
-                                        <p class="lowlight"><?=$this->_('Start at');?> : {%=item.startDay%}.</p>
+                                        <p class="lowlight"><?=$this->_('Date');?> : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} <?=$this->_('members joined');?>.</p>
                                     </div>
                                 </div>
@@ -252,7 +252,7 @@ foreach($this->eventList as $eventDay){
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <p class="lowlight">City : {%=item.city%}.</p>
-                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
+                                        <p class="lowlight">Date : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>

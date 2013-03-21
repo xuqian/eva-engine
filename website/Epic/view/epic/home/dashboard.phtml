@@ -78,7 +78,7 @@ if($tags) {
                                     <h4 class="media-heading"><a href="<?=$this->uri('/event/')?>{%=item.urlName%}">{%=item.title%}</a></h4>
                                     <div class="media">
                                         <p class="lowlight">City : {%=item.city%}.</p>
-                                        <p class="lowlight">Start at : {%=item.startDay%}.</p>
+                                        <p class="lowlight">Date : {%=item.startDay%}.</p>
                                         <p class="lowlight">{%=item.Count.memberCount%} members joined.</p>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@ if($tags) {
                         <div class="page-header border-header">
                             <h4><?=$this->_('News');?></h4>
                         </div>
-                        <div class="side-group-blog-list">
+                        <div class="side-blog-list">
                             {% if(o.items.length > 0) { %}
                                 {% for (var i=0, item; item=o.items[i]; i++) { %}
                                     <div class="item">
