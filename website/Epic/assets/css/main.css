@@ -6190,7 +6190,7 @@ body,
 .activity-list .item-sub {
   clear: both;
   position: relative;
-  height: 35px;
+  min-height: 35px;
   padding: 5px 0;
   text-align: left;
   *zoom: 1;
