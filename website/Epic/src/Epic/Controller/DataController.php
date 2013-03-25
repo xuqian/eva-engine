@@ -610,6 +610,7 @@ class DataController extends RestfulModuleController
                 'page' => 1
             );
         }
+        $selectQuery['excludeStatus'] = 'deleted';
         $items = $itemModel->setItemList($selectQuery)->getUserList();
         $items = $items->toArray(array(
             'self' => array(

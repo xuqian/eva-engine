@@ -185,6 +185,8 @@ class UserController extends ActionController
                 'page' => 1
             );
         }
+
+        $selectQuery['excludeStatus'] = 'deleted';
         $items = $itemModel->setItemList($selectQuery)->getUserList();
         $items = $items->toArray(array(
             'self' => array(

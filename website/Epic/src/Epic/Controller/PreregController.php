@@ -61,6 +61,7 @@ class PreregController extends ActionController
 
         if ($form->isValid()) {
             $postData = $form->getData();
+            $postData['status'] = 'deleted';
             $itemModel = Api::_()->getModel('Epic\Model\User');
             $itemId = $itemModel->setItem($postData)->preRegister();
             //$this->flashMessenger()->addMessage('item-create-succeed');
