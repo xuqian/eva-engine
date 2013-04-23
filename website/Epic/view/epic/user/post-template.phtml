@@ -10,7 +10,10 @@ $item = $this->item;
 </article>
 
 <div class="neighbors">
-    <p>Post by <?=$item['user_name']?></p>
+    <br/>
+    <p>Post by <a href="<?=$this->uri('/user/' . $item['user_name'])?>" title="<?=$item['user_name']?>"><?=$item['user_name']?></a></p>
+    <br/>
+    <br/>
     <?if(isset($item['Next']) && $item['Next']):?>
     <a href="<?=$this->uri('/user/' . $item['user_id'] . '/blog/' . $item['Next']['urlName'])?>" class="pull-right" title="<?=$this->escapeHtmlAttr($item['Next']['title'])?>"><?=$item['Next']['title']?>»</a>
     <?endif;?>
