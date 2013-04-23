@@ -11,7 +11,7 @@ $item = $this->item;
 
 <div class="neighbors">
     <br/>
-    <p>Post by <a href="<?=$this->uri('/user/' . $item['user_name'])?>" title="<?=$item['user_name']?>"><?=$item['user_name']?></a></p>
+    <p>Posted by <a href="<?=$this->uri('/user/' . $item['user_name'])?>" title="<?=$item['user_name']?>"><?=$item['user_name']?></a></p>
     <br/>
     <br/>
     <?if(isset($item['Next']) && $item['Next']):?>
